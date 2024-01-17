@@ -250,6 +250,44 @@ contains
 
 
   !!============================================================================
+  !> @brief Returns the id of a sensor object, including its type.
+  !>
+  !> @param[in] sensor The sensortypemodule::sensortype object to get id for
+  !> @param[in] typeAsPrefix If .true., use the sensor type as prefix
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 8 Feb 2024
+
+  function getSensorId (sensor,typeAsPrefix) result(text)
+
+    use IdTypeModule, only : lId_p, getId
+
+    type(SensorType) , intent(in) :: sensor
+    logical, optional, intent(in) :: typeAsPrefix
+
+    !! Local variables
+    character(len=lId_p) :: text
+
+    !! --- Logic section ---
+
+    text = getId(sensor%id)
+    if (sensor%type < 1 .or. sensor%type > size(sensorType_p)) then
+       text = 'Sensor'//text(1:lId_p-6)
+    else if (.not. present(typeAsPrefix)) then
+       text = 'Sensor'//text(1:lId_p-6)
+    else if (typeAsPrefix) then
+       text = trim(sensorType_p(sensor%type))//text
+    else
+       text = 'Sensor'//trim(text)//' of type '//sensorType_p(sensor%type)
+    end if
+
+  end function getSensorId
+
+
+  !!============================================================================
   !> @brief Initializes a sensor object.
   !>
   !> @param sensor The sensortypemodule::sensortype object to initialize

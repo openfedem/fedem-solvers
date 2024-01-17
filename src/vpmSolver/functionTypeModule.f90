@@ -402,7 +402,8 @@ contains
 
   subroutine WriteEngineType (engine,lpu)
 
-    use IdTypeModule, only : writeId, getId
+    use IdTypeModule    , only : writeId
+    use SensorTypeModule, only : getSensorId
 
     type(EngineType), intent(in) :: engine
     integer         , intent(in) :: lpu
@@ -414,20 +415,21 @@ contains
 
     write(lpu,'(A)') 'Engine','{'
     call writeId (engine%id,lpu)
-    write(lpu,*) 'tag         =', engine%tag
+    if (engine%tag /= '') write(lpu,*) 'tag         =', engine%tag
 
     if (associated(engine%args)) then
        do i = 1, size(engine%args)
           if (associated(engine%args(i)%p)) then
-             write(lpu,*) 'argSensor   =', trim(getId(engine%args(i)%p%id))
+             write(lpu,*) 'argSensor   = ', &
+                  &       trim(getSensorId(engine%args(i)%p,.true.))
           else
-             write(lpu,*) 'argSensor   = (null)'
+             write(lpu,*) 'argSensor   = NULL'
           end if
        end do
     end if
 
     if (associated(engine%func)) then
-       write(lpu,*) 'func        =', trim(getId(engine%func%id))
+       write(lpu,*) 'func        = ', trim(getFunctionId(engine%func))
     else
        write(lpu,*) 'func        = NULL'
     end if
@@ -435,6 +437,39 @@ contains
     write(lpu,'(A)') '}'
 
   end subroutine WriteEngineType
+
+
+  !!============================================================================
+  !> @brief Returns the id of a function object, including its type.
+  !>
+  !> @param[in] func The functiontypemodule::functiontype object to get id for
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 8 Feb 2024
+
+  function getFunctionId (func) result(text)
+
+    use IdTypeModule           , only : lId_p, getId
+    use explicitFunctionsModule, only : funcType_p, maxFunc_p
+
+    type(FunctionType), intent(in) :: func
+
+    !! Local variables
+    character(len=lId_p) :: text
+
+    !! --- Logic section ---
+
+    text = getId(func%id)
+    if (func%type > 0 .and. func%type <= maxFunc_p) then
+       text = trim(funcType_p(func%type))//text
+    else
+       text = 'Function'//text(1:lId_p-8)
+    end if
+
+  end function getFunctionId
 
 
   !!============================================================================
@@ -487,8 +522,7 @@ contains
 
   function FunctionValue1 (func,xArg,ierr) result(fVal)
 
-    use IdTypeModule           , only : getId
-    use explicitFunctionsModule, only : funcValue, funcType_p, maxFunc_p
+    use explicitFunctionsModule, only : funcValue
     use reportErrorModule      , only : getErrorFile, reportError, error_p
     use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getint
 
@@ -518,23 +552,20 @@ contains
        else
           errMsg = ''
        end if
-       if (func%type > 0 .and. func%type <= maxFunc_p) then
-          errMsg = ' of type '//trim(funcType_p(func%type))//errMsg
-       end if
     end if
     if (ierr < lerr) then
-       call reportError (error_p,'Unable to evaluate Function'// &
-            &            trim(getId(func%id))//errMsg)
+       call reportError (error_p,'Unable to evaluate '// &
+            &            trim(getFunctionId(func))//errMsg)
        return
     end if
     if (iprint > 2) then
        lpu = getErrorFile()
-       write(lpu,600) trim(getId(func%id)),trim(errMsg),fVal
-600    format(5X,'Function',2A,': Value =',1PE12.5)
+       write(lpu,600) trim(getFunctionId(func)),trim(errMsg),fVal
+600    format(5X,2A,': Value =',1PE12.5)
     end if
     if (isNaN(fVal)) then
        ierr = ierr - 1
-       call reportError (error_p,'Function'//trim(getId(func%id))//errMsg// &
+       call reportError (error_p,trim(getFunctionId(func))//errMsg// &
             &            ': Returned NaN','Check your input')
     end if
 
@@ -556,8 +587,7 @@ contains
 
   function FunctionValue2 (func,xArg,ierr) result(fVal)
 
-    use IdTypeModule           , only : getId
-    use explicitFunctionsModule, only : funcValue, funcType_p, maxFunc_p
+    use explicitFunctionsModule, only : funcValue
     use reportErrorModule      , only : getErrorFile, reportError, error_p
     use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getint
 
@@ -597,23 +627,20 @@ contains
        else
           errMsg = ''
        end if
-       if (func%type > 0 .and. func%type <= maxFunc_p) then
-          errMsg = ' of type '//trim(funcType_p(func%type))//errMsg
-       end if
     end if
     if (ierr < lerr) then
-       call reportError (error_p,'Unable to evaluate function'// &
-            &            trim(getId(func%id))//errMsg)
+       call reportError (error_p,'Unable to evaluate '// &
+            &            trim(getFunctionId(func))//errMsg)
        return
     end if
     if (iprint > 2) then
        lpu = getErrorFile()
-       write(lpu,600) trim(getId(func%id)),trim(errMsg),fVal
-600    format(5X,'Function',2A,': Value =',1PE12.5)
+       write(lpu,600) trim(getFunctionId(func)),trim(errMsg),fVal
+600    format(5X,2A,': Value =',1PE12.5)
     end if
     if (isNaN(fVal)) then
        ierr = ierr - 1
-       call reportError (error_p,'Function'//trim(getId(func%id))//errMsg// &
+       call reportError (error_p,trim(getFunctionId(func))//errMsg// &
             &            ': Returned NaN','Check your input')
     end if
 
@@ -766,8 +793,7 @@ contains
 
   function FunctionIntegral (func,x0,x1,intOrder,ierr) result(fInt)
 
-    use IdTypeModule           , only : getId
-    use explicitFunctionsModule, only : funcIntegral, funcType_p, maxFunc_p
+    use explicitFunctionsModule, only : funcIntegral
     use reportErrorModule      , only : reportError, error_p
 
     type(FunctionType), pointer       :: func
@@ -815,11 +841,8 @@ contains
     else
        write(errMsg,"(' from x = 0.0 to x =',1PE12.5)") x1
     end if
-    if (func%type > 0 .and. func%type <= maxFunc_p) then
-       errMsg = ' of type '//trim(funcType_p(func%type))//errMsg
-    end if
-    call reportError (error_p,'Unable to integrate function'// &
-         &            trim(getId(func%id))//errMsg)
+    call reportError (error_p,'Unable to integrate '// &
+         &            trim(getFunctionId(func))//errMsg)
 
   end function FunctionIntegral
 

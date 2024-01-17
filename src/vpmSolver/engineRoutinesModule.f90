@@ -99,7 +99,7 @@ contains
   !!============================================================================
   !> @brief Pre-evaluation of general functions.
   !>
-  !> @param engines All general functions in the model
+  !> @param[in] engines All general functions in the model
   !> @param ierr Error flag
   !>
   !> @details This subroutine pre-evaluates all functiontypemodule::enginetype
@@ -117,7 +117,7 @@ contains
     use kindModule             , only : dp
     use explicitFunctionsModule, only : USER_DEFINED_p
 
-    type(EngineType), intent(inout) :: engines(:)
+    type(EngineType), intent(in)    :: engines(:)
     integer         , intent(inout) :: ierr
 
     !! Local variables
@@ -186,7 +186,7 @@ contains
   !!============================================================================
   !> @brief Evaluates a general function.
   !>
-  !> @param engine The general function to evaluate
+  !> @param[in] engine The general function to evaluate
   !> @param ierr Error flag
   !> @param[in] xArg Optional function argument value
   !>
@@ -217,7 +217,7 @@ contains
     use explicitFunctionsModule, only : dbgFunc
     use reportErrorModule      , only : reportError, error_p
 
-    type(EngineType) , intent(inout) :: engine
+    type(EngineType) , intent(in)    :: engine
     integer          , intent(inout) :: ierr
     real(dp),optional, intent(in)    :: xArg
 
@@ -234,7 +234,7 @@ contains
     eVal = 0.0_dp
     lerr = ierr
 
-    !! Check for infinite recursive engine loop
+    !! Check for infinite recursion loop
     do i = 1, topStack
        if (engine%id%baseId == callStack(i)) then
           ierr = ierr - 1
@@ -251,7 +251,7 @@ contains
        return
     end if
 
-    !! Push current engine Id on the call stack
+    !! Push current base Id on the call stack
     topStack = topStack + 1
     callStack(topStack) = engine%id%baseId
 
@@ -269,13 +269,13 @@ contains
     end if
     call EvalArgs (engine%args,nArg,iDer,xArg,x,ramp,ierr)
     if (ierr < lerr) then
-       topStack = topStack - 1 ! Pop the call stack
-       call reportError (error_p,'Failed to evaluate arguments for engine'// &
+       call reportError (error_p,'Failed to evaluate arguments for Engine'// &
             &                    getId(engine%id),addString='EngineValue')
+       topStack = topStack - 1 ! Pop the call stack
        return
     end if
 
-    !! Define the engine value
+    !! Define the function value
     if (nArg > 1) then
        eVal = ramp * FunctionValue(engine%func,x(1:nArg),ierr)
     else
@@ -294,27 +294,31 @@ contains
 
 
   !!============================================================================
-  !> @brief Evaluates the time-derivative of a general function.
+  !> @brief Evaluates the derivative of a general function.
   !>
-  !> @param engine The general function to evaluate
+  !> @param[in] engine The general function to evaluate the derivative of
   !> @param ierr Error flag
-  !> @param[in] tArg Optional function argument value
+  !> @param[in] xArg Optional function argument value
+  !>
+  !> @details The time-derivative of the function will be calculated,
+  !> unless the function argument value @a xArg is provided. In that case,
+  !> the derivative w.r.t. that variable is calculated instead.
   !>
   !> @callgraph @callergraph
   !>
   !> @author Trond Arne Svidal                                 @date 13 May 2002
   !> @author Knut Morten Okstad                                @date 17 Nov 2014
 
-  recursive function EngineRate (engine,ierr,tArg) result(rVal)
+  recursive function EngineRate (engine,ierr,xArg) result(rVal)
 
     use kindModule        , only : dp
     use FunctionTypeModule, only : FunctionDerivative
     use IdTypeModule      , only : getId
     use reportErrorModule , only : reportError, error_p
 
-    type(EngineType) , intent(inout) :: engine
+    type(EngineType) , intent(in)    :: engine
     integer          , intent(inout) :: ierr
-    real(dp),optional, intent(in)    :: tArg
+    real(dp),optional, intent(in)    :: xArg
 
     !! Local variables
     integer  :: i, iDer, lerr, nArg
@@ -337,20 +341,20 @@ contains
           iDer = -1 ! Deactivate ramping for this function
        end if
     end if
-    call EvalArgs (engine%args,nArg,iDer,tArg,x,ramp,ierr)
+    call EvalArgs (engine%args,nArg,iDer,xArg,x,ramp,ierr)
     if (ierr < lerr) then
-       call reportError (error_p,'Failed to evaluate arguments for engine'// &
+       call reportError (error_p,'Failed to evaluate arguments for Engine'// &
             &                    getId(engine%id),addString='EngineRate')
        return
-    else if (abs(ramp-1.0_dp) < 1.0e-15_dp) then
+    else if (abs(ramp-1.0_dp) > 1.0e-15_dp) then ! check if ramp.ne.1
        ierr = ierr - 1
-       call reportError (error_p,'Time-derivative for ramped engines '// &
+       call reportError (error_p,'Time-derivative for ramped functions '// &
             &                    'not yet implemented',addString='EngineRate')
        return
     end if
 
-    !! Define the engine rate value
-    if (present(tArg)) then
+    !! Define the derivative (function rate) value
+    if (present(xArg)) then
        rVal = FunctionDerivative(engine%func,x(1),1,ierr)
     else if (nArg == 1 .and. associated(engine%args(1)%p)) then
        rVal = FunctionDerivative(engine%func,x(1),1,ierr) &
@@ -373,10 +377,14 @@ contains
 
 
   !!============================================================================
-  !> @brief Evaluates the time-derivative of a sensor value.
+  !> @brief Evaluates the derivative of a sensor value.
   !>
-  !> @param sensor The sensor object to evaluate the derivative for
+  !> @param[in] sensor The sensor object to evaluate the derivative for
   !> @param ierr Error flag
+  !>
+  !> @details The time-derivative of the sensor will be calculated, unless the
+  !> sensor measures a control variable. In that case, the derivative w.r.t.
+  !> that variable is calculated, which always will equal one.
   !>
   !> @callgraph @callergraph
   !>
@@ -387,12 +395,11 @@ contains
   recursive function SensorRate (sensor,ierr) result (rVal)
 
     use kindModule       , only : dp
-    use SensorTypeModule , only : SensorType
-    use SensorTypeModule , only : TIME_p, NUM_ITERATIONS_p, ENGINE_p
-    use IdTypeModule     , only : getId
-    use reportErrorModule, only : internalError, reportError, error_p
+    use SensorTypeModule , only : SensorType, getSensorId
+    use SensorTypeModule , only : TIME_p, CONTROL_p, NUM_ITERATIONS_p, ENGINE_p
+    use reportErrorModule, only : reportError, error_p
 
-    type(SensorType), intent(inout) :: sensor
+    type(SensorType), intent(in)    :: sensor
     integer         , intent(inout) :: ierr
 
     !! Local variables
@@ -402,7 +409,7 @@ contains
 
     select case (sensor%type)
 
-    case (TIME_p)
+    case (TIME_p, CONTROL_p)
        rVal = 1.0_dp
 
     case (NUM_ITERATIONS_p)
@@ -414,8 +421,8 @@ contains
     case default
        rVal = 0.0_dp
        ierr = ierr - 1
-       call reportError (error_p,'Can not evaluate time-derivative of Sensor'//&
-            &            getId(sensor%id),addString='SensorRate')
+       call reportError (error_p,'Can not evaluate time-derivative of '// &
+            &            getSensorId(sensor,.false.), addString='SensorRate')
     end select
 
   end function SensorRate
@@ -526,7 +533,7 @@ contains
   recursive subroutine UpdateSensor (sensor,ierr)
 
     use kindModule       , only : dp
-    use SensorTypeModule , only : SensorType, ourTime
+    use SensorTypeModule , only : SensorType, getSensorId, ourTime
     use SensorTypeModule , only : TIME_p, ENGINE_p, CONTROL_p
     use SensorTypeModule , only : JOINT_VARIABLE_p, RELATIVE_TRIAD_p, TRIAD_p
     use SensorTypeModule , only : SPRING_AXIAL_p, SPRING_JOINT_p
@@ -538,7 +545,6 @@ contains
     use WindTurbineRoutinesModule, only : getWindSpeed
     use HydrodynamicsModule, only : getSeaState
     use TriadTypeModule  , only : transVSysToGlob
-    use IdTypeModule     , only : getId
     use reportErrorModule, only : internalError, reportError, error_p
 
     type(SensorType), intent(inout) :: sensor
@@ -555,6 +561,7 @@ contains
 
     case ( TIME_p, CONTROL_p, JOINT_VARIABLE_p, &
          & STRAIN_GAGE_p, NUM_ITERATIONS_p )
+
        !! Do nothing, all handled through pointers to the appropriate values
 
     case (ENGINE_p)
@@ -638,15 +645,28 @@ contains
        end if
 
     case default
-       ierr = ierr + internalError('UpdateSensor: Invalid sensor type')
+       call sensorError ('Invalid sensor type',sensor%type)
     end select
 
     if (ierr < lerr) then
-       call reportError (error_p,'Failed to update Sensor'//getId(sensor%id), &
-            &            addString='UpdateSensor')
+       call reportError (error_p,'Failed to update '// &
+            &            getSensorId(sensor,.false.), addString='UpdateSensor')
     end if
 
   contains
+
+    !> @brief Reports an internal error on invalid sensor data.
+    subroutine sensorError (msg,ival)
+
+      character(len=*), intent(in) :: msg
+      integer         , intent(in) :: ival
+
+      character(len=8) :: cval
+
+      write(cval,"(I8)") ival
+      ierr = ierr + internalError('UpdateSensor: '//msg//' '//adjustl(cval))
+
+    end subroutine sensorError
 
     !!==========================================================================
     !> @brief Evaluates a local velocity, acceleration or force for given triad.
@@ -666,7 +686,7 @@ contains
          iStart = 4
          iDir   = dof - 3
       case default
-         ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+         call sensorError ('Invalid sensor DOF',dof)
          GetLocal = 0.0_dp
          return
       end select
@@ -686,7 +706,7 @@ contains
             vec = transVSysToGlob(triad,triad%nodeForce(iStart:iStart+2))
          end if
       case default
-         ierr = ierr + internalError('UpdateSensor: Invalid sensor entity')
+         call sensorError ('Invalid sensor entity',entity)
          GetLocal = 0.0_dp
          return
       end select
@@ -713,7 +733,7 @@ contains
          iStart = 4
          iDir   = dof - 3
       case default
-         ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+         call sensorError ('Invalid sensor DOF',dof)
          GetGlobalForce = 0.0_dp
          return
       end select
@@ -793,7 +813,7 @@ contains
             GetRelative = sqrt(dot_product(relPos,relPos))
 
          case default
-            ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+            call sensorError ('Invalid sensor DOF',dof)
             GetRelative = 0.0_dp
          end select
 
@@ -815,7 +835,7 @@ contains
             end if
 
          case default
-            ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+            call sensorError ('Invalid sensor DOF',dof)
             GetRelative = 0.0_dp
          end select
 
@@ -837,12 +857,12 @@ contains
             end if
 
          case default
-            ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+            call sensorError ('Invalid sensor DOF',dof)
             GetRelative = 0.0_dp
          end select
 
       case default
-         ierr = ierr + internalError('UpdateSensor: Invalid sensor entity')
+         call sensorError ('Invalid sensor entiry',entity)
          GetRelative = 0.0_dp
       end select
 
@@ -927,7 +947,7 @@ contains
 
     lerr = ierr
 
-    !! Get the engine value for the stress free length
+    !! Get current value for the stress free length
     if (associated(spr%length0Engine)) then
        spr%length0 = spr%l0 + spr%l1 * EngineValue(spr%length0Engine,ierr)
     else
@@ -935,7 +955,7 @@ contains
     end if
     if (ierr < lerr) then
        call reportError (error_p,'Failed to evaluate stress-free length '// &
-            &                    'engine for Spring'//getId(spr%id), &
+            &                    'function for Spring'//getId(spr%id), &
             &            addString='UpdateSpringBase')
        return
     end if
@@ -963,7 +983,7 @@ contains
 
     if (ierr < lerr) then
        call reportError (error_p,'Failed to evaluate stiffness scaling '// &
-            &                    'engine for Spring'//getId(spr%id), &
+            &                    'function for Spring'//getId(spr%id), &
             &            addString='UpdateSpringBase')
        return
     else
@@ -1041,7 +1061,7 @@ contains
 
     if (ierr < lerr) then
        call reportError (error_p,'Failed to evaluate damper-coefficient '// &
-            &                    'scaling engine for Damper'//getId(dmp%id), &
+            &                    'scaling function for Damper'//getId(dmp%id), &
             &            addString='UpdateDamperBase')
     else
        dmp%coeff = dmp%coeff*scale
@@ -1052,7 +1072,7 @@ contains
 
 
   !!============================================================================
-  !> @brief Update all engines and store the values for saving.
+  !> @brief Update all general function objects and store the values for saving.
   !>
   !> @param engines All general functions in the model
   !> @param[in] eFlag Update the functions whose @a saveVar equals this value
