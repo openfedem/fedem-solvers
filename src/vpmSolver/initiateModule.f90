@@ -423,6 +423,10 @@ contains
     call initSAM (sam,err)
     if (err /= 0) goto 990
 
+    !! Initialize pointers from engines to argument sensors/engines
+    call InitiateEngines2 (mech%engines,mech%sensors,err)
+    if (err /= 0) goto 900
+
     !! Establish the SAM arrays MADOF and MSC (nodal DOF data)
     call initSAM_dofStatus (mech%triads, mech%sups, mech%joints, &
          &                  sam%mpar, sam%madof, sam%msc, sam%dofType, err)
@@ -497,10 +501,6 @@ contains
 
     !! Initialize pointers from sensors to measured global variables
     call InitiateSensors2 (mech%sensors,mech%triads,mech%joints,ctrl,err)
-    if (err /= 0) goto 900
-
-    !! Initialize pointers from engines to argument sensors/engines
-    call InitiateEngines2 (mech%engines,mech%sensors,err)
     if (err /= 0) goto 900
 
     !! Initialize global pointers to mechanism objects for updateSensor
