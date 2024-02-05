@@ -412,14 +412,12 @@ contains
     end if
 
     if (sam%mpar(25) <= 41 .and. sam%mpar(26) >= 41 .and. addStiff) then
-       call writeObject (ssm,sam%mpar,lpu, &
-            &            ' >>> Assembled stiffness matrix <<<', &
-            &            complexity=IPSW)
+       call writeObject (ssm,lpu,' >>> Assembled stiffness matrix <<<', &
+            &            complexity=min(IPSW,10))
     end if
     if (sam%mpar(25) <= 42 .and. sam%mpar(26) >= 42 .and. IOPadd > 1) then
-       call writeObject (smm,sam%mpar,lpu, &
-            &            ' >>> Assembled mass matrix <<<', &
-            &            complexity=IPSW)
+       call writeObject (smm,lpu,' >>> Assembled mass matrix <<<', &
+            &            complexity=min(IPSW,10))
     end if
     if (sam%mpar(25) <= 44 .and. sam%mpar(26) >= 44 .and. present(gFull)) then
        call writeObject (gFull,lpu,'Gravitation force vectors')

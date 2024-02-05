@@ -173,7 +173,8 @@ contains
     write(io,'(A,1P3E13.5)') ' wForce  =', sys%wForce
     if (present(complexity)) then
        if (complexity > 1) then
-          call writeObject (sys%Nmat,io,'Newton matrix',complexity)
+          !! Write sparse matrix data structure
+          call writeObject (sys%Nmat,io,'Newton matrix',10+complexity)
        end if
     end if
     write(io,'(A)') '}'

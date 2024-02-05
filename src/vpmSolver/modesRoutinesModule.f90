@@ -710,9 +710,9 @@ contains
        io = getDBGfile(3,'modes.dbg')
        write(io,"(/'=== Eigenvalue analysis at time =',1pe12.5)") sys%time
        write(io,"('TolEigval, TolFactor, TolEigvec =',1p3e12.5)") modes%tol
-       call writeObject (modes%Kmat,sam%mpar,io,'Kmat in EigenValue analysis')
-       call writeObject (modes%Cmat,sam%mpar,io,'Cmat in EigenValue analysis')
-       call writeObject (modes%Mmat,sam%mpar,io,'Mmat in EigenValue analysis')
+       call writeObject (modes%Kmat,io,'Kmat in Eigenvalue analysis')
+       call writeObject (modes%Cmat,io,'Cmat in Eigenvalue analysis')
+       call writeObject (modes%Mmat,io,'Mmat in Eigenvalue analysis')
     end if
 #endif
 

@@ -359,8 +359,8 @@ contains
 900 continue
     if (ipsw > 1 .and. ierr <= 0) then
        call writeObject (sam,lpu,4)
-       call writeObject (sysK,sam%mpar,lpu,' === System stiffness matrix',10,3)
-       call writeObject (sysM,sam%mpar,lpu,' === System mass matrix',10,3)
+       call writeObject (sysK,lpu,' === System stiffness matrix',10,3)
+       call writeObject (sysM,lpu,' === System mass matrix',10,3)
     else if (ipsw >= -7 .and. ipsw <= -5 .and. ierr == 0) then
        call writeObject (sam,lpu,5)
     end if
