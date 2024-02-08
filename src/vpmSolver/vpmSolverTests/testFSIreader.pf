@@ -69,7 +69,7 @@ subroutine testFSIreader
   call iuCopyToScratch (infp,srcdir//'/models/cantilever-pipe.fsi',ierr)
   @assertEqual(0,ierr)
   rewind(infp)
-  call Read_HEADING (infp,ierr)
+  call read_HEADING (infp,ierr)
   @assertEqual(0,ierr)
   call readTriads (infp,triads,ierr)
   @assertEqual(0,ierr)
@@ -86,3 +86,81 @@ subroutine testFSIreader
   call DeallocateTriads (triads)
 
 end subroutine testFSIreader
+
+@test
+subroutine testFunctionsReader
+#if FT_PFUNIT > 3
+  use funit     , only : assertTrue, assertEqual
+  use funit     , only : sourceLocation, anyExceptions
+  use fUnitExtra, only : srcdir ! pFUnit extension
+#else
+  use pfunit_mod, only : assertTrue, assertEqual
+  use pfunit_mod, only : sourceLocation, anyExceptions
+  use pFUnitArgs, only : srcdir ! pFUnit extension
+#endif
+
+  use MechanismTypeModule       , only : MechanismType
+  use MechanismTypeModule       , only : nullifyMechanism, deallocateMechanism
+  use SystemTypeModule          , only : SystemType, nullifySys, deallocateSys
+  use FunctionTypeModule        , only : writeObject
+  use initiateTriadTypeModule   , only : readTriads
+  use initiateFunctionTypeModule, only : initiateFunctions
+  use initiateFunctionTypeModule, only : initiateEngines1, initiateEngines2
+  use initiateSensorTypeModule  , only : initiateSensors
+  use inputUtilities            , only : iuCopyToScratch
+  use reportErrorModule         , only : setErrorFile
+
+  implicit none
+
+  integer             :: i, infp, ierr
+  type(MechanismType) :: mech
+  type(SystemType)    :: sys
+
+  write(6,"(//'Testing reading multi-argument functions')")
+  @assertTrue(allocated(srcdir))
+  write(6,"('Source directory: ',A)") srcdir
+  call setErrorFile (6)
+
+  call nullifySys (sys)
+  call nullifyMechanism (mech)
+
+  !! Test reading functions with multiple arguments,
+  !! and verify that the sensor assignment works
+
+  infp = 7
+  open(infp,IOSTAT=ierr,STATUS='SCRATCH')
+  @assertEqual(0,ierr)
+  call iuCopyToScratch (infp,srcdir//'/models/functions.fsi',ierr)
+  @assertEqual(0,ierr)
+  call readTriads (infp,mech%triads,ierr)
+  @assertEqual(0,ierr)
+  call initiateFunctions (infp,mech%gravity,mech%env%seaDepth, &
+       &                  mech%env%waveFunc,mech%functions,ierr)
+  @assertEqual(0,ierr)
+  call initiateEngines1 (infp,mech%engines,mech%functions,ierr)
+  @assertEqual(0,ierr)
+  call initiateSensors (infp,sys,mech,mech%sensors,ierr)
+  @assertEqual(0,ierr)
+  close(infp)
+
+  @assertEqual(1,size(mech%triads))
+  @assertEqual(4,size(mech%functions))
+  @assertEqual(4,size(mech%engines))
+  @assertEqual(3,size(mech%sensors))
+
+  call initiateEngines2 (mech%engines,mech%sensors,ierr)
+  @assertEqual(0,ierr)
+
+  do i = 1, size(mech%engines)
+    call writeObject (mech%engines(i),6)
+  end do
+
+  @assertEqual(3,size(mech%engines(3)%args))
+  @assertTrue(associated(mech%engines(3)%args(1)%p,mech%sensors(2)))
+  @assertTrue(associated(mech%engines(3)%args(2)%p,mech%sensors(3)))
+  @assertTrue(associated(mech%engines(3)%args(3)%p,mech%sensors(1)))
+
+  call deallocateMechanism (mech)
+  call deallocateSys (sys)
+
+end subroutine testFunctionsReader
