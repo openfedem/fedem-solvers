@@ -299,7 +299,7 @@ contains
     call InitiateSensors (infp,sys,mech,mech%sensors,err)
     if (err /= 0) goto 990
 
-    call ReadControlSystem (infp,mech%engines,mech%sensors,ctrl,err)
+    call ReadControlSystem (infp,mech%engines,ctrl,err)
     if (err /= 0) goto 990
 
     call ReadTurbineConfig (infp,mech%env,mech%turbine, &
