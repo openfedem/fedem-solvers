@@ -25,10 +25,9 @@ contains
   subroutine SetControlInput (ctrl,ierr)
 
     use ControlTypeModule   , only : ControlType
-    use EngineRoutinesModule, only : EngineValue, updateSensor
+    use EngineRoutinesModule, only : EngineValue
     use IdTypeModule        , only : getId
     use reportErrorModule   , only : reportError, error_p, debugFileOnly_p
-    use reportErrorModule   , only : internalError
 
     type(ControlType), intent(inout) :: ctrl
     integer          , intent(out)   :: ierr
@@ -44,15 +43,7 @@ contains
 
        lerr = ierr
        if (associated(ctrl%input(i)%engine)) then
-          !! Engine input
           ctrl%vreg(j) = EngineValue(ctrl%input(i)%engine,ierr)
-       else if (associated(ctrl%input(i)%sensor)) then
-          !! Sensor input, update the sensor first
-          call updateSensor (ctrl%input(i)%sensor,ierr)
-          ctrl%vreg(j) = ctrl%input(i)%sensor%value
-       else
-          ierr = internalError('SetControlInput: Empty control input element')
-          return
        end if
 
        if (ierr < lerr) then

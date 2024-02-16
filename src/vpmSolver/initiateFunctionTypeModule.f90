@@ -874,8 +874,8 @@ contains
 
   subroutine InitiateEngines2 (engines,sensors,err)
 
-    use FunctionTypeModule       , only : EngineType, GetPtrToId
-    use SensorTypeModule         , only : SensorType, GetPtrToId
+    use FunctionTypeModule       , only : EngineType
+    use SensorTypeModule         , only : SensorType, GetPtrToId, ENGINE_p
     use IdTypeModule             , only : ReportInputError
     use explicitFunctionsModule  , only : DEVICE_FUNCTION_p
     use progressModule           , only : lterm
@@ -885,9 +885,9 @@ contains
     use FFaFilePathInterface     , only : ffa_checkPath
     use FFaCmdLineArgInterface   , only : ffa_cmdlinearg_getstring
 
-    type(EngineType), intent(inout) :: engines(:)
-    type(SensorType), intent(in)    :: sensors(:)
-    integer         , intent(out)   :: err
+    type(EngineType), intent(inout), target :: engines(:)
+    type(SensorType), intent(in)            :: sensors(:)
+    integer         , intent(out)           :: err
 
     !! Local variables
     integer :: i, j, iArg, nArg, stat, sensorId, extFunc(maxChannel)
@@ -920,6 +920,8 @@ contains
 
        stat = err
        do j = 1, nArg
+          nullify(engines(i)%args(j)%p)
+          nullify(engines(i)%args(j)%q)
           if (nArg > 1) then
              iArg = iArg + 1
              sensorId = argSensor(iArg)
@@ -930,9 +932,10 @@ contains
              if (.not. associated(engines(i)%args(j)%p)) then
                 err = err - 1
                 call ReportInputError ('ENGINE',i,engines(i)%id)
+             else if (engines(i)%args(j)%p%type == ENGINE_p) then
+                !! Connect function argument to the measured engine object
+                engines(i)%args(j)%q => engines(engines(i)%args(j)%p%index(1))
              end if
-          else ! Assume constant zero-valued function argument
-             nullify(engines(i)%args(j)%p)
           end if
        end do
        if (err < stat) then

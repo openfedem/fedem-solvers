@@ -19,7 +19,7 @@
 !> @note The enginevalue() function may be implicitly recursive
 !> if a sensortypemodule::sensortype object defining an argument of
 !> the general function is defined on a quantity which again may be controlled
-!> by (another) general function. Currently, this applies to sensors on
+!> by another general function. Currently, this applies to sensors on
 !> spring- and damper quantities. Due to this, the update subroutines for
 !> springs and dampers as well as sensors have all to be within this module,
 !> in order to avoid circular use inclusions. No other (non-recursive)
@@ -42,18 +42,16 @@ module EngineRoutinesModule
 
   !> Private pointer to the corresponding member array
   !> in the mechanismtypemodule::mechanismtype object
-  type(EngineType)    , save, private, pointer :: engines(:) => null()
-  !> @copydoc engineroutinesmodule::engines
   type(TriadType)     , save, private, pointer :: triads(:)  => null()
-  !> @copydoc engineroutinesmodule::engines
+  !> @copydoc engineroutinesmodule::triads
   type(SpringBaseType), save, private, pointer :: springs(:) => null()
-  !> @copydoc engineroutinesmodule::engines
+  !> @copydoc engineroutinesmodule::triads
   type(DamperBaseType), save, private, pointer :: dampers(:) => null()
 
   !> Flag used for consistent right-hand-side calculation in the predictor step.
   logical, save :: isPredictorStep = .false. !< Equals .true. in first iteration
 
-  private :: EvalArgs, SensorRate
+  private :: EvalArgs, UpdateSensor, SensorRate
 
 
 contains
@@ -61,7 +59,6 @@ contains
   !!============================================================================
   !> @brief Initialization of private pointers.
   !>
-  !> @param[in] eArr All functiontypemodule::enginetype objects in the model
   !> @param[in] tArr All triadtypemodule::triadtype objects in the model
   !> @param[in] sArr All springtypemodule::springbasetype objects in the model
   !> @param[in] dArr All dampertypemodule::damperbasetype objects in the model
@@ -79,16 +76,14 @@ contains
   !>
   !> @date 6 Jun 2002
 
-  subroutine SetPointersForSensors (eArr,tArr,sArr,dArr)
+  subroutine SetPointersForSensors (tArr,sArr,dArr)
 
-    type(EngineType)    , intent(in), target :: eArr(:)
     type(TriadType)     , intent(in), target :: tArr(:)
     type(SpringBaseType), intent(in), target :: sArr(:)
     type(DamperBaseType), intent(in), target :: dArr(:)
 
     !! --- Logic section ---
 
-    engines => eArr
     triads  => tArr
     springs => sArr
     dampers => dArr
@@ -146,13 +141,13 @@ contains
   !> @param[in] E1 Scaling factor
   !> @param[in] E0 Offset value
   !> @param ierr Error flag
-  !> @param[in] xArg Optional function argument value
+  !> @param[in] argShift Optional function argument shift
   !>
   !> @details
   !> - eVal = E0 + E1*func(x),  if @a func is defined for @a engine
   !> - eVal = E0 + E1*x,        if @a func is not defined for @a engine
   !>
-  !> @a x may either be the input @a xArg or sensor-defined.
+  !> where @a x is the optionally shifted sensor-defined argument value.
   !>
   !> @callgraph @callergraph
   !>
@@ -160,22 +155,20 @@ contains
   !>
   !> @date 6 Jun 2002
 
-  function Evaluate (engine,E1,E0,ierr,xArg) result(eVal)
+  function Evaluate (engine,E1,E0,ierr,argShift) result(eVal)
 
     use kindModule, only : dp
 
     type(EngineType) , pointer       :: engine
     real(dp)         , intent(in)    :: E1, E0
     integer          , intent(inout) :: ierr
-    real(dp),optional, intent(in)    :: xArg
+    real(dp),optional, intent(in)    :: argShift
     real(dp)                         :: eVal
 
     !! --- Logic section ---
 
     if (associated(engine)) then
-       eVal = E0 + E1 * EngineValue(engine,ierr,xArg)
-    else if (present(xArg)) then
-       eVal = E0 + E1 * xArg
+       eVal = E0 + E1 * EngineValue(engine,ierr,xShift=argShift)
     else
        eVal = E0
     end if
@@ -189,12 +182,15 @@ contains
   !> @param[in] engine The general function to evaluate
   !> @param ierr Error flag
   !> @param[in] xArg Optional function argument value
+  !> @param[in] xShift Optional function argument shift
   !>
   !> @details
   !> - EngineValue = func(x),  if @a func is defined for @a engine
   !> - EngineValue = x,        if @a func is not defined for @a engine
   !>
-  !> @a x may either be the input @a xArg or sensor-defined.
+  !> where @a x may either be the input @a xArg or sensor-defined.
+  !> If @a xShift is specified, that value is subtracted from @a x
+  !> before the function is evaluated.
   !>
   !> @note
   !> This may be an implicit recursive function through the call sequence:
@@ -209,7 +205,7 @@ contains
   !>
   !> @date 6 Jun 2002
 
-  recursive function EngineValue (engine,ierr,xArg) result(eVal)
+  recursive function EngineValue (engine,ierr,xArg,xShift) result(eVal)
 
     use kindModule             , only : dp
     use FunctionTypeModule     , only : FunctionValue
@@ -219,7 +215,7 @@ contains
 
     type(EngineType) , intent(in)    :: engine
     integer          , intent(inout) :: ierr
-    real(dp),optional, intent(in)    :: xArg
+    real(dp),optional, intent(in)    :: xArg, xShift
 
     !! Local variables
     integer  :: i, iDer, lerr, nArg
@@ -273,6 +269,9 @@ contains
             &                    getId(engine%id),addString='EngineValue')
        topStack = topStack - 1 ! Pop the call stack
        return
+    end if
+    if (present(xShift)) then
+       x(1) = x(1) - xShift
     end if
 
     !! Define the function value
@@ -358,12 +357,12 @@ contains
        rVal = FunctionDerivative(engine%func,x(1),1,ierr)
     else if (nArg == 1 .and. associated(engine%args(1)%p)) then
        rVal = FunctionDerivative(engine%func,x(1),1,ierr) &
-            * SensorRate(engine%args(1)%p,ierr)
+            * SensorRate(engine%args(1),ierr)
     else
        do i = 1, nArg
           if (associated(engine%args(i)%p)) then
              rVal = rVal + FunctionDerivative(engine%func,x(1:nArg),i,1,ierr) &
-                  &      * SensorRate(engine%args(i)%p,ierr)
+                  &      * SensorRate(engine%args(i),ierr)
           end if
        end do
     end if
@@ -394,20 +393,21 @@ contains
 
   recursive function SensorRate (sensor,ierr) result (rVal)
 
-    use kindModule       , only : dp
-    use SensorTypeModule , only : SensorType, getSensorId
-    use SensorTypeModule , only : TIME_p, CONTROL_p, NUM_ITERATIONS_p, ENGINE_p
-    use reportErrorModule, only : reportError, error_p
+    use kindModule        , only : dp
+    use FunctionTypeModule, only : SensorPtrType
+    use SensorTypeModule  , only : getSensorId
+    use SensorTypeModule  , only : TIME_p, CONTROL_p, NUM_ITERATIONS_p, ENGINE_p
+    use reportErrorModule , only : reportError, error_p
 
-    type(SensorType), intent(in)    :: sensor
-    integer         , intent(inout) :: ierr
+    type(SensorPtrType), intent(in)    :: sensor
+    integer            , intent(inout) :: ierr
 
     !! Local variables
     real(dp) :: rVal
 
     !! --- Logic section ---
 
-    select case (sensor%type)
+    select case (sensor%p%type)
 
     case (TIME_p, CONTROL_p)
        rVal = 1.0_dp
@@ -416,13 +416,13 @@ contains
        rVal = 0.0_dp
 
     case (ENGINE_p)
-       rVal = EngineRate(engines(sensor%index(1)),ierr)
+       rVal = EngineRate(sensor%q,ierr)
 
     case default
        rVal = 0.0_dp
        ierr = ierr - 1
        call reportError (error_p,'Can not evaluate time-derivative of '// &
-            &            getSensorId(sensor,.false.), addString='SensorRate')
+            &            getSensorId(sensor%p,.false.), addString='SensorRate')
     end select
 
   end function SensorRate
@@ -460,8 +460,8 @@ contains
   recursive subroutine EvalArgs (args,nArg,iDer,xArg,x,rVal,ierr)
 
     use kindModule        , only : dp, hugeVal_p
-    use FunctionTypeModule, only : FunctionValue, getRampValue
-    use SensorTypeModule  , only : SensorPtrType, ourTime, TIME_p
+    use FunctionTypeModule, only : SensorPtrType, FunctionValue, getRampValue
+    use SensorTypeModule  , only : ourTime, TIME_p
 
     type(SensorPtrType), intent(inout) :: args(:)
     integer            , intent(in)    :: nArg, iDer
@@ -493,7 +493,7 @@ contains
 
     do i = iArg, nArg
        if (associated(args(i)%p)) then
-          call UpdateSensor (args(i)%p,ierr)
+          call UpdateSensor (args(i),ierr)
           x(i) = args(i)%p%value
           if (args(i)%p%type == TIME_p .and. iDer >= 0) then
              call getRampValue (x(i),iDer,rVal,ierr)
@@ -532,125 +532,126 @@ contains
 
   recursive subroutine UpdateSensor (sensor,ierr)
 
-    use kindModule       , only : dp
-    use SensorTypeModule , only : SensorType, getSensorId, ourTime
-    use SensorTypeModule , only : TIME_p, ENGINE_p, CONTROL_p
-    use SensorTypeModule , only : JOINT_VARIABLE_p, RELATIVE_TRIAD_p, TRIAD_p
-    use SensorTypeModule , only : SPRING_AXIAL_p, SPRING_JOINT_p
-    use SensorTypeModule , only : DAMPER_AXIAL_p, DAMPER_JOINT_p
-    use SensorTypeModule , only : STRAIN_GAGE_p, NUM_ITERATIONS_p
-    use SensorTypeModule , only : LENGTH_p, VEL_p, ACC_p, LOCAL_p
-    use SensorTypeModule , only : POS_p, REL_POS_p, ANGLE_p, FORCE_p
-    use SensorTypeModule , only : W_SPEED_p, F_VEL_p, F_ACC_p, DYN_P_p
+    use kindModule         , only : dp
+    use FunctionTypeModule , only : SensorPtrType
+    use SensorTypeModule   , only : getSensorId, ourTime
+    use SensorTypeModule   , only : TIME_p, ENGINE_p, CONTROL_p
+    use SensorTypeModule   , only : JOINT_VARIABLE_p, RELATIVE_TRIAD_p, TRIAD_p
+    use SensorTypeModule   , only : SPRING_AXIAL_p, SPRING_JOINT_p
+    use SensorTypeModule   , only : DAMPER_AXIAL_p, DAMPER_JOINT_p
+    use SensorTypeModule   , only : STRAIN_GAGE_p, NUM_ITERATIONS_p
+    use SensorTypeModule   , only : LENGTH_p, VEL_p, ACC_p, LOCAL_p
+    use SensorTypeModule   , only : POS_p, REL_POS_p, ANGLE_p, FORCE_p
+    use SensorTypeModule   , only : W_SPEED_p, F_VEL_p, F_ACC_p, DYN_P_p
     use WindTurbineRoutinesModule, only : getWindSpeed
     use HydrodynamicsModule, only : getSeaState
-    use TriadTypeModule  , only : transVSysToGlob
-    use reportErrorModule, only : internalError, reportError, error_p
+    use TriadTypeModule    , only : transVSysToGlob
+    use reportErrorModule  , only : internalError, reportError, error_p
 
-    type(SensorType), intent(inout) :: sensor
-    integer         , intent(inout) :: ierr
+    type(SensorPtrType), intent(inout) :: sensor
+    integer            , intent(inout) :: ierr
 
     !! Local variables
-    integer  :: lerr
+    integer  :: lerr, idx, dof
     real(dp) :: work(7)
 
     !! --- Logic section ---
 
     lerr = ierr
-    select case (sensor%type)
+    select case (sensor%p%type)
 
-    case ( TIME_p, CONTROL_p, JOINT_VARIABLE_p, &
-         & STRAIN_GAGE_p, NUM_ITERATIONS_p )
+    case (TIME_p, CONTROL_p, JOINT_VARIABLE_p, STRAIN_GAGE_p, NUM_ITERATIONS_p)
 
        !! Do nothing, all handled through pointers to the appropriate values
 
     case (ENGINE_p)
 
-       sensor%value = EngineValue(engines(sensor%index(1)),ierr)
+       sensor%p%value = EngineValue(sensor%q,ierr)
 
     case (SPRING_AXIAL_p, SPRING_JOINT_p)
 
-       select case (sensor%entity)
+       select case (sensor%p%entity)
        case (LENGTH_p)
           !! Do nothing, the spring length should already be up-to-date
        case default
           !! Update the variables of the associated spring
-          call updateSpringBase (springs(sensor%index(1)),ierr)
+          call updateSpringBase (springs(sensor%p%index(1)),ierr)
        end select
 
     case (DAMPER_AXIAL_p, DAMPER_JOINT_p)
 
-       select case (sensor%entity)
+       select case (sensor%p%entity)
        case (LENGTH_p, VEL_p)
           !! Do nothing, the damper length/velocity should already be up-to-date
        case default
           !! Update the variables of the associated damper
-          call updateDamperBase (dampers(sensor%index(1)),ierr)
+          call updateDamperBase (dampers(sensor%p%index(1)),ierr)
        end select
 
     case (TRIAD_p)
 
-       select case (sensor%system)
+       idx = sensor%p%index(1)
+       dof = sensor%p%dof
+       select case (sensor%p%system)
        case (LOCAL_p)
           !! Evaluate local velocity/acceleration/force component of the triad
-          sensor%value = GetLocal(triads(sensor%index(1)), &
-               &                  sensor%dof,sensor%entity)
+          sensor%p%value = GetLocal(triads(idx),dof,sensor%p%entity)
        case default
           !! Do nothing, global position, velocity and acceleration are all
           !! handled through pointers into the associated triad object.
           !! Except for the following quantities:
-          select case (sensor%entity)
+          select case (sensor%p%entity)
           case (POS_p)
-             if (sensor%dof > 3) then
+             if (dof >= 4 .and. dof <= 9) then
                 !! Evaluate global angular orientation variables
-                sensor%value = GetAngle(triads(sensor%index(1)),sensor%dof)
+                sensor%p%value = GetAngle(triads(idx),dof-3)
              end if
           case (FORCE_p)
              !! Evaluate global force component of the triad
-             sensor%value = GetGlobalForce(triads(sensor%index(1)),sensor%dof)
+             sensor%p%value = GetGlobalForce(triads(idx),dof)
           case (W_SPEED_p)
              !! Evaluate the wind speed at the triad location
-             call getWindSpeed (triads(sensor%index(1))%ur(:,4), &
-                  &             ourTime%value,work(1:3),work(4:6),ierr)
+             call getWindSpeed (triads(idx)%ur(:,4),ourTime%value, &
+                  &             work(1:3),work(4:6),ierr)
              if (ierr < 0) ierr = lerr + ierr
-             sensor%value = work(sensor%dof)
+             sensor%p%value = work(dof)
           case (F_VEL_p:DYN_P_p)
              !! Evaluate the fluid particle velocity/acceleration/pressure
-             call getSeaState (ourEnvir,ourTime%value, &
-                  &            triads(sensor%index(1))%ur(:,4),work,ierr)
+             call getSeaState (ourEnvir,ourTime%value,triads(idx)%ur(:,4), &
+                  &            work,ierr)
              if (ierr < 0) ierr = lerr + ierr
-             if (sensor%entity == F_VEL_p) then
-                sensor%value = work(sensor%dof)
-             else if (sensor%entity == F_ACC_p) then
-                sensor%value = work(3+sensor%dof)
-             else
-                sensor%value = work(7)
-             end if
+             select case (sensor%p%entity)
+             case (F_VEL_p); sensor%p%value = work(dof)
+             case (F_ACC_p); sensor%p%value = work(3+dof)
+             case (DYN_P_p); sensor%p%value = work(7)
+             end select
           end select
        end select
 
     case (RELATIVE_TRIAD_p)
 
-       if (sensor%entity == ANGLE_p) then
+       if (sensor%p%entity == ANGLE_p) then
           !! Evaluate angle between two lines defined by the four triads
-          sensor%value = GetAngle2(triads(sensor%index(1)), &
-               &                   triads(sensor%index(3)), &
-               &                   triads(sensor%index(2)), &
-               &                   triads(sensor%index(4)), sensor%dof)
+          sensor%p%value = GetAngle2(triads(sensor%p%index(1)), &
+               &                     triads(sensor%p%index(3)), &
+               &                     triads(sensor%p%index(2)), &
+               &                     triads(sensor%p%index(4)), sensor%p%dof)
        else
           !! Evaluate relative position/velocity/acceleration between two triads
-          sensor%value = GetRelative(triads(sensor%index(1)), &
-               &                     triads(sensor%index(2)), &
-               &                     sensor%dof,sensor%entity,sensor%value)
+          sensor%p%value = GetRelative(triads(sensor%p%index(1)), &
+               &                       triads(sensor%p%index(2)), &
+               &                       sensor%p%dof, sensor%p%entity, &
+               &                       sensor%p%value)
        end if
 
     case default
-       call sensorError ('Invalid sensor type',sensor%type)
+       call sensorError ('Invalid sensor type',sensor%p%type)
     end select
 
     if (ierr < lerr) then
        call reportError (error_p,'Failed to update '// &
-            &            getSensorId(sensor,.false.), addString='UpdateSensor')
+            &            getSensorId(sensor%p,.false.), &
+            &            addString='UpdateSensor')
     end if
 
   contains

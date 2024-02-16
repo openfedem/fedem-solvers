@@ -17,7 +17,7 @@
 module FunctionTypeModule
 
   use IdTypeModule    , only : IdType, ldesc_p
-  use SensorTypeModule, only : SensorPtrType, dp
+  use SensorTypeModule, only : SensorType, dp
 
   implicit none
 
@@ -40,6 +40,16 @@ module FunctionTypeModule
      integer                      :: saveVar !< Flag indicating save to frs
      logical                      :: isUsed  !< Indicates that function is used
   end type EngineType
+
+  !> @brief Data type representing a sensor pointer.
+  !> @details This data type is used to construct arrays of sensor objects
+  !> where each array element is a pointer to a sensor object, and not the
+  !> sensors themselves. The second member @a q is used only in the case the
+  !> sensor is of type engine, and will in that case point to the actual engine.
+  type SensorPtrType
+     type(SensorType), pointer :: p !< Pointer to a sensor
+     type(EngineType), pointer :: q !< Pointer to an engine
+  end type SensorPtrType
 
   !> @brief Data type representing a general function pointer.
   !> @details This data type is used to construct arrays of function objects

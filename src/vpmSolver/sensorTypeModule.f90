@@ -100,14 +100,6 @@ module SensorTypeModule
      logical      :: allocValue !< If .true., the @a value is allocated
   end type SensorType
 
-  !> @brief Data type representing a sensor pointer.
-  !> @details This data type is used to construct arrays of sensor objects
-  !> where each array element is a pointer to a sensor object,
-  !> and not the sensors themselves.
-  type SensorPtrType
-     type(SensorType), pointer :: p !< Pointer to a sensor
-  end type SensorPtrType
-
   !> Pointer to the one and only time sensor of the model
   type(SensorType), pointer, save :: ourTime => null()
 

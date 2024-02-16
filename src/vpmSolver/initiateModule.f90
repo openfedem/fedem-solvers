@@ -504,8 +504,7 @@ contains
     if (err /= 0) goto 900
 
     !! Initialize global pointers to mechanism objects for updateSensor
-    call SetPointersForSensors (mech%engines,mech%triads, &
-         &                      mech%baseSprings,mech%baseDampers)
+    call SetPointersForSensors (mech%triads,mech%baseSprings,mech%baseDampers)
 
     !! Initialize the tire models
     call InitiateTires (sys,mech%tires,mech%roads,err)
