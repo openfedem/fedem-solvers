@@ -30,7 +30,7 @@ some unit tests for the C++ and Fortran code, respectively. Therefore,
 you need to set the environment variables `GTEST_ROOT` and `PFUNIT` to point to
 the root path of valid installations of the googletest and pFUnit frameworks,
 respectively, before executing the `cmake` commands shown below. See
-[Installing googletest and pFUnit](https://github.com/SAP/fedem-foundation/blob/main/pFUnit/README.md#installing-googletest-and-pfunit)
+[Installing googletest and pFUnit](https://github.com/openfedem/fedem-foundation/blob/main/pFUnit/README.md#installing-googletest-and-pfunit)
 for instructions on how to install these packages on your system.
 
 To build the FEDEM solvers from the sources, proceed as follows:
@@ -39,7 +39,7 @@ To build the FEDEM solvers from the sources, proceed as follows:
 
       mkdir ~/Fedem-src
       cd ~/Fedem-src
-      git clone --recurse-submodules git@github.com:SAP/fedem-solvers.git
+      git clone --recurse-submodules git@github.com:openfedem/fedem-solvers.git
 
 - On Linux, the FEDEM solvers and tests can be built and executed by:
 
