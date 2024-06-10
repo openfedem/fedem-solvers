@@ -1,0 +1,15 @@
+<map id="springtypemodule::springtype" name="springtypemodule::springtype">
+<area shape="rect" id="node1" title="Data type representing multi&#45;DOF spring element." alt="" coords="2884,68,3101,95"/>
+<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,221,167,248"/>
+<area shape="rect" id="node4" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="245,73,442,100"/>
+<area shape="rect" id="node6" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2267,224,2515,251"/>
+<area shape="rect" id="node7" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1265,334,1419,375"/>
+<area shape="rect" id="node8" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="805,183,959,225"/>
+<area shape="rect" id="node10" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,376,455,403"/>
+<area shape="rect" id="node11" href="$structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="479,128,737,155"/>
+<area shape="rect" id="node12" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1932,252,2181,279"/>
+<area shape="rect" id="node3" href="$structtriadtypemodule_1_1triadptrtype.html" title="Data type representing a triad pointer." alt="" coords="1027,68,1241,95"/>
+<area shape="rect" id="node5" href="$structspringtypemodule_1_1springptrtype.html" title="Data type representing a base spring pointer." alt="" coords="2576,148,2811,175"/>
+<area shape="rect" id="node13" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1516,309,1755,336"/>
+<area shape="rect" id="node9" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="761,376,1003,403"/>
+</map>

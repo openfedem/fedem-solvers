@@ -1,0 +1,22 @@
+<map id="normroutinesmodule::expandvector" name="normroutinesmodule::expandvector">
+<area shape="rect" id="node1" title="Returns a pointer to the expanded solution vector." alt="" coords="1323,71,1481,112"/>
+<area shape="rect" id="node2" href="$namespacenormroutinesmodule.html#a852dd09321a1ed6858c4e74538cd6cd5" title="Calculates energy norms for given force and displacement vectors." alt="" coords="1116,5,1275,47"/>
+<area shape="rect" id="node10" href="$namespacenormroutinesmodule.html#a2b350dab276ba8af3f77a0f71cd7fff3" title="Calculates infinity norms of the given vector." alt="" coords="1116,71,1275,112"/>
+<area shape="rect" id="node11" href="$namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="1116,136,1275,177"/>
+<area shape="rect" id="node3" href="$namespacesolverroutinesmodule.html#a5c310a227a63c05c486addd60a4891a0" title="Calculates all iteration norms defined in the system." alt="" coords="868,41,1053,83"/>
+<area shape="rect" id="node4" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,9,805,51"/>
+<area shape="rect" id="node9" href="$namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="622,75,803,116"/>
+<area shape="rect" id="node5" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,47,572,74"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,47,83,74"/>
+<area shape="rect" id="node7" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,47,341,74"/>
+<area shape="rect" id="node8" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,98,338,125"/>
+<area shape="rect" id="node12" href="$namespacenormroutinesmodule.html#a6155a1f7ea95c1fcbbfad47f1e294a8e" title="Defines the convergence tolerance to use for a given test item." alt="" coords="881,107,1040,148"/>
+<area shape="rect" id="node13" href="$namespacetimestepmodule.html#af787e6f92eeb200e9c4f125a827e8758" title=" " alt="" coords="853,173,1068,199"/>
+<area shape="rect" id="node14" href="$namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="870,224,1051,265"/>
+<area shape="rect" id="node15" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,231,800,258"/>
+<area shape="rect" id="node16" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,130,519,157"/>
+<area shape="rect" id="node17" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,181,519,207"/>
+<area shape="rect" id="node18" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,231,519,258"/>
+<area shape="rect" id="node19" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,282,519,309"/>
+<area shape="rect" id="node20" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,333,519,359"/>
+</map>

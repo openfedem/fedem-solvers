@@ -1,0 +1,6 @@
+<map id="savemodule::writecontactdb" name="savemodule::writecontactdb">
+<area shape="rect" id="node1" title="Writes results for a contact element to results database file." alt="" coords="5,56,212,83"/>
+<area shape="rect" id="node2" href="$namespacesavemodule.html#a50b2575d49e88a11898eb9c4910a7112" title="Writes results for a damper to results database file." alt="" coords="260,5,469,32"/>
+<area shape="rect" id="node3" href="$namespacesavemodule.html#ae254eb85a426cf68f889d5db6ebd57f5" title="Writes results for a friction to results database file." alt="" coords="262,56,467,83"/>
+<area shape="rect" id="node4" href="$namespacesavemodule.html#a261efef4985e4b70e4f79ec04e88396f" title="Writes results for a spring to results database file." alt="" coords="265,107,464,133"/>
+</map>

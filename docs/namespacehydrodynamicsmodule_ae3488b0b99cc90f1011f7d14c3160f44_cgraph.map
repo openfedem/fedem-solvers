@@ -1,0 +1,5 @@
+<map id="hydrodynamicsmodule::updatehydrodynbody" name="hydrodynamicsmodule::updatehydrodynbody">
+<area shape="rect" id="node1" title="Updates the hydrodynamic body quantities." alt="" coords="5,39,176,80"/>
+<area shape="rect" id="node2" href="$namespacehydrodynamicsmodule.html#a89c6ae8da9405064482ab133361c06c0" title="Computes the buoyancy length and center for a two&#45;noded beam." alt="" coords="224,5,395,47"/>
+<area shape="rect" id="node3" href="$namespacehydrodynamicsmodule.html#a2ea2177d016f5ca3e78cc96d8f103f1d" title="Returns the water surface normal vector in local coordinate system." alt="" coords="224,71,395,112"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="solvermodule::computegagestrains" name="solvermodule::computegagestrains">
+<area shape="rect" id="node1" title="Computes strain tensor at gage positions for input displacements." alt="" coords="165,5,417,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#ade0803ca952d384c462d887e06564c60" title="Calculates the strains at strain gages for a given displacement field." alt="" coords="5,5,117,32"/>
+</map>

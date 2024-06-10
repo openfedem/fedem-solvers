@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,183,125,209"/>
+<area shape="rect" id="node2" href="$classCantilever.html" title="Creates an FE model of a cantilever beam with default properties." alt="" coords="189,5,279,32"/>
+<area shape="rect" id="node3" href="$classCantileverShell.html" title="Creates an FE model of a cantilever shell." alt="" coords="173,56,295,83"/>
+<area shape="rect" id="node4" href="$classCylinderShell.html" title="Creates an FE model of a cantilever shell cylinder." alt="" coords="180,107,288,133"/>
+<area shape="rect" id="node5" href="$classOPHSphShell.html" title="Creates an FE model of the Open Pinched Hemisphere test case." alt="" coords="181,157,287,184"/>
+<area shape="rect" id="node6" href="$classPDICylShell.html" title="Creates an FE model of the Pinched diaphragmed cylinder test case." alt="" coords="185,208,283,235"/>
+<area shape="rect" id="node7" href="$classPinnedBeam.html" title="Creates an FE model of a pinned beam with default properties." alt="" coords="182,259,286,285"/>
+<area shape="rect" id="node8" href="$classQuartCylShell.html" title="Creates an FE model of one quarter of a shell cylinder." alt="" coords="179,309,289,336"/>
+<area shape="rect" id="node9" href="$classScoLoRoof.html" title="Creates an FE model of the Scordelis&#45;Lo Roof test case." alt="" coords="189,360,279,387"/>
+</map>

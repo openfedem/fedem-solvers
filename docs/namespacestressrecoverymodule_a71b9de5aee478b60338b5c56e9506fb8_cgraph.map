@@ -1,0 +1,4 @@
+<map id="stressrecoverymodule::flushrecoveryfiles" name="stressrecoverymodule::flushrecoveryfiles">
+<area shape="rect" id="node1" title="Flushes the strain gage results database file to disk." alt="" coords="5,5,172,47"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#a0722f82f6fa84c9a72b41d6b5c05fa9b" title="Flushes the specified results database file to disk." alt="" coords="220,13,395,39"/>
+</map>

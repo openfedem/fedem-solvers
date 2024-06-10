@@ -1,0 +1,6 @@
+<map id="FiUserElmPlugin::getTypeName" name="FiUserElmPlugin::getTypeName">
+<area shape="rect" id="node1" title="Returns the name of an element type." alt="" coords="5,78,231,105"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="279,5,459,47"/>
+<area shape="rect" id="node3" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="279,71,459,112"/>
+<area shape="rect" id="node4" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="313,137,424,163"/>
+</map>

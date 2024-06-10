@@ -1,0 +1,11 @@
+<map id="solvermodule::getsystemmatrix" name="solvermodule::getsystemmatrix">
+<area shape="rect" id="node1" title="Returns a system matrix as a full matrix." alt="" coords="813,115,1044,141"/>
+<area shape="rect" id="node2" href="$namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="539,5,765,32"/>
+<area shape="rect" id="node3" href="$namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="335,42,491,83"/>
+<area shape="rect" id="node6" href="$namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="574,107,730,149"/>
+<area shape="rect" id="node8" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="335,173,491,214"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#ae6e1f5b931c2ce470c9bb64e87c362a8" title="Returns a system matrix in full format." alt="" coords="601,224,703,251"/>
+<area shape="rect" id="node4" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="131,107,287,149"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,115,83,141"/>
+<area shape="rect" id="node7" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="335,107,491,149"/>
+</map>

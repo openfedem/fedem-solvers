@@ -1,0 +1,4 @@
+<map id="modesroutinesmodule::writeyamlheader" name="modesroutinesmodule::writeyamlheader">
+<area shape="rect" id="node1" title="Writes the header of a YAML frequency response file." alt="" coords="5,5,173,47"/>
+<area shape="rect" id="node2" href="$namespaceversionmodule.html#af1314db1e48ea02ac31a0d407028c9cd" title="Returns current date and time in the format &quot;dd Mmm yyyy hh:mm:ss&quot;." alt="" coords="221,13,444,39"/>
+</map>

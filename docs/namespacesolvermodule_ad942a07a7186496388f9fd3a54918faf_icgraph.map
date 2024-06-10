@@ -1,0 +1,4 @@
+<map id="solvermodule::softrestart" name="solvermodule::softrestart">
+<area shape="rect" id="node1" title="Restarts a running simulation model from the provided state." alt="" coords="144,5,331,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#a53a8d5ea2434ae00f5bf28cf66196cc3" title="Restarts a running solver process from the provided state." alt="" coords="5,5,96,32"/>
+</map>

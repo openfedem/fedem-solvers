@@ -1,0 +1,4 @@
+<map id="slv_syssize" name="slv_syssize">
+<area shape="rect" id="node1" title="Returns the dimension of the system matrices and vectors." alt="" coords="5,5,101,32"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#ab58dddec18fd15331fa7b96aa671d3af" title="Returns the dimension of the linearized system." alt="" coords="149,5,343,32"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="fedem&#45;foundation/src/FFaLib/FFaDefinitions/FFaResultDescription.H" name="fedem&#45;foundation/src/FFaLib/FFaDefinitions/FFaResultDescription.H">
+<area shape="rect" id="node1" title="Result variable description." alt="" coords="653,5,832,61"/>
+<area shape="rect" id="node2" href="$SolutionMapper_2main_8C.html" title="Solution field mapping utility for sub&#45;model analysis." alt="" coords="5,117,152,158"/>
+<area shape="rect" id="node3" href="$FFrEntryBase_8C.html" title=" " alt="" coords="176,117,344,158"/>
+<area shape="rect" id="node4" href="$FFrExtractor_8C.html" title="Front&#45;end for the result extraction module." alt="" coords="368,117,531,158"/>
+<area shape="rect" id="node5" href="$FFrExtractor__F_8C.html" title="Fortran wrapper for the FFrExtractor methods." alt="" coords="555,117,730,158"/>
+<area shape="rect" id="node6" href="$FFaResultDescription_8C.html" title=" " alt="" coords="754,109,931,165"/>
+<area shape="rect" id="node7" href="$FFpCurve_8C.html" title=" " alt="" coords="955,109,1122,165"/>
+<area shape="rect" id="node8" href="$FFpCurveDef_8H.html" title=" " alt="" coords="1146,109,1313,165"/>
+<area shape="rect" id="node11" href="$FFpReadResults_8C.html" title=" " alt="" coords="1337,109,1503,165"/>
+<area shape="rect" id="node9" href="$FFpCurveDef_8C.html" title=" " alt="" coords="1027,213,1194,269"/>
+<area shape="rect" id="node10" href="$FFpBatchExport_8C.html" title=" " alt="" coords="1219,221,1477,262"/>
+</map>

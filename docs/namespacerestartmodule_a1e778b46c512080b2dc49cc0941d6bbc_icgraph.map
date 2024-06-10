@@ -1,0 +1,4 @@
+<map id="restartmodule::readcontroldata" name="restartmodule::readcontroldata">
+<area shape="rect" id="node1" title="Reads control system data from results database for restart." alt="" coords="240,13,465,39"/>
+<area shape="rect" id="node2" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="5,5,192,47"/>
+</map>

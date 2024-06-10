@@ -1,0 +1,5 @@
+<map id="slv_initgages" name="slv_initgages">
+<area shape="rect" id="node1" title="Save/restores initial gage strain state to/from an array in core." alt="" coords="5,13,113,39"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#a7ad2b8d45d997d3009810b96ba5fe832" title="Save/restores the initial gage strain to/from an in&#45;core array." alt="" coords="161,13,408,39"/>
+<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#a8a92d21d270bc47338c919f868d6ee40" title="Saves/restores the initial gage strains to/from an in&#45;core array." alt="" coords="456,5,623,47"/>
+</map>

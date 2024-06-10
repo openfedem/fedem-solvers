@@ -1,0 +1,4 @@
+<map id="savemodule::writemechanismdb" name="savemodule::writemechanismdb">
+<area shape="rect" id="node1" title="Writes results for the mechanism to results database file." alt="" coords="5,13,240,39"/>
+<area shape="rect" id="node2" href="$namespaceffacmdlinearginterface.html#a5762b6bd35e833d000e6db4bcda3df60" title="Returns the value of an integer command&#45;line option id." alt="" coords="288,5,476,47"/>
+</map>

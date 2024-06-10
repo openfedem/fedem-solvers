@@ -1,0 +1,7 @@
+<map id="slv_beamforces" name="slv_beamforces">
+<area shape="rect" id="node1" title="Calculates beam section forces for given displacement vector." alt="" coords="5,56,131,83"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#a48d19402ea9394b4475a02c69b642fba" title="Computes beam sectional forces for input displacements." alt="" coords="179,56,432,83"/>
+<area shape="rect" id="node3" href="$solverModule_8f90.html#a1c4c543dbfd463aa17894a7f66fe2647" title="Updates the configuration by applying given displacement vector." alt="" coords="503,5,623,32"/>
+<area shape="rect" id="node4" href="$solverModule_8f90.html#ab0cd3c1b86b859e9252a73fdd985e9d7" title="Extracts sectional forces at triads from the beam elements." alt="" coords="480,56,647,83"/>
+<area shape="rect" id="node5" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="481,107,645,149"/>
+</map>

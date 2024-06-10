@@ -1,0 +1,5 @@
+<map id="solvermodule::savepartstate" name="solvermodule::savepartstate">
+<area shape="rect" id="node1" title="Saves the deformation/stress state of a FE part to an in&#45;core array." alt="" coords="5,46,215,73"/>
+<area shape="rect" id="node2" href="$namespacestressrecoverymodule.html#ad571529d2af499a2938a5c5ef7382981" title="Returns deformation vector of the specified part." alt="" coords="263,5,429,47"/>
+<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#a33d884cb577729eedcf58658473c706e" title="Returns the array of von Mises stresses for the specified part." alt="" coords="263,71,429,112"/>
+</map>

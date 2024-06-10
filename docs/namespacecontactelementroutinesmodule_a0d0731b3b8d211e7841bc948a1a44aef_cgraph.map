@@ -1,0 +1,7 @@
+<map id="contactelementroutinesmodule::updatecontactposition" name="contactelementroutinesmodule::updatecontactposition">
+<area shape="rect" id="node1" title="Updates the local coordinates of the contact element follower." alt="" coords="5,74,232,115"/>
+<area shape="rect" id="node2" href="$contactElementRoutinesModule_8f90.html#aec77f563a8276d891ca259324c3e4ae2" title="Adjusts the previous slide variable when looping contact curve." alt="" coords="364,5,472,32"/>
+<area shape="rect" id="node3" href="$namespacecurvetypemodule.html#a2234041bf7293bc612fe56eb32c2205b" title="Checks if Pos is in a corner section of a curve." alt="" coords="280,56,556,83"/>
+<area shape="rect" id="node4" href="$namespacecurvetypemodule.html#af576eff00ce42fd290a6d8cdb33aa3d5" title="Checks if a given point Pos is on a circular curve segment." alt="" coords="281,107,555,133"/>
+<area shape="rect" id="node5" href="$namespacecontactelementroutinesmodule.html#ad1f8ca55597e077ce65a47586c6bcee1" title="Updates the contact point velocities and eccentricty vectors." alt="" coords="305,158,531,199"/>
+</map>

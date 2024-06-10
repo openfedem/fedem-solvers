@@ -1,0 +1,4 @@
+<map id="initiatecontactelmtypemodule::initiatecontactelement" name="initiatecontactelmtypemodule::initiatecontactelement">
+<area shape="rect" id="node1" title="Initializes a contact element after reading the solver input file." alt="" coords="5,5,224,47"/>
+<area shape="rect" id="node2" href="$namespacecurvetypemodule.html#af576eff00ce42fd290a6d8cdb33aa3d5" title="Checks if a given point Pos is on a circular curve segment." alt="" coords="272,13,547,39"/>
+</map>

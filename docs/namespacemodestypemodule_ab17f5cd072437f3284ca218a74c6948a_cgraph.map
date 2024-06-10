@@ -1,0 +1,5 @@
+<map id="modestypemodule::writemodesdb" name="modestypemodule::writemodesdb">
+<area shape="rect" id="node1" title="Writes modal results to database file." alt="" coords="5,31,251,57"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#a7850da2d310d0ef72199c2e73b87ab66" title="Checks that the estimated number of bytes per time is correct." alt="" coords="306,5,498,32"/>
+<area shape="rect" id="node3" href="$namespacerdbmodule.html#a6f21d1d878c1b0ac3880c21c23b214ff" title="Writes current time step to the specified results database file." alt="" coords="299,56,505,83"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="savemodule::writesupelheader2" name="savemodule::writesupelheader2">
+<area shape="rect" id="node1" title="Writes secondary results database file header for a superelement." alt="" coords="5,132,236,159"/>
+<area shape="rect" id="node2" href="$namespacesupeltypemodule.html#aa4153a12fc9dac40e11e40f3b68142a1" title="Returns the full ID of a superelement." alt="" coords="284,5,495,32"/>
+<area shape="rect" id="node3" href="$namespacesavemodule.html#a4d8f178785c6788b3af406e7a06282a6" title="Helper function inserting an integer pair into a map." alt="" coords="295,56,483,83"/>
+<area shape="rect" id="node4" href="$namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="294,107,485,133"/>
+<area shape="rect" id="node5" href="$namespacerdbmodule.html#a9af0f358c23e7976f8302f236f52444b" title="Writes the beginning of an item group definition." alt="" coords="304,157,475,184"/>
+<area shape="rect" id="node6" href="$namespacesavemodule.html#afc3cb045dc75c005c5a703744323da0a" title="Writes an item group reference to the file header." alt="" coords="300,208,479,235"/>
+<area shape="rect" id="node7" href="$namespacerdbmodule.html#ac77a4ebbbaa73cec7d26d49901188fb6" title="Writes a variable definition." alt="" coords="302,259,477,285"/>
+</map>

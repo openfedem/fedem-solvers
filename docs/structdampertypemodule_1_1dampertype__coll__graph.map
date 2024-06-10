@@ -1,0 +1,14 @@
+<map id="dampertypemodule::dampertype" name="dampertypemodule::dampertype">
+<area shape="rect" id="node1" title="Data type representing a damper element." alt="" coords="2920,93,3157,120"/>
+<area shape="rect" id="node2" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="479,21,676,48"/>
+<area shape="rect" id="node3" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,207,167,233"/>
+<area shape="rect" id="node4" href="$structdampertypemodule_1_1damperbasetype.html" title="Data type representing a base damper object." alt="" coords="2571,167,2839,193"/>
+<area shape="rect" id="node5" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1248,222,1401,263"/>
+<area shape="rect" id="node6" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="744,322,897,363"/>
+<area shape="rect" id="node8" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,240,455,267"/>
+<area shape="rect" id="node9" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2249,316,2497,343"/>
+<area shape="rect" id="node10" href="$structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="965,511,1224,537"/>
+<area shape="rect" id="node11" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1915,228,2164,255"/>
+<area shape="rect" id="node12" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1499,224,1737,251"/>
+<area shape="rect" id="node7" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="700,240,941,267"/>
+</map>

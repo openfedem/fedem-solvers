@@ -1,0 +1,7 @@
+<map id="solverroutinesmodule::closesolverdb" name="solverroutinesmodule::closesolverdb">
+<area shape="rect" id="node1" title="Closes all solver data base files before program termination." alt="" coords="5,57,169,98"/>
+<area shape="rect" id="node2" href="$namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="217,5,427,32"/>
+<area shape="rect" id="node4" href="$namespacetireroutinesmodule.html#a6fde006223d686f83af46a5bfc95856b" title=" " alt="" coords="249,57,395,98"/>
+<area shape="rect" id="node5" href="$namespacesavevtfmodule.html#a81d77243bbbd06f4e4e51f977513ad9a" title=" " alt="" coords="232,123,412,149"/>
+<area shape="rect" id="node3" href="$namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="475,5,651,32"/>
+</map>

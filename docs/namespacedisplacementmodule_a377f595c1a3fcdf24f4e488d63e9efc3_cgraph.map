@@ -1,0 +1,4 @@
+<map id="displacementmodule::readstaticdisplacements" name="displacementmodule::readstaticdisplacements">
+<area shape="rect" id="node1" title="Calculates the internal displacements due to gravitation forces." alt="" coords="5,5,196,47"/>
+<area shape="rect" id="node2" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="244,5,401,47"/>
+</map>

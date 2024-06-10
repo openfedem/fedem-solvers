@@ -1,0 +1,11 @@
+<map id="fedem&#45;foundation/src/FFaLib/FFaAlgebra/FFaMath.H" name="fedem&#45;foundation/src/FFaLib/FFaAlgebra/FFaMath.H">
+<area shape="rect" id="node1" title="Various math utility functions (extension of math.h)." alt="" coords="823,5,1041,47"/>
+<area shape="rect" id="node2" href="$testModels_8C.html" title="Hard&#45;coded basic FE models for testing of FE part reduction." alt="" coords="5,102,219,143"/>
+<area shape="rect" id="node3" href="$SolutionMapper_2main_8C.html" title="Solution field mapping utility for sub&#45;model analysis." alt="" coords="243,102,389,143"/>
+<area shape="rect" id="node4" href="$FFa3DLocation_8C.html" title=" " alt="" coords="413,102,672,143"/>
+<area shape="rect" id="node5" href="$FFaMat33_8C.html" title=" " alt="" coords="696,102,923,143"/>
+<area shape="rect" id="node6" href="$FFaMath_8C.html" title="Various math utility functions." alt="" coords="947,102,1165,143"/>
+<area shape="rect" id="node7" href="$FFaTensorTransforms_8C.html" title="Tensor transformation utilities." alt="" coords="1190,95,1405,151"/>
+<area shape="rect" id="node8" href="$FFaUnitCalculator_8C.html" title=" " alt="" coords="1429,102,1707,143"/>
+<area shape="rect" id="node9" href="$FFaVec3_8C.html" title="Point vectors in 3D space." alt="" coords="1731,102,1949,143"/>
+</map>

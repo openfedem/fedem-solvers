@@ -1,0 +1,6 @@
+<map id="springtypemodule::springenergy" name="springtypemodule::springenergy">
+<area shape="rect" id="node1" title="Evaluates the current strain energy in a spring." alt="" coords="5,46,239,73"/>
+<area shape="rect" id="node2" href="$namespacefunctiontypemodule.html#a8dd4a0929509e61339aec8a0eed28f22" title="Checks whether a function can be integrated explicitly." alt="" coords="287,5,440,47"/>
+<area shape="rect" id="node3" href="$namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="287,71,440,112"/>
+<area shape="rect" id="node4" href="$namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="488,71,667,112"/>
+</map>

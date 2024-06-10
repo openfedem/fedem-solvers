@@ -1,0 +1,13 @@
+<map id="rdbmodule::nullifyrdb" name="rdbmodule::nullifyrdb">
+<area shape="rect" id="node1" title="Initializes a rdbmodule::rdbtype object." alt="" coords="637,169,800,196"/>
+<area shape="rect" id="node2" href="$namespacesavemodule.html#aa50e29317831724dd64995825e895ade" title="Initializes the solver result database file." alt="" coords="353,77,589,104"/>
+<area shape="rect" id="node9" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="388,129,555,170"/>
+<area shape="rect" id="node10" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="392,194,551,235"/>
+<area shape="rect" id="node11" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="392,259,551,301"/>
+<area shape="rect" id="node3" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" id="node4" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" id="node7" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>

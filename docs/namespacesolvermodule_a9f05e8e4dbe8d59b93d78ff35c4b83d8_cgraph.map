@@ -1,0 +1,6 @@
+<map id="solvermodule::writeclosure" name="solvermodule::writeclosure">
+<area shape="rect" id="node1" title="Outputs file and profiling information on program termination." alt="" coords="5,56,204,83"/>
+<area shape="rect" id="node2" href="$namespaceinitiatemodule.html#a8f0fedabe4d1a307c6d44a946b6bd418" title="Extracts a file name from a command&#45;line option." alt="" coords="253,5,457,32"/>
+<area shape="rect" id="node3" href="$namespaceprofilermodule.html#aba3890845238dfacf1394b47e474de03" title="Prints out solver profiling information in a nicely formatted table." alt="" coords="252,56,459,83"/>
+<area shape="rect" id="node4" href="$solverModule_8f90.html#acb9478740ad1afdfe4fef1dfad434481" title="Writes a file name with description to the console file unit." alt="" coords="299,107,412,133"/>
+</map>

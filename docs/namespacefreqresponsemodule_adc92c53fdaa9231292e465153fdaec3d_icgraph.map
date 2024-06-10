@@ -1,0 +1,5 @@
+<map id="freqresponsemodule::freq_eigenvalues" name="freqresponsemodule::freq_eigenvalues">
+<area shape="rect" id="node1" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="335,5,491,47"/>
+<area shape="rect" id="node2" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="131,5,287,47"/>
+<area shape="rect" id="node3" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,13,83,39"/>
+</map>

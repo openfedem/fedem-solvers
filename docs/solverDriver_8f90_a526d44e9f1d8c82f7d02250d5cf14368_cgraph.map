@@ -1,0 +1,4 @@
+<map id="slv_getvar" name="slv_getvar">
+<area shape="rect" id="node1" title="Returns the state variables for a given mechanism object." alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#a91f56e58c4c8357a3ae311fd38d9c73d" title="Returns the current state variables for the specified object." alt="" coords="144,5,357,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="massroutinesmodule::addininertiaforces" name="massroutinesmodule::addininertiaforces">
+<area shape="rect" id="node1" title="Calculates the inertia forces for a mass element." alt="" coords="292,5,451,47"/>
+<area shape="rect" id="node2" href="$namespaceaddinsysmodule.html#a4dedbdb8ba7983d8fc40b7e44a566fe5" title="Builds the system force vectors." alt="" coords="5,13,244,39"/>
+</map>

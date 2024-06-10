@@ -1,0 +1,9 @@
+<map id="displacementmodule::getgroupbmat" name="displacementmodule::getgroupbmat">
+<area shape="rect" id="node1" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="5,145,164,186"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title=" " alt="" coords="212,5,477,32"/>
+<area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#ace0f4417d7d811325ad451a1ece19d38" title=" " alt="" coords="267,57,423,98"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title=" " alt="" coords="247,123,443,149"/>
+<area shape="rect" id="node5" href="$namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538" title=" " alt="" coords="267,174,423,215"/>
+<area shape="rect" id="node6" href="$displacementModule_8f90.html#a53f6c76df3d79227725ebbf111b04df0" title="Convenience function with error handling for row&#45;index extraction." alt="" coords="276,240,413,267"/>
+<area shape="rect" id="node7" href="$namespacesammodule.html#a6fdab47d630a2d888453176403a65059" title="Returns internal node number and local dof&#45;number for a global dof." alt="" coords="220,291,469,317"/>
+</map>

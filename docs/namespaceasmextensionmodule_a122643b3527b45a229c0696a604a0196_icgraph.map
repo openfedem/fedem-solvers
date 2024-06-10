@@ -1,0 +1,15 @@
+<map id="asmextensionmodule::csallocpointerarrays" name="asmextensionmodule::csallocpointerarrays">
+<area shape="rect" id="node1" title="Initializes pointer arrays for the equation solvers." alt="" coords="911,151,1073,193"/>
+<area shape="rect" id="node2" href="$namespacesamsolvermodule.html#a0cf83f9fe742b5383b2d1dbe1f142d9a" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="667,109,863,150"/>
+<area shape="rect" id="node10" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="688,183,841,225"/>
+<area shape="rect" id="node3" href="$namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" id="node7" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+<area shape="rect" id="node11" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="451,157,521,184"/>
+<area shape="rect" id="node12" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="433,208,539,235"/>
+<area shape="rect" id="node13" href="$solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="455,259,517,285"/>
+</map>

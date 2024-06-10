@@ -1,0 +1,4 @@
+<map id="solvermodule::saveinitgagestrains" name="solvermodule::saveinitgagestrains">
+<area shape="rect" id="node1" title="Save/restores the initial gage strain to/from an in&#45;core array." alt="" coords="161,5,408,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#a81432727262c3ef8528782ab57e0afe3" title="Save/restores initial gage strain state to/from an array in core." alt="" coords="5,5,113,32"/>
+</map>

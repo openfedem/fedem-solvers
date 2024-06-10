@@ -1,0 +1,7 @@
+<map id="samstressmodule::initiatesam" name="samstressmodule::initiatesam">
+<area shape="rect" id="node1" title="Initializes the SAM data structure for the recovery processes." alt="" coords="5,81,225,108"/>
+<area shape="rect" id="node2" href="$namespacesammodule.html#a774b4410e5773eb4b5098c2a390d0c16" title="Performs consistency checking of the SAM data structure." alt="" coords="309,5,454,32"/>
+<area shape="rect" id="node3" href="$namespacesammodule.html#a69fd810a4c8b2fdea3b306017996214a" title="Forms the control arrays dofPosIn1 and/or dofPosIn2 in SAM." alt="" coords="273,56,489,83"/>
+<area shape="rect" id="node4" href="$namespacesammodule.html#a3b485dc310e4344a9620649c62ddc644" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="293,107,469,133"/>
+<area shape="rect" id="node5" href="$samStressModule_8f90.html#a021dbf4445de46fb85e9d9b7d2b8888f" title="Reads all SAM arrays from binary file." alt="" coords="321,157,441,184"/>
+</map>

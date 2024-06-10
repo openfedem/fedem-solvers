@@ -1,0 +1,11 @@
+<map id="solverroutinesmodule::calculateiterationnorms" name="solverroutinesmodule::calculateiterationnorms">
+<area shape="rect" id="node1" title="Calculates all iteration norms defined in the system." alt="" coords="5,90,191,131"/>
+<area shape="rect" id="node2" href="$namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7" title=" " alt="" coords="239,5,491,32"/>
+<area shape="rect" id="node3" href="$namespacenormroutinesmodule.html#a852dd09321a1ed6858c4e74538cd6cd5" title="Calculates energy norms for given force and displacement vectors." alt="" coords="285,122,444,163"/>
+<area shape="rect" id="node8" href="$namespacenormroutinesmodule.html#a2b350dab276ba8af3f77a0f71cd7fff3" title="Calculates infinity norms of the given vector." alt="" coords="285,187,444,229"/>
+<area shape="rect" id="node9" href="$namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="285,57,444,98"/>
+<area shape="rect" id="node4" href="$namespacenormroutinesmodule.html#ac496980953eb98dc898429cd5741382c" title="Returns a pointer to the expanded solution vector." alt="" coords="541,122,699,163"/>
+<area shape="rect" id="node7" href="$namespacesearchandsortmodule.html#a0a5e7bf805015a87a8e996d9e451ba66" title="Finds indices of the largest values in the given real array." alt="" coords="539,187,701,229"/>
+<area shape="rect" id="node5" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="751,90,905,131"/>
+<area shape="rect" id="node6" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="749,155,907,197"/>
+</map>

@@ -1,0 +1,41 @@
+<map id="hydrodynamicsmodule::watersurfacenormal" name="hydrodynamicsmodule::watersurfacenormal">
+<area shape="rect" id="node1" title="Returns the water surface normal vector in local coordinate system." alt="" coords="2504,149,2675,191"/>
+<area shape="rect" id="node2" href="$namespacehydrodynamicsmodule.html#a60d2fd3b09edcf79b41c42ee58433dc6" title="Calculates Morison force contributions for a two&#45;noded beam element." alt="" coords="2062,71,2233,112"/>
+<area shape="rect" id="node26" href="$namespacehydrodynamicsmodule.html#ae3488b0b99cc90f1011f7d14c3160f44" title="Updates the hydrodynamic body quantities." alt="" coords="2285,179,2456,220"/>
+<area shape="rect" id="node3" href="$namespaceuserdefelroutinesmodule.html#aeee3cd1496b1231f3fd8474240b0fc03" title="Calculates Morison force contributions for a two&#45;noded element." alt="" coords="1806,71,1991,112"/>
+<area shape="rect" id="node24" href="$namespacesupelroutinesmodule.html#a97fe939c5423a08fd26767a4e700798f" title="Calculates Morison force contributions for a two&#45;noded beam element." alt="" coords="1819,5,1978,47"/>
+<area shape="rect" id="node4" href="$namespaceuserdefelroutinesmodule.html#a145a2c99105ad2c826fe6833f3dddc03" title="Updates a user&#45;defined element." alt="" coords="1554,71,1739,112"/>
+<area shape="rect" id="node5" href="$namespaceuserdefelroutinesmodule.html#a3a423a4fa35d31f9b12b0e18a18ad80a" title="Updates all user&#45;defined elements in the model." alt="" coords="1320,192,1505,233"/>
+<area shape="rect" id="node6" href="$namespacestaticequilibriummodule.html#ae099843d3bb1498026518a0f5d321b37" title="Updates the configuration after initial static equilibrium." alt="" coords="1089,192,1270,233"/>
+<area shape="rect" id="node14" href="$namespacestaticequilibriummodule.html#a0380191594754df25b729586dcfad47e" title="Increments all position variables and updates the configuration." alt="" coords="1089,257,1270,299"/>
+<area shape="rect" id="node20" href="$namespacenewmarkroutinesmodule.html#a66a6b6c2901da72d85633d6374e189c2" title="Updates all mechanism objects." alt="" coords="1087,127,1272,168"/>
+<area shape="rect" id="node7" href="$namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="855,199,1037,240"/>
+<area shape="rect" id="node8" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,213,800,239"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,175,519,202"/>
+<area shape="rect" id="node10" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,226,519,253"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,277,519,303"/>
+<area shape="rect" id="node12" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,327,519,354"/>
+<area shape="rect" id="node13" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,125,519,151"/>
+<area shape="rect" id="node15" href="$namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="622,135,803,176"/>
+<area shape="rect" id="node16" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,74,572,101"/>
+<area shape="rect" id="node17" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,150,83,177"/>
+<area shape="rect" id="node18" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,99,341,126"/>
+<area shape="rect" id="node19" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,49,338,75"/>
+<area shape="rect" id="node21" href="$namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="853,131,1039,172"/>
+<area shape="rect" id="node22" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,69,805,111"/>
+<area shape="rect" id="node23" href="$namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="853,13,1039,55"/>
+<area shape="rect" id="node25" href="$namespacesupelroutinesmodule.html#a4fa23a365d753487fee11a133a8c43af" title="Updates all superelements in the model based on the computed state." alt="" coords="1333,127,1492,168"/>
+<area shape="rect" id="node27" href="$namespacehydrodynamicsmodule.html#aba4271cbefa81017b5f49a83f98d3641" title="Calculates buoyancy force resultant for a superelement or beam." alt="" coords="2062,179,2233,220"/>
+<area shape="rect" id="node36" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initiates all hydrodynamic bodies in the model." alt="" coords="2057,256,2237,297"/>
+<area shape="rect" id="node28" href="$namespaceuserdefelroutinesmodule.html#a389010241f5d9e5ac3f65cb56088c1c0" title="Calculates buoyancy force contributions for a two&#45;noded element." alt="" coords="1806,136,1991,177"/>
+<area shape="rect" id="node29" href="$namespacesupelroutinesmodule.html#ad6fc0213b4c19b628cfec3bfaa624127" title="Calculates buoyancy forces and associated load correction stiffness." alt="" coords="1567,136,1726,177"/>
+<area shape="rect" id="node30" href="$namespacesupelroutinesmodule.html#a31e9f3faf29bf864b624805c99318516" title="Updates all superelements in the model based on the computed state." alt="" coords="1333,384,1492,425"/>
+<area shape="rect" id="node31" href="$solverModule_8f90.html#a1c4c543dbfd463aa17894a7f66fe2647" title="Updates the configuration by applying given displacement vector." alt="" coords="1119,402,1239,429"/>
+<area shape="rect" id="node32" href="$namespacefreqresponsemodule.html#a1f0ce7e2cf86ece83bb380327c5a9e8e" title="Updates mechanism based on displacement, velocity and acceleration." alt="" coords="1101,336,1257,377"/>
+<area shape="rect" id="node35" href="$solverModule_8f90.html#a660f7320b8927fe9af55cf1569cf5b41" title="Updates the configuration by applying given displacement vector." alt="" coords="1109,453,1249,479"/>
+<area shape="rect" id="node33" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="868,353,1024,395"/>
+<area shape="rect" id="node34" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="158,273,314,315"/>
+<area shape="rect" id="node37" href="$namespacerestartmodule.html#a3cc4a3b3f2214de1013479ff69317376" title="Initializes the mechanism configuration for restart." alt="" coords="1788,263,2009,290"/>
+<area shape="rect" id="node38" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="1553,267,1740,308"/>
+<area shape="rect" id="node39" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="1553,201,1740,243"/>
+</map>

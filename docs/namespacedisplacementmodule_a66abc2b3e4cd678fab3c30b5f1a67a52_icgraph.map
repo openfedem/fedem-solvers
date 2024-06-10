@@ -1,0 +1,4 @@
+<map id="displacementmodule::extractexternaldisp" name="displacementmodule::extractexternaldisp">
+<area shape="rect" id="node1" title="Extracts local and total displacements for external group nodes." alt="" coords="180,5,339,47"/>
+<area shape="rect" id="node2" href="$stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,13,132,39"/>
+</map>

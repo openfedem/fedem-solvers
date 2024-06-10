@@ -1,0 +1,4 @@
+<map id="restartmodule::extractjointdata" name="restartmodule::extractjointdata">
+<area shape="rect" id="node1" title="Extracts joint results from in&#45;core state array for restart." alt="" coords="240,13,467,39"/>
+<area shape="rect" id="node2" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="5,5,192,47"/>
+</map>

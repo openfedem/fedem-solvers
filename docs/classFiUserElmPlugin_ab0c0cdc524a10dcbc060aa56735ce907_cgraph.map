@@ -1,0 +1,5 @@
+<map id="FiUserElmPlugin::getElementTypes" name="FiUserElmPlugin::getElementTypes">
+<area shape="rect" id="node1" title="Returns a list of element types defined in the plugin." alt="" coords="5,39,216,80"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="264,5,444,47"/>
+<area shape="rect" id="node3" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="264,71,444,112"/>
+</map>

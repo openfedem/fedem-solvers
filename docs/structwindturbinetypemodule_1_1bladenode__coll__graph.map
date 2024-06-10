@@ -1,0 +1,5 @@
+<map id="windturbinetypemodule::bladenode" name="windturbinetypemodule::bladenode">
+<area shape="rect" id="node1" title="Data type describing a turbine blade node." alt="" coords="15,184,193,225"/>
+<area shape="rect" id="node2" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="5,95,203,121"/>
+<area shape="rect" id="node3" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="23,5,185,32"/>
+</map>

@@ -1,0 +1,28 @@
+<map id="sysmatrixtypemodule::allocatesysmatrix" name="sysmatrixtypemodule::allocatesysmatrix">
+<area shape="rect" id="node1" title="Allocates storage for a system matrix." alt="" coords="1149,259,1315,301"/>
+<area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#af8756381919cc6b45c27d5332eafe0f2" title="Initializes the element assembly." alt="" coords="905,107,1067,149"/>
+<area shape="rect" id="node6" href="$namespaceasmextensionmodule.html#ac0ef0da561c2f45bf3ac1acf6511b3ce" title="Finalizes the element assembly." alt="" coords="905,42,1067,83"/>
+<area shape="rect" id="node7" href="$namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="871,267,1101,293"/>
+<area shape="rect" id="node16" href="$namespaceinitiatemodestypemodule.html#a584da4b82a57902b6584aacc8e02fba3" title="Initializes the eigenvalue solver." alt="" coords="891,419,1081,461"/>
+<area shape="rect" id="node26" href="$namespaceinitiatesystemtypemodule.html#af9c4acbed83f902656a49d8c198d94e1" title="Allocates the system vectors and Newton matrix." alt="" coords="889,335,1083,377"/>
+<area shape="rect" id="node3" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="655,5,725,32"/>
+<area shape="rect" id="node4" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="637,56,743,83"/>
+<area shape="rect" id="node5" href="$solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="659,107,721,133"/>
+<area shape="rect" id="node8" href="$namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="577,157,803,184"/>
+<area shape="rect" id="node9" href="$namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="344,194,500,235"/>
+<area shape="rect" id="node12" href="$namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="612,259,768,301"/>
+<area shape="rect" id="node14" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="344,325,500,366"/>
+<area shape="rect" id="node15" href="$solverDriver_8f90.html#ae6e1f5b931c2ce470c9bb64e87c362a8" title="Returns a system matrix in full format." alt="" coords="639,376,741,403"/>
+<area shape="rect" id="node10" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="131,259,287,301"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,267,83,293"/>
+<area shape="rect" id="node13" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="344,259,500,301"/>
+<area shape="rect" id="node17" href="$namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="557,427,823,453"/>
+<area shape="rect" id="node24" href="$namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="591,477,789,504"/>
+<area shape="rect" id="node18" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="335,427,509,453"/>
+<area shape="rect" id="node19" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="170,477,247,504"/>
+<area shape="rect" id="node20" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="170,528,247,555"/>
+<area shape="rect" id="node21" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="170,325,247,352"/>
+<area shape="rect" id="node22" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="171,376,247,403"/>
+<area shape="rect" id="node23" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="170,427,247,453"/>
+<area shape="rect" id="node25" href="$solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="376,477,468,504"/>
+</map>

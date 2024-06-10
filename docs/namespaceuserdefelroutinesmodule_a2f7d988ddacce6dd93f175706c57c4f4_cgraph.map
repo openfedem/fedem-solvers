@@ -1,0 +1,5 @@
+<map id="userdefelroutinesmodule::buildudenewtonmat" name="userdefelroutinesmodule::buildudenewtonmat">
+<area shape="rect" id="node1" title="Computes the user&#45;defined element Newton matrix." alt="" coords="5,23,191,65"/>
+<area shape="rect" id="node2" href="$userdefElRoutinesModule_8f90.html#a480bd861ada547aa73eb4bcaf43ce8a5" title="Calculates the Newton matrix with damping." alt="" coords="273,5,401,32"/>
+<area shape="rect" id="node3" href="$userdefElRoutinesModule_8f90.html#aa4d609edd05601aac18bbcbeba68d899" title="Calculates the Newton matrix without damping." alt="" coords="239,56,436,83"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="solvermodule::savepartstate" name="solvermodule::savepartstate">
+<area shape="rect" id="node1" title="Saves the deformation/stress state of a FE part to an in&#45;core array." alt="" coords="159,5,368,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#a30c0ad19a086e4397689e79f67a2fbfb" title="Saves current deformation state for an FE part to an array in core." alt="" coords="5,5,111,32"/>
+</map>

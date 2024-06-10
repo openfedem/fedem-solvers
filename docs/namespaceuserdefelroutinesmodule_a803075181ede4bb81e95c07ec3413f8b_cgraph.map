@@ -1,0 +1,5 @@
+<map id="userdefelroutinesmodule::addinudemat" name="userdefelroutinesmodule::addinudemat">
+<area shape="rect" id="node1" title="Adds an element matrix into the equivalent system matrix." alt="" coords="5,39,191,80"/>
+<area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="241,5,403,47"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="239,71,405,112"/>
+</map>

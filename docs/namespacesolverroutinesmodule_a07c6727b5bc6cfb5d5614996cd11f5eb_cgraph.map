@@ -1,0 +1,6 @@
+<map id="solverroutinesmodule::printconvergence" name="solverroutinesmodule::printconvergence">
+<area shape="rect" id="node1" title="Prints convergence information to the res&#45;file." alt="" coords="5,49,169,90"/>
+<area shape="rect" id="node2" href="$namespacesammodule.html#a6fdab47d630a2d888453176403a65059" title="Returns internal node number and local dof&#45;number for a global dof." alt="" coords="217,5,467,32"/>
+<area shape="rect" id="node3" href="$solverRoutinesModule_8f90.html#a8b107b3604a38889547790e06df78fd4" title="Writes the heading of the iteration norms." alt="" coords="268,56,416,83"/>
+<area shape="rect" id="node4" href="$solverRoutinesModule_8f90.html#ab42b9b8b7a449841a4f22b7ec95e5b65" title="Writes the iteration norms values." alt="" coords="276,107,408,133"/>
+</map>

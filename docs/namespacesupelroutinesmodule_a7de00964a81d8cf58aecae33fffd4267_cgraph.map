@@ -1,0 +1,5 @@
+<map id="supelroutinesmodule::comptanstiff" name="supelroutinesmodule::comptanstiff">
+<area shape="rect" id="node1" title="Computes the tangential superelement stiffness matrix." alt="" coords="5,27,164,69"/>
+<area shape="rect" id="node2" href="$namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f" title=" " alt="" coords="212,5,424,32"/>
+<area shape="rect" id="node3" href="$namespacesupelroutinesmodule.html#a585f5697d287857d37cdc6ecdef0ec67" title="Calculates the scaled matrix&#45;vector product Y = α*A*X." alt="" coords="239,57,397,98"/>
+</map>

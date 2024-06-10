@@ -1,0 +1,9 @@
+<map id="initiateuserdefeltypemodule::readuserdefels" name="initiateuserdefeltypemodule::readuserdefels">
+<area shape="rect" id="node1" title="Initializes user&#45;defined elements with data from the input file." alt="" coords="5,115,212,156"/>
+<area shape="rect" id="node2" href="$namespaceuserdefeltypemodule.html#af51104c6d68bf9ef6c9e18b80be8adfb" title="Deallocates all user&#45;defined element object." alt="" coords="306,5,467,47"/>
+<area shape="rect" id="node4" href="$namespaceuserdefeltypemodule.html#aa503d68e7591bd1e044260b25a01218f" title="Initializes a user&#45;defined element object." alt="" coords="771,35,932,76"/>
+<area shape="rect" id="node5" href="$namespacesupeltypemodule.html#a398ad15066fbddaf2f98068d48193b08" title="Initiates the hydrodynamics quantities for a superelement." alt="" coords="272,122,501,149"/>
+<area shape="rect" id="node6" href="$namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="260,173,513,199"/>
+<area shape="rect" id="node7" href="$namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="265,223,508,250"/>
+<area shape="rect" id="node3" href="$namespaceuserdefeltypemodule.html#ad52fd8040f5f03efc3f18b1fb9d013a0" title="Deallocates a user&#45;defined element object." alt="" coords="561,5,723,47"/>
+</map>

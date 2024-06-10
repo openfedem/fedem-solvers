@@ -1,0 +1,6 @@
+<map id="supelroutinesmodule::addinsupmat" name="supelroutinesmodule::addinsupmat">
+<area shape="rect" id="node1" title="Adds a superelement matrix into the equivalent system matrix." alt="" coords="5,71,164,112"/>
+<area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="244,5,407,47"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="242,71,409,112"/>
+<area shape="rect" id="node4" href="$namespacesupeltypemodule.html#adbdf5f04df719a0ba37ff40d70898c0a" title="Returns the transformation matrix to system directions for a triad." alt="" coords="212,137,439,163"/>
+</map>

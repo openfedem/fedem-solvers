@@ -1,0 +1,6 @@
+<map id="solvermodule::systemsize" name="solvermodule::systemsize">
+<area shape="rect" id="node1" title="Returns the dimension of the linearized system." alt="" coords="280,56,473,83"/>
+<area shape="rect" id="node2" href="$namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="5,5,232,32"/>
+<area shape="rect" id="node3" href="$solverDriver_8f90.html#abfa0dc0a0c51106b88f40447518cdc59" title="Returns the dimension of the system matrices and vectors." alt="" coords="71,56,167,83"/>
+<area shape="rect" id="node4" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="13,107,224,133"/>
+</map>

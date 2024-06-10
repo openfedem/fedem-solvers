@@ -1,0 +1,4 @@
+<map id="solvermodule::gettime" name="solvermodule::gettime">
+<area shape="rect" id="node1" title="Returns the simulation time of the current or next time step." alt="" coords="152,5,323,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#a33e63ef93705c8623bcd5d1b89e0013c" title="Returns the time of current or next time increment." alt="" coords="5,5,104,32"/>
+</map>

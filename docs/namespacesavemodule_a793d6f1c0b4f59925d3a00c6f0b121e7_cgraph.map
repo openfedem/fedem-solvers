@@ -1,0 +1,7 @@
+<map id="savemodule::writespringheader" name="savemodule::writespringheader">
+<area shape="rect" id="node1" title="Writes results database file header for a spring." alt="" coords="5,56,233,83"/>
+<area shape="rect" id="node2" href="$namespacesavemodule.html#a4d8f178785c6788b3af406e7a06282a6" title="Helper function inserting an integer pair into a map." alt="" coords="281,5,469,32"/>
+<area shape="rect" id="node3" href="$namespacesavemodule.html#a9eb548315e7bb63e9fd4b837a6e3b6d0" title="Writes an item group reference for a joint or triad DOF." alt="" coords="287,56,463,83"/>
+<area shape="rect" id="node5" href="$namespacerdbmodule.html#ac77a4ebbbaa73cec7d26d49901188fb6" title="Writes a variable definition." alt="" coords="288,107,463,133"/>
+<area shape="rect" id="node4" href="$namespacesavemodule.html#afc3cb045dc75c005c5a703744323da0a" title="Writes an item group reference to the file header." alt="" coords="517,56,696,83"/>
+</map>

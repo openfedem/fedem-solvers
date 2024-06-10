@@ -1,0 +1,5 @@
+<map id="rdbmodule::openrdbfile" name="rdbmodule::openrdbfile">
+<area shape="rect" id="node1" title="Opens a binary results database file." alt="" coords="5,31,180,57"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#ac020cfdf1ee407f503aa146e98b0f0b9" title="Copies contents of the temporary header files to the binary file." alt="" coords="228,5,479,32"/>
+<area shape="rect" id="node3" href="$namespaceversionmodule.html#af1314db1e48ea02ac31a0d407028c9cd" title="Returns current date and time in the format &quot;dd Mmm yyyy hh:mm:ss&quot;." alt="" coords="242,56,465,83"/>
+</map>

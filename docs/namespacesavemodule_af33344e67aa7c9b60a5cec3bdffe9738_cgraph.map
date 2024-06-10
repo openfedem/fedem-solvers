@@ -1,0 +1,5 @@
+<map id="savemodule::writesupeldb2" name="savemodule::writesupeldb2">
+<area shape="rect" id="node1" title="Writes secondary variables for a superelement to results database." alt="" coords="5,42,208,69"/>
+<area shape="rect" id="node2" href="$namespacefiniteelementmodule.html#a8f424e92b5e7e7b2efa657f084a03800" title="Returns the sectional forces at one end of a beam element." alt="" coords="272,5,431,47"/>
+<area shape="rect" id="node3" href="$namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="256,71,447,98"/>
+</map>

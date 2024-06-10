@@ -1,0 +1,7 @@
+<map id="supelroutinesmodule::addinsupmat" name="supelroutinesmodule::addinsupmat">
+<area shape="rect" id="node1" title="Adds a superelement matrix into the equivalent system matrix." alt="" coords="299,74,457,115"/>
+<area shape="rect" id="node2" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="5,5,251,32"/>
+<area shape="rect" id="node3" href="$namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="13,56,243,83"/>
+<area shape="rect" id="node4" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="7,107,249,133"/>
+<area shape="rect" id="node5" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="17,157,239,184"/>
+</map>

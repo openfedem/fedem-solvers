@@ -1,0 +1,7 @@
+<map id="normroutinesmodule::infinitenorms" name="normroutinesmodule::infinitenorms">
+<area shape="rect" id="node1" title="Calculates infinity norms of the given vector." alt="" coords="5,71,164,112"/>
+<area shape="rect" id="node2" href="$namespacenormroutinesmodule.html#ac496980953eb98dc898429cd5741382c" title="Returns a pointer to the expanded solution vector." alt="" coords="214,37,373,79"/>
+<area shape="rect" id="node5" href="$namespacesearchandsortmodule.html#a0a5e7bf805015a87a8e996d9e451ba66" title="Finds indices of the largest values in the given real array." alt="" coords="212,103,375,144"/>
+<area shape="rect" id="node3" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="424,5,579,47"/>
+<area shape="rect" id="node4" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="423,71,580,112"/>
+</map>

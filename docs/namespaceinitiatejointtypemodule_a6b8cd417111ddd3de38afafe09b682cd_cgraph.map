@@ -1,0 +1,6 @@
+<map id="initiatejointtypemodule::initiatejoints" name="initiatejointtypemodule::initiatejoints">
+<area shape="rect" id="node1" title="Computes constraint coefficient and joint variable start values." alt="" coords="5,71,180,112"/>
+<area shape="rect" id="node2" href="$namespacemasterslavejointroutinesmodule.html#ab75fa908234cef0fa464ebee9e49f33b" title="Initializes the joint variables (velocities and accelerations)." alt="" coords="228,5,463,47"/>
+<area shape="rect" id="node3" href="$namespacemasterslavejointroutinesmodule.html#a2037b51255c974aec61301b48f1b4467" title="Updates dependent triad position and the dependent variables." alt="" coords="228,71,463,112"/>
+<area shape="rect" id="node4" href="$namespacemasterslavejointroutinesmodule.html#a38027b6ab488fbb9ff6dbcaae3a13056" title="Updatea the linear dependencies in a joint." alt="" coords="228,136,463,177"/>
+</map>

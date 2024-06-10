@@ -1,0 +1,4 @@
+<map id="Cantilever" name="Cantilever">
+<area shape="rect" id="node1" title="Creates an FE model of a cantilever beam with default properties." alt="" coords="21,80,110,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,125,32"/>
+</map>

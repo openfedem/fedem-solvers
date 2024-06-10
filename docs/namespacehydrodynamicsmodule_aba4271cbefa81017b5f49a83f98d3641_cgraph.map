@@ -1,0 +1,18 @@
+<map id="hydrodynamicsmodule::getbuoyancyforces" name="hydrodynamicsmodule::getbuoyancyforces">
+<area shape="rect" id="node1" title="Calculates buoyancy force resultant for a superelement or beam." alt="" coords="5,520,176,561"/>
+<area shape="rect" id="node2" href="$namespacehydrodynamicsmodule.html#a6970d8c6fe6e6dcb973f3d6e30508472" title="Returns the wave height at the given point and time." alt="" coords="224,487,395,528"/>
+<area shape="rect" id="node14" href="$namespacehydrodynamicsmodule.html#ae3488b0b99cc90f1011f7d14c3160f44" title="Updates the hydrodynamic body quantities." alt="" coords="224,552,395,593"/>
+<area shape="rect" id="node3" href="$namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="443,332,613,373"/>
+<area shape="rect" id="node9" href="$FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="706,594,783,621"/>
+<area shape="rect" id="node4" href="$namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="661,5,828,47"/>
+<area shape="rect" id="node5" href="$namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="661,71,828,112"/>
+<area shape="rect" id="node6" href="$namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="661,136,828,177"/>
+<area shape="rect" id="node7" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="661,201,828,243"/>
+<area shape="rect" id="node8" href="$namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="661,267,828,308"/>
+<area shape="rect" id="node10" href="$namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="661,332,828,373"/>
+<area shape="rect" id="node11" href="$namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="661,397,828,439"/>
+<area shape="rect" id="node12" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="661,463,828,504"/>
+<area shape="rect" id="node13" href="$namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="661,528,828,569"/>
+<area shape="rect" id="node15" href="$namespacehydrodynamicsmodule.html#a89c6ae8da9405064482ab133361c06c0" title="Computes the buoyancy length and center for a two&#45;noded beam." alt="" coords="443,549,613,591"/>
+<area shape="rect" id="node16" href="$namespacehydrodynamicsmodule.html#a2ea2177d016f5ca3e78cc96d8f103f1d" title="Returns the water surface normal vector in local coordinate system." alt="" coords="443,615,613,656"/>
+</map>

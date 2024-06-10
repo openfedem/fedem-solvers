@@ -1,0 +1,4 @@
+<map id="sensortypemodule::sensortype" name="sensortypemodule::sensortype">
+<area shape="rect" id="node1" title="Data type representing a sensor object." alt="" coords="5,95,228,121"/>
+<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="36,5,197,32"/>
+</map>

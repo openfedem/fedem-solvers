@@ -1,0 +1,8 @@
+<map id="energyintegrationmodule::supelenergies" name="energyintegrationmodule::supelenergies">
+<area shape="rect" id="node1" title="Calculates the system energy contributions from a superelement." alt="" coords="5,115,192,157"/>
+<area shape="rect" id="node2" href="$namespacerotationmodule.html#a030dc71ea83690ae04ad3b1d00304023" title="Computes the incremental rotation vector rotating tensor T1 to T2." alt="" coords="277,5,458,32"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="289,57,446,98"/>
+<area shape="rect" id="node4" href="$namespacetriadtypemodule.html#a4824611730394184a244c2ca14eb02da" title="Returns the current incremental displacement in a triad." alt="" coords="240,123,495,149"/>
+<area shape="rect" id="node5" href="$namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936" title=" " alt="" coords="260,174,475,215"/>
+<area shape="rect" id="node6" href="$namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="291,239,444,281"/>
+</map>

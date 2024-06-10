@@ -1,0 +1,8 @@
+<map id="roadtypemodule::roadtype" name="roadtypemodule::roadtype">
+<area shape="rect" id="node1" title=" " alt="" coords="1091,59,1285,85"/>
+<area shape="rect" id="node2" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="843,125,996,166"/>
+<area shape="rect" id="node3" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,107,167,133"/>
+<area shape="rect" id="node4" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="564,69,717,110"/>
+<area shape="rect" id="node6" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,188,455,215"/>
+<area shape="rect" id="node5" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="520,188,761,215"/>
+</map>

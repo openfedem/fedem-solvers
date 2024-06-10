@@ -1,0 +1,5 @@
+<map id="solvermodule::statevectorsize" name="solvermodule::statevectorsize">
+<area shape="rect" id="node1" title="Returns the dimension of the state vector." alt="" coords="5,31,224,57"/>
+<area shape="rect" id="node2" href="$namespacerestartmodule.html#adc8b1c28591335c1715e837a4d403912" title="Calculates the length of the state array to restart from." alt="" coords="320,5,523,32"/>
+<area shape="rect" id="node3" href="$namespacerestartmodule.html#a50445089f62828d38558200496866c86" title="Calculates the length of the transformation state array." alt="" coords="272,56,571,83"/>
+</map>

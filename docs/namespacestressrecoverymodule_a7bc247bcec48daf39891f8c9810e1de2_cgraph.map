@@ -1,0 +1,5 @@
+<map id="stressrecoverymodule::gagerecovery" name="stressrecoverymodule::gagerecovery">
+<area shape="rect" id="node1" title="Calculates strain gage results for the superelements." alt="" coords="5,27,172,69"/>
+<area shape="rect" id="node2" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="243,5,367,32"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#abbf8c49accdc068e3b12b85662b1598d" title="Returns a pointer to a real(sp) scratch array." alt="" coords="220,57,391,98"/>
+</map>

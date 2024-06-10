@@ -1,0 +1,9 @@
+<map id="stressrecoverymodule::closerecovery" name="stressrecoverymodule::closerecovery">
+<area shape="rect" id="node1" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="5,115,172,157"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="241,57,402,98"/>
+<area shape="rect" id="node6" href="$namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="233,123,409,149"/>
+<area shape="rect" id="node7" href="$namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="220,173,423,200"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="471,5,675,32"/>
+<area shape="rect" id="node4" href="$namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title=" " alt="" coords="495,57,651,98"/>
+<area shape="rect" id="node5" href="$namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="489,122,656,163"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="savemodule::flushresultfiles" name="savemodule::flushresultfiles">
+<area shape="rect" id="node1" title="Flushes the results database file(s) to disk." alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#a0722f82f6fa84c9a72b41d6b5c05fa9b" title="Flushes the specified results database file to disk." alt="" coords="260,5,435,32"/>
+</map>

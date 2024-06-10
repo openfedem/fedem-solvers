@@ -1,0 +1,6 @@
+<map id="supeltypemodule::getsupelsvelacc" name="supeltypemodule::getsupelsvelacc">
+<area shape="rect" id="node1" title="Gets current velocity and acceleration from all superelements." alt="" coords="509,46,757,73"/>
+<area shape="rect" id="node2" href="$namespacerestartmodule.html#a3cc4a3b3f2214de1013479ff69317376" title="Initializes the mechanism configuration for restart." alt="" coords="240,46,461,73"/>
+<area shape="rect" id="node3" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="5,5,192,47"/>
+<area shape="rect" id="node4" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="5,71,192,112"/>
+</map>

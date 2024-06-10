@@ -1,0 +1,5 @@
+<map id="initiateuserdefeltypemodule::initiateuserdefels" name="initiateuserdefeltypemodule::initiateuserdefels">
+<area shape="rect" id="node1" title="Initializes the user&#45;defined elements after reading the input file." alt="" coords="5,5,212,47"/>
+<area shape="rect" id="node2" href="$namespaceuserdefelroutinesmodule.html#a5ca7f3fff1cd907e9a2d301ba46bf5e3" title="Initializes a user&#45;defined element." alt="" coords="260,5,445,47"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="493,5,651,47"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="slv_partsize" name="slv_partsize">
+<area shape="rect" id="node1" title="Returns the size of the deformation/stress state array for a FE part." alt="" coords="5,46,105,73"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#a94f4791c03597c67e22a8ef7e622af69" title="Returns the state vector dimension for a FE part." alt="" coords="153,46,399,73"/>
+<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#a0a23bc4de3d8d647b046631959676c48" title="Returns the size of deformation vector for the specified part." alt="" coords="447,5,613,47"/>
+<area shape="rect" id="node4" href="$namespacestressrecoverymodule.html#aa8c5d834e4088c3ec3bf783e697d10fb" title="Returns the size of von Mises stress array for the specified part." alt="" coords="447,71,613,112"/>
+</map>

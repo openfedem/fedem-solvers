@@ -1,0 +1,7 @@
+<map id="stressrecoverymodule::initstrainrosettes" name="stressrecoverymodule::initstrainrosettes">
+<area shape="rect" id="node1" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="5,64,172,105"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="220,64,383,105"/>
+<area shape="rect" id="node3" href="$namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="465,5,624,47"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="431,71,659,98"/>
+<area shape="rect" id="node5" href="$namespacesdiskmatrixmodule.html#a49b2465bca0546e2724fe1075e280857" title=" " alt="" coords="467,123,623,164"/>
+</map>

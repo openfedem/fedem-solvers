@@ -1,0 +1,14 @@
+<map id="rigidmodule::procdofcomp" name="rigidmodule::procdofcomp">
+<area shape="rect" id="node1" title="Processes an m&#45;set number of RGD and RBAR elements." alt="" coords="1447,157,1640,184"/>
+<area shape="rect" id="node2" href="$namespacerigidmodule.html#acc0b389ee153dce097daa850b0c8e687" title="Generates constraint equation arrays in the SAM datastructure." alt="" coords="640,5,887,32"/>
+<area shape="rect" id="node8" href="$namespacerigidmodule.html#a51bd789a49e720dd9f02a07b6055c016" title="Processes the component definition of an RBAR element." alt="" coords="1216,132,1399,159"/>
+<area shape="rect" id="node11" href="$namespacerigidmodule.html#a276b6de719dcfcda5c2a981600f120f0" title="Generates constraint equation arrays in the SAM datastructure." alt="" coords="687,157,840,184"/>
+<area shape="rect" id="node12" href="$namespacerigidmodule.html#af3cd1365241cc298edc9f2a4c29966ba" title="Construct the constraint equations for RGD (or RBE2) elements." alt="" coords="1235,259,1379,285"/>
+<area shape="rect" id="node3" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="361,56,592,83"/>
+<area shape="rect" id="node4" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="160,49,313,90"/>
+<area shape="rect" id="node5" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="23,5,94,32"/>
+<area shape="rect" id="node6" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="5,56,112,83"/>
+<area shape="rect" id="node7" href="$solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="27,107,90,133"/>
+<area shape="rect" id="node9" href="$namespacerigidmodule.html#afbce1ebe897c61e1c640e37072fe8363" title="Checks consistency of RBAR elements." alt="" coords="935,56,1168,83"/>
+<area shape="rect" id="node10" href="$namespacerigidmodule.html#a8156f3e36a7e7235bd7e10d970b29e56" title="Constructs the constraint equations for RBAR elements." alt="" coords="977,107,1126,133"/>
+</map>

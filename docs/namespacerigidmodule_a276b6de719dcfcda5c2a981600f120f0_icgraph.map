@@ -1,0 +1,8 @@
+<map id="rigidmodule::rigid3d" name="rigidmodule::rigid3d">
+<area shape="rect" id="node1" title="Generates constraint equation arrays in the SAM datastructure." alt="" coords="640,56,793,83"/>
+<area shape="rect" id="node2" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="361,56,592,83"/>
+<area shape="rect" id="node3" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="160,49,313,90"/>
+<area shape="rect" id="node4" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="23,5,94,32"/>
+<area shape="rect" id="node5" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="5,56,112,83"/>
+<area shape="rect" id="node6" href="$solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="27,107,90,133"/>
+</map>

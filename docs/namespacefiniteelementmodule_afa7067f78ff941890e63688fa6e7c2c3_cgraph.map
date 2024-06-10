@@ -1,0 +1,11 @@
+<map id="finiteelementmodule::calcelementmatrices" name="finiteelementmodule::calcelementmatrices">
+<area shape="rect" id="node1" title="Calculates the element matrices for a basic finite element." alt="" coords="5,166,172,207"/>
+<area shape="rect" id="node2" href="$namespacefiniteelementmodule.html#a9644f57878c9c6f38a997428fea458fe" title="Calculates the element matrices for a beam finite element." alt="" coords="220,137,424,178"/>
+<area shape="rect" id="node9" href="$namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="227,203,417,229"/>
+<area shape="rect" id="node3" href="$beam_8f.html#abb703887763d3b7239ec202fcc56556b" title="Generates the stiffness matrix for a 12&#45;dof beam element." alt="" coords="549,5,624,32"/>
+<area shape="rect" id="node4" href="$beam_8f.html#a8b583215e33de1151b3482a2b52bd980" title="Generates a mass matrix for a 12&#45;dof beam element." alt="" coords="549,56,624,83"/>
+<area shape="rect" id="node5" href="$namespaceenvironmenttypemodule.html#acfbe4066273844cbcd37ef196da11a4e" title="Transforms given global coordinates to the sea coordinate system." alt="" coords="495,107,678,149"/>
+<area shape="rect" id="node6" href="$finiteElementModule_8f90.html#a6e489b5ab67862bafa4bb637c03a97e0" title=" " alt="" coords="541,173,632,200"/>
+<area shape="rect" id="node7" href="$namespacesupeltypemodule.html#a398ad15066fbddaf2f98068d48193b08" title="Initiates the hydrodynamics quantities for a superelement." alt="" coords="472,224,701,251"/>
+<area shape="rect" id="node8" href="$namespacemanipmatrixmodule.html#ad76734c20774ddbdfd069abe3bdbdc89" title="Returns a 3×3 transformation matrix based on the given X&#45;direction vector V1." alt="" coords="505,275,668,317"/>
+</map>

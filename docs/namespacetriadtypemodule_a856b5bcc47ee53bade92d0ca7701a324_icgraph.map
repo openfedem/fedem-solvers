@@ -1,0 +1,13 @@
+<map id="triadtypemodule::settriadsvelacc" name="triadtypemodule::settriadsvelacc">
+<area shape="rect" id="node1" title="Sets global velocity and acceleration for all triads." alt="" coords="1087,78,1324,105"/>
+<area shape="rect" id="node2" href="$namespacefreqresponsemodule.html#a1f0ce7e2cf86ece83bb380327c5a9e8e" title="Updates mechanism based on displacement, velocity and acceleration." alt="" coords="868,5,1024,47"/>
+<area shape="rect" id="node6" href="$namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="853,71,1039,112"/>
+<area shape="rect" id="node11" href="$namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="853,136,1039,177"/>
+<area shape="rect" id="node3" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="635,5,791,47"/>
+<area shape="rect" id="node4" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="403,5,559,47"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,63,83,90"/>
+<area shape="rect" id="node7" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,107,805,148"/>
+<area shape="rect" id="node8" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,114,572,141"/>
+<area shape="rect" id="node9" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,114,341,141"/>
+<area shape="rect" id="node10" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,165,338,191"/>
+</map>

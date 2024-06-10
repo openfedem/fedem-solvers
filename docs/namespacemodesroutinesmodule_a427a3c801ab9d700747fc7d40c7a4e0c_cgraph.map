@@ -1,0 +1,19 @@
+<map id="modesroutinesmodule::eigenmodes" name="modesroutinesmodule::eigenmodes">
+<area shape="rect" id="node1" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="5,320,173,361"/>
+<area shape="rect" id="node2" href="$namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="549,13,717,55"/>
+<area shape="rect" id="node3" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="227,138,472,165"/>
+<area shape="rect" id="node4" href="$namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="234,189,465,215"/>
+<area shape="rect" id="node5" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="239,239,460,266"/>
+<area shape="rect" id="node6" href="$namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="269,291,430,332"/>
+<area shape="rect" id="node7" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="555,408,710,449"/>
+<area shape="rect" id="node8" href="$namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="267,539,431,580"/>
+<area shape="rect" id="node9" href="$namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="265,72,433,113"/>
+<area shape="rect" id="node11" href="$namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="265,408,433,449"/>
+<area shape="rect" id="node13" href="$namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="265,473,433,515"/>
+<area shape="rect" id="node14" href="$namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="221,605,477,631"/>
+<area shape="rect" id="node15" href="$namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="265,656,433,697"/>
+<area shape="rect" id="node10" href="$namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="550,79,715,120"/>
+<area shape="rect" id="node12" href="$namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a" title="Sorts a real array in ascending order." alt="" coords="549,473,717,515"/>
+<area shape="rect" id="node16" href="$namespacemodesroutinesmodule.html#aa8e9fddcfe2ea567d8e3433ce3ad90df" title="Adds an element unit displacement vector into the system vector." alt="" coords="549,623,717,664"/>
+<area shape="rect" id="node17" href="$namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title=" " alt="" coords="525,688,740,729"/>
+</map>

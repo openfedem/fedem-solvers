@@ -1,0 +1,5 @@
+<map id="modesroutinesmodule::findrealeigenvalues" name="modesroutinesmodule::findrealeigenvalues">
+<area shape="rect" id="node1" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="5,39,173,80"/>
+<area shape="rect" id="node2" href="$namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a" title="Sorts a real array in ascending order." alt="" coords="221,5,389,47"/>
+<area shape="rect" id="node3" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="228,71,383,112"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="springtypemodule::springyieldtype" name="springtypemodule::springyieldtype">
+<area shape="rect" id="node1" title="Data type representing a spring yield object." alt="" coords="5,508,255,535"/>
+<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="105,5,267,32"/>
+<area shape="rect" id="node4" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="168,300,321,341"/>
+<area shape="rect" id="node5" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="185,145,339,187"/>
+<area shape="rect" id="node7" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="256,95,479,121"/>
+<area shape="rect" id="node3" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="147,404,385,431"/>
+<area shape="rect" id="node6" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="280,211,521,237"/>
+</map>

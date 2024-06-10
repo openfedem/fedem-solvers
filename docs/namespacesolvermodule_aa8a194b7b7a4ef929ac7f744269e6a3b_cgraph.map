@@ -1,0 +1,4 @@
+<map id="solvermodule::solvedynamic" name="solvermodule::solvedynamic">
+<area shape="rect" id="node1" title="Returns whether the next step should be solved dynamically or not." alt="" coords="5,5,216,32"/>
+<area shape="rect" id="node2" href="$namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="264,5,503,32"/>
+</map>

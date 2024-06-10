@@ -1,0 +1,4 @@
+<map id="prescribedmotionmodule::readmotionfile" name="prescribedmotionmodule::readmotionfile">
+<area shape="rect" id="node1" title="Reads prescribed displacements for next time step from binary file." alt="" coords="257,13,443,54"/>
+<area shape="rect" id="node2" href="$interfacemotionroutinesmodule_1_1updateprescribedmotions.html#aeda03fd691791addfda072c3447e1494" title="Updates the prescribed motions." alt="" coords="5,5,209,61"/>
+</map>

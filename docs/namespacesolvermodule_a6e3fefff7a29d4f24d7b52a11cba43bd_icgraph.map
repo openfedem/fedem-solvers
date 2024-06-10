@@ -1,0 +1,4 @@
+<map id="solvermodule::finalize" name="solvermodule::finalize">
+<area shape="rect" id="node1" title="Terminates the simulation and close the result database." alt="" coords="133,5,300,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#a688267739853d43d34189be1365d3e33" title="Terminates the running solver process by deallocating all memory, etc." alt="" coords="5,5,85,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="sysmatrixtypemodule::extractdiagonal" name="sysmatrixtypemodule::extractdiagonal">
+<area shape="rect" id="node1" title="Extracts the diagonal elements from the given system matrix." alt="" coords="548,39,713,80"/>
+<area shape="rect" id="node2" href="$namespacematextensionmodule.html#a9540a8c066243cf5fdf2b7547ae52a2b" title="Extracts characteristic measures for a system matrix." alt="" coords="339,5,500,47"/>
+<area shape="rect" id="node4" href="$namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="342,71,497,112"/>
+<area shape="rect" id="node3" href="$interfaceinaddmodule_1_1inadd.html#a0523863bcaaeab5f52bd317604ae2feb" title=" " alt="" coords="132,5,283,47"/>
+<area shape="rect" id="node5" href="$namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="124,78,291,105"/>
+<area shape="rect" id="node6" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,78,76,105"/>
+</map>

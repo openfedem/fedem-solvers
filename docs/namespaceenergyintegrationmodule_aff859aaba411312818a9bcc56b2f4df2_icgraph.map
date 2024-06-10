@@ -1,0 +1,15 @@
+<map id="energyintegrationmodule::frictionenergies" name="energyintegrationmodule::frictionenergies">
+<area shape="rect" id="node1" title="Calculate the incremental work done by a joint friction." alt="" coords="859,150,1045,191"/>
+<area shape="rect" id="node2" href="$namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="624,150,811,191"/>
+<area shape="rect" id="node3" href="$namespaceenergyintegrationmodule.html#ab0df93c47539f0ca4c44728c4cbb87c7" title="Initializes the energy integration variables." alt="" coords="389,110,576,151"/>
+<area shape="rect" id="node10" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,187,574,213"/>
+<area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="149,107,323,133"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" id="node7" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,259,83,285"/>
+<area shape="rect" id="node12" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,208,341,235"/>
+<area shape="rect" id="node13" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,259,338,285"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fedem&#45;foundation/src/FFrLib/FFrReadOpInit.H" name="fedem&#45;foundation/src/FFrLib/FFrReadOpInit.H">
+<area shape="rect" id="node1" title=" " alt="" coords="353,5,528,47"/>
+<area shape="rect" id="node2" href="$solverInterface_8C.html" title="This file contains the C++ wrappers of the FEDEM dynamics solver API." alt="" coords="5,102,236,129"/>
+<area shape="rect" id="node3" href="$FFrExtractor_8C.html" title="Front&#45;end for the result extraction module." alt="" coords="261,95,423,136"/>
+<area shape="rect" id="node4" href="$FFrReadOpImpl_8C.html" title=" " alt="" coords="448,95,631,136"/>
+<area shape="rect" id="node5" href="$FFpBatchExport__F_8C.html" title=" " alt="" coords="655,95,927,136"/>
+</map>

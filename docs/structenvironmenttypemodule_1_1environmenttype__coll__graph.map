@@ -1,0 +1,8 @@
+<map id="environmenttypemodule::environmenttype" name="environmenttypemodule::environmenttype">
+<area shape="rect" id="node1" title="Data type containing some global environmental data." alt="" coords="53,424,236,465"/>
+<area shape="rect" id="node2" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="192,289,345,331"/>
+<area shape="rect" id="node3" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="223,5,384,32"/>
+<area shape="rect" id="node4" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="5,184,159,225"/>
+<area shape="rect" id="node6" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="192,95,415,121"/>
+<area shape="rect" id="node5" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="183,191,424,218"/>
+</map>

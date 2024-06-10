@@ -1,0 +1,9 @@
+<map id="samsolvermodule::initsam_preassembly" name="samsolvermodule::initsam_preassembly">
+<area shape="rect" id="node1" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="5,156,201,197"/>
+<area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="254,5,417,47"/>
+<area shape="rect" id="node3" href="$namespacesammodule.html#a774b4410e5773eb4b5098c2a390d0c16" title="Performs consistency checking of the SAM data structure." alt="" coords="263,71,408,98"/>
+<area shape="rect" id="node4" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="254,123,417,164"/>
+<area shape="rect" id="node5" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="254,188,417,229"/>
+<area shape="rect" id="node6" href="$namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="254,253,417,295"/>
+<area shape="rect" id="node7" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="249,319,421,360"/>
+</map>

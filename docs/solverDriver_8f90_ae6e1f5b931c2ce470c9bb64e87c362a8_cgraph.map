@@ -1,0 +1,10 @@
+<map id="slv_getsmat" name="slv_getsmat">
+<area shape="rect" id="node1" title="Returns a system matrix in full format." alt="" coords="5,147,108,174"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="156,147,387,174"/>
+<area shape="rect" id="node3" href="$namespacesysmatrixtypemodule.html#ada8e37503fcd8d03c4ea25fd8a1d448d" title="Allocates storage for a system matrix." alt="" coords="475,5,640,47"/>
+<area shape="rect" id="node4" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="435,71,680,98"/>
+<area shape="rect" id="node5" href="$namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="442,122,673,149"/>
+<area shape="rect" id="node6" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="447,173,668,199"/>
+<area shape="rect" id="node7" href="$namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="475,224,640,265"/>
+<area shape="rect" id="node8" href="$namespacesysmatrixtypemodule.html#a69d39748d3fceedc24046aa1fcc27044" title="Lets one system matrix object share the data structure of another." alt="" coords="474,289,641,331"/>
+</map>

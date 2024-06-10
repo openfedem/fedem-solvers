@@ -1,0 +1,13 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title="Test program for restarting the dynamics solver from an in&#45;core state." alt="" coords="5,233,60,260"/>
+<area shape="rect" id="node2" href="$testRestart_8C.html#ab00cea25a3560d175fc1d2c37dd6c251" title="Utility function to compare two ASCII files with numerical data." alt="" coords="108,5,251,32"/>
+<area shape="rect" id="node3" href="$solverInterface_8h.html#a4354e93ec1383d34a2b5ede7bad1e43d" title="Returns the current physical time of the simulation." alt="" coords="118,56,241,83"/>
+<area shape="rect" id="node4" href="$solverInterface_8h.html#aaabac250fd5fca3a7115bde0a793c168" title="Returns the required length of the initial strain gage vector which is used when restarting a simulat..." alt="" coords="124,107,235,133"/>
+<area shape="rect" id="node5" href="$solverInterface_8h.html#a04594cfb573c7777217d091d755b2082" title="Returns the physical time of the next step of the simulation." alt="" coords="126,157,233,184"/>
+<area shape="rect" id="node6" href="$solverInterface_8h.html#aa9df75bc18b19bbeaab2f2b0156be6e8" title="Returns the required length of the state vector to be is used when restarting a simulation from an in..." alt="" coords="127,208,231,235"/>
+<area shape="rect" id="node7" href="$solverInterface_8h.html#ac1b7090a95608f02a4cd57fd1c98decf" title="Saves the initial gage strains to the provided core array." alt="" coords="132,259,227,285"/>
+<area shape="rect" id="node8" href="$solverInterface_8h.html#ad679fee48b29e2fe2a599085ea6cf24e" title="Saves current state to the provided array." alt="" coords="136,309,223,336"/>
+<area shape="rect" id="node9" href="$solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="131,360,227,387"/>
+<area shape="rect" id="node10" href="$solverInterface_8h.html#a7323a44a81be57003d689b5adee5e7ec" title="Initializes a new solver process." alt="" coords="138,411,221,437"/>
+<area shape="rect" id="node11" href="$solverInterface_8h.html#ad50e1d03504ebbfa39bd87f2f8d3d8d6" title="Executes the simulation for a specified time window." alt="" coords="125,461,234,488"/>
+</map>

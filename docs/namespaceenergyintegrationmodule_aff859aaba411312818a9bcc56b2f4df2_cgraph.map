@@ -1,0 +1,4 @@
+<map id="energyintegrationmodule::frictionenergies" name="energyintegrationmodule::frictionenergies">
+<area shape="rect" id="node1" title="Calculate the incremental work done by a joint friction." alt="" coords="5,5,192,47"/>
+<area shape="rect" id="node2" href="$namespaceenergyintegrationmodule.html#acced15b7bbcd14473413bb9a7727cc9e" title="Prints out a warning if negative energy loss is detected." alt="" coords="240,5,427,47"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="FFrEntryBase" name="FFrEntryBase">
+<area shape="rect" id="node1" title=" " alt="" coords="235,5,343,32"/>
+<area shape="rect" id="node2" href="$classFFrFieldEntryBase.html" title=" " alt="" coords="133,80,271,107"/>
+<area shape="rect" id="node6" href="$classFFrVariableReference.html" title=" " alt="" coords="295,80,458,107"/>
+<area shape="rect" id="node3" href="$classFFrItemGroup.html" title=" " alt="" coords="5,155,116,181"/>
+<area shape="rect" id="node4" href="$classFFrObjectGroup.html" title=" " alt="" coords="141,155,263,181"/>
+<area shape="rect" id="node5" href="$classFFrSuperObjectGroup.html" title=" " alt="" coords="287,155,447,181"/>
+</map>

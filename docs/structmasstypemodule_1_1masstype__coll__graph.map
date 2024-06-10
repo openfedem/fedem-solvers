@@ -1,0 +1,9 @@
+<map id="masstypemodule::masstype" name="masstypemodule::masstype">
+<area shape="rect" id="node1" title=" " alt="" coords="18,431,225,457"/>
+<area shape="rect" id="node2" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="45,312,198,353"/>
+<area shape="rect" id="node3" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="71,5,233,32"/>
+<area shape="rect" id="node4" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="85,145,238,187"/>
+<area shape="rect" id="node6" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="189,95,411,121"/>
+<area shape="rect" id="node7" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="316,261,513,288"/>
+<area shape="rect" id="node5" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="179,211,421,237"/>
+</map>

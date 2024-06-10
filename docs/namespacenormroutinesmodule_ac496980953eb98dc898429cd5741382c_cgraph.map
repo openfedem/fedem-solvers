@@ -1,0 +1,5 @@
+<map id="normroutinesmodule::expandvector" name="normroutinesmodule::expandvector">
+<area shape="rect" id="node1" title="Returns a pointer to the expanded solution vector." alt="" coords="5,39,164,80"/>
+<area shape="rect" id="node2" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="213,5,368,47"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="212,71,369,112"/>
+</map>

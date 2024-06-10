@@ -1,0 +1,16 @@
+<map id="fedem&#45;foundation/src/FFaLib/FFaOperation/FFaOpUtils.H" name="fedem&#45;foundation/src/FFaLib/FFaOperation/FFaOpUtils.H">
+<area shape="rect" id="node1" title="Utilities for accessing unary operations." alt="" coords="420,5,583,61"/>
+<area shape="rect" id="node2" title=" " alt="" coords="761,206,820,233"/>
+<area shape="rect" id="node3" href="$FFaTensor3_8H.html" title=" " alt="" coords="312,288,544,315"/>
+<area shape="rect" id="node5" href="$FFaTensor2_8H.html" title=" " alt="" coords="5,288,237,315"/>
+<area shape="rect" id="node6" href="$FFaTensor1_8H.html" title=" " alt="" coords="159,117,391,143"/>
+<area shape="rect" id="node7" href="$FFaMat34_8H.html" title=" " alt="" coords="465,117,687,143"/>
+<area shape="rect" id="node11" href="$FFaOperation_8H.html" title="Classes that make up the core of a operation/transformation system." alt="" coords="792,109,947,151"/>
+<area shape="rect" id="node4" title=" " alt="" coords="312,363,392,389"/>
+<area shape="rect" id="node8" href="$FFaMat33_8H.html" title=" " alt="" coords="465,206,687,233"/>
+<area shape="rect" id="node9" href="$FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="569,288,783,315"/>
+<area shape="rect" id="node10" title=" " alt="" coords="645,363,707,389"/>
+<area shape="rect" id="node12" title=" " alt="" coords="844,206,895,233"/>
+<area shape="rect" id="node13" title=" " alt="" coords="919,206,982,233"/>
+<area shape="rect" id="node14" href="$FFaDynCB_8H.html" title="Macros for definition of dynamic callback objects." alt="" coords="1007,199,1156,240"/>
+</map>

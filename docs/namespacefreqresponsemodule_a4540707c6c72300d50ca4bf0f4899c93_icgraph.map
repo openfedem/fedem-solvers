@@ -1,0 +1,7 @@
+<map id="freqresponsemodule::fft_complex_1d" name="freqresponsemodule::fft_complex_1d">
+<area shape="rect" id="node1" title="Fourier transformation for a single periodic sequence within a complex array." alt="" coords="743,5,899,47"/>
+<area shape="rect" id="node2" href="$namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="539,5,695,47"/>
+<area shape="rect" id="node3" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="335,5,491,47"/>
+<area shape="rect" id="node4" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="131,5,287,47"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,13,83,39"/>
+</map>

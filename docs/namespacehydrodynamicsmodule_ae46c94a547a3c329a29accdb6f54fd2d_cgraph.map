@@ -1,0 +1,6 @@
+<map id="hydrodynamicsmodule::getdragforces" name="hydrodynamicsmodule::getdragforces">
+<area shape="rect" id="node1" title="Calculates drag (and slam) forces for a (partly) submerged body." alt="" coords="5,49,176,90"/>
+<area shape="rect" id="node2" href="$hydroDynamicsModule_8f90.html#a993a40100ec86deb60c0528a0c447f01" title=" " alt="" coords="224,5,416,32"/>
+<area shape="rect" id="node3" href="$hydroDynamicsModule_8f90.html#a7c4a8160933d111f76dded43743a6f23" title=" " alt="" coords="234,56,406,83"/>
+<area shape="rect" id="node4" href="$FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="281,107,359,133"/>
+</map>

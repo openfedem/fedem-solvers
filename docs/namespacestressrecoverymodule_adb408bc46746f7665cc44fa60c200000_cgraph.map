@@ -1,0 +1,40 @@
+<map id="stressrecoverymodule::initrecovery" name="stressrecoverymodule::initrecovery">
+<area shape="rect" id="node1" title="Initializes for superelement stress recovery." alt="" coords="5,926,172,967"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#a196b5251e74a5dcb0ec4ef7da1e3cf4e" title="Allocates the B&#45; and E disk matrix objects." alt="" coords="241,343,419,385"/>
+<area shape="rect" id="node5" href="$namespacedisplacementmodule.html#a1f042f886f3d02ae72a2fd0b435e802f" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="251,409,409,450"/>
+<area shape="rect" id="node8" href="$namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="247,594,413,635"/>
+<area shape="rect" id="node13" href="$namespacedisplacementmodule.html#a46bf062a36b7cee9aed6df227523c683" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="251,838,409,879"/>
+<area shape="rect" id="node20" href="$stressRecoveryModule_8f90.html#a216ae814fbef3cce2e487339a370ffcb" title="Returns the size of the in&#45;core array with von Mises stresses." alt="" coords="263,933,397,960"/>
+<area shape="rect" id="node21" href="$namespacesamstressmodule.html#ac92e4718f898abf21cbe409e81b53a96" title="Initializes the SAM data structure for the recovery processes." alt="" coords="220,1013,440,1040"/>
+<area shape="rect" id="node24" href="$namespacesammodule.html#a3b485dc310e4344a9620649c62ddc644" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="533,1165,709,1192"/>
+<area shape="rect" id="node26" href="$namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="247,1115,413,1157"/>
+<area shape="rect" id="node31" href="$namespacestressrecoverymodule.html#a341d5cd78cb64693ea6226254523dda1" title="Initiates all strain rosettes that are on parts marked for recovery." alt="" coords="230,1181,430,1222"/>
+<area shape="rect" id="node32" href="$namespacerdbmodule.html#a61e32840f6162d281a5b8723648f4e92" title="Initializes a rdbmodule::rdbtype object." alt="" coords="249,1247,411,1273"/>
+<area shape="rect" id="node33" href="$namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="251,203,409,245"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="515,357,726,384"/>
+<area shape="rect" id="node4" href="$namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title=" " alt="" coords="543,291,699,333"/>
+<area shape="rect" id="node6" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="813,467,1017,493"/>
+<area shape="rect" id="node7" href="$namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title=" " alt="" coords="837,401,993,442"/>
+<area shape="rect" id="node9" href="$namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="540,510,701,551"/>
+<area shape="rect" id="node11" href="$namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="533,576,709,603"/>
+<area shape="rect" id="node12" href="$namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="519,627,722,653"/>
+<area shape="rect" id="node10" href="$namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="832,518,999,559"/>
+<area shape="rect" id="node14" href="$namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title=" " alt="" coords="488,845,753,872"/>
+<area shape="rect" id="node15" href="$namespacesdiskmatrixmodule.html#ace0f4417d7d811325ad451a1ece19d38" title=" " alt="" coords="543,897,699,938"/>
+<area shape="rect" id="node16" href="$namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title=" " alt="" coords="523,963,719,989"/>
+<area shape="rect" id="node17" href="$namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538" title=" " alt="" coords="543,678,699,719"/>
+<area shape="rect" id="node18" href="$displacementModule_8f90.html#a53f6c76df3d79227725ebbf111b04df0" title="Convenience function with error handling for row&#45;index extraction." alt="" coords="552,744,689,771"/>
+<area shape="rect" id="node19" href="$namespacesammodule.html#a6fdab47d630a2d888453176403a65059" title="Returns internal node number and local dof&#45;number for a global dof." alt="" coords="496,795,745,821"/>
+<area shape="rect" id="node22" href="$namespacesammodule.html#a774b4410e5773eb4b5098c2a390d0c16" title="Performs consistency checking of the SAM data structure." alt="" coords="548,1013,693,1040"/>
+<area shape="rect" id="node23" href="$namespacesammodule.html#a69fd810a4c8b2fdea3b306017996214a" title="Forms the control arrays dofPosIn1 and/or dofPosIn2 in SAM." alt="" coords="513,1064,729,1091"/>
+<area shape="rect" id="node25" href="$samStressModule_8f90.html#a021dbf4445de46fb85e9d9b7d2b8888f" title="Reads all SAM arrays from binary file." alt="" coords="561,1115,681,1141"/>
+<area shape="rect" id="node27" href="$namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="539,1217,702,1258"/>
+<area shape="rect" id="node28" href="$namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="836,1158,995,1199"/>
+<area shape="rect" id="node29" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="801,1224,1029,1251"/>
+<area shape="rect" id="node30" href="$namespacesdiskmatrixmodule.html#a49b2465bca0546e2724fe1075e280857" title=" " alt="" coords="837,1275,993,1317"/>
+<area shape="rect" id="node34" href="$namespacesdiskmatrixmodule.html#a073cda31fc3afe1f6e7823d0aed50de6" title=" " alt="" coords="543,174,699,215"/>
+<area shape="rect" id="node35" href="$namespacediskmatrixmodule.html#a07dca70d14fe2f177b4f6add61538f3a" title=" " alt="" coords="495,240,746,267"/>
+<area shape="rect" id="node36" href="$namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85" title=" " alt="" coords="519,5,722,32"/>
+<area shape="rect" id="node37" href="$namespacesdiskmatrixmodule.html#a412b6c593c2be060dce9a93f7a459a31" title=" " alt="" coords="543,57,699,98"/>
+<area shape="rect" id="node38" href="$stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="570,123,671,149"/>
+</map>

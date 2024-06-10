@@ -1,0 +1,5 @@
+<map id="stressrecoverymodule::recparttype" name="stressrecoverymodule::recparttype">
+<area shape="rect" id="node1" title="Data type holding recovery data for superelements." alt="" coords="95,109,261,151"/>
+<area shape="rect" id="node2" href="$structsammodule_1_1samtype.html" title="Data structure for management of FE matrix assembly." alt="" coords="5,5,169,32"/>
+<area shape="rect" id="node3" href="$structrdbmodule_1_1rdbtype.html" title="Data type for a binary result database file." alt="" coords="193,5,344,32"/>
+</map>

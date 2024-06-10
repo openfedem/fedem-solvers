@@ -1,0 +1,5 @@
+<map id="initiatesupeltypemodule::readnonlinsupelmatrices" name="initiatesupeltypemodule::readnonlinsupelmatrices">
+<area shape="rect" id="node1" title="Reads into core the reduced nonlinear superelement matrices." alt="" coords="5,5,196,47"/>
+<area shape="rect" id="node2" href="$namespaceinitiatesupeltypemodule.html#ad9b8025de8331ecc2ebd5108ab9c3742" title="Reads a matrix from a binary file into core." alt="" coords="244,5,425,47"/>
+<area shape="rect" id="node3" href="$dummyLoadSupelMatrix_8f90.html#a04a7ed774f3f8eb22908eab9c634470e" title=" " alt="" coords="473,13,660,39"/>
+</map>

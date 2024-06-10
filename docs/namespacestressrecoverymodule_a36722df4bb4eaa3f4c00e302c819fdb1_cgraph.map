@@ -1,0 +1,5 @@
+<map id="stressrecoverymodule::stressrecovery" name="stressrecoverymodule::stressrecovery">
+<area shape="rect" id="node1" title="Calculates internal displacements and stresses in superelements." alt="" coords="5,23,172,65"/>
+<area shape="rect" id="node2" href="$stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="220,5,347,32"/>
+<area shape="rect" id="node3" href="$stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="222,56,345,83"/>
+</map>

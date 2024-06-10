@@ -1,0 +1,12 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title="Test program for Newton iteration manipulation." alt="" coords="5,208,60,235"/>
+<area shape="rect" id="node2" href="$solverInterface_8h.html#a9cce6e3731192ec8615fd648f2ac5d12" title="Returns the equation numbers for the DOFs of a specified object." alt="" coords="122,5,229,32"/>
+<area shape="rect" id="node3" href="$solverInterface_8h.html#a116a6b6355c1af3fbbb033bfa21df611" title="Returns current content of the system Newton matrix." alt="" coords="108,56,243,83"/>
+<area shape="rect" id="node4" href="$solverInterface_8h.html#a5509a03677335b415d67331b8d1f1b12" title="Returns current content of the system right&#45;hand&#45;side vector." alt="" coords="121,107,230,133"/>
+<area shape="rect" id="node5" href="$solverInterface_8h.html#a1db5e7074f81464e55c6fb0a18a6fac5" title="Returns the dimension (number of equations) of the system." alt="" coords="116,157,235,184"/>
+<area shape="rect" id="node6" href="$solverInterface_8h.html#ac59f665348f68a27f0f43f2df379a9a9" title="Replaces current content of the system right&#45;hand&#45;side vector." alt="" coords="121,208,229,235"/>
+<area shape="rect" id="node7" href="$solverInterface_8h.html#a48cd64935f370f9b4335ed287ab24708" title="Solves current linearized equation system and updates the state." alt="" coords="119,259,231,285"/>
+<area shape="rect" id="node8" href="$solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="127,309,223,336"/>
+<area shape="rect" id="node9" href="$solverInterface_8h.html#a7323a44a81be57003d689b5adee5e7ec" title="Initializes a new solver process." alt="" coords="134,360,217,387"/>
+<area shape="rect" id="node10" href="$solverInterface_8h.html#aa3938c1804d216931223e52e29288419" title="Starts a new time/load step." alt="" coords="135,411,216,437"/>
+</map>

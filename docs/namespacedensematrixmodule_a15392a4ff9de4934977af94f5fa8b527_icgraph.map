@@ -1,0 +1,6 @@
+<map id="densematrixmodule::solveaxb" name="densematrixmodule::solveaxb">
+<area shape="rect" id="node1" title="Solves the linear equation system A*x = B." alt="" coords="320,57,481,98"/>
+<area shape="rect" id="node2" href="$namespacecorotutilmodule.html#a856fb738c65ae2c4bcc1a3a38a6469e0" title=" " alt="" coords="5,5,272,32"/>
+<area shape="rect" id="node3" href="$namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722" title=" " alt="" coords="25,57,252,98"/>
+<area shape="rect" id="node4" href="$namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title=" " alt="" coords="62,122,215,163"/>
+</map>

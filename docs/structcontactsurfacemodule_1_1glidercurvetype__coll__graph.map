@@ -1,0 +1,6 @@
+<map id="contactsurfacemodule::glidercurvetype" name="contactsurfacemodule::glidercurvetype">
+<area shape="rect" id="node1" title="Data type representing the glider curve in point&#45;to&#45;path joints." alt="" coords="5,288,172,329"/>
+<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="8,5,169,32"/>
+<area shape="rect" id="node4" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="105,95,302,121"/>
+<area shape="rect" id="node3" href="$structcurvepointtypemodule_1_1curvepointtype.html" title="Data type representing a point on a contact curve/surface." alt="" coords="112,184,281,225"/>
+</map>

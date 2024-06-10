@@ -1,0 +1,4 @@
+<map id="energyintegrationmodule::aeroenergy" name="energyintegrationmodule::aeroenergy">
+<area shape="rect" id="node1" title="Calculates the incremental work done by the aerodynamic force on a wind turbine blade node." alt="" coords="5,5,192,47"/>
+<area shape="rect" id="node2" href="$namespacetriadtypemodule.html#a4824611730394184a244c2ca14eb02da" title="Returns the current incremental displacement in a triad." alt="" coords="240,13,495,39"/>
+</map>

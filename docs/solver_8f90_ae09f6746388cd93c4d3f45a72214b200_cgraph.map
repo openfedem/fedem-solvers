@@ -1,0 +1,52 @@
+<map id="solver" name="solver">
+<area shape="rect" id="node1" title="Driver for the FEDEM linear FE part solver." alt="" coords="5,907,68,934"/>
+<area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="413,5,575,47"/>
+<area shape="rect" id="node3" href="$closeLogFiles_8f90.html#a5532a1d604cc2bf79b3aea46f8ce88f1" title="Global subroutine (callable from C++) used by signal handlers, etc." alt="" coords="171,607,275,634"/>
+<area shape="rect" id="node4" href="$namespaceasmextensionmodule.html#af8756381919cc6b45c27d5332eafe0f2" title="Initializes the element assembly." alt="" coords="142,659,305,700"/>
+<area shape="rect" id="node5" href="$namespaceasmextensionmodule.html#ac0ef0da561c2f45bf3ac1acf6511b3ce" title="Finalizes the element assembly." alt="" coords="142,724,305,765"/>
+<area shape="rect" id="node6" href="$namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="122,790,325,817"/>
+<area shape="rect" id="node7" href="$namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="141,841,306,883"/>
+<area shape="rect" id="node8" href="$namespacecmstrsmodule.html#aabb37c12078bebda799a65a02816c11b" title="Solves the eigenvalue problem of the FE model." alt="" coords="142,907,305,934"/>
+<area shape="rect" id="node12" href="$stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="173,958,274,985"/>
+<area shape="rect" id="node13" href="$inputReducerModule_8f90.html#a3931be5c96baca5539248aa0e6610d37" title="Returns the node number and local DOF for a global DOF." alt="" coords="144,1009,303,1035"/>
+<area shape="rect" id="node14" href="$namespaceversionmodule.html#a27b0515f99082f419d4ebf8b00acf0a0" title="Opens the solver res&#45;file and print header information to it." alt="" coords="123,1059,323,1086"/>
+<area shape="rect" id="node15" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="147,384,300,425"/>
+<area shape="rect" id="node47" href="$namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="140,1111,307,1152"/>
+<area shape="rect" id="node48" href="$namespacesamreducermodule.html#a34a8690bef6a35e78d72fb3d522d7337" title="Writes arrays of the SAM data structure to binary file." alt="" coords="116,1177,331,1203"/>
+<area shape="rect" id="node49" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="144,1228,303,1269"/>
+<area shape="rect" id="node50" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="144,1293,303,1335"/>
+<area shape="rect" id="node9" href="$namespacematextensionmodule.html#a404b0d1dd69c6d84c33fd4d13b5e819d" title="Extracts the 11 sub&#45;matrix from a system matrix." alt="" coords="413,900,575,941"/>
+<area shape="rect" id="node10" href="$namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="412,965,576,1007"/>
+<area shape="rect" id="node11" href="$namespacecmstrsmodule.html#a53814a7cf8508ddb1ca2b41ef236c825" title="Prints an error message on singular system system." alt="" coords="384,1031,604,1058"/>
+<area shape="rect" id="node16" href="$namespaceinputreducermodule.html#a10152fa957ff8d5a9e018ff073e3e88a" title="Checks the dof status correctness for all linear couplings." alt="" coords="411,319,577,360"/>
+<area shape="rect" id="node17" href="$namespaceinputreducermodule.html#a28e86609e97d7cef3162ca604dc437b2" title="Checks that all nodes are connected to an element." alt="" coords="415,384,573,425"/>
+<area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="413,449,575,491"/>
+<area shape="rect" id="node19" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="413,515,575,556"/>
+<area shape="rect" id="node20" href="$namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="413,580,575,621"/>
+<area shape="rect" id="node21" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="1041,681,1213,723"/>
+<area shape="rect" id="node22" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="379,849,609,875"/>
+<area shape="rect" id="node43" href="$namespacesysmatrixtypemodule.html#aa279b99d9db021dfedba04c9922ffe11" title="Initializes a system matrix object." alt="" coords="411,71,577,112"/>
+<area shape="rect" id="node44" href="$namespacesysmatrixtypemodule.html#a69d39748d3fceedc24046aa1fcc27044" title="Lets one system matrix object share the data structure of another." alt="" coords="411,136,577,177"/>
+<area shape="rect" id="node45" href="$namespaceinputreducermodule.html#a29c25bd4f269437a4fbe4708ff532407" title="Prints out data for a substructure." alt="" coords="417,201,571,243"/>
+<area shape="rect" id="node46" href="$namespacesammodule.html#a87fd5c25093f3458ea070feffd17f3cf" title="Writes out allocated storage for the SAM data structure." alt="" coords="397,267,591,294"/>
+<area shape="rect" id="node23" href="$namespacesamreducermodule.html#a0c33d59cea989c25f5209b5671d7f3b8" title="Establishes constraint equations associated with beam pin flags." alt="" coords="657,798,943,825"/>
+<area shape="rect" id="node25" href="$namespacesammodule.html#a774b4410e5773eb4b5098c2a390d0c16" title="Performs consistency checking of the SAM data structure." alt="" coords="727,899,873,926"/>
+<area shape="rect" id="node26" href="$namespacerigidmodule.html#afbce1ebe897c61e1c640e37072fe8363" title="Checks consistency of RBAR elements." alt="" coords="683,950,917,977"/>
+<area shape="rect" id="node27" href="$namespacerigidmodule.html#a9a4c638fb0aad8844c18f67e48a1dd40" title="Checks the topology of the RGD elements." alt="" coords="686,1001,914,1027"/>
+<area shape="rect" id="node28" href="$samReducerModule_8f90.html#a3515469519e1f49ef245a3019b5f698c" title="Finds a conservative estimate on the constraint array sizes." alt="" coords="727,1051,873,1078"/>
+<area shape="rect" id="node29" href="$samReducerModule_8f90.html#a04a87a9e31e70b6ed4026b6caaa10a9c" title="Translates the external status code (2) to fixed (0)." alt="" coords="739,1102,861,1129"/>
+<area shape="rect" id="node30" href="$namespacerigidmodule.html#acc0b389ee153dce097daa850b0c8e687" title="Generates constraint equation arrays in the SAM datastructure." alt="" coords="677,849,923,875"/>
+<area shape="rect" id="node35" href="$namespacesammodule.html#a3b485dc310e4344a9620649c62ddc644" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="712,747,888,774"/>
+<area shape="rect" id="node36" href="$namespacerigidmodule.html#a276b6de719dcfcda5c2a981600f120f0" title="Generates constraint equation arrays in the SAM datastructure." alt="" coords="723,1153,877,1179"/>
+<area shape="rect" id="node24" href="$FNVwaveForceModule_8f90.html#a9a0048950edd691805aa86cc576d4b18" title=" " alt="" coords="1071,747,1183,774"/>
+<area shape="rect" id="node31" href="$namespacerigidmodule.html#aaccf3528bf10af33395a600ba0514aac" title="Establishes the constraint equation for a given dependent DOF." alt="" coords="1311,975,1549,1002"/>
+<area shape="rect" id="node32" href="$rigidModule_8f90.html#ac2296e71598ae28d934798a20cd3c7c4" title="Copies coefficients of an explicitly defined constraint equation." alt="" coords="1069,899,1184,926"/>
+<area shape="rect" id="node33" href="$namespacerigidmodule.html#a60105ef466bd00d19ef0b2675d49f404" title="Processes an m&#45;set number of RGD and RBAR elements." alt="" coords="1597,1039,1791,1066"/>
+<area shape="rect" id="node34" href="$namespacewavgmotionmodule.html#a73cde02d6fa5d4622ce6b5535da27e64" title="Computes constraint equation coefficients for a WAVGM element." alt="" coords="991,798,1263,825"/>
+<area shape="rect" id="node37" href="$rigidModule_8f90.html#a3f0e2793df70006198b0617dd7a5f013" title="Calculates chain depth of an RGD element based on array MELDEP." alt="" coords="1084,1102,1169,1129"/>
+<area shape="rect" id="node38" href="$rigidModule_8f90.html#a2efc3ce6e8227132683d6e011ca42f2a" title="Checks for illegal status codes on rigid dependent DOFs." alt="" coords="1057,1153,1197,1179"/>
+<area shape="rect" id="node39" href="$rigidModule_8f90.html#af4d584b37101509fb8721e12e29d07f0" title="Checks for illegal status codes on rigid independent DOFs." alt="" coords="1051,1203,1203,1230"/>
+<area shape="rect" id="node40" href="$namespacescratcharraymodule.html#af862e9fd76dcf2f23faa78e64a376180" title="Returns a pointer to an integer scratch array." alt="" coords="1037,1255,1216,1296"/>
+<area shape="rect" id="node41" href="$namespacerigidmodule.html#a51bd789a49e720dd9f02a07b6055c016" title="Processes the component definition of an RBAR element." alt="" coords="1339,1039,1521,1066"/>
+<area shape="rect" id="node42" href="$namespacerigidmodule.html#a8156f3e36a7e7235bd7e10d970b29e56" title="Constructs the constraint equations for RBAR elements." alt="" coords="1052,1001,1201,1027"/>
+</map>

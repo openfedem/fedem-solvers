@@ -1,0 +1,6 @@
+<map id="displacementmodule::calctotaldisplacements" name="displacementmodule::calctotaldisplacements">
+<area shape="rect" id="node1" title="Calculates the total displacements at the nodal points." alt="" coords="5,27,187,69"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#a4fa44ab4319f390202f3439874f8ba7a" title="Calculates the total displacement at a nodal point." alt="" coords="235,27,445,69"/>
+<area shape="rect" id="node3" href="$namespacerotationmodule.html#a030dc71ea83690ae04ad3b1d00304023" title="Computes the incremental rotation vector rotating tensor T1 to T2." alt="" coords="493,5,675,32"/>
+<area shape="rect" id="node4" href="$namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="507,57,661,98"/>
+</map>

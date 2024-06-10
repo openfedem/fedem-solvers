@@ -1,0 +1,4 @@
+<map id="engineroutinesmodule::sensorrate" name="engineroutinesmodule::sensorrate">
+<area shape="rect" id="node1" title="Evaluates the time&#45;derivative of a sensor value." alt="" coords="221,5,389,47"/>
+<area shape="rect" id="node2" href="$namespaceengineroutinesmodule.html#a4bc95e5aa1d4f7be389fb8e1ba1680d7" title="Evaluates the time&#45;derivative of a general function." alt="" coords="5,5,173,47"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="initiatedampertypemodule::initiatedampers" name="initiatedampertypemodule::initiatedampers">
+<area shape="rect" id="node1" title="Initializes damper objects with data from the solver input file." alt="" coords="5,125,201,166"/>
+<area shape="rect" id="node2" href="$namespacetriadtypemodule.html#a70b4b5104d0d081f25390ef4340959b1" title="Allocates the total nodal force vector associated with a triad." alt="" coords="249,5,504,32"/>
+<area shape="rect" id="node3" href="$initiateDamperTypeModule_8f90.html#a5ef7764da665df5ad290dae9425d74fb" title="Connects engines and functions to the given damper object." alt="" coords="310,56,443,83"/>
+<area shape="rect" id="node4" href="$namespaceinpututilities.html#ab5015c437b78d3d4358c59b1697abbc7" title="Searches for a text string in an array of strings." alt="" coords="285,107,468,133"/>
+<area shape="rect" id="node5" href="$namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="250,157,503,184"/>
+<area shape="rect" id="node6" href="$namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="255,208,498,235"/>
+<area shape="rect" id="node7" href="$initiateDamperTypeModule_8f90.html#aabc9b894d70e3ae780fa86adb680e7c2" title="Determines which secondary damper variables will be saved." alt="" coords="329,259,424,285"/>
+</map>

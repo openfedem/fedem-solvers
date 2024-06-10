@@ -1,0 +1,7 @@
+<map id="FiDeviceFunctionBase" name="FiDeviceFunctionBase">
+<area shape="rect" id="node1" title=" " alt="" coords="149,5,313,32"/>
+<area shape="rect" id="node2" href="$classFiASCFile.html" title="Class representing external device functions based on ASCII files." alt="" coords="5,80,85,107"/>
+<area shape="rect" id="node3" href="$classFiCurveASCFile.html" title="ASCII file for curve plotting." alt="" coords="110,80,229,107"/>
+<area shape="rect" id="node4" href="$classFiDACFile.html" title=" " alt="" coords="252,80,335,107"/>
+<area shape="rect" id="node5" href="$classFiRPC3File.html" title=" " alt="" coords="359,80,447,107"/>
+</map>

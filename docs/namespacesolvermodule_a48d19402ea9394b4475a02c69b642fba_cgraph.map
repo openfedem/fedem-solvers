@@ -1,0 +1,6 @@
+<map id="solvermodule::computebeamforces" name="solvermodule::computebeamforces">
+<area shape="rect" id="node1" title="Computes beam sectional forces for input displacements." alt="" coords="5,56,259,83"/>
+<area shape="rect" id="node2" href="$solverModule_8f90.html#a1c4c543dbfd463aa17894a7f66fe2647" title="Updates the configuration by applying given displacement vector." alt="" coords="330,5,450,32"/>
+<area shape="rect" id="node3" href="$solverModule_8f90.html#ab0cd3c1b86b859e9252a73fdd985e9d7" title="Extracts sectional forces at triads from the beam elements." alt="" coords="307,56,473,83"/>
+<area shape="rect" id="node4" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="308,107,472,149"/>
+</map>

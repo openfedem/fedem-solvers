@@ -1,0 +1,6 @@
+<map id="normroutinesmodule::scalednorm" name="normroutinesmodule::scalednorm">
+<area shape="rect" id="node1" title="Calculates the scaled norm of the given vector." alt="" coords="5,39,164,80"/>
+<area shape="rect" id="node2" href="$namespacenormroutinesmodule.html#ac496980953eb98dc898429cd5741382c" title="Returns a pointer to the expanded solution vector." alt="" coords="212,39,371,80"/>
+<area shape="rect" id="node3" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="420,5,575,47"/>
+<area shape="rect" id="node4" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="419,71,576,112"/>
+</map>

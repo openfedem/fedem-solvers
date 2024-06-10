@@ -1,0 +1,4 @@
+<map id="environmenttypemodule::updategravity" name="environmenttypemodule::updategravity">
+<area shape="rect" id="node1" title="Updates the scaled gravitation vector in case of dynamic up&#45;ramping." alt="" coords="5,5,188,47"/>
+<area shape="rect" id="node2" href="$namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="236,5,389,47"/>
+</map>

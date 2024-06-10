@@ -1,0 +1,5 @@
+<map id="savemodule::writewindturbineheader" name="savemodule::writewindturbineheader">
+<area shape="rect" id="node1" title="Writes results database file header for a wind turbine." alt="" coords="5,31,271,57"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#a9af0f358c23e7976f8302f236f52444b" title="Writes the beginning of an item group definition." alt="" coords="321,5,491,32"/>
+<area shape="rect" id="node3" href="$namespacerdbmodule.html#ac77a4ebbbaa73cec7d26d49901188fb6" title="Writes a variable definition." alt="" coords="319,56,493,83"/>
+</map>

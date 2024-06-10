@@ -1,0 +1,6 @@
+<map id="displacementmodule::calcgroupdisplacements" name="displacementmodule::calcgroupdisplacements">
+<area shape="rect" id="node1" title="Extracts the internal displacements for a group of nodes." alt="" coords="5,27,193,69"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#a4fa44ab4319f390202f3439874f8ba7a" title="Calculates the total displacement at a nodal point." alt="" coords="241,27,452,69"/>
+<area shape="rect" id="node3" href="$namespacerotationmodule.html#a030dc71ea83690ae04ad3b1d00304023" title="Computes the incremental rotation vector rotating tensor T1 to T2." alt="" coords="500,5,681,32"/>
+<area shape="rect" id="node4" href="$namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="514,57,667,98"/>
+</map>

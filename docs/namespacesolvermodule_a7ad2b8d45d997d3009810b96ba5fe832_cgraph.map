@@ -1,0 +1,4 @@
+<map id="solvermodule::saveinitgagestrains" name="solvermodule::saveinitgagestrains">
+<area shape="rect" id="node1" title="Save/restores the initial gage strain to/from an in&#45;core array." alt="" coords="5,13,252,39"/>
+<area shape="rect" id="node2" href="$namespacestressrecoverymodule.html#a8a92d21d270bc47338c919f868d6ee40" title="Saves/restores the initial gage strains to/from an in&#45;core array." alt="" coords="300,5,467,47"/>
+</map>

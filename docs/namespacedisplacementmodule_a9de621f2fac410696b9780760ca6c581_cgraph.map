@@ -1,0 +1,6 @@
+<map id="displacementmodule::closebandematrices" name="displacementmodule::closebandematrices">
+<area shape="rect" id="node1" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="5,57,167,98"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="215,5,419,32"/>
+<area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title=" " alt="" coords="239,57,395,98"/>
+<area shape="rect" id="node4" href="$namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="233,122,400,163"/>
+</map>

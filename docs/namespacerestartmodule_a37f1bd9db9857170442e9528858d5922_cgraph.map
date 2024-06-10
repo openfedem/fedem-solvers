@@ -1,0 +1,12 @@
+<map id="restartmodule::savetocore" name="restartmodule::savetocore">
+<area shape="rect" id="node1" title="Saves state&#45;dependent data of current time step to an array in core." alt="" coords="5,238,200,265"/>
+<area shape="rect" id="node2" href="$namespaceffacmdlinearginterface.html#a5762b6bd35e833d000e6db4bcda3df60" title="Returns the value of an integer command&#45;line option id." alt="" coords="296,5,484,47"/>
+<area shape="rect" id="node3" href="$namespacecontroltypemodule.html#a0ab21abe0427f8f9194d24479dde1770" title="Checks if control elements are present in the model." alt="" coords="313,71,467,112"/>
+<area shape="rect" id="node4" href="$namespacerestartmodule.html#ad83f715b121387e1fee1864a410ca603" title="Saves contact element results to in&#45;core state array for restart." alt="" coords="248,137,532,163"/>
+<area shape="rect" id="node5" href="$namespacerestartmodule.html#a1677142c80cbf087f594e0e5cd7d6063" title="Saves control system data to in&#45;core state array for restart." alt="" coords="277,187,503,214"/>
+<area shape="rect" id="node6" href="$namespacerestartmodule.html#abdd61b6062aee00a6ee633dd059bb878" title="Saves damper results to in&#45;core state array for restart." alt="" coords="274,238,506,265"/>
+<area shape="rect" id="node7" href="$namespacerestartmodule.html#a5b300262bac4eb40346f4b5d8b3eca66" title="Saves joint results to in&#45;core state array for restart." alt="" coords="285,289,495,315"/>
+<area shape="rect" id="node8" href="$namespacerestartmodule.html#a8df659e5fb1104eefcd3ec9d29659489" title="Saves prescribed motion results to in&#45;core state array for restart." alt="" coords="276,339,504,366"/>
+<area shape="rect" id="node9" href="$namespacerestartmodule.html#a0750eebddcc8258e52b2831433e2d847" title="Saves superelement results to in&#45;core array for restart." alt="" coords="254,390,526,417"/>
+<area shape="rect" id="node10" href="$namespacerestartmodule.html#ab15f2025c0db0baa3baaaff91a7ad890" title="Saves triad results to in&#45;core array for restart." alt="" coords="284,441,496,467"/>
+</map>
