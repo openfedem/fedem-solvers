@@ -127,8 +127,16 @@ endif ( LINUX )
 find_program ( DOXYGEN "doxygen" )
 if ( DOXYGEN )
   message ( STATUS "Found Doxygen : ${DOXYGEN}" )
+  if ( WIN )
+    execute_process ( COMMAND "echo %DATE:~7,2%.%DATE:~4,2%.%DATE:~10,4%"
+                      OUTPUT_VARIABLE BUILD_DATE )
+  else ( WIN )
+    execute_process ( COMMAND "date" "+%e %b %Y"
+                      OUTPUT_VARIABLE BUILD_DATE )
+  endif ( WIN )
+  configure_file ( src/Doxyfile.solver.in Doxyfile.solver )
+  configure_file ( src/vpmSolver/mainpage.dox.in mainpage.dox )
   add_custom_target ( doc )
-  configure_file ( src/Doxyfile.solver Doxyfile.solver )
   add_custom_target ( solver_doc
                       COMMAND ${DOXYGEN} ${PROJECT_BINARY_DIR}/Doxyfile.solver
                       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
