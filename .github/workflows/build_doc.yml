@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2023 SAP SE
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is part of FEDEM - https://openfedem.org
+
+name: Build source code documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-doc:
+    if: github.event.commits[0].author.name != 'github-actions'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install doxygen
+        run: sudo apt -y install doxygen graphviz
+
+      - name: Checkout source code repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.ACCESS_PAT }}
+
+      - name: Configure for build
+        run: cmake . -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build the solver documentation
+        run: make doc
+
+      - name: Check build status
+        run: |
+          set +e
+          ./.github/scripts/check_doc.sh
+          echo "NEW_DOC=$?" >> $GITHUB_ENV
+
+      - name: Push updated solver documentation
+        if: env.NEW_DOC != 0
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m"Update solver source code documentation"
+          git push origin HEAD
