@@ -8,6 +8,23 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.0.3] (2024-06-12)
+
+### :rocket: Added
+
+- Support for L-profiles from PBEAML-records in Nastran bulk data files.
+- Account for non-symmetric beam cross sections from Nastran bulk data files.
+- An optional `time_next` argument is added to the `start_step()` method
+  of the `fedempy.solver.FedemSolver` class, working in the same way as
+  the `time_next` argument of the `solve_next()` method.
+- The FE part reducer will now continue (with a warning message) when zero-area
+  shell elements are detected, instead of aborting the reduction process.
+
+### :bug: Fixed
+
+- The torsional stiffness constant calculated from PBARL/PBEAML records
+  is incorrect for some beam cross section shapes.
+
 ## [fedem-8.0.1] (2024-01-25)
 
 ### :rocket: Added
