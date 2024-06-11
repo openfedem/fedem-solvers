@@ -3,7 +3,7 @@ Installing fedempy
 
 To install the latest released ``fedempy`` package, run the following command in a console window::
 
-    pip install https://github.com/SAP/fedem-solvers/releases/download/#FEDEM_TAG#/fedempy-#FEDEMPY_VERSION#.tar.gz
+    pip install https://github.com/openfedem/fedem-solvers/releases/download/#FEDEM_TAG#/fedempy-#FEDEMPY_VERSION#.tar.gz
 
 Before using the ``fedempy`` modules, the following environment variables need to be set:
 
