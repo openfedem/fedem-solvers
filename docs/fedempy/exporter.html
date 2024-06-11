@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>exporter module &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f474186"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fmm module" href="fmm.html" />
+    <link rel="prev" title="enums module" href="enums.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fedempy modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="divergence.html">divergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">enums module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">exporter module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exporter.Exporter"><code class="docutils literal notranslate"><span class="pre">Exporter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#exporter.Exporter.clean"><code class="docutils literal notranslate"><span class="pre">Exporter.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exporter.Exporter.do_step"><code class="docutils literal notranslate"><span class="pre">Exporter.do_step()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#exporter.ExporterException"><code class="docutils literal notranslate"><span class="pre">ExporterException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fmm.html">fmm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm_solver.html">fmm_solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inverse.html">inverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeler.html">modeler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reducer.html">reducer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver.html">solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write_fmx.html">write_fmx module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_parser.html">yaml_parser module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">fedempy modules</a></li>
+      <li class="breadcrumb-item active">exporter module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/exporter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-exporter">
+<span id="exporter-module"></span><h1>exporter module<a class="headerlink" href="#module-exporter" title="Link to this heading"></a></h1>
+<p>Python wrapper for the native VTFX exporter.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="exporter.Exporter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">Exporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fe_parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vis_parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lib_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class provides functionality for exporting fedem animations
+to Ceetron CUG format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>fe_parts</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of finite element parts to include in visualization</p>
+</dd>
+<dt><strong>vis_parts</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of visualization/vrml parts to include in visualization</p>
+</dd>
+<dt><strong>lib_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to the shared object library vtfxExporter.so</p>
+</dd>
+<dt><strong>vtfx_path</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to vtfx-file, use a temporary file if None</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>do_step:</strong></p></td>
+<td><p>Executes a step of visualization export with the provided input data</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>clean:</strong></p></td>
+<td><p>Converts temporary generated vtfx-file to CUG database and cleans up</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="exporter.Exporter.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lib_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cug_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/usr/bin/CugComposer'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter.clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter.clean" title="Link to this definition"></a></dt>
+<dd><p>Clears all data about included FE-parts and frs-files,
+and removes all transformation, stress and deformation results.
+Closes the vtfx-file and converts it to a CUG database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time_step</strong><span class="classifier">double</span></dt><dd><p>Time step to use for animation speed</p>
+</dd>
+<dt><strong>lib_dir</strong><span class="classifier">str</span></dt><dd><p>Absolute path to app location</p>
+</dd>
+<dt><strong>out_dir</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path for output folder of the CUG database
+If None, CUG data is not generated and the vtfx-file is retained</p>
+</dd>
+<dt><strong>cug_path</strong><span class="classifier">str, default=”/usr/bin/CugComposer”</span></dt><dd><p>Absolute path to Ceetron CUG composer executable</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exporter.Exporter.do_step">
+<span class="sig-name descname"><span class="pre">do_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformation_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deformation_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stress_in</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter.do_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter.do_step" title="Link to this definition"></a></dt>
+<dd><p>Execute a step of visualization export with the provided input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time</strong><span class="classifier">float</span></dt><dd><p>Simulation time</p>
+</dd>
+<dt><strong>transformation_in</strong><span class="classifier">list of c_double</span></dt><dd><p>Array of transformation data from the fedem solver</p>
+</dd>
+<dt><strong>deformation_in</strong><span class="classifier">dict</span></dt><dd><p>Arrays of part deformation data from the fedem solver</p>
+</dd>
+<dt><strong>stress_in</strong><span class="classifier">dict</span></dt><dd><p>Arrays of part stress data from the fedem solver</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="exporter.ExporterException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">ExporterException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#ExporterException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.ExporterException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>General exception-type for exporter exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>rc</strong><span class="classifier">int, default=0</span></dt><dd><p>Return code</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="enums.html" class="btn btn-neutral float-left" title="enums module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fmm.html" class="btn btn-neutral float-right" title="fmm module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

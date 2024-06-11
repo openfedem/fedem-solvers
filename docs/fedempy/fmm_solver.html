@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fmm_solver module &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f474186"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="inverse module" href="inverse.html" />
+    <link rel="prev" title="fmm module" href="fmm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fedempy modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="divergence.html">divergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">enums module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporter.html">exporter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm.html">fmm module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">fmm_solver module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fmm_solver.FmmInverse"><code class="docutils literal notranslate"><span class="pre">FmmInverse</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fmm_solver.FmmSolver"><code class="docutils literal notranslate"><span class="pre">FmmSolver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fmm_solver.FmmSolver.close_model"><code class="docutils literal notranslate"><span class="pre">FmmSolver.close_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fmm_solver.FmmSolver.set_input"><code class="docutils literal notranslate"><span class="pre">FmmSolver.set_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fmm_solver.FmmSolver.solve_all"><code class="docutils literal notranslate"><span class="pre">FmmSolver.solve_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fmm_solver.FmmSolver.start"><code class="docutils literal notranslate"><span class="pre">FmmSolver.start()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="inverse.html">inverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeler.html">modeler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reducer.html">reducer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver.html">solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write_fmx.html">write_fmx module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_parser.html">yaml_parser module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">fedempy modules</a></li>
+      <li class="breadcrumb-item active">fmm_solver module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/fmm_solver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-fmm_solver">
+<span id="fmm-solver-module"></span><h1>fmm_solver module<a class="headerlink" href="#module-fmm_solver" title="Link to this heading"></a></h1>
+<p>Python wrapper for the native fedem dynamics solver
+which operates directly on fedem mechanism model files (<cite>*.fmm</cite>).</p>
+<p>This module relies on the following environment variables:</p>
+<div class="line-block">
+<div class="line"><em>FEDEM_REDUCER</em> = Full path to the Fedem reducer shared object library</div>
+<div class="line"><em>FEDEM_SOLVER</em> = Full path to the Fedem solver shared object library</div>
+<div class="line"><em>FEDEM_MDB</em> = Full path to the Fedem model database shared object library</div>
+</div>
+<p>The first variable needs to be set only if FE model reduction
+is to be performed. The other two variables are mandatory.</p>
+<p>This module can also be launched directly, to run a specified model,
+using the syntax</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">fedempy.fmm_solver</span> <span class="pre">-f</span> <span class="pre">mymodel.fmm</span> <span class="pre">[--reduce-fem]</span> <span class="pre">[--save-model]</span></code></div>
+</div>
+<p>This will then invoke the method <a class="reference internal" href="#fmm_solver.FmmSolver.solve_all" title="fmm_solver.FmmSolver.solve_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fmm_solver.FmmSolver.solve_all()</span></code></a>
+on the specified model-file (<cite>mymodel.fmm</cite>). If you already have a directory
+populated with Fedem solver input files, you can run the solver directly on
+those files by launching this module without arguments, i.e.:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">fedempy.fmm_solver</span></code></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="fmm_solver.FmmInverse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fmm_solver.</span></span><span class="sig-name descname"><span class="pre">FmmInverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_internal_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmInverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmInverse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fmm_solver.FmmSolver" title="fmm_solver.FmmSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">FmmSolver</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">InverseSolver</span></code></p>
+<p>This class augments FmmSolver with inverse solution capabilities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str</span></dt><dd><p>Absolute path to the fedem model file to start the simulation on</p>
+</dd>
+<dt><strong>config</strong><span class="classifier">dictionary</span></dt><dd><p>Inverse solver configuration</p>
+</dd>
+<dt><strong>use_internal_state</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, internal state arrays are allocated (for microbatching)</p>
+</dd>
+<dt><strong>keep_res</strong><span class="classifier">bool, default=False</span></dt><dd><p>Option to not overwrite any existing res-file in the RDB directory</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_rhs_vector</span></code>(r_vec)</p></td>
+<td><p>Utility updating the content of the system right-hand-side vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_times</span></code>(xtimes[, use_times])</p></td>
+<td><p>Utility checking that a given time series starts with the current solver time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">close_model</span></code>([save, remove_singletons])</p></td>
+<td><p>Closes the currently open model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_int_forces_from_displ</span></code>(disp, ids)</p></td>
+<td><p>This method computes beam section forces in triads for the given displacement field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_rel_dist_from_displ</span></code>(disp, ids)</p></td>
+<td><p>This method computes the relative distance at sensors for the given displacement field.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_spring_var_from_displ</span></code>(disp, ids)</p></td>
+<td><p>This method computes one of the spring variables (length, deflection, force) at sensors for the given displacement field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_strains_from_displ</span></code>(disp, gauge_ids)</p></td>
+<td><p>This method computes the strain tensor at gauges for the given displacement field, or from current state if no displacements provided.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_rev_joint_force</span></code>(data)</p></td>
+<td><p>Modify the data set for spring force input for revolute joints with defined spring forces Conversation from force to lenght x=F/k (const.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">finish_step</span></code>()</p></td>
+<td><p>This method completes current time (or load) step, by iterating the linearized equation system until convergence is achieved.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_current_strains</span></code>(gauge_ids)</p></td>
+<td><p>This method computes the strain tensor at gauges from current state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_current_time</span></code>()</p></td>
+<td><p>Utility returning the current physical time of the simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_damping_matrix</span></code>()</p></td>
+<td><p>Utility returning current content of the system damping matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_element_stiffness_matrix</span></code>(bid)</p></td>
+<td><p>Utility returning the initial content of an element stiffness matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_equations</span></code>(bid)</p></td>
+<td><p>Utility returning the equation numbers for the DOFs of the object with the specified base Id (bid).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_external_force_vector</span></code>()</p></td>
+<td><p>Utility returning current content of the external force vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_function</span></code>([uid, tag, arg])</p></td>
+<td><p>Utility evaluating a general function in the model, identified by the specified user Id <cite>uid</cite> or <cite>tag</cite>, and with the function argument <cite>arg</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_function_ids</span></code>(tags)</p></td>
+<td><p>Utility returning a list of user Ids of tagged general functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_functions</span></code>(uids)</p></td>
+<td><p>Utility evaluating a list of general functions for current state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_gauge_size</span></code>()</p></td>
+<td><p>Utility returning the required size of the initial strain gauge array which is used when restarting a simulation from an in-core array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_spring_stiffness</span></code>(bid)</p></td>
+<td><p>Get joint spring stiffness coefficient(s).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass_matrix</span></code>()</p></td>
+<td><p>Utility returning current content of the system mass matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_newton_matrix</span></code>()</p></td>
+<td><p>Utility returning current content of the system Newton matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_next_time</span></code>()</p></td>
+<td><p>Utility returning the physical time of the next step of the simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_part_deformation_state_size</span></code>(base_id)</p></td>
+<td><p>Utility returning the required length of the state vector which stores deformation data for the FE Part with the given base Id.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_part_stress_state_size</span></code>(base_id)</p></td>
+<td><p>Utility returning the required length of the state vector which stores von Mises stresses for the FE Part with the given base Id.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rhs_vector</span></code>()</p></td>
+<td><p>Utility returning current content of the system right-hand-side vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_state_size</span></code>()</p></td>
+<td><p>Utility returning the required length of the state vector which is used when restarting a simulation from an in-core array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_stiffness_matrix</span></code>()</p></td>
+<td><p>Utility returning current content of the system stiffness matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_system_dofs</span></code>()</p></td>
+<td><p>Utiloty returning the total number of DOFs of the system.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_system_size</span></code>()</p></td>
+<td><p>Utility returning the dimension (number of equations) of the system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transformation_state_size</span></code>()</p></td>
+<td><p>Utility returning the required length of the vector which stores the transformation matrices (rotation and translation) for Triads, Parts and Beams.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">restart_from_state</span></code>(state_data[, write_to_rdb])</p></td>
+<td><p>This method re-initializes the mechanism objects with data from the provided state array, such that the simulation can continue from there.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_all</span></code>(options)</p></td>
+<td><p>This method runs the dynamics solver with given command-line <cite>options</cite>, without any user intervention.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse</span></code>(inp_data, out_def)</p></td>
+<td><p>Collector for different inverse methods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse_dyn</span></code>(inp_data, out_def)</p></td>
+<td><p>Inverse solution driver (dynamic case).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse_fedem</span></code>(inp_data, out_def)</p></td>
+<td><p>This method uses fedem's inverse solution in fortran</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_gauges</span></code>()</p></td>
+<td><p>This method stores initial gauge strains in the self.gauge_data array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_part_state</span></code>(base_id, def_state, str_state)</p></td>
+<td><p>This method stores current deformation- and stress states for the specified FE Part in the provided core arrays.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_state</span></code>()</p></td>
+<td><p>This method stores current solver state in the self.state_data array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_transformation_state</span></code>(state_data)</p></td>
+<td><p>This method stores current transformation state for Triads, Parts and Beams in the provided core array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_ext_func</span></code>(func_id[, value])</p></td>
+<td><p>This method may be used prior to the solve_next call, to assign a sensor value from a physical twin to the specified actuator or load in the model, identified by the argument func_id (external function Id).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_input</span></code>(func_tag[, value])</p></td>
+<td><p>This method may be used prior to the solve_next call, to assign a sensor value from a physical twin to the specified actuator or load in the model, identified by the argument func_tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_rhs_vector</span></code>(r_vec)</p></td>
+<td><p>Utility replacing current content of the system right-hand-side vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_all</span></code>(model_file[, save_model, reduce_fem])</p></td>
+<td><p>Starts and runs through a simulation on the specified model file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_inverse</span></code>(x_val, x_def, g_def[, out_def])</p></td>
+<td><p>This method solves the inverse problem at current time/load step, assuming small deformations only (linear response).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_iteration</span></code>()</p></td>
+<td><p>This method solves the current linearized equation system and updates all state variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_modes</span></code>(n_modes[, dof_order, use_lapack])</p></td>
+<td><p>This method solves the eigenvalue problem at current time step, and returns the computed eigenvalues and associated eigenvectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_next</span></code>([inp, inp_def, out_def, time_next])</p></td>
+<td><p>This method advances the solution one time/load step forward.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_window</span></code>(n_step[, inputs, f_out, xtimes])</p></td>
+<td><p>This method solves the problem for a time/load step window, with given values for the external functions, and extraction of results from another set of general functions in the model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_close</span></code>()</p></td>
+<td><p>This method needs to be used if solver_done() was invoked with its <cite>remove_singletons</cite> argument set to False.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_done</span></code>([remove_singletons])</p></td>
+<td><p>This method should be used when the time/load step loop is finished.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_init</span></code>(options[, fsi, state_data, ...])</p></td>
+<td><p>This method processes the input and sets up necessary data structures prior to the time integration loop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code>(model_file[, keep_old_res, ...])</p></td>
+<td><p>Starts a simulation on the specified model file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_step</span></code>([time_next])</p></td>
+<td><p>This method starts a new time (or load) step, by calculating the predicted response, the coefficient matrix and right-hand-side vector of the first nonlinear iteration.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fmm_solver.FmmSolver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fmm_solver.</span></span><span class="sig-name descname"><span class="pre">FmmSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_internal_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_old_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FedemSolver</span></code></p>
+<p>This subclass of FedemSolver adds the possibility
+to start a simulation on a specified fedem model file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to the fedem model file to start the simulation on</p>
+</dd>
+<dt><strong>use_internal_state</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, internal state arrays are allocated (for microbatching)</p>
+</dd>
+<dt><strong>keep_old_res</strong><span class="classifier">bool, default=False</span></dt><dd><p>Option to not overwrite any existing res-file in the RDB directory</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>start:</strong></p></td>
+<td><p>Starts a simulation on the specified model file</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>close_model:</strong></p></td>
+<td><p>Closes the currently open model</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>solve_all:</strong></p></td>
+<td><p>Starts and runs through a simulation on the specified model file</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>set_input:</strong></p></td>
+<td><p>Assigns sensor value to a tagged external function</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="fmm_solver.FmmSolver.close_model">
+<span class="sig-name descname"><span class="pre">close_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_singletons</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.close_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.close_model" title="Link to this definition"></a></dt>
+<dd><p>Closes the currently open model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>save</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, the model file is updated based on current result files</p>
+</dd>
+<dt><strong>remove_singletons</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, heap-allocated singelton objects are also released</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True on success, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fmm_solver.FmmSolver.set_input">
+<span class="sig-name descname"><span class="pre">set_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.set_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.set_input" title="Link to this definition"></a></dt>
+<dd><p>This method may be used prior to the solve_next call, to assign a
+sensor value from a physical twin to the specified actuator or load in
+the model, identified by the argument func_tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>func_tag</strong><span class="classifier">str</span></dt><dd><p>Tag of the external function to be assigned new value</p>
+</dd>
+<dt><strong>value</strong><span class="classifier">float, default=None</span></dt><dd><p>The value to be assigned</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Always True, unless the specified function is not found</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fmm_solver.FmmSolver.solve_all">
+<span class="sig-name descname"><span class="pre">solve_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_fem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.solve_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.solve_all" title="Link to this definition"></a></dt>
+<dd><p>Starts and runs through a simulation on the specified model file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str</span></dt><dd><p>Absolute path of the Fedem model file to run the solver on</p>
+</dd>
+<dt><strong>save_model</strong><span class="classifier">bool, default=True</span></dt><dd><p>If True, save the model file with new results when solver finished</p>
+</dd>
+<dt><strong>reduce_fem</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, and the model contains FE parts, they will be reduced
+before the solver is started, unless the reduced matrix files
+already exist</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Zero on success, otherwise negative</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fmm_solver.FmmSolver.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_old_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_fem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gauge_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extf_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.start" title="Link to this definition"></a></dt>
+<dd><p>Starts a simulation on the specified model file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str</span></dt><dd><p>Absolute path of the Fedem model file to run the solver on</p>
+</dd>
+<dt><strong>keep_old_res</strong><span class="classifier">bool, default=False</span></dt><dd><p>Option to not overwrite any existing res-file in the RDB directory</p>
+</dd>
+<dt><strong>close_model</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, release the model from memory before solver start</p>
+</dd>
+<dt><strong>reduce_fem</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, and the model contains FE parts, they will be reduced
+before the solver is started, unless the reduced matrix files
+already exist</p>
+</dd>
+<dt><strong>state_data</strong><span class="classifier">list of float, default=None</span></dt><dd><p>Complete state vector to restart simulation from</p>
+</dd>
+<dt><strong>gauge_data</strong><span class="classifier">list of float, default=None</span></dt><dd><p>Initial strain gauge values for restart</p>
+</dd>
+<dt><strong>extf_input</strong><span class="classifier">list of float, default=None</span></dt><dd><p>Initial external function values, for initial equilibrium iterations</p>
+</dd>
+<dt><strong>time_start</strong><span class="classifier">float, default=None</span></dt><dd><p>Optional start time of simulation, override setting in model file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Zero on success, otherwise negative</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fmm.html" class="btn btn-neutral float-left" title="fmm module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="inverse.html" class="btn btn-neutral float-right" title="inverse module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

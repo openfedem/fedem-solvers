@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solving Fedem models &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f474186"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fedempy modules" href="modules.html" />
+    <link rel="prev" title="Creating/editing Fedem models" href="howto-modeling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="howtos.html">fedempy HOWTO</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto-install.html">Installing fedempy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto-modeling.html">Creating/editing Fedem models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto-modeling.html#no-code-modeling">No-code modeling</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Solving Fedem models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-a-new-simulation">Starting a new simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solving">Solving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-closing-current-model">Saving/closing current model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solving-models-with-external-functions">Solving models with external functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="howtos.html">fedempy HOWTO</a></li>
+      <li class="breadcrumb-item active">Solving Fedem models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/howto-solving.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solving-fedem-models">
+<h1>Solving Fedem models<a class="headerlink" href="#solving-fedem-models" title="Link to this heading"></a></h1>
+<p>This section gives a brief introduction on how you can use the <code class="docutils literal notranslate"><span class="pre">fedempy</span></code>
+package to execute the Fedem dynamics solver through python scripting.
+It relies on the <a class="reference internal" href="fmm_solver.html#module-fmm_solver" title="fmm_solver"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fmm_solver</span></code></a> module.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Before you start, you need to set the environment variable <strong>FEDEM_SOLVER</strong>
+to point to the shared object library of the Fedem dynamics solver.
+This library is named <cite>libfedem_solver_core.so</cite> on Linux
+and <cite>fedem_solver_core.dll</cite> on Windows.
+You also need to set the environment variable <strong>FEDEM_MDB</strong> to point to
+the shared object library of the Fedem mechanism model database.
+This library is named <cite>libFedemDB.so</cite> on Linux (<cite>FedemDB.dll</cite> on Windows).</p>
+<p>The methods for conducting dynamics simulation of a Fedem model are collected
+in the class <code class="docutils literal notranslate"><span class="pre">FmmSolver</span></code> which is a sub-class of <code class="docutils literal notranslate"><span class="pre">FedemSolver</span></code>.
+To access this class, start your python script by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fedempy.fmm_solver</span> <span class="kn">import</span> <span class="n">FmmSolver</span>
+</pre></div>
+</div>
+</section>
+<section id="starting-a-new-simulation">
+<h2>Starting a new simulation<a class="headerlink" href="#starting-a-new-simulation" title="Link to this heading"></a></h2>
+<p>To start the solver on an existing Fedem model “mymodel.fmm”, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will parse the model file, write out some key model size parameters, and
+generate the necessary input files for the dynamics solver in the appropriate
+directory structure. The solver will then start and halt after the setup stage,
+during which the mechanism model is initialized in memory. If an error condition
+occurs during this stage, an exception is raised and the script will abort.</p>
+<p>You may also perform this in two separate operations, like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">()</span>
+
+<span class="n">status</span> <span class="o">=</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Something bad happened, check fedem_solver.res&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This way, the script will not abort if the solver fails, and you can take the
+proper action by checking the return value <cite>status</cite> instead. You may then also
+reuse the FmmSolver object in subsequent simulation within the same script.</p>
+<p>If the model contains FE parts, they will be reduced if needed, if you specify
+<cite>True</cite> as the third parameter in the call to the <code class="docutils literal notranslate"><span class="pre">start</span></code> method. Otherwise,
+it is assumed the FE models have already been reduced and the solver will fail
+if the reduced matrix files are not found.</p>
+<p>You also need to set the environment variable <strong>FEDEM_REDUCER</strong> to point to
+the shared object library of the Fedem FE part reducer for this to work.
+This library is named <cite>libfedem_reducer_core.so</cite> on Linux
+and <cite>fedem_reducer_core.dll</cite> on Windows.</p>
+</section>
+<section id="solving">
+<h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
+<p>There are many methods in <code class="docutils literal notranslate"><span class="pre">FmmSolver</span></code> via its parent class <code class="docutils literal notranslate"><span class="pre">FedemSolver</span></code>
+for running through the time stepping of the simulation.
+See the <a class="reference internal" href="fmm_solver.html#fmm_solver.FmmSolver" title="fmm_solver.FmmSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">fmm_solver.FmmSolver</span></code></a> and <a class="reference internal" href="solver.html#solver.FedemSolver" title="solver.FedemSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">solver.FedemSolver</span></code></a>
+documentation for a full overview of the available methods.</p>
+<p>The easiest way to just step through the simulation would be as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function_id</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># User Id of a function measuring the response variable</span>
+<span class="k">while</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">solve_next</span><span class="p">():</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">get_function</span><span class="p">(</span><span class="n">function_id</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time = &quot;</span><span class="p">,</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">(),</span> <span class="s2">&quot; response =&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Time step loop finished, solver is closed&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Solver failed, see fedem_solver.res&quot;</span><span class="p">,</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The while loop will continue as long there are more time steps defined,
+and no error condition occurred. In the above, the current simulation time
+and a response variable extracted using <code class="docutils literal notranslate"><span class="pre">get_function</span></code> is printed during
+the simulation. Here you can insert any other processing instead.</p>
+<p>If you only need to run through the model without accessing any response
+variables, the above code block can be replaced by one line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span><span class="o">.</span><span class="n">solve_all</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will also reduce the FE parts, if needed, before the solver is started,
+see <a class="reference internal" href="fmm_solver.html#fmm_solver.FmmSolver.solve_all" title="fmm_solver.FmmSolver.solve_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fmm_solver.FmmSolver.solve_all()</span></code></a>.</p>
+</section>
+<section id="saving-closing-current-model">
+<h2>Saving/closing current model<a class="headerlink" href="#saving-closing-current-model" title="Link to this heading"></a></h2>
+<p>To close model after the simulation has finished, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will first update the model file with references to the latest simulation
+results in the model database, and then release the model from core memory.
+You may also close the model without saving it (e.g., if the simulation failed)
+by specifying <cite>False</cite> as parameter.</p>
+<p>If you used the <code class="docutils literal notranslate"><span class="pre">solve_all</span></code> method, you don’t need to invoke <code class="docutils literal notranslate"><span class="pre">close_model</span></code>
+aftwards as this is included in the former method.</p>
+</section>
+<section id="solving-models-with-external-functions">
+<h2>Solving models with external functions<a class="headerlink" href="#solving-models-with-external-functions" title="Link to this heading"></a></h2>
+<p>In digital twin applications, the input loads and/or motions in a Fedem model
+are defined by means of External Functions. These are function objects that are
+assigned their value by an external process, for instance by using the method
+<a class="reference internal" href="solver.html#solver.FedemSolver.set_ext_func" title="solver.FedemSolver.set_ext_func"><code class="xref py py-meth docutils literal notranslate"><span class="pre">solver.FedemSolver.set_ext_func()</span></code></a> within the time integration loop.</p>
+<p>During the development of a digital twin model, it is often convenient to take
+the external function values from a file instead, such that the model can be
+solved directly from the Fedem Desktop, or by using the <code class="docutils literal notranslate"><span class="pre">solve_all</span></code> method.
+This can be done by specifying the following additional option for the
+dynamics solver:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">externalfuncfile</span> <span class="o">&lt;</span><span class="n">datafile</span><span class="o">.</span><span class="n">asc</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>where <cite>&lt;datafile.asc&gt;</cite> is the name of a multi-column ASCII file containing the
+external function values as columns. The first column is assumed to contain the
+time of each step and is not used. The columns need to be labeled with the <cite>tag</cite>
+of the external function objects, by specifying the following as a
+comment line before the numerical data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#DESCRIPTION &lt;func1-tag&gt; &lt;func2-tag&gt; &lt;func3-tag&gt; ...</span>
+</pre></div>
+</div>
+<p>where each <cite>&lt;func#-tag&gt;</cite> identifies the respective column.
+The order of the columns in the file is arbitrary, and it may also contain some
+columns that are not used, since a search will be performed for each function.</p>
+<p>For instance, assume you created a model using <a class="reference internal" href="modeler.html#modeler.FedemModeler" title="modeler.FedemModeler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modeler.FedemModeler</span></code></a>
+and included the following external functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;Input function A&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;FuncA&quot;</span><span class="p">);</span>
+<span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;Input function B&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;FuncB&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then a <cite>datafile.asc</cite> containing the following will work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#DESCRIPTION Func_A unused Func_B</span>
+<span class="mf">0.0</span>          <span class="mf">1.2345</span>  <span class="mf">0.123</span> <span class="mf">2.3456</span>
+<span class="mf">0.1</span>          <span class="mf">2.2345</span>  <span class="mf">0.234</span> <span class="mf">3.3456</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Note: It is assumed that the time steps of the simulation match those of
+the specified file, and such that a new line of data is read and the
+function values are updated prior to each time step of the simulation.
+No interpolation is performed if the times do not match. If the file contains
+fewer data lines than the total number of time steps in the simulation,
+all external functions will remain constant and equal to the values of
+the last line for the remaining steps throughout the simulation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="howto-modeling.html" class="btn btn-neutral float-left" title="Creating/editing Fedem models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="fedempy modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

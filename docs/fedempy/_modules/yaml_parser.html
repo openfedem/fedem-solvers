@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yaml_parser &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">yaml_parser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for yaml_parser</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module provides functionality for creating a Fedem model based on a</span>
+<span class="sd">YAML-formatted input file. The following keywords are recognized when parsing</span>
+<span class="sd">the input file:</span>
+
+<span class="sd">| *target_file* - specifies the name of the fmm-file to be created</span>
+<span class="sd">| *source_file* - specifies an fmm-file to be used as template for the model.</span>
+<span class="sd">| *file_exists* - specified what to do if the `target_file` already exists:</span>
+<span class="sd">|                 USE_IT - opens this file for editing existing model</span>
+<span class="sd">|                 OVERWRITE! - ignores and overwrites any existing file</span>
+<span class="sd">|                 STOP! - aborts the execution</span>
+<span class="sd">|                 index - creates a new non-existing file name</span>
+<span class="sd">| *fe_parts* - imports specified FE data files as a Parts</span>
+<span class="sd">| *triads* - creates triads at specified global points</span>
+<span class="sd">| *triads_from_fe_parts* - creates triads at nodal points on specified FE Parts</span>
+<span class="sd">| *beam_materials* - creates Beam material objects</span>
+<span class="sd">| *beam_sections* - creates Beam cross section objects</span>
+<span class="sd">| *beams* - creates Beam element objects</span>
+<span class="sd">| *joints* - creates Joint objects</span>
+<span class="sd">| *loads* - create Load objects</span>
+<span class="sd">| *virtual_sensors* - creates Sensor objects for extraction of response data</span>
+<span class="sd">| *functions* - creates Function objects (including input functions)</span>
+<span class="sd">| *spring_dampers* - creates Axial spring/damper objects</span>
+<span class="sd">| *edit_fe_parts* - modifies the properties of FE Part objects</span>
+<span class="sd">| *edit_triads* - modifies the properties of Triad objects</span>
+<span class="sd">| *edit_joints* - modifies the properties of Joint objects</span>
+<span class="sd">| *edit_settings* - modifies the solver settings</span>
+
+<span class="sd">Each keyword (except the first three) are followed by an arbitrary number of</span>
+<span class="sd">lines, where each line defines one object to be created (or edited).</span>
+<span class="sd">The syntax of the input can be either list-based or dictionary based.</span>
+
+<span class="sd">This module can also be launched directly using the syntax</span>
+
+<span class="sd">| ``python -m fedempy.yaml_parser -f mymodel.yaml``</span>
+
+<span class="sd">It will then invoke the method :meth:`yaml_parser.main`</span>
+<span class="sd">on the specified input file (`mymodel.yaml`).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dump</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">makedirs</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copy2</span>
+
+<span class="kn">from</span> <span class="nn">yaml</span> <span class="kn">import</span> <span class="n">FullLoader</span><span class="p">,</span> <span class="n">load</span>
+
+<span class="kn">from</span> <span class="nn">fedempy.enums</span> <span class="kn">import</span> <span class="n">FmDof</span><span class="p">,</span> <span class="n">FmDofStat</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="p">,</span> <span class="n">FmType</span><span class="p">,</span> <span class="n">FmVar</span>
+<span class="kn">from</span> <span class="nn">fedempy.fmm_solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FmmSolver</span>
+<span class="kn">from</span> <span class="nn">fedempy.modeler</span> <span class="kn">import</span> <span class="n">FedemModeler</span>
+
+
+<span class="k">def</span> <span class="nf">_check_target</span><span class="p">(</span><span class="n">rel_path</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">exists</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check for existing target file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">rel_path</span> <span class="o">+</span> <span class="n">fname</span><span class="p">):</span>
+        <span class="c1"># Manage already existing target model file</span>
+        <span class="k">if</span> <span class="n">exists</span> <span class="o">==</span> <span class="s2">&quot;STOP!&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target file </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> alread exists!&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exists</span> <span class="o">==</span> <span class="s2">&quot;OVERWRITE!&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ** Existing file </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> will be overwritten.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">exists</span> <span class="o">==</span> <span class="s2">&quot;USE_IT&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   * Updating existing model file </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">exists</span> <span class="o">==</span> <span class="s2">&quot;index&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+                <span class="n">new_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fname</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">-i</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">03</span><span class="si">}{</span><span class="n">fname</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">rel_path</span> <span class="o">+</span> <span class="n">new_name</span><span class="p">):</span>
+                    <span class="k">break</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ** Target file </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> exists, using </span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="n">fname</span> <span class="o">=</span> <span class="n">new_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid command (</span><span class="si">{</span><span class="n">exists</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rel_path</span> <span class="o">+</span> <span class="n">fname</span>
+
+
+<span class="k">def</span> <span class="nf">_merge</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merges the `source` dictionary into the `target` dictionary.</span>
+<span class="sd">    Entries for already existing keys shall _not_ be overwritten.</span>
+<span class="sd">    Therefore, we can&#39;t use the update() method here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">_val</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Account for that &quot;triads&quot; and &quot;triads_from_fe_parts&quot; are equivalent</span>
+        <span class="k">if</span> <span class="n">_key</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">my_key</span> <span class="o">=</span> <span class="n">_key</span>
+        <span class="k">elif</span> <span class="n">_key</span> <span class="o">==</span> <span class="s2">&quot;triads&quot;</span> <span class="ow">and</span> <span class="s2">&quot;triads_from_fe_parts&quot;</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">my_key</span> <span class="o">=</span> <span class="s2">&quot;triads_from_fe_parts&quot;</span>
+        <span class="k">elif</span> <span class="n">_key</span> <span class="o">==</span> <span class="s2">&quot;triads_from_fe_parts&quot;</span> <span class="ow">and</span> <span class="s2">&quot;triads&quot;</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">my_key</span> <span class="o">=</span> <span class="s2">&quot;triads&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target</span><span class="p">[</span><span class="n">_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_val</span>
+            <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">__key</span><span class="p">,</span> <span class="n">__val</span> <span class="ow">in</span> <span class="n">_val</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">__key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">target</span><span class="p">[</span><span class="n">my_key</span><span class="p">]:</span>
+                <span class="n">target</span><span class="p">[</span><span class="n">my_key</span><span class="p">][</span><span class="n">__key</span><span class="p">]</span> <span class="o">=</span> <span class="n">__val</span>
+
+    <span class="k">return</span> <span class="n">target</span>
+
+
+<span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic function for invoking the method `generator`</span>
+<span class="sd">    on the data dictionary `properties`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Comment line:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">generator</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Model generation failure.&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ModelYAML">
+<a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML">[docs]</a>
+<span class="k">class</span> <span class="nc">ModelYAML</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class contains methods for parsing a YAML-formated input file</span>
+<span class="sd">    and creating a Fedem model from it. It is an extension of the class</span>
+<span class="sd">    :class:`modeler.FedemModeler`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_file : str</span>
+<span class="sd">        Absolute path to the YAML-formated input file</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    build:</span>
+<span class="sd">        Loads and parses all model attributes into the model instance</span>
+<span class="sd">    save:</span>
+<span class="sd">        Saves the model to the input file specified FEDEM model file</span>
+<span class="sd">    solve:</span>
+<span class="sd">        Executes the dynamics solver on the created model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_file</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Parsing YAML input file&quot;</span><span class="p">,</span> <span class="n">input_file</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">yml_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">yml_file</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">FullLoader</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="p">:</span>
+            <span class="c1"># Check for inclusion of other yaml-file(s) into parent file</span>
+            <span class="n">sub_models</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;include&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="k">if</span> <span class="n">sub_models</span><span class="p">:</span>
+                <span class="c1"># Merge the content of the included files with the current</span>
+                <span class="c1"># yaml-file content. Notice that any existing values in</span>
+                <span class="c1"># the current dictionary will not be overwritten.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span> <span class="o">=</span> <span class="n">_merge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="p">,</span> <span class="n">sub_models</span><span class="p">)</span>
+
+            <span class="c1"># Extract some file management keywords</span>
+            <span class="n">rel_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;relative_path&quot;</span><span class="p">,</span> <span class="s2">&quot;./&quot;</span><span class="p">)</span>
+            <span class="n">def_file</span> <span class="o">=</span> <span class="n">input_file</span><span class="p">[:</span> <span class="n">input_file</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)]</span> <span class="o">+</span> <span class="s2">&quot;.fmm&quot;</span>
+            <span class="n">target_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;target_file&quot;</span><span class="p">,</span> <span class="n">def_file</span><span class="p">)</span>
+            <span class="n">source_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;source_file&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">file_exists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;file_exists&quot;</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">target_file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>  <span class="c1"># Absolute path</span>
+                <span class="n">rel_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">elif</span> <span class="n">getcwd</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>
+                <span class="c1"># Necessary for running in docker (start directory is then &quot;/&quot;)</span>
+                <span class="n">rel_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">rel_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">source_file</span> <span class="o">==</span> <span class="n">rel_path</span> <span class="o">+</span> <span class="n">target_file</span><span class="p">:</span>
+                <span class="n">file_exists</span> <span class="o">=</span> <span class="s2">&quot;USE_IT&quot;</span>  <span class="c1"># We are amending an existing model</span>
+            <span class="c1"># Assign the resulting target_file to the [self.model_file] variable</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_file</span> <span class="o">=</span> <span class="n">_check_target</span><span class="p">(</span><span class="n">rel_path</span><span class="p">,</span> <span class="n">target_file</span><span class="p">,</span> <span class="n">file_exists</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rel_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;./&quot;</span><span class="p">):</span>
+                <span class="n">makedirs</span><span class="p">(</span><span class="n">rel_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">source_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">source_file</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">file_exists</span> <span class="o">!=</span> <span class="s2">&quot;USE IT&quot;</span>
+            <span class="p">):</span>
+                <span class="n">copy2</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_file</span><span class="p">)</span>
+
+        <span class="c1"># Instanciate a new Fedem model object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_file</span><span class="p">,</span> <span class="n">file_exists</span> <span class="o">==</span> <span class="s2">&quot;OVERWRITE!&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Establish keyword-to-method mapping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_generators</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># Make standard FEDEM attributes</span>
+            <span class="s2">&quot;fe_parts&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_fe_part</span><span class="p">,</span>
+            <span class="s2">&quot;triads&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_triad</span><span class="p">,</span>
+            <span class="s2">&quot;triads_from_fe_parts&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_triad</span><span class="p">,</span>
+            <span class="s2">&quot;beam_materials&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_beam_material</span><span class="p">,</span>
+            <span class="s2">&quot;beam_sections&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_beam_section</span><span class="p">,</span>
+            <span class="s2">&quot;beams&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_beam</span><span class="p">,</span>
+            <span class="s2">&quot;joints&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_joint</span><span class="p">,</span>
+            <span class="s2">&quot;loads&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_load</span><span class="p">,</span>
+            <span class="s2">&quot;virtual_sensors&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_sensor</span><span class="p">,</span>
+            <span class="s2">&quot;functions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_function</span><span class="p">,</span>
+            <span class="s2">&quot;spring_dampers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_spring_damper</span><span class="p">,</span>
+            <span class="c1"># Edit standard FEDEM attributes</span>
+            <span class="s2">&quot;edit_fe_parts&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_part</span><span class="p">,</span>
+            <span class="s2">&quot;edit_triads&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_triad</span><span class="p">,</span>
+            <span class="s2">&quot;edit_joints&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_joint</span><span class="p">,</span>
+            <span class="c1"># Edit solver setup</span>
+            <span class="s2">&quot;edit_settings&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_settings</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="ModelYAML.build">
+<a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML.build">[docs]</a>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dump_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads and parses all model attributes into the model instance.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dump_file : str, default=None</span>
+<span class="sd">            Absolute path to dump the model data dictionary to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dump_file</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dump_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">d_file</span><span class="p">:</span>
+                <span class="n">dump</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">items</span><span class="p">())),</span> <span class="n">d_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">model_edit</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_input</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Comment line:&quot;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_generators</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Ignoring unknown keyword:&quot;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;edit_&quot;</span><span class="p">):</span>
+                <span class="c1"># All editing commands will be processed at the end</span>
+                <span class="n">model_edit</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">********** Processing </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> **************&quot;</span><span class="p">)</span>
+                <span class="n">_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_generators</span><span class="p">[</span><span class="n">method</span><span class="p">],</span> <span class="n">properties</span><span class="p">)</span>
+
+        <span class="c1"># Now process the edit-commands</span>
+        <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span> <span class="ow">in</span> <span class="n">model_edit</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">********** Processing </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> **************&quot;</span><span class="p">)</span>
+            <span class="n">_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_generators</span><span class="p">[</span><span class="n">method</span><span class="p">],</span> <span class="n">properties</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ModelYAML.save">
+<a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML.save">[docs]</a>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_as</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the model with the defined file name,</span>
+<span class="sd">        or save it as a new file if `save_as` is set.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        save_as : bool, default=False</span>
+<span class="sd">            If True, the model is stored with a new file name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   * Enter new model name : &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">save_as</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">new_name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Failure saving the Fedem model.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ModelYAML.solve">
+<a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML.solve">[docs]</a>
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executes the dynamics solver on the created model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Failure solving the Fedem model.&quot;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_include</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yaml_files</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the inclusion of other yaml-files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">yaml_files</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>  <span class="c1"># No included files</span>
+
+        <span class="c1"># Check argument type, only string or a list if strings are accepted</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yaml_files</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">yaml_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">yaml_files</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yaml_files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Invalid specification of include files&quot;</span><span class="p">)</span>
+
+        <span class="n">model_input</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">included_file</span> <span class="ow">in</span> <span class="n">yaml_files</span><span class="p">:</span>
+            <span class="c1"># Parse the included file</span>
+            <span class="n">yaml_name</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">included_file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   *&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">level</span><span class="p">),</span> <span class="s2">&quot;Parsing included file&quot;</span><span class="p">,</span> <span class="n">yaml_name</span><span class="p">)</span>
+            <span class="n">submod</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">yaml_name</span><span class="p">),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">FullLoader</span><span class="p">)</span>
+            <span class="c1"># Recursively check for sub-models</span>
+            <span class="n">submod</span> <span class="o">=</span> <span class="n">_merge</span><span class="p">(</span><span class="n">submod</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include</span><span class="p">(</span><span class="n">submod</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;include&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="c1"># Merge the sub-models.</span>
+            <span class="c1"># Notice that any existing values in model_input will not be overwritten.</span>
+            <span class="n">model_input</span> <span class="o">=</span> <span class="n">_merge</span><span class="p">(</span><span class="n">model_input</span><span class="p">,</span> <span class="n">submod</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">model_input</span>
+
+    <span class="k">def</span> <span class="nf">_get_triad_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the base id of Triad(s) with matching tag.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">triads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">get_all</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">triads</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">triads</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** No triad matches the tag(s)&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_get_joint_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the base id of Joint(s) with matching tag.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">joints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">JOINT</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">get_all</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">joints</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">joints</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">joints</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** No joint matches the tag(s)&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_get_part_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the base id of FE part(s) with matching tag.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">get_all</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">parts</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** No FE part matches the tag(s)&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a triad to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="s2">&quot;rot&quot;</span><span class="p">,</span> <span class="s2">&quot;node&quot;</span><span class="p">,</span> <span class="s2">&quot;on_part&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">vargs</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">vargs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">on_part</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_part_id</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;on_part&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;on_part&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="s2">&quot;pos&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">rot</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rot&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">on_part</span><span class="o">=</span><span class="n">on_part</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;node&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">],</span> <span class="n">on_part</span><span class="o">=</span><span class="n">on_part</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Neither position data nor node index is given.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a triad to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;node&quot;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">part_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_part_id</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">on_part</span><span class="o">=</span><span class="n">part_id</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__make_triad</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__make_triad</span><span class="p">(</span><span class="o">**</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Triad </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span>
+
+    <span class="k">def</span> <span class="nf">_make_beam_material</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a beam material object to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rho&quot;</span><span class="p">,</span> <span class="mi">7850</span><span class="p">),</span>
+                <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="mf">2.1e11</span><span class="p">),</span>
+                <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="mf">0.295</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Material </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> has wrong syntax.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_beam_material</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Material </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span>
+
+    <span class="k">def</span> <span class="nf">_make_beam_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a beam cross section object to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">material_key</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">material_key</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;material&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parameters&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Beam section </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> has wrong syntax.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">material_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">MAT_PROP</span><span class="p">,</span> <span class="n">material_key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_id</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** No beam material </span><span class="si">{</span><span class="n">material_key</span><span class="si">}</span><span class="s2"> in the model.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_beam_section</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">material_id</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Beam section </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span>
+
+    <span class="k">def</span> <span class="nf">_make_beam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append a beam element to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">triads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_triad_id</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">beam_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">BEAM_PROP</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">beam_section</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** No beam section </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> in the model.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Beam </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> has wrong syntax&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_beam</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="n">beam_section</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Beam(s) </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_make_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a joint to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">edit_data</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FmType</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_triad_id</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_joint</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Joint </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">edit_data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_joint</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">edit_data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span>
+
+    <span class="k">def</span> <span class="nf">_make_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a sensor object to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Object </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FmVar</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FmDof</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_sensor</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Sensor </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">user_id</span>
+
+    <span class="k">def</span> <span class="nf">_make_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a load to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FmLoadType</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_triad_id</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_load</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Load </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span>
+
+    <span class="k">def</span> <span class="nf">__make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends an FE part to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;Tx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ty&quot;</span><span class="p">,</span> <span class="s2">&quot;Tz&quot;</span><span class="p">,</span> <span class="s2">&quot;Rx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span><span class="p">,</span> <span class="s2">&quot;Rz&quot;</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">vargs</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">vargs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">library_path</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;library_path&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">)</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">library_path</span> <span class="o">/</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;file_name&quot;</span><span class="p">)</span>
+        <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_fe_part</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** FE Part </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with name </span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">base_id</span>
+
+        <span class="n">triads</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;triads&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_key</span><span class="p">,</span> <span class="n">_kwargs</span> <span class="ow">in</span> <span class="n">triads</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_make_triad</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_key</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">,</span> <span class="n">on_part</span><span class="o">=</span><span class="n">base_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">edit_part</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id</span>
+
+    <span class="k">def</span> <span class="nf">_make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends an FE part to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__make_fe_part</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__make_fe_part</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** FE part </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> has wrong syntax.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_make_spring_damper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends an axial spring/damper object to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">triads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Too few triads (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span><span class="si">}</span><span class="s2">) for spring/damper </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">triads</span> <span class="o">=</span> <span class="p">(</span><span class="n">triads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">triads</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">bid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="n">init_Stiff_Coeff</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bid</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Spring </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> could not be created.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bid</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_damper</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="n">init_Damp_Coeff</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">bid</span>
+
+    <span class="k">def</span> <span class="nf">_make_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends a function object to the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_edit_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modifies the position or properties of a triad.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_triad_id</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="o">**</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed to edit Triad </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_edit_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modifies the position or properties of a joint.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;constraints&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;constraints&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="s2">&quot;spring&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;spring&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;constraints&quot;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">SPRING_DYN</span>
+        <span class="k">if</span> <span class="s2">&quot;damper&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;damper&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;constraints&quot;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">SPRING_DYN</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">edit_joint</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">edit_joint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_joint_id</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="o">**</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed to edit Joint </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_edit_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modifies the position or properties of an FE part.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">edit_part</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_part_id</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="o">**</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed to edit Part </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_edit_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setting solver parameters like t_start, t_inc, t_end, t_quasi, e_inc, n_modes.</span>
+<span class="sd">        Usage in yaml file, e.g.:</span>
+<span class="sd">        edit_settings:</span>
+<span class="sd">            solver: { t_start: 0., t_inc: 0.05, t_end: 20., t_quasi: -20., e_inc: 0., n_modes: 0 }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;solver&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">solver_setup</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ** Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2"> is not implemented yet (ignored).&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../yaml_parser.html#yaml_parser.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">dump_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solve</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main driver.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_file : str</span>
+<span class="sd">        Absolute path to the YAML-formated input file</span>
+<span class="sd">    dump_file : str, default=None</span>
+<span class="sd">        Absolute path to json-file for dumping the model data dictionary</span>
+<span class="sd">    solve : bool, default=False</span>
+<span class="sd">        If True, the dynamics solver is launched on the created model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ModelYAML</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">dump_file</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">solve</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;PythonAPI YAML parser&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--input-file&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;YAML input file&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;--dump-file&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;JSON output file for model dump&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--solve&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Solves the model&quot;</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

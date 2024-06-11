@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yaml_parser module &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f474186"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dts_operators module" href="dts_operators.html" />
+    <link rel="prev" title="write_fmx module" href="write_fmx.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fedempy modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="divergence.html">divergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">enums module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporter.html">exporter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm.html">fmm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm_solver.html">fmm_solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inverse.html">inverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeler.html">modeler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reducer.html">reducer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver.html">solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write_fmx.html">write_fmx module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">yaml_parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yaml_parser.ModelYAML"><code class="docutils literal notranslate"><span class="pre">ModelYAML</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yaml_parser.ModelYAML.build"><code class="docutils literal notranslate"><span class="pre">ModelYAML.build()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yaml_parser.ModelYAML.save"><code class="docutils literal notranslate"><span class="pre">ModelYAML.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yaml_parser.ModelYAML.solve"><code class="docutils literal notranslate"><span class="pre">ModelYAML.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#yaml_parser.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">fedempy modules</a></li>
+      <li class="breadcrumb-item active">yaml_parser module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/yaml_parser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-yaml_parser">
+<span id="yaml-parser-module"></span><h1>yaml_parser module<a class="headerlink" href="#module-yaml_parser" title="Link to this heading"></a></h1>
+<p>This module provides functionality for creating a Fedem model based on a
+YAML-formatted input file. The following keywords are recognized when parsing
+the input file:</p>
+<div class="line-block">
+<div class="line"><em>target_file</em> - specifies the name of the fmm-file to be created</div>
+<div class="line"><em>source_file</em> - specifies an fmm-file to be used as template for the model.</div>
+<div class="line"><em>file_exists</em> - specified what to do if the <cite>target_file</cite> already exists:</div>
+<div class="line-block">
+<div class="line">USE_IT - opens this file for editing existing model</div>
+<div class="line">OVERWRITE! - ignores and overwrites any existing file</div>
+<div class="line">STOP! - aborts the execution</div>
+<div class="line">index - creates a new non-existing file name</div>
+</div>
+<div class="line"><em>fe_parts</em> - imports specified FE data files as a Parts</div>
+<div class="line"><em>triads</em> - creates triads at specified global points</div>
+<div class="line"><em>triads_from_fe_parts</em> - creates triads at nodal points on specified FE Parts</div>
+<div class="line"><em>beam_materials</em> - creates Beam material objects</div>
+<div class="line"><em>beam_sections</em> - creates Beam cross section objects</div>
+<div class="line"><em>beams</em> - creates Beam element objects</div>
+<div class="line"><em>joints</em> - creates Joint objects</div>
+<div class="line"><em>loads</em> - create Load objects</div>
+<div class="line"><em>virtual_sensors</em> - creates Sensor objects for extraction of response data</div>
+<div class="line"><em>functions</em> - creates Function objects (including input functions)</div>
+<div class="line"><em>spring_dampers</em> - creates Axial spring/damper objects</div>
+<div class="line"><em>edit_fe_parts</em> - modifies the properties of FE Part objects</div>
+<div class="line"><em>edit_triads</em> - modifies the properties of Triad objects</div>
+<div class="line"><em>edit_joints</em> - modifies the properties of Joint objects</div>
+<div class="line"><em>edit_settings</em> - modifies the solver settings</div>
+</div>
+<p>Each keyword (except the first three) are followed by an arbitrary number of
+lines, where each line defines one object to be created (or edited).
+The syntax of the input can be either list-based or dictionary based.</p>
+<p>This module can also be launched directly using the syntax</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">fedempy.yaml_parser</span> <span class="pre">-f</span> <span class="pre">mymodel.yaml</span></code></div>
+</div>
+<p>It will then invoke the method <a class="reference internal" href="#yaml_parser.main" title="yaml_parser.main"><code class="xref py py-meth docutils literal notranslate"><span class="pre">yaml_parser.main()</span></code></a>
+on the specified input file (<cite>mymodel.yaml</cite>).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="yaml_parser.ModelYAML">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">yaml_parser.</span></span><span class="sig-name descname"><span class="pre">ModelYAML</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/yaml_parser.html#ModelYAML"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_parser.ModelYAML" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class contains methods for parsing a YAML-formated input file
+and creating a Fedem model from it. It is an extension of the class
+<a class="reference internal" href="modeler.html#modeler.FedemModeler" title="modeler.FedemModeler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modeler.FedemModeler</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Absolute path to the YAML-formated input file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>build:</strong></p></td>
+<td><p>Loads and parses all model attributes into the model instance</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>save:</strong></p></td>
+<td><p>Saves the model to the input file specified FEDEM model file</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>solve:</strong></p></td>
+<td><p>Executes the dynamics solver on the created model.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="yaml_parser.ModelYAML.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dump_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/yaml_parser.html#ModelYAML.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_parser.ModelYAML.build" title="Link to this definition"></a></dt>
+<dd><p>Loads and parses all model attributes into the model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dump_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to dump the model data dictionary to</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="yaml_parser.ModelYAML.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_as</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/yaml_parser.html#ModelYAML.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_parser.ModelYAML.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the model with the defined file name,
+or save it as a new file if <cite>save_as</cite> is set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>save_as</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, the model is stored with a new file name</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="yaml_parser.ModelYAML.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/yaml_parser.html#ModelYAML.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_parser.ModelYAML.solve" title="Link to this definition"></a></dt>
+<dd><p>Executes the dynamics solver on the created model.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_parser.main">
+<span class="sig-prename descclassname"><span class="pre">yaml_parser.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dump_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/yaml_parser.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_parser.main" title="Link to this definition"></a></dt>
+<dd><p>Main driver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Absolute path to the YAML-formated input file</p>
+</dd>
+<dt><strong>dump_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to json-file for dumping the model data dictionary</p>
+</dd>
+<dt><strong>solve</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, the dynamics solver is launched on the created model</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="write_fmx.html" class="btn btn-neutral float-left" title="write_fmx module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dts_operators.html" class="btn btn-neutral float-right" title="dts_operators module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

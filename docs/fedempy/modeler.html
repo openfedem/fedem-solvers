@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modeler module &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f474186"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="reducer module" href="reducer.html" />
+    <link rel="prev" title="inverse module" href="inverse.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fedempy modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="divergence.html">divergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">enums module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporter.html">exporter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm.html">fmm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm_solver.html">fmm_solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inverse.html">inverse module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">modeler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modeler.FedemModeler"><code class="docutils literal notranslate"><span class="pre">FedemModeler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.close"><code class="docutils literal notranslate"><span class="pre">FedemModeler.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.edit_function"><code class="docutils literal notranslate"><span class="pre">FedemModeler.edit_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.edit_joint"><code class="docutils literal notranslate"><span class="pre">FedemModeler.edit_joint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.edit_part"><code class="docutils literal notranslate"><span class="pre">FedemModeler.edit_part()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.edit_triad"><code class="docutils literal notranslate"><span class="pre">FedemModeler.edit_triad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_assembly"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_assembly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_beam"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_beam()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_beam_material"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_beam_material()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_beam_section"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_beam_section()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_damper"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_damper()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_fe_part"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_fe_part()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_function"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_joint"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_joint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_load"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_sensor"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_sensor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_spring"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_spring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_strain_rosette"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_strain_rosette()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_triad"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_triad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_udelm"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_udelm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.open"><code class="docutils literal notranslate"><span class="pre">FedemModeler.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.save"><code class="docutils literal notranslate"><span class="pre">FedemModeler.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.solver_setup"><code class="docutils literal notranslate"><span class="pre">FedemModeler.solver_setup()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reducer.html">reducer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver.html">solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write_fmx.html">write_fmx module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_parser.html">yaml_parser module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">fedempy modules</a></li>
+      <li class="breadcrumb-item active">modeler module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modeler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modeler">
+<span id="modeler-module"></span><h1>modeler module<a class="headerlink" href="#module-modeler" title="Link to this heading"></a></h1>
+<p>Python wrapper for the native fedem modeler.</p>
+<p>This module provides functionality for creating new Fedem models,
+and for modifying existing ones.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modeler.FedemModeler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modeler.</span></span><span class="sig-name descname"><span class="pre">FedemModeler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plugins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FedemModel</span></code></p>
+<p>This subclass of <a class="reference internal" href="fmm.html#fmm.FedemModel" title="fmm.FedemModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">fmm.FedemModel</span></code></a> adds some basic modeling methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to the fedem model file to open</p>
+</dd>
+<dt><strong>force_new</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, any existing model will be overwritten on save</p>
+</dd>
+<dt><strong>plugins</strong><span class="classifier">str or list of str, default=None</span></dt><dd><p>Plugin libraries with user-defined elements and functions</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>open:</strong></p></td>
+<td><p>Opens the specified model file</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>save:</strong></p></td>
+<td><p>Saves current model into the specified model file</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>close:</strong></p></td>
+<td><p>Closes the currently open model</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_triad:</strong></p></td>
+<td><p>Creates a triad at specified location or node</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>make_beam:</strong></p></td>
+<td><p>Creates a string of beam elements</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_beam_section:</strong></p></td>
+<td><p>Creates a beam cross section property object</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>make_beam_material:</strong></p></td>
+<td><p>Creates a material property object</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_spring:</strong></p></td>
+<td><p>Creates a spring element</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>make_damper:</strong></p></td>
+<td><p>Creates a damper element</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_joint:</strong></p></td>
+<td><p>Creates a joint object</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>make_load:</strong></p></td>
+<td><p>Creates an external load object</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_function:</strong></p></td>
+<td><p>Creates a general function object</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>make_sensor:</strong></p></td>
+<td><p>Creates a sensor object</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_fe_part:</strong></p></td>
+<td><p>Creates an FE part</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>make_strain_rosette:</strong></p></td>
+<td><p>Creates a strain rosette on an FE part</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_udelm:</strong></p></td>
+<td><p>Creates a string of user-defined elements</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>edit_triad:</strong></p></td>
+<td><p>Modifies an existing triad</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>edit_part:</strong></p></td>
+<td><p>Modifies an existing FE part</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>edit_joint:</strong></p></td>
+<td><p>Modifies an existing joint</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>edit_function:</strong></p></td>
+<td><p>Modifies an existing function</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>solver_setup:</strong></p></td>
+<td><p>Setting dynamics solver parameters</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_singletons</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.close" title="Link to this definition"></a></dt>
+<dd><p>Closes the currently open model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>save</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, the model file is updated with the current model</p>
+</dd>
+<dt><strong>remove_singletons</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, heap-allocated singelton objects are also released</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True on success, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.edit_function">
+<span class="sig-name descname"><span class="pre">edit_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.edit_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.edit_function" title="Link to this definition"></a></dt>
+<dd><p>Modifies an existing function by changing its argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>func_id</strong><span class="classifier">int</span></dt><dd><p>User Id (or base Id, if negative) of the function to modify</p>
+</dd>
+<dt><strong>obj</strong><span class="classifier">int or str or (int, int) or (str, str)</span></dt><dd><p>Base Id or tag of object(s) producing the response quantity to use</p>
+</dd>
+<dt><strong>var</strong><span class="classifier">FmVar, default=None=0</span></dt><dd><p>Response quantity to use as function argument</p>
+</dd>
+<dt><strong>dof</strong><span class="classifier">FmDof, default=None=0</span></dt><dd><p>Which component of <cite>var</cite> to be used if a multi-DOF quantity</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if the input is valid, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.edit_joint">
+<span class="sig-name descname"><span class="pre">edit_joint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.edit_joint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.edit_joint" title="Link to this definition"></a></dt>
+<dd><p>Modifies an existing joint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>obj_id</strong><span class="classifier">int or str or list of int or list of str</span></dt><dd><p>Base Id or tag of the joint(s) to modify</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments containing the new joint attributes to assign.
+Currently, the following keywords are recognized:</p>
+<ul class="simple">
+<li><p>Tx, Ty, Tz : Translation offset in global X, Y, and Z-direction</p></li>
+<li><p>Rx, Ry, Rz : Euler angles (in degrees) for rotating the joint</p></li>
+<li><p>tra_ref : Base Id of object used as translation reference</p></li>
+<li><p>rot_ref : Base Id of object used as rotation reference</p></li>
+<li><p>constraints : Dictionary with keywords for constraing DOFs, i.e.,
+<code class="docutils literal notranslate"><span class="pre">constraints={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;value&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;value&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> can be any of the enum values <a class="reference internal" href="enums.html#enums.FmDofStat" title="enums.FmDofStat"><code class="xref py py-class docutils literal notranslate"><span class="pre">enums.FmDofStat</span></code></a>.
+Only the DOFs that should be changed need to be specified.
+You can also use “All” as key which implies all DOFs in the joint.</p></li>
+<li><p>init_vel : Dictionary with keywords specifying initial velocities,
+i.e., <code class="docutils literal notranslate"><span class="pre">init_vel={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u01&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u06&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;u0i&gt;</span></code> is the initial velocity to be assigned local dof <cite>i</cite>.</p></li>
+<li><p>load : Dictionary with keywords specifying constant DOF loads,
+i.e., <code class="docutils literal notranslate"><span class="pre">load={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;f1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;f6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;fi&gt;</span></code> is the user Id of a general function defining the load
+in local dof <cite>i</cite> if the type is int, otherwise it is taken as the
+constant load to be assigned local dof <cite>i</cite>.</p></li>
+<li><p>motion : Dictionary with keywords specifying prescribed motions,
+i.e., <code class="docutils literal notranslate"><span class="pre">motion={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;ui&gt;</span></code> is the user Id of a general function defining the motion
+in local dof <cite>i</cite> if the type is int, otherwise it is taken as the
+constant motion to be prescribed in local dof <cite>i</cite>.</p></li>
+<li><p>spring : Dictionary with keywords specifying spring stiffnesses,
+i.e., <code class="docutils literal notranslate"><span class="pre">spring={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;k1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;k6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;ki&gt;</span></code> is the constant stiffness to be assigned local dof <cite>i</cite>.</p></li>
+<li><p>damper : Dictionary with keywords specifying damping coefficients,
+i.e., <code class="docutils literal notranslate"><span class="pre">load={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;c1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;c6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;ci&gt;</span></code> is the constant damping to be assigned local dof <cite>i</cite>.</p></li>
+<li><p>length : Dictionary with keywords specifying stress-free lengths,
+i.e., <code class="docutils literal notranslate"><span class="pre">length={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;l1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;l6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> is the user Id of a general function defining the
+stress-free length in local dof <cite>i</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if the input is valid, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.edit_part">
+<span class="sig-name descname"><span class="pre">edit_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.edit_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.edit_part" title="Link to this definition"></a></dt>
+<dd><p>Modifies an existing FE part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>obj_id</strong><span class="classifier">int or str or list of int or list of str</span></dt><dd><p>Base Id or tag of the part(s) to modify</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments containing the new part attributes to assign.
+Currently, the following keywords are recognized:</p>
+<ul class="simple">
+<li><p>Tx, Ty, Tz : Translation offset in global X, Y, and Z-direction</p></li>
+<li><p>Rx, Ry, Rz : Euler angles (in degrees) for rotating the Part</p></li>
+<li><p>tra_ref : Base Id of object used as translation reference</p></li>
+<li><p>rot_ref : Base Id of object used as rotation reference</p></li>
+<li><p>alpha1 : Mass-proportional damping coefficient</p></li>
+<li><p>alpha2 : Stiffness-proportional damping coefficient</p></li>
+<li><p>component_modes : Number of component modes</p></li>
+<li><p>consistent_mass : If True, use consistent mass (lumped is default)</p></li>
+<li><p>recovery : Flag for activating FE part recovery during solve
+(0=off, 1=stress recovery, 2=strain gage recovery, 3=both)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if the input is valid, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.edit_triad">
+<span class="sig-name descname"><span class="pre">edit_triad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.edit_triad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.edit_triad" title="Link to this definition"></a></dt>
+<dd><p>Modifies an existing triad.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>obj_id</strong><span class="classifier">int or str or list of int or list of str</span></dt><dd><p>Base Id or tag of the triad(s) to modify</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments containing the new triad attributes to assign.
+Currently, the following keywords are recognized:</p>
+<ul class="simple">
+<li><p>Tx, Ty, Tz : Translation offset in global X, Y, and Z-direction</p></li>
+<li><p>Rx, Ry, Rz : Euler angles (in degrees) for rotating the Triad</p></li>
+<li><p>tra_ref : Base Id of object used as translation reference</p></li>
+<li><p>rot_ref : Base Id of object used as rotation reference</p></li>
+<li><p>mass : Additional mass (and inertia) on the Triad</p></li>
+<li><p>mass_func : User Id or base Id (if negative) of mass scaling function</p></li>
+<li><p>constraints : Dictionary with keywords for constraing DOFs, i.e.,
+<code class="docutils literal notranslate"><span class="pre">constraints={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;value&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;value&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> can be any of the enum values <a class="reference internal" href="enums.html#enums.FmDofStat" title="enums.FmDofStat"><code class="xref py py-class docutils literal notranslate"><span class="pre">enums.FmDofStat</span></code></a>.
+Only the DOFs that should be changed need to be specified.
+You can also use “All” as key which implies all DOFs in the triad.</p></li>
+<li><p>init_vel : Dictionary with keywords specifying initial velocities,
+i.e., <code class="docutils literal notranslate"><span class="pre">init_vel={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u01&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u06&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;u0i&gt;</span></code> is the initial velocity to be assigned local dof <cite>i</cite>.</p></li>
+<li><p>load : Dictionary with keywords specifying constant DOF loads,
+i.e., <code class="docutils literal notranslate"><span class="pre">load={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;f1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;f6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;fi&gt;</span></code> is the user Id of a general function defining the load
+in local dof <cite>i</cite> if the type is int, otherwise it is taken as the
+constant load to be assigned local dof <cite>i</cite>.</p></li>
+<li><p>motion : Dictionary with keywords specifying prescribed motions,
+i.e., <code class="docutils literal notranslate"><span class="pre">motion={&quot;Tx&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u1&gt;,</span> <span class="pre">...,</span> <span class="pre">&quot;Rz&quot;</span> <span class="pre">:</span> <span class="pre">&lt;u6&gt;}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">&lt;ui&gt;</span></code> is the user Id of a general function defining the motion
+in local dof <cite>i</cite> if the type is int, otherwise it is taken as the
+constant motion to be prescribed in local dof <cite>i</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if the input is valid, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_assembly">
+<span class="sig-name descname"><span class="pre">make_assembly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_assembly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_assembly" title="Link to this definition"></a></dt>
+<dd><p>Creates a sub-assembly and moves the specified objects into it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new sub-assembly</p>
+</dd>
+<dt><strong>objs</strong><span class="classifier">list of int or str or list of str, default=None</span></dt><dd><p>List of base Ids or tags of the objects to put into the new sub-assembly</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of the created sub-assembly</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_beam">
+<span class="sig-name descname"><span class="pre">make_beam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bprop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_beam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_beam" title="Link to this definition"></a></dt>
+<dd><p>Creates a string of beam elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new beam(s)</p>
+</dd>
+<dt><strong>triads</strong><span class="classifier">list of int or list of str</span></dt><dd><p>List of base Ids or tags of the connected triads</p>
+</dd>
+<dt><strong>bprop</strong><span class="classifier">int or str, default=None</span></dt><dd><p>Base Id or tag of beam property to use</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created beam(s) with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list of int</dt><dd><p>Base Ids of the created beams, None if error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_beam_material">
+<span class="sig-name descname"><span class="pre">make_beam_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mprops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_beam_material"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_beam_material" title="Link to this definition"></a></dt>
+<dd><p>Creates a material property object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new material property</p>
+</dd>
+<dt><strong>mprop</strong><span class="classifier">list of float</span></dt><dd><p>List of property data</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created material property with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of material property object, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_beam_section">
+<span class="sig-name descname"><span class="pre">make_beam_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bprops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_beam_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_beam_section" title="Link to this definition"></a></dt>
+<dd><p>Creates a beam cross section property object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new beam property</p>
+</dd>
+<dt><strong>mat</strong><span class="classifier">int or str</span></dt><dd><p>Cross section type flag.
+If zero, a Generic cross section is defined.
+If str or a non-zero int, a Pipe cross section is defined,
+and the value gives the tag or base Id of the material to use.</p>
+</dd>
+<dt><strong>bprop</strong><span class="classifier">list of float</span></dt><dd><p>List of property data</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created beam property with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of beam property object, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_damper">
+<span class="sig-name descname"><span class="pre">make_damper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triads</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_damper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_damper" title="Link to this definition"></a></dt>
+<dd><p>Creates axial damper elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new damper(s)</p>
+</dd>
+<dt><strong>triads</strong><span class="classifier">(str, str) or (int, int) or list of (int, int)</span></dt><dd><p>Tags or base Ids of the connected triads.
+If a list of tuples is specified,
+one damper is created for each tuple.</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments defining the damper properties.
+The following keywords are currently supported:</p>
+<ul class="simple">
+<li><p><cite>tag</cite> : Tag to associate the created damper(s) with</p></li>
+<li><p><cite>def_vel_damper</cite>: If True, use deformational velocity</p></li>
+<li><p><cite>init_Damp_Coeff</cite>: Constant damping coefficient</p></li>
+<li><p><cite>fn</cite>: Base Id of damping coefficient function</p></li>
+<li><p><cite>xy</cite>: List of XY-pairs giving a piece-wise linear damping coefficient</p></li>
+<li><p><cite>extrapol_type</cite>: String, either “NONE” (default), “FLAT” or “LINEAR”</p></li>
+<li><p><cite>damp_characteristics</cite>: String, either “DA_TRA_COEFF” (default)
+or “DA_TRA_FORCE”</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int or list of int</dt><dd><p>Base Id(s) of the created damper(s), None if an error occurs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_fe_part">
+<span class="sig-name descname"><span class="pre">make_fe_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_fe_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_fe_part" title="Link to this definition"></a></dt>
+<dd><p>Creates an FE part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file</strong><span class="classifier">str</span></dt><dd><p>Absolute path to the FE data file</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str, default=None</span></dt><dd><p>Description of the new part, use file basename if not specified</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created part with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of the FE part object, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_function">
+<span class="sig-name descname"><span class="pre">make_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_function" title="Link to this definition"></a></dt>
+<dd><p>Creates a general function of time.</p>
+<p>The type of function to be created is determined
+by which keyword arguments are provided.
+The keyword determining the function type is below marked
+by an asterix (<sup>*</sup>) in each case.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new function</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><blockquote>
+<div><p>Keyword arguments depending on function type.
+The following <strong>function types</strong> and <cite>keywords</cite>
+are currently supported:</p>
+<ol class="arabic simple">
+<li><p><strong>Polyline</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>xy</cite><sup>*</sup>: List of <cite>XY</cite>-pairs giving a
+piece-wise linear curve</div>
+<div class="line"><cite>extrapol_type</cite>: String, either “NONE” (default),
+“FLAT” or “LINEAR”</div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Polyline-from-file</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>filename</cite><sup>*</sup>: Name of file containing <cite>XY</cite>-pairs</div>
+<div class="line"><cite>ch_name</cite>: String identifying the column to use
+for multi-column files</div>
+<div class="line"><cite>sc_factor</cite>: Scaling factor, default=1.0</div>
+<div class="line"><cite>z_adjust</cite>: If True, the <cite>y</cite>-values are shifted
+such that the first value is zero, default=False</div>
+<div class="line"><cite>v_shift</cite>: Additional shift of the <cite>y</cite>-values, default=0.0</div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Sine</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>frequency</cite><sup>*</sup>: Angular frequency</div>
+<div class="line"><cite>amplitude</cite>: Scaling factor, default=1.0</div>
+<div class="line"><cite>delay</cite>: Phase shift, default=0.0</div>
+<div class="line"><cite>mean_value</cite>: Constant shift, default=0.0</div>
+<div class="line"><cite>end</cite>: Default=0.0, if greater than zero, the function
+value is constant for <cite>x</cite> greater than <cite>end</cite></div>
+</div>
+<p>The Sine function therefore evaluates to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">amplitude</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">frequency</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="n">delay</span><span class="p">)</span> <span class="o">+</span> <span class="n">mean_value</span>
+</pre></div>
+</div>
+<p>for <cite>x</cite>-values less than <cite>end</cite>, whereas <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">f(end)</span></code>
+for <cite>x</cite> greater than <cite>end</cite>.</p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p><strong>Constant</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>value</cite><sup>*</sup>: The constant function value, i.e.,
+<code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">value</span></code> for any <cite>x</cite></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p><strong>Linear</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>slope</cite><sup>*</sup>: The scaling factor, i.e., <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">slope*x</span></code></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p><strong>Ramp</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>start_ramp</cite><sup>*</sup>: Start point of sloped function domain</div>
+<div class="line"><cite>start_val</cite>: Function value before <cite>start_ramp</cite>, default=0.0</div>
+<div class="line"><cite>slope</cite>: The scaling factor, default=1.0</div>
+</div>
+<p>The Ramp function therefore evaluates to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">start_val</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">start_ramp</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">for <cite>x</cite>-values greater than <cite>start_ramp</cite>, whereas</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">start_val</span></code> for <cite>x</cite> less than or equal to <cite>start_ramp</cite>.</div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p><strong>Limited Ramp</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>start_ramp</cite>: Start point of sloped function domain, default=0.0</div>
+<div class="line"><cite>end_ramp</cite><sup>*</sup>: End point of sloped function domain</div>
+<div class="line"><cite>start_val</cite>: Function value before <cite>start_ramp</cite>, default=0.0</div>
+<div class="line"><cite>slope</cite>: The scaling factor, default=1.0</div>
+</div>
+<p>The Limited Ramp function therefore evaluates to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">start_val</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">start_ramp</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">for <cite>x</cite>-values in the range [<cite>start_ramp</cite>, <cite>end_ramp</cite>]</div>
+<div class="line">whereas <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">start_val</span></code> for <cite>x</cite> less than <cite>start_ramp</cite>,</div>
+<div class="line">and <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">f(end_ramp)</span></code> for <cite>x</cite> greater than <cite>end_ramp</cite>.</div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p><strong>Math expression</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><cite>expression</cite><sup>*</sup>: String containing the expression to use</div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li><p><strong>External function</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="line-block">
+<div class="line">No keywords</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>In addition, the <cite>tag</cite> keyword is accepted for all function types,
+to associate a specified tag with the created function, and the
+<cite>base_id</cite> keyword is used to indicate if the base Id of the created
+function should be returned, instead of the default user Id.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>User Id or base Id of created function object.
+Will be 0 or negative if an error occurs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_joint">
+<span class="sig-name descname"><span class="pre">make_joint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">joint_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">followed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_joint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_joint" title="Link to this definition"></a></dt>
+<dd><p>Creates a joint object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new joint</p>
+</dd>
+<dt><strong>joint_type</strong><span class="classifier">FmType</span></dt><dd><p>Type of joint</p>
+</dd>
+<dt><strong>follower</strong><span class="classifier">int or str</span></dt><dd><p>Base Id or tag of the dependent joint triad</p>
+</dd>
+<dt><strong>followed</strong><span class="classifier">int or str or list of int, default=None</span></dt><dd><p>Base Id or tag of the independent joint triad(s).
+If None, the joint is connected to ground and the independent
+triad is created at the same location as the dependent triad.
+For point-to-path joints, the first two triads specified
+are taken as the end points of the glider.</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created joint with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of joint object, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_load">
+<span class="sig-name descname"><span class="pre">make_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_load" title="Link to this definition"></a></dt>
+<dd><p>Creates an external load object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new load</p>
+</dd>
+<dt><strong>load_type</strong><span class="classifier">FmLoadType</span></dt><dd><p>Type of load</p>
+</dd>
+<dt><strong>triad</strong><span class="classifier">int or str</span></dt><dd><p>Base Id or tag of triad where the load attacks</p>
+</dd>
+<dt><strong>load_dir</strong><span class="classifier">(float, float, float)</span></dt><dd><p>Load direction vector</p>
+</dd>
+<dt><strong>magnitude</strong><span class="classifier">str, default=None</span></dt><dd><p>Load magnitude expression</p>
+</dd>
+<dt><strong>fn</strong><span class="classifier">int, default=0</span></dt><dd><p>User Id of load magnitude function</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created load with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of load object, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_sensor">
+<span class="sig-name descname"><span class="pre">make_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_sensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_sensor" title="Link to this definition"></a></dt>
+<dd><p>Creates a sensor object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new sensor</p>
+</dd>
+<dt><strong>obj</strong><span class="classifier">int or str or (int, int) or (str, str)</span></dt><dd><p>Base Id or tag of object(s) to measure</p>
+</dd>
+<dt><strong>var</strong><span class="classifier">FmVar</span></dt><dd><p>The variable to measure</p>
+</dd>
+<dt><strong>dof</strong><span class="classifier">FmDof, default=None</span></dt><dd><p>Local DOF to measure if <cite>var</cite> is a multi-DOF quantity</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created sensor with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>User Id of sensor object, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_spring">
+<span class="sig-name descname"><span class="pre">make_spring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triads</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_spring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_spring" title="Link to this definition"></a></dt>
+<dd><p>Creates axial spring elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new spring(s)</p>
+</dd>
+<dt><strong>triads</strong><span class="classifier">(str, str) or (int, int) or list of (int, int)</span></dt><dd><p>Tags or base Ids of the connected triads.
+If a list of tuples is specified,
+one spring is created for each tuple.</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created beam(s) with</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments defining the spring properties.
+The following keywords are currently supported:</p>
+<ul class="simple">
+<li><p><cite>tag</cite> : Tag to associate the created spring(s) with</p></li>
+<li><p><cite>constDefl</cite>: Constant stress free deflection</p></li>
+<li><p><cite>constLength</cite>: Constant stress free length</p></li>
+<li><p><cite>length</cite>: User Id of general function defining stress free length</p></li>
+<li><p><cite>init_Stiff_Coeff</cite>: Constant spring stiffness coefficient</p></li>
+<li><p><cite>fn</cite>: Base Id of spring stiffness function</p></li>
+<li><p><cite>xy</cite>: List of XY-pairs giving a piece-wise linear spring stiffness</p></li>
+<li><p><cite>extrapol_type</cite>: String, either “NONE” (default), “FLAT” or “LINEAR”</p></li>
+<li><p><cite>spring_characteristics</cite>: String, either “SPR_TRA_STIFF” (default)
+or “SPR_TRA_FORCE”</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int or list of int</dt><dd><p>Base Id(s) of the created spring(s), None if an error occurs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_strain_rosette">
+<span class="sig-name descname"><span class="pre">make_strain_rosette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_strain_rosette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_strain_rosette" title="Link to this definition"></a></dt>
+<dd><p>Creates a strain rosette on an FE part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new strain rosette</p>
+</dd>
+<dt><strong>part_id</strong><span class="classifier">int or str</span></dt><dd><p>Base Id or tag of FE part on which the rosette will be created</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments defining the strain rosette properties.
+The following keywords are recognized:</p>
+<ul class="simple">
+<li><p><cite>tag</cite> : Tag to associate the created strain rosette with</p></li>
+<li><p><cite>nodes</cite>: List of nodes to connect the strain rosette to</p></li>
+<li><p><cite>pos</cite>: List of connection point coordinates, on the format
+<cite>[(x1,y1,z1), (x2,y2,z2), (x3,y3,z3), (x4,y4,z4)]</cite>.
+The last tuple is skipped if a 3-noded rosette is desired.</p></li>
+<li><p><cite>direction</cite>: Tuple <cite>(x,y,z)</cite> defining the local <cite>X</cite>-axis
+direction vector of the strain rosette</p></li>
+<li><p><cite>angle</cite> : Angle between strain gage direction and local X-axis</p></li>
+<li><p><cite>start_at_zero</cite> : If True, the start strains are set to zero</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of the strain rosette, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_triad">
+<span class="sig-name descname"><span class="pre">make_triad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_part</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_triad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_triad" title="Link to this definition"></a></dt>
+<dd><p>Creates a new triad at specified location or nodal point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new triad</p>
+</dd>
+<dt><strong>pos</strong><span class="classifier">(float, float, float)</span></dt><dd><p>Global XYZ-coordinates of new triad</p>
+</dd>
+<dt><strong>rot</strong><span class="classifier">(float, float, float), default=None</span></dt><dd><p>Global Euler angles giving the orientation of new triad</p>
+</dd>
+<dt><strong>node</strong><span class="classifier">int, default=0</span></dt><dd><p>FE node number to associate the triad with.
+Used only if <cite>on_part</cite> is specified.</p>
+</dd>
+<dt><strong>on_part</strong><span class="classifier">int or str, default=0</span></dt><dd><p>Base Id or tag of the part that this triad should be attached to.
+You can also specify the Reference plane here,
+to create a new triad that is attached to ground.</p>
+</dd>
+<dt><strong>tag</strong><span class="classifier">str, default=None</span></dt><dd><p>Tag to associate the created triad with</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of new triad, zero or negative on error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_udelm">
+<span class="sig-name descname"><span class="pre">make_udelm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triads</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_udelm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_udelm" title="Link to this definition"></a></dt>
+<dd><p>Creates a string of 2-noded user-defined elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new element(s)</p>
+</dd>
+<dt><strong>triads</strong><span class="classifier">list of int or list of str</span></dt><dd><p>List of base Ids or tags of the connected triads</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments defining some element properties.
+Currently, the following keywords are recognized:</p>
+<ul class="simple">
+<li><p><cite>alpha1</cite> : Mass-proportional damping coefficient</p></li>
+<li><p><cite>alpha2</cite> : Stiffness-proportional damping coefficient</p></li>
+<li><p><cite>tag</cite> : Tag to associate the created element with</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list of int</dt><dd><p>Base Ids of the created elements, None if error</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.open" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified model file and prints out some key model parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str</span></dt><dd><p>Absolute path of the Fedem model file to open</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True on success, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.save" title="Link to this definition"></a></dt>
+<dd><p>Saves current model into the specified model file.</p>
+<p>If no model_file is given, that last opened model file is overwritten.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path of the Fedem model file to save to</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True on success, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.solver_setup">
+<span class="sig-name descname"><span class="pre">solver_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.solver_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.solver_setup" title="Link to this definition"></a></dt>
+<dd><p>Setting up solver parameters, t_quasi, t_inc and t_end.
+Switching off initial equilibrium by setting t_quasi negative.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments containing the solver settings to assign.
+Currently, the following keywords are recognized:</p>
+<ul class="simple">
+<li><p>t_start : Start time</p></li>
+<li><p>t_end : Stop time</p></li>
+<li><p>t_inc : Time step size</p></li>
+<li><dl class="simple">
+<dt>t_quasi<span class="classifier">Stop time for quasi-static simulation.</span></dt><dd><p>If equal to t_start, perform initial equilibrium analysis
+before starting the dynamics time integration.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>n_modes<span class="classifier">If non-zero, perform eigenvalue analysis during the simulation,</span></dt><dd><p>and calculate this number of modes each time</p>
+</dd>
+</dl>
+</li>
+<li><p>e_inc: Time between each eigenvalue analysis</p></li>
+<li><p>add_opt: Additional solver options</p></li>
+<li><p>tol_ene: Convergence tolerance in energy norm</p></li>
+<li><p>tol_dis: Convergence tolerance in displacement norm</p></li>
+<li><p>tol_vel: Convergence tolerance in velocity norm</p></li>
+<li><p>tol_res: Convergence tolerance in force residual norm</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="inverse.html" class="btn btn-neutral float-left" title="inverse module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reducer.html" class="btn btn-neutral float-right" title="reducer module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inverse &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">inverse</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for inverse</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Python implementation of inverse solution methods with Fedem.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">c_</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">transpose</span><span class="p">,</span> <span class="n">vstack</span><span class="p">,</span> <span class="n">zeros</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span><span class="p">,</span> <span class="n">lstsq</span><span class="p">,</span> <span class="n">solve</span>
+
+<span class="kn">from</span> <span class="nn">fedempy.enums</span> <span class="kn">import</span> <span class="n">FmType</span>
+<span class="kn">from</span> <span class="nn">fedempy.log_conf</span> <span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+
+    <span class="n">have_sci_py</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">have_sci_py</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># log file at the execution place</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;fedemRun.log&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="InverseException">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseException">[docs]</a>
+<span class="k">class</span> <span class="nc">InverseException</span><span class="p">(</span><span class="n">FedemException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General exception type for inverse solver exceptions.</span>
+<span class="sd">    Used to generalize error messages from the FedemSolver methods.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    method_name : str</span>
+<span class="sd">        Name of the method that detected an error</span>
+<span class="sd">    ierr : int, default=None</span>
+<span class="sd">        Error flag value that is embedded into the error message</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">,</span> <span class="n">ierr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor. Forwards to the parent class constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;FedemSolver.&quot;</span> <span class="o">+</span> <span class="n">method_name</span> <span class="o">+</span> <span class="s2">&quot;() failure&quot;</span>
+        <span class="k">if</span> <span class="n">ierr</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ierr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+                <span class="n">error_message</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">ierr</span><span class="si">}</span><span class="s2">). Check fedem_solver.res for details.&quot;</span>
+            <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InverseSolver">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseSolver">[docs]</a>
+<span class="k">class</span> <span class="nc">InverseSolver</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class handles the inverse solution through proper methods.</span>
+<span class="sd">    It accesses the Fedem model through the provided FedemSolver instance.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    solver : FedemSolver</span>
+<span class="sd">        The Fedem dynamics solver instance</span>
+<span class="sd">    config : dictionary</span>
+<span class="sd">        Inverse solver configuration</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run_inverse_dyn:</span>
+<span class="sd">        Performs the inverse solution (dynamic case)</span>
+<span class="sd">    run_inverse_fedem:</span>
+<span class="sd">        Performs the inverse static solution using the internal inverse solver</span>
+<span class="sd">    run_inverse:</span>
+<span class="sd">        Performs the inverse solution (static case)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor. Initializes the object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># create dicts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;internal_equations&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;initialisation list started&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_equations</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;initialisation list finished</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span>
+
+        <span class="c1"># Memory for dynamic inverse solution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_vec</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># displacement vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ud_vec</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># velocity vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">udd_vec</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># acceleration vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fa_vec</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># force vector for the HHT implementation</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">internal_force_mat</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initial force matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># loop number over simulation</span>
+
+    <span class="k">def</span> <span class="nf">_init_equations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find internal equation number related to triad_id and dof</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__get_equations</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the equation numbers associated with given object(s).</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_equations</span><span class="p">(</span><span class="n">obj_id</span><span class="p">)</span>
+            <span class="n">meqn</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">base_ids</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">obj_id</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">bid</span> <span class="ow">in</span> <span class="n">base_ids</span><span class="p">:</span>
+                <span class="n">meqn</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">get_equations</span><span class="p">(</span><span class="n">bid</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">meqn</span>
+
+        <span class="n">dof_set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tx&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ty&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;tz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+        <span class="n">dof_set_rev</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;tz&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+        <span class="c1"># allowed set of equations</span>
+        <span class="n">eq_list</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;unknown_fm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;unknown_f&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_x&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_intF&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_secF&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_relD&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_eps&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_sprD&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_sprF&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_Fx&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># if &#39;baseID&#39; in dict, change it to &#39;triadID&#39;</span>
+        <span class="c1"># ignore key unknown_fm</span>
+        <span class="n">ignore_key</span> <span class="o">=</span> <span class="p">[</span><span class="n">eq_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">eq_items</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ignore_key</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">eq_items</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s2">&quot;baseID&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">item</span><span class="p">[</span><span class="s2">&quot;triadID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;baseID&quot;</span><span class="p">)</span>
+
+        <span class="c1"># defined set of equations (collects the keys in the list)</span>
+        <span class="c1"># and use the same order  as mentioned in the yaml file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eq_list_def</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">]</span>
+
+        <span class="c1"># declare empty lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">int_force_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sec_force_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rel_dist_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strain_tensor_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defl_spring_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frc_spring_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Manage eigenvalue calculation, only once or every time step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_initial_eigen_vec</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Select which eigensolver to use.</span>
+        <span class="c1"># The default (0) is to use Fedem&#39;s internal Lanczos solver.</span>
+        <span class="c1"># Notice that the other options involve expanding the system matrices</span>
+        <span class="c1"># into full dense matrices, which will require higher memory usage and</span>
+        <span class="c1"># longer computation time. Therefore, use for smaller systems only.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 1: DSYGVX, 2: DGGEVX, 3: scipy.linalg.eigh</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">eq_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="s2">&quot;initial&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">use_initial_eigen_vec</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="s2">&quot;initial&quot;</span><span class="p">]</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Eigenmodes/eigenvectors are calculated only once&quot;</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="s2">&quot;update&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="s2">&quot;update&quot;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using modes: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mode numbers: &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s2">&quot;solver&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="s2">&quot;LANCZOS&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;DSYGVX&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;DGGEVX&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;SCIPY_EIGH&quot;</span><span class="p">,</span>
+                        <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="s2">&quot;solver&quot;</span><span class="p">])</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using eigensolver: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span><span class="n">eq_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">9</span><span class="p">]):</span>
+                    <span class="c1"># branch for &quot;unknown_f&quot;, &quot;known_x&quot;, &quot;known_Fx&quot;</span>
+                    <span class="n">item_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">item_len</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="s2">&quot;triadID&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                            <span class="n">con_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;triadID&quot;</span><span class="p">]</span>
+                            <span class="n">con_dof_set</span> <span class="o">=</span> <span class="n">dof_set</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">con_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;revJID&quot;</span><span class="p">]</span>
+                            <span class="n">con_dof_set</span> <span class="o">=</span> <span class="n">dof_set_rev</span>
+
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;dof&quot;</span><span class="p">])</span>
+                            <span class="n">v_list</span> <span class="o">=</span> <span class="p">[]</span>
+                            <span class="k">while</span> <span class="n">val</span><span class="p">:</span>
+                                <span class="n">digit</span> <span class="o">=</span> <span class="n">val</span> <span class="o">%</span> <span class="mi">10</span>
+                                <span class="n">v_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                                <span class="c1"># remove last digit from number (as integer)</span>
+                                <span class="n">val</span> <span class="o">//=</span> <span class="mi">10</span>
+                            <span class="n">eq_num</span> <span class="o">=</span> <span class="n">__get_equations</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">con_id</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">v_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v_list</span><span class="p">):</span>
+                                <span class="n">v_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">eq_num</span><span class="p">[</span><span class="n">v_item</span><span class="p">]</span>
+
+                            <span class="c1"># append dict in reverse order</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;eqNum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_list</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">value_error</span><span class="p">:</span>
+                            <span class="n">dof</span> <span class="o">=</span> <span class="n">con_dof_set</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;dof&quot;</span><span class="p">]]</span>
+                            <span class="n">eq_num</span> <span class="o">=</span> <span class="n">__get_equations</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">con_id</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">eq_num</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                                    <span class="s2">&quot;Check if triadID is correct, &quot;</span>
+                                    <span class="o">+</span> <span class="s2">&quot;dof is not found or may be fixed&quot;</span>
+                                <span class="p">)</span> <span class="kn">from</span> <span class="nn">value_error</span>
+                            <span class="k">if</span> <span class="n">eq_num</span><span class="p">[</span><span class="n">dof</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                                    <span class="s2">&quot;Check if triadID is correct, &quot;</span>
+                                    <span class="o">+</span> <span class="s2">&quot;dof is likely dependent&quot;</span>
+                                <span class="p">)</span> <span class="kn">from</span> <span class="nn">value_error</span>
+
+                            <span class="n">eq_num</span> <span class="o">=</span> <span class="n">eq_num</span><span class="p">[</span><span class="n">dof</span><span class="p">]</span>
+
+                            <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;eqNum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eq_num</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">int_force_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sec_force_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># known_relD - relative distance</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">rel_dist_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span>  <span class="c1"># known_eps - plain strain tensor</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">strain_tensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span>  <span class="c1"># known_sprD - spring deflection</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">defl_spring_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span>  <span class="c1"># known_sprF - spring force</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">frc_spring_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_inverse_get_boundary_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">one_based</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts boundary conditions related to measurements and forces.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__get_equation_numbers</span><span class="p">(</span><span class="n">equation_set</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Extracts equation numbers from given dictionary.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">eq_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">ieq</span> <span class="ow">in</span> <span class="n">equation_set</span><span class="p">:</span>
+                <span class="n">eq_num</span> <span class="o">=</span> <span class="n">ieq</span><span class="p">[</span><span class="s2">&quot;eqNum&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eq_num</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">eq_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">eq_num</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">eq_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eq_num</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">one_based</span><span class="p">:</span>  <span class="c1"># fortran to python convention</span>
+                <span class="n">eq_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">eq_list</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">eq_list</span>
+
+        <span class="n">x_def</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">g_def</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;known_x&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;known_Fx&quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">x_def</span> <span class="o">=</span> <span class="n">__get_equation_numbers</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;--&gt; content of x_def: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x_def</span><span class="p">)</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unknown_f&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">g_def</span> <span class="o">=</span> <span class="n">__get_equation_numbers</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;--&gt; content of g_def: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">g_def</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span>
+
+<div class="viewcode-block" id="InverseSolver.convert_rev_joint_force">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.convert_rev_joint_force">[docs]</a>
+    <span class="k">def</span> <span class="nf">convert_rev_joint_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modify the data set for spring force input for revolute joints</span>
+<span class="sd">        with defined spring forces</span>
+<span class="sd">        Conversation from force to lenght x=F/k (const. stiffness assumption)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of float</span>
+<span class="sd">            Input function/data values</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of int</span>
+<span class="sd">            revolute joint ID&#39;s and their modified input data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dof_set_rev</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;tz&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+        <span class="n">rev_joints</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;known_Fx&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+                <span class="n">jid</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;revJID&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">dof</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dof&quot;</span><span class="p">,</span> <span class="s2">&quot;rz&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">jid</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dof</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;rz&quot;</span><span class="p">,</span> <span class="s2">&quot;tz&quot;</span><span class="p">):</span>
+                    <span class="n">dof</span> <span class="o">=</span> <span class="n">dof_set_rev</span><span class="p">[</span><span class="n">dof</span><span class="p">]</span>
+                    <span class="n">rev_joints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jid</span><span class="p">)</span>
+                    <span class="n">stiff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_joint_spring_stiffness</span><span class="p">(</span><span class="n">jid</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">dof</span><span class="p">]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spring stiffness: &quot;</span><span class="p">,</span> <span class="n">stiff</span><span class="p">)</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/=</span> <span class="n">stiff</span>
+
+        <span class="k">return</span> <span class="n">rev_joints</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_inverse_build_mat_from_ndef</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">mat_def</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Building position matrices for active dofs (sensor/force)</span>
+<span class="sd">        Indicating related dof by 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">k_mat</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">mat_def</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mat_def</span><span class="p">):</span>
+            <span class="n">mat</span><span class="p">[</span><span class="n">val</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">mat</span>
+
+    <span class="k">def</span> <span class="nf">_init_mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Memory initialisation for dynamic inverse solution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="p">),</span> <span class="nb">float</span><span class="p">)</span>  <span class="c1"># displacement vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ud_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="p">),</span> <span class="nb">float</span><span class="p">)</span>  <span class="c1"># velocity vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">udd_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="p">),</span> <span class="nb">float</span><span class="p">)</span>  <span class="c1"># acceleration vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fa_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="p">),</span> <span class="nb">float</span><span class="p">)</span>  <span class="c1"># RHS force vector</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_newmark_coefficients</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameter calculation for Newmark and HHT algorithm</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">h</span><span class="p">))</span>
+
+        <span class="n">a0</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">))</span> <span class="o">-</span> <span class="mf">1.0</span>
+        <span class="n">a4</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span>
+        <span class="n">a5</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">beta</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">,</span> <span class="n">a4</span><span class="p">,</span> <span class="n">a5</span>
+
+<div class="viewcode-block" id="InverseSolver.run_inverse_dyn">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.run_inverse_dyn">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_inverse_dyn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse solution driver (dynamic case).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inp_data : list of float</span>
+<span class="sd">            Input function values</span>
+<span class="sd">        out_def : list of int</span>
+<span class="sd">            User Ids of the functions to evaluate the response for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Evaluated response variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_mem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">())</span>
+
+        <span class="n">t_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+
+        <span class="c1"># run start step</span>
+        <span class="n">do_continue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">start_step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Simulation failure</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;start_step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">do_continue</span><span class="p">:</span>  <span class="c1"># Reached the end of simulation</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">t1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+
+        <span class="n">q_vec</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_external_force_vector</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_external_force_vector&quot;</span><span class="p">)</span>
+
+        <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_get_boundary_conditions</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_def and g_def: &quot;</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
+
+        <span class="c1"># simulation parameters</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>  <span class="c1"># default Newmark alpha value</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t_0</span>
+        <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">,</span> <span class="n">a4</span><span class="p">,</span> <span class="n">a5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_newmark_coefficients</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+        <span class="n">k_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_stiffness_matrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">m_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_mass_matrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">c_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_damping_matrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_newton_matrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">z_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_build_mat_from_ndef</span><span class="p">(</span><span class="n">n_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">)</span>
+
+        <span class="c1"># assign measurement data/sensor data</span>
+        <span class="n">measurements</span> <span class="o">=</span> <span class="n">inp_data</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># define storage indices</span>
+            <span class="n">i0</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+            <span class="n">i1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+
+            <span class="c1"># displacements v0, velocities v1 and accelerations v2</span>
+            <span class="c1"># are currently calulated &#39;online&#39;</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">a1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">a4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ud_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">a5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">udd_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">a0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">a2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ud_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+                <span class="o">+</span> <span class="n">a3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">udd_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="n">cv</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">c_mat</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+            <span class="n">ma</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">m_mat</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+
+            <span class="n">fac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fa_vec</span><span class="p">[:,</span> <span class="n">i0</span><span class="p">]</span>
+
+            <span class="c1"># equation: kh*u = F + cv + ma (where kh = n_mat)</span>
+            <span class="c1"># 1) calculate the dynamic part from the former solution step</span>
+            <span class="c1"># 2) measurements (sensor values) are split into an external force part</span>
+            <span class="c1">#    (generalized forces) and dynamic part (cv and ma are calculated</span>
+            <span class="c1">#    from the step before)</span>
+            <span class="c1"># 3) reduce the measurements by the dynamic part</span>
+            <span class="c1"># 4) calculate the external force vector (generalized forces) by</span>
+            <span class="c1">#    calling _inverse_core()</span>
+            <span class="c1"># 5) generalized forces are scaled by parameter h (fedem alignment)</span>
+            <span class="n">csc</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">cv</span><span class="p">)</span> <span class="o">+</span> <span class="n">ma</span> <span class="o">-</span> <span class="n">h</span> <span class="o">*</span> <span class="n">fac</span>
+            <span class="n">uc</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n_mat</span><span class="p">,</span> <span class="n">csc</span><span class="p">)</span>
+            <span class="n">uc0</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">transpose</span><span class="p">(</span><span class="n">z_mat</span><span class="p">),</span> <span class="n">uc</span><span class="p">)</span>
+
+            <span class="c1"># call inverse_core method,</span>
+            <span class="c1"># dynamic part is subtracted from the measurements</span>
+            <span class="n">fsc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_core</span><span class="p">(</span><span class="n">n_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">measurements</span> <span class="o">-</span> <span class="n">uc0</span><span class="p">,</span> <span class="n">q_vec</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># force (for fedem input)</span>
+            <span class="n">f_pos</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="n">fsc</span>
+
+            <span class="c1"># force for displacement, velocity and acceleration calculation</span>
+            <span class="n">f_dyn</span> <span class="o">=</span> <span class="n">fsc</span> <span class="o">+</span> <span class="n">csc</span>
+
+            <span class="c1"># new displacements</span>
+            <span class="n">u_n</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n_mat</span><span class="p">,</span> <span class="n">f_dyn</span><span class="p">)</span>
+
+            <span class="c1"># update accelerations (u_ddn) and velocities (u_dn)</span>
+            <span class="n">u_ddn</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">u_n</span> <span class="o">-</span> <span class="n">v2</span>
+            <span class="n">u_dn</span> <span class="o">=</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">u_n</span> <span class="o">-</span> <span class="n">v1</span>
+
+            <span class="n">fan</span> <span class="o">=</span> <span class="n">f_pos</span> <span class="o">-</span> <span class="n">dot</span><span class="p">(</span><span class="n">c_mat</span><span class="p">,</span> <span class="n">u_dn</span><span class="p">)</span> <span class="o">-</span> <span class="n">dot</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">u_n</span><span class="p">)</span>
+
+            <span class="c1"># store displacements, velocities and accelerations</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">i1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_n</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ud_vec</span><span class="p">[:,</span> <span class="n">i1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_dn</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">udd_vec</span><span class="p">[:,</span> <span class="n">i1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_ddn</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fa_vec</span><span class="p">[:,</span> <span class="n">i1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fan</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># first increment uses static solution</span>
+            <span class="n">f_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_core</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">measurements</span><span class="p">,</span> <span class="n">q_vec</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># subtract constant force vector</span>
+        <span class="n">f_pos</span> <span class="o">-=</span> <span class="n">q_vec</span>
+
+        <span class="c1"># update right hand side vector</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">add_rhs_vector</span><span class="p">(</span><span class="n">f_pos</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;add_rhs_vector&quot;</span><span class="p">)</span>
+
+        <span class="c1"># equilibrium iterations (fedem)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">finish_step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;finish_step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="c1"># increase time step loop number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># return output function values</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_functions</span><span class="p">(</span><span class="n">out_def</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_inverse_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">,</span> <span class="n">f0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Central inverse algorithm</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">b_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_build_mat_from_ndef</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">)</span>
+        <span class="n">f_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_build_mat_from_ndef</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">f0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f0</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_mat</span><span class="p">))</span>  <span class="c1"># constant forces</span>
+
+        <span class="n">inv_k</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">k_mat</span><span class="p">)</span>
+        <span class="n">bt_inv_k</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">b_mat</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">inv_k</span><span class="p">)</span>
+        <span class="n">c_val</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">bt_inv_k</span><span class="p">,</span> <span class="n">f_mat</span><span class="p">)</span>
+        <span class="n">b0</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">bt_inv_k</span><span class="p">,</span> <span class="n">f0</span><span class="p">)</span>
+
+        <span class="n">opt_alpha</span> <span class="o">=</span> <span class="n">lstsq</span><span class="p">(</span><span class="n">c_val</span><span class="p">,</span> <span class="p">(</span><span class="n">x_vec</span> <span class="o">-</span> <span class="n">b0</span><span class="p">),</span> <span class="n">rcond</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaling: &quot;</span><span class="p">,</span> <span class="n">opt_alpha</span><span class="p">)</span>
+        <span class="n">force_eval</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">f_mat</span><span class="p">,</span> <span class="n">opt_alpha</span><span class="p">)</span> <span class="o">+</span> <span class="n">f0</span>
+        <span class="n">pos_eval</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">inv_k</span><span class="p">,</span> <span class="n">force_eval</span><span class="p">)</span>  <span class="c1"># displacement vector</span>
+
+        <span class="k">return</span> <span class="n">pos_eval</span><span class="p">,</span> <span class="n">force_eval</span>
+
+<div class="viewcode-block" id="InverseSolver.run_inverse_fedem">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.run_inverse_fedem">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_inverse_fedem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method uses fedem&#39;s inverse solution in fortran</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inp_data : list of float</span>
+<span class="sd">            Input function values</span>
+<span class="sd">        out_def : list of int</span>
+<span class="sd">            User Ids of the functions to evaluate the response for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Evaluated response variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_get_boundary_conditions</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">solve_inverse</span><span class="p">(</span><span class="n">inp_data</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">out_def</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;solve_inverse&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_build_sensor_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Store sensor IDs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__get_base_id</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converts an object tag into corresponsing base Id.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">base_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">obj_type</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">obj_id</span> <span class="o">=</span> <span class="n">base_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple objects of type </span><span class="si">{</span><span class="n">obj_type</span><span class="si">}</span><span class="s2"> with tag </span><span class="si">{</span><span class="n">obj_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">obj_id</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No objects of type </span><span class="si">{</span><span class="n">obj_type</span><span class="si">}</span><span class="s2"> with tag </span><span class="si">{</span><span class="n">obj_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">obj_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">obj_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">obj_id</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Check if sensor_id is correct, &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;sensor_id is not found or may be not defined&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">sensor_id</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nr</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;relative&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rel_dist_list</span><span class="p">):</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span>
+            <span class="n">sensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rel_dist_list</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;relID&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;strain&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">strain_tensor_list</span><span class="p">):</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="n">FmType</span><span class="o">.</span><span class="n">STRAIN_ROSETTE</span>
+            <span class="n">sensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">strain_tensor_list</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;epsID&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;force&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">int_force_list</span><span class="p">):</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="n">FmType</span><span class="o">.</span><span class="n">BEAM</span>
+            <span class="n">sensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">int_force_list</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;beamID&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;section&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sec_force_list</span><span class="p">):</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="n">FmType</span><span class="o">.</span><span class="n">BEAM</span>
+            <span class="n">sensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sec_force_list</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;beamID&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;deflection&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defl_spring_list</span><span class="p">):</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="n">FmType</span><span class="o">.</span><span class="n">JOINT</span>
+            <span class="n">sensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defl_spring_list</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;deflID&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;springForce&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frc_spring_list</span><span class="p">):</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="n">FmType</span><span class="o">.</span><span class="n">JOINT</span>
+            <span class="n">sensor_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frc_spring_list</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;frcID&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no sensor type specified&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">nr</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sensor_list</span><span class="p">:</span>
+            <span class="n">item_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__get_base_id</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="n">identifier</span><span class="p">],</span> <span class="n">item_type</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">identifier</span> <span class="o">==</span> <span class="s2">&quot;beamID&quot;</span><span class="p">:</span>
+                <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__get_base_id</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;triadID&quot;</span><span class="p">],</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">item_len</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># case internal force</span>
+                    <span class="k">try</span><span class="p">:</span>  <span class="c1"># check if d_set an int or a string</span>
+                        <span class="n">d_set</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;dof&quot;</span><span class="p">])</span>
+                        <span class="n">v_list</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">while</span> <span class="n">d_set</span><span class="p">:</span>
+                            <span class="n">digit</span> <span class="o">=</span> <span class="n">d_set</span> <span class="o">%</span> <span class="mi">10</span>
+                            <span class="c1"># switch from fortran to python notation</span>
+                            <span class="n">v_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                            <span class="n">d_set</span> <span class="o">//=</span> <span class="mi">10</span>
+                        <span class="c1"># insert last element</span>
+                        <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="c1"># loop backwards, v_list contains digits in reverse order</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                            <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># append beamID again</span>
+                            <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># append triadID again</span>
+                            <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>  <span class="c1"># append dof</span>
+                            <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">dof_set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tx&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ty&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;tz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;ry&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;rz&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+                        <span class="n">dof</span> <span class="o">=</span> <span class="n">dof_set</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;dof&quot;</span><span class="p">]]</span>
+                        <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span>
+                        <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># case section forces</span>
+                    <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">identifier</span> <span class="o">==</span> <span class="s2">&quot;epsID&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">item_len</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># strain tensor component is defined</span>
+                    <span class="k">try</span><span class="p">:</span>  <span class="c1"># check if e_set an int or a string</span>
+                        <span class="n">e_set</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;strain&quot;</span><span class="p">])</span>
+                        <span class="n">v_list</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">while</span> <span class="n">e_set</span><span class="p">:</span>
+                            <span class="n">digit</span> <span class="o">=</span> <span class="n">e_set</span> <span class="o">%</span> <span class="mi">10</span>
+                            <span class="c1"># switch from fortran to python notation</span>
+                            <span class="n">v_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                            <span class="n">e_set</span> <span class="o">//=</span> <span class="mi">10</span>
+                        <span class="c1"># insert last element</span>
+                        <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="c1"># loop backwards, v_list contains digits in reverse order</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                            <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># append epsID again</span>
+                            <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v_list</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>  <span class="c1"># append direction</span>
+                            <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">eps_set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ex&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ey&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;exy&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+                        <span class="n">eps</span> <span class="o">=</span> <span class="n">eps_set</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;strain&quot;</span><span class="p">]]</span>
+                        <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+                        <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sensor_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;relID&quot;</span><span class="p">,</span> <span class="s2">&quot;deflID&quot;</span><span class="p">,</span> <span class="s2">&quot;frcID&quot;</span><span class="p">):</span>
+                <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No. of sensors for </span><span class="si">{</span><span class="n">sensor_type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">nr</span><span class="si">}</span><span class="s2">, sensor_id=</span><span class="si">{</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">nr</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_inverse_disp_sensor</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Standard inverse solution for displacement sensor input</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">b_mat</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_def</span><span class="p">)))</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_def</span><span class="p">):</span>
+            <span class="n">b_mat</span><span class="p">[</span><span class="n">val</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">c_val</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">b_mat</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">u_vec</span><span class="p">)</span>
+
+        <span class="c1"># remove non-scalable part from the measurements</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_def</span><span class="p">)):</span>
+            <span class="n">rhs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">c_val</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">lhs</span><span class="p">,</span> <span class="n">c_val</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_def</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+
+    <span class="k">def</span> <span class="nf">_inverse_strain_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse solution for strain sensor input (e.g. strain gage measurements)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gage_id</span><span class="p">,</span> <span class="n">nr_gauges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_sensor_ids</span><span class="p">(</span><span class="s2">&quot;strain&quot;</span><span class="p">)</span>
+
+        <span class="n">n_3c</span> <span class="o">=</span> <span class="n">gage_id</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># number of 3 component tensors</span>
+        <span class="n">n_1c</span> <span class="o">=</span> <span class="n">nr_gauges</span> <span class="o">-</span> <span class="n">n_3c</span>  <span class="c1"># number of 1 component tensors</span>
+        <span class="n">nr_c</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">n_3c</span> <span class="o">+</span> <span class="n">n_1c</span>
+
+        <span class="c1"># no. of generalized load cases (without gravity load displacement vector)</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># gathering unit load strains into a matrix</span>
+        <span class="n">lh</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">nr_c</span><span class="p">,</span> <span class="n">ng</span><span class="p">))</span>
+
+        <span class="c1"># loop over generalized forces</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ng</span><span class="p">):</span>
+            <span class="n">lh</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_strains_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">gage_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_strains_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># const force part (e.g. gravity)</span>
+        <span class="n">eps</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_strains_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">gage_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_strains_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># update measurements based on strains, subtract constant part</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_c</span><span class="p">):</span>
+            <span class="n">rhs</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">eps</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">lhs</span><span class="p">,</span> <span class="n">lh</span><span class="p">])</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">nr_c</span>
+
+        <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+
+    <span class="k">def</span> <span class="nf">_inverse_section_forces_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse solution for section forces (N,Qy,Qz,Mx,My,Mz)</span>
+<span class="sd">        6 components solution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">beam_ids</span><span class="p">,</span> <span class="n">nr_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_sensor_ids</span><span class="p">(</span><span class="s2">&quot;section&quot;</span><span class="p">)</span>
+
+        <span class="c1"># no. of generalized load cases (without gravity load displacement vector)</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># gathering sectional forces (from unit loads) into a matrix</span>
+        <span class="n">lh</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">nr_sec</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="n">ng</span><span class="p">))</span>
+
+        <span class="c1"># loop over generalized forces</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ng</span><span class="p">):</span>
+            <span class="n">lh</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_int_forces_from_displ</span><span class="p">(</span>
+                <span class="n">u_vec</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">beam_ids</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_int_forces_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="n">c_fg</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_int_forces_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">beam_ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_int_forces_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># remove constant load from unit force matrix</span>
+        <span class="c1"># update measurements/calculations based on internal forces</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_sec</span> <span class="o">*</span> <span class="mi">6</span><span class="p">):</span>
+            <span class="n">rhs</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">c_fg</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">lhs</span><span class="p">,</span> <span class="n">lh</span><span class="p">])</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">nr_sec</span> <span class="o">*</span> <span class="mi">6</span>
+
+        <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+
+    <span class="k">def</span> <span class="nf">_inverse_rel_dist_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse solution for relative distance change</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eng_ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_sensor_ids</span><span class="p">(</span><span class="s2">&quot;relative&quot;</span><span class="p">)</span>
+
+        <span class="c1"># no. of generalized load cases (without gravity load displacement vector)</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># define size of the lhs matrix</span>
+        <span class="n">lh</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">eng_ids</span><span class="p">),</span> <span class="n">ng</span><span class="p">))</span>
+
+        <span class="c1"># loop over generalized forces (no. of columns)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ng</span><span class="p">):</span>
+            <span class="n">lh</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_rel_dist_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">eng_ids</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_rel_dist_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># relative displacements from constant loads (e.g. gravity)</span>
+        <span class="n">r_dg</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_rel_dist_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">eng_ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_rel_dist_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eng_ids</span><span class="p">)):</span>
+            <span class="n">rhs</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">r_dg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">lhs</span><span class="p">,</span> <span class="n">lh</span><span class="p">])</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">eng_ids</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+
+    <span class="k">def</span> <span class="nf">_inverse_spring_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spr_var</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse solution for spring variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_sensor_ids</span><span class="p">(</span><span class="n">spr_var</span><span class="p">)</span>
+
+        <span class="c1"># no. of generalized load cases (without gravity load displacement vector)</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># define size of the lhs matrix</span>
+        <span class="n">lh</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span> <span class="n">ng</span><span class="p">))</span>
+
+        <span class="c1"># loop over generalized forces (no. of columns)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ng</span><span class="p">):</span>
+            <span class="n">lh</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_spring_var_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ids</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_spring_var_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># spring forces from constant loads (e.g. gravity)</span>
+        <span class="n">r_dg</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_spring_var_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_spring_var_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)):</span>
+            <span class="n">rhs</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">r_dg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">lhs</span><span class="p">,</span> <span class="n">lh</span><span class="p">])</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+
+    <span class="k">def</span> <span class="nf">_inverse_int_force_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse solution for known internal force</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ids</span><span class="p">,</span> <span class="n">nr_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_sensor_ids</span><span class="p">(</span><span class="s2">&quot;force&quot;</span><span class="p">)</span>
+
+        <span class="c1"># no. of generalized load cases (without gravity load displacement vector)</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># gathering forces (from unit loads) into a matrix</span>
+        <span class="n">lh</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">nr_b</span><span class="p">,</span> <span class="n">ng</span><span class="p">))</span>
+
+        <span class="c1"># loop over generalized forces</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ng</span><span class="p">):</span>
+            <span class="n">lh</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_int_forces_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ids</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_int_forces_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># beam forces from const forces (e.g. gravity)</span>
+        <span class="n">c_fg</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">compute_int_forces_from_displ</span><span class="p">(</span><span class="n">u_vec</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;compute_int_forces_from_displ&quot;</span><span class="p">)</span>
+
+        <span class="c1"># remove constant load from unit force matrix</span>
+        <span class="c1"># update measurements/calculations based on internal forces</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_b</span><span class="p">):</span>
+            <span class="n">rhs</span><span class="p">[</span><span class="n">pos</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">c_fg</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">vstack</span><span class="p">([</span><span class="n">lhs</span><span class="p">,</span> <span class="n">lh</span><span class="p">])</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">nr_b</span>
+
+        <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_unit_load</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">g_def</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Force vector based on unit loads (generalized forces)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Prepare matrix for generalized forces</span>
+        <span class="n">f_mat</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g_def</span><span class="p">)))</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g_def</span><span class="p">):</span>
+            <span class="n">f_mat</span><span class="p">[</span><span class="n">val</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="k">return</span> <span class="n">f_mat</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_mode_load_scipy</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Force vector based on natural frequency shapes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">k_mat</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_stiffness_matrix</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_stiffness_matrix&quot;</span><span class="p">)</span>
+
+        <span class="n">m_mat</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_mass_matrix</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_mass_matrix&quot;</span><span class="p">)</span>
+
+        <span class="c1"># check is matrix m_mat positive definite (via Cholesky factorization)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check Mass Matrix for positive definiteness:&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">m_mat</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mass matrix is not positive definite - check input&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Mass matrix will be modified, because matrix is not positive definite&quot;</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">m_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.0e-15</span><span class="p">:</span>
+                    <span class="n">m_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0e-15</span>
+
+        <span class="c1"># take into account modes up to max mode number in the array modes</span>
+        <span class="n">up_to_mode</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calculate modes up to mode No.: &quot;</span><span class="p">,</span> <span class="n">up_to_mode</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculate modes up to mode No.: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">up_to_mode</span><span class="p">)</span>
+
+        <span class="c1"># calculate natural frequencies (e) and natural frequency modes (u)</span>
+        <span class="p">(</span><span class="n">e_val</span><span class="p">,</span> <span class="n">e_vec</span><span class="p">)</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">m_mat</span><span class="p">,</span> <span class="n">eigvals</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">up_to_mode</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues (low, high):&quot;</span><span class="p">,</span> <span class="n">e_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Eigenvalues: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e_val</span><span class="p">)</span>
+
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
+        <span class="n">n_m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span>
+        <span class="n">f_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">n_m</span><span class="p">))</span>
+        <span class="n">fm</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">up_to_mode</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_m</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">imode</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">modes</span><span class="p">):</span>
+            <span class="n">fm</span><span class="p">[</span><span class="n">imode</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="c1"># Transform force vector from modal space (fm) to nodal space (F)</span>
+        <span class="c1"># via F = (E^-1)^T*fm</span>
+        <span class="c1"># The eigenvector matrix is an orthogonal matrix,</span>
+        <span class="c1"># where transpose and inverse delivers the same result.</span>
+        <span class="c1"># The above expression can therefore be simplified to F = E*fm</span>
+
+        <span class="n">f_vec</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">e_vec</span><span class="p">,</span> <span class="n">fm</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Modal force vector calculated&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f_vec</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_mode_load</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">use_lapack</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Force vector based on natural frequency shapes.</span>
+<span class="sd">        New and faster implementation, using Fedem&#39;s internal eigenvalue solver.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># take into account modes up to max mode number in the array modes</span>
+        <span class="n">n_modes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating the modes: &quot;</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculate the first </span><span class="si">%s</span><span class="s2"> eigenmodes.&quot;</span> <span class="o">%</span> <span class="n">n_modes</span><span class="p">)</span>
+
+        <span class="c1"># calculate natural frequencies (e_val)</span>
+        <span class="c1"># and the associated mode shapes (e_vec)</span>
+        <span class="n">e_val</span><span class="p">,</span> <span class="n">e_vec</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">(</span><span class="n">n_modes</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">use_lapack</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;solve_modes&quot;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues (low, high):&quot;</span><span class="p">,</span> <span class="n">e_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Eigenvalues: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e_val</span><span class="p">)</span>
+
+        <span class="c1"># Pick eigenvectors as given by the modes indices</span>
+        <span class="n">n_dim</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
+        <span class="n">n_mod</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span>
+        <span class="n">f_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">n_dim</span><span class="p">,</span> <span class="n">n_mod</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">imode</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">modes</span><span class="p">):</span>
+            <span class="n">f_vec</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_vec</span><span class="p">[</span><span class="n">imode</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Modal force vector calculated&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f_vec</span>
+
+<div class="viewcode-block" id="InverseSolver.run_inverse">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.run_inverse">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collector for different inverse methods.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inp_data : list of float</span>
+<span class="sd">            Input function values</span>
+<span class="sd">        out_def : list of int</span>
+<span class="sd">            User Ids of the functions to evaluate the response for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Evaluated response variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># run start step</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;================================&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Running step start </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span><span class="p">)</span>
+        <span class="n">do_continue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">start_step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Simulation failure</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;start_step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">do_continue</span><span class="p">:</span>  <span class="c1"># Reached the end of simulation</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Getting updated stiffness matrix&quot;</span><span class="p">)</span>
+        <span class="n">k_mat</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_stiffness_matrix</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_stiffness_matrix&quot;</span><span class="p">)</span>
+
+        <span class="c1"># external force vector</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Getting external force vector&quot;</span><span class="p">)</span>
+        <span class="n">q_vec</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_external_force_vector</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_external_force_vector&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting boundary conditions&quot;</span><span class="p">)</span>
+        <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_get_boundary_conditions</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_def and g_def: &quot;</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
+
+        <span class="c1"># displacement field based on unit loads/modal forces</span>
+        <span class="c1"># F matrix (generalized fore part) will not change during the simulation,</span>
+        <span class="c1"># the modal force is calculated every step (default)</span>
+        <span class="c1"># if use_initial_eigen_vec = False</span>
+        <span class="c1"># otherwise only once at the beginning due performance reasons.</span>
+        <span class="n">f_mat</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">n_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_force_mat</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_initial_eigen_vec</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">g_def</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">f_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_load</span><span class="p">(</span><span class="n">n_dim</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Generalized force built&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">have_sci_py</span><span class="p">:</span>
+                    <span class="n">f_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode_load_scipy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">f_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">f_mat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">f_mat</span> <span class="o">=</span> <span class="n">f_vec</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">f_mat</span> <span class="o">=</span> <span class="n">c_</span><span class="p">[</span><span class="n">f_mat</span><span class="p">,</span> <span class="n">f_vec</span><span class="p">]</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Modal force vector built&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_force_mat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">internal_force_mat</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">f_mat</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_initial_eigen_vec</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Store force vector (generalized and/or modal) at initial step&quot;</span><span class="p">)</span>
+            <span class="n">f_mat</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">internal_force_mat</span><span class="p">)</span>
+
+        <span class="c1"># add external force vector to F (last column)</span>
+        <span class="n">f_mat</span> <span class="o">=</span> <span class="n">c_</span><span class="p">[</span><span class="n">f_mat</span><span class="p">,</span> <span class="n">q_vec</span><span class="p">]</span>
+
+        <span class="c1"># calculate displacement vector u by solving eq. k_mat*u=F</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculating generalized displacements&quot;</span><span class="p">)</span>
+        <span class="n">u_vec</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">f_mat</span><span class="p">)</span>
+
+        <span class="c1"># build rhs vector from measurements (copy)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Building RHS vector on sensor data&quot;</span><span class="p">)</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">inp_data</span><span class="p">)</span>
+        <span class="n">rhs</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">inp_data</span>
+
+        <span class="c1"># position in rhs vector</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># create a 1xg_def matrix, initialized with 0</span>
+        <span class="n">lhs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="c1"># building equation system</span>
+        <span class="k">for</span> <span class="n">eq_def</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eq_list_def</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">eq_def</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;known_x&quot;</span><span class="p">,</span> <span class="s2">&quot;known_Fx&quot;</span><span class="p">):</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_disp_sensor</span><span class="p">(</span>
+                    <span class="n">n_dim</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+                <span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Displacement sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">eq_def</span> <span class="o">==</span> <span class="s2">&quot;known_eps&quot;</span><span class="p">:</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_strain_sensor</span><span class="p">(</span><span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Strain sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">eq_def</span> <span class="o">==</span> <span class="s2">&quot;known_secF&quot;</span><span class="p">:</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_section_forces_sensor</span><span class="p">(</span>
+                    <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
+                <span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Section force sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">eq_def</span> <span class="o">==</span> <span class="s2">&quot;known_relD&quot;</span><span class="p">:</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_rel_dist_sensor</span><span class="p">(</span><span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Rel. dist sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">eq_def</span> <span class="o">==</span> <span class="s2">&quot;known_intF&quot;</span><span class="p">:</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_int_force_sensor</span><span class="p">(</span><span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Internal force sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">eq_def</span> <span class="o">==</span> <span class="s2">&quot;known_sprD&quot;</span><span class="p">:</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_spring_var</span><span class="p">(</span>
+                    <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="s2">&quot;deflection&quot;</span>
+                <span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Spring deflection sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span>
+                    <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">eq_def</span> <span class="o">==</span> <span class="s2">&quot;known_sprF&quot;</span><span class="p">:</span>
+                <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_spring_var</span><span class="p">(</span>
+                    <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="s2">&quot;springForce&quot;</span>
+                <span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Spring force sensor, locations/pos [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+                <span class="p">)</span>
+
+        <span class="c1"># remove first row from matrix</span>
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># check number of equations and pointer position (pos)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pos</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;InCorrect dimension of equation system lhs: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dimension of rhs: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pos of position pointer: &quot;</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Equation system has incorrect dimensions: [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span> <span class="n">pos</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of the equation system: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+        <span class="c1"># compute scaling factor and force vector</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">lstsq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">force</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">f_mat</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaling factor: &quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Scaling factors: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alpha</span><span class="p">)</span>
+
+        <span class="c1"># update right hand side vector</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting RHS for Fedem solver&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">add_rhs_vector</span><span class="p">(</span><span class="n">force</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;add_rhs_vector&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;force vector added&quot;</span><span class="p">)</span>
+
+        <span class="c1"># equilibrium iterations (fedem)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">finish_step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;finish_step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;equlibrium iterations done&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Equlibrium iterations finished&quot;</span><span class="p">)</span>
+
+        <span class="c1"># increment counter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-- Step/Cycle finished --</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># return output function values</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_functions</span><span class="p">(</span><span class="n">out_def</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_calc_eigen_values</span><span class="p">(</span><span class="n">solver</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calulates eigenvalues and eigenvectors (test routine, only for testing)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">have_sci_py</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;FedemRun._calc_eigen_values() requires scipy&quot;</span><span class="p">)</span>
+
+        <span class="n">k_mat</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_stiffness_matrix</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_stiffness_matrix&quot;</span><span class="p">)</span>
+
+        <span class="n">m_mat</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_mass_matrix</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_mass_matrix&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All eigenvalues/eigenvectors calculated&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">eig_vals</span><span class="p">,</span> <span class="n">eig_vecs</span><span class="p">)</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">m_mat</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">eig_vals</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1.0e-5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: check k_mat, m_mat - negative eigenvalues&quot;</span><span class="p">)</span>
+
+        <span class="n">omega</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">eig_vals</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="mf">3.14159</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">omega</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+
+        <span class="n">ndof</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">eig_vals</span><span class="p">)</span>
+
+        <span class="c1"># put eigenvalues into correct order into fn</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">ndof</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndof</span><span class="p">):</span>
+            <span class="n">fn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">omega</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="c1"># mass normalisation V_T*M*V</span>
+        <span class="n">dd</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">eig_vecs</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dot</span><span class="p">(</span><span class="n">m_mat</span><span class="p">,</span> <span class="n">eig_vecs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndof</span><span class="p">):</span>
+            <span class="n">nf</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndof</span><span class="p">):</span>
+                <span class="n">eig_vecs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">nf</span>
+
+        <span class="c1"># sort eigenvectors into MS</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">ndof</span><span class="p">,</span> <span class="n">ndof</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndof</span><span class="p">):</span>
+            <span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ndof</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">eig_vecs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ndof</span><span class="p">,</span> <span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues: &quot;</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvectors: &quot;</span><span class="p">,</span> <span class="n">ms</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="FedemRun">
+<a class="viewcode-back" href="../inverse.html#inverse.FedemRun">[docs]</a>
+<span class="k">class</span> <span class="nc">FedemRun</span><span class="p">(</span><span class="n">FedemSolver</span><span class="p">,</span> <span class="n">InverseSolver</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class augments FedemSolver with inverse solution capabilities.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wrkdir : str</span>
+<span class="sd">        Current working directory for the fedem dynamics solver</span>
+<span class="sd">    config : dictionary</span>
+<span class="sd">        Content of yaml input file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrkdir</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor. Initializes the object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;FEDEM_SOLVER&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Environment variable FEDEM_SOLVER not defined&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Set up the standard solver command-line options,</span>
+        <span class="c1"># taking into account the *.fco, *.fop and *.fao files, if they exist.</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-cwd&quot;</span><span class="p">,</span> <span class="n">wrkdir</span><span class="p">,</span> <span class="s2">&quot;-terminal&quot;</span><span class="p">,</span> <span class="s2">&quot;-1&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;fco&quot;</span><span class="p">,</span> <span class="s2">&quot;fop&quot;</span><span class="p">,</span> <span class="s2">&quot;fao&quot;</span><span class="p">):</span>
+            <span class="n">option_file</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver.&quot;</span> <span class="o">+</span> <span class="n">ext</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">wrkdir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">option_file</span><span class="p">):</span>
+                <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">ext</span><span class="p">,</span> <span class="n">option_file</span><span class="p">]</span>
+
+        <span class="c1"># Initialize the dynamics solver</span>
+        <span class="n">FedemSolver</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_SOLVER&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">)</span>
+
+        <span class="c1"># Initialize the inverse solver</span>
+        <span class="n">InverseSolver</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

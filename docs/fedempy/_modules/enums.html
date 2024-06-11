@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>enums &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">enums</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for enums</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains some enum definitions for the ``fedempy`` package.</span>
+<span class="sd">They are python equivalents to corresponding enum definitions in the C++ code</span>
+<span class="sd">of the `FedemDB` shared object library (see the `fedem_mdb` repository).</span>
+<span class="sd">The numerical value of each enum value in this module should therefore</span>
+<span class="sd">not be changed without a similar change in the C++ equivalent,</span>
+<span class="sd">to preserve consistency.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+
+<div class="viewcode-block" id="FmType">
+<a class="viewcode-back" href="../enums.html#enums.FmType">[docs]</a>
+<span class="k">class</span> <span class="nc">FmType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This enumerator identifies the various object types a Fedem mechanism model</span>
+<span class="sd">    may consist of. They are mapped onto a corresponding type ID value of the</span>
+<span class="sd">    C++ classes in the `FedemDB.C` source file (see the `fedem_mdb` repository).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ALL</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">TRIAD</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">BEAM</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">FEPART</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">BEAM_PROP</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">MAT_PROP</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">JOINT</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">RIGID_JOINT</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">REVOLUTE_JOINT</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">BALL_JOINT</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">FREE_JOINT</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">PRISMATIC_JOINT</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="n">CYLINDRIC_JOINT</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">CAM_JOINT</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">LOAD</span> <span class="o">=</span> <span class="mi">14</span>
+    <span class="n">FUNCTION</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="n">SENSOR</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">AXIAL_SPRING</span> <span class="o">=</span> <span class="mi">17</span>
+    <span class="n">AXIAL_DAMPER</span> <span class="o">=</span> <span class="mi">18</span>
+    <span class="n">STRAIN_ROSETTE</span> <span class="o">=</span> <span class="mi">19</span></div>
+
+
+
+<div class="viewcode-block" id="FmLoadType">
+<a class="viewcode-back" href="../enums.html#enums.FmLoadType">[docs]</a>
+<span class="k">class</span> <span class="nc">FmLoadType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This enumerator identifies the two external load types a Fedem model.</span>
+<span class="sd">    The values corresponds to the enum values in the C++ class ``FmLoad``.</span>
+<span class="sd">    (see the `fedem_mdb` repository).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">FORCE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">TORQUE</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="FmDofStat">
+<a class="viewcode-back" href="../enums.html#enums.FmDofStat">[docs]</a>
+<span class="k">class</span> <span class="nc">FmDofStat</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This enumerator identifies the available DOF constraint types.</span>
+<span class="sd">    The values corresponds to the ``FmHasDOFsBase::DOFStatus`` enum values</span>
+<span class="sd">    (see the `fedem_mdb` repository).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">FREE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">FIXED</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">PRESCRIBED</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">FREE_DYN</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">SPRING</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">SPRING_DYN</span> <span class="o">=</span> <span class="mi">5</span></div>
+
+
+
+<div class="viewcode-block" id="FmDof">
+<a class="viewcode-back" href="../enums.html#enums.FmDof">[docs]</a>
+<span class="k">class</span> <span class="nc">FmDof</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This enumerator identifies the local DOF components in an object.</span>
+<span class="sd">    The values corresponds to the ``FmIsMeasuredBase::SensorDof`` enum values</span>
+<span class="sd">    (see the `fedem_mdb` repository).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">TX</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">TY</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">TZ</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">RX</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">RY</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">RZ</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">MAX_PR</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">MIN_PR</span> <span class="o">=</span> <span class="mi">14</span>
+    <span class="n">SA_MAX</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="n">VMISES</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">GAGE_1</span> <span class="o">=</span> <span class="mi">17</span>
+    <span class="n">GAGE_2</span> <span class="o">=</span> <span class="mi">18</span>
+    <span class="n">GAGE_3</span> <span class="o">=</span> <span class="mi">19</span></div>
+
+
+
+<div class="viewcode-block" id="FmVar">
+<a class="viewcode-back" href="../enums.html#enums.FmVar">[docs]</a>
+<span class="k">class</span> <span class="nc">FmVar</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This enumerator identifies the result quantities that may be measured.</span>
+<span class="sd">    The values corresponds to the ``FmIsMeasuredBase::SensorEntity`` enum values</span>
+<span class="sd">    (see the `fedem_mdb` repository).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">POS</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">LOCAL_VEL</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">GLOBAL_VEL</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">LOCAL_ACC</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">GLOBAL_ACC</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">DISTANCE</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">VEL</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">ACC</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">REL_POS</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">SPR_ANG</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">SPR_DEFL</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">SPR_FORCE</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="n">DAMP_ANG</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">DAMP_VEL</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">DAMP_FORCE</span> <span class="o">=</span> <span class="mi">14</span>
+    <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="n">DEFLECTION</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">FORCE</span> <span class="o">=</span> <span class="mi">17</span>
+    <span class="n">LOCAL_FORCE</span> <span class="o">=</span> <span class="mi">18</span>
+    <span class="n">GLOBAL_FORCE</span> <span class="o">=</span> <span class="mi">19</span>
+    <span class="n">STRAIN</span> <span class="o">=</span> <span class="mi">24</span>
+    <span class="n">STRESS</span> <span class="o">=</span> <span class="mi">25</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

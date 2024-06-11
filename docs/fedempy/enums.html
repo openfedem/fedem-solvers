@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>enums module &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f474186"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="exporter module" href="exporter.html" />
+    <link rel="prev" title="divergence module" href="divergence.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fedempy modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="divergence.html">divergence module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">enums module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enums.FmDof"><code class="docutils literal notranslate"><span class="pre">FmDof</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.GAGE_1"><code class="docutils literal notranslate"><span class="pre">FmDof.GAGE_1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.GAGE_2"><code class="docutils literal notranslate"><span class="pre">FmDof.GAGE_2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.GAGE_3"><code class="docutils literal notranslate"><span class="pre">FmDof.GAGE_3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.LENGTH"><code class="docutils literal notranslate"><span class="pre">FmDof.LENGTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.MAX_PR"><code class="docutils literal notranslate"><span class="pre">FmDof.MAX_PR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.MIN_PR"><code class="docutils literal notranslate"><span class="pre">FmDof.MIN_PR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.RX"><code class="docutils literal notranslate"><span class="pre">FmDof.RX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.RY"><code class="docutils literal notranslate"><span class="pre">FmDof.RY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.RZ"><code class="docutils literal notranslate"><span class="pre">FmDof.RZ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.SA_MAX"><code class="docutils literal notranslate"><span class="pre">FmDof.SA_MAX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.TX"><code class="docutils literal notranslate"><span class="pre">FmDof.TX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.TY"><code class="docutils literal notranslate"><span class="pre">FmDof.TY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.TZ"><code class="docutils literal notranslate"><span class="pre">FmDof.TZ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDof.VMISES"><code class="docutils literal notranslate"><span class="pre">FmDof.VMISES</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enums.FmDofStat"><code class="docutils literal notranslate"><span class="pre">FmDofStat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDofStat.FIXED"><code class="docutils literal notranslate"><span class="pre">FmDofStat.FIXED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDofStat.FREE"><code class="docutils literal notranslate"><span class="pre">FmDofStat.FREE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDofStat.FREE_DYN"><code class="docutils literal notranslate"><span class="pre">FmDofStat.FREE_DYN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDofStat.PRESCRIBED"><code class="docutils literal notranslate"><span class="pre">FmDofStat.PRESCRIBED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDofStat.SPRING"><code class="docutils literal notranslate"><span class="pre">FmDofStat.SPRING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmDofStat.SPRING_DYN"><code class="docutils literal notranslate"><span class="pre">FmDofStat.SPRING_DYN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enums.FmLoadType"><code class="docutils literal notranslate"><span class="pre">FmLoadType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmLoadType.FORCE"><code class="docutils literal notranslate"><span class="pre">FmLoadType.FORCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmLoadType.TORQUE"><code class="docutils literal notranslate"><span class="pre">FmLoadType.TORQUE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enums.FmType"><code class="docutils literal notranslate"><span class="pre">FmType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.ALL"><code class="docutils literal notranslate"><span class="pre">FmType.ALL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.AXIAL_DAMPER"><code class="docutils literal notranslate"><span class="pre">FmType.AXIAL_DAMPER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.AXIAL_SPRING"><code class="docutils literal notranslate"><span class="pre">FmType.AXIAL_SPRING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.BALL_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.BALL_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.BEAM"><code class="docutils literal notranslate"><span class="pre">FmType.BEAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.BEAM_PROP"><code class="docutils literal notranslate"><span class="pre">FmType.BEAM_PROP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.CAM_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.CAM_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.CYLINDRIC_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.CYLINDRIC_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.FEPART"><code class="docutils literal notranslate"><span class="pre">FmType.FEPART</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.FREE_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.FREE_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.FUNCTION"><code class="docutils literal notranslate"><span class="pre">FmType.FUNCTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.LOAD"><code class="docutils literal notranslate"><span class="pre">FmType.LOAD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.MAT_PROP"><code class="docutils literal notranslate"><span class="pre">FmType.MAT_PROP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.PRISMATIC_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.PRISMATIC_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.REVOLUTE_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.REVOLUTE_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.RIGID_JOINT"><code class="docutils literal notranslate"><span class="pre">FmType.RIGID_JOINT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.SENSOR"><code class="docutils literal notranslate"><span class="pre">FmType.SENSOR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.STRAIN_ROSETTE"><code class="docutils literal notranslate"><span class="pre">FmType.STRAIN_ROSETTE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmType.TRIAD"><code class="docutils literal notranslate"><span class="pre">FmType.TRIAD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enums.FmVar"><code class="docutils literal notranslate"><span class="pre">FmVar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.ACC"><code class="docutils literal notranslate"><span class="pre">FmVar.ACC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.DAMP_ANG"><code class="docutils literal notranslate"><span class="pre">FmVar.DAMP_ANG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.DAMP_FORCE"><code class="docutils literal notranslate"><span class="pre">FmVar.DAMP_FORCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.DAMP_VEL"><code class="docutils literal notranslate"><span class="pre">FmVar.DAMP_VEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.DEFLECTION"><code class="docutils literal notranslate"><span class="pre">FmVar.DEFLECTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.DISTANCE"><code class="docutils literal notranslate"><span class="pre">FmVar.DISTANCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.FORCE"><code class="docutils literal notranslate"><span class="pre">FmVar.FORCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.GLOBAL_ACC"><code class="docutils literal notranslate"><span class="pre">FmVar.GLOBAL_ACC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.GLOBAL_FORCE"><code class="docutils literal notranslate"><span class="pre">FmVar.GLOBAL_FORCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.GLOBAL_VEL"><code class="docutils literal notranslate"><span class="pre">FmVar.GLOBAL_VEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.LENGTH"><code class="docutils literal notranslate"><span class="pre">FmVar.LENGTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.LOCAL_ACC"><code class="docutils literal notranslate"><span class="pre">FmVar.LOCAL_ACC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.LOCAL_FORCE"><code class="docutils literal notranslate"><span class="pre">FmVar.LOCAL_FORCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.LOCAL_VEL"><code class="docutils literal notranslate"><span class="pre">FmVar.LOCAL_VEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.POS"><code class="docutils literal notranslate"><span class="pre">FmVar.POS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.REL_POS"><code class="docutils literal notranslate"><span class="pre">FmVar.REL_POS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.SPR_ANG"><code class="docutils literal notranslate"><span class="pre">FmVar.SPR_ANG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.SPR_DEFL"><code class="docutils literal notranslate"><span class="pre">FmVar.SPR_DEFL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.SPR_FORCE"><code class="docutils literal notranslate"><span class="pre">FmVar.SPR_FORCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.STRAIN"><code class="docutils literal notranslate"><span class="pre">FmVar.STRAIN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.STRESS"><code class="docutils literal notranslate"><span class="pre">FmVar.STRESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enums.FmVar.VEL"><code class="docutils literal notranslate"><span class="pre">FmVar.VEL</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exporter.html">exporter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm.html">fmm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmm_solver.html">fmm_solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inverse.html">inverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeler.html">modeler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reducer.html">reducer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver.html">solver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write_fmx.html">write_fmx module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_parser.html">yaml_parser module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">fedempy modules</a></li>
+      <li class="breadcrumb-item active">enums module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/enums.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-enums">
+<span id="enums-module"></span><h1>enums module<a class="headerlink" href="#module-enums" title="Link to this heading"></a></h1>
+<p>This module contains some enum definitions for the <code class="docutils literal notranslate"><span class="pre">fedempy</span></code> package.
+They are python equivalents to corresponding enum definitions in the C++ code
+of the <cite>FedemDB</cite> shared object library (see the <cite>fedem_mdb</cite> repository).
+The numerical value of each enum value in this module should therefore
+not be changed without a similar change in the C++ equivalent,
+to preserve consistency.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="enums.FmDof">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">enums.</span></span><span class="sig-name descname"><span class="pre">FmDof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/enums.html#FmDof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#enums.FmDof" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>This enumerator identifies the local DOF components in an object.
+The values corresponds to the <code class="docutils literal notranslate"><span class="pre">FmIsMeasuredBase::SensorDof</span></code> enum values
+(see the <cite>fedem_mdb</cite> repository).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.GAGE_1">
+<span class="sig-name descname"><span class="pre">GAGE_1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17</span></em><a class="headerlink" href="#enums.FmDof.GAGE_1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.GAGE_2">
+<span class="sig-name descname"><span class="pre">GAGE_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18</span></em><a class="headerlink" href="#enums.FmDof.GAGE_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.GAGE_3">
+<span class="sig-name descname"><span class="pre">GAGE_3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#enums.FmDof.GAGE_3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.LENGTH">
+<span class="sig-name descname"><span class="pre">LENGTH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#enums.FmDof.LENGTH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.MAX_PR">
+<span class="sig-name descname"><span class="pre">MAX_PR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></em><a class="headerlink" href="#enums.FmDof.MAX_PR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.MIN_PR">
+<span class="sig-name descname"><span class="pre">MIN_PR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">14</span></em><a class="headerlink" href="#enums.FmDof.MIN_PR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.RX">
+<span class="sig-name descname"><span class="pre">RX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#enums.FmDof.RX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.RY">
+<span class="sig-name descname"><span class="pre">RY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#enums.FmDof.RY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.RZ">
+<span class="sig-name descname"><span class="pre">RZ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#enums.FmDof.RZ" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.SA_MAX">
+<span class="sig-name descname"><span class="pre">SA_MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></em><a class="headerlink" href="#enums.FmDof.SA_MAX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.TX">
+<span class="sig-name descname"><span class="pre">TX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#enums.FmDof.TX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.TY">
+<span class="sig-name descname"><span class="pre">TY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#enums.FmDof.TY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.TZ">
+<span class="sig-name descname"><span class="pre">TZ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#enums.FmDof.TZ" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDof.VMISES">
+<span class="sig-name descname"><span class="pre">VMISES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#enums.FmDof.VMISES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="enums.FmDofStat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">enums.</span></span><span class="sig-name descname"><span class="pre">FmDofStat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/enums.html#FmDofStat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#enums.FmDofStat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>This enumerator identifies the available DOF constraint types.
+The values corresponds to the <code class="docutils literal notranslate"><span class="pre">FmHasDOFsBase::DOFStatus</span></code> enum values
+(see the <cite>fedem_mdb</cite> repository).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDofStat.FIXED">
+<span class="sig-name descname"><span class="pre">FIXED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#enums.FmDofStat.FIXED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDofStat.FREE">
+<span class="sig-name descname"><span class="pre">FREE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#enums.FmDofStat.FREE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDofStat.FREE_DYN">
+<span class="sig-name descname"><span class="pre">FREE_DYN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#enums.FmDofStat.FREE_DYN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDofStat.PRESCRIBED">
+<span class="sig-name descname"><span class="pre">PRESCRIBED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#enums.FmDofStat.PRESCRIBED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDofStat.SPRING">
+<span class="sig-name descname"><span class="pre">SPRING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#enums.FmDofStat.SPRING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmDofStat.SPRING_DYN">
+<span class="sig-name descname"><span class="pre">SPRING_DYN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#enums.FmDofStat.SPRING_DYN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="enums.FmLoadType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">enums.</span></span><span class="sig-name descname"><span class="pre">FmLoadType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/enums.html#FmLoadType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#enums.FmLoadType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>This enumerator identifies the two external load types a Fedem model.
+The values corresponds to the enum values in the C++ class <code class="docutils literal notranslate"><span class="pre">FmLoad</span></code>.
+(see the <cite>fedem_mdb</cite> repository).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmLoadType.FORCE">
+<span class="sig-name descname"><span class="pre">FORCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#enums.FmLoadType.FORCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmLoadType.TORQUE">
+<span class="sig-name descname"><span class="pre">TORQUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#enums.FmLoadType.TORQUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="enums.FmType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">enums.</span></span><span class="sig-name descname"><span class="pre">FmType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/enums.html#FmType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#enums.FmType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>This enumerator identifies the various object types a Fedem mechanism model
+may consist of. They are mapped onto a corresponding type ID value of the
+C++ classes in the <cite>FedemDB.C</cite> source file (see the <cite>fedem_mdb</cite> repository).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#enums.FmType.ALL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.AXIAL_DAMPER">
+<span class="sig-name descname"><span class="pre">AXIAL_DAMPER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18</span></em><a class="headerlink" href="#enums.FmType.AXIAL_DAMPER" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.AXIAL_SPRING">
+<span class="sig-name descname"><span class="pre">AXIAL_SPRING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17</span></em><a class="headerlink" href="#enums.FmType.AXIAL_SPRING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.BALL_JOINT">
+<span class="sig-name descname"><span class="pre">BALL_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#enums.FmType.BALL_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.BEAM">
+<span class="sig-name descname"><span class="pre">BEAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#enums.FmType.BEAM" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.BEAM_PROP">
+<span class="sig-name descname"><span class="pre">BEAM_PROP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#enums.FmType.BEAM_PROP" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.CAM_JOINT">
+<span class="sig-name descname"><span class="pre">CAM_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></em><a class="headerlink" href="#enums.FmType.CAM_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.CYLINDRIC_JOINT">
+<span class="sig-name descname"><span class="pre">CYLINDRIC_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#enums.FmType.CYLINDRIC_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.FEPART">
+<span class="sig-name descname"><span class="pre">FEPART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#enums.FmType.FEPART" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.FREE_JOINT">
+<span class="sig-name descname"><span class="pre">FREE_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#enums.FmType.FREE_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.FUNCTION">
+<span class="sig-name descname"><span class="pre">FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></em><a class="headerlink" href="#enums.FmType.FUNCTION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.JOINT">
+<span class="sig-name descname"><span class="pre">JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#enums.FmType.JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.LOAD">
+<span class="sig-name descname"><span class="pre">LOAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">14</span></em><a class="headerlink" href="#enums.FmType.LOAD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.MAT_PROP">
+<span class="sig-name descname"><span class="pre">MAT_PROP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#enums.FmType.MAT_PROP" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.PRISMATIC_JOINT">
+<span class="sig-name descname"><span class="pre">PRISMATIC_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></em><a class="headerlink" href="#enums.FmType.PRISMATIC_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.REVOLUTE_JOINT">
+<span class="sig-name descname"><span class="pre">REVOLUTE_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#enums.FmType.REVOLUTE_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.RIGID_JOINT">
+<span class="sig-name descname"><span class="pre">RIGID_JOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#enums.FmType.RIGID_JOINT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.SENSOR">
+<span class="sig-name descname"><span class="pre">SENSOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#enums.FmType.SENSOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.STRAIN_ROSETTE">
+<span class="sig-name descname"><span class="pre">STRAIN_ROSETTE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#enums.FmType.STRAIN_ROSETTE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmType.TRIAD">
+<span class="sig-name descname"><span class="pre">TRIAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#enums.FmType.TRIAD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="enums.FmVar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">enums.</span></span><span class="sig-name descname"><span class="pre">FmVar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/enums.html#FmVar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#enums.FmVar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>This enumerator identifies the result quantities that may be measured.
+The values corresponds to the <code class="docutils literal notranslate"><span class="pre">FmIsMeasuredBase::SensorEntity</span></code> enum values
+(see the <cite>fedem_mdb</cite> repository).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.ACC">
+<span class="sig-name descname"><span class="pre">ACC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#enums.FmVar.ACC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.DAMP_ANG">
+<span class="sig-name descname"><span class="pre">DAMP_ANG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#enums.FmVar.DAMP_ANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.DAMP_FORCE">
+<span class="sig-name descname"><span class="pre">DAMP_FORCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">14</span></em><a class="headerlink" href="#enums.FmVar.DAMP_FORCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.DAMP_VEL">
+<span class="sig-name descname"><span class="pre">DAMP_VEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></em><a class="headerlink" href="#enums.FmVar.DAMP_VEL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.DEFLECTION">
+<span class="sig-name descname"><span class="pre">DEFLECTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#enums.FmVar.DEFLECTION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.DISTANCE">
+<span class="sig-name descname"><span class="pre">DISTANCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#enums.FmVar.DISTANCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.FORCE">
+<span class="sig-name descname"><span class="pre">FORCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17</span></em><a class="headerlink" href="#enums.FmVar.FORCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.GLOBAL_ACC">
+<span class="sig-name descname"><span class="pre">GLOBAL_ACC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#enums.FmVar.GLOBAL_ACC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.GLOBAL_FORCE">
+<span class="sig-name descname"><span class="pre">GLOBAL_FORCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#enums.FmVar.GLOBAL_FORCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.GLOBAL_VEL">
+<span class="sig-name descname"><span class="pre">GLOBAL_VEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#enums.FmVar.GLOBAL_VEL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.LENGTH">
+<span class="sig-name descname"><span class="pre">LENGTH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></em><a class="headerlink" href="#enums.FmVar.LENGTH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.LOCAL_ACC">
+<span class="sig-name descname"><span class="pre">LOCAL_ACC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#enums.FmVar.LOCAL_ACC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.LOCAL_FORCE">
+<span class="sig-name descname"><span class="pre">LOCAL_FORCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18</span></em><a class="headerlink" href="#enums.FmVar.LOCAL_FORCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.LOCAL_VEL">
+<span class="sig-name descname"><span class="pre">LOCAL_VEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#enums.FmVar.LOCAL_VEL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.POS">
+<span class="sig-name descname"><span class="pre">POS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#enums.FmVar.POS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.REL_POS">
+<span class="sig-name descname"><span class="pre">REL_POS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#enums.FmVar.REL_POS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.SPR_ANG">
+<span class="sig-name descname"><span class="pre">SPR_ANG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#enums.FmVar.SPR_ANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.SPR_DEFL">
+<span class="sig-name descname"><span class="pre">SPR_DEFL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#enums.FmVar.SPR_DEFL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.SPR_FORCE">
+<span class="sig-name descname"><span class="pre">SPR_FORCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></em><a class="headerlink" href="#enums.FmVar.SPR_FORCE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.STRAIN">
+<span class="sig-name descname"><span class="pre">STRAIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">24</span></em><a class="headerlink" href="#enums.FmVar.STRAIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.STRESS">
+<span class="sig-name descname"><span class="pre">STRESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">25</span></em><a class="headerlink" href="#enums.FmVar.STRESS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="enums.FmVar.VEL">
+<span class="sig-name descname"><span class="pre">VEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#enums.FmVar.VEL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="divergence.html" class="btn btn-neutral float-left" title="divergence module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exporter.html" class="btn btn-neutral float-right" title="exporter module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>exporter &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">exporter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for exporter</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Python wrapper for the native VTFX exporter.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">byref</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_float</span><span class="p">,</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">cdll</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">remove</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">run</span>
+
+
+<div class="viewcode-block" id="ExporterException">
+<a class="viewcode-back" href="../exporter.html#exporter.ExporterException">[docs]</a>
+<span class="k">class</span> <span class="nc">ExporterException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General exception-type for exporter exceptions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rc : int, default=0</span>
+<span class="sd">        Return code</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span><span class="s2">&quot;Failure&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Return code </span><span class="si">{</span><span class="n">rc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="Exporter">
+<a class="viewcode-back" href="../exporter.html#exporter.Exporter">[docs]</a>
+<span class="k">class</span> <span class="nc">Exporter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class provides functionality for exporting fedem animations</span>
+<span class="sd">    to Ceetron CUG format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fe_parts : dict</span>
+<span class="sd">        Dictionary of finite element parts to include in visualization</span>
+<span class="sd">    vis_parts : dict</span>
+<span class="sd">        Dictionary of visualization/vrml parts to include in visualization</span>
+<span class="sd">    lib_path : str</span>
+<span class="sd">        Absolute path to the shared object library vtfxExporter.so</span>
+<span class="sd">    vtfx_path : str, default=None</span>
+<span class="sd">        Absolute path to vtfx-file, use a temporary file if None</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    do_step:</span>
+<span class="sd">        Executes a step of visualization export with the provided input data</span>
+<span class="sd">    clean:</span>
+<span class="sd">        Converts temporary generated vtfx-file to CUG database and cleans up</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fe_parts</span><span class="p">,</span> <span class="n">vis_parts</span><span class="p">,</span> <span class="n">lib_path</span><span class="p">,</span> <span class="n">vtfx_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        Initializes the internal datastructure of the shared object library,</span>
+<span class="sd">        and loads the finite element and visualization parts into memory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize</span><span class="p">(</span><span class="n">lib_path</span><span class="p">,</span> <span class="n">vtfx_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fem_parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vis_parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Add FE parts</span>
+        <span class="k">for</span> <span class="n">fe_part</span> <span class="ow">in</span> <span class="n">fe_parts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_fe_part</span><span class="p">(</span>
+                    <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]),</span>
+                    <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]),</span>
+                    <span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;base_id&quot;</span><span class="p">],</span>
+                    <span class="n">fe_part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;surface_only&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                    <span class="n">fe_part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;include_spiders&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;recovery&quot;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fem_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;base_id&quot;</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_vis_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fe_part</span><span class="p">[</span><span class="s2">&quot;base_id&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Add visualization parts</span>
+        <span class="k">for</span> <span class="n">vis_part</span> <span class="ow">in</span> <span class="n">vis_parts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">vis_part</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_visualization_part</span><span class="p">(</span>
+                    <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">vis_part</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]),</span>
+                    <span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">vis_part</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]),</span>
+                    <span class="n">vis_part</span><span class="p">[</span><span class="s2">&quot;base_id&quot;</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_vis_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vis_part</span><span class="p">[</span><span class="s2">&quot;base_id&quot;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_get_part_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">part_id</span><span class="p">):</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_elements</span><span class="p">(</span><span class="n">part_id</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_element_types</span><span class="p">(</span><span class="n">part_id</span><span class="p">)</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nodes</span><span class="p">(</span><span class="n">part_id</span><span class="p">)</span>
+        <span class="n">t_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_transformation_matrix</span><span class="p">(</span><span class="n">part_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="n">nodes</span><span class="p">,</span>
+            <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="n">elements</span><span class="p">,</span>
+            <span class="s2">&quot;elementTypes&quot;</span><span class="p">:</span> <span class="n">types</span><span class="p">,</span>
+            <span class="s2">&quot;transformation&quot;</span><span class="p">:</span> <span class="n">t_matrix</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_export_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">part_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fem_parts</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_part_object</span><span class="p">(</span><span class="n">part_id</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">part_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vis_parts</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_part_object</span><span class="p">(</span><span class="n">part_id</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;parts&quot;</span><span class="p">:</span> <span class="n">parts</span><span class="p">}</span>
+
+<div class="viewcode-block" id="Exporter.do_step">
+<a class="viewcode-back" href="../exporter.html#exporter.Exporter.do_step">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">transformation_in</span><span class="p">,</span> <span class="n">deformation_in</span><span class="p">,</span> <span class="n">stress_in</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute a step of visualization export with the provided input data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time : float</span>
+<span class="sd">            Simulation time</span>
+<span class="sd">        transformation_in : list of c_double</span>
+<span class="sd">            Array of transformation data from the fedem solver</span>
+<span class="sd">        deformation_in : dict</span>
+<span class="sd">            Arrays of part deformation data from the fedem solver</span>
+<span class="sd">        stress_in : dict</span>
+<span class="sd">            Arrays of part stress data from the fedem solver</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_transformation_data</span><span class="p">(</span><span class="n">transformation_in</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">base_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fem_parts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_part_deformation_data</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">deformation_in</span><span class="p">[</span><span class="n">base_id</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_part_stress_data</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">stress_in</span><span class="p">[</span><span class="n">base_id</span><span class="p">])</span>
+
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">doStep</span><span class="p">(</span><span class="n">c_double</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Exporter.clean">
+<a class="viewcode-back" href="../exporter.html#exporter.Exporter.clean">[docs]</a>
+    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cug_path</span><span class="o">=</span><span class="s2">&quot;/usr/bin/CugComposer&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears all data about included FE-parts and frs-files,</span>
+<span class="sd">        and removes all transformation, stress and deformation results.</span>
+<span class="sd">        Closes the vtfx-file and converts it to a CUG database.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time_step : double</span>
+<span class="sd">            Time step to use for animation speed</span>
+<span class="sd">        lib_dir : str</span>
+<span class="sd">            Absolute path to app location</span>
+<span class="sd">        out_dir : str, default=None</span>
+<span class="sd">            Absolute path for output folder of the CUG database</span>
+<span class="sd">            If None, CUG data is not generated and the vtfx-file is retained</span>
+<span class="sd">        cug_path : str, default=&quot;/usr/bin/CugComposer&quot;</span>
+<span class="sd">            Absolute path to Ceetron CUG composer executable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Writing VTFX-file&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtfx_file_path</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">finish</span><span class="p">(</span><span class="n">c_double</span><span class="p">(</span><span class="n">time_step</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">out_dir</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">cug_path</span><span class="p">):</span>
+            <span class="n">logfile</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/Cug.log&quot;</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;./Cug.log&quot;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Creating CUG database in&quot;</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">rc</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">cug_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vtfx_file_path</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">outfile</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">returncode</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed (</span><span class="si">{</span><span class="n">rc</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">out_dir</span><span class="p">:</span>
+            <span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vtfx_file_path</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lib_path</span><span class="p">,</span> <span class="n">vtfx_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span> <span class="o">=</span> <span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="n">lib_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vtfx_file_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/temp.vtfx&quot;</span> <span class="k">if</span> <span class="n">vtfx_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">vtfx_path</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">setVtfxPath</span><span class="p">(</span>
+            <span class="n">c_char_p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vtfx_file_path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_fe_part</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ftl_path</span><span class="p">,</span> <span class="n">part_name</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">surface_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_spiders</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the FE-Part defined in the FEDEM ftl-file at ftl_path,</span>
+<span class="sd">        with the specified part_name, and set up remapping of elements</span>
+<span class="sd">        to the formats required by the Ceetron vtfx format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ftl_path : str</span>
+<span class="sd">            Absolute path to the ftl-file containing the node</span>
+<span class="sd">            and element definitions for the FE-part.</span>
+<span class="sd">        part_name : str</span>
+<span class="sd">            Name given to the FE-part in the exported vtfx-file.</span>
+<span class="sd">        base_id : int</span>
+<span class="sd">            The base_id of the part in the FEDEM model.</span>
+<span class="sd">        surface_only : bool, default=True</span>
+<span class="sd">            Set to True if all geometry should be converted to</span>
+<span class="sd">            surface quad and triangle elements.</span>
+<span class="sd">        include_spiders : bool, default=False</span>
+<span class="sd">            Set to True to also include spider elements and beams</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">ftl_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">addFEPart</span><span class="p">(</span>
+            <span class="n">c_char_p</span><span class="p">(</span><span class="n">ftl_path</span><span class="p">),</span>
+            <span class="n">c_char_p</span><span class="p">(</span><span class="n">part_name</span><span class="p">),</span>
+            <span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span>
+            <span class="n">c_bool</span><span class="p">(</span><span class="n">surface_only</span><span class="p">),</span>
+            <span class="n">c_bool</span><span class="p">(</span><span class="n">include_spiders</span><span class="p">),</span>
+            <span class="n">c_float</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_visualization_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">part_name</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the visualization part defined in the specified vrml-file,</span>
+<span class="sd">        with the specified part_name, and set up remapping of elements</span>
+<span class="sd">        to the formats required by the Ceetron vtfx format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_path : str</span>
+<span class="sd">            Absolute path to the visualization file containing the node</span>
+<span class="sd">            and element definitions.</span>
+<span class="sd">        part_name : str</span>
+<span class="sd">            Name given to the FE-part in the exported vtfx-file.</span>
+<span class="sd">        base_id : int</span>
+<span class="sd">            The base_id of the part in the FEDEM model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">addVisualizationPart</span><span class="p">(</span>
+            <span class="n">c_char_p</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span>
+            <span class="n">c_char_p</span><span class="p">(</span><span class="n">part_name</span><span class="p">),</span>
+            <span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span>
+            <span class="n">c_float</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_number_of_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the total number of finite elements for the FE-part in the ftl-file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the FE-part.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The number of elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getNumberOfElements</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_get_number_of_element_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the total number of element-nodes for the FE-part</span>
+<span class="sd">        with the specified baseId.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the FE-part.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The number of element nodes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getNumberOfElementNodes</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_get_number_of_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the total number of unique nodes for the FE-part</span>
+<span class="sd">         with the specified baseId.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the FE-part.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The number of nodes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getNumberOfNodes</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_get_element_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">element_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills the array given as input with the element types for all elements</span>
+<span class="sd">        of the FE-part with the specified baseId.</span>
+<span class="sd">        Each type is an integer-value corresponding to the number of nodes</span>
+<span class="sd">        in the element(3 for triangles, 4 for quads)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseId of the FE-Part.</span>
+<span class="sd">        elementTypes : list of c_int, default=None</span>
+<span class="sd">            The array of integers that will be filled with the element-types.</span>
+<span class="sd">            If none, a list will be allocated inside the function.</span>
+<span class="sd">            Size of list must be equal to value from _get_number_of_elements().</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of ints</span>
+<span class="sd">            List of element types</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">element_types</span><span class="p">:</span>
+            <span class="n">element_types</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_number_of_elements</span><span class="p">(</span><span class="n">base_id</span><span class="p">))()</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getElementTypes</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="n">element_types</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">element_types</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_get_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills the array given as input with the node-indices of all</span>
+<span class="sd">        elements of the FE-part with the specified baseId.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the FE-part.</span>
+<span class="sd">        elements : list of c_int, default=None</span>
+<span class="sd">            List of integers that will be filled with the element-node indices.</span>
+<span class="sd">            If None, a list will be allocated inside the function.</span>
+<span class="sd">            The size must be equal to the sum of all nodes for the different elements.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List of ints</span>
+<span class="sd">            List of node indices for the elements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">elements</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_number_of_element_nodes</span><span class="p">(</span><span class="n">base_id</span><span class="p">))()</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getElements</span><span class="p">(</span>
+            <span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_get_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills the array given as input with the x,y and z values</span>
+<span class="sd">        for all the nodes of the FE-part with the specified baseId.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the FE-part.</span>
+<span class="sd">        nodes : list of c_double, default=None</span>
+<span class="sd">            List of doubles that will be filled with the node coordinates.</span>
+<span class="sd">            If None, a list will be allocated inside the function.</span>
+<span class="sd">            The size must be equal to three times the value from _get_number_of_nodes().</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List of doubles</span>
+<span class="sd">            List of node coordinates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_number_of_nodes</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span><span class="p">))()</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getNodes</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_get_transformation_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">transformation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills the array given as input with the 16 components of the</span>
+<span class="sd">        transformation matrix of the FE-part with the</span>
+<span class="sd">        specified baseId, for the current time-step.</span>
+<span class="sd">        Row dominant. Final row is translation</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the part to get results from.</span>
+<span class="sd">        transformation : list of c_double, default=None</span>
+<span class="sd">            List of doubles that will be filled with the transformation matrix.</span>
+<span class="sd">            If none, a list will be allocated inside the function.</span>
+<span class="sd">            Size of array must be equal to 16.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List of doubles</span>
+<span class="sd">            List containing the transformation matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">transformation</span><span class="p">:</span>
+            <span class="n">transformation</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)()</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getTransformationMatrix</span><span class="p">(</span>
+            <span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="n">transformation</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">transformation</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_get_deformation_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">deformation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills the array given as input with the updated x,y and z values in the</span>
+<span class="sd">        current time-step, for all the nodes of</span>
+<span class="sd">        the FE-part with the specified baseId.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the part to get results from.</span>
+<span class="sd">        deformation : List of c_double, default=None</span>
+<span class="sd">            List of doubles that will be filled with</span>
+<span class="sd">            x,y,z coordinates of all nodes of the deformed part.</span>
+<span class="sd">            If None, a list will be allocated inside the function.</span>
+<span class="sd">            The size must be equal to three times the value from _get_number_of_nodes().</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List of doubles</span>
+<span class="sd">            List containing the nodal displacements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">deformation</span><span class="p">:</span>
+            <span class="n">deformation</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_number_of_nodes</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span><span class="p">))()</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getDeformationVector</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="n">deformation</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">deformation</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_get_stress_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">stress</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills the array given as input with the von Mises stress values in the</span>
+<span class="sd">        current time-step, for all the nodes of the FE-part in the ftl-file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        baseId : int</span>
+<span class="sd">            The FEDEM BaseID of the part to get results from.</span>
+<span class="sd">        stress : List of c_double, default=None</span>
+<span class="sd">            List of doubles that will be filled with</span>
+<span class="sd">            von Mises stress value of all nodes of the deformed part.</span>
+<span class="sd">            If none, a list will be allocated inside the function.</span>
+<span class="sd">            The size must be equal to the value from _get_number_of_element_nodes().</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List of doubles</span>
+<span class="sd">            List containing the stress values for each node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stress</span><span class="p">:</span>
+            <span class="n">stress</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_number_of_nodes</span><span class="p">(</span><span class="n">base_id</span><span class="p">))()</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">getStressVector</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="n">stress</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stress</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_set_transformation_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">setTransformationData</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">sz</span><span class="p">),</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_part_deformation_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">setPartDeformationData</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">c_int</span><span class="p">(</span><span class="n">sz</span><span class="p">),</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_part_stress_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_exporter</span><span class="o">.</span><span class="n">setPartStressData</span><span class="p">(</span><span class="n">c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">c_int</span><span class="p">(</span><span class="n">sz</span><span class="p">),</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExporterException</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

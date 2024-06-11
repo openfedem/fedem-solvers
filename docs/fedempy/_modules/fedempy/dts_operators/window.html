@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fedempy.dts_operators.window &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">fedempy.dts_operators.window</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for fedempy.dts_operators.window</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Convenience module for running Fedem simulations as an operator.</span>
+<span class="sd">Usage: Invoke `run(df)` with the input data in the DataFrame `df`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
+<span class="kn">from</span> <span class="nn">fedempy.divergence</span> <span class="kn">import</span> <span class="n">jump_state</span><span class="p">,</span> <span class="n">ramp_dataframe</span><span class="p">,</span> <span class="n">restart</span>
+<span class="kn">from</span> <span class="nn">fedempy.fmm_solver</span> <span class="kn">import</span> <span class="n">FmmSolver</span>
+<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
+
+
+<span class="k">def</span> <span class="nf">_check_state</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">use_state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks whether solver state transfer should be used or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">use_state</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">dts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">dts</span><span class="o">.</span><span class="n">window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">dts</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">overlap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;State transfer with overlap not yet supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dts</span><span class="o">.</span><span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dts</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># An invalid state array was provided, ignore it and do normal start instead.</span>
+        <span class="c1"># The first three values are the step number, actual time, and increment size,</span>
+        <span class="c1"># respectively. At least the first and third value should thus be positive.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ** Ignoring invalid state array </span><span class="si">{</span><span class="n">dts</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dts</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="start_solver">
+<a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.window.start_solver">[docs]</a>
+<span class="k">def</span> <span class="nf">start_solver</span><span class="p">(</span>
+    <span class="n">solver_options</span><span class="p">,</span> <span class="n">cw_dir</span><span class="p">,</span> <span class="n">use_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">old_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tstart</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Starts the dynamics solver with the provided command-line options.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    solver_options : list of str</span>
+<span class="sd">        List of command-line arguments that are passed to the solver</span>
+<span class="sd">    cw_dir : str</span>
+<span class="sd">        Path to working directory of the solver process</span>
+<span class="sd">    use_state : bool, default=False</span>
+<span class="sd">        If True, internal state vectors will be allocated</span>
+<span class="sd">    old_state : list of float, default=None</span>
+<span class="sd">        State vector to restart simulation from</span>
+<span class="sd">    ext_input : list of float, default=None</span>
+<span class="sd">        Initial external function values, for initial equilibrium iterations</span>
+<span class="sd">    tstart : float, default=None</span>
+<span class="sd">        Optional start time of simulation, override setting in model file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FedemSolver</span>
+<span class="sd">        The dynamics solver object</span>
+<span class="sd">    int</span>
+<span class="sd">        Zero on success, negative values indicate errors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">+&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">solver_options</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">cw_dir</span><span class="p">):</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-cwd=&quot;</span> <span class="o">+</span> <span class="n">cw_dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tstart</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-timeStart=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tstart</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="s2">&quot;FEDEM_SOLVER&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Environment variable FEDEM_SOLVER not defined&quot;</span><span class="p">)</span>
+
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">FedemSolver</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_SOLVER&quot;</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_state</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solver_init</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">extf_input</span><span class="o">=</span><span class="n">ext_input</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">solver</span><span class="p">,</span> <span class="n">status</span></div>
+
+
+
+<div class="viewcode-block" id="start_fmm_solver">
+<a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.window.start_fmm_solver">[docs]</a>
+<span class="k">def</span> <span class="nf">start_fmm_solver</span><span class="p">(</span>
+    <span class="n">fmm_file</span><span class="p">,</span>
+    <span class="n">lib_dir</span><span class="p">,</span>
+    <span class="n">use_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">old_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">ext_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">t_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">keep_old_res</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Starts the dynamics solver on the provided Fedem model file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fmm_file : str</span>
+<span class="sd">        The Fedem model file to run simulation on</span>
+<span class="sd">    lib_dir : str</span>
+<span class="sd">        Path to where the model file is located,</span>
+<span class="sd">        used only if `fmm_file` is a relative path</span>
+<span class="sd">    use_state : bool, default=False</span>
+<span class="sd">        If True, internal state vectors will be allocated</span>
+<span class="sd">    old_state : list of float, default=None</span>
+<span class="sd">        State vector to restart simulation from</span>
+<span class="sd">    ext_input : list of float, default=None</span>
+<span class="sd">        Initial external function values, for initial equilibrium iterations</span>
+<span class="sd">    t_start : float, default=None</span>
+<span class="sd">        Optional start time of simulation, override setting in model file</span>
+<span class="sd">    keep_old_res : bool, default=True</span>
+<span class="sd">        Option to not overwrite any existing res-file in the RDB directory</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FmmSolver</span>
+<span class="sd">        The dynamics solver object</span>
+<span class="sd">    int</span>
+<span class="sd">        Zero on success, negative values indicate errors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">fmm_file</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">fmm_file</span><span class="p">)</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
+        <span class="n">fmm_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">fmm_file</span>
+
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_state</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+        <span class="n">fmm_file</span><span class="p">,</span>
+        <span class="n">keep_old_res</span><span class="p">,</span>
+        <span class="kc">True</span><span class="p">,</span>
+        <span class="kc">True</span><span class="p">,</span>
+        <span class="n">old_state</span><span class="p">,</span>
+        <span class="n">extf_input</span><span class="o">=</span><span class="n">ext_input</span><span class="p">,</span>
+        <span class="n">time_start</span><span class="o">=</span><span class="n">t_start</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">solver</span><span class="p">,</span> <span class="n">status</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_get_start_state</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">use_times</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts start condition (time and input values) from given DataFrame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">use_times</span><span class="p">:</span>
+        <span class="c1"># Extract start time and associated input values from first row,</span>
+        <span class="c1"># to be applied on the initial equilibirum iterations, if any</span>
+        <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># First row has time stamp 0.0, assume the associated input values</span>
+        <span class="c1"># then should be applied on the initial equilibrium iterations, if any</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="c1"># The first row will be applied as load on the first time increment</span>
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_run_window</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">n_step</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs a new time window, with optional restart on divergence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve_window</span><span class="p">(</span><span class="n">n_step</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">conv_type</span> <span class="o">=</span> <span class="s2">&quot;CONVERGED&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">conv_type</span> <span class="o">=</span> <span class="n">restart</span><span class="p">(</span>
+            <span class="n">solver</span><span class="p">,</span>
+            <span class="n">df</span><span class="p">,</span>
+            <span class="n">old_state</span><span class="p">,</span>
+            <span class="n">lib_dir</span><span class="p">,</span>
+            <span class="n">out_id</span><span class="p">,</span>
+            <span class="n">options</span><span class="p">,</span>
+            <span class="n">xtimes</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">t_stop</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;FAILURE&quot;</span><span class="p">:</span>
+        <span class="n">ierr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># Initialization failure, model is already deallocated</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ierr</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ierr</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**** Time window finished at t=</span><span class="si">{</span><span class="n">t_stop</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">conv_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;NO_CONV&quot;</span><span class="p">,</span> <span class="s2">&quot;FAILURE&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Dynamics solver failed, probably a divergent model.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Check the fedem_solver.res file for details.&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to run solver (</span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**** Time window stopped [</span><span class="si">{</span><span class="n">conv_type</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ierr</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     with error flags&quot;</span><span class="p">,</span> <span class="n">ierr</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<div class="viewcode-block" id="run">
+<a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.window.run">[docs]</a>
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run Fedem simulation over a time window with `df` as input.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : DataFrame</span>
+<span class="sd">        Input function values</span>
+<span class="sd">    dts : DTSContext, default=None</span>
+<span class="sd">        State data to be passed between each micro-batch</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        Dictionary containing output definitions and/or solver options</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    DataFrame</span>
+<span class="sd">        Response values in output sensors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Absolute path to app location</span>
+    <span class="n">lib_dir</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lib_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;/var/digitaltwin/app/lib&quot;</span><span class="p">)</span>
+
+    <span class="n">use_times</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;use_times&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">jump_state</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">ramp_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">use_state</span><span class="p">,</span> <span class="n">old_state</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">use_state</span><span class="p">,</span> <span class="n">old_state</span> <span class="o">=</span> <span class="n">_check_state</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;use_state&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">old_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">**** Start solver on initial state&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t_start</span><span class="p">,</span> <span class="n">ext_inp</span> <span class="o">=</span> <span class="n">_get_start_state</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">use_times</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Restart from previous state</span>
+        <span class="n">istep</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">old_state</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">time0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">old_state</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">**** Start solver from step </span><span class="si">{</span><span class="n">istep</span><span class="si">}</span><span class="s2"> t=</span><span class="si">{</span><span class="n">time0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t_start</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ext_inp</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="s2">&quot;solver_options&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="c1"># Start the dynamics solver directly with the solver options provided</span>
+        <span class="n">solver</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">start_solver</span><span class="p">(</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;solver_options&quot;</span><span class="p">],</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">use_state</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">ext_inp</span><span class="p">,</span> <span class="n">t_start</span>
+        <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Assume a Fedem model file is provided.</span>
+        <span class="c1"># This will then create the solver input files and start the dynamics solver.</span>
+        <span class="c1"># Any FE models will be reduced first, unless they already have been reduced.</span>
+        <span class="n">solver</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">start_fmm_solver</span><span class="p">(</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fmm_file&quot;</span><span class="p">),</span>
+            <span class="n">lib_dir</span><span class="p">,</span>
+            <span class="n">use_state</span><span class="p">,</span>
+            <span class="n">old_state</span><span class="p">,</span>
+            <span class="n">ext_inp</span><span class="p">,</span>
+            <span class="n">t_start</span><span class="p">,</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keep_old_res&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to start solver (</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># The first row of the input dataframe was consumed by initial equilibrium iterations,</span>
+        <span class="c1"># so drop it from the subsequent dynamics/quasi-static simulation</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">     The first input values are consumed by the initial equilibrium analysis.&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># Run the solver through the given time window</span>
+    <span class="n">n_step</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">t_step</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;solving </span><span class="si">{</span><span class="n">n_step</span><span class="si">}</span><span class="s2"> steps [</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="o">+</span> <span class="n">t0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Solver successfully started,&quot;</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">out_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_ids&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">_run_window</span><span class="p">(</span>
+        <span class="n">solver</span><span class="p">,</span>
+        <span class="n">n_step</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">solver</span><span class="o">.</span><span class="n">get_function_ids</span><span class="p">(</span><span class="n">out_id</span><span class="p">),</span>
+        <span class="n">solver</span><span class="o">.</span><span class="n">check_times</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">use_times</span><span class="p">),</span>
+        <span class="n">old_state</span><span class="p">,</span>
+        <span class="n">lib_dir</span><span class="p">,</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;crash_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">out_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Create the output DataFrame</span>
+    <span class="n">n_out</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">n_col</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)</span>
+    <span class="n">n_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_out</span> <span class="o">/</span> <span class="n">n_col</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   * Create output DataFrame [</span><span class="si">{</span><span class="n">n_col</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">n_row</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">)</span>
+    <span class="n">np_outputs</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n_out</span><span class="p">)</span>
+    <span class="n">np_outputs</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:]</span>
+    <span class="n">df_out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np_outputs</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_col</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">df_out</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">oid</span><span class="p">)</span> <span class="k">for</span> <span class="n">oid</span> <span class="ow">in</span> <span class="n">out_id</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">use_state</span> <span class="ow">and</span> <span class="n">solver</span><span class="o">.</span><span class="n">state_data</span><span class="p">:</span>
+        <span class="c1"># Store the final state for next time window</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   * Store final state for next window (</span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">state_size</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">new_state</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">state_size</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+        <span class="n">new_state</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">state_data</span><span class="p">))</span>
+        <span class="n">dts</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">new_state</span>
+
+    <span class="k">return</span> <span class="n">df_out</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

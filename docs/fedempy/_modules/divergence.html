@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>divergence &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">divergence</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for divergence</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Convenience module for automatic simulation restart of diverging models.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">c_double</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">mkdir</span><span class="p">,</span> <span class="n">path</span>
+
+
+<div class="viewcode-block" id="ramp_dataframe">
+<a class="viewcode-back" href="../divergence.html#divergence.ramp_dataframe">[docs]</a>
+<span class="k">def</span> <span class="nf">ramp_dataframe</span><span class="p">(</span><span class="n">dfr</span><span class="p">,</span> <span class="n">start_pos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creating a s-shape ramp, starting with 0 and ending with 1</span>
+<span class="sd">    Second derivative at start/end will be zero</span>
+<span class="sd">    Multiplying each column in dataframe with ramp-array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfr</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>  <span class="c1"># ramp steps</span>
+
+    <span class="n">smooth</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_steps</span>
+    <span class="n">scale_step</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">r_steps</span> <span class="o">-</span> <span class="n">start_pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span> <span class="n">r_steps</span><span class="p">):</span>
+        <span class="n">s_x</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">start_pos</span><span class="p">)</span>
+        <span class="n">smooth</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s_x</span> <span class="o">*</span> <span class="n">s_x</span> <span class="o">*</span> <span class="n">s_x</span> <span class="o">*</span> <span class="p">(</span><span class="n">s_x</span> <span class="o">*</span> <span class="p">(</span><span class="n">s_x</span> <span class="o">*</span> <span class="mf">6.0</span> <span class="o">-</span> <span class="mf">15.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">10.0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dfr</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">smooth</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="jump_state">
+<a class="viewcode-back" href="../divergence.html#divergence.jump_state">[docs]</a>
+<span class="k">def</span> <span class="nf">jump_state</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks whether the current state should be jumped over or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jump_exist</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">json_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/stream.json&quot;</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">frame_data</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+            <span class="n">jump_exist</span> <span class="o">=</span> <span class="n">frame_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;conv_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;JUMP_OVER&quot;</span>
+
+    <span class="k">if</span> <span class="n">jump_exist</span><span class="p">:</span>
+        <span class="c1"># Reset conv_type to None</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;conv_type&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">jump_exist</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_opts_list</span><span class="p">(</span><span class="n">opts_dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper converting option dictionary into a list of solver options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">+&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">__format_arg</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">opts_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+
+<div class="viewcode-block" id="restart">
+<a class="viewcode-back" href="../divergence.html#divergence.restart">[docs]</a>
+<span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">c_opts</span><span class="p">,</span> <span class="n">x_times</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Restarts the simulation over a time window in case of divergence issues.</span>
+<span class="sd">    When a divergent solution is detected, one (or more) of the following</span>
+<span class="sd">    approaches may be attempted:</span>
+
+<span class="sd">    * `TOL`:</span>
+<span class="sd">      Increasing tolerance(s) for convergence checks</span>
+<span class="sd">      (tolDispNorm, tolVecNorm, tolEnerSum, maxit).</span>
+<span class="sd">    * `STATE_DYNAMIC`:</span>
+<span class="sd">      Use dynamic equilibrium at restart.</span>
+<span class="sd">      Restart can be performed at a specified number of steps before the divergent step,</span>
+<span class="sd">      optionally with ramp-scaling activated (default activated).</span>
+<span class="sd">    * `STATE_STATIC`:</span>
+<span class="sd">      Use quasi-static equilibrium for a specified number of steps at restart.</span>
+<span class="sd">      Restart can be performed at a specified number of steps before the divergent step,</span>
+<span class="sd">      optionally with ramp-scaling activated (default activated) done n-steps backwards.</span>
+<span class="sd">    * `NO_STATE_WITH_RAMP`:</span>
+<span class="sd">      Restart of specified number of steps before the diverged step.</span>
+<span class="sd">      The loads are ramped up from zero and the state is not used.</span>
+<span class="sd">    * `JUMP_OVER`:</span>
+<span class="sd">      Skip the rest if the current window and restart from the next,</span>
+<span class="sd">      with the loads ramped up from zero.</span>
+<span class="sd">    * `NO_CONV`:</span>
+<span class="sd">      No convergence is obtained.</span>
+<span class="sd">    * `FAILURE`:</span>
+<span class="sd">      Other solver failure during re-initialization.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    solver : FedemSolver</span>
+<span class="sd">        Fedem dynamics solver instance</span>
+<span class="sd">    df : DataFrame</span>
+<span class="sd">        Input function values</span>
+<span class="sd">    state : list of float</span>
+<span class="sd">        State vector to restart simulation from</span>
+<span class="sd">    lib_dir : str</span>
+<span class="sd">        Path to the input/output files</span>
+<span class="sd">    out_id : list of int</span>
+<span class="sd">        List of user Ids identifying the output sensors in the model</span>
+<span class="sd">    c_opts : dictionary</span>
+<span class="sd">        Settings for the Fedem solver</span>
+<span class="sd">    x_times : list of float, default=None</span>
+<span class="sd">        Time list linked to the input</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list of float</span>
+<span class="sd">        Output sensor values for each time step</span>
+<span class="sd">    str</span>
+<span class="sd">        How the simulation was actually restarted (or not)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** The solver has diverged at t =&quot;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
+
+    <span class="c1"># If file stream.json not existing, create it</span>
+    <span class="n">json_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/stream.json&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;conv_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOL&quot;</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># Define state path for state file storage</span>
+    <span class="n">step_state_path</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/step_state&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">step_state_path</span><span class="p">):</span>
+        <span class="n">mkdir</span><span class="p">(</span><span class="n">step_state_path</span><span class="p">)</span>
+
+    <span class="c1"># Input data</span>
+    <span class="n">input_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">n_step</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Default dictionary settings (solver)</span>
+    <span class="c1"># Check that the option files exist before adding them</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cwd&quot;</span><span class="p">:</span> <span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;terminal&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;fco&quot;</span><span class="p">,</span> <span class="s2">&quot;fop&quot;</span><span class="p">,</span> <span class="s2">&quot;fao&quot;</span><span class="p">):</span>
+        <span class="n">option_file</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver.&quot;</span> <span class="o">+</span> <span class="n">ext</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">option_file</span><span class="p">):</span>
+            <span class="n">opts</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span> <span class="o">=</span> <span class="n">option_file</span>
+
+    <span class="c1"># Do not overwrite the original res-file</span>
+    <span class="n">ires</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">ires</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ires</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;resfile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver_r&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">ires</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.res&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;resfile&quot;</span><span class="p">]):</span>
+            <span class="n">ires</span> <span class="o">=</span> <span class="o">-</span><span class="n">ires</span>
+
+    <span class="k">if</span> <span class="n">c_opts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">c_opts</span><span class="p">)</span>
+
+    <span class="c1"># Convergence handling settings (solver)</span>
+    <span class="n">activate_ramp</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;use_ramping&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">state_pos</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;use_state_n_steps_behind&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">nr_steps</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;nr_steps&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">conv_types</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
+        <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;TOL&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;STATE_DYNAMIC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;STATE_STATIC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;NO_STATE_WITH_RAMP&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;JUMP_OVER&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;NO_CONV&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="c1"># Ensure the trial loop exits with NO_CONV if nothing else succeeds</span>
+    <span class="k">if</span> <span class="n">conv_types</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;NO_CONV&quot;</span><span class="p">:</span>
+        <span class="n">conv_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NO_CONV&quot;</span><span class="p">)</span>
+
+    <span class="n">use_ramp</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">setoff</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># setoff for scaling function</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_step</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)</span>
+
+    <span class="c1"># Set convergence type to TOL</span>
+    <span class="n">conv_type</span> <span class="o">=</span> <span class="n">conv_types</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Initialise step state file size</span>
+    <span class="n">state_size</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_state_size</span><span class="p">()</span>
+    <span class="n">step_state</span> <span class="o">=</span> <span class="n">state</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">conv_types</span><span class="p">)):</span>
+        <span class="c1"># Shut down the solver</span>
+        <span class="n">solver</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span>
+
+        <span class="c1"># Reinitialize the solver</span>
+        <span class="n">ierr</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solver_init</span><span class="p">(</span><span class="n">_opts_list</span><span class="p">(</span><span class="n">opts</span><span class="p">),</span> <span class="n">state_data</span><span class="o">=</span><span class="n">step_state</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ierr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot; *** Solver initialization failure in divergence handling (</span><span class="si">{</span><span class="n">ierr</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+                <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;FAILURE&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Trying restart </span><span class="si">{</span><span class="n">conv_type</span><span class="si">}</span><span class="s2"> at t = </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Scaling down the input for the remaining period</span>
+        <span class="k">if</span> <span class="n">use_ramp</span><span class="p">:</span>
+            <span class="n">input_data</span> <span class="o">=</span> <span class="n">ramp_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">setoff</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">use_ramp</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n_step</span> <span class="ow">and</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Solve for next time step</span>
+            <span class="n">t_next</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x_times</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">x_times</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve_next</span><span class="p">(</span><span class="n">input_data</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">time_next</span><span class="o">=</span><span class="n">t_next</span><span class="p">):</span>
+                <span class="c1"># Save state during stepping</span>
+                <span class="n">solver</span><span class="o">.</span><span class="n">save_state</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">solver</span><span class="o">.</span><span class="n">state_data</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** No state at step&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">step_state_file</span> <span class="o">=</span> <span class="n">step_state_path</span> <span class="o">+</span> <span class="s2">&quot;/step_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">state_pos</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">step_state_file</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_file</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">step_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">state_data</span><span class="p">)</span>
+                        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Failed to write state to&quot;</span><span class="p">,</span> <span class="n">step_state_file</span><span class="p">)</span>
+
+                <span class="c1"># Extract the results</span>
+                <span class="n">output</span><span class="p">[</span><span class="n">j</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)</span> <span class="p">:</span> <span class="n">j</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">get_function</span><span class="p">(</span><span class="n">out_id</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">))</span>
+                <span class="p">)</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** The solver diverged at t =&quot;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Leave loop in case of convergence/non-convergence and jump over</span>
+        <span class="n">conv_type</span> <span class="o">=</span> <span class="n">conv_types</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;JUMP_OVER&quot;</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">n_step</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n_step</span><span class="p">:</span>
+            <span class="c1"># Update data on json file</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;conv_type&quot;</span><span class="p">:</span> <span class="n">conv_type</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Convergence issue still exists</span>
+        <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;NO_STATE_WITH_RAMP&quot;</span><span class="p">:</span>
+            <span class="n">step_state</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">use_ramp</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;NO_CONV&quot;</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># No convergence reached, giving up</span>
+        <span class="k">elif</span> <span class="n">conv_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;STATE_DYNAMIC&quot;</span><span class="p">,</span> <span class="s2">&quot;STATE_STATIC&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">state_pos</span><span class="p">:</span>
+                <span class="n">step_state</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># use state at the beginning</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">step_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">state_size</span><span class="p">)()</span>
+                <span class="n">step_state_file</span> <span class="o">=</span> <span class="n">step_state_path</span> <span class="o">+</span> <span class="s2">&quot;/step_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">state_pos</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   * Read state from </span><span class="si">{</span><span class="n">step_state_file</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">state_size</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">step_state_file</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_file</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">step_file</span><span class="o">.</span><span class="n">readinto</span><span class="p">(</span><span class="n">step_state</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Failed to read state from&quot;</span><span class="p">,</span> <span class="n">step_state_file</span><span class="p">)</span>
+
+            <span class="c1"># Number of backwards steps</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">state_pos</span> <span class="k">else</span> <span class="n">j</span> <span class="o">-</span> <span class="n">state_pos</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="c1"># Activate ramp (external specification, user request, default activated)</span>
+            <span class="k">if</span> <span class="n">activate_ramp</span><span class="p">:</span>
+                <span class="n">use_ramp</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">setoff</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># means ramping starts with zero</span>
+
+            <span class="c1"># Equilibrium fails at time, set solver parameter quasiStatic</span>
+            <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;STATE_STATIC&quot;</span><span class="p">:</span>
+                <span class="n">time</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_next_time</span><span class="p">()</span>
+                <span class="n">dt</span> <span class="o">=</span> <span class="n">time</span> <span class="o">-</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+                <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;quasiStatic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="n">nr_steps</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+
+        <span class="c1"># Increment the restart res-file, to not overwrite previous ones</span>
+        <span class="n">ires</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;resfile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver_r&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ires</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.res&quot;</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">conv_type</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

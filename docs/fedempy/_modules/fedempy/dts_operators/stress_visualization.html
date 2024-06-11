@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fedempy.dts_operators.stress_visualization &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">fedempy.dts_operators.stress_visualization</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for fedempy.dts_operators.stress_visualization</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Convenience module for running Fedem stress recovery with CUG export as an operator.</span>
+<span class="sd">Usage: Invoke `run(df)` with the input data in the DataFrame `df`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">c_double</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">makedirs</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+
+<span class="kn">from</span> <span class="nn">fedempy.dts_operators.window</span> <span class="kn">import</span> <span class="n">start_fmm_solver</span><span class="p">,</span> <span class="n">start_solver</span>
+<span class="kn">from</span> <span class="nn">fedempy.exporter</span> <span class="kn">import</span> <span class="n">Exporter</span>
+<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemException</span>
+
+
+<span class="k">def</span> <span class="nf">_get_out_dir</span><span class="p">():</span>
+    <span class="n">out_dir_env</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PEI_SERVICE_FILE_STORAGE&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">out_dir_env</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;.&quot;</span>
+    <span class="n">out_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">normcase</span><span class="p">(</span><span class="n">out_dir_env</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
+        <span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_dir</span>
+
+
+<div class="viewcode-block" id="run">
+<a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.stress_visualization.run">[docs]</a>
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run Fedem simulation with stress recovery and create CUG visualization.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : Dataframe</span>
+<span class="sd">        Input function values</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        Dictionary containing configuration parameters and/or solver options</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Absolute path to app location</span>
+    <span class="n">lib_dir</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lib_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;/var/digitaltwin/app/lib&quot;</span><span class="p">)</span>
+    <span class="c1"># Input values for initial static equilibrium iterations</span>
+    <span class="n">ext_inp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="s2">&quot;solver_options&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="c1"># Start the dynamics solver directly with the solver options provided</span>
+        <span class="n">solver</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">start_solver</span><span class="p">(</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;solver_options&quot;</span><span class="p">],</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">ext_input</span><span class="o">=</span><span class="n">ext_inp</span>
+        <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Assume a Fedem model file is provided.</span>
+        <span class="c1"># This will then create the solver input files and start the dynamics solver.</span>
+        <span class="c1"># Any FE models will be reduced first, unless they already have been reduced.</span>
+        <span class="n">solver</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">start_fmm_solver</span><span class="p">(</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fmm_file&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">ext_input</span><span class="o">=</span><span class="n">ext_inp</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to start solver (</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+    <span class="n">base_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">fe_parts</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fe_parts&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">vis_parts</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visualization_parts&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">fe_parts</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">part</span><span class="p">[</span><span class="s2">&quot;recovery&quot;</span><span class="p">]:</span>
+            <span class="n">base_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">[</span><span class="s2">&quot;base_id&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="p">[</span><span class="o">*</span><span class="n">fe_parts</span><span class="p">,</span> <span class="o">*</span><span class="n">vis_parts</span><span class="p">]:</span>
+            <span class="n">part</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">part</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s2">&quot;VIS_EXPORTER&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Environment variable VIS_EXPORTER not defined&quot;</span><span class="p">)</span>
+
+    <span class="n">exporter</span> <span class="o">=</span> <span class="n">Exporter</span><span class="p">(</span>
+        <span class="n">fe_parts</span><span class="p">,</span> <span class="n">vis_parts</span><span class="p">,</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;VIS_EXPORTER&quot;</span><span class="p">],</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vtfx_file&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># The first row of the input dataframe was consumed by initial equilibrium iterations,</span>
+        <span class="c1"># so drop it from the subsequent dynamics/quasi-static simulation</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">     The first input values are consumed by the initial equilibrium analysis.&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">t_step</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;solving </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> steps [</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="o">+</span> <span class="n">t0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Solver successfully started,&quot;</span><span class="p">,</span> <span class="n">t_step</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">xtimes</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">check_times</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;use_times&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+    <span class="n">_solve</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">base_ids</span><span class="p">,</span> <span class="n">exporter</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="s2">&quot;vtfx_file&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_get_deform_state_array</span><span class="p">(</span><span class="n">bid</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allocates deformation state array for an FE part.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">state_size</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_part_deformation_state_size</span><span class="p">(</span><span class="n">bid</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state_size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No deformation state (</span><span class="si">{</span><span class="n">state_size</span><span class="si">}</span><span class="s2">) for FE Part </span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">state_size</span><span class="p">)()</span>
+
+
+<span class="k">def</span> <span class="nf">_get_stress_state_array</span><span class="p">(</span><span class="n">bid</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allocates stress state array for an FE part.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">state_size</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_part_stress_state_size</span><span class="p">(</span><span class="n">bid</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state_size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No stress state (</span><span class="si">{</span><span class="n">state_size</span><span class="si">}</span><span class="s2">) for FE Part </span><span class="si">{</span><span class="n">bid</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">state_size</span><span class="p">)()</span>
+
+
+<span class="k">def</span> <span class="nf">_solve</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fe_parts</span><span class="p">,</span> <span class="n">exporter</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">skip_cug</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve and recover deformations and von Mises stresses.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c_transformation</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_transformation_state_size</span><span class="p">())()</span>
+    <span class="n">c_deformation</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">c_stress</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">bid</span> <span class="ow">in</span> <span class="n">fe_parts</span><span class="p">:</span>
+        <span class="c1"># Initialize the deformation and stress arrays</span>
+        <span class="n">c_deformation</span><span class="p">[</span><span class="n">bid</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_deform_state_array</span><span class="p">(</span><span class="n">bid</span><span class="p">,</span> <span class="n">solver</span><span class="p">)</span>
+        <span class="n">c_stress</span><span class="p">[</span><span class="n">bid</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_stress_state_array</span><span class="p">(</span><span class="n">bid</span><span class="p">,</span> <span class="n">solver</span><span class="p">)</span>
+
+    <span class="c1"># Run the solver through the given time window</span>
+    <span class="n">n_steps</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        <span class="n">next_time</span> <span class="o">=</span> <span class="n">xtimes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">xtimes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">_continue</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve_next</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time_next</span><span class="o">=</span><span class="n">next_time</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to solve next step (</span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get transformation and stress recovery results</span>
+        <span class="n">solver</span><span class="o">.</span><span class="n">save_transformation_state</span><span class="p">(</span><span class="n">c_transformation</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">bid</span> <span class="ow">in</span> <span class="n">fe_parts</span><span class="p">:</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">save_part_state</span><span class="p">(</span><span class="n">bid</span><span class="p">,</span> <span class="n">c_deformation</span><span class="p">[</span><span class="n">bid</span><span class="p">],</span> <span class="n">c_stress</span><span class="p">[</span><span class="n">bid</span><span class="p">])</span>
+
+        <span class="c1"># Export the transformations and recovery results</span>
+        <span class="n">curr_time</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+        <span class="n">exporter</span><span class="o">.</span><span class="n">do_step</span><span class="p">(</span><span class="n">curr_time</span><span class="p">,</span> <span class="n">c_transformation</span><span class="p">,</span> <span class="n">c_deformation</span><span class="p">,</span> <span class="n">c_stress</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_continue</span><span class="p">:</span>  <span class="c1"># Reached simulation end time</span>
+            <span class="k">break</span>
+
+    <span class="n">endtime</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**** Time window finished at t=</span><span class="si">{</span><span class="n">endtime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Dynamics solver failed, probably a divergent model.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Check the fedem_solver.res file for details.&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to run solver (</span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">skip_cug</span><span class="p">:</span>  <span class="c1"># Don&#39;t write CUG database and retain the vtfx-file</span>
+        <span class="n">exporter</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="n">endtime</span> <span class="o">/</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Write CUG database and delete the temporary vtfx-file</span>
+        <span class="n">exporter</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="n">endtime</span> <span class="o">/</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">_get_out_dir</span><span class="p">())</span>
+
+
+<div class="viewcode-block" id="stress_visualization_run">
+<a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.stress_visualization.stress_visualization_run">[docs]</a>
+<span class="k">def</span> <span class="nf">stress_visualization_run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For backwards compatibility.</span>
+<span class="sd">    Consider remove and update existing apps using this entry accordingly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Warning: Calling depreciated method stress_visualization_run().&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;              Update your app replacing it by run() instead.&quot;</span><span class="p">)</span>
+    <span class="n">run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

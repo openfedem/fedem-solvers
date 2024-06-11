@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>solver &mdash; fedempy 3.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3f474186"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            fedempy
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howtos.html">fedempy HOWTO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">fedempy modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dts_operators.html">dts_operators module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fedempy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">solver</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for solver</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-FileCopyrightText: 2023 SAP SE</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Python wrapper for the native fedem dynamics solver.</span>
+<span class="sd">Used for convenience in order to hide native type convertions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">byref</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">cdll</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">empty</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">int32</span><span class="p">,</span> <span class="n">int64</span><span class="p">,</span> <span class="n">ndarray</span>
+
+
+<div class="viewcode-block" id="FedemException">
+<a class="viewcode-back" href="../solver.html#solver.FedemException">[docs]</a>
+<span class="k">class</span> <span class="nc">FedemException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General exception-type for solver exceptions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    errmsg : str</span>
+<span class="sd">        Error message to print.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errmsg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span><span class="s2">&quot;Error&quot;</span><span class="p">:</span> <span class="n">errmsg</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="FedemSolver">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver">[docs]</a>
+<span class="k">class</span> <span class="nc">FedemSolver</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class mirrors the functionality of the fedem dynamics solver library</span>
+<span class="sd">    (libfedem_solver_core.so on Linux, fedem_solver_core.dll on Windows).</span>
+<span class="sd">    See also the header file ../../../proprietary/vpmSolver/solverInterface.h</span>
+
+<span class="sd">    In addition to the methods for conducting the simulation itself, the class</span>
+<span class="sd">    also contains several methods for accessing and manipulating the linearized</span>
+<span class="sd">    equation system, to facilitate use by external solution algorithms.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lib_path : str</span>
+<span class="sd">        Absolute path to the solver shared object library</span>
+<span class="sd">    solver_options : list of str, default=None</span>
+<span class="sd">        List of command-line arguments passed to the solver</span>
+<span class="sd">    use_internal_state : bool, default=False</span>
+<span class="sd">        If True, internal state arrays are allocated (for microbatching)</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    solver_init:</span>
+<span class="sd">        Processes the input and sets up necessary data structures</span>
+<span class="sd">    restart_from_state:</span>
+<span class="sd">        Re-initializes the mechanism objects with data from state array</span>
+<span class="sd">    solve_window:</span>
+<span class="sd">        Solves the problem for a time/load step window</span>
+<span class="sd">    get_state_size:</span>
+<span class="sd">        Returns the length of the state vector</span>
+<span class="sd">    get_gauge_size:</span>
+<span class="sd">        Returns the length of the initial strain gauge array</span>
+<span class="sd">    get_transformation_state_size:</span>
+<span class="sd">        Returns the length of the state vector holding transformation matrices</span>
+<span class="sd">    get_part_deformation_state_size:</span>
+<span class="sd">        Returns the length of the state vector holding deformation data</span>
+<span class="sd">    get_part_stress_state_size:</span>
+<span class="sd">        Returns the length of the state vector holding von Mises stress data</span>
+<span class="sd">    save_state:</span>
+<span class="sd">        Stores current solver state in the self.state_data array</span>
+<span class="sd">    save_gauges:</span>
+<span class="sd">        Stores initial gauge strains in the self.gauge_data array</span>
+<span class="sd">    save_transformation_state:</span>
+<span class="sd">        Stores current transformation state in provided core array</span>
+<span class="sd">    save_part_state:</span>
+<span class="sd">        Stores current deformation- and stress states in provided core arrays</span>
+<span class="sd">    solve_next:</span>
+<span class="sd">        Advances the solution one time/load step forward</span>
+<span class="sd">    start_step:</span>
+<span class="sd">        Starts a new time (or load) step</span>
+<span class="sd">    solve_iteration:</span>
+<span class="sd">        Solves current linearized equation system and updates state variables</span>
+<span class="sd">    finish_step:</span>
+<span class="sd">        Completes current time (or load) step</span>
+<span class="sd">    solve_modes:</span>
+<span class="sd">        Solves the eigenvalue problem at current time step</span>
+<span class="sd">    solve_inverse:</span>
+<span class="sd">        Solves the inverse problem at current time/load step</span>
+<span class="sd">    solver_done:</span>
+<span class="sd">        Closes down the model and cleans up heap memory and things on disk</span>
+<span class="sd">    solver_close:</span>
+<span class="sd">        Cleans up heap memory (singleton objects) on close</span>
+<span class="sd">    run_all:</span>
+<span class="sd">        Runs through the dynamics solver without any user intervention.</span>
+<span class="sd">    set_ext_func:</span>
+<span class="sd">        Assigns new value to an external function</span>
+<span class="sd">    get_current_time:</span>
+<span class="sd">        Returns the current physical time of the simulation</span>
+<span class="sd">    get_next_time:</span>
+<span class="sd">        Returns the physical time of the next step of the simulation</span>
+<span class="sd">    get_function:</span>
+<span class="sd">        Evaluates a general function in the model and returns its value</span>
+<span class="sd">    get_functions:</span>
+<span class="sd">        Evaluates several general functions in the model and returns their value</span>
+<span class="sd">    get_function_ids:</span>
+<span class="sd">        Returns a list of user Ids of tagged general functions</span>
+<span class="sd">    get_equations:</span>
+<span class="sd">        Returns the equation numbers associated with the DOFs of an object</span>
+<span class="sd">    get_system_size:</span>
+<span class="sd">        Returns the number of equations in the linearized system</span>
+<span class="sd">    get_system_dofs:</span>
+<span class="sd">        Returns the number of DOFs in the system</span>
+<span class="sd">    get_newton_matrix:</span>
+<span class="sd">        Returns current content of the system Newton matrix</span>
+<span class="sd">    get_stiffness_matrix:</span>
+<span class="sd">        Returns current content of the system stiffness matrix</span>
+<span class="sd">    get_mass_matrix:</span>
+<span class="sd">        Returns current content of the system mass matrix</span>
+<span class="sd">    get_damping_matrix:</span>
+<span class="sd">        Returns current content of the system damping matrix</span>
+<span class="sd">    get_element_stiffness_matrix:</span>
+<span class="sd">        Returns the content of a (beam) element stiffness matrix</span>
+<span class="sd">    get_rhs_vector:</span>
+<span class="sd">        Returns the content of the system right-hand-side vector</span>
+<span class="sd">    get_external_force_vector:</span>
+<span class="sd">        Returns the content of the external force vector</span>
+<span class="sd">    set_rhs_vector:</span>
+<span class="sd">        Replaces current content of the system right-hand-side vector</span>
+<span class="sd">    add_rhs_vector:</span>
+<span class="sd">        Updates the content of the system right-hand-side vector</span>
+<span class="sd">    compute_strains_from_displ:</span>
+<span class="sd">        Computes the strain tensor at gauges for given displacement field</span>
+<span class="sd">    get_current_strains:</span>
+<span class="sd">        Returns the current strain tensor for the specified gauges</span>
+<span class="sd">    compute_rel_dist_from_displ:</span>
+<span class="sd">        Computes relative distance at sensors for given displacement field</span>
+<span class="sd">    compute_int_forces_from_displ:</span>
+<span class="sd">        Computes beam section forces in triads for given displacement field</span>
+<span class="sd">    compute_spring_var_from_displ:</span>
+<span class="sd">        Computes one of the spring variables for given displacement field</span>
+<span class="sd">    get_joint_spring_stiffness:</span>
+<span class="sd">        Returns current joint spring stiffness coefficient(s)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lib_path</span><span class="p">,</span> <span class="n">solver_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_internal_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        Optionally initializes the solver itself if solver_options is given.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># load the solver library</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="n">lib_path</span><span class="p">)</span>
+
+        <span class="c1"># set up return type for functions in the solver library</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverInit</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">restartFromState</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveWindow</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getStateSize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getTransformationStateSize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getPartDeformationStateSize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getPartStressStateSize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getGagesSize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveState</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveTransformationState</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">savePartDeformationState</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">savePartStressState</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveGages</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveNext</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">startStep</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveIteration</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveEigenModes</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveInverse</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverDone</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">setExtFunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getTime</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_double</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">evalFunc</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_double</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getEquations</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getStateVar</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getSystemSize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getSystemMatrix</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getElementStiffnessMatrix</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getRhsVector</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">setRhsVector</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">addRhsVector</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getBeamForcesFromDisp</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getStrainsFromDisp</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getRelDisp</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getRespVars</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getJointSprCoeff</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
+
+        <span class="c1"># initialize error flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="o">-</span><span class="mi">999</span><span class="p">)</span>
+
+        <span class="c1"># initialize the internal state arrays</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">use_internal_state</span> <span class="k">else</span> <span class="n">c_int</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># initialize the fedem solver</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver_init</span><span class="p">(</span><span class="n">solver_options</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Initialization failure (</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">). &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;Check the fedem_solver.res file for error messages.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__check_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks that the internal error flag is zero, to prevent invoking another</span>
+<span class="sd">        solver method if an error condition has occurred in a previous call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span>
+                <span class="n">func</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;() cannot be called due to previous error (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">).&quot;</span>
+            <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_c_double</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a float from Python to C type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">default_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_double</span><span class="p">(</span><span class="n">default_value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">int32</span><span class="p">,</span> <span class="n">int64</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">c_double</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">c_double</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">arg</span>
+
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">float</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">int</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">float64</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">int32</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">int64</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_c_int</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts an integer from Python to C type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">int32</span><span class="p">,</span> <span class="n">int64</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">c_int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">arg</span>
+
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">int</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">int32</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">int64</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_c_char</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a character string from Python to C type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_char_p</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">c_char_p</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">arg</span>
+
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">str</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_char_p</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_c_double_array</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ndiv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts an array of floats from Python to C type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">allow_none</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">argc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="n">argv</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">argc</span><span class="p">)()</span>
+            <span class="n">argv</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">arg</span>
+            <span class="k">if</span> <span class="n">ndiv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="n">argv</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">argc</span> <span class="o">//</span> <span class="n">ndiv</span><span class="p">),</span> <span class="n">argv</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_length_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_type_&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_double</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)),</span> <span class="n">arg</span>
+
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ndarray</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_double</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_c_int_array</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts an array of integers from Python to C type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">allow_none</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">argc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="n">argv</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="n">argc</span><span class="p">)()</span>
+            <span class="n">argv</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">arg</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="n">argv</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_length_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_type_&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)),</span> <span class="n">arg</span>
+
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ndarray</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_int</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_c_char_array</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts an array of strings from Python to C type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">argc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="n">argv</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_char_p</span> <span class="o">*</span> <span class="n">argc</span><span class="p">)()</span>
+            <span class="n">argv</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">aval</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">aval</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="n">argv</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_length_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_type_&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_char_p</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)),</span> <span class="n">arg</span>
+
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_char_p</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FedemSolver.solver_init">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solver_init">[docs]</a>
+    <span class="k">def</span> <span class="nf">solver_init</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">fsi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gauge_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extf_input</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method processes the input and sets up necessary data structures</span>
+<span class="sd">        prior to the time integration loop. It also performs the license checks.</span>
+
+<span class="sd">        See the Fedem R7.5 Users Guide, Appendix C.3 for a complete list of all</span>
+<span class="sd">        command-line arguments that may be specified and their default values.</span>
+
+<span class="sd">        If the argument fsi is None, the model is assumed defined in the file</span>
+<span class="sd">        specified via the command-line argument -fsifile instead.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        options : list of str</span>
+<span class="sd">            List of command-line arguments passed to the solver</span>
+<span class="sd">        fsi : str, default=None</span>
+<span class="sd">            Content of the solver input file describing the model</span>
+<span class="sd">        state_data : list of float, default=None</span>
+<span class="sd">            Complete state vector to restart simulation from</span>
+<span class="sd">        gauge_data : list of float, default=None</span>
+<span class="sd">            Initial strain gauge values for restart</span>
+<span class="sd">        extf_input : list of float, default=None</span>
+<span class="sd">            Initial external function values, for initial equilibrium iterations</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            A negative value indicates an error, otherwise success.</span>
+<span class="sd">            A positive value indicates that initial equilibrium iterations</span>
+<span class="sd">            was performed with external function values from `extf_input`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># do nothing if no solver options specified</span>
+
+        <span class="c1"># The first option is expected to contain the path of the executable,</span>
+        <span class="c1"># so insert a dummy name here if the first option starts with &#39;-&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;fedem_solver&quot;</span><span class="p">)</span>  <span class="c1"># arbitrary name (not used)</span>
+        <span class="n">argc_</span><span class="p">,</span> <span class="n">argv_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_char_array</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="n">cfsi_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_char</span><span class="p">(</span><span class="n">fsi</span><span class="p">)</span>
+
+        <span class="n">ndat_</span><span class="p">,</span> <span class="n">sdat_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">state_data</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">ngda_</span><span class="p">,</span> <span class="n">gdat_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">gauge_data</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">nxin_</span><span class="p">,</span> <span class="n">xinp_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">extf_input</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverInit</span><span class="p">(</span>
+            <span class="n">argc_</span><span class="p">,</span> <span class="n">argv_</span><span class="p">,</span> <span class="n">cfsi_</span><span class="p">,</span> <span class="n">sdat_</span><span class="p">,</span> <span class="n">ndat_</span><span class="p">,</span> <span class="n">gdat_</span><span class="p">,</span> <span class="n">ngda_</span><span class="p">,</span> <span class="n">xinp_</span><span class="p">,</span> <span class="n">byref</span><span class="p">(</span><span class="n">nxin_</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">status</span>  <span class="c1"># initialization failure</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nxin_</span><span class="o">.</span><span class="n">value</span>  <span class="c1"># not using internal state arrays (no restart)</span>
+
+        <span class="c1"># Initialize state array sizes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_state_size</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_gauge_size</span><span class="p">())</span>
+
+        <span class="c1"># Initialize the state arrays</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="o">.</span><span class="n">value</span><span class="p">)()</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid valid array size </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span><span class="o">.</span><span class="n">value</span><span class="p">)()</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid valid array size </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">nxin_</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.restart_from_state">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.restart_from_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">restart_from_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_data</span><span class="p">,</span> <span class="n">write_to_rdb</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method re-initializes the mechanism objects with data from the</span>
+<span class="sd">        provided state array, such that the simulation can continue from there.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state_data : list of float</span>
+<span class="sd">            Complete state vector to restart simulation from</span>
+<span class="sd">        write_to_rdb : int, default=2</span>
+<span class="sd">            | Flag for saving response variables to results database,</span>
+<span class="sd">            | = 0 : No results saving,</span>
+<span class="sd">            | = 1 : Append results to already opened results database,</span>
+<span class="sd">            | = 2 : Increment the results database and write to new files</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Zero on success, a negative value indicates some error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;restart_from_state&quot;</span><span class="p">)</span>
+
+        <span class="n">ndat_</span><span class="p">,</span> <span class="n">sdat_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">state_data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">write_to_rdb</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">write_to_rdb_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">write_to_rdb</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected integer value in (0, 1, 2), got </span><span class="si">{</span><span class="n">write_to_rdb</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">restartFromState</span><span class="p">(</span><span class="n">sdat_</span><span class="p">,</span> <span class="n">ndat_</span><span class="p">,</span> <span class="n">write_to_rdb_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solve_window">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solve_window">[docs]</a>
+    <span class="k">def</span> <span class="nf">solve_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_step</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f_out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xtimes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method solves the problem for a time/load step window,</span>
+<span class="sd">        with given values for the external functions, and extraction</span>
+<span class="sd">        of results from another set of general functions in the model.</span>
+
+<span class="sd">        A non-zero value on self.ierr on exit indicates that an error condition</span>
+<span class="sd">        that will require the simulation to terminate has occurred.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_step : int</span>
+<span class="sd">            Number of time/load steps to solve for from current state</span>
+<span class="sd">        inputs : list of float, default=None</span>
+<span class="sd">            List of input sensor values for each time step.</span>
+<span class="sd">            The length of this list must be equal to `n_step` times</span>
+<span class="sd">            the number of input sensors.</span>
+<span class="sd">        f_out : list of int, default=None</span>
+<span class="sd">            List of user Ids identifying the output sensors in the model</span>
+<span class="sd">        xtimes : list of float, default=None</span>
+<span class="sd">            List of times associated with the inputs.</span>
+<span class="sd">            The length of this list must be equal to `n_step`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Output sensor values for each time step</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the end of the simulation has been reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;solve_window&quot;</span><span class="p">)</span>
+
+        <span class="n">n_inc_</span><span class="p">,</span> <span class="n">xtimes_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">xtimes</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">n_inp_</span><span class="p">,</span> <span class="n">inputs_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">n_step</span><span class="p">)</span>
+        <span class="n">n_out_</span><span class="p">,</span> <span class="n">f_out_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int_array</span><span class="p">(</span><span class="n">f_out</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">outputs_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_step</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">f_out</span><span class="p">)))()</span> <span class="k">if</span> <span class="n">f_out</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="n">not_done</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveWindow</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">n_step</span><span class="p">),</span>
+            <span class="n">n_inc_</span><span class="p">,</span>
+            <span class="n">n_inp_</span><span class="p">,</span>
+            <span class="n">n_out_</span><span class="p">,</span>
+            <span class="n">f_out_</span><span class="p">,</span>
+            <span class="n">xtimes_</span><span class="p">,</span>
+            <span class="n">inputs_</span><span class="p">,</span>
+            <span class="n">outputs_</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="p">,</span>
+            <span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveGages</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">f_out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_out</span><span class="p">)</span> <span class="o">*</span> <span class="n">n_step</span><span class="p">)</span>
+            <span class="n">outputs</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">outputs_</span>
+
+        <span class="k">return</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">not_done</span> <span class="ow">and</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_state_size">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_state_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_state_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the required length of the state vector</span>
+<span class="sd">        which is used when restarting a simulation from an in-core array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getStateSize</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_gauge_size">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_gauge_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_gauge_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the required size of the initial strain gauge array</span>
+<span class="sd">        which is used when restarting a simulation from an in-core array.</span>
+<span class="sd">        Returns 0 if the model does not contain any strain gauges.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getGagesSize</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_transformation_state_size">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_transformation_state_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_transformation_state_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the required length of the vector</span>
+<span class="sd">        which stores the transformation matrices (rotation and translation)</span>
+<span class="sd">        for Triads, Parts and Beams.</span>
+
+<span class="sd">        | The size/length of the state vector is:</span>
+<span class="sd">        | 3 +</span>
+<span class="sd">        | (number of Triads) * 14 +</span>
+<span class="sd">        | (number of Parts) * 14</span>
+<span class="sd">        | (number of Beams) * 14</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getTransformationStateSize</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_part_deformation_state_size">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_part_deformation_state_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_part_deformation_state_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the required length of the state vector</span>
+<span class="sd">        which stores deformation data for the FE Part with the given base Id.</span>
+<span class="sd">        Returns -1 if the specified Part does not exist.</span>
+
+<span class="sd">        | The size/length of the state vector is:</span>
+<span class="sd">        | (number of nodal points in the FE Part) * 3</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bid_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getPartDeformationStateSize</span><span class="p">(</span><span class="n">bid_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_part_stress_state_size">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_part_stress_state_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_part_stress_state_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the required length of the state vector</span>
+<span class="sd">        which stores von Mises stresses for the FE Part with the given base Id.</span>
+<span class="sd">        Returns -1 if the specified Part does not exist, and 0 if the specified</span>
+<span class="sd">        Part does not contain any (shell or solid) elements with stresses.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bid_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getPartStressStateSize</span><span class="p">(</span><span class="n">bid_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.save_state">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.save_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method stores current solver state in the self.state_data array.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the self.state_data array is too small</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.save_gauges">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.save_gauges">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_gauges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method stores initial gauge strains in the self.gauge_data array.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the self.gauge_data array is too small</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveGages</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gauge_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauge_size</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.save_transformation_state">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.save_transformation_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_transformation_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method stores current transformation state for Triads, Parts</span>
+<span class="sd">        and Beams in the provided core array.</span>
+
+<span class="sd">        The transformation state data is on the format:</span>
+
+<span class="sd">        | [step number]</span>
+<span class="sd">        | [current time]</span>
+<span class="sd">        | [current time increment]</span>
+<span class="sd">        | for each non-fixed Triad:</span>
+<span class="sd">        |   1</span>
+<span class="sd">        |   [rotMatrix column 1]</span>
+<span class="sd">        |   [rotMatrix column 2]</span>
+<span class="sd">        |   [rotMatrix column 3]</span>
+<span class="sd">        |   [translation vector]</span>
+<span class="sd">        | for each Part and Beam:</span>
+<span class="sd">        |   2</span>
+<span class="sd">        |   [rotMatrix column 1]</span>
+<span class="sd">        |   [rotMatrix column 2]</span>
+<span class="sd">        |   [rotMatrix column 3]</span>
+<span class="sd">        |   [translation vector]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state_data : list of c_double</span>
+<span class="sd">            Array to fill with transformation data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the state_data array is too small</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ndat</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state_data</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">saveTransformationState</span><span class="p">(</span><span class="n">state_data</span><span class="p">,</span> <span class="n">ndat</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.save_part_state">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.save_part_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_part_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">def_state</span><span class="p">,</span> <span class="n">str_state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method stores current deformation- and stress states</span>
+<span class="sd">        for the specified FE Part in the provided core arrays.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        base_id : int</span>
+<span class="sd">            Base Id of the FE Part to save state for</span>
+<span class="sd">        def_state : list of c_double</span>
+<span class="sd">            Array to fill with deformation data</span>
+<span class="sd">        str_state : list of c_couble</span>
+<span class="sd">            Array to fill with stress data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless one or both of the state arrays are too small</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bid_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span>
+        <span class="n">ndef</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">def_state</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">savePartDeformationState</span><span class="p">(</span><span class="n">bid_</span><span class="p">,</span> <span class="n">def_state</span><span class="p">,</span> <span class="n">ndef</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">nstr</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str_state</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">savePartStressState</span><span class="p">(</span><span class="n">bid_</span><span class="p">,</span> <span class="n">str_state</span><span class="p">,</span> <span class="n">nstr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solve_next">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solve_next">[docs]</a>
+    <span class="k">def</span> <span class="nf">solve_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inp_def</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out_def</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method advances the solution one time/load step forward.</span>
+<span class="sd">        The self.ierr variable has the value zero on a successful computation.</span>
+<span class="sd">        A non-zero value indicates some error that requires the simulation</span>
+<span class="sd">        to terminate.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inp : list of float, default=None</span>
+<span class="sd">            Input function values</span>
+<span class="sd">        inp_def : list of int, default=None</span>
+<span class="sd">            External function Ids of the functions to assign values</span>
+<span class="sd">        out_def : list of int, default=None</span>
+<span class="sd">            User Ids of the functions to evaluate the response for</span>
+<span class="sd">        time_next : float, default=None</span>
+<span class="sd">            Time of next step, to override time step size defined in the model</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float, only if out_def is specified</span>
+<span class="sd">            Evaluated response variables</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless current time/load step failed to converge,</span>
+<span class="sd">            or the end time of the simulation has been reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;solve_next&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">time_next</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">setTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double</span><span class="p">(</span><span class="n">time_next</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">inp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">inp_def</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">set_ext_func</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">inp_def</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">set_ext_func</span><span class="p">(</span><span class="n">inp_def</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+
+        <span class="n">success</span> <span class="o">&amp;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveNext</span><span class="p">(</span><span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">out_def</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">success</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_functions</span><span class="p">(</span><span class="n">out_def</span><span class="p">),</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.start_step">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.start_step">[docs]</a>
+    <span class="k">def</span> <span class="nf">start_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method starts a new time (or load) step, by calculating the</span>
+<span class="sd">        predicted response, the coefficient matrix and right-hand-side vector</span>
+<span class="sd">        of the first nonlinear iteration. It has to be followed up by</span>
+<span class="sd">        a series of solve_iteration calls in order to continue the simulation,</span>
+<span class="sd">        but the linear equation system can be manipulated in between.</span>
+<span class="sd">        The self.ierr variable has the value zero on a successful computation.</span>
+<span class="sd">        A non-zero value indicates some error that requires the simulation</span>
+<span class="sd">        to terminate.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time_next : float, default=None</span>
+<span class="sd">            Time of next step, to override time step size defined in the model</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the simulation has to stop due to some error,</span>
+<span class="sd">            or the end time of the simulation has been reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;start_step&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">time_next</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">setTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double</span><span class="p">(</span><span class="n">time_next</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">startStep</span><span class="p">(</span><span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">))</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solve_iteration">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solve_iteration">[docs]</a>
+    <span class="k">def</span> <span class="nf">solve_iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method solves the current linearized equation system and updates</span>
+<span class="sd">        all state variables. Then it assembles the linearized system of</span>
+<span class="sd">        equations for next iteration, unless convergence has been reached.</span>
+<span class="sd">        The self.ierr variable has the value zero on a successful computation.</span>
+<span class="sd">        A non-zero value indicates some error that requires the simulation</span>
+<span class="sd">        to terminate.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the simulation has to stop due to some error,</span>
+<span class="sd">            or the current time/load step has converged.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;solve_iteration&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveIteration</span><span class="p">(</span><span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">),</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.finish_step">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.finish_step">[docs]</a>
+    <span class="k">def</span> <span class="nf">finish_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method completes current time (or load) step, by iterating the</span>
+<span class="sd">        linearized equation system until convergence is achieved.</span>
+<span class="sd">        The self.ierr variable has the value zero on a successful computation.</span>
+<span class="sd">        A non-zero value indicates some error that requires the simulation</span>
+<span class="sd">        to terminate.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless current time/load step failed to converge,</span>
+<span class="sd">            or the end time of the simulation has been reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;finish_step&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveIteration</span><span class="p">(</span><span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">),</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solve_modes">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solve_modes">[docs]</a>
+    <span class="k">def</span> <span class="nf">solve_modes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_modes</span><span class="p">,</span> <span class="n">dof_order</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_lapack</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method solves the eigenvalue problem at current time step,</span>
+<span class="sd">        and returns the computed eigenvalues and associated eigenvectors.</span>
+<span class="sd">        If an error condition that requires the simulation to terminate occurs,</span>
+<span class="sd">        the self.ierr variable is assigned a negative value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_modes : int</span>
+<span class="sd">            Number of eigenmodes to calculate</span>
+<span class="sd">        dof_order : bool, default=False</span>
+<span class="sd">            If True, the eigenvectors are returned in DOF-order</span>
+<span class="sd">            instead of equation order which is the default</span>
+<span class="sd">        use_lapack : int, default=0</span>
+<span class="sd">            Flag usage of LAPACK eigensolvers (0=No, 1=DSYGVX, 2=DGGEVX)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            The computed eigenvalues</span>
+<span class="sd">        list of list of float</span>
+<span class="sd">            The computed eigenvectors</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the computation failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;solve_modes&quot;</span><span class="p">)</span>
+
+        <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_system_dofs</span><span class="p">()</span> <span class="k">if</span> <span class="n">dof_order</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
+        <span class="n">n_mod_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)</span>
+        <span class="n">e_val_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">n_modes</span><span class="p">)()</span>
+        <span class="n">e_vec_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">*</span> <span class="n">n_modes</span><span class="p">))()</span>
+        <span class="n">doford</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="n">dof_order</span><span class="p">)</span>
+        <span class="n">lapack</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">use_lapack</span><span class="p">)</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveEigenModes</span><span class="p">(</span>
+            <span class="n">n_mod_</span><span class="p">,</span> <span class="n">e_val_</span><span class="p">,</span> <span class="n">e_vec_</span><span class="p">,</span> <span class="n">doford</span><span class="p">,</span> <span class="n">lapack</span><span class="p">,</span> <span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">success</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">success</span>
+
+        <span class="n">e_val</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_modes</span>
+        <span class="n">e_val</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">e_val_</span>
+        <span class="n">e_vec</span> <span class="o">=</span> <span class="p">[</span><span class="n">e_vec_</span><span class="p">[</span><span class="n">dim</span> <span class="o">*</span> <span class="n">i</span> <span class="p">:</span> <span class="n">dim</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_modes</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">e_val</span><span class="p">,</span> <span class="n">e_vec</span><span class="p">,</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solve_inverse">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solve_inverse">[docs]</a>
+    <span class="k">def</span> <span class="nf">solve_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_val</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">out_def</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method solves the inverse problem at current time/load step,</span>
+<span class="sd">        assuming small deformations only (linear response).</span>
+<span class="sd">        If an error condition that requires the simulation to terminate occurs,</span>
+<span class="sd">        the self.ierr variable is assigned a non-zero value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x_val : list of float</span>
+<span class="sd">            Specified displacement values at a set of degrees of freedom</span>
+<span class="sd">        x_def : list of int</span>
+<span class="sd">            Equation numbers for the specified displacement values</span>
+<span class="sd">        g_def : list of int</span>
+<span class="sd">            Equation numbers for the DOFs with unknown external forces</span>
+<span class="sd">        out_def : list of int, default=None</span>
+<span class="sd">            User Ids of the functions to evaluate the response for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float, only if out_def is specified</span>
+<span class="sd">            Evaluated response variables</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the simulation has to stop due to some error,</span>
+<span class="sd">            or the end of the simulation has been reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_error</span><span class="p">(</span><span class="s2">&quot;solve_inverse&quot;</span><span class="p">)</span>
+
+        <span class="n">nval_</span><span class="p">,</span> <span class="n">xval_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+        <span class="n">ndis_</span><span class="p">,</span> <span class="n">xeqs_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int_array</span><span class="p">(</span><span class="n">x_def</span><span class="p">)</span>
+        <span class="n">nfrs_</span><span class="p">,</span> <span class="n">feqs_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int_array</span><span class="p">(</span><span class="n">g_def</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nval_</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">ndis_</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Array x_val is too small (</span><span class="si">{</span><span class="n">nval_</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solveInverse</span><span class="p">(</span>
+            <span class="n">xval_</span><span class="p">,</span> <span class="n">xeqs_</span><span class="p">,</span> <span class="n">feqs_</span><span class="p">,</span> <span class="n">ndis_</span><span class="p">,</span> <span class="n">nfrs_</span><span class="p">,</span> <span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">out_def</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">success</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_functions</span><span class="p">(</span><span class="n">out_def</span><span class="p">),</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solver_done">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solver_done">[docs]</a>
+    <span class="k">def</span> <span class="nf">solver_done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method should be used when the time/load step loop is finished.</span>
+<span class="sd">        It closes down the model and cleans up heap memory and things on disk.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        remove_singletons : bool default=None</span>
+<span class="sd">            If True or None, heap-allocated singelton objects are also released</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Zero on success, non-zero values indicates errors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">remove_singletons</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_rsflag</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remove_singletons</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="n">_rsflag</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="n">remove_singletons</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remove_singletons</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">):</span>
+            <span class="n">_rsflag</span> <span class="o">=</span> <span class="n">remove_singletons</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_rsflag</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverDone</span><span class="p">(</span><span class="n">_rsflag</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.solver_close">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.solver_close">[docs]</a>
+    <span class="k">def</span> <span class="nf">solver_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method needs to be used if solver_done() was invoked</span>
+<span class="sd">        with its `remove_singletons` argument set to False.</span>
+<span class="sd">        It will delete those singleton objects here instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverClose</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.run_all">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.run_all">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method runs the dynamics solver with given command-line `options`,</span>
+<span class="sd">        without any user intervention.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver_init</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Solver initialization failure (</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Check the fedem_solver.res file for error messages.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">status</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">solve_next</span><span class="p">():</span>
+            <span class="k">pass</span>  <span class="c1"># Dummy statement</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Time step loop OK&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Dynamics solver failed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.set_ext_func">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.set_ext_func">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ext_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_id</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method may be used prior to the solve_next call, to assign a</span>
+<span class="sd">        sensor value from a physical twin to the specified actuator or load in</span>
+<span class="sd">        the model, identified by the argument func_id (external function Id).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        func_id : int</span>
+<span class="sd">            Id of the external function to be assigned new value</span>
+<span class="sd">        value : float, default=None</span>
+<span class="sd">            The value to be assigned</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the specified function is not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">func_id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
+        <span class="n">f_value_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">setExtFunc</span><span class="p">(</span><span class="n">func_id_</span><span class="p">,</span> <span class="n">f_value_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_current_time">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_current_time">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_current_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the current physical time of the simulation.</span>
+<span class="sd">        The self.ierr variable is not touched.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getTime</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_next_time">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_next_time">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_next_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the physical time of the next step of the simulation.</span>
+<span class="sd">        If the time step size is defined by a general function that could not be</span>
+<span class="sd">        evaluated, the self.ierr variable is decremented.</span>
+<span class="sd">        Otherwise, it is not touched.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getTime</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">),</span> <span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.check_times">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.check_times">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">,</span> <span class="n">use_times</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility checking that a given time series starts with the current solver time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">use_times</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">xtimes</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">mismatch</span> <span class="o">=</span> <span class="n">xtimes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mismatch</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ** Warning: Mismatch (</span><span class="si">{</span><span class="n">mismatch</span><span class="si">}</span><span class="s2">) between the first input time&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     and expected time of the first step (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_next_time</span><span class="p">()</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     This may cause problems and/or incorrect simulation results.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">xtimes</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_function">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_function">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility evaluating a general function in the model, identified by the</span>
+<span class="sd">        specified user Id `uid` or `tag`, and with the function argument `arg`.</span>
+<span class="sd">        If `arg` is `None` or contains a negative value, the function is instead</span>
+<span class="sd">        evaluated for current state of the sensor object that is defined as</span>
+<span class="sd">        the function argument. The same is done if a `tag` is specified.</span>
+<span class="sd">        If the specified function could not be evaluated, the self.ierr variable</span>
+<span class="sd">        is decremented. Otherwise, it is not touched.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">uid_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+        <span class="n">tag_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_char</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+        <span class="n">arg_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">evalFunc</span><span class="p">(</span><span class="n">uid_</span><span class="p">,</span> <span class="n">tag_</span><span class="p">,</span> <span class="n">arg_</span><span class="p">,</span> <span class="n">byref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_functions">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_functions">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility evaluating a list of general functions for current state.</span>
+<span class="sd">        The `uids` argument can be a list of either the user Ids of the</span>
+<span class="sd">        functions to be evaluated, or their corresponding objects tags.</span>
+<span class="sd">        If the specified functions could not be evaluated, the self.ierr variable</span>
+<span class="sd">        is decremented for each problem encountered. Otherwise, it is not touched.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">uids</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">uid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">uids</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_function</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="n">uid</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_function</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_function_ids">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_function_ids">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_function_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning a list of user Ids of tagged general functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getFuncId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_char</span><span class="p">(</span><span class="n">tags</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">uids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tags</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">uids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getFuncId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_char</span><span class="p">(</span><span class="n">tag</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">uids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">uids</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_equations">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_equations">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_equations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bid</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the equation numbers for the DOFs of the object</span>
+<span class="sd">        with the specified base Id (bid).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bid_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">bid</span><span class="p">)</span>
+        <span class="n">eqns</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)()</span>
+        <span class="n">num_eqn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getEquations</span><span class="p">(</span><span class="n">bid_</span><span class="p">,</span> <span class="n">eqns</span><span class="p">)</span>
+        <span class="n">meqn</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_eqn</span>
+        <span class="n">meqn</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">eqns</span>
+
+        <span class="k">return</span> <span class="n">meqn</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_system_size">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_system_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_system_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the dimension (number of equations) of the system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getSystemSize</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_system_dofs">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_system_dofs">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_system_dofs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utiloty returning the total number of DOFs of the system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getSystemSize</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__get_system_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i_mat</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning a system matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">))()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getSystemMatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">c_int</span><span class="p">(</span><span class="n">i_mat</span><span class="p">))</span>
+        <span class="n">n_mat</span> <span class="o">=</span> <span class="n">empty</span><span class="p">([</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">n_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">dim</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">n_mat</span><span class="p">,</span> <span class="n">success</span>
+
+<div class="viewcode-block" id="FedemSolver.get_newton_matrix">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_newton_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_newton_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning current content of the system Newton matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_system_matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_stiffness_matrix">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_stiffness_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_stiffness_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning current content of the system stiffness matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_system_matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_mass_matrix">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_mass_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_mass_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning current content of the system mass matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_system_matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_damping_matrix">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_damping_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_damping_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning current content of the system damping matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_system_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_element_stiffness_matrix">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_element_stiffness_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_element_stiffness_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bid</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning the initial content of an element stiffness matrix.</span>
+<span class="sd">        Use this method for beam elements only, 6 dof per node (total 12).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="mi">12</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">))()</span>
+        <span class="n">bid_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">bid</span><span class="p">)</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getElementStiffnessMatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">bid_</span><span class="p">)</span>
+        <span class="n">es_mat</span> <span class="o">=</span> <span class="n">empty</span><span class="p">([</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">es_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">dim</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">es_mat</span><span class="p">,</span> <span class="n">success</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__get_rhs_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i_vec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning a system right-hand-side vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">dim</span><span class="p">)()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getRhsVector</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">c_int</span><span class="p">(</span><span class="n">i_vec</span><span class="p">))</span>
+        <span class="n">r_vec</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">r_vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">r_vec</span><span class="p">,</span> <span class="n">success</span>
+
+<div class="viewcode-block" id="FedemSolver.get_rhs_vector">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_rhs_vector">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_rhs_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning current content of the system right-hand-side vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_rhs_vector</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_external_force_vector">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_external_force_vector">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_external_force_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility returning current content of the external force vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_rhs_vector</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.set_rhs_vector">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.set_rhs_vector">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_rhs_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility replacing current content of the system right-hand-side vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">setRhsVector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">r_vec</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.add_rhs_vector">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.add_rhs_vector">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_rhs_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility updating the content of the system right-hand-side vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">addRhsVector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">r_vec</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.compute_strains_from_displ">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.compute_strains_from_displ">[docs]</a>
+    <span class="k">def</span> <span class="nf">compute_strains_from_displ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">gauge_ids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method computes the strain tensor at gauges for the given</span>
+<span class="sd">        displacement field, or from current state if no displacements provided.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        disp : list of float</span>
+<span class="sd">            Displacement field to evaluate strains from</span>
+<span class="sd">        gauge_ids : list of int</span>
+<span class="sd">            Array with gauge identification numbers</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Strain components</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the calculation failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">n_dof_</span><span class="p">,</span> <span class="n">disp_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">ngauge</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gauge_ids</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">ngauge_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">ngauge</span><span class="p">)</span>
+        <span class="n">gauge_ids_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="n">ngauge</span><span class="p">)()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ngauge</span><span class="p">):</span>
+            <span class="n">gauge_ids_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">gauge_ids</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">])</span>
+
+        <span class="n">eps_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">ngauge</span><span class="p">))()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getStrainsFromDisp</span><span class="p">(</span>
+            <span class="n">disp_</span><span class="p">,</span> <span class="n">gauge_ids_</span><span class="p">,</span> <span class="n">eps_</span><span class="p">,</span> <span class="n">n_dof_</span><span class="p">,</span> <span class="n">ngauge_</span>
+        <span class="p">)</span>
+
+        <span class="n">eps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ngauge</span><span class="p">):</span>
+            <span class="n">tc_idx</span> <span class="o">=</span> <span class="n">gauge_ids</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">tc_idx</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>  <span class="c1"># Tensorial component index</span>
+                <span class="n">eps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eps_</span><span class="p">[</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">tc_idx</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Return all three tensor components</span>
+                <span class="n">eps</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">eps_</span><span class="p">[</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="p">:</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">eps</span><span class="p">,</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_current_strains">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_current_strains">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_current_strains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gauge_ids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method computes the strain tensor at gauges from current state.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        gauge_ids : list of int</span>
+<span class="sd">            Array with gauge identification numbers</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Strain components</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the calculation failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_strains_from_displ</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">gauge_ids</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.compute_rel_dist_from_displ">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.compute_rel_dist_from_displ">[docs]</a>
+    <span class="k">def</span> <span class="nf">compute_rel_dist_from_displ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method computes the relative distance at sensors for the</span>
+<span class="sd">        given displacement field.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        disp : list of float</span>
+<span class="sd">            Displacement field</span>
+<span class="sd">        ids : list of int</span>
+<span class="sd">            Array with function identification numbers</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Displacement components</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the calculation failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">n_dof_</span><span class="p">,</span> <span class="n">disp_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+        <span class="n">n_ids_</span><span class="p">,</span> <span class="n">ids_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int_array</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+        <span class="n">n_ids</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+        <span class="n">rel_dis_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">n_ids</span><span class="p">)()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getRelDisp</span><span class="p">(</span><span class="n">disp_</span><span class="p">,</span> <span class="n">ids_</span><span class="p">,</span> <span class="n">rel_dis_</span><span class="p">,</span> <span class="n">n_dof_</span><span class="p">,</span> <span class="n">n_ids_</span><span class="p">)</span>
+
+        <span class="n">rel_dis</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_ids</span>
+        <span class="n">rel_dis</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">rel_dis_</span>
+
+        <span class="k">return</span> <span class="n">rel_dis</span><span class="p">,</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.compute_spring_var_from_displ">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.compute_spring_var_from_displ">[docs]</a>
+    <span class="k">def</span> <span class="nf">compute_spring_var_from_displ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method computes one of the spring variables (length,</span>
+<span class="sd">        deflection, force) at sensors for the given displacement field.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        disp : list of float</span>
+<span class="sd">            Displacement field</span>
+<span class="sd">        ids : list of int</span>
+<span class="sd">            Array with function identification numbers</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Displacement components</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the calculation failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">n_dof_</span><span class="p">,</span> <span class="n">disp_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+        <span class="n">n_ids_</span><span class="p">,</span> <span class="n">ids_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int_array</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+        <span class="n">n_ids</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+        <span class="n">spr_var_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">n_ids</span><span class="p">)()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getRespVars</span><span class="p">(</span><span class="n">disp_</span><span class="p">,</span> <span class="n">ids_</span><span class="p">,</span> <span class="n">spr_var_</span><span class="p">,</span> <span class="n">n_dof_</span><span class="p">,</span> <span class="n">n_ids_</span><span class="p">)</span>
+
+        <span class="n">spr_var</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_ids</span>
+        <span class="n">spr_var</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">spr_var_</span>
+
+        <span class="k">return</span> <span class="n">spr_var</span><span class="p">,</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.compute_int_forces_from_displ">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.compute_int_forces_from_displ">[docs]</a>
+    <span class="k">def</span> <span class="nf">compute_int_forces_from_displ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method computes beam section forces in triads for the</span>
+<span class="sd">        given displacement field.</span>
+
+<span class="sd">        There are 2 cases:</span>
+
+<span class="sd">        | InternalForce component defined by an array</span>
+<span class="sd">        |   dofi contains dof number in a certain direction i</span>
+<span class="sd">        |   ids = [ beamID1, triadID1, dof1, beamID2, triadID2, dof2, ..... ]</span>
+
+<span class="sd">        | InternalSectionForces defined by an array</span>
+<span class="sd">        |   dofi contains always -1, 6 components are requested</span>
+<span class="sd">        |   ids = [ beamID1, triadID1, -1, beamID2, triadID2, -1, ..... ]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        disp : list of float</span>
+<span class="sd">            Displacement field</span>
+<span class="sd">        ids : list of int</span>
+<span class="sd">            Array with beam and triad identification numbers</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Force components</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the calculation failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">n_dof_</span><span class="p">,</span> <span class="n">disp_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_double_array</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+        <span class="n">n_ids_</span><span class="p">,</span> <span class="n">ids_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int_array</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+        <span class="n">n_items</span> <span class="o">=</span> <span class="n">n_ids_</span><span class="o">.</span><span class="n">value</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">n_items_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">n_items</span><span class="p">)</span>
+        <span class="n">forces_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">n_items</span><span class="p">))()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getBeamForcesFromDisp</span><span class="p">(</span>
+            <span class="n">disp_</span><span class="p">,</span> <span class="n">ids_</span><span class="p">,</span> <span class="n">forces_</span><span class="p">,</span> <span class="n">n_dof_</span><span class="p">,</span> <span class="n">n_items_</span>
+        <span class="p">)</span>
+
+        <span class="n">iforce</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># all 6 force components are requested</span>
+                <span class="n">forces</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">forces_</span><span class="p">[</span><span class="n">iforce</span> <span class="p">:</span> <span class="n">iforce</span> <span class="o">+</span> <span class="mi">6</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Force component for local dof ids[i] is requested</span>
+                <span class="n">forces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">forces_</span><span class="p">[</span><span class="n">iforce</span> <span class="o">+</span> <span class="n">ids</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            <span class="n">iforce</span> <span class="o">+=</span> <span class="mi">6</span>
+
+        <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="FedemSolver.get_joint_spring_stiffness">
+<a class="viewcode-back" href="../solver.html#solver.FedemSolver.get_joint_spring_stiffness">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_joint_spring_stiffness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bid</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get joint spring stiffness coefficient(s).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        bid : int</span>
+<span class="sd">            Joint identification number (base ID)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            Spring stiffness coefficients for the joint DOFs</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always True, unless the extraction failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_dof</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># max no. of joint dofs</span>
+        <span class="n">stiffc_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">max_dof</span><span class="p">)()</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">getJointSprCoeff</span><span class="p">(</span><span class="n">stiffc_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_c_int</span><span class="p">(</span><span class="n">bid</span><span class="p">))</span>
+
+        <span class="n">stiffness</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">max_dof</span>
+        <span class="n">stiffness</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">stiffc_</span>
+
+        <span class="k">return</span> <span class="n">stiffness</span><span class="p">,</span> <span class="n">success</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, SAP SE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
