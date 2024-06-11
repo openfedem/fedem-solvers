@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$namespacesamstressmodule.html#ac92e4718f898abf21cbe409e81b53a96" title="Initializes the SAM data structure for the recovery processes." alt="" coords="672,99,892,125"/>
 <area shape="rect" id="node10" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="667,216,897,243"/>
 <area shape="rect" id="node15" href="$namespacesamsolvermodule.html#a0cf83f9fe742b5383b2d1dbe1f142d9a" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="684,150,880,191"/>
-<area shape="rect" id="node17" href="$classFaFace.html#a36124d54364addafdc7a23bae125835c" title=" " alt="" coords="716,267,848,293"/>
+<area shape="rect" id="node17" href="$classFaFace.html#a36124d54364addafdc7a23bae125835c" title=" " alt="" coords="717,267,847,293"/>
 <area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="403,91,569,133"/>
 <area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" id="node5" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>

@@ -1,5 +1,5 @@
 <map id="triadtypemodule::nullifytriad" name="triadtypemodule::nullifytriad">
-<area shape="rect" id="node1" title="Initializes a triad object." alt="" coords="1891,269,2100,296"/>
+<area shape="rect" id="node1" title="Initializes a triad object." alt="" coords="1891,269,2099,296"/>
 <area shape="rect" id="node2" href="$namespacetriadtypemodule.html#a51c4d067b4d89e839c4b3914b796e0dd" title="Deallocates a triad object." alt="" coords="1607,244,1843,271"/>
 <area shape="rect" id="node22" href="$namespaceinitiatetriadtypemodule.html#a4158a534ee1a02c6a5edd2c0a9c9bc35" title=" " alt="" coords="1092,287,1268,329"/>
 <area shape="rect" id="node3" href="$namespacetriadtypemodule.html#a8367c97a2ee48bc490ebdf38ccd254e3" title="Deallocates an array of triad objects." alt="" coords="1316,244,1559,271"/>

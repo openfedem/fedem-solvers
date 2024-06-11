@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="549,13,717,55"/>
 <area shape="rect" id="node3" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="227,138,472,165"/>
 <area shape="rect" id="node4" href="$namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="234,189,465,215"/>
-<area shape="rect" id="node5" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="239,239,460,266"/>
+<area shape="rect" id="node5" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="239,239,459,266"/>
 <area shape="rect" id="node6" href="$namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="269,291,430,332"/>
 <area shape="rect" id="node7" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="555,408,710,449"/>
 <area shape="rect" id="node8" href="$namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="267,539,431,580"/>

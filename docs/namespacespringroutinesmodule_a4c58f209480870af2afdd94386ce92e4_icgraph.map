@@ -1,8 +1,8 @@
 <map id="springroutinesmodule::couplespringstiffness" name="springroutinesmodule::couplespringstiffness">
-<area shape="rect" id="node1" title="Updates a spring element stiffness matrix due to explicit coupling." alt="" coords="720,50,889,91"/>
+<area shape="rect" id="node1" title="Updates a spring element stiffness matrix due to explicit coupling." alt="" coords="720,50,888,91"/>
 <area shape="rect" id="node2" href="$namespacespringroutinesmodule.html#ab33de58a0a2ea7e130d3910aa61cabd3" title="Calculates the stiffness matrix contributions from a spring element." alt="" coords="508,50,672,91"/>
 <area shape="rect" id="node3" href="$interfacespringroutinesmodule_1_1addinspringforces.html#a0416daf424b1f3dc0e2a5cb386763b46" title="Assembles system force vector contributions from a spring element." alt="" coords="296,5,460,61"/>
 <area shape="rect" id="node4" href="$namespacespringroutinesmodule.html#ac05d1d43e81337683d3ae43a7e3c962d" title="Assembles system stiffness contributions from a spring element." alt="" coords="296,86,460,127"/>
 <area shape="rect" id="node5" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="5,68,248,95"/>
-<area shape="rect" id="node6" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="16,119,237,145"/>
+<area shape="rect" id="node6" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="17,119,237,145"/>
 </map>

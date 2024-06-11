@@ -1,4 +1,4 @@
 <map id="savemodule::initiatesavemodule" name="savemodule::initiatesavemodule">
 <area shape="rect" id="node1" title="Initializes the solver result database file." alt="" coords="5,5,241,32"/>
-<area shape="rect" id="node2" href="$namespacerdbmodule.html#a61e32840f6162d281a5b8723648f4e92" title="Initializes a rdbmodule::rdbtype object." alt="" coords="289,5,452,32"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#a61e32840f6162d281a5b8723648f4e92" title="Initializes a rdbmodule::rdbtype object." alt="" coords="289,5,451,32"/>
 </map>

@@ -1,12 +1,12 @@
 <map id="springtypemodule::springptrtype" name="springtypemodule::springptrtype">
-<area shape="rect" id="node1" title="Data type representing a base spring pointer." alt="" coords="2395,140,2629,167"/>
-<area shape="rect" id="node2" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2085,140,2333,167"/>
+<area shape="rect" id="node1" title="Data type representing a base spring pointer." alt="" coords="2393,140,2628,167"/>
+<area shape="rect" id="node2" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2084,140,2332,167"/>
 <area shape="rect" id="node3" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1084,146,1237,187"/>
 <area shape="rect" id="node10" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1335,195,1573,221"/>
 <area shape="rect" id="node4" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,172,167,199"/>
 <area shape="rect" id="node5" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="805,78,959,119"/>
 <area shape="rect" id="node7" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,147,455,173"/>
 <area shape="rect" id="node8" href="$structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="479,299,737,325"/>
-<area shape="rect" id="node9" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1751,200,2000,227"/>
+<area shape="rect" id="node9" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1749,200,1999,227"/>
 <area shape="rect" id="node6" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="761,147,1003,173"/>
 </map>

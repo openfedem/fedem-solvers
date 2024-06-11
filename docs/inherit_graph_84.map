@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classFFaDynamicLibraryBase.html" title="Base class for dynamic loading of shared object libraries." alt="" coords="36,71,216,98"/>
-<area shape="rect" id="node2" href="$classFFaUserFuncPlugin.html" title=" " alt="" coords="295,30,440,57"/>
-<area shape="rect" id="node3" href="$classFiUserElmPlugin.html" title="Singleton class for user&#45;defined element plugins." alt="" coords="304,97,431,123"/>
-<area shape="rect" id="node4" href="$classFFaSingelton.html" title=" " alt="" coords="24,5,228,47"/>
+<area shape="rect" id="node1" href="$classFFaDynamicLibraryBase.html" title="Base class for dynamic loading of shared object libraries." alt="" coords="37,71,215,98"/>
+<area shape="rect" id="node2" href="$classFFaUserFuncPlugin.html" title=" " alt="" coords="295,30,439,57"/>
+<area shape="rect" id="node3" href="$classFiUserElmPlugin.html" title="Singleton class for user&#45;defined element plugins." alt="" coords="303,97,431,123"/>
+<area shape="rect" id="node4" href="$classFFaSingelton.html" title=" " alt="" coords="25,5,227,47"/>
 <area shape="rect" id="node5" href="$classFFaSingelton.html" title=" " alt="" coords="5,122,247,149"/>
 </map>

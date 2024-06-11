@@ -1,13 +1,13 @@
 <map id="dampertypemodule::damperptrtype" name="dampertypemodule::damperptrtype">
-<area shape="rect" id="node1" title="Data type representing a base damper pointer." alt="" coords="2736,161,2991,188"/>
-<area shape="rect" id="node2" href="$structdampertypemodule_1_1damperbasetype.html" title="Data type representing a base damper object." alt="" coords="2407,161,2675,188"/>
+<area shape="rect" id="node1" title="Data type representing a base damper pointer." alt="" coords="2735,161,2989,188"/>
+<area shape="rect" id="node2" href="$structdampertypemodule_1_1damperbasetype.html" title="Data type representing a base damper object." alt="" coords="2405,161,2673,188"/>
 <area shape="rect" id="node3" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1084,195,1237,237"/>
-<area shape="rect" id="node8" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2085,287,2333,313"/>
+<area shape="rect" id="node8" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2084,287,2332,313"/>
 <area shape="rect" id="node11" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1335,255,1573,281"/>
 <area shape="rect" id="node4" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,300,167,327"/>
 <area shape="rect" id="node5" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="805,94,959,135"/>
 <area shape="rect" id="node7" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,199,455,225"/>
 <area shape="rect" id="node9" href="$structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="479,412,737,439"/>
-<area shape="rect" id="node10" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1751,359,2000,385"/>
+<area shape="rect" id="node10" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1749,359,1999,385"/>
 <area shape="rect" id="node6" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="761,199,1003,225"/>
 </map>

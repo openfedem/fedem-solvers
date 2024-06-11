@@ -2,11 +2,11 @@
 <area shape="rect" id="node1" title="Test program for external functions in the dynamics solver." alt="" coords="5,284,60,311"/>
 <area shape="rect" id="node2" href="$testExternal_8C.html#ab00cea25a3560d175fc1d2c37dd6c251" title="Utility function to compare two ASCII files with numerical data." alt="" coords="108,5,251,32"/>
 <area shape="rect" id="node3" href="$testExternal_8C.html#addecd4c91a5d3003015bdd719d84e657" title="Hard&#45;coded external function evaluations to test against." alt="" coords="143,56,216,83"/>
-<area shape="rect" id="node4" href="$solverInterface_8h.html#a4354e93ec1383d34a2b5ede7bad1e43d" title="Returns the current physical time of the simulation." alt="" coords="118,107,241,133"/>
+<area shape="rect" id="node4" href="$solverInterface_8h.html#a4354e93ec1383d34a2b5ede7bad1e43d" title="Returns the current physical time of the simulation." alt="" coords="117,107,241,133"/>
 <area shape="rect" id="node5" href="$solverInterface_8h.html#a8d8fa539bc9a6624b55925249ac8517a" title="Returns the current value of the specified general function." alt="" coords="143,157,216,184"/>
 <area shape="rect" id="node6" href="$solverInterface_8h.html#a04594cfb573c7777217d091d755b2082" title="Returns the physical time of the next step of the simulation." alt="" coords="126,208,233,235"/>
 <area shape="rect" id="node7" href="$testExternal_8C.html#a30a86df369d41825ffbc294bdbc08613" title="Helper to print out response data to the given stream for a time step." alt="" coords="142,259,217,285"/>
-<area shape="rect" id="node8" href="$testExternal_8C.html#a0998710d3db8b85d5ced8b2eb56d3854" title="Utility function to read a solver input file into a string variable." alt="" coords="133,309,225,336"/>
+<area shape="rect" id="node8" href="$testExternal_8C.html#a0998710d3db8b85d5ced8b2eb56d3854" title="Utility function to read a solver input file into a string variable." alt="" coords="133,309,226,336"/>
 <area shape="rect" id="node9" href="$solverInterface_8h.html#a0dd4fccae0a0a6f195da03c878cf868d" title="Assigns a sensor value from a physical twin to the simulation model." alt="" coords="133,360,226,387"/>
 <area shape="rect" id="node10" href="$solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward." alt="" coords="135,411,223,437"/>
 <area shape="rect" id="node11" href="$solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="131,461,227,488"/>

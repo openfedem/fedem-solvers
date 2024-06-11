@@ -1,8 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classFFrEntryBase.html" title=" " alt="" coords="5,81,113,108"/>
-<area shape="rect" id="node2" href="$classFFrFieldEntryBase.html" title=" " alt="" coords="173,56,312,83"/>
-<area shape="rect" id="node6" href="$classFFrVariableReference.html" title=" " alt="" coords="161,107,324,133"/>
-<area shape="rect" id="node3" href="$classFFrItemGroup.html" title=" " alt="" coords="397,5,507,32"/>
-<area shape="rect" id="node4" href="$classFFrObjectGroup.html" title=" " alt="" coords="391,56,513,83"/>
-<area shape="rect" id="node5" href="$classFFrSuperObjectGroup.html" title=" " alt="" coords="372,107,532,133"/>
+<area shape="rect" id="node2" href="$classFFrFieldEntryBase.html" title=" " alt="" coords="173,56,311,83"/>
+<area shape="rect" id="node6" href="$classFFrVariableReference.html" title=" " alt="" coords="161,107,323,133"/>
+<area shape="rect" id="node3" href="$classFFrItemGroup.html" title=" " alt="" coords="395,5,506,32"/>
+<area shape="rect" id="node4" href="$classFFrObjectGroup.html" title=" " alt="" coords="389,56,512,83"/>
+<area shape="rect" id="node5" href="$classFFrSuperObjectGroup.html" title=" " alt="" coords="371,107,531,133"/>
 </map>

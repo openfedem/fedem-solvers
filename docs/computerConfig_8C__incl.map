@@ -1,8 +1,8 @@
 <map id="src/vpmUtilities/computerConfig.C" name="src/vpmUtilities/computerConfig.C">
-<area shape="rect" id="node1" title="Global functions for extracting information on the running computer." alt="" coords="307,5,497,47"/>
-<area shape="rect" id="node2" href="$FFaFortran_8H.html" title="Macros to aid cross&#45;language linkage between C/C++ and Fortran." alt="" coords="5,95,201,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="226,95,343,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="367,95,437,121"/>
-<area shape="rect" id="node5" title=" " alt="" coords="461,95,532,121"/>
-<area shape="rect" id="node6" title=" " alt="" coords="557,95,623,121"/>
+<area shape="rect" id="node1" title="Global functions for extracting information on the running computer." alt="" coords="304,5,495,47"/>
+<area shape="rect" id="node2" href="$FFaFortran_8H.html" title="Macros to aid cross&#45;language linkage between C/C++ and Fortran." alt="" coords="5,95,199,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="223,95,341,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="364,95,435,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="459,95,529,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="554,95,621,121"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="savemodule::closeresultfiles" name="savemodule::closeresultfiles">
-<area shape="rect" id="node1" title="Closes the results database file(s)." alt="" coords="5,5,215,32"/>
-<area shape="rect" id="node2" href="$namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="263,5,439,32"/>
+<area shape="rect" id="node1" title="Closes the results database file(s)." alt="" coords="5,5,213,32"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="261,5,436,32"/>
 </map>

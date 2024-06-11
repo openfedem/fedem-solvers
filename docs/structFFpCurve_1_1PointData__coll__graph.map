@@ -1,9 +1,9 @@
 <map id="FFpCurve::PointData" name="FFpCurve::PointData">
-<area shape="rect" id="node1" title=" " alt="" coords="216,184,372,211"/>
+<area shape="rect" id="node1" title=" " alt="" coords="215,184,371,211"/>
 <area shape="rect" id="node2" href="$classFFaOperation.html" title=" " alt="" coords="5,95,188,121"/>
-<area shape="rect" id="node3" href="$classFFaOperationBase.html" title="Base class for all operations." alt="" coords="26,5,167,32"/>
-<area shape="rect" id="node4" href="$classFFrVariableReference.html" title=" " alt="" coords="213,95,375,121"/>
-<area shape="rect" id="node5" href="$classFFrEntryBase.html" title=" " alt="" coords="216,5,324,32"/>
-<area shape="rect" id="node6" href="$classFFrVariable.html" title=" " alt="" coords="441,5,537,32"/>
-<area shape="rect" id="node7" href="$classFFaResultDescription.html" title="Class representing a result variable description." alt="" coords="457,95,617,121"/>
+<area shape="rect" id="node3" href="$classFFaOperationBase.html" title="Base class for all operations." alt="" coords="27,5,167,32"/>
+<area shape="rect" id="node4" href="$classFFrVariableReference.html" title=" " alt="" coords="212,95,373,121"/>
+<area shape="rect" id="node5" href="$classFFrEntryBase.html" title=" " alt="" coords="215,5,323,32"/>
+<area shape="rect" id="node6" href="$classFFrVariable.html" title=" " alt="" coords="439,5,533,32"/>
+<area shape="rect" id="node7" href="$classFFaResultDescription.html" title="Class representing a result variable description." alt="" coords="455,95,613,121"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="savemodule::writedofig" name="savemodule::writedofig">
-<area shape="rect" id="node1" title="Writes an item group reference for a joint or triad DOF." alt="" coords="1524,284,1700,311"/>
+<area shape="rect" id="node1" title="Writes an item group reference for a joint or triad DOF." alt="" coords="1524,284,1699,311"/>
 <area shape="rect" id="node2" href="$namespacesavemodule.html#ad35032034b8be5937d8bd2ec8e5753fc" title="Writes results database file header for a contact element." alt="" coords="930,233,1166,260"/>
 <area shape="rect" id="node16" href="$namespacesavemodule.html#abfa2bff0469d29a8ecab078c072329ce" title="Writes results database file header for a damper." alt="" coords="1237,183,1476,209"/>
 <area shape="rect" id="node19" href="$namespacesavemodule.html#a2e6ee1a6aca16c3bf40c4df010544723" title="Writes results database file header for a friction." alt="" coords="1239,284,1474,311"/>

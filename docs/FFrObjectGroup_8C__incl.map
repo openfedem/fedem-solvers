@@ -1,23 +1,23 @@
 <map id="fedem&#45;foundation/src/FFrLib/FFrObjectGroup.C" name="fedem&#45;foundation/src/FFrLib/FFrObjectGroup.C">
-<area shape="rect" id="node1" title=" " alt="" coords="546,5,729,47"/>
-<area shape="rect" id="node2" href="$FFrObjectGroup_8H.html" title=" " alt="" coords="97,169,277,196"/>
-<area shape="rect" id="node11" href="$FFrResultContainer_8H.html" title="Results file data container." alt="" coords="725,95,928,121"/>
-<area shape="rect" id="node21" href="$FFaTokenizer_8H.html" title="One&#45;level token hierarchies." alt="" coords="531,319,762,345"/>
-<area shape="rect" id="node3" href="$FFrFieldEntryBase_8H.html" title=" " alt="" coords="415,244,609,271"/>
+<area shape="rect" id="node1" title=" " alt="" coords="542,5,725,47"/>
+<area shape="rect" id="node2" href="$FFrObjectGroup_8H.html" title=" " alt="" coords="93,169,273,196"/>
+<area shape="rect" id="node11" href="$FFrResultContainer_8H.html" title="Results file data container." alt="" coords="720,95,923,121"/>
+<area shape="rect" id="node21" href="$FFaTokenizer_8H.html" title="One&#45;level token hierarchies." alt="" coords="529,319,756,345"/>
+<area shape="rect" id="node3" href="$FFrFieldEntryBase_8H.html" title=" " alt="" coords="409,244,605,271"/>
 <area shape="rect" id="node9" href="$FFrEnums_8H.html" title=" " alt="" coords="82,319,225,345"/>
 <area shape="rect" id="node10" title=" " alt="" coords="215,393,276,420"/>
-<area shape="rect" id="node4" href="$FFrEntryBase_8H.html" title=" " alt="" coords="888,319,1053,345"/>
-<area shape="rect" id="node5" title=" " alt="" coords="607,393,687,420"/>
-<area shape="rect" id="node6" title=" " alt="" coords="1149,393,1208,420"/>
-<area shape="rect" id="node7" title=" " alt="" coords="769,393,831,420"/>
-<area shape="rect" id="node8" title=" " alt="" coords="1069,393,1112,420"/>
-<area shape="rect" id="node12" title=" " alt="" coords="1160,169,1211,196"/>
-<area shape="rect" id="node13" href="$FFrVariable_8H.html" title=" " alt="" coords="237,244,390,271"/>
-<area shape="rect" id="node18" href="$FFrItemGroup_8H.html" title=" " alt="" coords="347,169,515,196"/>
-<area shape="rect" id="node19" href="$FFaIO_8H.html" title="Functions and data type for direct access of large binary files." alt="" coords="675,169,839,196"/>
-<area shape="rect" id="node14" href="$FFaEnum_8H.html" title="Enum variables with text representations." alt="" coords="301,319,507,345"/>
+<area shape="rect" id="node4" href="$FFrEntryBase_8H.html" title=" " alt="" coords="881,319,1047,345"/>
+<area shape="rect" id="node5" title=" " alt="" coords="603,393,683,420"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1143,393,1201,420"/>
+<area shape="rect" id="node7" title=" " alt="" coords="762,393,825,420"/>
+<area shape="rect" id="node8" title=" " alt="" coords="1063,393,1105,420"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1153,169,1204,196"/>
+<area shape="rect" id="node13" href="$FFrVariable_8H.html" title=" " alt="" coords="232,244,384,271"/>
+<area shape="rect" id="node18" href="$FFrItemGroup_8H.html" title=" " alt="" coords="343,169,511,196"/>
+<area shape="rect" id="node19" href="$FFaIO_8H.html" title="Functions and data type for direct access of large binary files." alt="" coords="671,169,833,196"/>
+<area shape="rect" id="node14" href="$FFaEnum_8H.html" title="Enum variables with text representations." alt="" coords="301,319,505,345"/>
 <area shape="rect" id="node15" title=" " alt="" coords="390,393,450,420"/>
 <area shape="rect" id="node16" title=" " alt="" coords="475,393,541,420"/>
 <area shape="rect" id="node17" title=" " alt="" coords="301,393,366,420"/>
-<area shape="rect" id="node20" title=" " alt="" coords="724,244,791,271"/>
+<area shape="rect" id="node20" title=" " alt="" coords="719,244,785,271"/>
 </map>

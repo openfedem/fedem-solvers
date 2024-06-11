@@ -1,8 +1,8 @@
 <map id="nullTerminate" name="nullTerminate">
-<area shape="rect" id="node1" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="515,56,625,83"/>
-<area shape="rect" id="node2" href="$classFiUserElmPlugin.html#aa6f4b9c1f631e4e5ee7cb63fc2cdfad5" title="Returns the signature string of the loaded plugin." alt="" coords="262,5,446,32"/>
-<area shape="rect" id="node4" href="$classFiUserElmPlugin.html#a50bbb0ba7a6751ac031468b591a942e6" title="Returns the name of an element type." alt="" coords="241,56,467,83"/>
-<area shape="rect" id="node5" href="$classFiUserElmPlugin.html#a4f8eb57f47909d0fa9770e766d43dfe2" title="Returns the name of a result quantity of a user&#45;defined element." alt="" coords="268,107,440,133"/>
-<area shape="rect" id="node3" href="$classFiUserElmPlugin.html#a292487c446dcd32d0409ee9aec19088c" title="Checks if the named library can be loaded as a plugin." alt="" coords="5,5,193,32"/>
-<area shape="rect" id="node6" href="$FiUserElmPlugin__F_8C.html#a65a2df73452ccf371d4f74afe48d1106" title="Returns the name of a result quantity of a user&#45;defined element." alt="" coords="45,107,153,133"/>
+<area shape="rect" id="node1" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="517,56,628,83"/>
+<area shape="rect" id="node2" href="$classFiUserElmPlugin.html#aa6f4b9c1f631e4e5ee7cb63fc2cdfad5" title="Returns the signature string of the loaded plugin." alt="" coords="263,5,449,32"/>
+<area shape="rect" id="node4" href="$classFiUserElmPlugin.html#a50bbb0ba7a6751ac031468b591a942e6" title="Returns the name of an element type." alt="" coords="243,56,469,83"/>
+<area shape="rect" id="node5" href="$classFiUserElmPlugin.html#a4f8eb57f47909d0fa9770e766d43dfe2" title="Returns the name of a result quantity of a user&#45;defined element." alt="" coords="269,107,443,133"/>
+<area shape="rect" id="node3" href="$classFiUserElmPlugin.html#a292487c446dcd32d0409ee9aec19088c" title="Checks if the named library can be loaded as a plugin." alt="" coords="5,5,195,32"/>
+<area shape="rect" id="node6" href="$FiUserElmPlugin__F_8C.html#a65a2df73452ccf371d4f74afe48d1106" title="Returns the name of a result quantity of a user&#45;defined element." alt="" coords="46,107,154,133"/>
 </map>

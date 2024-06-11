@@ -1,5 +1,5 @@
 <map id="versionmodule::openresfile" name="versionmodule::openresfile">
-<area shape="rect" id="node1" title="Opens the solver res&#45;file and print header information to it." alt="" coords="353,183,553,209"/>
+<area shape="rect" id="node1" title="Opens the solver res&#45;file and print header information to it." alt="" coords="353,183,552,209"/>
 <area shape="rect" id="node2" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" id="node8" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="183,157,253,184"/>
 <area shape="rect" id="node9" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="165,208,271,235"/>

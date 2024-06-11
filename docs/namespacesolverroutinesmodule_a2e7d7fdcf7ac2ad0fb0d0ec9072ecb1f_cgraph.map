@@ -1,7 +1,7 @@
 <map id="solverroutinesmodule::terminatestep" name="solverroutinesmodule::terminatestep">
 <area shape="rect" id="node1" title="Terminates a time step by doing some final calculations." alt="" coords="5,74,169,115"/>
-<area shape="rect" id="node2" href="$namespacespringtypemodule.html#abc124f7b0f3dafa7ad3945f5df9a2c20" title="Checks for elastic unloading of cyclic plastic springs." alt="" coords="217,5,468,32"/>
-<area shape="rect" id="node3" href="$namespacerotationmodule.html#a1074f5915042f7e80b4dd66a4e4e62b2" title="Makes a rotation tensor orthonormal through use of quaternions." alt="" coords="239,56,446,83"/>
-<area shape="rect" id="node4" href="$namespacetimestepmodule.html#aeef6fe463ac0290ac10f160651333a74" title=" " alt="" coords="224,107,461,133"/>
-<area shape="rect" id="node5" href="$namespacesolverroutinesmodule.html#a3680756ba4e87795f19474addfe247e6" title="Updates the previous state variables in the mechanism objects." alt="" coords="261,158,425,199"/>
+<area shape="rect" id="node2" href="$namespacespringtypemodule.html#abc124f7b0f3dafa7ad3945f5df9a2c20" title="Checks for elastic unloading of cyclic plastic springs." alt="" coords="217,5,467,32"/>
+<area shape="rect" id="node3" href="$namespacerotationmodule.html#a1074f5915042f7e80b4dd66a4e4e62b2" title="Makes a rotation tensor orthonormal through use of quaternions." alt="" coords="239,56,445,83"/>
+<area shape="rect" id="node4" href="$namespacetimestepmodule.html#aeef6fe463ac0290ac10f160651333a74" title=" " alt="" coords="223,107,461,133"/>
+<area shape="rect" id="node5" href="$namespacesolverroutinesmodule.html#a3680756ba4e87795f19474addfe247e6" title="Updates the previous state variables in the mechanism objects." alt="" coords="260,158,424,199"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="springroutinesmodule::calcspringstiffness" name="springroutinesmodule::calcspringstiffness">
 <area shape="rect" id="node1" title="Calculates the stiffness matrix contributions from a spring element." alt="" coords="5,5,169,47"/>
-<area shape="rect" id="node2" href="$namespacespringroutinesmodule.html#a4c58f209480870af2afdd94386ce92e4" title="Updates a spring element stiffness matrix due to explicit coupling." alt="" coords="217,5,387,47"/>
+<area shape="rect" id="node2" href="$namespacespringroutinesmodule.html#a4c58f209480870af2afdd94386ce92e4" title="Updates a spring element stiffness matrix due to explicit coupling." alt="" coords="217,5,385,47"/>
 </map>

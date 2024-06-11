@@ -1,9 +1,9 @@
 <map id="FiUserElmPlugin::validate" name="FiUserElmPlugin::validate">
-<area shape="rect" id="node1" title="Checks if the named library can be loaded as a plugin." alt="" coords="5,103,193,130"/>
-<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="473,5,653,47"/>
-<area shape="rect" id="node3" href="$classFiUserElmPlugin.html#aa6f4b9c1f631e4e5ee7cb63fc2cdfad5" title="Returns the signature string of the loaded plugin." alt="" coords="241,74,425,101"/>
-<area shape="rect" id="node6" href="$classFFaDynamicLibraryBase.html#a1fac954c8ea3ef0711dda5f301eed4e6" title="Loads the library named libName." alt="" coords="243,125,423,167"/>
-<area shape="rect" id="node7" href="$classFFaDynamicLibraryBase.html#aae905aaf5544e2b09a9cb0f85deb6150" title="Unloads the library named libName." alt="" coords="243,191,423,232"/>
-<area shape="rect" id="node4" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="473,71,653,112"/>
-<area shape="rect" id="node5" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="508,137,619,163"/>
+<area shape="rect" id="node1" title="Checks if the named library can be loaded as a plugin." alt="" coords="5,103,195,130"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="476,5,655,47"/>
+<area shape="rect" id="node3" href="$classFiUserElmPlugin.html#aa6f4b9c1f631e4e5ee7cb63fc2cdfad5" title="Returns the signature string of the loaded plugin." alt="" coords="243,74,428,101"/>
+<area shape="rect" id="node6" href="$classFFaDynamicLibraryBase.html#a1fac954c8ea3ef0711dda5f301eed4e6" title="Loads the library named libName." alt="" coords="246,125,425,167"/>
+<area shape="rect" id="node7" href="$classFFaDynamicLibraryBase.html#aae905aaf5544e2b09a9cb0f85deb6150" title="Unloads the library named libName." alt="" coords="246,191,425,232"/>
+<area shape="rect" id="node4" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="476,71,655,112"/>
+<area shape="rect" id="node5" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="510,137,621,163"/>
 </map>

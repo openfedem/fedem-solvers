@@ -1,5 +1,5 @@
 <map id="motiontypemodule::nullifymotion" name="motiontypemodule::nullifymotion">
-<area shape="rect" id="node1" title="Initializes the MotionType object." alt="" coords="925,107,1167,133"/>
+<area shape="rect" id="node1" title="Initializes the MotionType object." alt="" coords="925,107,1165,133"/>
 <area shape="rect" id="node2" href="$namespacemotiontypemodule.html#ac98610bc7b49d4fdff1ebe2702178982" title="Initializes prescribed motions with data from the solver input file." alt="" coords="624,107,877,133"/>
 <area shape="rect" id="node3" href="$namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>

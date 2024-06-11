@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classFFaTokenInput.html" title="Base class for generic token input." alt="" coords="5,56,120,83"/>
-<area shape="rect" id="node2" href="$classFFaFileData.html" title="Class for token input from file." alt="" coords="181,5,279,32"/>
-<area shape="rect" id="node3" href="$classFFaIteratorData.html" title="Class for token input from a string range." alt="" coords="168,56,292,83"/>
-<area shape="rect" id="node4" href="$classFFaStreamData.html" title="Class for token input from an input stream." alt="" coords="169,107,291,133"/>
+<area shape="rect" id="node2" href="$classFFaFileData.html" title="Class for token input from file." alt="" coords="180,5,279,32"/>
+<area shape="rect" id="node3" href="$classFFaIteratorData.html" title="Class for token input from a string range." alt="" coords="168,56,291,83"/>
+<area shape="rect" id="node4" href="$classFFaStreamData.html" title="Class for token input from an input stream." alt="" coords="168,107,291,133"/>
 </map>

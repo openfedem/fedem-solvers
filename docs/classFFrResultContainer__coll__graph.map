@@ -1,7 +1,7 @@
 <map id="FFrResultContainer" name="FFrResultContainer">
-<area shape="rect" id="node1" title="Class holding the data of a Fedem results file." alt="" coords="202,184,349,211"/>
-<area shape="rect" id="node2" href="$classFFrVariableReference.html" title=" " alt="" coords="87,95,250,121"/>
+<area shape="rect" id="node1" title="Class holding the data of a Fedem results file." alt="" coords="201,184,347,211"/>
+<area shape="rect" id="node2" href="$classFFrVariableReference.html" title=" " alt="" coords="87,95,248,121"/>
 <area shape="rect" id="node3" href="$classFFrEntryBase.html" title=" " alt="" coords="5,5,113,32"/>
-<area shape="rect" id="node4" href="$classFFrVariable.html" title=" " alt="" coords="230,5,326,32"/>
-<area shape="rect" id="node5" href="$classFFrExtractor.html" title="Front&#45;end for the result extraction module." alt="" coords="331,95,433,121"/>
+<area shape="rect" id="node4" href="$classFFrVariable.html" title=" " alt="" coords="229,5,324,32"/>
+<area shape="rect" id="node5" href="$classFFrExtractor.html" title="Front&#45;end for the result extraction module." alt="" coords="330,95,431,121"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="FiUserElmPlugin::init" name="FiUserElmPlugin::init">
-<area shape="rect" id="node1" title="Initializes the plugin." alt="" coords="5,13,161,39"/>
-<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="209,5,389,47"/>
+<area shape="rect" id="node1" title="Initializes the plugin." alt="" coords="5,13,163,39"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="211,5,389,47"/>
 </map>

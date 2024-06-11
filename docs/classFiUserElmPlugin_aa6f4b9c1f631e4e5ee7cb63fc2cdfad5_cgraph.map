@@ -1,6 +1,6 @@
 <map id="FiUserElmPlugin::getSign" name="FiUserElmPlugin::getSign">
-<area shape="rect" id="node1" title="Returns the signature string of the loaded plugin." alt="" coords="5,78,189,105"/>
-<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="237,5,417,47"/>
-<area shape="rect" id="node3" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="237,71,417,112"/>
-<area shape="rect" id="node4" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="272,137,383,163"/>
+<area shape="rect" id="node1" title="Returns the signature string of the loaded plugin." alt="" coords="5,78,191,105"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="239,5,417,47"/>
+<area shape="rect" id="node3" href="$classFFaDynamicLibraryBase.html#a1d1f672752195d18af84ec534f7fc467" title="Returns the function pointer for the named function." alt="" coords="239,71,417,112"/>
+<area shape="rect" id="node4" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="273,137,383,163"/>
 </map>

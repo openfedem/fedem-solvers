@@ -1,5 +1,5 @@
 <map id="savemodule::closeresultfiles" name="savemodule::closeresultfiles">
-<area shape="rect" id="node1" title="Closes the results database file(s)." alt="" coords="1053,305,1263,332"/>
+<area shape="rect" id="node1" title="Closes the results database file(s)." alt="" coords="1053,305,1261,332"/>
 <area shape="rect" id="node2" href="$namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="624,297,793,324"/>
 <area shape="rect" id="node11" href="$namespacesolvermodule.html#ad942a07a7186496388f9fd3a54918faf" title="Restarts a running simulation model from the provided state." alt="" coords="389,157,576,184"/>
 <area shape="rect" id="node15" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,415,574,441"/>

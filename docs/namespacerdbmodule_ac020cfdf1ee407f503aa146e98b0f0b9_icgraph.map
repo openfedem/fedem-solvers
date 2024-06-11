@@ -1,6 +1,6 @@
 <map id="rdbmodule::copyheadertobinaryfile" name="rdbmodule::copyheadertobinaryfile">
-<area shape="rect" id="node1" title="Copies contents of the temporary header files to the binary file." alt="" coords="1129,200,1380,227"/>
-<area shape="rect" id="node2" href="$namespacerdbmodule.html#ad5b33578f856cc2a5d9c5394d073dd49" title="Opens a binary results database file." alt="" coords="907,200,1081,227"/>
+<area shape="rect" id="node1" title="Copies contents of the temporary header files to the binary file." alt="" coords="1128,200,1379,227"/>
+<area shape="rect" id="node2" href="$namespacerdbmodule.html#ad5b33578f856cc2a5d9c5394d073dd49" title="Opens a binary results database file." alt="" coords="907,200,1080,227"/>
 <area shape="rect" id="node3" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="662,127,821,169"/>
 <area shape="rect" id="node4" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="662,193,821,234"/>
 <area shape="rect" id="node5" href="$namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="624,259,859,285"/>

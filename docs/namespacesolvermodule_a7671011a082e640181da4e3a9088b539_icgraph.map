@@ -1,4 +1,4 @@
 <map id="solvermodule::getjointspringstiffness" name="solvermodule::getjointspringstiffness">
-<area shape="rect" id="node1" title="Gets joint spring stiffness coefficients." alt="" coords="171,5,436,32"/>
+<area shape="rect" id="node1" title="Gets joint spring stiffness coefficients." alt="" coords="171,5,435,32"/>
 <area shape="rect" id="node2" href="$solverDriver_8f90.html#af80250c54756d2434a6a165cb07e269e" title="Gets joint spring stiffness coefficients." alt="" coords="5,5,123,32"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="sammodule::nullifysam" name="sammodule::nullifysam">
-<area shape="rect" id="node1" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="1433,123,1609,149"/>
+<area shape="rect" id="node1" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="1433,123,1608,149"/>
 <area shape="rect" id="node2" href="$namespacesamstressmodule.html#ac92e4718f898abf21cbe409e81b53a96" title="Initializes the SAM data structure for the recovery processes." alt="" coords="1160,173,1380,200"/>
 <area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="925,217,1092,258"/>
 <area shape="rect" id="node10" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="1155,123,1385,149"/>

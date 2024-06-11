@@ -1,12 +1,12 @@
 <map id="fedem&#45;foundation/src/FFaLib/FFaAlgebra/FFa3DLocation.H" name="fedem&#45;foundation/src/FFaLib/FFaAlgebra/FFa3DLocation.H">
-<area shape="rect" id="node1" title=" " alt="" coords="101,5,359,47"/>
-<area shape="rect" id="node2" href="$FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="5,95,220,121"/>
-<area shape="rect" id="node5" href="$FFaEnum_8H.html" title="Enum variables with text representations." alt="" coords="244,95,451,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="99,169,179,196"/>
-<area shape="rect" id="node4" title=" " alt="" coords="12,169,75,196"/>
-<area shape="rect" id="node6" title=" " alt="" coords="204,169,267,196"/>
-<area shape="rect" id="node7" title=" " alt="" coords="291,169,351,196"/>
-<area shape="rect" id="node8" title=" " alt="" coords="375,169,442,196"/>
-<area shape="rect" id="node9" title=" " alt="" coords="467,169,532,196"/>
-<area shape="rect" id="node10" title=" " alt="" coords="557,169,618,196"/>
+<area shape="rect" id="node1" title=" " alt="" coords="99,5,355,47"/>
+<area shape="rect" id="node2" href="$FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="5,95,216,121"/>
+<area shape="rect" id="node5" href="$FFaEnum_8H.html" title="Enum variables with text representations." alt="" coords="241,95,445,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="96,169,176,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="9,169,71,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="201,169,263,196"/>
+<area shape="rect" id="node7" title=" " alt="" coords="287,169,347,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="372,169,439,196"/>
+<area shape="rect" id="node9" title=" " alt="" coords="463,169,529,196"/>
+<area shape="rect" id="node10" title=" " alt="" coords="553,169,615,196"/>
 </map>

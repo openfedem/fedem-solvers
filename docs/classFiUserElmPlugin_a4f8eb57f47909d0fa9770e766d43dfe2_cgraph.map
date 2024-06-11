@@ -1,5 +1,5 @@
 <map id="FiUserElmPlugin::result" name="FiUserElmPlugin::result">
-<area shape="rect" id="node1" title="Returns the name of a result quantity of a user&#45;defined element." alt="" coords="5,42,177,69"/>
-<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#ae84a2f19ce5e808c12ad145497e7d6d6" title="Returns the function pointer for the given function." alt="" coords="225,5,405,47"/>
-<area shape="rect" id="node3" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="260,71,371,98"/>
+<area shape="rect" id="node1" title="Returns the name of a result quantity of a user&#45;defined element." alt="" coords="5,42,179,69"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#ae84a2f19ce5e808c12ad145497e7d6d6" title="Returns the function pointer for the given function." alt="" coords="227,5,405,47"/>
+<area shape="rect" id="node3" href="$FiUserElmPlugin_8C.html#a9432aa579c36f92cae475bf45258059a" title="Static helper to replace trailing white&#45;spaces a with null&#45;character." alt="" coords="261,71,371,98"/>
 </map>

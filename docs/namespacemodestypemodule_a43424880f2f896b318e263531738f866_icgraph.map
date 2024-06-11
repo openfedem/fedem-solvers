@@ -1,5 +1,5 @@
 <map id="modestypemodule::nullifymodes" name="modestypemodule::nullifymodes">
-<area shape="rect" id="node1" title="Initializes the ModesType object." alt="" coords="1500,236,1737,263"/>
+<area shape="rect" id="node1" title="Initializes the ModesType object." alt="" coords="1500,236,1736,263"/>
 <area shape="rect" id="node2" href="$namespacemodestypemodule.html#a3fa8725132dbe04fc66f03bff91f38ad" title="Deallocates the ModesType object." alt="" coords="1188,195,1452,221"/>
 <area shape="rect" id="node20" href="$namespaceinitiatemodestypemodule.html#a584da4b82a57902b6584aacc8e02fba3" title="Initializes the eigenvalue solver." alt="" coords="1225,258,1415,299"/>
 <area shape="rect" id="node3" href="$namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="937,171,1140,197"/>

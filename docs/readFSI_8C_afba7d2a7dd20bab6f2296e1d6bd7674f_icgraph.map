@@ -1,4 +1,4 @@
 <map id="readFsiFile" name="readFsiFile">
-<area shape="rect" id="node1" title="Utility function to read a solver input file into a string variable." alt="" coords="108,5,200,32"/>
+<area shape="rect" id="node1" title="Utility function to read a solver input file into a string variable." alt="" coords="108,5,201,32"/>
 <area shape="rect" id="node2" href="$testExternal_8C.html#a3c04138a5bfe5d72780bb7e82a18e627" title="Test program for external functions in the dynamics solver." alt="" coords="5,5,60,32"/>
 </map>

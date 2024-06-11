@@ -1,6 +1,6 @@
 <map id="rigidmodule::rbarce" name="rigidmodule::rbarce">
 <area shape="rect" id="node1" title="Constructs the constraint equations for RBAR elements." alt="" coords="5,31,155,57"/>
-<area shape="rect" id="node2" href="$namespacerigidmodule.html#aaccf3528bf10af33395a600ba0514aac" title="Establishes the constraint equation for a given dependent DOF." alt="" coords="203,5,441,32"/>
-<area shape="rect" id="node3" href="$namespacerigidmodule.html#a51bd789a49e720dd9f02a07b6055c016" title="Processes the component definition of an RBAR element." alt="" coords="231,56,413,83"/>
-<area shape="rect" id="node4" href="$namespacerigidmodule.html#a60105ef466bd00d19ef0b2675d49f404" title="Processes an m&#45;set number of RGD and RBAR elements." alt="" coords="489,56,683,83"/>
+<area shape="rect" id="node2" href="$namespacerigidmodule.html#aaccf3528bf10af33395a600ba0514aac" title="Establishes the constraint equation for a given dependent DOF." alt="" coords="203,5,440,32"/>
+<area shape="rect" id="node3" href="$namespacerigidmodule.html#a51bd789a49e720dd9f02a07b6055c016" title="Processes the component definition of an RBAR element." alt="" coords="230,56,413,83"/>
+<area shape="rect" id="node4" href="$namespacerigidmodule.html#a60105ef466bd00d19ef0b2675d49f404" title="Processes an m&#45;set number of RGD and RBAR elements." alt="" coords="488,56,681,83"/>
 </map>

@@ -1,11 +1,11 @@
 <map id="fedem&#45;foundation/src/FFaLib/FFaString/FFaStringExt.H" name="fedem&#45;foundation/src/FFaLib/FFaString/FFaStringExt.H">
-<area shape="rect" id="node1" title="Extensions of the STL string class." alt="" coords="770,5,969,61"/>
-<area shape="rect" id="node2" href="$FFaCmdLineArgImplementation_8C.html" title="General command&#45;line option handler." alt="" coords="5,109,251,165"/>
-<area shape="rect" id="node3" href="$FFaResultDescription_8C.html" title=" " alt="" coords="275,109,453,165"/>
-<area shape="rect" id="node4" href="$FFaVersionNumber_8C.html" title=" " alt="" coords="477,109,643,165"/>
-<area shape="rect" id="node5" href="$FFaStringExt_8C.html" title="Extensions of the STL string class." alt="" coords="667,109,866,165"/>
-<area shape="rect" id="node6" href="$FFpCurve_8C.html" title=" " alt="" coords="890,109,1057,165"/>
-<area shape="rect" id="node7" href="$FFpBatchExport_8C.html" title=" " alt="" coords="1081,117,1340,158"/>
-<area shape="rect" id="node8" href="$FiDeviceFunctionFactory_8C.html" title="External device function factory (functions from file)." alt="" coords="1364,109,1567,165"/>
-<area shape="rect" id="node9" href="$FiRPC3File_8C.html" title=" " alt="" coords="1591,117,1817,158"/>
+<area shape="rect" id="node1" title="Extensions of the STL string class." alt="" coords="763,5,958,61"/>
+<area shape="rect" id="node2" href="$FFaCmdLineArgImplementation_8C.html" title="General command&#45;line option handler." alt="" coords="5,109,249,165"/>
+<area shape="rect" id="node3" href="$FFaResultDescription_8C.html" title=" " alt="" coords="274,109,450,165"/>
+<area shape="rect" id="node4" href="$FFaVersionNumber_8C.html" title=" " alt="" coords="474,109,637,165"/>
+<area shape="rect" id="node5" href="$FFaStringExt_8C.html" title="Extensions of the STL string class." alt="" coords="661,109,855,165"/>
+<area shape="rect" id="node6" href="$FFpCurve_8C.html" title=" " alt="" coords="880,109,1047,165"/>
+<area shape="rect" id="node7" href="$FFpBatchExport_8C.html" title=" " alt="" coords="1071,117,1330,158"/>
+<area shape="rect" id="node8" href="$FiDeviceFunctionFactory_8C.html" title="External device function factory (functions from file)." alt="" coords="1355,109,1559,165"/>
+<area shape="rect" id="node9" href="$FiRPC3File_8C.html" title=" " alt="" coords="1583,117,1813,158"/>
 </map>

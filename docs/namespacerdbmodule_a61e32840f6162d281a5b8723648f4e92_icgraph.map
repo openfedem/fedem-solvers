@@ -1,5 +1,5 @@
 <map id="rdbmodule::nullifyrdb" name="rdbmodule::nullifyrdb">
-<area shape="rect" id="node1" title="Initializes a rdbmodule::rdbtype object." alt="" coords="637,169,800,196"/>
+<area shape="rect" id="node1" title="Initializes a rdbmodule::rdbtype object." alt="" coords="637,169,799,196"/>
 <area shape="rect" id="node2" href="$namespacesavemodule.html#aa50e29317831724dd64995825e895ade" title="Initializes the solver result database file." alt="" coords="353,77,589,104"/>
 <area shape="rect" id="node9" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="388,129,555,170"/>
 <area shape="rect" id="node10" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="392,194,551,235"/>

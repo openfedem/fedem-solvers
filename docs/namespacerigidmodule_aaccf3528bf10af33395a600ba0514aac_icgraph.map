@@ -1,5 +1,5 @@
 <map id="rigidmodule::defineconstrainteqn" name="rigidmodule::defineconstrainteqn">
-<area shape="rect" id="node1" title="Establishes the constraint equation for a given dependent DOF." alt="" coords="1132,81,1371,108"/>
+<area shape="rect" id="node1" title="Establishes the constraint equation for a given dependent DOF." alt="" coords="1132,81,1369,108"/>
 <area shape="rect" id="node2" href="$namespacerigidmodule.html#acc0b389ee153dce097daa850b0c8e687" title="Generates constraint equation arrays in the SAM datastructure." alt="" coords="640,31,887,57"/>
 <area shape="rect" id="node8" href="$namespacerigidmodule.html#a8156f3e36a7e7235bd7e10d970b29e56" title="Constructs the constraint equations for RBAR elements." alt="" coords="935,81,1084,108"/>
 <area shape="rect" id="node10" href="$namespacerigidmodule.html#af3cd1365241cc298edc9f2a4c29966ba" title="Construct the constraint equations for RGD (or RBE2) elements." alt="" coords="937,132,1081,159"/>

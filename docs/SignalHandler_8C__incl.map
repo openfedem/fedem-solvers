@@ -1,9 +1,9 @@
 <map id="src/vpmCommon/SignalHandler.C" name="src/vpmCommon/SignalHandler.C">
-<area shape="rect" id="node1" title="Handling of various OS signals casing the program to abort." alt="" coords="109,5,350,32"/>
+<area shape="rect" id="node1" title="Handling of various OS signals casing the program to abort." alt="" coords="108,5,348,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,169,85,196"/>
 <area shape="rect" id="node3" href="$SignalHandler_8H.html" title="Handling of various OS signals casing the program to abort." alt="" coords="79,87,206,114"/>
-<area shape="rect" id="node5" href="$FFaCmdLineArg_8H.html" title="General command&#45;line option handler." alt="" coords="231,80,401,121"/>
-<area shape="rect" id="node11" title=" " alt="" coords="426,87,499,114"/>
+<area shape="rect" id="node5" href="$FFaCmdLineArg_8H.html" title="General command&#45;line option handler." alt="" coords="231,80,399,121"/>
+<area shape="rect" id="node11" title=" " alt="" coords="423,87,497,114"/>
 <area shape="rect" id="node4" title=" " alt="" coords="113,169,172,196"/>
 <area shape="rect" id="node6" title=" " alt="" coords="549,169,611,196"/>
 <area shape="rect" id="node7" title=" " alt="" coords="196,169,247,196"/>

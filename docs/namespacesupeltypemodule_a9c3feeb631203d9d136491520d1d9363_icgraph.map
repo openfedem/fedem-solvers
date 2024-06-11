@@ -1,5 +1,5 @@
 <map id="supeltypemodule::buildfinit" name="supeltypemodule::buildfinit">
-<area shape="rect" id="node1" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="1896,227,2097,253"/>
+<area shape="rect" id="node1" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="1896,227,2096,253"/>
 <area shape="rect" id="node2" href="$solverModule_8f90.html#a64222ceb18e44202c9e2628909d35ffc" title="Updates the configuration by applying given displacement vector." alt="" coords="1653,59,1787,85"/>
 <area shape="rect" id="node3" href="$namespacedisplacementmodule.html#afa9f18d12165821d77a118c792920973" title="Reads external nodal displacements for the specified superelement." alt="" coords="1625,110,1815,151"/>
 <area shape="rect" id="node4" href="$namespacerestartmodule.html#a3cc4a3b3f2214de1013479ff69317376" title="Initializes the mechanism configuration for restart." alt="" coords="1609,176,1831,203"/>
