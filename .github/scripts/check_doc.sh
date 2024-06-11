@@ -12,18 +12,18 @@
 # Therefore moving this file around.
 
 git checkout gh-pages
-mv docs/index.html index.old
+mv docs/solver/index.html index.old
 mv doc/solver_html/index.html index.new
-git rm -rf docs
-mv doc/solver_html docs
-mv index.old docs/index.html
-git add docs/*.* docs/search/*.*
+git rm -rf docs/solver
+mv doc/solver_html docs/solver
+mv index.old docs/solver/index.html
+git add docs/solver
 if git diff -I "^Generated on .* for FEDEM" HEAD --quiet; then
   echo No changes in source code documentation
   git reset --hard HEAD
   exit 0
 else
-  mv index.new docs/index.html
-  git add docs/index.html
+  mv index.new docs/solver/index.html
+  git add docs/solver/index.html
   exit 1
 fi

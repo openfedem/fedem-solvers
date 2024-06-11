@@ -17,8 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install doxygen
-        run: sudo apt -y install doxygen graphviz
+      - name: Install doxygen and sphinx
+        run: |
+          sudo apt -y install doxygen graphviz python3-sphinx python3-numpydoc
+          pip install sphinx_rtd_theme
 
       - name: Checkout source code repository
         uses: actions/checkout@v3
@@ -33,16 +35,38 @@ jobs:
       - name: Build the solver documentation
         run: make doc
 
+      - name: Build the fedempy documentation
+        run: |
+          pip install -r PythonAPI/requirements.txt
+          PythonAPI/doc/make.sh
+
       - name: Check build status
         run: |
           set +e
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           ./.github/scripts/check_doc.sh
           echo "NEW_DOC=$?" >> $GITHUB_ENV
 
       - name: Push updated solver documentation
         if: env.NEW_DOC != 0
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
           git commit -m"Update solver source code documentation"
+          git push origin HEAD
+
+      - name: Check build status for fedempy documentation
+        run: |
+          set +e
+          git rm -rf docs/fedempy
+          rm PythonAPI/doc/build/html/.buildinfo
+          mv PythonAPI/doc/build/html/.nojekyll docs/
+          mv PythonAPI/doc/build/html docs/fedempy
+          git add docs/fedempy
+          git diff HEAD --quiet
+          echo "NEW_DOC=$?" >> $GITHUB_ENV
+
+      - name: Push updated fedempy documentation
+        if: env.NEW_DOC != 0
+        run: |
+          git commit -m"Update fedempy documentation"
           git push origin HEAD
