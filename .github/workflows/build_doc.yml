@@ -8,12 +8,11 @@ name: Build source code documentation
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - fedem-*
 
 jobs:
   build-doc:
-    if: github.event.commits[0].author.name != 'github-actions'
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +27,11 @@ jobs:
           fetch-depth: 0
           submodules: recursive
           token: ${{ secrets.ACCESS_PAT }}
+
+      - name: Checkout the latest release tag
+        run: |
+          git checkout `git tag | tail -1`
+          git submodule update
 
       - name: Configure for build
         run: cmake . -DCMAKE_BUILD_TYPE=Release
