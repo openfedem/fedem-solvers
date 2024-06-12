@@ -499,10 +499,10 @@ Example
 -------
 
 A sample python script using ``modeler`` to generate a simple model is provided
-`here <https://github.com/SAP/fedem-mdb/blob/main/test/fedempy/test_modeler.py>`_.
+`here <https://github.com/openfedem/fedem-mdb/blob/main/test/fedempy/test_modeler.py>`_.
 Another script that generates and solves the model which is used in the
-`Car Suspension <https://github.com/SAP/fedem-solver-tests/tree/main/TimeDomain/CarSuspension>`_ regression test is
-`available here <https://github.com/SAP/fedem-mdb/blob/main/test/fedempy/test_SLA.py>`_.
+`Car Suspension <https://github.com/openfedem/fedem-solver-tests/tree/main/TimeDomain/CarSuspension>`_ regression test is
+`available here <https://github.com/openfedem/fedem-mdb/blob/main/test/fedempy/test_SLA.py>`_.
 
 No-code modeling
 ================
@@ -530,5 +530,5 @@ The option `--solve` will execute the dynamics solver on the generated model.
 Sample YAML input file
 ----------------------
 
-`See here <https://github.com/SAP/fedem-mdb/blob/main/test/fedempy/models/02-loader.yaml>`_
+`See here <https://github.com/openfedem/fedem-mdb/blob/main/test/fedempy/models/02-loader.yaml>`_
 for a sample YAML input file, which will create the classical Loader model.

@@ -771,18 +771,14 @@ WARN_LOGFILE           = ${PROJECT_BINARY_DIR}/DoxyWarnings.log
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                   = src/vpmSolver \
-                          src/vpmSolver/vpmSolverTests \
-                          src/vpmReducer \
-                          src/vpmReducer/vpmReducerTests \
-                          src/vpmCommon \
-                          src/vpmCommon/vpmLinAlg \
+INPUT                   = ${PROJECT_BINARY_DIR} \
+                          src/vpmSolver src/vpmSolver/vpmSolverTests \
+                          src/vpmReducer src/vpmReducer/vpmReducerTests \
+                          src/vpmCommon src/vpmCommon/vpmLinAlg \
                           src/vpmStress/displacementModule.f90 \
                           src/vpmStress/samStressModule.f90 \
-                          src/SolutionMapper \
-                          src/vpmUtilities \
-                          src/FemLib/beam.f \
-                          src/FemLib/beamaux.f \
+                          src/vpmUtilities src/SolutionMapper \
+                          src/Femlib/beam.f src/Femlib/beamaux.f \
                           fedem-foundation/pFUnit/pFUnitExtraArg.f90 \
                           fedem-foundation/src/gtest.h \
                           fedem-foundation/src/FFrLib \
@@ -1208,7 +1204,7 @@ HTML_COLORSTYLE_GAMMA  = 80
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_TIMESTAMP         = NO
+HTML_TIMESTAMP         = YES
 
 # If the HTML_DYNAMIC_SECTIONS tag is set to YES then the generated HTML
 # documentation will contain sections that can be hidden and shown after the

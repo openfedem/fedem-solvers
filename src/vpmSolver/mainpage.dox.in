@@ -4,13 +4,13 @@
  *
  * This file is part of FEDEM - https://openfedem.org
  */
-/*!
 
+/*!
 \mainpage The FEDEM Dynamics Solver
 
-\author Knut Morten Okstad, SAP SE
+\author Knut Morten Okstad
 
-\date 26 Feb 2019
+\date @BUILD_DATE@
 
 \section intro Introduction
 

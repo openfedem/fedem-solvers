@@ -30,10 +30,11 @@ jobs:
         run: |
           echo $VERSION > cfg/VERSION
           echo $VERSION > PythonAPI/version.txt
+          sed -i "/^release =/s/[0-9][0-9\.]*/$VERSION/" PythonAPI/doc/source/conf.py
 
       - name: Push updated VERSION file
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git commit -m"chore(version): build number $VERSION" cfg/VERSION PythonAPI/version.txt
+          git commit -m"chore(version): build number $VERSION" cfg/VERSION PythonAPI
           git push origin HEAD
