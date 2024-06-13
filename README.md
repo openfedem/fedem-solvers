@@ -16,9 +16,10 @@
 
 ## About this project
 
-This project contains the Fortran source code of the FEDEM solver modules.
+This project contains (in the [src](src) folder)
+the Fortran source code of the FEDEM solver modules.
 In addition, the [PythonAPI](PythonAPI) folder contains the source code of
-the Python package `fedempy`, which enables the use of python to control
+the python package `fedempy`, which enables the use of python to control
 execution of the FE Part Reducer and Dynamics Solver,
 as well as creating new models and/or editing existing ones by scripting.
 
