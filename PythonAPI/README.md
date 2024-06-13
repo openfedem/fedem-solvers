@@ -10,14 +10,18 @@
 
 This folder contains the sources of the python wrapper for FEDEM, the `fedempy` package.
 The source code resides in the sub-folder [src/fedempy](src/fedempy) which is
-compiled into the python package `fedempy` by the `setup.py` script.
+compiled into the python package `fedempy` by the [setup.py](setup.py) script.
 In addition, some test drivers are placed in the sub-folder [PythonAPITests](PythonAPITests)
 which are invoked as regression/integration tests by the cmake-based build system
 for the `fedem-solvers` project.
 
-See [here](https://openfedem.org/fedempy/), for the extracted source code documentation
-of the python code, which is generated using the [Sphinx](https://www.sphinx-doc.org) tool.
-That page also contains some basic installation and end-user documentation for `fedempy`.
+See [here](https://openfedem.github.io/fedem-solvers/fedempy/)
+for the extracted source code documentation of the python code,
+which is generated using the [Sphinx](https://www.sphinx-doc.org) tool.
+That page also contains installation and end-user documentation for `fedempy`.
+This documentation is updated automatically when a new release is tagged,
+provided there are changes in the source code/comments compared with
+the previous release and that these changes affects the documentation.
 
 ## Local build of python package
 
@@ -25,8 +29,9 @@ Run the command
 
     python setup.py sdist
 
-This will create the archive `fedempy-<VERSION>.tar.gz` where `<VERSION>` is the content
-of the file [version.txt](version.txt). To install the built package, use the command:
+This will create the archive `fedempy-<VERSION>.tar.gz`
+where `<VERSION>` is the content of the file [version.txt](version.txt).
+To install the built package, use the command:
 
     pip install dist/fedempy-<VERSION>.tar.gz
 
