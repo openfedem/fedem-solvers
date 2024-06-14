@@ -36,6 +36,7 @@ module rdbModule
   integer, save, public  :: iitem = 66 !< Temporary item group description file
   integer, save, public  :: idatd = 67 !< Temporary data description file
 
+  !!TODO,kmo: Check if the below still is an issue or if this can be refactored.
   !! Note that since ivard, iitem and idatd are global static variables
   !! (and not members of RDBType) we can only write one file header at once.
   !! Trying to put these parameters as variables in RDBType only results in a
@@ -133,8 +134,8 @@ contains
     write(addMsg,600) rdb%nBstep, nByteStep
     call reportError (error_p, &
          'You have detected an inconsistency in the results management.', &
-         'Please give details to support@fedem.com','This error can be '// &
-         'bypassed by switching to automatic flushing of result files', &
+         'Please give details to developers@openfedem.org','This error '// &
+         'can be bypassed by switching to automatic flushing of result files', &
          '(specify -flushinc -1 as an additional solver option).', &
          addString=trim(addMsg)//',   File: '//rdb%fileName)
 
@@ -657,7 +658,7 @@ contains
   !> @param[in] iStep Time step number
   !> @param[in] time Current time
   !> @param[out] ierr Error flag
-  !> @param[in] openTmp If present and @e .true., a temporary binary file is
+  !> @param[in] openTmp If present and .true., a temporary binary file is
   !> opened if the binary results database file is not opened yet
   !>
   !> @callgraph @callergraph
@@ -922,7 +923,7 @@ contains
   !> @param rdb The result database file to write to
   !> @param[in] var The variable value to write
   !> @param ierr Error flag
-  !> @param[in] writeAsDouble If present and @e .true., write as 64-bit real,
+  !> @param[in] writeAsDouble If present and .true., write as 64-bit real,
   !> otherwise cast to 32-bit real
   !>
   !> @callgraph
@@ -975,7 +976,7 @@ contains
   !> @param rdb The result database file to write to
   !> @param[in] array The array to write
   !> @param ierr Error flag
-  !> @param[in] writeAsDouble If present and @e .true., write as 64-bit reals,
+  !> @param[in] writeAsDouble If present and .true., write as 64-bit reals,
   !> otherwise cast to 32-bit reals
   !>
   !> @callgraph
@@ -1046,7 +1047,7 @@ contains
   !>
   !> @param rdb The result database file to write to
   !> @param[in] array The array to write
-  !> @param[in] writeAsDouble If present and @e .true., write as 64-bit reals,
+  !> @param[in] writeAsDouble If present and .true., write as 64-bit reals,
   !> otherwise cast to 32-bit reals
   !> @param ierr Error flag
   !>
@@ -1154,10 +1155,10 @@ contains
   !>
   !> @param rdb The result database file to close
   !> @param ierr Error flag
-  !> @param[in] retainIfEmpty If present and @e .true., don't delete empty file
-  !> @param[out] haveData If present, set to @e .true. unless the file is empty
+  !> @param[in] retainIfEmpty If present and .true., don't delete empty file
+  !> @param[out] haveData If present, set to .true. unless the file is empty
   !>
-  !> @details The file is deleted if it is empty when closed (i.e.,no binary
+  !> @details The file is deleted if it is empty when closed (i.e., no binary
   !> data has been written to it) unless @a retainIfEmpty is .true.
   !>
   !> @callgraph @callergraph
