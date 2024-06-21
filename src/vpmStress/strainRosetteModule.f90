@@ -504,7 +504,7 @@ contains
 
 
   subroutine calcElmCoordSystem (id, globalNodes, posInGl, X_el, T_el, &
-       &                         ierr, useElCoordSys)
+       &                         lpu, ierr, useElCoordSys)
 
     !!==========================================================================
     !! Calulate nodal coordinates and transformation matrix for the
@@ -524,7 +524,7 @@ contains
     use FFlLinkHandlerInterface       , only : ffl_getNodalCoor
 
     type(IdType)     , intent(in)    :: id
-    integer          , intent(in)    :: globalNodes(:)
+    integer          , intent(in)    :: globalNodes(:), lpu
     real(dp)         , intent(inout) :: posInGl(:,:)
     real(dp)         , intent(out)   :: X_el(:,:), T_el(:,:)
     integer          , intent(out)   :: ierr
@@ -551,7 +551,7 @@ contains
     !! Get the transformation matrix from global to element coordinate system
     call getShellElementAxes (nElNodes, X_el(1,:), X_el(2,:), X_el(3,:), &
          &                    T_el(1,:), T_el(2,:), T_el(3,:), &
-         &                    ierr, useElCoordSys)
+         &                    lpu, ierr, useElCoordSys)
     if (ierr /= 0) goto 910
     if (.not.present(useElCoordSys)) return ! Do not recompute matrix posInGl
 
@@ -646,7 +646,7 @@ contains
     !! Calculate position and transformation matrices
 
     call calcElmCoordSystem (rosette%id, rosette%globalNodes, rosette%posInGl, &
-         &                   X_el, T_el, ierr, useElCoordSys)
+         &                   X_el, T_el, lpu, ierr, useElCoordSys)
     if (ierr /= 0) then
        call reportError (debugFileOnly_p,'InitStrainRosette')
        return
@@ -811,7 +811,8 @@ contains
   end subroutine InitStrainRosette
 
 
-  subroutine CalcRosetteDisplacements (rosette, madof, H_el, displ, supTr, ierr)
+  subroutine CalcRosetteDisplacements (rosette, madof, H_el, displ, supTr, &
+       &                               lpu, ierr)
 
     !!==========================================================================
     !! Compute nodal displacements in a strain rosette.
@@ -826,7 +827,7 @@ contains
     use reportErrorModule             , only : reportError, debugFileOnly_p
 
     type(StrainElementType), intent(inout) :: rosette
-    integer                , intent(in)    :: madof(:)
+    integer                , intent(in)    :: madof(:), lpu
     real(rk)               , intent(in)    :: H_el(:,:), displ(:)
     real(dp)               , intent(in)    :: supTr(:,:)
     integer                , intent(out)   :: ierr
@@ -860,7 +861,7 @@ contains
     !! Updated strain gage orientation
     Xn(:,1:nElNodes) = rosette%X0 + rosette%disp
     call getShellElementAxes (nElNodes, Xn(1,:), Xn(2,:), Xn(3,:), &
-         &                    Tn(:,1), Tn(:,2), Tn(:,3), ierr)
+         &                    Tn(:,1), Tn(:,2), Tn(:,3), lpu, ierr)
     if (ierr /= 0) then
        call reportError (debugFileOnly_p,'CalcRosetteDisplacements')
        return
