@@ -9,6 +9,31 @@
 !> @brief Recovery of displacements at internal nodes.
 
 !!==============================================================================
+!> @brief Module with real kind parameter to use in the recovery calculations.
+
+module RecKindModule
+
+#if FT_HAS_RECOVERY == 1
+  use KindModule, only : sp
+#else
+  use KindModule, only : dp
+#endif
+
+  implicit none
+
+  private
+
+  !> @brief Real kind (precision) to use for all recovery calculations
+#if FT_HAS_RECOVERY == 1
+  integer, parameter, public :: rk = sp
+#else
+  integer, parameter, public :: rk = dp
+#endif
+
+end module RecKindModule
+
+
+!!==============================================================================
 !> @brief Module with subroutines for recovery of internal displacements.
 !>
 !> @details This module contains a set of subroutines for calculation of
@@ -20,11 +45,10 @@
 
 module DisplacementModule
 
+  use RecKindModule    , only : rk
 #if FT_HAS_RECOVERY == 1
-  use KindModule       , only : sp
   use sDiskMatrixModule, only : DiskMatrixType
 #else
-  use KindModule       , only : dp
   use DiskMatrixModule , only : DiskMatrixType
 #endif
 
@@ -36,14 +60,12 @@ module DisplacementModule
 #define RAXPY  SAXPY
 #define RGEMV  SGEMV
 #define RSCATR SSCATR
-  integer, parameter :: rk = sp !< Single precision real kind
 #else
 #define RGEMV  DGEMV
 #define RCOPY  DCOPY
 #define RAXPY  DAXPY
 #define RGEMV  DGEMV
 #define RSCATR DSCATR
-  integer, parameter :: rk = dp !< Double precision real kind
 #endif
 
   !> @cond NO_DOCUMENTATION

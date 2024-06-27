@@ -779,6 +779,7 @@ INPUT                   = ${PROJECT_BINARY_DIR} \
                           src/vpmStress/elStressModule.f90 \
                           src/vpmStress/samStressModule.f90 \
                           src/vpmStress/strainAndStressUtils.f90 \
+                          src/vpmStress/strainRosetteModule.f90 \
                           src/vpmStress/stressRoutines.f90 \
                           src/vpmUtilities src/SolutionMapper \
                           src/Femlib/beam.f src/Femlib/beamaux.f \

@@ -13,25 +13,16 @@
 
 module ElstressModule
 
-#if FT_HAS_RECOVERY == 1
-  use kindModule, only : dp, sp
-#else
   use kindModule, only : dp
-#endif
 
   implicit none
 
-#if FT_HAS_RECOVERY == 1
-  integer , parameter :: rk = sp
-#else
-  integer , parameter :: rk = dp
-#endif
   logical , parameter :: lStiffProj = .true.    !< Activate stiffness projection
   real(dp), parameter :: sqrt3_p = sqrt(3.0_dp) !< For Gauss-point extrapolation
 
   private
 
-  public :: extractEV, ElStress, rk
+  public :: extractEV, ElStress
 
 
 contains
@@ -57,7 +48,8 @@ contains
 
   subroutine extractEV (IEL,sam,SV,EV,NEDOF)
 
-    use SamModule, only : SamType
+    use SamModule    , only : SamType
+    use recKindModule, only : rk
 
     integer      , intent(in)  :: IEL
     type(SamType), intent(in)  :: sam

@@ -5,19 +5,24 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file strainRosetteModule.f90
+!> @brief Strain rosette object data containers and methods.
+
+!!==============================================================================
+!> @brief Module with data types representing strain rosette objects.
+!>
+!> @details The module also contains subroutines for accessing the data,
+!> and to perform some calculations.
+
 module StrainRosetteModule
 
-  use KindModule  , only : dp, sp
-  use IdTypeModule, only : IdType
+  use KindModule   , only : dp
+  use RecKindModule, only : rk
+  use IdTypeModule , only : IdType
 
   implicit none
 
-#if FT_HAS_RECOVERY == 1
-  integer, parameter :: rk = sp !< Single precision real kind
-#else
-  integer, parameter :: rk = dp !< Double precision real kind
-#endif
-
+  !> @brief Data type representing a single strain gage.
   type StrainGageType
      integer  :: lpu_FiDF       !< Device function file for writing
      integer  :: fatHandle      !< Handle to fatigue calculation data
@@ -27,6 +32,7 @@ module StrainRosetteModule
   end type StrainGageType
 
 
+  !> @brief Data type representing a strain rosette.
   type StrainRosetteType
 
      !! Constant (time-independent) quantities
@@ -59,6 +65,7 @@ module StrainRosetteModule
   end type StrainRosetteType
 
 
+  !> @brief Data type representing a surface stress/strain recovery element.
   type StrainElementType
 
      type(IdType) :: id    !< General identification data
@@ -80,6 +87,7 @@ module StrainRosetteModule
   end type StrainElementType
 
 
+  !> @brief Initializes a stress/strain recovery object.
   interface nullifyRosette
      module procedure nullifyStrainRosette
      module procedure nullifyStrainElement
@@ -90,14 +98,14 @@ module StrainRosetteModule
 
 contains
 
-  subroutine nullifyStrainRosette (rosette)
+  !!============================================================================
+  !> @brief Initializes a strainrosettemodule::strainrosettetype object.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 May 2001
 
-    !!==========================================================================
-    !! Initialize the StrainRosetteType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 May 2001/1.0
-    !!==========================================================================
+  subroutine nullifyStrainRosette (rosette)
 
     type(StrainRosetteType), intent(out) :: rosette
 
@@ -129,14 +137,14 @@ contains
   end subroutine nullifyStrainRosette
 
 
-  subroutine nullifyStrainElement (rosette)
+  !!============================================================================
+  !> @brief Initializes a strainrosettemodule::strainelementtype object.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 6 Feb 2004
 
-    !!==========================================================================
-    !! Initialize the StrainElementType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 6 Feb 2004/1.0
-    !!==========================================================================
+  subroutine nullifyStrainElement (rosette)
 
     use IdTypeModule, only : nullifyId
 
@@ -161,14 +169,14 @@ contains
   end subroutine nullifyStrainElement
 
 
-  subroutine deallocateRosette (rosette)
+  !!============================================================================
+  !> @brief Deallocates a strainrosettemodule::strainelementtype object.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 23 Jan 2017
 
-    !!==========================================================================
-    !! Deallocate the StrainElementType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 23 Jan 2017/1.0
-    !!==========================================================================
+  subroutine deallocateRosette (rosette)
 
     type(StrainElementType), intent(inout) :: rosette
 
@@ -222,15 +230,20 @@ contains
   end subroutine deallocateRosette
 
 
-  subroutine evaluateStrainGages (gages,epsC,sigC)
+  !!============================================================================
+  !> @brief Evaluates the given strain gages based on given strain/stress state.
+  !>
+  !> @param gages The strain gage objects to evaluate
+  !> @param[in] epsC Cartesian strain vector
+  !> @param[in] sigC Cartesian stress vector
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 May 2001
 
-    !!==========================================================================
-    !! Evaluate the given strain gages based on the cartesian strain state epsC
-    !! and the cartesian stress state sigC.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 May 2001/1.0
-    !!==========================================================================
+  subroutine evaluateStrainGages (gages,epsC,sigC)
 
     type(StrainGageType), intent(inout) :: gages(:)
     real(dp)            , intent(in)    :: epsC(:), sigC(:)
@@ -248,14 +261,16 @@ contains
   end subroutine evaluateStrainGages
 
 
-  subroutine calcRosetteStrains (rosette,displ,ierr)
+  !!============================================================================
+  !> @brief Evaluates the given strain rosette based on the given displacements.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 May 2001
 
-    !!==========================================================================
-    !! Evaluate the given strain rosette based on the given displacement vector.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 May 2001/2.0
-    !!==========================================================================
+  subroutine calcRosetteStrains (rosette,displ,ierr)
 
     use StrainAndStressUtilitiesModule, only : PrincipleStrains2D
     use StrainAndStressUtilitiesModule, only : PrincipleStresses2D
@@ -324,14 +339,16 @@ contains
   end subroutine calcRosetteStrains
 
 
-  subroutine calcZeroStartRosetteStrains (rosette,displ,ierr)
+  !!============================================================================
+  !> @brief Evaluates the initial strain of a strain rosette.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 May 2001
 
-    !!==========================================================================
-    !! Evaluate the initial strain of a strain rosette.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 May 2001/2.0
-    !!==========================================================================
+  subroutine calcZeroStartRosetteStrains (rosette,displ,ierr)
 
     use reportErrorModule, only : internalError
 
@@ -354,14 +371,16 @@ contains
   end subroutine CalcZeroStartRosetteStrains
 
 
-  subroutine PrintRosetteStrains (rosette,time,lpu)
+  !!============================================================================
+  !> @brief Prints the current state of a strain rosette to ASCII file.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 25 May 2001
 
-    !!==========================================================================
-    !! Print the current state of a strain rosette to ASCII file.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 25 May 2001 / 2.0
-    !!==========================================================================
+  subroutine PrintRosetteStrains (rosette,time,lpu)
 
     use kindModule, only : pi_p
 
@@ -395,14 +414,16 @@ contains
   end subroutine PrintRosetteStrains
 
 
-  subroutine PrintInitialStrain (rosette,time,lpu)
+  !!============================================================================
+  !> @brief Prints the initial state of a strain rosette to ASCII file.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 25 May 2001
 
-    !!==========================================================================
-    !! Print the initial state of a strain rosette to ASCII file.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 25 May 2001 / 2.0
-    !!==========================================================================
+  subroutine PrintInitialStrain (rosette,time,lpu)
 
     use StrainAndStressUtilitiesModule, only : PrincipleStrains2D
     use StrainAndStressUtilitiesModule, only : PrincipleStresses2D
@@ -442,15 +463,17 @@ contains
   end subroutine PrintInitialStrain
 
 
+  !!============================================================================
+  !> @brief Prints the ASCII file heading for a given strain rosette object.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 25 May 2001
+
   subroutine PrintRosetteHeading (rosette, globalNodes, minex, posInGl, &
        &                          rosId, feId, lpu)
-
-    !!==========================================================================
-    !! Print ASCII file heading for a given strain rosette.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 25 May 2001 / 2.0
-    !!==========================================================================
 
     use kindModule, only : pi_p
 
@@ -503,17 +526,22 @@ contains
   end subroutine PrintRosetteHeading
 
 
+  !!============================================================================
+  !> @brief Computes nodal coordinates and transformation matrix for an element.
+  !>
+  !> @details This subroutine extracts the global nodal coordinates for a
+  !> strain-gage element and calculates its associated global-to-local
+  !> transformation matrix. If the initial nodal ordering gives wrong Z-axis
+  !> direction, the element nodes are reordered and the calculation is repeated.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 25 May 2001
+
   subroutine calcElmCoordSystem (id, globalNodes, posInGl, X_el, T_el, &
        &                         lpu, ierr, useElCoordSys)
-
-    !!==========================================================================
-    !! Calulate nodal coordinates and transformation matrix for the
-    !! strain-gage element. Reorder the nodes and repeat calculation if the
-    !! initial ordering gives the wrong Z-axis direction.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 25 May 2001 / 1.0
-    !!==========================================================================
 
     use kindModule                    , only : epsDiv0_p
     use IdTypeModule                  , only : getId
@@ -584,16 +612,18 @@ contains
   end subroutine calcElmCoordSystem
 
 
+  !!============================================================================
+  !> @brief Computes strain-displacement matrices for all strain rosettes.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 25 May 2001
+
   subroutine InitStrainRosette (rosette, H_el, madof, addSigma0, sigma0, &
        &                        iprint, lpu, ierr, &
        &                        useElCoordSys, openFiles, calcDisp, vgii)
-
-    !!==========================================================================
-    !! Compute strain-displacement matrices for all strain rosettes.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 25 May 2001 / 2.0
-    !!==========================================================================
 
     use StrainAndStressUtilitiesModule, only : StrainDispCST, StrainDispQuad4
     use IdTypeModule                  , only : getId
@@ -798,6 +828,7 @@ contains
 
   contains
 
+    !> @brief Computes strain contributions from given DOF range.
     subroutine calcStrain (eps,idof1,idof2)
       real(dp), intent(inout) :: eps(3)
       integer , intent(in)    :: idof1, idof2
@@ -811,15 +842,17 @@ contains
   end subroutine InitStrainRosette
 
 
+  !!============================================================================
+  !> @brief Computes nodal displacements in a strain rosette.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 31 May 2007
+
   subroutine CalcRosetteDisplacements (rosette, madof, H_el, displ, supTr, &
        &                               lpu, ierr)
-
-    !!==========================================================================
-    !! Compute nodal displacements in a strain rosette.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 31 May 2007 / 1.0
-    !!==========================================================================
 
     use StrainAndStressUtilitiesModule, only : getShellElementAxes
     use rotationModule                , only : FFa_glbEulerZYX

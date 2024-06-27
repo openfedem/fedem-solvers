@@ -49,9 +49,10 @@ contains
        &                   irec,isav,iprint,lpu,ierr)
 
     use KindModule                    , only : dp, i8, hugeVal_p
+    use RecKindModule                 , only : rk
     use RDBModule                     , only : RDBType, flushRDBfile
     use SamModule                     , only : SamType
-    use ElStressModule                , only : extractEV, elStress, rk
+    use ElStressModule                , only : extractEV, elStress
     use ResStressModule               , only : addResStress
     use SaveStressModule              , only : saveElmOrder, writeStressHeader
     use SaveStressModule              , only : writeStressDB, writeStrMeasureDB

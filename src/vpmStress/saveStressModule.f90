@@ -6,7 +6,6 @@
 !!==============================================================================
 
 !> @file saveStressModule.f90
-!>
 !> @brief Save of stress recovery variables to result database files.
 
 !!==============================================================================
@@ -16,12 +15,6 @@
 !> stress recovery results data of an FE part to the results database.
 
 module saveStressModule
-
-#if FT_HAS_RECOVERY == 1
-  use KindModule, only : sp
-#else
-  use KindModule, only : dp
-#endif
 
   implicit none
 
@@ -47,12 +40,6 @@ module saveStressModule
      integer :: idPEN6, idPEN15
      integer :: idHEX8, idHEX20
   end type HeaderId
-
-#if FT_HAS_RECOVERY == 1
-  integer, parameter :: rk = sp !< Do displacement recovery in single precision
-#else
-  integer, parameter :: rk = dp !< Do displacement recovery in double precision
-#endif
 
   logical, save :: lNodes = .true. !< Flag displacement output as nodal results
   integer, save :: lVector = 0     !< Flag displacement output as vector results
@@ -1436,6 +1423,7 @@ contains
 
   subroutine writeDisplacementDB (rdb,sam,sv,ierr,iComp,svtot,lDouble2)
 
+    use RecKindModule         , only : rk
     use RDBModule             , only : RDBType, writeRDB
     use SamModule             , only : SamType
     use reportErrorModule     , only : reportError, debugFileOnly_p
