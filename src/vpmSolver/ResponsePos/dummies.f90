@@ -106,3 +106,8 @@ contains
     if (present(complexity) .and. present(text)) print*,text
   end subroutine writeSysMat
 end module SysMatrixTypeModule
+
+module RecKindModule
+  use kindModule, only : sp
+  integer, parameter, public :: rk = sp
+end module RecKindModule
