@@ -281,14 +281,14 @@ contains
 
   subroutine readStrainRosettes (infp,ierr)
 
-    use StrainGageModule, only : readStrainGages
+    use StrainRosetteModule, only : readStrainElements
 
     integer, intent(in)  :: infp
     integer, intent(out) :: ierr
 
     !! --- Logic section ---
 
-    call readStrainGages (infp,strainRosettes,err=ierr)
+    call readStrainElements (infp,strainRosettes,err=ierr)
 
   end subroutine readStrainRosettes
 
@@ -310,8 +310,8 @@ contains
 
     use DisplacementModule     , only : RMatrixPtr, IVectorPtr
     use DisplacementModule     , only : elDispFromSupElDisp
-    use StrainGageModule       , only : initStrainGages, checkRosette
-    use StrainRosetteModule    , only : initStrainRosette, printRosetteHeading
+    use StrainRosetteModule    , only : initStrainRosette, checkRosette
+    use StrainRosetteModule    , only : initStrainGauges, printRosetteHeading
     use ReportErrorModule      , only : allocationError
     use ReportErrorModule      , only : reportError, debugFileOnly_p
     use FFlLinkHandlerInterface, only : ffl_set
@@ -388,11 +388,9 @@ contains
                &                  iprint=ipsw, lpu=lpu, ierr=ierr)
           if (ierr /= 0) goto 900
 
-          call InitStrainGages (strainRosettes(i)%id%userId, &
-               &                strainRosettes(i)%data(1)%gages, &
-               &                strainRosettes(i)%data(1)%alphaGages, &
-               &                strainRosettes(i)%posInGl, ierr=ierr)
-          if (ierr < 0) goto 900
+          call InitStrainGauges (strainRosettes(i)%data(1)%gages, &
+               &                 strainRosettes(i)%data(1)%alphaGages, &
+               &                 strainRosettes(i)%posInGl)
 
           call PrintRosetteHeading (strainRosettes(i)%data(1), &
                &                    strainRosettes(i)%globalNodes, &
@@ -434,10 +432,11 @@ contains
 
   subroutine initStrainRosettesFromCore (ierr)
 
-    use IdTypeModule     , only : getId
-    use ProgressModule   , only : lterm
-    use StrainGageModule , only : initStrainGages
-    use ReportErrorModule, only : allocationError, reportError, debugFileOnly_p
+    use IdTypeModule       , only : getId
+    use ProgressModule     , only : lterm
+    use StrainRosetteModule, only : initStrainGauges
+    use ReportErrorModule  , only : allocationError
+    use ReportErrorModule  , only : reportError, debugFileOnly_p
 
     integer, intent(out) :: ierr
 
@@ -461,10 +460,9 @@ contains
                   &                          strainRosettes(i)%data(1)%Bcart, &
                   &                          3*part(j)%ndim,ierr)
              if (ierr == 3*part(j)%ndim) then
-                call initStrainGages (strainRosettes(i)%id%userId, &
-                     &                strainRosettes(i)%data(1)%gages, &
-                     &                strainRosettes(i)%data(1)%alphaGages, &
-                     &                strainRosettes(i)%posInGl, ierr=ierr)
+                call initStrainGauges (strainRosettes(i)%data(1)%gages, &
+                     &                 strainRosettes(i)%data(1)%alphaGages, &
+                     &                 strainRosettes(i)%posInGl)
              else
                 deallocate(strainRosettes(i)%data(1)%Bcart)
                 nullify(strainRosettes(i)%data(1)%Bcart)

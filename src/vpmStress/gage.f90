@@ -322,7 +322,8 @@ subroutine gage (ierr)
 
         if (associated(strainRosettes(i)%disp)) then
            call CalcRosetteDisplacements (strainRosettes(i),samSup%madof, &
-                &                         H_all(i)%p,sup%finit,sup%supTr,ierr)
+                &                         H_all(i)%p,sup%finit,sup%supTr, &
+                &                         lpu,ierr)
            if (ierr /= 0) goto 900
            if (iprint > 1) then
               write(lpu,6031) trim(getId(strainRosettes(i)%id)), &
