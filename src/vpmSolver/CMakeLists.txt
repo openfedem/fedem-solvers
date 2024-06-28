@@ -164,7 +164,6 @@ if ( USE_CONCURRENT_RECOVERY )
                      ../vpmStress/saveStressModule
                      ../vpmStress/saveStrainGageModule
                      ../vpmStress/saveVTFModule
-                     ../vpmStress/strainGageModule
                      ../vpmStress/strainRosetteModule
                      dummyResStressModule
     )
