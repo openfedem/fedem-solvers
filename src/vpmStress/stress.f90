@@ -15,7 +15,7 @@ subroutine stress (ierr)
   use DisplacementModule     , only : readSupElPosition, readSupElDisplacements
   use DisplacementModule     , only : readResponsePointers, readDisplPointer
   use DisplacementModule     , only : readIntDisplacements, calcIntDisplacements
-  use DisplacementModule     , only : calcTotalDisplacements, getFileName
+  use DisplacementModule     , only : calcTotalDisplacements
   use TriadTypeModule        , only : TriadType
   use SupElTypeModule        , only : SupElType, nullifySupel
   use RDBModule              , only : RDBType, writeTimeStepDB, closeRDBfile
@@ -32,6 +32,7 @@ subroutine stress (ierr)
   use SaveVTFModule2         , only : writeDisplacementVTF
   use ResStressModule        , only : readResStress
   use StressRoutinesModule   , only : calcStresses
+  use FileUtilitiesModule    , only : getFileName
   use TimerModule            , only : initTime, showTime
   use VersionModule          , only : openResFile
   use ProgressModule         , only : lterm, writeProgress

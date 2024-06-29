@@ -18,10 +18,10 @@ subroutine cfemReducer (numStiff,ierr)
   use DiskMatrixModule          , only : DiskMatrixType, dmSize, dmGetSwapSize
   use DiskMatrixModule          , only : dmNullify, dmOpen, dmClose, dmNdp_p
   use AsmExtensionModule        , only : csBeginAssembly, csEndAssembly
-  use InputReducerModule        , only : getFileName
   use InaddModule               , only : INADD, extractSubMat
   use CfemFedemModule           , only : readReducerDataAndSolveCfem
   use CmstrsModule              , only : CMSTRS, EIGVAL, EIGCMS, JCMS, GRAV
+  use FileUtilitiesModule       , only : getFileName
   use TimerModule               , only : initTime, showTime
   use VersionModule             , only : openResFile
   use ProgressModule            , only : lterm, writeProgress

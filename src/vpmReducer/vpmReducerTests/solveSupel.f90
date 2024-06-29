@@ -14,9 +14,9 @@ subroutine solveSupEl (ndim,nfix,neq,g,ierr)
   !! date/rev   : 23 Feb 2018/1.0
   !!============================================================================
 
-  use kindModule        , only : dp, lfnam_p
-  use InputReducerModule, only : getFileName
-  use reportErrorModule , only : setErrorFile
+  use kindModule         , only : dp, lfnam_p
+  use fileUtilitiesModule, only : getFileName
+  use reportErrorModule  , only : setErrorFile
 
   implicit none
 
@@ -72,10 +72,10 @@ subroutine solveSupEl1 (ndim,nfix,neq,g,lpu,ierr)
   real(dp) :: A(ndim-nfix,ndim-nfix), R(ndim-nfix)
   real(dp) :: B(neq-ndim,ndim), vii(neq-ndim), vei(neq-ndim), vgi(neq-ndim,3)
 
-  character(len=13), parameter :: file1 = 'reducer_S.fmx'
-  character(len=13), parameter :: file2 = 'reducer_G.fmx'
-  character(len=13), parameter :: file3 = 'reducer_V.fmx'
-  character(len=13), parameter :: file4 = 'reducer_B.fmx'
+  character(len=11), parameter :: file1 = 'fedem_S.fmx'
+  character(len=11), parameter :: file2 = 'fedem_G.fmx'
+  character(len=11), parameter :: file3 = 'fedem_V.fmx'
+  character(len=11), parameter :: file4 = 'fedem_B.fmx'
 
   !! Read reduction matrices from files
   ierr = 0
@@ -127,7 +127,7 @@ subroutine solveSupEl2 (ndim,nfix,g,lpu,ierr)
   !!============================================================================
 
   use kindModule            , only : dp, lfnam_p
-  use InputReducerModule    , only : getFileName
+  use fileUtilitiesModule   , only : getFileName
   use binaryDBInterface     , only : readDoubleDB
   use manipMatrixModule     , only : writeObject
   use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getdoubles

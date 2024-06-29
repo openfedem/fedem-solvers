@@ -13,7 +13,7 @@ subroutine gage (ierr)
   use InitiateStressModule      , only : readSolverData
   use DisplacementModule        , only : openBandEmatrices, closeBandEmatrices
   use DisplacementModule        , only : readSupElDisplacements
-  use DisplacementModule        , only : readResponsePointers, getFileName
+  use DisplacementModule        , only : readResponsePointers
   use DisplacementModule        , only : readStaticDisplacements, dis1Expand
   use DisplacementModule        , only : ElDispFromSupElDisp
   use DisplacementModule        , only : RMatrixPtr, IVectorPtr
@@ -34,6 +34,7 @@ subroutine gage (ierr)
   use RDBModule                 , only : RDBType, flushRDBfile, closeRDBfile
   use SaveStrainGageModule      , only : writeStrainGageHeader,writeStrainGageDB
   use ManipMatrixModule         , only : writeObject
+  use FileUtilitiesModule       , only : getFileName
   use TimerModule               , only : initTime, showTime
   use VersionModule             , only : openResFile
   use ProgressModule            , only : lterm, writeProgress

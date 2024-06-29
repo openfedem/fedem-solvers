@@ -81,7 +81,7 @@ contains
 #ifdef FT_HAS_RECOVERY
     use StressRecoveryModule        , only : ReadStrainRosettes
 #endif
-    use FileUtilitiesModule         , only : findUnitNumber
+    use FileUtilitiesModule         , only : findUnitNumber, getFileName
     use ReportErrorModule           , only : reportError
     use ReportErrorModule           , only : error_p, debugFileOnly_p
 
@@ -545,33 +545,5 @@ contains
     if (err /= 0) call reportError (debugFileOnly_p,'preprocessSolverData')
 
   end subroutine preprocessSolverData
-
-
-  !!============================================================================
-  !> @brief Extracts a file name from a command-line option.
-  !>
-  !> @param[in]  chFile The command-line option to extract from
-  !> @param[out] chName The value of the command-line option
-  !>
-  !> @details If needed the string value is converted to UNIX or Windows format.
-  !>
-  !> @author Knut Morten Okstad
-  !>
-  !> @date 12 Dec 2000
-
-  subroutine getFileName (chFile,chName)
-
-    use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getstring
-    use FFaFilePathInterface  , only : ffa_checkpath
-
-    character(len=*), intent(in)  :: chFile
-    character(len=*), intent(out) :: chName
-
-    !! --- Logic section ---
-
-    call ffa_cmdlinearg_getstring (chFile,chName)
-    call ffa_checkpath (chName)
-
-  end subroutine getFileName
 
 end module initiateModule

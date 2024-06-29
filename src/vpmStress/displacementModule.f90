@@ -89,57 +89,6 @@ module DisplacementModule
 contains
 
   !!============================================================================
-  !> @brief Extracts a file name from a command-line option.
-  !>
-  !> @param[in]  file The command-line option to extract from
-  !> @param[out] name The value of the command-line option
-  !> @param[in]  suffix File extension to use when using default file
-  !>
-  !> @details If needed the string value is converted to UNIX or Windows format.
-  !> If the specified command-line option is not used, the default file name is
-  !> `<partname><suffix>` where `<partname>` is the name of the FE data file
-  !> without the file extension.
-  !>
-  !> @callergraph
-  !>
-  !> @author Knut Morten Okstad
-  !>
-  !> @date 20 Sep 2000
-
-  subroutine getFileName (file,name,suffix)
-
-    use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getstring
-    use FFaFilePathInterface  , only : ffa_checkpath
-
-    character(len=*), optional, intent(in)  :: suffix
-    character(len=*),           intent(in)  :: file
-    character(len=*),           intent(out) :: name
-
-    !! Local variables
-    integer :: idot
-
-    !! --- Logic section ---
-
-    call ffa_cmdlinearg_getstring (file,name)
-    if (name == '' .and. present(suffix)) then
-       !! File name not given, use default
-       call ffa_cmdlinearg_getstring ('linkfile',name)
-       if (name == '') then
-          name = 'fedem'//suffix
-          return
-       end if
-       idot = index(name,'.',.TRUE.)
-       if (idot < 1) idot = len_trim(name)+1
-       name(idot:) = suffix
-    end if
-
-    !! Unix/NT pathname conversion
-    call ffa_checkpath (name)
-
-  end subroutine getFileName
-
-
-  !!============================================================================
   !> @brief Retrieves result database file pointers for system response data.
   !>
   !> @param[in] triads Array of triads to read response variables for
@@ -555,15 +504,16 @@ contains
   subroutine openBandEmatrices (ndof1,ndof2,ngen,nColSwap,ierr, &
        &                        Bmatfile,Ematfile,indx)
 
-    use kindModule       , only : lfnam_p
+    use kindModule         , only : lfnam_p
+    use FileUtilitiesModule, only : getFileName
 #if FT_HAS_RECOVERY == 1
-    use sDiskMatrixModule, only : dmNullify, dmOpen, dmGetSwapSize
+    use sDiskMatrixModule  , only : dmNullify, dmOpen, dmGetSwapSize
 #else
-    use DiskMatrixModule , only : dmNullify, dmOpen, dmGetSwapSize
+    use DiskMatrixModule   , only : dmNullify, dmOpen, dmGetSwapSize
 #endif
-    use DiskMatrixModule , only : dmOld_p
-    use reportErrorModule, only : reportError, debugFileOnly_p
-    use reportErrorModule, only : allocationError, internalError
+    use DiskMatrixModule   , only : dmOld_p
+    use reportErrorModule  , only : reportError, debugFileOnly_p
+    use reportErrorModule  , only : allocationError, internalError
 
     integer                   , intent(in)  :: ndof1, ndof2, ngen, nColSwap
     integer                   , intent(out) :: ierr

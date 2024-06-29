@@ -113,7 +113,6 @@ contains
     use SensorTypeModule          , only : numCtrlOut
     use FunctionTypeModule        , only : isCtrlSysUsed
     use FrictionTypeModule        , only : fricForceTol
-    use InitiateModule            , only : getFileName
     use InitiateModule            , only : readSolverData, preprocessSolverData
     use InitiateSystemTypeModule  , only : initTimeStepping
     use InitiateSupElTypeModule   , only : writeSupEls2Ftn
@@ -134,6 +133,7 @@ contains
 #endif
     use SaveModule                , only : initiateSaveModule
     use SaveModule                , only : writeSolverHeaders
+    use FileUtilitiesModule       , only : getFileName
     use VersionModule             , only : openResFile
     use TimerModule               , only : initTime, startTimer, stopTimer
     use ProfilerModule            , only : ini_p, nProfMod_p
@@ -1111,7 +1111,6 @@ contains
   subroutine finalize (ierr)
 
     use KindModule                , only : i8
-    use InitiateModule            , only : getFileName
     use SystemTypeModule          , only : isQuasiStatic
     use SolverRoutinesModule      , only : dumpStep
     use SaveModule                , only : res1DB, res2DB, modeDB, freqDB
@@ -1119,6 +1118,7 @@ contains
 #ifdef FT_HAS_RECOVERY
     use StressRecoveryModule      , only : getGageRecoveryFiles
 #endif
+    use FileUtilitiesModule       , only : getFileName
     use ProfilerModule            , only : startTimer, stopTimer, exp_p
     use ProgressModule            , only : writeProgress, lterm
     use ReportErrorModule         , only : reportError, debugFileOnly_p, error_p
@@ -1313,9 +1313,9 @@ contains
 
   subroutine writeClosure (lcon,ierr)
 
-    use InitiateModule, only : getFileName
-    use ProfilerModule, only : reportTiming
-    use TimerModule   , only : showTime
+    use FileUtilitiesModule, only : getFileName
+    use ProfilerModule     , only : reportTiming
+    use TimerModule        , only : showTime
 
     integer, intent(in)    :: lcon
     integer, intent(inout) :: ierr

@@ -12,7 +12,7 @@ subroutine fpp (ierr)
   use SamStressModule        , only : initiateSAM
   use InitiateStressModule   , only : readSolverData
   use DisplacementModule     , only : IVectorPtr, RMatrixPtr
-  use DisplacementModule     , only : getFileName, ElDispFromSupElDisp
+  use DisplacementModule     , only : ElDispFromSupElDisp
   use DisplacementModule     , only : openBandEmatrices, closeBAndEMatrices
   use DisplacementModule     , only : readResponsePointers
   use DisplacementModule     , only : readSupElDisplacements
@@ -38,6 +38,7 @@ subroutine fpp (ierr)
   use SaveStrainCoatModule   , only : writeElementsHeader, writeElementsDB
   use SaveStrainCoatModule   , only : writeHistoryHeader, writeHistoryDB
   use ResStressModule        , only : readResStress, getSolidSurfaceStress
+  use FileUtilitiesModule    , only : getFileName
   use TimerModule            , only : initTime, showTime
   use VersionModule          , only : openResFile
   use ProgressModule         , only : writeProgress, lterm

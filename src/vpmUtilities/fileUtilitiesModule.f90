@@ -186,4 +186,54 @@ contains
   end subroutine printOpenFiles
 
   !> @endcond
+  !!============================================================================
+  !> @brief Extracts a file name from a command-line option.
+  !>
+  !> @param[in]  file The command-line option to extract from
+  !> @param[out] name The value of the command-line option
+  !> @param[in]  suffix File extension to use when using default file
+  !>
+  !> @details If needed the string value is converted to UNIX or Windows format.
+  !> If the specified command-line option is not used, the default file name is
+  !> `<partname><suffix>` where `<partname>` is the name of the FE data file
+  !> without the file extension, as provided with the `-linkfile` option.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 20 Sep 2000
+
+  subroutine getFileName (file,name,suffix)
+
+    use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getstring
+    use FFaFilePathInterface  , only : ffa_checkpath
+
+    character(len=*),           intent(in)  :: file
+    character(len=*),           intent(out) :: name
+    character(len=*), optional, intent(in)  :: suffix
+
+    !! Local variables
+    integer :: idot
+
+    !! --- Logic section ---
+
+    call ffa_cmdlinearg_getstring (file,name)
+    if (name == '' .and. present(suffix)) then
+       !! File name not given, use default
+       call ffa_cmdlinearg_getstring ('linkfile',name)
+       if (name == '') then
+          name = 'fedem'//suffix
+          return
+       end if
+       idot = index(name,'.',.TRUE.)
+       if (idot < 1) idot = len_trim(name)+1
+       name(idot:) = suffix
+    end if
+
+    !! Unix/Windows pathname conversion
+    call ffa_checkpath (name)
+
+  end subroutine getFileName
+
 end module FileUtilitiesModule

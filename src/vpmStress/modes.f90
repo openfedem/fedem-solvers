@@ -15,7 +15,7 @@ subroutine modes (nStep,nMode,timeStep,modeNum,processThisMode,ierr)
   use InitiateStressModule   , only : readSolverData
   use DisplacementModule     , only : openBandEmatrices, closeBandEmatrices
   use DisplacementModule     , only : readResponsePointers, calcIntDisplacements
-  use DisplacementModule     , only : readSupElDisplacements, getFileName
+  use DisplacementModule     , only : readSupElDisplacements
   use IdTypeModule           , only : StrId
   use RDBModule              , only : RDBType, openRDBfile, closeRDBfile
   use RDBModule              , only : writeTimeStepDB
@@ -30,6 +30,7 @@ subroutine modes (nStep,nMode,timeStep,modeNum,processThisMode,ierr)
   use ModesRoutinesModule2   , only : readModesPointers
   use ModesRoutinesModule2   , only : readFrequencies, readSupelModes
   use ModesRoutinesModule2   , only : calcStrainEnergyDensity
+  use FileUtilitiesModule    , only : getFileName
   use TimerModule            , only : initTime, showTime
   use VersionModule          , only : openResFile
   use ProgressModule         , only : lterm, writeProgress

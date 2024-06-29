@@ -46,9 +46,8 @@ contains
     use IdTypeModule             , only : ReportInputError
     use HeadingNameListModule    , only : Read_HEADING, modelFile
     use EnvironmentNameListModule, only : Read_ENVIRONMENT, gravity
-    use DisplacementModule       , only : getFileName
     use inputUtilities           , only : iuCopyToScratch, iuSetPosAtNextEntry
-    use fileUtilitiesModule      , only : findUnitNumber
+    use fileUtilitiesModule      , only : findUnitNumber, getFileName
     use reportErrorModule        , only : reportError, error_p, debugFIleOnly_p
 
     integer         , intent(in)  :: iSup, iprint, lpu

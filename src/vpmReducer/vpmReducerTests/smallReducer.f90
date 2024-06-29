@@ -26,10 +26,11 @@ subroutine smallReducer (ierr)
   use SysMatrixTypeModule    , only : SysMatrixType, deallocateSysMatrix
   use AsmExtensionModule     , only : csBeginAssembly, csEndAssembly, castToInt8
   use MatExtensionModule     , only : csGetSub11, csGetSub12, csGetSub22
-  use InputReducerModule     , only : getFileName, readReducerData
+  use InputReducerModule     , only : readReducerData
   use SamReducerModule       , only : saveSAM
   use InaddModule            , only : INADD
   use CmstrsModule           , only : GRAVfull
+  use FileUtilitiesModule    , only : getFileName
   use TimerModule            , only : initTime, showTime
   use VersionModule          , only : openResFile
   use ProgressModule         , only : lterm, writeProgress
@@ -233,31 +234,31 @@ subroutine smallReducer (ierr)
 
   ! --- Store the reduced substructure matrices for fedem_solver
 
-  call writeDoubleDB ('reducer_S.fmx','stiffness matrix',i,sk,ierr)
+  call writeDoubleDB ('fedem_S.fmx','stiffness matrix',i,sk,ierr)
   if (ierr /= 0) then
      call reportError (error_p,'Can not save reduced stiffness matrix to file')
      goto 900
   end if
 
-  call writeDoubleDB ('reducer_M.fmx','mass matrix',i,sm,ierr)
+  call writeDoubleDB ('fedem_M.fmx','mass matrix',i,sm,ierr)
   if (ierr /= 0) then
      call reportError (error_p,'Can not save reduced mass matrix to file')
      goto 900
   end if
 
-  call writeDoubleDB ('reducer_V.fmx','displacement matrix',i,vgi,ierr)
+  call writeDoubleDB ('fedem_V.fmx','displacement matrix',i,vgi,ierr)
   if (ierr /= 0) then
      call reportError (error_p,'Can not save displacement matrix to file')
      goto 900
   end if
 
-  call writeDoubleDB ('reducer_B.fmx','disk matrix',i,Bmat,ierr)
+  call writeDoubleDB ('fedem_B.fmx','disk matrix',i,Bmat,ierr)
   if (ierr /= 0) then
      call reportError (error_p,'Can not save disk matrix to file')
      goto 900
   end if
 
-  call writeDoubleDB ('reducer_G.fmx','gravity force vectors',i,gravec,ierr)
+  call writeDoubleDB ('fedem_G.fmx','gravity force vectors',i,gravec,ierr)
   if (ierr /= 0) then
      call reportError (error_p,'Can not save gravity force vectors to file')
      goto 900
