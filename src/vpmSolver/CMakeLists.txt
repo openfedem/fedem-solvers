@@ -156,7 +156,6 @@ endif ( NOT ( BUILD_SOLVER_AS_DLL AND BUILD_DUMMY_SUPEL_DLL ) )
 if ( USE_CONCURRENT_RECOVERY )
   set ( REC_FILE_LIST stressRecoveryModule
                      ../vpmStress/displacementModule
-                     ../vpmStress/initiateTriadAndSupElTypeModule
                      ../vpmStress/samStressModule
                      ../vpmStress/strainAndStressUtils
                      ../vpmStress/stressRoutines

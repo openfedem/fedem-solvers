@@ -7,51 +7,50 @@
 
 subroutine stress (ierr)
 
-  use KindModule                , only : dp, i8, maxInt_p, lfNam_p
-  use SamModule                 , only : SamType, deAllocateSAM, writeObject
-  use SamStressModule           , only : initiateSAM
-  use DisplacementModule        , only : openBandEmatrices, closeBandEmatrices
-  use DisplacementModule        , only : readSupElPosition, readSolverData
-  use DisplacementModule        , only : readSupElDisplacements, getFileName
-  use DisplacementModule        , only : readResponsePointers, readDisplPointer
-  use DisplacementModule        , only : readIntDisplacements
-  use DisplacementModule        , only : calcIntDisplacements
-  use DisplacementModule        , only : calcTotalDisplacements
-  use TriadTypeModule           , only : TriadType
-  use SupElTypeModule           , only : SupElType, nullifySupel
-  use RDBModule                 , only : RDBType, writeTimeStepDB, closeRDBfile
-  use SaveStressModule          , only : initWriteDisp, writeStressHeader
-  use SaveStressModule          , only : writeDisplacementDB, saveElmOrder
-  use SaveNastranModule2        , only : writeSupElDeformation
-  use SaveNastranModule2        , only : findFENodeNumsForTriads
-  use SaveVTFModule2            , only : VTFFFileSetOutputDebugError
-  use SaveVTFModule2            , only : VTFFStateInfoBlockCreate
-  use SaveVTFModule2            , only : VTFFFileAppendFile
-  use SaveVTFModule2            , only : VTFFFileCloseFile, VTFFFileDelete
-  use SaveVTFModule2            , only : writeTimeStepVTF, writeDummyStressVTF
-  use SaveVTFModule2            , only : writeSupElTransformVTF, writeFooterVTF
-  use SaveVTFModule2            , only : writeDisplacementVTF
-  use ResStressModule           , only : readResStress
-  use StressRoutinesModule      , only : calcStresses
-  use TimerModule               , only : initTime, showTime
-  use VersionModule             , only : openResFile
-  use ProgressModule            , only : lterm, writeProgress
-  use PointerKindModule         , only : ptr
-  use ReportErrorModule         , only : note_p, error_p, debugFileOnly_p
-  use ReportErrorModule         , only : openTerminalOutputFile
-  use ReportErrorModule         , only : allocationError, reportError
-  use BinaryDBInterface         , only : readDoubleDB
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getint
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getbool
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getdouble
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getstring
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_isSet
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_isTrue
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_intValue
-  use FFlLinkHandlerInterface   , only : ffl_init, ffl_done
-  use FFlLinkHandlerInterface   , only : ffl_export_vtf, ffl_elmorder_vtf
-  use FFrExtractorInterface     , only : ffr_init, ffr_done
-  use FFrExtractorInterface     , only : ffr_setposition, ffr_getnextstep
+  use KindModule             , only : dp, i8, maxInt_p, lfNam_p
+  use SamModule              , only : SamType, deAllocateSAM, writeObject
+  use SamStressModule        , only : initiateSAM
+  use InitiateStressModule   , only : readSolverData
+  use DisplacementModule     , only : openBandEmatrices, closeBandEmatrices
+  use DisplacementModule     , only : readSupElPosition, readSupElDisplacements
+  use DisplacementModule     , only : readResponsePointers, readDisplPointer
+  use DisplacementModule     , only : readIntDisplacements, calcIntDisplacements
+  use DisplacementModule     , only : calcTotalDisplacements, getFileName
+  use TriadTypeModule        , only : TriadType
+  use SupElTypeModule        , only : SupElType, nullifySupel
+  use RDBModule              , only : RDBType, writeTimeStepDB, closeRDBfile
+  use SaveStressModule       , only : initWriteDisp, writeStressHeader
+  use SaveStressModule       , only : writeDisplacementDB, saveElmOrder
+  use SaveNastranModule2     , only : writeSupElDeformation
+  use SaveNastranModule2     , only : findFENodeNumsForTriads
+  use SaveVTFModule2         , only : VTFFFileSetOutputDebugError
+  use SaveVTFModule2         , only : VTFFStateInfoBlockCreate
+  use SaveVTFModule2         , only : VTFFFileAppendFile
+  use SaveVTFModule2         , only : VTFFFileCloseFile, VTFFFileDelete
+  use SaveVTFModule2         , only : writeTimeStepVTF, writeDummyStressVTF
+  use SaveVTFModule2         , only : writeSupElTransformVTF, writeFooterVTF
+  use SaveVTFModule2         , only : writeDisplacementVTF
+  use ResStressModule        , only : readResStress
+  use StressRoutinesModule   , only : calcStresses
+  use TimerModule            , only : initTime, showTime
+  use VersionModule          , only : openResFile
+  use ProgressModule         , only : lterm, writeProgress
+  use PointerKindModule      , only : ptr
+  use ReportErrorModule      , only : note_p, error_p, debugFileOnly_p
+  use ReportErrorModule      , only : openTerminalOutputFile
+  use ReportErrorModule      , only : allocationError, reportError
+  use BinaryDBInterface      , only : readDoubleDB
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getint
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getbool
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getdouble
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getstring
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_isSet
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_isTrue
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_intValue
+  use FFlLinkHandlerInterface, only : ffl_init, ffl_done
+  use FFlLinkHandlerInterface, only : ffl_export_vtf, ffl_elmorder_vtf
+  use FFrExtractorInterface  , only : ffr_init, ffr_done
+  use FFrExtractorInterface  , only : ffr_setposition, ffr_getnextstep
 
   implicit none
 

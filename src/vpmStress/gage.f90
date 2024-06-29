@@ -10,8 +10,9 @@ subroutine gage (ierr)
   use KindModule                , only : dp, i8, epsDiv0_p, lfNam_p
   use SamModule                 , only : SamType, deAllocateSAM, writeObject
   use SamStressModule           , only : initiateSAM
+  use InitiateStressModule      , only : readSolverData
   use DisplacementModule        , only : openBandEmatrices, closeBandEmatrices
-  use DisplacementModule        , only : readSupElDisplacements, readSolverData
+  use DisplacementModule        , only : readSupElDisplacements
   use DisplacementModule        , only : readResponsePointers, getFileName
   use DisplacementModule        , only : readStaticDisplacements, dis1Expand
   use DisplacementModule        , only : ElDispFromSupElDisp
