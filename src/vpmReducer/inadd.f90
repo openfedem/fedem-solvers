@@ -163,7 +163,7 @@ contains
        case(71) !! Two-noded spring element (no mass)
           if (.not. addStiff) goto 100
           call ffl_getSpring (ek,nedof,iel,ierr)
-          if (jpsw > -5) then
+          if (jpsw > -5 .and. ierr == 0) then
              write(lpu,"(//5X,'Stiffness matrix for spring element',I10/)") &
                   &    ffl_getElmId(iel)
              call writeObject (reshape(ek,(/nedof,nedof/)),lpu,eps=1.0e-4_dp)
@@ -875,13 +875,13 @@ contains
     end if
 
     call ffl_getBeamSection (BSEC,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving beam element data')
        return
     end if
 
     call ffl_getNSM (NSMass,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element non-structural mass')
        return
     end if
@@ -891,7 +891,7 @@ contains
 
     ! Get the beam pin flags, if any
     call ffl_getPinFlags (IPA,IPB,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving beam pin flags')
        return
     end if
@@ -985,25 +985,25 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
 
     call ffl_getthick (TH,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element thickness')
        return
     end if
 
     call ffl_getNSM (NSMass,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element non-structural mass')
        return
     end if
@@ -1092,25 +1092,25 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
 
     call ffl_getthick (TH,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element thickness')
        return
     end if
 
     call ffl_getNSM (NSMass,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element non-structural mass')
        return
     end if
@@ -1208,7 +1208,7 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
@@ -1262,23 +1262,23 @@ contains
     TelT = trel(1:3,1:3)
     Tel  = transpose(TelT)
 
-    if (ffl_hasAttribute('PMAT',iel,ierr) > 0) then
+    if (ffl_hasAttribute('PMAT',iel,ierr)) then
 
        !!=== Standard isotropic material and thickness
 
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving element material data')
           return
        end if
 
        call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving element material data')
           return
        end if
 
        call ffl_getthick (TH,IEL,ierr)
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving element thickness')
           return
        end if
@@ -1300,24 +1300,24 @@ contains
 
        thetaMaterial = 0.0_dp
 
-    else if (ffl_hasAttribute('PMATSHELL',iel,ierr) > 0) then
+    else if (ffl_hasAttribute('PMATSHELL',iel,ierr)) then
 
        !!=== Single layer anisotropic material
 
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving shell material data')
           return
        end if
 
        compID = ffl_getAttributeID('PMATSHELL',iel)
        call ffl_getPMATSHELL (compID, EMOD, E2, RNY, G12, G1Z, G2Z, RHO, ierr)
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving shell material data')
           return
        end if
 
        call ffl_getthick (TH,IEL,ierr)
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving element thickness')
           return
        end if
@@ -1355,7 +1355,7 @@ contains
     end if
 
     call ffl_getNSM (NSMass,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element non-structural mass')
        return
     end if
@@ -1420,9 +1420,7 @@ contains
     use PmatModule             , only : pMatStiff
     use ReportErrorModule      , only : reportError, error_p
     use FFlLinkHandlerInterface, only : ffl_getCoor, ffl_getElmId
-    use FFlLinkHandlerInterface, only : ffl_getMat, ffl_getNSM
-    use FFlLinkHandlerInterface, only : ffl_getPMATSHELL, ffl_getThick
-    use FFlLinkHandlerInterface, only : ffl_hasAttribute, ffl_getAttributeID
+    use FFlLinkHandlerInterface, only : ffl_getMat, ffl_getNSM, ffl_getThick
 
     integer , parameter   :: neldof = 24
     integer , intent(in)  :: iop, iel, lpu
@@ -1452,7 +1450,7 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
@@ -1491,13 +1489,13 @@ contains
     end do
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
 
     call ffl_getthick (TH,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element thickness')
        return
     end if
@@ -1505,7 +1503,7 @@ contains
     thickness = (TH(1)+TH(2)+TH(3)+TH(4))/4.0_dp
 
     call ffl_getNSM (NSMass,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element non-structural mass')
        return
     end if
@@ -1616,19 +1614,19 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
 
     call ffl_getthick (TH,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element thickness')
        return
     end if
@@ -1719,19 +1717,19 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
 
     call ffl_getthick (TH,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element thickness')
        return
     end if
@@ -1822,13 +1820,13 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
     !
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
@@ -1923,13 +1921,13 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
@@ -2027,13 +2025,13 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
@@ -2132,13 +2130,13 @@ contains
     ! --- HENTER N\DVENDIGE ELEMENTDATA
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
@@ -2288,13 +2286,13 @@ contains
     ! --- Get necessary element data
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
@@ -2373,13 +2371,13 @@ contains
     ! --- Get necessary element data
 
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getmat (EMOD,RNY,RHO,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element material data')
        return
     end if
@@ -2522,7 +2520,7 @@ contains
     eMass = 0.0_dp
 
     call ffl_getMass (em,iel,nedof,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving concentrated node mass')
        return
     end if
@@ -2640,7 +2638,7 @@ contains
     ! Get necessary element data
 
     call ffl_getCoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
@@ -2728,19 +2726,19 @@ contains
     ! Get necessary element data
 
     call ffl_getCoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        return
     end if
 
     call ffl_getElCoorSys (T,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element coordinate system')
        return
     end if
 
     call ffl_getBush (S,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving bushing element data')
        return
     end if
@@ -2814,7 +2812,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        call ReportError (debugFileOnly_p,'LOAD21')
     end if
@@ -2863,7 +2861,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        call ReportError (debugFileOnly_p,'LOAD22')
     end if
@@ -2926,7 +2924,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        goto 990
     end if
@@ -2992,7 +2990,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        goto 990
     end if
@@ -3059,7 +3057,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        goto 990
     end if
@@ -3114,7 +3112,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        goto 990
     end if
@@ -3124,7 +3122,7 @@ contains
        !! and the associated static condensation matrices A1 and A2
        !! in order to compute a consistent load vector
        call ffl_getmat (EMOD,RNY,E(1),IEL,ierr)
-       if (ierr /= 0) then
+       if (ierr < 0) then
           call ReportError (error_p,'Error retrieving element material data')
           goto 990
        end if
@@ -3183,7 +3181,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        goto 990
     end if
@@ -3227,7 +3225,7 @@ contains
 
     !! Get global nodal coordinates for the element
     call ffl_getcoor (XG,YG,ZG,IEL,ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call ReportError (error_p,'Error retrieving element nodal coordinates')
        goto 990
     end if

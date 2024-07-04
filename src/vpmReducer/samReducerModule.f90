@@ -329,7 +329,7 @@ contains
     call ffl_getTopol (sam%nel, sam%nmmnpc, &
          &             sam%melcon(1), sam%mmnpc(1), sam%mpmnpc(1), &
          &             mpbeam, mprgd, mprbar, mpwavgm, ierr)
-    if (ierr /= 0) then
+    if (ierr < 0) then
        call reportError (error_p,'Failure creating global topology arrays', &
             &            addString='ffl_getTopol')
        goto 900
