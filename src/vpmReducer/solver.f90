@@ -40,9 +40,10 @@ subroutine solver (n,nodes,displ,ierr)
   use AsmExtensionModule        , only : csBeginAssembly, csEndAssembly
   use AsmExtensionModule        , only : castToInt8
   use SolExtensionModule        , only : csSolve
-  use InputReducerModule        , only : readReducerData, getFileName
+  use InputReducerModule        , only : readReducerData
   use InaddModule               , only : INADD
   use CmstrsModule              , only : EIGVAL
+  use FileUtilitiesModule       , only : getFileName
   use TimerModule               , only : initTime, showTime
   use VersionModule             , only : openResFile
   use ProgressModule            , only : lterm, writeProgress

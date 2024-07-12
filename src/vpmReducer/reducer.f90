@@ -37,9 +37,10 @@ subroutine reducer (ierr)
   use DiskMatrixModule          , only : dmFindMinConnections
   use AsmExtensionModule        , only : csBeginAssembly, csEndAssembly
   use AsmExtensionModule        , only : castToInt8
-  use InputReducerModule        , only : getFileName, readReducerData
+  use InputReducerModule        , only : readReducerData
   use InaddModule               , only : INADD, extractSubMat
   use CmstrsModule              , only : CMSTRS, EIGVAL, EIGCMS, JCMS, GRAV
+  use FileUtilitiesModule       , only : getFileName
   use TimerModule               , only : initTime, showTime
   use VersionModule             , only : openResFile
   use ProgressModule            , only : lterm, writeProgress

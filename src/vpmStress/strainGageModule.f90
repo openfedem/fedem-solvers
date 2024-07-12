@@ -9,19 +9,7 @@ module StrainGageModule
 
   implicit none
 
-  logical, parameter, private :: nodID = .true. !< Argument to ffl_ext2int()
-
-  integer, parameter, private :: singleGage_p  = 1 !< Along X-direction vector
-  integer, parameter, private :: doubleGage_p  = 2 !< 90 degrees spread
-  integer, parameter, private :: tripleGage1_p = 3 !< 60 degrees spread
-  integer, parameter, private :: tripleGage2_p = 4 !< 45 degrees spread
-
-  character(len=14), parameter, private :: gageType_p(4) = (/'SINGLE_GAGE   ',&
-       &                                                     'DOUBLE_GAGE_90',&
-       &                                                     'TRIPLE_GAGE_60',&
-       &                                                     'TRIPLE_GAGE_45'/)
-
-  private :: ReadStrainGageOldData, checkOrientation
+  private :: ReadStrainGageOldData
 
 
 contains
@@ -35,7 +23,7 @@ contains
     !! date/rev   : 6 Feb 2004 / 2.0
     !!==========================================================================
 
-    use StrainRosetteModule, only : StrainElementType
+    use StrainRosetteModule, only : StrainElementType, ReadStrainElements
     use IdTypeModule       , only : IdType
     use inputUtilities     , only : iuCopyToScratch
     use fileUtilitiesModule, only : findUnitNumber
@@ -64,7 +52,7 @@ contains
 
     rewind(infp)
     if (useFSIformat) then
-       call ReadStrainGages (infp,strainRosettes,linkId%baseId,ierr)
+       call ReadStrainElements (infp,strainRosettes,linkId%baseId,ierr)
     else
        call ReadStrainGageOldData (infp,strainRosettes,linkId%userId,ierr)
     end if
@@ -74,173 +62,6 @@ contains
     if (ierr /= 0) call reportError (debugFileOnly_p,'ReadStrainGageData')
 
   end subroutine ReadStrainGageData
-
-
-  subroutine ReadStrainGages (infp,strainRosettes,thisLinkNumber,err)
-
-    !!==========================================================================
-    !! Initiate the StrainElementType objects from the solver input file.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 6 Feb 2004 / 1.0
-    !!==========================================================================
-
-    use kindModule         , only : pi_p, dp
-    use StrainRosetteModule, only : StrainElementType, nullifyRosette
-    use IdTypeModule       , only : ldesc_p, initId, getId, ReportInputError
-    use inputUtilities     , only : iuGetNumberOfEntries, iuCharToInt
-    use inputUtilities     , only : iuSetPosAtNextEntry
-    use isoMatModule       , only : isoMat2D
-    use progressModule     , only : lterm
-    use reportErrorModule  , only : allocationError, reportError
-    use reportErrorModule  , only : error_p, debugFileOnly_p
-
-    integer                , intent(in)  :: infp
-    type(StrainElementType), pointer     :: strainRosettes(:)
-    integer, optional      , intent(in)  :: thisLinkNumber
-    integer                , intent(out) :: err
-
-    !! Local variables
-    integer  :: i, idIn, nRosettes, nGages, stat
-    real(dp) :: alpha
-
-    !! Define the STRAIN_ROSETTE namelist
-    integer, parameter :: maxNodes_p = 9
-    character(ldesc_p) :: extDescr
-    character(len=16)  :: type
-    integer            :: id, extId(10), linkId
-    integer            :: zeroInit, numnod, nodes(maxNodes_p)
-    real(dp)           :: rPos(4,3), zPos, Emod, nu, gateVal, snCurve(4)
-
-    namelist /STRAIN_ROSETTE/ id, extId, extDescr, linkId, type, zeroInit, &
-         &                    numnod, nodes, rPos, zPos, Emod, nu, &
-         &                    gateVal, snCurve
-
-    !! --- Logic section ---
-
-    nRosettes = iuGetNumberOfEntries(infp,'&STRAIN_ROSETTE',err)
-    if (err /= 0) goto 900
-
-    if (nRosettes < 1) then
-       if (present(thisLinkNumber)) then
-          goto 900
-       else
-          return
-       end if
-    end if
-
-    if (present(thisLinkNumber)) then
-       write(lterm,"(15X,'Number of &STRAIN_ROSETTE =',I6)") nRosettes
-    else ! Using free format in the dynamics solver as for the others
-       write(lterm,*) 'Number of &STRAIN_ROSETTE =', nRosettes
-    end if
-
-    allocate(strainRosettes(nRosettes),STAT=stat)
-    if (stat /= 0) then
-       err = allocationError('ReadStrainGages 1')
-       return
-    end if
-
-    do idIn = 1, nRosettes
-
-       call nullifyRosette (strainRosettes(idIn))
-       if (.not. iuSetPosAtNextEntry(infp,'&STRAIN_ROSETTE')) then
-          err = err - 1
-          call ReportInputError('STRAIN_ROSETTE',idIn)
-          cycle
-       end if
-
-       !! Default values
-       extDescr = ''; type = ''
-       id = 0; extId = 0; linkId = 0; zeroInit = 0; numnod = 0; nodes = 0
-       rPos = 0.0_dp; zPos = 0.0_dp; Emod = 0.0_dp; nu = 0.0_dp
-       gateVal = 0.0_dp; snCurve = 0.0_dp
-
-       read(infp,nml=STRAIN_ROSETTE,iostat=stat)
-       if (stat /= 0) then
-          err = err - 1
-          call ReportInputError('STRAIN_ROSETTE',idIn)
-          cycle
-       end if
-
-       call initId (strainRosettes(idIn)%id,id,extId,extDescr,stat)
-       strainRosettes(idIn)%linkNumber = linkId
-       if (present(thisLinkNumber)) then
-          if (linkId /= thisLinkNumber) then
-             err = err - 1
-             call ReportInputError('STRAIN_ROSETTE', &
-                  &                idIn,strainRosettes(idIn)%id, &
-                  &                'The part base ID does not match')
-             cycle
-          end if
-       end if
-
-       allocate(strainRosettes(idIn)%globalNodes(numnod), &
-            &   strainRosettes(idIn)%data(1), STAT=stat)
-       if (stat /= 0) then
-          err = allocationError('ReadStrainGages 2')
-          return
-       end if
-
-       call nullifyRosette (strainRosettes(idIn)%data(1))
-       strainRosettes(idIn)%data(1)%zeroInit = zeroInit > 0
-       strainRosettes(idIn)%data(1)%zPos = zPos
-       strainRosettes(idIn)%posInGl = transpose(rPos)
-       call isoMat2D (Emod,nu,strainRosettes(idIn)%data(1)%Cmat)
-
-       if (present(thisLinkNumber)) then
-          !! Check that the nodal ordering of the strain rosette yields
-          !! a proper normal vector and swap the element nodes if not.
-          call checkRosette (strainRosettes(idIn),nodes(1:numnod),stat)
-          if (stat < 0) err = err + stat
-       else
-          !! Link data not loaded yet, check nodal ordering later
-          do i = 1, numnod
-             strainRosettes(idIn)%globalNodes(i) = nodes(i)
-          end do
-       end if
-
-       select case (iuCharToInt(type,gageType_p))
-
-       case (singleGage_p)
-          nGages = 1
-          alpha  = 0.0_dp
-
-       case (doubleGage_p)
-          nGages = 2
-          alpha  = pi_p/2.0_dp ! 90 degrees between the gages
-
-       case (tripleGage1_p)
-          nGages = 3
-          alpha  = pi_p/3.0_dp ! 60 degrees between the gages
-
-       case (tripleGage2_p)
-          nGages = 3
-          alpha  = pi_p/4.0_dp ! 45 degrees between the gages
-
-       case default
-          err = err - 1
-          call reportError (error_p,'Invalid rosette-type '//trim(type)// &
-               &            'for Rosette'//getId(strainRosettes(idIn)%id))
-          cycle
-
-       end select
-
-       strainRosettes(idIn)%data(1)%alphaGages = alpha
-       allocate(strainRosettes(idIn)%data(1)%gages(nGages),STAT=stat)
-       if (stat /= 0) then
-          err = allocationError('ReadStrainGages 3')
-          return
-       end if
-
-       strainRosettes(idIn)%data(1)%gateValue = gateVal
-       strainRosettes(idIn)%data(1)%snCurve = snCurve
-
-    end do
-
-900 if (err < 0) call reportError (debugFileOnly_p,'ReadStrainGages')
-
-  end subroutine ReadStrainGages
 
 
   subroutine ReadStrainGageOldData (inFile,strainRosettes,thisLinkNumber,err)
@@ -253,10 +74,13 @@ contains
     !!==========================================================================
 
     use kindModule             , only : dp, pi_p
-    use StrainRosetteModule    , only : StrainElementType, nullifyRosette
+    use StrainRosetteModule    , only : StrainElementType
+    use StrainRosetteModule    , only : nullifyRosette, checkRosette
+    use StrainRosetteModule    , only : singleGage_p, doubleGage_p
+    use StrainRosetteModule    , only : tripleGage1_p, tripleGage2_p
     use isoMatModule           , only : isoMat2D
-    use reportErrorModule      , only : allocationError, reportError, note_p
-    use reportErrorModule      , only : getErrorFile, errorFileOnly_p, error_p
+    use reportErrorModule      , only : allocationError, getErrorFile
+    use reportErrorModule      , only : reportError, errorFileOnly_p, error_p
     use FFlLinkHandlerInterface, only : ffl_ext2int
     use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getint
 
@@ -322,6 +146,8 @@ contains
        strainRosettes(idIn)%linkNumber = linkNumber
 
        numberOfNodes = readInteger()
+       if (err < 0) goto 900
+
        allocate(strainRosettes(idIn)%globalNodes(numberOfNodes), &
             &   strainRosettes(idIn)%data(1), STAT=err)
        if (err /= 0) then
@@ -332,13 +158,8 @@ contains
        call nullifyRosette (strainRosettes(idIn)%data(1))
 
        do i = 1, numberOfNodes
-          strainRosettes(idIn)%globalNodes(i) = ffl_ext2int(nodID,readInteger())
-          if (strainRosettes(idIn)%globalNodes(i) < 0) then
-             write(errmsg,"('Invalid node numbers for rosette number:',I8)") id
-             goto 900
-          end if
+          strainRosettes(idIn)%globalNodes(i) = readInteger()
        end do
-
        strainRosettes(idIn)%data(1)%zPos = readDP()
        do i = 1,3
           xVector(i) = readDP()
@@ -378,14 +199,9 @@ contains
 
        !! Check that the nodal ordering of the strain rosette yields
        !! a proper normal vector and swap the element nodes if not.
-       if (checkOrientation(strainRosettes(idIn)%globalNodes,zVector,err)) then
-          write(errMsg,"(I8,' has been swapped')") id
-          call reportError (note_p,'Nodal ordering for strain rosette'//errMsg)
-          errMsg = ''
-       else if (err < 0) then
-          write(errMsg,"('Failed to get coordinates for strain rosette',I8)") id
-          goto 900
-       end if
+       call checkRosette (strainRosettes(idIn), &
+            &             strainRosettes(idIn)%globalNodes,err)
+       if (err < 0) goto 900
 
        select case (rosetteType)
 
@@ -476,100 +292,6 @@ contains
   end subroutine ReadStrainGageOldData
 
 
-  subroutine checkRosette (ros,nodes,ierr)
-
-    !!==========================================================================
-    !! Convert internal node numbers of the strain rosette to external numbers.
-    !! Check that the nodal ordering of the strain rosette yields
-    !! a proper normal vector and swap the element nodes if not.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 21 Jan 2016 / 1.0
-    !!==========================================================================
-
-    use StrainRosetteModule    , only : StrainElementType
-    use IdTypeModule           , only : getId, StrId
-    use reportErrorModule      , only : reportError, error_p, noteFileOnly_p
-    use FFlLinkHandlerInterface, only : ffl_ext2int
-
-    type(StrainElementType), intent(inout) :: ros
-    integer                , intent(in)    :: nodes(:)
-    integer                , intent(out)   :: ierr
-
-    !! Local variables
-    integer :: i
-
-    !! --- Logic section ---
-
-    ierr = 0
-    do i = 1, size(nodes)
-       ros%globalNodes(i) = ffl_ext2int(nodID,nodes(i))
-       if (ros%globalNodes(i) < 0) ierr = ierr - 1
-    end do
-    if (ierr < 0) then
-       call reportError (error_p,trim(adjustl(StrId(-ierr)))// &
-            &            ' invalid node number(s) for Rosette'//getId(ros%id), &
-            &            addString='checkRosette')
-    else if (checkOrientation(ros%globalNodes,ros%posInGl(:,3),ierr)) then
-       call reportError (noteFileOnly_p,'Nodal ordering for Rosette'// &
-            &            trim(getId(ros%id))//' has been swapped')
-    else if (ierr < 0) then
-       call reportError (error_p,'Failed to get coordinates for Rosette'// &
-            &            getId(ros%id),addString='checkOrientation')
-    end if
-
-  end subroutine checkRosette
-
-
-  function checkOrientation (mnpc,V3,ierr) result(swap)
-
-    !!==========================================================================
-    !! Check and swap the nodal ordering of a strain rosette element,
-    !! if necessary, such that it is consistent with the given Z-axis vector.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 6 Feb 2004 / 1.0
-    !!==========================================================================
-
-    use kindModule             , only : dp
-    use manipMatrixModule      , only : cross_product
-    use FFlLinkHandlerInterface, only : ffl_getNodalCoor
-
-    integer , intent(inout) :: mnpc(:)
-    real(dp), intent(in)    :: V3(3)
-    integer , intent(out)   :: ierr
-
-    !! Local variables
-    real(dp) :: VN(3), X(3,3)
-    integer  :: i, j, n
-    logical  :: swap
-
-    !! --- Logic section ---
-
-    ierr = 0
-    swap = .false.
-
-    n = size(mnpc)
-    if (n < 3) return
-
-    do i = 1, 3
-       call ffl_getNodalCoor (X(1,i),X(2,i),X(3,i),mnpc(i),ierr)
-       if (ierr /= 0) return
-    end do
-
-    VN = cross_product(X(:,2)-X(:,1),X(:,3)-X(:,1))
-    if (dot_product(V3,VN) < 0.0_dp) then
-       swap = .true.
-       do i = 1, n/2
-          j = mnpc(i)
-          mnpc(i) = mnpc(n+1-i)
-          mnpc(n+1-i) = j
-       end do
-    end if
-
-  end function checkOrientation
-
-
   subroutine PrintStrainGages_FiDF (rosette,time)
 
     !!==========================================================================
@@ -604,17 +326,15 @@ contains
   subroutine InitStrainGages (rosId,gages,alphaGages,posInGl,dT_FiDF,ierr)
 
     !!==========================================================================
-    !! Establish the strain-gage direction vectors and the tranformation from
-    !! Cartesian strains to strains in the gage direction. Also initiate the
-    !! device function file for each strain rosette.
+    !! Initiate the strain-gage data and open the device function file
+    !! for each strain gage in the strain rosette.
     !!
     !! Programmer : Knut Morten Okstad
     !! date/rev   : 25 May 2001 / 2.0
     !!==========================================================================
 
     use kindModule               , only : dp, epsDiv0_p
-    use StrainRosetteModule      , only : StrainGageType
-    use rotationModule           , only : vec_to_mat
+    use StrainRosetteModule      , only : StrainGageType, InitStrainGauges
     use reportErrorModule        , only : reportError, error_p, warning_p
     use FiDeviceFunctionInterface, only : FiDF_OpenWrite, FiDF_SetStep
     use FiDeviceFunctionInterface, only : FiDF_SetXAxis, FiDF_SetYAxis
@@ -622,13 +342,11 @@ contains
 
     integer             , intent(in)    :: rosId
     type(StrainGageType), intent(inout) :: gages(:)
-    real(dp)            , intent(in)    :: alphaGages, posInGl(:,:)
-    real(dp), optional  , intent(in)    :: dT_FiDF
+    real(dp)            , intent(in)    :: alphaGages, posInGl(:,:), dT_FiDF
     integer             , intent(out)   :: ierr
 
     !! Local variables
-    integer  :: i
-    real(dp) :: c, s, rotVec(3), rotMat(3,3)
+    integer :: i
 
     character(len=1)  :: chGage
     character(len=16) :: chId
@@ -642,28 +360,12 @@ contains
     !! --- Logic section ---
 
     ierr = 0
+    call initStrainGauges (gages,alphaGages,posInGl)
+    if (dT_FiDF < 0.0_dp) return ! Suppress DAC-file output
+
+    !! Initialize a DAC-file for each strain gage
     do i = 1, size(gages)
 
-       gages(i)%lpu_FiDF  = 0
-       gages(i)%fatHandle = 0
-       gages(i)%epsGage   = 0.0_dp
-       gages(i)%sigGage   = 0.0_dp
-
-       rotVec = (i-1)*alphaGages*posInGl(:,3)
-       call vec_to_mat(rotVec,rotMat)
-       rotVec = matmul(rotMat,posInGl(:,1))
-
-       !! Establish the strain tranformation from Cartesian to gage strain
-       c = dot_product(rotVec,posInGl(:,1))
-       s = dot_product(rotVec,posInGl(:,2))
-       gages(i)%Teps_NfromC(1) = c*c
-       gages(i)%Teps_NfromC(2) = s*s
-       gages(i)%Teps_NfromC(3) = c*s
-
-       if (.not.present(dT_FiDF)) cycle ! Suppress DAC-file output
-       if (dT_FiDF < 0.0_dp) cycle ! Suppress DAC-file output
-
-       !! Initialize the DAC-file
        write(chId,'(I12)') rosId
        write(chGage,'(I1)') i
        chName = 'rosette'//trim(adjustl(chId))//'_gage'//chGage//'.dac'

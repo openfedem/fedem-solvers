@@ -31,7 +31,8 @@ target_link_libraries ( test_shells vpmReducer_F )
 target_link_libraries ( test_reducer ${LIB_ID} vpmCommon )
 add_dependencies ( check test_reducer )
 
-add_test ( Reduce-Cantilever test_reducer -gvec 0.0 9.81 -dispfile reducer_V.fmx )
+# Add some reducer regression tests
+add_test ( Reduce-Cantilever test_reducer -gvec 0.0 9.81 -dispfile fedem_V.fmx )
 add_test ( SmallR-Cantilever test_reducer -small -gvec 0.0 9.81 -resfile smallr.res )
 add_test ( Solver-Cantilever test_reducer -solve -gvec 0.0 9.81 -resfile solver.res )
 add_test ( BeamPin1 test_reducer 2 -P2 -1 -resfile beampin1.res )
@@ -39,13 +40,13 @@ add_test ( BeamPin2 test_reducer 2 -P2 2 -resfile beampin2.res )
 add_test ( Rigid-Cylinder test_reducer -P3 2.0 1.0 0.01 2 8 -gvec 0.0 9.81 -resfile cylinder-rgd.res )
 add_test ( Flexible-Cylinder test_reducer -P4 2.0 1.0 0.01 2 8 -gvec 0.0 9.81 -resfile cylinder-flx.res )
 add_test ( Reduce-Shell1 test_reducer -P5 5.0 1.0 0.01 6 2 -gvec 0.0 0.0 9.81
-           -dispfile reducer_V.fmx -resfile shl1-compare.res )
+           -dispfile fedem_V.fmx -resfile shl1-compare.res )
 add_test ( Reduce-Shell2 test_reducer -P5 5.0 1.0 0.01 3 1 -gvec 0.0 0.0 9.81 -useParabolic
-           -dispfile reducer_V.fmx -resfile shl2-compare.res )
+           -dispfile fedem_V.fmx -resfile shl2-compare.res )
 add_test ( Reduce-QuartCyl1 test_reducer -P7 2.0 1.0 0.01 4 5 -gvec 0.0 0.0 9.81
-           -dispfile reducer_V.fmx -resfile quartcyl1-compare.res )
+           -dispfile fedem_V.fmx -resfile quartcyl1-compare.res )
 add_test ( Reduce-QuartCyl2 test_reducer -P7 2.0 1.0 0.01 2 3 -gvec 0.0 0.0 9.81 -useParabolic
-           -dispfile reducer_V.fmx -resfile quartcyl2-compare.res )
+           -dispfile fedem_V.fmx -resfile quartcyl2-compare.res )
 
 file ( GLOB NASTRAN_FILES FEparts/C*_.nas )
 foreach ( FILE_NAME ${NASTRAN_FILES} )

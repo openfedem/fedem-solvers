@@ -18,58 +18,6 @@ module InputReducerModule
 contains
 
   !!============================================================================
-  !> @brief Gets a file name from a command-line option.
-  !>
-  !> @param[in] file Command-line option used to input the file name
-  !> @param[out] name The file name
-  !> @param[in] suffix Default file extension
-  !>
-  !> @details If the specified command-line option is not used,
-  !> the default file name is (name)(suffix) where (name) is the name of
-  !> the FE data input file without the file extension.
-  !>
-  !> @callgraph @callergraph
-  !>
-  !> @author Knut Morten Okstad
-  !>
-  !> @date 20 Sep 2000
-
-  subroutine getFileName (file,name,suffix)
-
-    use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getstring
-    use FFaFilePathInterface  , only : ffa_checkpath
-
-    character(len=*), intent(in)           :: file
-    character(len=*), intent(in), optional :: suffix
-    character(len=*), intent(out)          :: name
-
-    !! Local variables
-    integer :: idot
-
-    !! --- Logic section ---
-
-    call ffa_cmdlinearg_getstring (file,name)
-    if (name == '') then
-       if (.not. present(suffix)) return
-
-       !! File name not given, use default
-       call ffa_cmdlinearg_getstring ('linkfile',name)
-       if (name == '') then
-          name = 'reducer'//suffix
-          return
-       end if
-       idot = index(name,'.',.TRUE.)
-       if (idot < 1) idot = len_trim(name)+1
-       name(idot:) = suffix
-    end if
-
-    !! Unix/NT pathname conversion
-    call ffa_checkpath (name)
-
-  end subroutine getFilename
-
-
-  !!============================================================================
   !> @brief Administers data input and preprocessing for fedem_reducer.
   !>
   !> @param[out] sam Data for managing system matrix assembly

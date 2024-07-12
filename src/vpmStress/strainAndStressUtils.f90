@@ -5,30 +5,49 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file strainAndStressUtils.f90
+!> @brief Utilities for strain- and stress calculation.
+
+!!==============================================================================
+!> @brief Module with utility subroutines for strain- and stress calculation.
+
 module StrainAndStressUtilitiesModule
 
   implicit none
 
 contains
 
-  subroutine PrincipleStrains2D (epsC, eps1, eps2, gammaMax, alpha1, alphaGamma)
+  !!============================================================================
+  !> @brief Calculation of principal strains in 2D.
+  !>
+  !> @param[in] epsC Strain components
+  !> @param[out] eps1 Maximum principal strain
+  !> @param[out] eps2 Minimum principal strain
+  !> @param[out] gamma Maximum shear strain
+  !> @param[out] alpha1 Angle between local X-axis and direction of @a eps1
+  !> @param[out] alphaGamma Angle between local X-axis and direction of @a gamma
+  !>
+  !> @details This subroutine computes the principle strains, max shear strain,
+  !> angle to the (max) principle strain and angle to the max shear strain.
+  !> Using Mohr's circle interpretation.
+  !>
+  !> @note The shear strain @a epsC(3) is assumed to be the quantity
+  !> &gamma;<sub>xy</sub> = &epsilon;<sub>xy</sub> + &epsilon;<sub>yx</sub>
+  !> where &epsilon;<sub>xy</sub> = &epsilon;<sub>yx</sub>
+  !> is the tensorial shear strain component.
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 13 Apr 2000
 
-    !!==========================================================================
-    !! Compute 2D principle strains, max shear strain, angle to principle
-    !! strain and angle to max shear strain. Using Mohr's circle interpretation.
-    !!
-    !! NOTE: The shear strain epsC(3) is assumed to be the quantity
-    !!       gamma_xy = eps_xy + eps_yx where eps_xy = eps_yx is the
-    !!       tensorial shear strain component.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 13 Apr 2000/1.0
-    !!==========================================================================
+  subroutine PrincipleStrains2D (epsC, eps1, eps2, gamma, alpha1, alphaGamma)
 
     use KindModule, only : dp, epsDiv0_p
 
     real(dp),           intent(in)  :: epsC(3)
-    real(dp),           intent(out) :: eps1, eps2, gammaMax
+    real(dp),           intent(out) :: eps1, eps2, gamma
     real(dp), optional, intent(out) :: alpha1, alphaGamma
 
     !! Local variables
@@ -36,16 +55,16 @@ contains
 
     !! --- Logic section ---
 
-    origo    = (epsC(1) + epsC(2))*0.5_dp
-    eps_12   =  epsC(1) - epsC(2)
-    eps_xy   =  epsC(3)*0.5_dp
-    radius   = sqrt( eps_12*eps_12 + epsC(3)*epsC(3) )*0.5_dp
+    origo  = (epsC(1) + epsC(2))*0.5_dp
+    eps_12 =  epsC(1) - epsC(2)
+    eps_xy =  epsC(3)*0.5_dp
+    radius = sqrt( eps_12*eps_12 + epsC(3)*epsC(3) )*0.5_dp
 
-    eps1     = origo + radius
-    eps2     = origo - radius
-    gammaMax = radius*2.0_dp
+    eps1   = origo + radius
+    eps2   = origo - radius
+    gamma  = radius*2.0_dp
 
-    !! Angles to principle strain (eps1) and max shear (gammaMax)
+    !! Angles to principle strain (eps1) and max shear (gamma)
     if (abs(eps_xy) > epsDiv0_p .or. abs(eps_12) > epsDiv0_p) then
        if (present(alpha1))     alpha1     = atan2(eps_xy,eps_12) * 0.5_dp
        if (present(alphaGamma)) alphaGamma = atan2(eps_12,eps_xy) * 0.5_dp
@@ -57,20 +76,32 @@ contains
   end subroutine PrincipleStrains2D
 
 
-  subroutine PrincipleStresses2D (sigC, sig1, sig2, tauMax, alpha1, alphaTau)
+  !!============================================================================
+  !> @brief Calculation of principal stresses in 2D.
+  !>
+  !> @param[in] sigC Stress components
+  !> @param[out] sig1 Maximum principal stress
+  !> @param[out] sig2 Minimum principal stress
+  !> @param[out] tau Maximum shear stress
+  !> @param[out] alpha1 Angle between local X-axis and direction of @a sig1
+  !> @param[out] alphaTau Angle between local X-axis and direction of @a tau
+  !>
+  !> @details This subroutine computes the principle stresses, max shear stress,
+  !> angle to the (max) principle stress and angle to the max shear stress.
+  !> Using Mohr's circle interpretation.
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 13 Apr 2000
 
-    !!==========================================================================
-    !! Compute 2D principle stresses, max shear stress, angle to principle
-    !! stress and angle to max shear stress. Using Mohr's circle interpretation.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 13 Apr 2000/1.0
-    !!==========================================================================
+  subroutine PrincipleStresses2D (sigC, sig1, sig2, tau, alpha1, alphaTau)
 
     use KindModule, only : dp, epsDiv0_p
 
     real(dp),           intent(in)  :: sigC(3)
-    real(dp),           intent(out) :: sig1, sig2, tauMax
+    real(dp),           intent(out) :: sig1, sig2, tau
     real(dp), optional, intent(out) :: alpha1, alphaTau
 
     !! Local variables
@@ -78,15 +109,15 @@ contains
 
     !! --- Logic section ---
 
-    origo    = (sigC(1) + sigC(2))*0.5_dp
-    sig_12   =  sigC(1) - sigC(2)
-    radius   = sqrt( sig_12*sig_12 + 4.0_dp*sigC(3)*sigC(3) )*0.5_dp
+    origo  = (sigC(1) + sigC(2))*0.5_dp
+    sig_12 =  sigC(1) - sigC(2)
+    radius = sqrt( sig_12*sig_12 + 4.0_dp*sigC(3)*sigC(3) )*0.5_dp
 
-    sig1     = origo + radius
-    sig2     = origo - radius
-    tauMax   = radius
+    sig1   = origo + radius
+    sig2   = origo - radius
+    tau    = radius
 
-    !! Angles to principle stress (sig1) and max shear (tauMax)
+    !! Angles to principle stress (sig1) and max shear (tau)
     if (abs(sigC(3)) > epsDiv0_p .or. abs(sig_12) > epsDiv0_p) then
        if (present(alpha1))   alpha1   = atan2(sigC(3),sig_12) * 0.5_dp
        if (present(alphaTau)) alphaTau = atan2(sig_12,sigC(3)) * 0.5_dp
@@ -98,14 +129,24 @@ contains
   end subroutine PrincipleStresses2D
 
 
-  subroutine StrainDispCST (nndof, xEl, yEl, zEl, T_el, zPos, B_el)
+  !!============================================================================
+  !> @brief Computes strain-displacement matrix for constant strain triangle.
+  !>
+  !> @param[in] nndof Number of DOFs per nodal point
+  !> @param[in] xEl X-coordinates of the element nodes
+  !> @param[in] yEl Y-coordinates of the element nodes
+  !> @param[in] zEl Z-coordinates of the element nodes
+  !> @param[in] T_el Global-to-local transformation matrix for the element
+  !> @param[in] zPos Local position of top shell surface w.r.t. the mid-surface
+  !> @param[out] B_el Strain-displacement matrix for the element
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 13 Apr 2000
 
-    !!==========================================================================
-    !! Compute the strain-displacement matrix for constant strain triangle.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 13 Apr 2000/1.0
-    !!==========================================================================
+  subroutine StrainDispCST (nndof, xEl, yEl, zEl, T_el, zPos, B_el)
 
     use KindModule, only : dp, epsDiv0_p
 
@@ -162,49 +203,78 @@ contains
   end subroutine StrainDispCST
 
 
+  !!============================================================================
+  !> @brief Computes strain-displacement matrix for the 4-noded quadrilateral.
+  !>
+  !> @param[in] nndof Number of DOFs per nodal point
+  !> @param[in] xEl X-coordinates of the element nodes
+  !> @param[in] yEl Y-coordinates of the element nodes
+  !> @param[in] zEl Z-coordinates of the element nodes
+  !> @param[in] T_el Global-to-local transformation matrix for the element
+  !> @param[in] xi First coordinate in domain [-1,1] of evaluation point
+  !> @param[in] eta Second coordinate in domain [-1,1] of evaluation point
+  !> @param[in] zPos Local position of top shell surface w.r.t. the mid-surface
+  !> @param[out] B_el Strain-displacement matrix for the element
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 13 Apr 2000
+
   subroutine StrainDispQuad4 (nndof, xEl, yEl, zEl, T_el, xi, eta, zPos, B_el)
 
-    !!==========================================================================
-    !! Compute the strain-displacement matrix for the 4-noded quadrilateral.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 13 Apr 2000/1.0
-    !!==========================================================================
-
-    use KindModule, only : dp, epsDiv0_p
+    use KindModule       , only : dp, epsDiv0_p
+    use manipMatrixModule, only : invert22
 
     integer , intent(in)  :: nndof
     real(dp), intent(in)  :: xEl(:), yEl(:), zEl(:), T_el(3,3), xi, eta, zPos
     real(dp), intent(out) :: B_el(3,nndof,4)
 
     !! Local variables
-    real(dp) :: xL(4), yL(4), sfunc_x(4), sfunc_y(4), vec(3)
+    real(dp) :: sfuncD(2,4), jacobi(2,2), jacobi_inv(2,2), XY(4,2), vec(3)
     integer  :: in
 
     !! --- Logic section ---
 
     B_el = 0.0_dp
 
-    ! Local coordinates relative to node 1
-    xL(1) = 0.0_dp
-    yL(1) = 0.0_dp
+    !! Local XY-coordinates relative to node 1
+    XY(1,:) = 0.0_dp
     do in = 2, 4
        vec(1) = xEl(in) - xEl(1)
        vec(2) = yEl(in) - yEl(1)
        vec(3) = zEl(in) - zEl(1)
-       xL(in) = dot_product(T_el(1,:),vec)
-       yL(in) = dot_product(T_el(2,:),vec)
+       XY(in,:) = matmul(T_el(1:2,:),vec)
     end do
 
-    call Quad4ShapeDer (xi, eta, xL, yL, sfunc_x, sfunc_y)
+    !! Partial derivatives with respect to xi
+    sfuncD(1,1) = -(1.0_dp - eta)*0.25_dp
+    sfuncD(1,2) =  (1.0_dp - eta)*0.25_dp
+    sfuncD(1,3) =  (1.0_dp + eta)*0.25_dp
+    sfuncD(1,4) = -(1.0_dp + eta)*0.25_dp
+
+    !! Partial derivatives with respect to eta
+    sfuncD(2,1) = -(1.0_dp - xi)*0.25_dp
+    sfuncD(2,2) = -(1.0_dp + xi)*0.25_dp
+    sfuncD(2,3) =  (1.0_dp + xi)*0.25_dp
+    sfuncD(2,4) =  (1.0_dp - xi)*0.25_dp
+
+    !! Jacobi matrix  | dx/dxi   dy/dxi  |
+    !!                | dx/deta  dy/deta |
+    jacobi = matmul(sfuncD,XY)
+
+    !! Invert the Jacobian, i.e.  | dxi/dx  deta/dx |
+    !!                            | dxi/dy  deta/dy |
+    jacobi_inv = invert22(jacobi)
 
     !! X-displacements
-    B_el(1,1,:) = sfunc_x
-    B_el(3,1,:) = sfunc_y
+    B_el(1,1,:) = jacobi_inv(1,1)*sfuncD(1,:) + jacobi_inv(1,2)*sfuncD(2,:)
+    B_el(3,1,:) = jacobi_inv(2,1)*sfuncD(1,:) + jacobi_inv(2,2)*sfuncD(2,:)
 
     !! Y-displacements
-    B_el(2,2,:) = sfunc_y
-    B_el(3,2,:) = sfunc_x
+    B_el(2,2,:) = B_el(3,1,:)
+    B_el(3,2,:) = B_el(1,1,:)
 
     !! Rotational degrees of freedom
     if (nndof >= 5 .and. abs(zpos) > epsDiv0_p) then
@@ -217,113 +287,43 @@ contains
   end subroutine StrainDispQuad4
 
 
-  subroutine Quad4Shape (xi, eta, sfunc)
+  !!============================================================================
+  !> @brief Calculates the X-axis direction of the globalized coordinate system.
+  !>
+  !> @param[in] eZ Local Z-axis (normal vector) of the shell surface
+  !> @return Globalized X-axis direction vector for the shell surface
+  !>
+  !> @details This function computes the vector @a V1 defined by the projection
+  !> of the global X-axis onto the plane defined by the normal vector @a eZ.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 Nov 2000
 
-    !!==========================================================================
-    !! Evaluate shape functions for the 4-noded quadrilateral.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 13 Apr 2000/1.0
-    !!==========================================================================
-
-    use KindModule, only : dp
-
-    real(dp), intent(in)  :: xi, eta
-    real(dp), intent(out) :: sfunc(4)
-
-    !! --- Logic section ---
-
-    sfunc(1) = (1.0_dp-xi)*(1.0_dp-eta)*0.25_dp
-    sfunc(2) = (1.0_dp+xi)*(1.0_dp-eta)*0.25_dp
-    sfunc(3) = (1.0_dp+xi)*(1.0_dp+eta)*0.25_dp
-    sfunc(4) = (1.0_dp-xi)*(1.0_dp+eta)*0.25_dp
-
-  end subroutine Quad4Shape
-
-
-  subroutine Quad4ShapeDer (xi, eta, xL, yL, sfunc_x, sfunc_y)
-
-    !!==========================================================================
-    !! Evaluate shape function derivatives for the 4-noded quadrilateral.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 13 Apr 2000/1.0
-    !!==========================================================================
-
-    use KindModule, only : dp
-
-    real(dp), intent(in)  :: xi, eta, xL(4), yL(4)
-    real(dp), intent(out) :: sfunc_x(4), sfunc_y(4)
-
-    !! Local variables
-    real(dp) :: sfunc_xi(4), sfunc_eta(4), jacobi(2,2), jacobi_inv(2,2), det
-
-    !! --- Logic section ---
-
-    !! Partial derivatives with respect to xi
-    sfunc_xi(1) = -(1.0_dp-eta)*0.25_dp
-    sfunc_xi(2) =  (1.0_dp-eta)*0.25_dp
-    sfunc_xi(3) =  (1.0_dp+eta)*0.25_dp
-    sfunc_xi(4) = -(1.0_dp+eta)*0.25_dp
-
-    !! Partial derivatives with respect to eta
-    sfunc_eta(1) = -(1.0_dp-xi)*0.25_dp
-    sfunc_eta(2) = -(1.0_dp+xi)*0.25_dp
-    sfunc_eta(3) =  (1.0_dp+xi)*0.25_dp
-    sfunc_eta(4) =  (1.0_dp-xi)*0.25_dp
-
-    !! Jacobi matrix  | dx/dxi   dy/dxi  |
-    !!                | dx/deta  dy/deta |
-    jacobi(1,1) = dot_product(sfunc_xi,xL)
-    jacobi(1,2) = dot_product(sfunc_xi,yL)
-    jacobi(2,1) = dot_product(sfunc_eta,xL)
-    jacobi(2,2) = dot_product(sfunc_eta,yL)
-
-    !! Invert the Jacobian, i.e.  | dxi/dx  deta/dx |
-    !!                            | dxi/dy  deta/dy |
-    det = jacobi(1,1)*jacobi(2,2) - jacobi(2,1)*jacobi(1,2)
-    jacobi_inv(1,1) =  jacobi(2,2)/det
-    jacobi_inv(2,2) =  jacobi(1,1)/det
-    jacobi_inv(1,2) = -jacobi(1,2)/det
-    jacobi_inv(2,1) = -jacobi(2,1)/det
-
-    !! Partial derivatives with respect to X and Y
-    sfunc_x = jacobi_inv(1,1)*sfunc_xi + jacobi_inv(1,2)*sfunc_eta
-    sfunc_y = jacobi_inv(2,1)*sfunc_xi + jacobi_inv(2,2)*sfunc_eta
-
-  end subroutine Quad4ShapeDer
-
-
-  function getGlobalizedX (VZ) result(V1)
-
-    !!==========================================================================
-    !! Find the vector defined by the projection of the global X-axis onto
-    !! the plane defined by the given vector VZ.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 Nov 2000/1.0
-    !!==========================================================================
+  function getGlobalizedX (eZ) result(V1)
 
     use KindModule       , only : dp, epsDiv0_p
     use manipMatrixModule, only : cross_product
 
-    real(dp), intent(in) :: VZ(3)
+    real(dp), intent(in) :: eZ(3)
     real(dp)             :: V1(3), V2(3), VLength2
     real(dp), parameter  :: somewhatSmall_p = 0.01_dp
 
     !! --- Logic section ---
 
-    if (abs(VZ(2)) > somewhatSmall_p .or. abs(VZ(3)) > somewhatSmall_p) then
+    if (abs(eZ(2)) > somewhatSmall_p .or. abs(eZ(3)) > somewhatSmall_p) then
        !! Define V1 by projecting global X-axis onto the plane
-       V1(1) =  VZ(2)*VZ(2) + VZ(3)*VZ(3)
-       V1(2) = -VZ(1)*VZ(2)
-       V1(3) = -VZ(1)*VZ(3)
+       V1(1) =  eZ(2)*eZ(2) + eZ(3)*eZ(3)
+       V1(2) = -eZ(1)*eZ(2)
+       V1(3) = -eZ(1)*eZ(3)
     else
-       !! Define V2 by projecting global Y-axis onto the plane, then V1=V2xVZ
-       V2(1) = -VZ(2)*VZ(1)
-       V2(2) =  VZ(1)*VZ(1) + VZ(3)*VZ(3)
-       V2(3) = -VZ(2)*VZ(3)
-       V1    = cross_product(V2,VZ)
+       !! Define V2 by projecting global Y-axis onto the plane, then V1={V2}x{eZ}
+       V2(1) = -eZ(2)*eZ(1)
+       V2(2) =  eZ(1)*eZ(1) + eZ(3)*eZ(3)
+       V2(3) = -eZ(2)*eZ(3)
+       V1    = cross_product(V2,eZ)
     end if
 
     VLength2 = dot_product(V1,V1)
@@ -336,22 +336,37 @@ contains
   end function getGlobalizedX
 
 
-  subroutine getShellElementAxes (nenod, X, Y, Z, V1, V2, V3, ierr, doGlobalize)
+  !!============================================================================
+  !> @brief Computes the local element axes for a thin shell element.
+  !>
+  !> @param[in] nenod Number of element nodes (3 or 4)
+  !> @param[in] X Global X-coordinates for the element
+  !> @param[in] Y Global Y-coordinates for the element
+  !> @param[in] Z Global Z-coordinates for the element
+  !> @param[out] V1 Direction of local X-axis for the element
+  !> @param[out] V2 Direction of local Y-axis for the element
+  !> @param[out] V3 Direction of local Z-axis for the element
+  !> @param[in] lpu File unit number for res-file output
+  !> @param[out] ierr Error flag
+  !> @param[in] doGlobalize If .true., the globalized shell axes are computed
+  !>
+  !> @details The local-to-global transformation matrix is then T = [V1,V2,V3].
+  !> Optionally, the globalized shell element axes can be computed instead of
+  !> the local element axes.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 Nov 2000
 
-    !!==========================================================================
-    !! Compute the local- (or globalized) element axes for a thin shell element.
-    !! The local-to-global transformation matrix is then T = [V1,V2,V3].
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 Nov 2000/1.0
-    !!==========================================================================
+  subroutine getShellElementAxes (nenod, X, Y, Z, V1, V2, V3, &
+       &                          lpu, ierr, doGlobalize)
 
     use KindModule       , only : dp, epsDiv0_p
     use manipMatrixModule, only : cross_product
-    use reportErrorModule, only : internalError, reportError, errorFileOnly_p
-    use reportErrorModule, only : getErrorFile
 
-    integer , intent(in)  :: nenod
+    integer , intent(in)  :: nenod, lpu
     real(dp), intent(in)  :: X(nenod), Y(nenod) ,Z(nenod)
     real(dp), intent(out) :: V1(3), V2(3), V3(3)
     integer , intent(out) :: ierr
@@ -388,9 +403,11 @@ contains
        V2(2) = Y(4) - Y(2)
        V2(3) = Z(4) - Z(2)
     else
-       ierr = internalError('getShellElementAxes: Invalid element type')
+       write(lpu,*) '*** getShellElementAxes: Invalid element type ',nenod
+       ierr = -1
        return
     end if
+
     V3 = cross_product(V1,V2)
     VN = dot_product(V3,V3)
     if (VN > epsDiv0_p*epsDiv0_p) then
@@ -426,31 +443,41 @@ contains
     return
 
 900 continue
-    call reportError(errorFileOnly_p,'Degenerated shell element')
-    write(getErrorFile(),600) V1,V2,V3,7-2*ierr,7-2*ierr,VN,epsDiv0_p*epsDiv0_p
-600 format(10X,'V1 =',1P3E13.5 / 10X,'V2 =',1P3E13.5 / 10X,'V3 =',1P3E13.5, &
-         / 10X,'V',I1,'*V',I1,' = ',1PE12.5,' tol = ',E12.5)
+    write(lpu,*) '*** getShellElementAxes: Degenerated shell element',ierr
+    write(lpu,600) V1,V2,V3,7-2*ierr,7-2*ierr,VN,epsDiv0_p*epsDiv0_p
+600 format(26X,'V1 =',1P3E13.5 / 26X,'V2 =',1P3E13.5 / 26X,'V3 =',1P3E13.5, &
+         / 26X,'V',I1,'*V',I1,' = ',1PE12.5,' tol = ',E12.5)
 
   end subroutine getShellElementAxes
 
 
-  subroutine getShellStressTrans (VX, VZ, T, ierr)
+  !!============================================================================
+  !> @brief Computes the stress transformation matrix for a thin shell element.
+  !>
+  !> @param[in] eX X-axis of the element coordinate system
+  !> @param[in] eZ Z-axis of the element coordinate system
+  !> @param[out] T In-plane transformation matrix
+  !> @param[in] lpu File unit number for res-file output
+  !> @param[out] ierr Error flag
+  !>
+  !> @details This subroutine computes the 2D transformation matrix from the
+  !> element coordinate system to the continuous stress output coordinate
+  !> system for a shell element.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 Nov 2000
 
-    !!==========================================================================
-    !! Compute the 2D transformation matrix from the element coordinate system
-    !! to the continuous stress output coordinate system for shell elements.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 Nov 2000/1.0
-    !!==========================================================================
+  subroutine getShellStressTrans (eX, eZ, T, lpu, ierr)
 
     use KindModule       , only : dp, epsDiv0_p
     use manipMatrixModule, only : cross_product
-    use reportErrorModule, only : internalError
 
-    real(dp), intent(in)  :: VX(3)  ! X-axis of the element coordinate system
-    real(dp), intent(in)  :: VZ(3)  ! Z-axis of the element coordinate system
-    real(dp), intent(out) :: T(2,2) ! in-plane transformation matrix
+    real(dp), intent(in)  :: eX(3), eZ(3)
+    real(dp), intent(out) :: T(2,2)
+    integer , intent(in)  :: lpu
     integer , intent(out) :: ierr
 
     !! Local variables
@@ -458,19 +485,18 @@ contains
 
     !! --- Logic section ---
 
-    ierr = 0
-
     !! Find the local X-axis (V1) of the stress output coordinate system
-    V1 = getGlobalizedX(VZ)
+    V1 = getGlobalizedX(eZ)
     if (dot_product(V1,V1) <= epsDiv0_p*epsDiv0_p) then
-       ierr = internalError('getShellStressTrans: Invalid element axes')
+       write(lpu,*) '*** getShellStressTrans: Invalid shell normal vector',eZ
+       ierr = -1
        return
     end if
 
-    !! Find the rotation from VX to V1 in terms of cos(angle) and sin(angle)
-    V2 = cross_product(VX,V1)
-    CA = dot_product(V1,VX)
-    SA = sign(sqrt(dot_product(V2,V2)),dot_product(V2,VZ))
+    !! Find the rotation from aX to V1 in terms of cos(angle) and sin(angle)
+    V2 = cross_product(eX,V1)
+    CA = dot_product(V1,eX)
+    SA = sign(sqrt(dot_product(V2,V2)),dot_product(V2,eZ))
 
     !! Set up the in-plane rotation matrix
     T(1,1) =  CA
@@ -478,80 +504,8 @@ contains
     T(2,1) = -SA
     T(2,2) =  CA
 
+    ierr = 0
+
   end subroutine getShellStressTrans
-
-
-  subroutine calcVonMises (inTensor,ncomp,nstrp,vmVec)
-
-    !!==========================================================================
-    !! Calculate von Mises stress from input stress tensor.
-    !!
-    !! Programmer : Tommy Stokmo Jørstad
-    !! date/rev   : 14 May 2002/1.0
-    !!==========================================================================
-
-    use KindModule                  , only : dp
-    use FFaTensorTransformsInterface, only : vonMises
-
-    integer,  intent(in)  :: ncomp, nstrp
-    real(dp), intent(in)  :: inTensor(ncomp,nstrp)
-    real(dp), intent(out) :: vmVec(nstrp)
-
-    !! Local variables
-    integer :: i, ncalc
-
-    !! --- Logic section ---
-
-    select case(ncomp)
-    case(1); ncalc = 1 ! Beam element
-    case(3); ncalc = 2 ! Shell element
-    case(6); ncalc = 3 ! Solid element
-    case default; ncalc = 0
-    end select
-
-    do i = 1, nstrp
-       vmVec(i) = vonMises(ncalc,inTensor(:,i))
-    end do
-
-  end subroutine calcVonMises
-
-
-  subroutine calcPrincipalVals (inTensor,ncomp,nstrp,maxPVal,minPVal,maxSVal)
-
-    !!==========================================================================
-    !! Calculate max/min principal value and max shear from input tensor.
-    !!
-    !! Programmer : Tommy Stokmo Jørstad
-    !! date/rev   : 14 May 2002/1.0
-    !!==========================================================================
-
-    use KindModule                  , only : dp
-    use FFaTensorTransformsInterface, only : princval, maxshearvalue
-
-    integer,  intent(in)  :: ncomp, nstrp
-    real(dp), intent(in)  :: inTensor(ncomp,nstrp)
-    real(dp), intent(out) :: maxPVal(nstrp), minPVal(nstrp), maxSVal(nstrp)
-
-    !! Local variables
-    integer  :: i, ncalc
-    real(dp) :: prinValVec(3)
-
-    !! --- Logic section ---
-
-    select case(ncomp)
-    case(1); ncalc = 1 ! Beam element
-    case(3); ncalc = 2 ! Shell element
-    case(6); ncalc = 3 ! Solid element
-    case default; ncalc = 0
-    end select
-
-    do i = 1, nstrp
-       call princval (ncalc,inTensor(:,i),prinValVec)
-       maxPVal(i) = prinValVec(1)
-       minPVal(i) = prinValVec(ncalc)
-       call maxshearvalue (ncalc,prinValVec,maxSVal(i))
-    end do
-
-  end subroutine calcPrincipalVals
 
 end module StrainAndStressUtilitiesModule

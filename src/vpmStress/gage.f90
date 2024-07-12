@@ -10,9 +10,10 @@ subroutine gage (ierr)
   use KindModule                , only : dp, i8, epsDiv0_p, lfNam_p
   use SamModule                 , only : SamType, deAllocateSAM, writeObject
   use SamStressModule           , only : initiateSAM
+  use InitiateStressModule      , only : readSolverData
   use DisplacementModule        , only : openBandEmatrices, closeBandEmatrices
-  use DisplacementModule        , only : readSupElDisplacements, readSolverData
-  use DisplacementModule        , only : readResponsePointers, getFileName
+  use DisplacementModule        , only : readSupElDisplacements
+  use DisplacementModule        , only : readResponsePointers
   use DisplacementModule        , only : readStaticDisplacements, dis1Expand
   use DisplacementModule        , only : ElDispFromSupElDisp
   use DisplacementModule        , only : RMatrixPtr, IVectorPtr
@@ -33,6 +34,7 @@ subroutine gage (ierr)
   use RDBModule                 , only : RDBType, flushRDBfile, closeRDBfile
   use SaveStrainGageModule      , only : writeStrainGageHeader,writeStrainGageDB
   use ManipMatrixModule         , only : writeObject
+  use FileUtilitiesModule       , only : getFileName
   use TimerModule               , only : initTime, showTime
   use VersionModule             , only : openResFile
   use ProgressModule            , only : lterm, writeProgress
@@ -322,7 +324,8 @@ subroutine gage (ierr)
 
         if (associated(strainRosettes(i)%disp)) then
            call CalcRosetteDisplacements (strainRosettes(i),samSup%madof, &
-                &                         H_all(i)%p,sup%finit,sup%supTr,ierr)
+                &                         H_all(i)%p,sup%finit,sup%supTr, &
+                &                         lpu,ierr)
            if (ierr /= 0) goto 900
            if (iprint > 1) then
               write(lpu,6031) trim(getId(strainRosettes(i)%id)), &

@@ -9,6 +9,31 @@
 !> @brief Recovery of displacements at internal nodes.
 
 !!==============================================================================
+!> @brief Module with real kind parameter to use in the recovery calculations.
+
+module RecKindModule
+
+#if FT_HAS_RECOVERY == 1
+  use KindModule, only : sp
+#else
+  use KindModule, only : dp
+#endif
+
+  implicit none
+
+  private
+
+  !> @brief Real kind (precision) to use for all recovery calculations
+#if FT_HAS_RECOVERY == 1
+  integer, parameter, public :: rk = sp
+#else
+  integer, parameter, public :: rk = dp
+#endif
+
+end module RecKindModule
+
+
+!!==============================================================================
 !> @brief Module with subroutines for recovery of internal displacements.
 !>
 !> @details This module contains a set of subroutines for calculation of
@@ -20,11 +45,10 @@
 
 module DisplacementModule
 
+  use RecKindModule    , only : rk
 #if FT_HAS_RECOVERY == 1
-  use KindModule       , only : sp
   use sDiskMatrixModule, only : DiskMatrixType
 #else
-  use KindModule       , only : dp
   use DiskMatrixModule , only : DiskMatrixType
 #endif
 
@@ -36,14 +60,12 @@ module DisplacementModule
 #define RAXPY  SAXPY
 #define RGEMV  SGEMV
 #define RSCATR SSCATR
-  integer, parameter :: rk = sp !< Single precision real kind
 #else
 #define RGEMV  DGEMV
 #define RCOPY  DCOPY
 #define RAXPY  DAXPY
 #define RGEMV  DGEMV
 #define RSCATR DSCATR
-  integer, parameter :: rk = dp !< Double precision real kind
 #endif
 
   !> @cond NO_DOCUMENTATION
@@ -65,169 +87,6 @@ module DisplacementModule
 
 
 contains
-
-  !!============================================================================
-  !> @brief Extracts a file name from a command-line option.
-  !>
-  !> @param[in]  file The command-line option to extract from
-  !> @param[out] name The value of the command-line option
-  !> @param[in]  suffix File extension to use when using default file
-  !>
-  !> @details If needed the string value is converted to UNIX or Windows format.
-  !> If the specified command-line option is not used, the default file name is
-  !> `<partname><suffix>` where `<partname>` is the name of the FE data file
-  !> without the file extension.
-  !>
-  !> @callergraph
-  !>
-  !> @author Knut Morten Okstad
-  !>
-  !> @date 20 Sep 2000
-
-  subroutine getFileName (file,name,suffix)
-
-    use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getstring
-    use FFaFilePathInterface  , only : ffa_checkpath
-
-    character(len=*), optional, intent(in)  :: suffix
-    character(len=*),           intent(in)  :: file
-    character(len=*),           intent(out) :: name
-
-    !! Local variables
-    integer :: idot
-
-    !! --- Logic section ---
-
-    call ffa_cmdlinearg_getstring (file,name)
-    if (name == '' .and. present(suffix)) then
-       !! File name not given, use default
-       call ffa_cmdlinearg_getstring ('linkfile',name)
-       if (name == '') then
-          name = 'fedem'//suffix
-          return
-       end if
-       idot = index(name,'.',.TRUE.)
-       if (idot < 1) idot = len_trim(name)+1
-       name(idot:) = suffix
-    end if
-
-    !! Unix/NT pathname conversion
-    call ffa_checkpath (name)
-
-  end subroutine getFileName
-
-
-  !!============================================================================
-  !> @brief Initializes a superelement and connected triads from the input file.
-  !>
-  !> @param[in] iSup Base ID of the superelement to initializes
-  !> @param[out] gvec Gravity vector
-  !> @param[out] sup The superelement that that was initialized
-  !> @param[out] triads Array of triads connected to the superelement
-  !> @param[out] modelFileName Name of model file
-  !> @param[in] iprint Print switch
-  !> @param[in] lpu File unit number for res-file output
-  !> @param[out] ierr Error flag
-  !>
-  !> @callgraph @callergraph
-  !>
-  !> @author Knut Morten Okstad
-  !>
-  !> @date 2 Oct 2000
-
-  subroutine readSolverData (iSup,gvec,sup,triads,modelFileName,iprint,lpu,ierr)
-
-    use kindModule                     , only : dp, lfnam_p
-    use TriadTypeModule                , only : TriadType, writeObject
-    use SupElTypeModule                , only : SupElType, writeObject
-    use IdTypeModule                   , only : ReportInputError
-    use HeadingNameListModule          , only : Read_HEADING, modelFile
-    use EnvironmentNameListModule      , only : Read_ENVIRONMENT, gravity
-    use initiateTriadAndSupElTypeModule, only : InitiateSupEls1, InitiateSupEls2
-    use initiateTriadAndSupElTypeModule, only : InitiateTriads
-    use inputUtilities                 , only : iuCopyToScratch
-    use inputUtilities                 , only : iuSetPosAtNextEntry
-    use fileUtilitiesModule            , only : findUnitNumber
-    use reportErrorModule              , only : reportError
-    use reportErrorModule              , only : error_p, debugFIleOnly_p
-
-    integer         , intent(in)  :: iSup, iprint, lpu
-    real(dp)        , intent(out) :: gvec(3)
-    type(SupElType) , intent(out) :: sup
-    type(TriadType) , pointer     :: triads(:)
-    character(len=*), intent(out) :: modelFileName
-    integer         , intent(out) :: ierr
-
-    !! Local variables
-    integer, pointer   :: triadIds(:)
-    integer            :: i, infp
-    character(lfnam_p) :: chname
-
-    !! --- Logic section ---
-
-    infp = findUnitNumber(50)
-    open(infp,IOSTAT=ierr,STATUS='SCRATCH')
-    if (ierr /= 0) then
-       call reportError (error_p,'Unable to open temporary solver input file')
-       goto 990
-    end if
-
-    call getFileName ('fsifile',chname)
-    call iuCopyToScratch (infp,chname,ierr)
-    if (ierr /= 0) goto 990
-
-    rewind(infp)
-
-    call Read_HEADING (infp,ierr)
-    if (ierr /= 0) then
-       call ReportInputError ('HEADING')
-       return
-    end if
-
-    modelFileName = modelFile
-
-    if (iuSetPosAtNextEntry(infp,'&ENVIRONMENT')) then
-
-       call Read_ENVIRONMENT (infp,ierr)
-       if (ierr /= 0) then
-          call ReportInputError ('ENVIRONMENT')
-          return
-       end if
-
-       gvec = gravity
-
-    else ! No environment record, assume zero gravity
-       rewind(infp)
-       gvec = 0.0_dp
-    end if
-
-    call InitiateSupEls1 (infp,iSup,triadIds,sup,ierr)
-    if (ierr /= 0) goto 900
-
-    call InitiateTriads (infp,triads,ierr,triadIds)
-    if (ierr /= 0) goto 900
-
-    call InitiateSupEls2 (triadIds,triads,sup,ierr)
-    if (ierr /= 0) goto 900
-
-    close(infp)
-
-900 continue
-    if (iprint < 3) goto 990
-
-    call WriteObject (sup,lpu,1)
-    write(lpu,'(/)')
-
-    do i = 1, size(triads)
-       call WriteObject (triads(i),lpu,1)
-       write(lpu,'(/)')
-    end do
-
-990 continue
-    if (ierr /= 0) call reportError (debugFileOnly_p,'readSolverData')
-
-  end subroutine readSolverData
-
 
   !!============================================================================
   !> @brief Retrieves result database file pointers for system response data.
@@ -297,7 +156,7 @@ contains
        !! No response variables found, most likely OK but give warning
        call reportError (warning_p,'No system-level response variables found.',&
             &            'Stress recovery will be based on local deformations',&
-            &            'relative to the modelling configuration of the part.')
+            &            'relative to the modelling configuration of the Part.')
        ierr = 1
        return
     end if
@@ -583,9 +442,9 @@ contains
 
 
   !!============================================================================
-  !> @brief Allocates the B- and E disk matrix objects.
+  !> @brief Allocates the B- and E-matrix file objects.
   !>
-  !> @param[in] nPart Number of superelements to allocated matrices for
+  !> @param[in] nPart Number of superelements to allocate matrices for
   !> @param[out] ierr Error flag
   !>
   !> @callgraph @callergraph
@@ -645,15 +504,16 @@ contains
   subroutine openBandEmatrices (ndof1,ndof2,ngen,nColSwap,ierr, &
        &                        Bmatfile,Ematfile,indx)
 
-    use kindModule       , only : lfnam_p
+    use kindModule         , only : lfnam_p
+    use FileUtilitiesModule, only : getFileName
 #if FT_HAS_RECOVERY == 1
-    use sDiskMatrixModule, only : dmNullify, dmOpen, dmGetSwapSize
+    use sDiskMatrixModule  , only : dmNullify, dmOpen, dmGetSwapSize
 #else
-    use DiskMatrixModule , only : dmNullify, dmOpen, dmGetSwapSize
+    use DiskMatrixModule   , only : dmNullify, dmOpen, dmGetSwapSize
 #endif
-    use DiskMatrixModule , only : dmOld_p
-    use reportErrorModule, only : reportError, debugFileOnly_p
-    use reportErrorModule, only : allocationError, internalError
+    use DiskMatrixModule   , only : dmOld_p
+    use reportErrorModule  , only : reportError, debugFileOnly_p
+    use reportErrorModule  , only : allocationError, internalError
 
     integer                   , intent(in)  :: ndof1, ndof2, ngen, nColSwap
     integer                   , intent(out) :: ierr
@@ -1213,9 +1073,9 @@ contains
   !> but we don't want the recovery modules to depend on that big module.
   !> The implementation is essentially the same as the subroutine EXPAND
   !> from the SAM library. Notice that the first coefficient of each constraint
-  !> equation, i.e., c0=ttcc(mpmceq(iceq)) is ignored here, under the assumption
-  !> that all constraint equations represents coupling elements (RBE2 and RBE3),
-  !> and no prescribed motions.
+  !> equation, i.e., `c0=ttcc(mpmceq(iceq))` is ignored here, under the
+  !> assumption that all constraint equations represents coupling elements
+  !> (RBE2 and RBE3), and no prescribed motions.
   !>
   !> @callergraph
   !>

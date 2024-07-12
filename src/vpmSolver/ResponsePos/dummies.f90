@@ -22,6 +22,15 @@ function checkCtrlParams (elmType,nRealData,nVar)
 end function checkCtrlParams
 
 module FFlLinkHandlerInterface; contains
+  integer function ffl_ext2int (nodeID, Id)
+    logical, intent(in) :: nodeID
+    integer, intent(in) :: id
+    if (nodeID) then
+      ffl_ext2int = Id
+    else
+      ffl_ext2int = Id
+    end if
+  end function
   subroutine ffl_getnodalcoor (x,y,z,inod,ierr)
     use kindModule, only : dp
     real(dp) :: x, y, z
@@ -106,3 +115,18 @@ contains
     if (present(complexity) .and. present(text)) print*,text
   end subroutine writeSysMat
 end module SysMatrixTypeModule
+
+module isoMatModule; contains
+  subroutine isoMat2D (Emod,Rnu,C)
+    use KindModule, only : dp
+    real(dp), intent(in)  :: Emod,Rnu
+    real(dp), intent(out) :: C(:,:)
+    print*,' ** isoMat2D dummy: ',Emod,Rnu
+    C = 0.0_dp
+  end subroutine isoMat2D
+end module isoMatModule
+
+module RecKindModule
+  use kindModule, only : sp
+  integer, parameter, public :: rk = sp
+end module RecKindModule

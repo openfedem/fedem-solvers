@@ -12,7 +12,7 @@
 
 ![Fedem Logo](https://github.com/openfedem/.github/blob/main/profile/FedemLogo.png "Welcome to FEDEM")
 
-**Welcome to FEDEM! - Finite Element Dynamics of Elastic Mechanisms.**
+**Welcome to FEDEM! - Finite Element Dynamics in Elastic Mechanisms.**
 
 ## About this project
 

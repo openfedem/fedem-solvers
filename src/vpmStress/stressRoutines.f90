@@ -5,7 +5,7 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
-!> @file stressRoutinesModule.f90
+!> @file stressRoutines.f90
 !> @brief Calculation and storage of superelement stresses.
 
 !!==============================================================================
@@ -49,11 +49,11 @@ contains
        &                   irec,isav,iprint,lpu,ierr)
 
     use KindModule                    , only : dp, i8, hugeVal_p
+    use RecKindModule                 , only : rk
     use RDBModule                     , only : RDBType, flushRDBfile
     use SamModule                     , only : SamType
-    use ElStressModule                , only : extractEV, elStress, rk
+    use ElStressModule                , only : extractEV, elStress
     use ResStressModule               , only : addResStress
-    use StrainAndStressUtilitiesModule, only : calcVonMises, calcPrincipalVals
     use SaveStressModule              , only : saveElmOrder, writeStressHeader
     use SaveStressModule              , only : writeStressDB, writeStrMeasureDB
     use SaveVTFModule2                , only : VTFA_RESMAP_ELEMENT
@@ -68,6 +68,7 @@ contains
     use TimerModule                   , only : startTimer, stopTimer
     use ReportErrorModule             , only : internalError, reportError
     use ReportErrorModule             , only : error_p, debugFileOnly_p
+    use FFaTensorTransformsInterface  , only : vonMises, princval, maxshearvalue
     use FFaCmdLineArgInterface        , only : ffa_cmdlinearg_getbool
     use FFaCmdLineArgInterface        , only : ffa_cmdlinearg_isTrue
 
@@ -87,7 +88,7 @@ contains
     logical, parameter :: lSS  = .false. ! No stress resultant conjugate strains
     logical     :: lDouble, lForce, lSave, lStoreVMS
     logical     :: lSR, lStress, lStrain, lStrRes(nStrRes)
-    integer     :: iel, jel, idat, iBlock, lerr, iReMap, vtfFile
+    integer     :: i, j, iel, jel, idat, iBlock, lerr, iReMap, vtfFile
     integer     :: n, ncmp0, ncmp1, ncmp2, nenod, nstrp
     integer(i8) :: nBytes, nWrote
     real(dp)    :: EV(6*maxnod), EF(6*maxnod), SR(6*maxnod), SS(6*maxnod)
@@ -227,8 +228,7 @@ contains
        if (lForce .and. nenod > 0) then
           !! Add element nodal forces into the global vector
           n = sam%mpmnpc(iel)
-          call addEF (SF,EF,sam%madof,sam%mmnpc(n:n+nenod-1),nenod, &
-               &      numberOfComponents(sam%melcon(iel),0))
+          call addEF (SF,EF,sam%madof,sam%mmnpc(n:n+nenod-1),nenod,ncmp0)
        end if
 
        if (ncmp2 > 0 .and. nenod > 0 .and. lSave) then
@@ -270,21 +270,30 @@ contains
              if (present(irec)) call startTimer (irec)
 
              !! Calculate von Mises and/or principal values
+             n = numberOfComponents(sam%melcon(iel),3)
+             j = 1
              resMat = 0.0_dp
-             if (lStrRes(1) .or. vtfFile >= 0) then
-                call calcVonMises (Stress,ncmp1,nstrp,resMat(1,:))
-             end if
-             if (any(lStrRes(2:4))) then
-                call calcPrincipalVals (Stress,ncmp1,nstrp, &
-                     &                  resMat(2,:),resMat(3,:),resMat(4,:))
-             end if
-             if (lStrRes(5)) then
-                call calcVonMises (Strain,ncmp1,nstrp,resMat(5,:))
-             end if
-             if (any(lStrRes(6:8))) then
-                call calcPrincipalVals (Strain,ncmp1,nstrp, &
-                     &                  resMat(6,:),resMat(7,:),resMat(8,:))
-             end if
+             do i = 1, nstrp
+                if (lStrRes(1) .or. vtfFile >= 0) then
+                   resMat(1,i) = vonMises(n,Stress(j))
+                end if
+                if (any(lStrRes(2:4))) then
+                   call princval (n,Stress(j),resMat(2:4,i))
+                   call maxshearvalue (n,resMat(2:4,i),SS(1))
+                   resMat(3,i) = resMat(1+n,i)
+                   resMat(4,i) = SS(1)
+                end if
+                if (lStrRes(5)) then
+                   resMat(5,i) = vonMises(n,Strain(j))
+                end if
+                if (any(lStrRes(6:8))) then
+                   call princval (n,Strain(j),resMat(6:8,i))
+                   call maxshearvalue (n,resMat(6:8,i),SS(1))
+                   resMat(7,i) = resMat(5+n,i)
+                   resMat(8,i) = SS(1)
+                end if
+                j = j + ncmp1
+             end do
 
              if (present(irec)) call stopTimer (irec)
           end if
@@ -403,6 +412,14 @@ contains
          case (11);    nComp = 6 ! Beam element
          case (21:24); nComp = 6 ! Thin shell element
          case (31:32); nComp = 6 ! Thick shell element
+         case default; nComp = 0
+         end select
+      case (3) ! Stress/strain tensor dimension
+         select case (ieltyp)
+         case (11);    nComp = 1 ! Beam element
+         case (21:24); nComp = 2 ! Thin shell element
+         case (31:32); nComp = 3 ! Thick shell element
+         case (41:46); nComp = 3 ! Solid element
          case default; nComp = 0
          end select
       case default

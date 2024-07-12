@@ -204,7 +204,8 @@ contains
 
     call ReportError (error_p,'Internal error', &
          'You may have encountered a bug in the program', &
-         'Please give details to support@fedem.com',addString=errorString)
+         'Please give details to developers@openfedem.org', &
+         addString=errorString)
 
     InternalError = -1
 

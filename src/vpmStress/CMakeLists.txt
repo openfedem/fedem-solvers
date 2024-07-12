@@ -32,8 +32,7 @@ set ( HEADER_FILE_LIST )
 set ( SOURCE_FILE_LIST stressInterface )
 
 ## Fortran 90 source files
-set ( F90_FILE_LIST displacementModule
-                    initiateTriadAndSupElTypeModule
+set ( F90_FILE_LIST displacementModule initiateStressModule
                     samStressModule strainAndStressUtils
                     fpp fatigueModule strainCoatModule
                     gage strainRosetteModule strainGageModule
