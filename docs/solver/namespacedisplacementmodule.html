@@ -76,12 +76,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aebcba898bae16fdcba85c961b619fce1"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#aebcba898bae16fdcba85c961b619fce1">getfilename</a> (file, name, suffix)</td></tr>
-<tr class="memdesc:aebcba898bae16fdcba85c961b619fce1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a file name from a command-line option.  <a href="namespacedisplacementmodule.html#aebcba898bae16fdcba85c961b619fce1">More...</a><br /></td></tr>
-<tr class="separator:aebcba898bae16fdcba85c961b619fce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aac6f82413bffa462dbf26569c9004c"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#a7aac6f82413bffa462dbf26569c9004c">readsolverdata</a> (iSup, gvec, sup, triads, modelFileName, iprint, lpu, ierr)</td></tr>
-<tr class="memdesc:a7aac6f82413bffa462dbf26569c9004c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a superelement and connected triads from the input file.  <a href="namespacedisplacementmodule.html#a7aac6f82413bffa462dbf26569c9004c">More...</a><br /></td></tr>
-<tr class="separator:a7aac6f82413bffa462dbf26569c9004c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a552ed128d1d276b3a4159c38b12d9c00"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#a552ed128d1d276b3a4159c38b12d9c00">readresponsepointers</a> (triads, sup, pointers, ierr)</td></tr>
 <tr class="memdesc:a552ed128d1d276b3a4159c38b12d9c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves result database file pointers for system response data.  <a href="namespacedisplacementmodule.html#a552ed128d1d276b3a4159c38b12d9c00">More...</a><br /></td></tr>
 <tr class="separator:a552ed128d1d276b3a4159c38b12d9c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,7 +92,7 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a377f595c1a3fcdf24f4e488d63e9efc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the internal displacements due to gravitation forces.  <a href="namespacedisplacementmodule.html#a377f595c1a3fcdf24f4e488d63e9efc3">More...</a><br /></td></tr>
 <tr class="separator:a377f595c1a3fcdf24f4e488d63e9efc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a196b5251e74a5dcb0ec4ef7da1e3cf4e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#a196b5251e74a5dcb0ec4ef7da1e3cf4e">allocatebandematrices</a> (nPart, ierr)</td></tr>
-<tr class="memdesc:a196b5251e74a5dcb0ec4ef7da1e3cf4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the B- and E disk matrix objects.  <a href="namespacedisplacementmodule.html#a196b5251e74a5dcb0ec4ef7da1e3cf4e">More...</a><br /></td></tr>
+<tr class="memdesc:a196b5251e74a5dcb0ec4ef7da1e3cf4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the B- and E-matrix file objects.  <a href="namespacedisplacementmodule.html#a196b5251e74a5dcb0ec4ef7da1e3cf4e">More...</a><br /></td></tr>
 <tr class="separator:a196b5251e74a5dcb0ec4ef7da1e3cf4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf56a3d6145b2b52d8c05f67033ae572"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572">openbandematrices</a> (ndof1, ndof2, ngen, nColSwap, ierr, Bmatfile, Ematfile, indx)</td></tr>
 <tr class="memdesc:adf56a3d6145b2b52d8c05f67033ae572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the B- and E-matrix files associated with a superelement.  <a href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572">More...</a><br /></td></tr>
@@ -142,9 +136,6 @@ Functions/Subroutines</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aed00d490b4653f209512f190d81e1b41"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a> = sp</td></tr>
-<tr class="memdesc:aed00d490b4653f209512f190d81e1b41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single precision real kind.  <a href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">More...</a><br /></td></tr>
-<tr class="separator:aed00d490b4653f209512f190d81e1b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d9af540520fbe5ebb6acdb8910cf22"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html">diskmatrixtype</a>), dimension(:), allocatable, save, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedisplacementmodule.html#a86d9af540520fbe5ebb6acdb8910cf22">bmatdisk</a></td></tr>
 <tr class="memdesc:a86d9af540520fbe5ebb6acdb8910cf22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displacement recovery matrices associated with external nodal DOFs.  <a href="namespacedisplacementmodule.html#a86d9af540520fbe5ebb6acdb8910cf22">More...</a><br /></td></tr>
 <tr class="separator:a86d9af540520fbe5ebb6acdb8910cf22"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,10 +173,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Allocates the B- and E disk matrix objects. </p>
+<p>Allocates the B- and E-matrix file objects. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">nPart</td><td>Number of superelements to allocated matrices for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nPart</td><td>Number of superelements to allocate matrices for </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
@@ -197,7 +188,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_cgraph.png" border="0" usemap="#anamespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_cgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_cgraph" id="anamespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_cgraph">
-<area shape="rect" title="Allocates the B&#45; and E disk matrix objects." alt="" coords="5,27,184,69"/>
+<area shape="rect" title="Allocates the B&#45; and E&#45;matrix file objects." alt="" coords="5,27,184,69"/>
 <area shape="rect" href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="232,5,443,32"/>
 <area shape="rect" href="namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title=" " alt="" coords="259,57,415,98"/>
 </map>
@@ -207,7 +198,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_icgraph" id="anamespacedisplacementmodule_a196b5251e74a5dcb0ec4ef7da1e3cf4e_icgraph">
-<area shape="rect" title="Allocates the B&#45; and E disk matrix objects." alt="" coords="568,99,747,141"/>
+<area shape="rect" title="Allocates the B&#45; and E&#45;matrix file objects." alt="" coords="568,99,747,141"/>
 <area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,99,520,141"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -229,13 +220,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">subroutine displacementmodule::calcgroupdisplacements </td>
           <td>(</td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(out)&#160;</td>
           <td class="paramname"><em>vd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(out)&#160;</td>
           <td class="paramname"><em>vt</em>, </td>
         </tr>
         <tr>
@@ -253,7 +244,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:,:), intent(in)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:,:), intent(in)&#160;</td>
           <td class="paramname"><em>Bmat</em>, </td>
         </tr>
         <tr>
@@ -322,8 +313,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_ab3ebf224d60ad13cdca82aa4316ba080_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_ab3ebf224d60ad13cdca82aa4316ba080_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_ab3ebf224d60ad13cdca82aa4316ba080_icgraph" id="anamespacedisplacementmodule_ab3ebf224d60ad13cdca82aa4316ba080_icgraph">
-<area shape="rect" title="Extracts the internal displacements for a group of nodes." alt="" coords="180,5,368,47"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,13,132,39"/>
+<area shape="rect" title="Extracts the internal displacements for a group of nodes." alt="" coords="1009,19,1197,60"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,26,961,53"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,19,787,60"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,26,572,53"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,26,83,53"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,26,341,53"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,77,338,103"/>
 </map>
 </div>
 
@@ -344,7 +340,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(sam%ndof), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(sam%ndof), intent(out)&#160;</td>
           <td class="paramname"><em>sv</em>, </td>
         </tr>
         <tr>
@@ -386,13 +382,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(in), optional&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(in), optional&#160;</td>
           <td class="paramname"><em>vii</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(3), intent(in), optional&#160;</td>
+          <td class="paramtype">real(rk), dimension(3), intent(in), optional&#160;</td>
           <td class="paramname"><em>g</em>&#160;</td>
         </tr>
         <tr>
@@ -436,9 +432,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_ada8fbbdbf8da1ecc5abc2dc43fd2b08f_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_ada8fbbdbf8da1ecc5abc2dc43fd2b08f_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_ada8fbbdbf8da1ecc5abc2dc43fd2b08f_icgraph" id="anamespacedisplacementmodule_ada8fbbdbf8da1ecc5abc2dc43fd2b08f_icgraph">
-<area shape="rect" title="Extracts the internal displacements for a superelement." alt="" coords="180,23,348,65"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,5,132,32"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="7,56,130,83"/>
+<area shape="rect" title="Extracts the internal displacements for a superelement." alt="" coords="1009,23,1177,65"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,5,961,32"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="837,56,959,83"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,23,787,65"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,31,572,57"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,31,83,57"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,31,341,57"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,81,338,108"/>
 </map>
 </div>
 
@@ -471,13 +472,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(in)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(in)&#160;</td>
           <td class="paramname"><em>sv</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(out)&#160;</td>
           <td class="paramname"><em>svTotal</em>, </td>
         </tr>
         <tr>
@@ -524,8 +525,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_a8c7ec23640d4ec69a95091405c034881_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_a8c7ec23640d4ec69a95091405c034881_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_a8c7ec23640d4ec69a95091405c034881_icgraph" id="anamespacedisplacementmodule_a8c7ec23640d4ec69a95091405c034881_icgraph">
-<area shape="rect" title="Calculates the total displacements at the nodal points." alt="" coords="180,5,361,47"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,13,132,39"/>
+<area shape="rect" title="Calculates the total displacements at the nodal points." alt="" coords="1009,19,1191,60"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,26,961,53"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,19,787,60"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,26,572,53"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,26,83,53"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,26,341,53"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,77,338,103"/>
 </map>
 </div>
 
@@ -561,13 +567,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(in)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(in)&#160;</td>
           <td class="paramname"><em>uLoc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(out)&#160;</td>
           <td class="paramname"><em>uTot</em>, </td>
         </tr>
         <tr>
@@ -618,11 +624,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_a4fa44ab4319f390202f3439874f8ba7a_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_a4fa44ab4319f390202f3439874f8ba7a_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_a4fa44ab4319f390202f3439874f8ba7a_icgraph" id="anamespacedisplacementmodule_a4fa44ab4319f390202f3439874f8ba7a_icgraph">
-<area shape="rect" title="Calculates the total displacement at a nodal point." alt="" coords="416,71,627,112"/>
-<area shape="rect" href="namespacedisplacementmodule.html#ab3ebf224d60ad13cdca82aa4316ba080" title="Extracts the internal displacements for a group of nodes." alt="" coords="180,5,368,47"/>
-<area shape="rect" href="namespacedisplacementmodule.html#a8c7ec23640d4ec69a95091405c034881" title="Calculates the total displacements at the nodal points." alt="" coords="183,71,365,112"/>
-<area shape="rect" href="namespacedisplacementmodule.html#a66abc2b3e4cd678fab3c30b5f1a67a52" title="Extracts local and total displacements for external group nodes." alt="" coords="195,136,353,177"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,78,132,105"/>
+<area shape="rect" title="Calculates the total displacement at a nodal point." alt="" coords="1245,71,1456,112"/>
+<area shape="rect" href="namespacedisplacementmodule.html#ab3ebf224d60ad13cdca82aa4316ba080" title="Extracts the internal displacements for a group of nodes." alt="" coords="1009,5,1197,47"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a8c7ec23640d4ec69a95091405c034881" title="Calculates the total displacements at the nodal points." alt="" coords="1013,71,1194,112"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a66abc2b3e4cd678fab3c30b5f1a67a52" title="Extracts local and total displacements for external group nodes." alt="" coords="1024,136,1183,177"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,78,961,105"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,71,787,112"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,78,572,105"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,78,83,105"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,78,341,105"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,129,338,155"/>
 </map>
 </div>
 
@@ -775,13 +786,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(in)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(in)&#160;</td>
           <td class="paramname"><em>sveq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(out)&#160;</td>
           <td class="paramname"><em>svdof</em>, </td>
         </tr>
         <tr>
@@ -840,13 +851,13 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(in)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(in)&#160;</td>
           <td class="paramname"><em>sveq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(out)&#160;</td>
           <td class="paramname"><em>svdof</em>&#160;</td>
         </tr>
         <tr>
@@ -871,7 +882,7 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
-<p>This is the same as the subroutine <a class="el" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector.">solextensionmodule::csexpand</a>, but we don't want the recovery modules to depend on that big module. The implementation is essentially the same as the subroutine EXPAND from the SAM library. Notice that the first coefficient of each constraint equation, i.e., c0=ttcc(mpmceq(iceq)) is ignored here, under the assumption that all constraint equations represents coupling elements (RBE2 and RBE3), and no prescribed motions.</p>
+<p>This is the same as the subroutine <a class="el" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector.">solextensionmodule::csexpand</a>, but we don't want the recovery modules to depend on that big module. The implementation is essentially the same as the subroutine EXPAND from the SAM library. Notice that the first coefficient of each constraint equation, i.e., <code>c0=ttcc(mpmceq(iceq))</code> is ignored here, under the assumption that all constraint equations represents coupling elements (RBE2 and RBE3), and no prescribed motions.</p>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Feb 2017 </dd></dl>
 <div class="dynheader">
@@ -879,20 +890,25 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_a576bbe7be4f205ae5d92fcd5d576651f_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_a576bbe7be4f205ae5d92fcd5d576651f_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_a576bbe7be4f205ae5d92fcd5d576651f_icgraph" id="anamespacedisplacementmodule_a576bbe7be4f205ae5d92fcd5d576651f_icgraph">
-<area shape="rect" title="Expands and rearranges a displacement vector." alt="" coords="999,89,1157,130"/>
-<area shape="rect" href="namespacedisplacementmodule.html#ada8fbbdbf8da1ecc5abc2dc43fd2b08f" title="Extracts the internal displacements for a superelement." alt="" coords="783,23,951,65"/>
-<area shape="rect" href="namespacedisplacementmodule.html#a78f63da4235dd09bae39cebb67d95501" title="Expands and rearranges a displacement vector." alt="" coords="787,89,946,130"/>
-<area shape="rect" href="namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="785,154,948,195"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="588,5,715,32"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="590,56,713,83"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="568,154,735,195"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,154,520,195"/>
-<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,161,305,188"/>
-<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,60,83,87"/>
-<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,111,83,137"/>
-<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,161,83,188"/>
-<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,212,82,239"/>
-<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,263,83,289"/>
+<area shape="rect" title="Expands and rearranges a displacement vector." alt="" coords="1265,136,1424,177"/>
+<area shape="rect" href="namespacedisplacementmodule.html#ada8fbbdbf8da1ecc5abc2dc43fd2b08f" title="Extracts the internal displacements for a superelement." alt="" coords="1049,71,1217,112"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a78f63da4235dd09bae39cebb67d95501" title="Expands and rearranges a displacement vector." alt="" coords="1054,136,1213,177"/>
+<area shape="rect" href="namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="1052,203,1215,244"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="855,27,981,54"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="857,78,979,105"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,20,787,61"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,27,572,54"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,26,83,53"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,26,341,53"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,77,338,103"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="835,205,1001,247"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="620,211,787,252"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="393,229,568,255"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,127,275,154"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,178,275,205"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,229,275,255"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,279,274,306"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,330,275,357"/>
 </map>
 </div>
 
@@ -995,13 +1011,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">subroutine displacementmodule::extractexternaldisp </td>
           <td>(</td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(inout)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(inout)&#160;</td>
           <td class="paramname"><em>sv</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:), intent(inout)&#160;</td>
+          <td class="paramtype">real(rk), dimension(:), intent(inout)&#160;</td>
           <td class="paramname"><em>svTotal</em>, </td>
         </tr>
         <tr>
@@ -1081,57 +1097,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacedisplacementmodule_a66abc2b3e4cd678fab3c30b5f1a67a52_icgraph.png" border="0" usemap="#anamespacedisplacementmodule_a66abc2b3e4cd678fab3c30b5f1a67a52_icgraph" alt=""/></div>
 <map name="anamespacedisplacementmodule_a66abc2b3e4cd678fab3c30b5f1a67a52_icgraph" id="anamespacedisplacementmodule_a66abc2b3e4cd678fab3c30b5f1a67a52_icgraph">
-<area shape="rect" title="Extracts local and total displacements for external group nodes." alt="" coords="180,5,339,47"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,13,132,39"/>
+<area shape="rect" title="Extracts local and total displacements for external group nodes." alt="" coords="1009,19,1168,60"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,26,961,53"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,19,787,60"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,26,572,53"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,26,83,53"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,26,341,53"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,77,338,103"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="aebcba898bae16fdcba85c961b619fce1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebcba898bae16fdcba85c961b619fce1">&#9670;&nbsp;</a></span>getfilename()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine displacementmodule::getfilename </td>
-          <td>(</td>
-          <td class="paramtype">character(len=*), intent(in)&#160;</td>
-          <td class="paramname"><em>file</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">character(len=*), intent(out)&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
-          <td class="paramname"><em>suffix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Extracts a file name from a command-line option. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>The command-line option to extract from </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>The value of the command-line option </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">suffix</td><td>File extension to use when using default file</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>If needed the string value is converted to UNIX or Windows format. If the specified command-line option is not used, the default file name is <code>&lt;partname&gt;&lt;suffix&gt;</code> where <code>&lt;partname&gt;</code> is the name of the FE data file without the file extension.</p>
-<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>20 Sep 2000 </dd></dl>
 
 </div>
 </div>
@@ -1162,7 +1136,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(:,:), intent(out), pointer&#160;</td>
+          <td class="paramtype">real(rk), dimension(:,:), intent(out), pointer&#160;</td>
           <td class="paramname"><em>Bsub</em>, </td>
         </tr>
         <tr>
@@ -1430,7 +1404,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(<a class="el" href="namespacedisplacementmodule.html#aed00d490b4653f209512f190d81e1b41">rk</a>), dimension(sam%ndof), intent(out)&#160;</td>
+          <td class="paramtype">real(rk), dimension(sam%ndof), intent(out)&#160;</td>
           <td class="paramname"><em>sv</em>, </td>
         </tr>
         <tr>
@@ -1527,98 +1501,6 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>9 Oct 2000 </dd></dl>
-
-</div>
-</div>
-<a id="a7aac6f82413bffa462dbf26569c9004c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aac6f82413bffa462dbf26569c9004c">&#9670;&nbsp;</a></span>readsolverdata()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine displacementmodule::readsolverdata </td>
-          <td>(</td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>iSup</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(dp), dimension(3), intent(out)&#160;</td>
-          <td class="paramname"><em>gvec</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">type(<a class="el" href="structsupeltypemodule_1_1supeltype.html">supeltype</a>), intent(out)&#160;</td>
-          <td class="paramname"><em>sup</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), dimension(:), pointer&#160;</td>
-          <td class="paramname"><em>triads</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">character(len=*), intent(out)&#160;</td>
-          <td class="paramname"><em>modelFileName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>iprint</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>lpu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(out)&#160;</td>
-          <td class="paramname"><em>ierr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initializes a superelement and connected triads from the input file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">iSup</td><td>Base ID of the superelement to initializes </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">gvec</td><td>Gravity vector </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">sup</td><td>The superelement that that was initialized </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">triads</td><td>Array of triads connected to the superelement </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">modelFileName</td><td>Name of model file </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iprint</td><td>Print switch </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lpu</td><td>File unit number for res-file output </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2 Oct 2000 </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespacedisplacementmodule_a7aac6f82413bffa462dbf26569c9004c_cgraph.png" border="0" usemap="#anamespacedisplacementmodule_a7aac6f82413bffa462dbf26569c9004c_cgraph" alt=""/></div>
-<map name="anamespacedisplacementmodule_a7aac6f82413bffa462dbf26569c9004c_cgraph" id="anamespacedisplacementmodule_a7aac6f82413bffa462dbf26569c9004c_cgraph">
-<area shape="rect" title="Initializes a superelement and connected triads from the input file." alt="" coords="5,49,164,90"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="283,5,383,32"/>
-<area shape="rect" href="namespaceinpututilities.html#adc3a66205e0ae904d098b4f32d55fc02" title="Copies a solver input file to a temporary scratch file." alt="" coords="226,56,441,83"/>
-<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="212,107,455,133"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1877,27 +1759,10 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="aed00d490b4653f209512f190d81e1b41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed00d490b4653f209512f190d81e1b41">&#9670;&nbsp;</a></span>rk</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer parameter displacementmodule::rk = sp</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Single precision real kind. </p>
-<p>Double precision real kind. </p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 11 2024 12:17:36 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Jul 12 2024 12:24:54 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -1,0 +1,6 @@
+<map id="strainrosettemodule::strainelementtype" name="strainrosettemodule::strainelementtype">
+<area shape="rect" id="node1" title="Data type representing a surface stress/strain recovery element." alt="" coords="33,213,187,255"/>
+<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,117,167,143"/>
+<area shape="rect" id="node3" href="$structstrainrosettemodule_1_1strainrosettetype.html" title="Data type representing a strain rosette." alt="" coords="191,109,346,151"/>
+<area shape="rect" id="node4" href="$structstrainrosettemodule_1_1straingagetype.html" title="Data type representing a single strain gage." alt="" coords="191,5,346,47"/>
+</map>

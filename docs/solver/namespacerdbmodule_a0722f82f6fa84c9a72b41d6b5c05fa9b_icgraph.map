@@ -1,9 +1,13 @@
 <map id="rdbmodule::flushrdbfile" name="rdbmodule::flushrdbfile">
-<area shape="rect" id="node1" title="Flushes the specified results database file to disk." alt="" coords="873,42,1045,69"/>
-<area shape="rect" id="node2" href="$namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="639,5,806,47"/>
-<area shape="rect" id="node7" href="$namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="620,71,825,98"/>
-<area shape="rect" id="node3" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,42,572,69"/>
-<area shape="rect" id="node4" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,42,83,69"/>
-<area shape="rect" id="node5" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,42,341,69"/>
-<area shape="rect" id="node6" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,93,338,119"/>
+<area shape="rect" id="node1" title="Flushes the specified results database file to disk." alt="" coords="1263,111,1435,137"/>
+<area shape="rect" id="node2" href="$namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f" title="Calculates element stresses and stores on results database file." alt="" coords="1031,45,1193,86"/>
+<area shape="rect" id="node10" href="$namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="620,99,787,141"/>
+<area shape="rect" id="node11" href="$namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="1009,161,1215,188"/>
+<area shape="rect" id="node3" href="$stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,5,961,32"/>
+<area shape="rect" id="node9" href="$stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="837,56,959,83"/>
+<area shape="rect" id="node4" href="$namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,34,787,75"/>
+<area shape="rect" id="node5" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,107,572,133"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,107,83,133"/>
+<area shape="rect" id="node7" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,107,341,133"/>
+<area shape="rect" id="node8" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,157,338,184"/>
 </map>

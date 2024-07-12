@@ -1,0 +1,20 @@
+<map id="recoverandsave" name="recoverandsave">
+<area shape="rect" id="node1" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,177,132,203"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#ab3ebf224d60ad13cdca82aa4316ba080" title="Extracts the internal displacements for a group of nodes." alt="" coords="189,5,377,47"/>
+<area shape="rect" id="node6" href="$namespacedisplacementmodule.html#ada8fbbdbf8da1ecc5abc2dc43fd2b08f" title="Extracts the internal displacements for a superelement." alt="" coords="199,201,367,243"/>
+<area shape="rect" id="node8" href="$namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f" title="Calculates element stresses and stores on results database file." alt="" coords="202,281,365,323"/>
+<area shape="rect" id="node16" href="$namespacedisplacementmodule.html#a8c7ec23640d4ec69a95091405c034881" title="Calculates the total displacements at the nodal points." alt="" coords="193,71,374,112"/>
+<area shape="rect" id="node17" href="$namespacedisplacementmodule.html#a66abc2b3e4cd678fab3c30b5f1a67a52" title="Extracts local and total displacements for external group nodes." alt="" coords="204,136,363,177"/>
+<area shape="rect" id="node18" href="$namespacerdbmodule.html#a6f21d1d878c1b0ac3880c21c23b214ff" title="Writes current time step to the specified results database file." alt="" coords="180,347,387,374"/>
+<area shape="rect" id="node3" href="$namespacedisplacementmodule.html#a4fa44ab4319f390202f3439874f8ba7a" title="Calculates the total displacement at a nodal point." alt="" coords="435,56,645,97"/>
+<area shape="rect" id="node4" href="$namespacerotationmodule.html#a030dc71ea83690ae04ad3b1d00304023" title="Computes the incremental rotation vector rotating tensor T1 to T2." alt="" coords="693,34,875,61"/>
+<area shape="rect" id="node5" href="$namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="707,85,861,127"/>
+<area shape="rect" id="node7" href="$namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="461,121,619,163"/>
+<area shape="rect" id="node9" href="$stressRoutines_8f90.html#afc7bf06bbbcff94a025943dfd224c442" title="Adds element nodal forces into the global vector." alt="" coords="511,187,569,214"/>
+<area shape="rect" id="node10" href="$namespaceelstressmodule.html#abe20ae8eb4988818b5d797cf5d38a98a" title="Computes FE stresses and strains for the specified element." alt="" coords="449,238,631,265"/>
+<area shape="rect" id="node11" href="$namespaceelstressmodule.html#a572c956d5809e428868a0d0dda62495d" title="Extracts element displacements from superelement displacements." alt="" coords="444,289,636,315"/>
+<area shape="rect" id="node12" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="455,340,625,381"/>
+<area shape="rect" id="node13" href="$namespacerdbmodule.html#a0722f82f6fa84c9a72b41d6b5c05fa9b" title="Flushes the specified results database file to disk." alt="" coords="454,406,626,433"/>
+<area shape="rect" id="node14" href="$stressRoutines_8f90.html#a447c837204f8c0c2e4d7645653e8a68a" title="Returns the number of result components for an element type." alt="" coords="457,457,623,483"/>
+<area shape="rect" id="node15" href="$stressRoutines_8f90.html#a35f1717686b74c1a46638b08b0900918" title="Prints nodal forces to unit LPU, omitting nodes with zero forces." alt="" coords="476,507,604,534"/>
+</map>

@@ -1,7 +1,18 @@
 <map id="stressrecoverymodule::initstrainrosettes" name="stressrecoverymodule::initstrainrosettes">
-<area shape="rect" id="node1" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="5,64,172,105"/>
-<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="220,64,383,105"/>
-<area shape="rect" id="node3" href="$namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="465,5,624,47"/>
-<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="431,71,659,98"/>
-<area shape="rect" id="node5" href="$namespacesdiskmatrixmodule.html#a49b2465bca0546e2724fe1075e280857" title=" " alt="" coords="467,123,623,164"/>
+<area shape="rect" id="node1" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="5,181,172,223"/>
+<area shape="rect" id="node2" href="$namespacestrainrosettemodule.html#a470904596a8f8388828dce3f85711c03" title="Checks the nodal ordering of a strain rosette element." alt="" coords="224,51,379,92"/>
+<area shape="rect" id="node3" href="$namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="220,116,383,157"/>
+<area shape="rect" id="node7" href="$namespacestrainrosettemodule.html#a51992ccd7638c87950dfc1d85ac40202" title="Initializes the strain gage objects." alt="" coords="224,181,379,223"/>
+<area shape="rect" id="node8" href="$namespacestrainrosettemodule.html#ab70e60c62247863904d549251c5de67b" title="Computes strain&#45;displacement matrices for all strain rosettes." alt="" coords="224,247,379,288"/>
+<area shape="rect" id="node16" href="$namespacestrainrosettemodule.html#a32947f203842b5d06babefeb36304bba" title="Prints the ASCII file heading for a given strain rosette object." alt="" coords="222,312,381,353"/>
+<area shape="rect" id="node4" href="$namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="465,5,624,47"/>
+<area shape="rect" id="node5" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="431,71,659,98"/>
+<area shape="rect" id="node6" href="$namespacesdiskmatrixmodule.html#a49b2465bca0546e2724fe1075e280857" title=" " alt="" coords="467,123,623,164"/>
+<area shape="rect" id="node9" href="$namespacestrainrosettemodule.html#af11bfef6bbf9a03f6258b92196bfe743" title="Computes nodal coordinates and transformation matrix for an element." alt="" coords="462,188,627,229"/>
+<area shape="rect" id="node13" href="$strainRosetteModule_8f90.html#a5e7b06bb639155c6395f74887d605427" title="Computes strain contributions from given DOF range." alt="" coords="502,254,587,281"/>
+<area shape="rect" id="node14" href="$namespacestrainandstressutilitiesmodule.html#aed015d12f1068f6ad399f5906ddd3c43" title="Computes strain&#45;displacement matrix for constant strain triangle." alt="" coords="435,305,655,347"/>
+<area shape="rect" id="node15" href="$namespacestrainandstressutilitiesmodule.html#a47dd3d96030abbcca71bedace155e7a5" title="Computes strain&#45;displacement matrix for the 4&#45;noded quadrilateral." alt="" coords="435,371,655,412"/>
+<area shape="rect" id="node10" href="$FNVwaveForceModule_8f90.html#a9a0048950edd691805aa86cc576d4b18" title=" " alt="" coords="761,137,873,163"/>
+<area shape="rect" id="node11" href="$namespacestrainandstressutilitiesmodule.html#a6f9ad53898e308539b89156e4944feec" title="Computes the local element axes for a thin shell element." alt="" coords="707,188,927,229"/>
+<area shape="rect" id="node12" href="$namespacerotationmodule.html#a1074f5915042f7e80b4dd66a4e4e62b2" title="Makes a rotation tensor orthonormal through use of quaternions." alt="" coords="713,254,920,281"/>
 </map>

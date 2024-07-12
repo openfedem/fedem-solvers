@@ -1,0 +1,9 @@
+<map id="calcgagestrains" name="calcgagestrains">
+<area shape="rect" id="node1" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="5,143,129,170"/>
+<area shape="rect" id="node2" href="$namespacestrainrosettemodule.html#a187b296b8d8a49fdae113cfc5215e7ac" title="Evaluates the given strain rosette based on the given displacements." alt="" coords="202,71,357,112"/>
+<area shape="rect" id="node6" href="$namespacestrainrosettemodule.html#a471900236df378afe12e5492f42ed74f" title="Evaluates the initial strain of a strain rosette." alt="" coords="177,136,381,177"/>
+<area shape="rect" id="node7" href="$namespacestrainrosettemodule.html#ac76981b2b0098f212eb0028dd27a5041" title="Prints the current state of a strain rosette to ASCII file." alt="" coords="202,201,357,243"/>
+<area shape="rect" id="node3" href="$namespacestrainrosettemodule.html#ad6b1e55ed25978b90b0f602075dafd88" title="Evaluates the given strain gages based on given strain/stress state." alt="" coords="458,5,621,47"/>
+<area shape="rect" id="node4" href="$namespacestrainandstressutilitiesmodule.html#a81619885417c201f2cfc9671ad96f27b" title="Calculation of principal strains in 2D." alt="" coords="429,71,649,112"/>
+<area shape="rect" id="node5" href="$namespacestrainandstressutilitiesmodule.html#a018140447581cc2b8e357382aaa0b36a" title="Calculation of principal stresses in 2D." alt="" coords="429,136,649,177"/>
+</map>

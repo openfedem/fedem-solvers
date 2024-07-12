@@ -1,0 +1,4 @@
+<map id="strainandstressutilitiesmodule::getshellstresstrans" name="strainandstressutilitiesmodule::getshellstresstrans">
+<area shape="rect" id="node1" title="Computes the stress transformation matrix for a thin shell element." alt="" coords="288,5,508,47"/>
+<area shape="rect" id="node2" href="$namespaceelstressmodule.html#a612e9b06ca20ffc8b917318766a8f516" title="Utility to retrieve element data needed for stress recovery." alt="" coords="5,13,240,39"/>
+</map>

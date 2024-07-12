@@ -1,10 +1,16 @@
 <map id="slv_straindisp" name="slv_straindisp">
-<area shape="rect" id="node1" title="Calculates the strains at strain gages for a given displacement field." alt="" coords="5,93,117,120"/>
-<area shape="rect" id="node2" href="$namespacesolvermodule.html#a894f3f3cc83efce0f23873aab0cf920f" title="Computes strain tensor at gage positions for input displacements." alt="" coords="165,93,417,120"/>
-<area shape="rect" id="node3" href="$solverModule_8f90.html#a64222ceb18e44202c9e2628909d35ffc" title="Updates the configuration by applying given displacement vector." alt="" coords="482,5,615,32"/>
-<area shape="rect" id="node4" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="465,57,632,98"/>
-<area shape="rect" id="node7" href="$solverModule_8f90.html#a1efd15323b7a98a174543d7b7417f84e" title="Extracts gage strains from the strain rosette objects." alt="" coords="489,123,608,149"/>
-<area shape="rect" id="node8" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="467,174,631,215"/>
-<area shape="rect" id="node5" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="703,35,827,61"/>
-<area shape="rect" id="node6" href="$namespacescratcharraymodule.html#abbf8c49accdc068e3b12b85662b1598d" title="Returns a pointer to a real(sp) scratch array." alt="" coords="680,86,851,127"/>
+<area shape="rect" id="node1" title="Calculates the strains at strain gages for a given displacement field." alt="" coords="5,202,117,229"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#a894f3f3cc83efce0f23873aab0cf920f" title="Computes strain tensor at gage positions for input displacements." alt="" coords="165,202,417,229"/>
+<area shape="rect" id="node3" href="$solverModule_8f90.html#a64222ceb18e44202c9e2628909d35ffc" title="Updates the configuration by applying given displacement vector." alt="" coords="482,114,615,141"/>
+<area shape="rect" id="node4" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="465,165,632,207"/>
+<area shape="rect" id="node13" href="$solverModule_8f90.html#a1efd15323b7a98a174543d7b7417f84e" title="Extracts gage strains from the strain rosette objects." alt="" coords="489,231,608,258"/>
+<area shape="rect" id="node14" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="467,283,631,324"/>
+<area shape="rect" id="node5" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="703,143,827,170"/>
+<area shape="rect" id="node12" href="$namespacescratcharraymodule.html#abbf8c49accdc068e3b12b85662b1598d" title="Returns a pointer to a real(sp) scratch array." alt="" coords="680,195,851,236"/>
+<area shape="rect" id="node6" href="$namespacestrainrosettemodule.html#a187b296b8d8a49fdae113cfc5215e7ac" title="Evaluates the given strain rosette based on the given displacements." alt="" coords="923,71,1078,112"/>
+<area shape="rect" id="node10" href="$namespacestrainrosettemodule.html#a471900236df378afe12e5492f42ed74f" title="Evaluates the initial strain of a strain rosette." alt="" coords="899,136,1103,177"/>
+<area shape="rect" id="node11" href="$namespacestrainrosettemodule.html#ac76981b2b0098f212eb0028dd27a5041" title="Prints the current state of a strain rosette to ASCII file." alt="" coords="923,201,1078,243"/>
+<area shape="rect" id="node7" href="$namespacestrainrosettemodule.html#ad6b1e55ed25978b90b0f602075dafd88" title="Evaluates the given strain gages based on given strain/stress state." alt="" coords="1179,5,1342,47"/>
+<area shape="rect" id="node8" href="$namespacestrainandstressutilitiesmodule.html#a81619885417c201f2cfc9671ad96f27b" title="Calculation of principal strains in 2D." alt="" coords="1151,71,1371,112"/>
+<area shape="rect" id="node9" href="$namespacestrainandstressutilitiesmodule.html#a018140447581cc2b8e357382aaa0b36a" title="Calculation of principal stresses in 2D." alt="" coords="1151,136,1371,177"/>
 </map>

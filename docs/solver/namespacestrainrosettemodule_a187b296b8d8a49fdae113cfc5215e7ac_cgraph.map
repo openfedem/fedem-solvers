@@ -1,0 +1,6 @@
+<map id="strainrosettemodule::calcrosettestrains" name="strainrosettemodule::calcrosettestrains">
+<area shape="rect" id="node1" title="Evaluates the given strain rosette based on the given displacements." alt="" coords="5,71,160,112"/>
+<area shape="rect" id="node2" href="$namespacestrainrosettemodule.html#ad6b1e55ed25978b90b0f602075dafd88" title="Evaluates the given strain gages based on given strain/stress state." alt="" coords="237,5,399,47"/>
+<area shape="rect" id="node3" href="$namespacestrainandstressutilitiesmodule.html#a81619885417c201f2cfc9671ad96f27b" title="Calculation of principal strains in 2D." alt="" coords="208,71,428,112"/>
+<area shape="rect" id="node4" href="$namespacestrainandstressutilitiesmodule.html#a018140447581cc2b8e357382aaa0b36a" title="Calculation of principal stresses in 2D." alt="" coords="208,136,428,177"/>
+</map>

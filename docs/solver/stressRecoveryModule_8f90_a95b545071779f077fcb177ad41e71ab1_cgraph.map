@@ -1,0 +1,13 @@
+<map id="recovernotsave" name="recovernotsave">
+<area shape="rect" id="node1" title="Recovers internal displacements and stresses without saving." alt="" coords="5,170,128,197"/>
+<area shape="rect" id="node2" href="$namespacedisplacementmodule.html#ada8fbbdbf8da1ecc5abc2dc43fd2b08f" title="Extracts the internal displacements for a superelement." alt="" coords="176,68,344,109"/>
+<area shape="rect" id="node4" href="$namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f" title="Calculates element stresses and stores on results database file." alt="" coords="179,195,341,236"/>
+<area shape="rect" id="node3" href="$namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="409,5,567,47"/>
+<area shape="rect" id="node5" href="$stressRoutines_8f90.html#afc7bf06bbbcff94a025943dfd224c442" title="Adds element nodal forces into the global vector." alt="" coords="459,71,517,98"/>
+<area shape="rect" id="node6" href="$namespaceelstressmodule.html#abe20ae8eb4988818b5d797cf5d38a98a" title="Computes FE stresses and strains for the specified element." alt="" coords="397,122,579,149"/>
+<area shape="rect" id="node7" href="$namespaceelstressmodule.html#a572c956d5809e428868a0d0dda62495d" title="Extracts element displacements from superelement displacements." alt="" coords="392,173,584,199"/>
+<area shape="rect" id="node8" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="403,224,573,265"/>
+<area shape="rect" id="node9" href="$namespacerdbmodule.html#a0722f82f6fa84c9a72b41d6b5c05fa9b" title="Flushes the specified results database file to disk." alt="" coords="402,290,574,317"/>
+<area shape="rect" id="node10" href="$stressRoutines_8f90.html#a447c837204f8c0c2e4d7645653e8a68a" title="Returns the number of result components for an element type." alt="" coords="405,341,571,367"/>
+<area shape="rect" id="node11" href="$stressRoutines_8f90.html#a35f1717686b74c1a46638b08b0900918" title="Prints nodal forces to unit LPU, omitting nodes with zero forces." alt="" coords="424,391,552,418"/>
+</map>

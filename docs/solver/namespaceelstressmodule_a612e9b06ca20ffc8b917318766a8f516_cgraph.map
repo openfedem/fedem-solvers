@@ -1,0 +1,10 @@
+<map id="elstressmodule::getelementdata" name="elstressmodule::getelementdata">
+<area shape="rect" id="node1" title="Utility to retrieve element data needed for stress recovery." alt="" coords="5,180,240,207"/>
+<area shape="rect" id="node2" href="$beam_8f.html#abb703887763d3b7239ec202fcc56556b" title="Generates the stiffness matrix for a 12&#45;dof beam element." alt="" coords="361,5,435,32"/>
+<area shape="rect" id="node3" href="$beamaux_8f.html#a3d57ce48f612720bc56038d3e4e574a7" title="Computes a local&#45;to&#45;global transformation matrix." alt="" coords="364,56,432,83"/>
+<area shape="rect" id="node4" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="313,107,483,149"/>
+<area shape="rect" id="node5" href="$namespacestrainandstressutilitiesmodule.html#a6f9ad53898e308539b89156e4944feec" title="Computes the local element axes for a thin shell element." alt="" coords="288,173,508,214"/>
+<area shape="rect" id="node6" href="$namespacestrainandstressutilitiesmodule.html#a5fd1f35d038add21422e1c484f738d22" title="Computes the stress transformation matrix for a thin shell element." alt="" coords="288,238,508,279"/>
+<area shape="rect" id="node7" href="$namespacemanipmatrixmodule.html#a28a80e756e8d6bb562a3212f2d25b225" title="Returns the inverse of the 3×3 matrix a." alt="" coords="317,303,479,345"/>
+<area shape="rect" id="node8" href="$namespacestrainandstressutilitiesmodule.html#a47dd3d96030abbcca71bedace155e7a5" title="Computes strain&#45;displacement matrix for the 4&#45;noded quadrilateral." alt="" coords="288,369,508,410"/>
+</map>

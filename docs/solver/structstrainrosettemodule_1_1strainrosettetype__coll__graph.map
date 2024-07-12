@@ -1,0 +1,4 @@
+<map id="strainrosettemodule::strainrosettetype" name="strainrosettemodule::strainrosettetype">
+<area shape="rect" id="node1" title="Data type representing a strain rosette." alt="" coords="5,109,160,151"/>
+<area shape="rect" id="node2" href="$structstrainrosettemodule_1_1straingagetype.html" title="Data type representing a single strain gage." alt="" coords="5,5,160,47"/>
+</map>

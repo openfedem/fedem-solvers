@@ -1,0 +1,19 @@
+<map id="strainrosettemodule::evaluatestraingages" name="strainrosettemodule::evaluatestraingages">
+<area shape="rect" id="node1" title="Evaluates the given strain gages based on given strain/stress state." alt="" coords="1279,183,1441,225"/>
+<area shape="rect" id="node2" href="$namespacestrainrosettemodule.html#a187b296b8d8a49fdae113cfc5215e7ac" title="Evaluates the given strain rosette based on the given displacements." alt="" coords="1076,150,1231,191"/>
+<area shape="rect" id="node17" href="$namespacestrainrosettemodule.html#a0ea40ae8b40d99039e2d6d1526907e5b" title="Prints the initial state of a strain rosette to ASCII file." alt="" coords="1076,215,1231,257"/>
+<area shape="rect" id="node3" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="904,157,1028,184"/>
+<area shape="rect" id="node4" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="689,150,856,191"/>
+<area shape="rect" id="node5" href="$namespacesolvermodule.html#a894f3f3cc83efce0f23873aab0cf920f" title="Computes strain tensor at gage positions for input displacements." alt="" coords="389,56,641,83"/>
+<area shape="rect" id="node7" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="428,157,603,184"/>
+<area shape="rect" id="node13" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="424,335,607,361"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#ade0803ca952d384c462d887e06564c60" title="Calculates the strains at strain gages for a given displacement field." alt="" coords="180,5,292,32"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,56,275,83"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,107,275,133"/>
+<area shape="rect" id="node10" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,157,275,184"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,208,274,235"/>
+<area shape="rect" id="node12" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,259,275,285"/>
+<area shape="rect" id="node14" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,360,83,387"/>
+<area shape="rect" id="node15" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,360,341,387"/>
+<area shape="rect" id="node16" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,411,338,437"/>
+</map>

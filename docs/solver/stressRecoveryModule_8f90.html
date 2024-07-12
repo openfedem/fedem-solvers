@@ -94,7 +94,7 @@ Modules</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a8cbbde28deb6c01a7017716edf5d200a"><td class="memItemLeft" align="right" valign="top">type(strainrosettetype) function, pointer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#a8cbbde28deb6c01a7017716edf5d200a">stressrecoverymodule::getstrainrosette</a> (id)</td></tr>
+<tr class="memitem:a8cbbde28deb6c01a7017716edf5d200a"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structstrainrosettemodule_1_1strainrosettetype.html">strainrosettetype</a>) function, pointer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#a8cbbde28deb6c01a7017716edf5d200a">stressrecoverymodule::getstrainrosette</a> (id)</td></tr>
 <tr class="memdesc:a8cbbde28deb6c01a7017716edf5d200a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to (first) strain rosette object with specified ID.  <a href="namespacestressrecoverymodule.html#a8cbbde28deb6c01a7017716edf5d200a">More...</a><br /></td></tr>
 <tr class="separator:a8cbbde28deb6c01a7017716edf5d200a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad571529d2af499a2938a5c5ef7382981"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#ad571529d2af499a2938a5c5ef7382981">stressrecoverymodule::getdeformation</a> (id, data, ndat, idat)</td></tr>
@@ -146,7 +146,7 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a7bc247bcec48daf39891f8c9810e1de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates strain gage results for the superelements.  <a href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2">More...</a><br /></td></tr>
 <tr class="separator:a7bc247bcec48daf39891f8c9810e1de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af487591f1d0bdfe737fbde850cbe0b3b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b">calcgagestrains</a> (rosette, finit, lpu, ierr)</td></tr>
-<tr class="memdesc:af487591f1d0bdfe737fbde850cbe0b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience wrapper for some strainrosettemodule subroutines.  <a href="stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b">More...</a><br /></td></tr>
+<tr class="memdesc:af487591f1d0bdfe737fbde850cbe0b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience wrapper for some <a class="el" href="namespacestrainrosettemodule.html" title="Module with data types representing strain rosette objects.">strainrosettemodule</a> subroutines.  <a href="stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b">More...</a><br /></td></tr>
 <tr class="separator:af487591f1d0bdfe737fbde850cbe0b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b35e2c5a3e912f3b02ecdc70fd8b065"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065">stressrecoverymodule::savegageresults</a> (sups, iStep, time, ierr)</td></tr>
 <tr class="memdesc:a5b35e2c5a3e912f3b02ecdc70fd8b065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save strain gage results to the results database file.  <a href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065">More...</a><br /></td></tr>
@@ -178,7 +178,7 @@ Variables</h2></td></tr>
 <tr class="memitem:a57b990390480f6e9fca013d273ce16be"><td class="memItemLeft" align="right" valign="top">type(recparttype), dimension(:), allocatable, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#a57b990390480f6e9fca013d273ce16be">stressrecoverymodule::part</a></td></tr>
 <tr class="memdesc:a57b990390480f6e9fca013d273ce16be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Superelement recovery data container.  <a href="namespacestressrecoverymodule.html#a57b990390480f6e9fca013d273ce16be">More...</a><br /></td></tr>
 <tr class="separator:a57b990390480f6e9fca013d273ce16be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28b898b32a02aaed03220a9183780f15"><td class="memItemLeft" align="right" valign="top">type(strainelementtype), dimension(:), pointer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#a28b898b32a02aaed03220a9183780f15">stressrecoverymodule::strainrosettes</a> =&gt; null()</td></tr>
+<tr class="memitem:a28b898b32a02aaed03220a9183780f15"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structstrainrosettemodule_1_1strainelementtype.html">strainelementtype</a>), dimension(:), pointer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressrecoverymodule.html#a28b898b32a02aaed03220a9183780f15">stressrecoverymodule::strainrosettes</a> =&gt; null()</td></tr>
 <tr class="memdesc:a28b898b32a02aaed03220a9183780f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strain rosette container.  <a href="namespacestressrecoverymodule.html#a28b898b32a02aaed03220a9183780f15">More...</a><br /></td></tr>
 <tr class="separator:a28b898b32a02aaed03220a9183780f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -194,7 +194,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">subroutine gagerecovery::calcgagestrains </td>
           <td>(</td>
-          <td class="paramtype">type(strainrosettetype), intent(inout)&#160;</td>
+          <td class="paramtype">type(<a class="el" href="structstrainrosettemodule_1_1strainrosettetype.html">strainrosettetype</a>), intent(inout)&#160;</td>
           <td class="paramname"><em>rosette</em>, </td>
         </tr>
         <tr>
@@ -223,7 +223,42 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Convenience wrapper for some strainrosettemodule subroutines. </p>
+<p>Convenience wrapper for some <a class="el" href="namespacestrainrosettemodule.html" title="Module with data types representing strain rosette objects.">strainrosettemodule</a> subroutines. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="stressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_cgraph.png" border="0" usemap="#astressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_cgraph" alt=""/></div>
+<map name="astressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_cgraph" id="astressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_cgraph">
+<area shape="rect" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="5,143,129,170"/>
+<area shape="rect" href="namespacestrainrosettemodule.html#a187b296b8d8a49fdae113cfc5215e7ac" title="Evaluates the given strain rosette based on the given displacements." alt="" coords="202,71,357,112"/>
+<area shape="rect" href="namespacestrainrosettemodule.html#a471900236df378afe12e5492f42ed74f" title="Evaluates the initial strain of a strain rosette." alt="" coords="177,136,381,177"/>
+<area shape="rect" href="namespacestrainrosettemodule.html#ac76981b2b0098f212eb0028dd27a5041" title="Prints the current state of a strain rosette to ASCII file." alt="" coords="202,201,357,243"/>
+<area shape="rect" href="namespacestrainrosettemodule.html#ad6b1e55ed25978b90b0f602075dafd88" title="Evaluates the given strain gages based on given strain/stress state." alt="" coords="458,5,621,47"/>
+<area shape="rect" href="namespacestrainandstressutilitiesmodule.html#a81619885417c201f2cfc9671ad96f27b" title="Calculation of principal strains in 2D." alt="" coords="429,71,649,112"/>
+<area shape="rect" href="namespacestrainandstressutilitiesmodule.html#a018140447581cc2b8e357382aaa0b36a" title="Calculation of principal stresses in 2D." alt="" coords="429,136,649,177"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="stressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_icgraph.png" border="0" usemap="#astressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_icgraph" alt=""/></div>
+<map name="astressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_icgraph" id="astressRecoveryModule_8f90_af487591f1d0bdfe737fbde850cbe0b3b_icgraph">
+<area shape="rect" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="904,157,1028,184"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="689,150,856,191"/>
+<area shape="rect" href="namespacesolvermodule.html#a894f3f3cc83efce0f23873aab0cf920f" title="Computes strain tensor at gage positions for input displacements." alt="" coords="389,56,641,83"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="428,157,603,184"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="424,335,607,361"/>
+<area shape="rect" href="solverDriver_8f90.html#ade0803ca952d384c462d887e06564c60" title="Calculates the strains at strain gages for a given displacement field." alt="" coords="180,5,292,32"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,56,275,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,107,275,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,157,275,184"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,208,274,235"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,259,275,285"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,360,83,387"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,360,341,387"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,411,338,437"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -338,6 +373,44 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="stressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_cgraph.png" border="0" usemap="#astressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_cgraph" alt=""/></div>
+<map name="astressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_cgraph" id="astressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_cgraph">
+<area shape="rect" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="5,177,132,203"/>
+<area shape="rect" href="namespacedisplacementmodule.html#ab3ebf224d60ad13cdca82aa4316ba080" title="Extracts the internal displacements for a group of nodes." alt="" coords="189,5,377,47"/>
+<area shape="rect" href="namespacedisplacementmodule.html#ada8fbbdbf8da1ecc5abc2dc43fd2b08f" title="Extracts the internal displacements for a superelement." alt="" coords="199,201,367,243"/>
+<area shape="rect" href="namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f" title="Calculates element stresses and stores on results database file." alt="" coords="202,281,365,323"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a8c7ec23640d4ec69a95091405c034881" title="Calculates the total displacements at the nodal points." alt="" coords="193,71,374,112"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a66abc2b3e4cd678fab3c30b5f1a67a52" title="Extracts local and total displacements for external group nodes." alt="" coords="204,136,363,177"/>
+<area shape="rect" href="namespacerdbmodule.html#a6f21d1d878c1b0ac3880c21c23b214ff" title="Writes current time step to the specified results database file." alt="" coords="180,347,387,374"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a4fa44ab4319f390202f3439874f8ba7a" title="Calculates the total displacement at a nodal point." alt="" coords="435,56,645,97"/>
+<area shape="rect" href="namespacerotationmodule.html#a030dc71ea83690ae04ad3b1d00304023" title="Computes the incremental rotation vector rotating tensor T1 to T2." alt="" coords="693,34,875,61"/>
+<area shape="rect" href="namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="707,85,861,127"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="461,121,619,163"/>
+<area shape="rect" href="stressRoutines_8f90.html#afc7bf06bbbcff94a025943dfd224c442" title="Adds element nodal forces into the global vector." alt="" coords="511,187,569,214"/>
+<area shape="rect" href="namespaceelstressmodule.html#abe20ae8eb4988818b5d797cf5d38a98a" title="Computes FE stresses and strains for the specified element." alt="" coords="449,238,631,265"/>
+<area shape="rect" href="namespaceelstressmodule.html#a572c956d5809e428868a0d0dda62495d" title="Extracts element displacements from superelement displacements." alt="" coords="444,289,636,315"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="455,340,625,381"/>
+<area shape="rect" href="namespacerdbmodule.html#a0722f82f6fa84c9a72b41d6b5c05fa9b" title="Flushes the specified results database file to disk." alt="" coords="454,406,626,433"/>
+<area shape="rect" href="stressRoutines_8f90.html#a447c837204f8c0c2e4d7645653e8a68a" title="Returns the number of result components for an element type." alt="" coords="457,457,623,483"/>
+<area shape="rect" href="stressRoutines_8f90.html#a35f1717686b74c1a46638b08b0900918" title="Prints nodal forces to unit LPU, omitting nodes with zero forces." alt="" coords="476,507,604,534"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="stressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_icgraph.png" border="0" usemap="#astressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_icgraph" alt=""/></div>
+<map name="astressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_icgraph" id="astressRecoveryModule_8f90_aff750b6cb425374b9513b7b7be3201af_icgraph">
+<area shape="rect" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,26,961,53"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,19,787,60"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,26,572,53"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,26,83,53"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,26,341,53"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,77,338,103"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -382,6 +455,37 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="stressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_cgraph.png" border="0" usemap="#astressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_cgraph" alt=""/></div>
+<map name="astressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_cgraph" id="astressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_cgraph">
+<area shape="rect" title="Recovers internal displacements and stresses without saving." alt="" coords="5,170,128,197"/>
+<area shape="rect" href="namespacedisplacementmodule.html#ada8fbbdbf8da1ecc5abc2dc43fd2b08f" title="Extracts the internal displacements for a superelement." alt="" coords="176,68,344,109"/>
+<area shape="rect" href="namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f" title="Calculates element stresses and stores on results database file." alt="" coords="179,195,341,236"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a576bbe7be4f205ae5d92fcd5d576651f" title="Expands and rearranges a displacement vector." alt="" coords="409,5,567,47"/>
+<area shape="rect" href="stressRoutines_8f90.html#afc7bf06bbbcff94a025943dfd224c442" title="Adds element nodal forces into the global vector." alt="" coords="459,71,517,98"/>
+<area shape="rect" href="namespaceelstressmodule.html#abe20ae8eb4988818b5d797cf5d38a98a" title="Computes FE stresses and strains for the specified element." alt="" coords="397,122,579,149"/>
+<area shape="rect" href="namespaceelstressmodule.html#a572c956d5809e428868a0d0dda62495d" title="Extracts element displacements from superelement displacements." alt="" coords="392,173,584,199"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="403,224,573,265"/>
+<area shape="rect" href="namespacerdbmodule.html#a0722f82f6fa84c9a72b41d6b5c05fa9b" title="Flushes the specified results database file to disk." alt="" coords="402,290,574,317"/>
+<area shape="rect" href="stressRoutines_8f90.html#a447c837204f8c0c2e4d7645653e8a68a" title="Returns the number of result components for an element type." alt="" coords="405,341,571,367"/>
+<area shape="rect" href="stressRoutines_8f90.html#a35f1717686b74c1a46638b08b0900918" title="Prints nodal forces to unit LPU, omitting nodes with zero forces." alt="" coords="424,391,552,418"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="stressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_icgraph.png" border="0" usemap="#astressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_icgraph" alt=""/></div>
+<map name="astressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_icgraph" id="astressRecoveryModule_8f90_a95b545071779f077fcb177ad41e71ab1_icgraph">
+<area shape="rect" title="Recovers internal displacements and stresses without saving." alt="" coords="835,26,957,53"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,19,787,60"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,26,572,53"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,26,83,53"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,26,341,53"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,77,338,103"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -432,7 +536,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 11 2024 12:17:36 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Jul 12 2024 12:24:54 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

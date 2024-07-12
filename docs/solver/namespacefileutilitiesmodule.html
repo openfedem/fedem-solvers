@@ -63,6 +63,8 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a>  </div>
   <div class="headertitle">
 <div class="title">fileutilitiesmodule Module Reference</div>  </div>
 </div><!--header-->
@@ -70,15 +72,70 @@ $(function() {
 
 <p>Module with subroutines for file handling.  
 <a href="namespacefileutilitiesmodule.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:afd6286450c66d1772911d8ff183b8587"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefileutilitiesmodule.html#afd6286450c66d1772911d8ff183b8587">getfilename</a> (file, name, suffix)</td></tr>
+<tr class="memdesc:afd6286450c66d1772911d8ff183b8587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a file name from a command-line option.  <a href="namespacefileutilitiesmodule.html#afd6286450c66d1772911d8ff183b8587">More...</a><br /></td></tr>
+<tr class="separator:afd6286450c66d1772911d8ff183b8587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Module with subroutines for file handling. </p>
 <p>This module contains various utility subroutines and functions for management of file unit numbers that mostly are used for debug output. You have to configure doxygen with the option ENABLED_SECTIONS = FULL_DOC to extract the detailed documentation of the symbols in this module.</p>
 <dl class="section author"><dt>Author</dt><dd>Bjorn Haugen </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Sep 2002 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="afd6286450c66d1772911d8ff183b8587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd6286450c66d1772911d8ff183b8587">&#9670;&nbsp;</a></span>getfilename()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine fileutilitiesmodule::getfilename </td>
+          <td>(</td>
+          <td class="paramtype">character(len=*), intent(in)&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">character(len=*), intent(out)&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
+          <td class="paramname"><em>suffix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extracts a file name from a command-line option. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>The command-line option to extract from </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>The value of the command-line option </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">suffix</td><td>File extension to use when using default file</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If needed the string value is converted to UNIX or Windows format. If the specified command-line option is not used, the default file name is <code>&lt;partname&gt;&lt;suffix&gt;</code> where <code>&lt;partname&gt;</code> is the name of the FE data file without the file extension, as provided with the <code>-linkfile</code> option.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20 Sep 2000 </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 11 2024 12:17:36 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Jul 12 2024 12:24:54 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

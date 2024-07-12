@@ -75,9 +75,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a8f17895e0dfc2506b5c1eb9a6fcd0d73"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinputreducermodule.html#a8f17895e0dfc2506b5c1eb9a6fcd0d73">getfilename</a> (file, name, suffix)</td></tr>
-<tr class="memdesc:a8f17895e0dfc2506b5c1eb9a6fcd0d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a file name from a command-line option.  <a href="namespaceinputreducermodule.html#a8f17895e0dfc2506b5c1eb9a6fcd0d73">More...</a><br /></td></tr>
-<tr class="separator:a8f17895e0dfc2506b5c1eb9a6fcd0d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2">readreducerdata</a> (sam, sysK, sysM, mass, rotMass, tenc, medof, mlc, noMass, diagMass, lumpedMass, demoEdition, ipsw, lpu, ierr, directSolve)</td></tr>
 <tr class="memdesc:a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Administers data input and preprocessing for fedem_reducer.  <a href="namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2">More...</a><br /></td></tr>
 <tr class="separator:a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,53 +222,6 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="27,107,90,133"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="a8f17895e0dfc2506b5c1eb9a6fcd0d73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f17895e0dfc2506b5c1eb9a6fcd0d73">&#9670;&nbsp;</a></span>getfilename()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine inputreducermodule::getfilename </td>
-          <td>(</td>
-          <td class="paramtype">character(len=*), intent(in)&#160;</td>
-          <td class="paramname"><em>file</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">character(len=*), intent(out)&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
-          <td class="paramname"><em>suffix</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets a file name from a command-line option. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>Command-line option used to input the file name </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>The file name </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">suffix</td><td>Default file extension</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>If the specified command-line option is not used, the default file name is (name)(suffix) where (name) is the name of the FE data input file without the file extension.</p>
-<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>20 Sep 2000 </dd></dl>
 
 </div>
 </div>
@@ -597,7 +547,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 11 2024 12:17:36 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Jul 12 2024 12:24:55 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

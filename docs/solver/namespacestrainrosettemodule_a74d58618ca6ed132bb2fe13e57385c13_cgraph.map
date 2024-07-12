@@ -1,0 +1,4 @@
+<map id="strainrosettemodule::calcrosettedisplacements" name="strainrosettemodule::calcrosettedisplacements">
+<area shape="rect" id="node1" title="Computes nodal displacements in a strain rosette." alt="" coords="5,5,203,47"/>
+<area shape="rect" id="node2" href="$namespacestrainandstressutilitiesmodule.html#a6f9ad53898e308539b89156e4944feec" title="Computes the local element axes for a thin shell element." alt="" coords="251,5,471,47"/>
+</map>

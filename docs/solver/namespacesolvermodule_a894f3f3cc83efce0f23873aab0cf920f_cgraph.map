@@ -1,9 +1,15 @@
 <map id="solvermodule::computegagestrains" name="solvermodule::computegagestrains">
-<area shape="rect" id="node1" title="Computes strain tensor at gage positions for input displacements." alt="" coords="5,93,257,120"/>
-<area shape="rect" id="node2" href="$solverModule_8f90.html#a64222ceb18e44202c9e2628909d35ffc" title="Updates the configuration by applying given displacement vector." alt="" coords="322,5,455,32"/>
-<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="305,57,472,98"/>
-<area shape="rect" id="node6" href="$solverModule_8f90.html#a1efd15323b7a98a174543d7b7417f84e" title="Extracts gage strains from the strain rosette objects." alt="" coords="329,123,448,149"/>
-<area shape="rect" id="node7" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="307,174,471,215"/>
-<area shape="rect" id="node4" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="543,35,667,61"/>
-<area shape="rect" id="node5" href="$namespacescratcharraymodule.html#abbf8c49accdc068e3b12b85662b1598d" title="Returns a pointer to a real(sp) scratch array." alt="" coords="520,86,691,127"/>
+<area shape="rect" id="node1" title="Computes strain tensor at gage positions for input displacements." alt="" coords="5,202,257,229"/>
+<area shape="rect" id="node2" href="$solverModule_8f90.html#a64222ceb18e44202c9e2628909d35ffc" title="Updates the configuration by applying given displacement vector." alt="" coords="322,114,455,141"/>
+<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="305,165,472,207"/>
+<area shape="rect" id="node12" href="$solverModule_8f90.html#a1efd15323b7a98a174543d7b7417f84e" title="Extracts gage strains from the strain rosette objects." alt="" coords="329,231,448,258"/>
+<area shape="rect" id="node13" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="307,283,471,324"/>
+<area shape="rect" id="node4" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="543,143,667,170"/>
+<area shape="rect" id="node11" href="$namespacescratcharraymodule.html#abbf8c49accdc068e3b12b85662b1598d" title="Returns a pointer to a real(sp) scratch array." alt="" coords="520,195,691,236"/>
+<area shape="rect" id="node5" href="$namespacestrainrosettemodule.html#a187b296b8d8a49fdae113cfc5215e7ac" title="Evaluates the given strain rosette based on the given displacements." alt="" coords="763,71,918,112"/>
+<area shape="rect" id="node9" href="$namespacestrainrosettemodule.html#a471900236df378afe12e5492f42ed74f" title="Evaluates the initial strain of a strain rosette." alt="" coords="739,136,943,177"/>
+<area shape="rect" id="node10" href="$namespacestrainrosettemodule.html#ac76981b2b0098f212eb0028dd27a5041" title="Prints the current state of a strain rosette to ASCII file." alt="" coords="763,201,918,243"/>
+<area shape="rect" id="node6" href="$namespacestrainrosettemodule.html#ad6b1e55ed25978b90b0f602075dafd88" title="Evaluates the given strain gages based on given strain/stress state." alt="" coords="1019,5,1182,47"/>
+<area shape="rect" id="node7" href="$namespacestrainandstressutilitiesmodule.html#a81619885417c201f2cfc9671ad96f27b" title="Calculation of principal strains in 2D." alt="" coords="991,71,1211,112"/>
+<area shape="rect" id="node8" href="$namespacestrainandstressutilitiesmodule.html#a018140447581cc2b8e357382aaa0b36a" title="Calculation of principal stresses in 2D." alt="" coords="991,136,1211,177"/>
 </map>

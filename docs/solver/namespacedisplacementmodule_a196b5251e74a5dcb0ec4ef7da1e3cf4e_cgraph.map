@@ -1,5 +1,5 @@
 <map id="displacementmodule::allocatebandematrices" name="displacementmodule::allocatebandematrices">
-<area shape="rect" id="node1" title="Allocates the B&#45; and E disk matrix objects." alt="" coords="5,27,184,69"/>
+<area shape="rect" id="node1" title="Allocates the B&#45; and E&#45;matrix file objects." alt="" coords="5,27,184,69"/>
 <area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="232,5,443,32"/>
 <area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title=" " alt="" coords="259,57,415,98"/>
 </map>

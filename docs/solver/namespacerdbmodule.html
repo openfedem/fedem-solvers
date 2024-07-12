@@ -284,12 +284,12 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">rdb</td><td>The result database file to close </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">retainIfEmpty</td><td>If present and <em></em>.true., don't delete empty file </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">haveData</td><td>If present, set to <em></em>.true. unless the file is empty</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">retainIfEmpty</td><td>If present and .true., don't delete empty file </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">haveData</td><td>If present, set to .true. unless the file is empty</td></tr>
   </table>
   </dd>
 </dl>
-<p>The file is deleted if it is empty when closed (i.e.,no binary data has been written to it) unless <em>retainIfEmpty</em> is .true.</p>
+<p>The file is deleted if it is empty when closed (i.e., no binary data has been written to it) unless <em>retainIfEmpty</em> is .true.</p>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>20 Nov 2000 </dd></dl>
 <div class="dynheader">
@@ -431,13 +431,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacerdbmodule_a0722f82f6fa84c9a72b41d6b5c05fa9b_icgraph.png" border="0" usemap="#anamespacerdbmodule_a0722f82f6fa84c9a72b41d6b5c05fa9b_icgraph" alt=""/></div>
 <map name="anamespacerdbmodule_a0722f82f6fa84c9a72b41d6b5c05fa9b_icgraph" id="anamespacerdbmodule_a0722f82f6fa84c9a72b41d6b5c05fa9b_icgraph">
-<area shape="rect" title="Flushes the specified results database file to disk." alt="" coords="873,42,1045,69"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="639,5,806,47"/>
-<area shape="rect" href="namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="620,71,825,98"/>
-<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,42,572,69"/>
-<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,42,83,69"/>
-<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,42,341,69"/>
-<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,93,338,119"/>
+<area shape="rect" title="Flushes the specified results database file to disk." alt="" coords="1263,111,1435,137"/>
+<area shape="rect" href="namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f" title="Calculates element stresses and stores on results database file." alt="" coords="1031,45,1193,86"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="620,99,787,141"/>
+<area shape="rect" href="namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="1009,161,1215,188"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,5,961,32"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="837,56,959,83"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="620,34,787,75"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,107,572,133"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,107,341,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,157,338,184"/>
 </map>
 </div>
 
@@ -757,7 +761,7 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir"></td><td class="paramname">rdb</td><td>The result database file to write to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">array</td><td>The array to write </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">writeAsDouble</td><td>If present and <em></em>.true., write as 64-bit reals, otherwise cast to 32-bit reals</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">writeAsDouble</td><td>If present and .true., write as 64-bit reals, otherwise cast to 32-bit reals</td></tr>
   </table>
   </dd>
 </dl>
@@ -809,7 +813,7 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">rdb</td><td>The result database file to write to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">array</td><td>The array to write </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">writeAsDouble</td><td>If present and <em></em>.true., write as 64-bit reals, otherwise cast to 32-bit reals </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">writeAsDouble</td><td>If present and .true., write as 64-bit reals, otherwise cast to 32-bit reals </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
@@ -863,7 +867,7 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir"></td><td class="paramname">rdb</td><td>The result database file to write to </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">var</td><td>The variable value to write </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">writeAsDouble</td><td>If present and <em></em>.true., write as 64-bit real, otherwise cast to 32-bit real</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">writeAsDouble</td><td>If present and .true., write as 64-bit real, otherwise cast to 32-bit real</td></tr>
   </table>
   </dd>
 </dl>
@@ -1202,7 +1206,7 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir">[in]</td><td class="paramname">iStep</td><td>Time step number </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>Current time </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">openTmp</td><td>If present and <em></em>.true., a temporary binary file is opened if the binary results database file is not opened yet</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">openTmp</td><td>If present and .true., a temporary binary file is opened if the binary results database file is not opened yet</td></tr>
   </table>
   </dd>
 </dl>
@@ -1213,32 +1217,33 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacerdbmodule_a6f21d1d878c1b0ac3880c21c23b214ff_icgraph.png" border="0" usemap="#anamespacerdbmodule_a6f21d1d878c1b0ac3880c21c23b214ff_icgraph" alt=""/></div>
 <map name="anamespacerdbmodule_a6f21d1d878c1b0ac3880c21c23b214ff_icgraph" id="anamespacerdbmodule_a6f21d1d878c1b0ac3880c21c23b214ff_icgraph">
-<area shape="rect" title="Writes current time step to the specified results database file." alt="" coords="1401,249,1608,276"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="1187,52,1313,79"/>
-<area shape="rect" href="namespacecontroltypemodule.html#a23fa66555119dbc779a93733c49420cb" title="Writes control system data to the results database." alt="" coords="1173,103,1327,145"/>
-<area shape="rect" href="namespacesavereducermodule.html#aa864dfebb60bbb91ccba3bad3e120e33" title="Writes nodal displacements to the results database file." alt="" coords="1171,271,1329,313"/>
-<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="897,319,1055,361"/>
-<area shape="rect" href="namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="853,385,1099,412"/>
-<area shape="rect" href="namespacesavemodule.html#a8d6caebb54a58318d38ebc0019f40250" title="Administers writing of primary response results to database file." alt="" coords="1147,169,1353,196"/>
-<area shape="rect" href="namespacesavemodule.html#ad712350ee862e5a2fb3ec295f3afd965" title="Administers writing of secondary response results to database file." alt="" coords="1147,220,1353,247"/>
-<area shape="rect" href="namespacesavemodule.html#a2ecb95a70119c22a8f423ea427e59a9e" title="Administers writing of frequency response results to database file." alt="" coords="1147,440,1353,467"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="894,175,1058,217"/>
+<area shape="rect" title="Writes current time step to the specified results database file." alt="" coords="1383,308,1589,335"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="1168,279,1295,305"/>
+<area shape="rect" href="namespacecontroltypemodule.html#a23fa66555119dbc779a93733c49420cb" title="Writes control system data to the results database." alt="" coords="1155,213,1308,254"/>
+<area shape="rect" href="namespacesavereducermodule.html#aa864dfebb60bbb91ccba3bad3e120e33" title="Writes nodal displacements to the results database file." alt="" coords="1152,330,1311,371"/>
+<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="917,381,1076,422"/>
+<area shape="rect" href="namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="620,431,865,457"/>
+<area shape="rect" href="namespacesavemodule.html#a8d6caebb54a58318d38ebc0019f40250" title="Administers writing of primary response results to database file." alt="" coords="1128,111,1335,137"/>
+<area shape="rect" href="namespacesavemodule.html#ad712350ee862e5a2fb3ec295f3afd965" title="Administers writing of secondary response results to database file." alt="" coords="1128,161,1335,188"/>
+<area shape="rect" href="namespacesavemodule.html#a2ecb95a70119c22a8f423ea427e59a9e" title="Administers writing of frequency response results to database file." alt="" coords="1128,501,1335,528"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="913,250,1080,291"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,376,572,403"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,379,83,405"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,429,341,456"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,328,338,355"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="915,170,1079,211"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="393,107,568,133"/>
-<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,202,805,243"/>
-<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,327,572,353"/>
-<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="622,137,803,178"/>
-<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="622,319,803,361"/>
-<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,5,275,32"/>
-<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,56,275,83"/>
-<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,107,275,133"/>
-<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,157,274,184"/>
-<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,208,275,235"/>
-<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,380,83,407"/>
-<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,329,341,356"/>
-<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,380,338,407"/>
-<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="897,254,1055,295"/>
-<area shape="rect" href="namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="898,437,1054,478"/>
-<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="403,427,559,469"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="650,246,835,287"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="652,129,833,170"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="652,311,833,353"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,208,275,235"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,5,275,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,56,275,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,107,274,133"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,157,275,184"/>
+<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="917,315,1076,357"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="919,498,1075,539"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="403,475,559,517"/>
 </map>
 </div>
 
@@ -1539,7 +1544,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 11 2024 12:17:36 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Jul 12 2024 12:24:55 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
