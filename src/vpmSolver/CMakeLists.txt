@@ -51,7 +51,7 @@ if ( USE_FFTPACK AND TARGET fftpack51 )
   set ( FFT_LIBRARY fftpack51 )
   string ( APPEND CMAKE_Fortran_FLAGS " -DFT_HAS_FFTPACK" )
 else ( USE_FFTPACK AND TARGET fftpack51 )
-  message ( STATUS "Configuring without frequency domain analysis support." )
+  message ( STATUS "Configuring without frequency domain analysis support" )
 endif( USE_FFTPACK AND TARGET fftpack51 )
 
 if ( WIN )
@@ -283,3 +283,20 @@ endif ( BUILD_SOLVER_AS_DLL )
 install ( TARGETS ${TARGET_LIST}
           RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
           LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" )
+
+if ( AeroDyn_DLL )
+  install ( FILES ${AeroDyn_DLL}
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" )
+elseif ( AeroDyn_LIBRARY )
+  install ( FILES ${AeroDyn_LIBRARY}
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" )
+endif ( AeroDyn_DLL )
+if ( TURBSIM )
+  install ( PROGRAMS ${TURBSIM}
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" )
+  get_filename_component ( TURBSIM_DIR "${TURBSIM}" PATH )
+  get_filename_component ( TURBSIM_DIR "${TURBSIM_DIR}" PATH )
+  file ( GLOB TEMPLATES ${TURBSIM_DIR}/Templates/*.inp )
+  install ( FILES ${TEMPLATES}
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/Templates" )
+endif ( TURBSIM )
