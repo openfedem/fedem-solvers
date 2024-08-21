@@ -9,7 +9,10 @@
 set ( APPLICATION_SOURCE_FILE_LIST stress modes gage fpp )
 set ( LIB_ID vpmStress )
 set ( DLL_ID fedem_recovery_core )
-set ( LIB_ID_LIST vpmStressTests )
+set ( LIB_ID_LIST )
+if ( BUILD_TESTS )
+  set ( LIB_ID_LIST vpmStressTests )
+endif ( BUILD_TESTS )
 set ( UNIT_ID ${DOMAIN_ID}_${PACKAGE_ID}_${LIB_ID} )
 
 message ( STATUS "INFORMATION : Processing unit ${UNIT_ID}" )
