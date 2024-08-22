@@ -38,41 +38,39 @@ unset ( _MODULES CACHE )
 include ( CheckPFUnit )
 include ( FedemConfig )
 
-option ( USE_MEMPOOL "Use memory pool for heap allocation in FE library" false )
-option ( USE_PROFILER "Use CPU and Memory profiler" false )
-mark_as_advanced ( USE_MEMPOOL USE_PROFILER )
+option ( USE_MEMPOOL "Use memory pool for heap allocation in FE library" OFF )
+option ( USE_PROFILER "Use CPU and Memory profiler" OFF )
+option ( BUILD_TEST_REPORTS "Enable test and profiling reports" OFF )
+mark_as_advanced ( USE_MEMPOOL USE_PROFILER BUILD_TEST_REPORTS )
 
 
 # Enable unit and regression testing
 
 set ( CTEST_OPTIONS --force-new-ctest-process --output-on-failure -O CTest.txt )
-option ( BUILD_TEST_REPORTS "Enable test and profiling reports" false )
 if ( BUILD_TEST_REPORTS )
   list ( APPEND CTEST_OPTIONS --test-action Test --no-compress-output )
   # Needed by the profiling execution (see below)
   set ( MEMORYCHECK_COMMAND_OPTIONS "--tool=callgrind -v" )
   include ( CTest )
-else ( BUILD_TEST_REPORTS )
+elseif ( BUILD_TESTS )
   enable_testing ()
 endif ( BUILD_TEST_REPORTS )
 if ( CMAKE_CONFIGURATION_TYPES )
   list ( APPEND CTEST_OPTIONS --build-config \"$<CONFIGURATION>\" )
 endif ( CMAKE_CONFIGURATION_TYPES )
+
+if ( BUILD_TEST_REPORTS OR BUILD_TESTS )
+
 # The target check is to be used (instead of test) to ensure that
 # all test executables are built before executing the tests.
-add_custom_target ( check COMMAND ${CMAKE_CTEST_COMMAND} ${CTEST_OPTIONS} )
+  add_custom_target ( check COMMAND ${CMAKE_CTEST_COMMAND} ${CTEST_OPTIONS} )
 
-include ( GTest ) # Using the google test framework for C++ unit tests
-include ( pFUnit ) # Using the pFUnit test framework for Fortran unit tests
+  include ( GTest ) # Using the google test framework for C++ unit tests
+  include ( pFUnit ) # Using the pFUnit test framework for Fortran unit tests
 
-# Copy scripts to build directory file (script execution place)
-message ( STATUS "INFORMATION : Copying run scripts to build directory")
-file ( GLOB SCRIPT_FILES scripts/*.sh )
-foreach ( FILE ${SCRIPT_FILES} )
-  configure_file ( ${FILE} ${CMAKE_CURRENT_BINARY_DIR} )
-endforeach ( FILE ${SCRIPT_FILES} )
+endif ( BUILD_TEST_REPORTS OR BUILD_TESTS )
 
-# Setting up profiling with callgrind without using a script.
+# Setting up profiling with callgrind.
 # Set PROF_RANGE for running a specific number of tests by numbers
 # (must be specified at cmake level, see CTest documentation).
 # cmake ....... -DPROF_RANGE=3,3 (for example)
@@ -92,7 +90,7 @@ endif ( BUILD_TEST_REPORTS )
 
 # Generate documentation for code coverage
 
-if ( LINUX )
+if ( LINUX AND BUILD_TEST_REPORTS )
   include ( CodeCoverage )
 
 # skip coverage reporting for all sources under these folders
@@ -119,7 +117,7 @@ if ( LINUX )
                          ${CMAKE_CURRENT_BINARY_DIR}/Admin )
   lcov_html_target ( NAME lcoverage EXCLUDE ${EXCLUDES} /usr/include
                      EXECUTABLE ${CMAKE_CTEST_COMMAND} -j ${PROCESSOR_COUNT} )
-endif ( LINUX )
+endif ( LINUX AND BUILD_TEST_REPORTS )
 
 
 # Generate source code documentation with doxygen, if available
@@ -154,8 +152,9 @@ set ( SRC_DIR "${CMAKE_CURRENT_BINARY_DIR}/src" )
 add_subdirectory ( fedem-foundation/src "${CMAKE_CURRENT_BINARY_DIR}/fedem-foundation" )
 add_subdirectory ( SAM/src "${CMAKE_CURRENT_BINARY_DIR}/src/SAM" )
 add_subdirectory ( src )
-add_subdirectory ( PythonAPI )
-
+if ( BUILD_TEST_REPORTS OR BUILD_TESTS )
+  add_subdirectory ( PythonAPI )
+endif ( BUILD_TEST_REPORTS OR BUILD_TESTS )
 
 # Install the Fortran redistributables
 

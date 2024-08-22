@@ -7,7 +7,10 @@
 # Library setup
 
 set ( LIB_ID vpmUtilities )
-set ( LIB_ID_LIST vpmUtilitiesTests )
+set ( LIB_ID_LIST )
+if ( BUILD_TESTS )
+  set ( LIB_ID_LIST vpmUtilitiesTests )
+endif ( BUILD_TESTS )
 set ( UNIT_ID ${DOMAIN_ID}_${PACKAGE_ID}_${LIB_ID} )
 
 foreach ( FOLDER ${LIB_ID_LIST} )

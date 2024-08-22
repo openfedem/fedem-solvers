@@ -1623,7 +1623,8 @@ contains
   subroutine getEngine (value,ierr,userId,tag,x)
 
     use EngineRoutinesModule, only : EngineValue
-    use reportErrorModule   , only : reportError, warningFileOnly_p
+    use reportErrorModule   , only : reportError
+    use reportErrorModule   , only : debugFileOnly_p, warningFileOnly_p
 
     real(dp)        , intent(out)          :: value
     integer         , intent(inout)        :: ierr
@@ -1632,7 +1633,7 @@ contains
     real(dp)        , intent(in), optional :: x
 
     !! Local variables
-    integer :: i
+    integer :: i, jerr
     logical :: found
 
     !! --- Logic section ---
@@ -1645,20 +1646,26 @@ contains
 
     found = .false.
 
+    jerr = ierr
     do i = 1, size(mech%engines)
        if (mech%engines(i)%id%userId == userId) then
+          found = .true.
           value = EngineValue(mech%engines(i),ierr,x)
-          return
+          exit
        else if (present(tag) .and. .not.found) then
           if (mech%engines(i)%tag == tag) then
              found = .true.
              value = EngineValue(mech%engines(i),ierr,x)
-             if (userId <= 0) return
+             if (userId <= 0) exit
           end if
        end if
     end do
 
-    if (present(tag) .and. .not.found) then
+    if (ierr < jerr) then
+       call reportError (debugFileOnly_p,'getEngine',ierr=ierr)
+    else if (found) then
+       return
+    else if (present(tag)) then
        call reportError (warningFileOnly_p,'No Function with tag = '//tag)
     end if
 
@@ -2608,7 +2615,7 @@ contains
     integer , intent(out) :: ierr
 
     !! Local variables
-    integer  :: i, jerr
+    integer  :: i
     real(dp) :: relDist
 
     !! --- Logic section ---
@@ -2616,13 +2623,9 @@ contains
     !! Extract current relative distance between 2 triads
     ierr = 0
     do i = 1, nIds
-       call getEngine (relDis(i),jerr,Ids(i))
-       ierr = ierr + jerr
+       call getEngine (relDis(i),ierr,Ids(i))
     end do
-    if (ierr < 0) then
-       call reportError (debugFileOnly_p,'computeRelativeDistance')
-       return
-    end if
+    if (ierr < 0) goto 915
 
     !! Expand the equation-ordered solution vector to DOF-order
     call csExpand (sam,disp(1:nDofs),sys%sinc(:,1))
@@ -2635,9 +2638,10 @@ contains
 
     !! Extract relative distance change due to the given displacement state
     do i = 1, nIds
-       call getEngine (relDist,jerr,Ids(i))
+       call getEngine (relDist,ierr,Ids(i))
        relDis(i) = relDist - relDis(i)
     end do
+    if (ierr < 0) goto 915
 
     !! Reset triad positions from the stored previous values
     do i = 1, size(mech%triads)
@@ -2645,6 +2649,11 @@ contains
           mech%triads(i)%ur = mech%triads(i)%urPrev
        end if
     end do
+
+    return
+
+915 continue
+    call reportError (debugFileOnly_p,'computeRelativeDistance',ierr=ierr)
 
   end subroutine computeRelativeDistance
 
@@ -2676,7 +2685,7 @@ contains
     integer , intent(out) :: ierr
 
     !! Local variables
-    integer  :: i, jerr
+    integer  :: i
     real(dp) :: newValue
 
     !! --- Logic section ---
@@ -2684,26 +2693,26 @@ contains
     !! Extract current response values
     ierr = 0
     do i = 1, nIds
-       call getEngine (resp(i),jerr,Ids(i))
-       ierr = ierr + jerr
+       call getEngine (resp(i),ierr,Ids(i))
     end do
-    if (ierr < 0) then
-       call reportError (debugFileOnly_p,'computeResponseVars')
-       return
-    end if
+    if (ierr < 0) goto 915
 
     !! Calculate variables from displacement vector
     call variablesFromDisp (disp,ierr)
-    if (ierr < 0) return
+    if (ierr < 0) goto 915
 
     !! Extract response value changes due to the given displacement state
     do i = 1, nIds
-       call getEngine (newValue,jerr,Ids(i))
+       call getEngine (newValue,ierr,Ids(i))
        resp(i) = newValue - resp(i)
     end do
+    if (ierr < 0) goto 915
 
     !! Reset all position variables from the stored previous values
     call restoreLastStep (sam,sys,mech)
+
+915 continue
+    call reportError (debugFileOnly_p,'computeResponseVars',ierr=ierr)
 
   contains
 
@@ -2747,6 +2756,8 @@ contains
 
       !! Update spring variables
       call updateSprings (mech%axialSprings,mech%joints,.false.,ierr)
+
+      if (ierr < 0) call reportError (debugFileOnly_p,'variablesFromDisp')
 
     end subroutine variablesFromDisp
 

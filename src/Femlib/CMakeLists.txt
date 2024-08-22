@@ -7,7 +7,10 @@
 # Library setup
 
 set ( LIB_ID FemLib )
-set ( LIB_ID_LIST FemLibTests )
+set ( LIB_ID_LIST )
+if ( BUILD_TESTS )
+  set ( LIB_ID_LIST FemLibTests )
+endif ( BUILD_TESTS )
 set ( UNIT_ID ${DOMAIN_ID}_${PACKAGE_ID}_${LIB_ID} )
 
 message ( STATUS "INFORMATION : Processing unit ${UNIT_ID}" )

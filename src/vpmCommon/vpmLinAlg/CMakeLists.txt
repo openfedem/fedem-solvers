@@ -7,7 +7,10 @@
 # Library setup
 
 set ( LIB_ID vpmLinAlg )
-set ( LIB_ID_LIST vpmLinAlgTests )
+set ( LIB_ID_LIST )
+if ( BUILD_TESTS )
+  set ( LIB_ID_LIST vpmLinAlgTests )
+endif ( BUILD_TESTS )
 set ( UNIT_ID ${DOMAIN_ID}_${PACKAGE_ID}_${LIB_ID} )
 
 message ( STATUS "INFORMATION : Processing unit ${UNIT_ID}" )
@@ -40,7 +43,7 @@ if ( NOT FTLINALG_FOUND )
 # add a dummy library containing the expected symbols.
 # This library is compiled in a sub-folder, to avoid that
 # its generated module files are mixed with the others.
-  set ( SUBFOLDER_LIST vpmLinAlgDummy ${SUBFOLDER_LIST} )
+  list ( INSERT SUBFOLDER_LIST 0 vpmLinAlgDummy )
 endif ( NOT FTLINALG_FOUND )
 foreach ( FOLDER ${SUBFOLDER_LIST} )
   add_subdirectory ( ${FOLDER} )
