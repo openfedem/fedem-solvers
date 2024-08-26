@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2023 SAP SE
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is part of FEDEM - https://openfedem.org
+
+name: Build and release fedempy
+
+on:
+  push:
+    tags:
+      - fedem-*
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  publish-fedempy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ACCESS_PAT }}
+
+      - name: Checkout the latest release tag
+        run: |
+          git checkout `git tag | tail -1`
+          echo "MY_TAG=`git tag | tail -1`" >> $GITHUB_ENV
+          echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
+
+      - name: Build the fedempy module
+        run: |
+          if [ -e cfg/RELEASE ]; then
+            sed "1 s/.*$/fedempy package for Fedem &/" cfg/RELEASE  | tr '\n' ' ' > body.md
+          else
+            echo -n "fedempy package for Fedem R8.0.4 " > body.md
+          fi
+          sed " 1 s/^.*\./(build /;s/.*$/& and later)/" cfg/VERSION >> body.md
+          cd PythonAPI
+          python -m setup sdist
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.MY_TAG }}
+          name: "fedempy ${{ env.MY_VER }}"
+          artifacts: "PythonAPI/dist/fedempy-${{ env.MY_VER }}.tar.gz"
+          bodyFile: "body.md"
+          allowUpdates: true
