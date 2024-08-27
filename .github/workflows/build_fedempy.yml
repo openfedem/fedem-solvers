@@ -47,6 +47,7 @@ jobs:
         with:
           tag: ${{ env.MY_TAG }}
           name: "fedempy ${{ env.MY_VER }}"
+          token: ${{ secrets.ACCESS_PAT }}
           artifacts: "PythonAPI/dist/fedempy-${{ env.MY_VER }}.tar.gz"
           bodyFile: "body.md"
           allowUpdates: true
