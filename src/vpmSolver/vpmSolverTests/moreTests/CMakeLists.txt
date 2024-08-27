@@ -4,6 +4,13 @@
 #
 # This file is part of FEDEM - https://openfedem.org
 
+# Note: The tests here are put in a separate sub-folder,
+# since they depend on a dummy environmenttypemodule
+# (in file dummyModules.f90) which is different than the
+# same module used by the other tests in the parent folder.
+# This way a separate mod-file is created for this dummy module
+# which does not disturb the other tests if run separately.
+
 set ( LIB_ID moreTests )
 set ( UNIT_ID ${DOMAIN_ID}_${PACKAGE_ID}_${LIB_ID} )
 
