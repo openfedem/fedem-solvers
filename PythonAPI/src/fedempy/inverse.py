@@ -922,6 +922,11 @@ class InverseSolver:
         e_val, e_vec, ok = solver.solve_modes(n_modes, False, use_lapack)
         if solver.ierr.value < 0 or not ok:
             raise InverseException("solve_modes", solver.ierr.value)
+        if e_val is None:
+            print(f"Unable for calculate eigenvalues at t={solver.get_current_time()}")
+            print(f"Terminating dynamics solver ({solver.solver_done(print_res=True)})")
+            print("Please check the fedem_solver.res file content above.")
+            raise InverseException("solve_modes", solver.ierr.value)
 
         print("Eigenvalues (low, high):", e_val[0], e_val[-1])
         logger.info("Eigenvalues: %s" % e_val)

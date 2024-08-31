@@ -10,6 +10,7 @@ Used for convenience in order to hide native type convertions.
 """
 
 from ctypes import byref, c_bool, c_char_p, c_double, c_int, cdll
+from os import path
 
 from numpy import empty, float64, int32, int64, ndarray
 
@@ -35,7 +36,7 @@ class FedemSolver:
     """
     This class mirrors the functionality of the fedem dynamics solver library
     (libfedem_solver_core.so on Linux, fedem_solver_core.dll on Windows).
-    See also the header file ../../../proprietary/vpmSolver/solverInterface.h
+    See also the header file ../../../src/vpmSolver/solverInterface.h
 
     In addition to the methods for conducting the simulation itself, the class
     also contains several methods for accessing and manipulating the linearized
@@ -830,15 +831,17 @@ class FedemSolver:
 
         return self.get_functions(out_def), success
 
-    def solver_done(self, remove_singletons=None):
+    def solver_done(self, remove_singletons=None, print_res=False):
         """
         This method should be used when the time/load step loop is finished.
         It closes down the model and cleans up heap memory and things on disk.
 
         Parameters
         ----------
-        remove_singletons : bool default=None
+        remove_singletons : bool, default=None
             If True or None, heap-allocated singelton objects are also released
+        print_res : bool, default=False
+            If True, the res-file content is printed to console
 
         Returns
         -------
@@ -854,7 +857,20 @@ class FedemSolver:
         else:
             _rsflag = c_bool(True)
 
-        return self._solver.solverDone(_rsflag)
+        status = self._solver.solverDone(_rsflag)
+        if print_res and path.isfile("./fedem_solver.res"):
+            with open("./fedem_solver.res", "r") as resf:
+                print_line = 1
+                for count, line in enumerate(resf):
+                    if line.find("Error :") == 0:
+                        print_line = 2
+                    elif count > 100 and print_line == 1:
+                        print_line = 0
+                        print("     . . .")
+                    if print_line > 0:
+                        print("%8d %s" % (count + 1, line.rstrip()))
+                print("#### End of file fedem_solver.res", flush=True)
+        return status
 
     def solver_close(self):
         """
