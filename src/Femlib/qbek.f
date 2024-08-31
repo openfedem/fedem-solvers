@@ -5,18 +5,18 @@ C
 C     This file is part of FEDEM - https://openfedem.org
 C
       SUBROUTINE QBEK31 (AEK,AELPAT,AX,AY,AALF,ADB,ADS,TH,RNY,
-     +                  ISHEAR,IEL,IPRINT,LUNPRF,IERR)
+     +                   ISHEAR,IEL,IPRINT,LUNPRF,IERR)
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
 C
 C =======================-----------------------------------------------
-C ===  FEDEM                                              MODULE: QBEK2
+C ===  FEDEM                                              MODULE: QBEK31
 C =======================-----------------------------------------------
 C
 C     PURPOSE/
 C     METHOD :
 C
-C     THE SUBROUTINE QBEK2 COMPUTES THE STIFFNESS MATRIX
+C     THE SUBROUTINE QBEK31 COMPUTES THE STIFFNESS MATRIX
 C     OF A GENERAL QUADRILATERAL PLATE BENDING ELEMENT (WITH 4
 C     NODES AND 12 NODAL DEGREES OF FREEDOM) AND THE AREA RATIOS
 C     FOR LUMPING UNIFORM DISTRIBUTED LOAD TO NODAL LOAD
@@ -91,10 +91,9 @@ C                                                - EXTERNAL VARIABLES
      +          AELPAT(12)
 C                                                - INTERNAL VARIABLES
       DIMENSION AXY(2,4),AEKQH(6,6),AH(12,12),AHH(6,12),ALT(3,12),
-     +          TRANM(12,12),TEM(12,12),TEMEK(12,12)
+     +          TRANM(12,12),TEM(12,12),TMP(144)
 C                                                - COMMON
-      COMMON / XPARAX / ALFA,AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,
-     +                  C1,C2
+      COMMON / XPARAX / AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
 C
 C-----------------------------------------------------------
 C     EXECUTABLE SECTION
@@ -106,27 +105,20 @@ C
 C
       WRITE(LUNPRF,6000) IEL
 C
-   10 DO  20 I = 1,4
-      AXY(1,I) = AX(I)
-      AXY(2,I) = AY(I)
-   20 CONTINUE
-C
 C----------------------------------------------------------
 C     CALCULATE THE COORDINATE VALUES OF NODAL POINTS
 C     REFERRED TO THE LOCAL COORDINATE SYSTEM
 C----------------------------------------------------------
 C
-      CALL CENTPO (AXY)
+   10 CALL CENTPO (AX,AY,AXY)
 C
       IF (IPRINT .LE. 0)               GO TO   30
 C
       WRITE(LUNPRF,6100)
       CALL WRIME (AXY,2,4,LUNPRF)
 C
-   30 DO   40 I = 1,12
-      DO   40 J = 1,12
-      AEK(I,J) = 0.0
-   40 CONTINUE
+   30 CALL DCOPY (12*12,0.0D0,0,AEK,1)
+      CALL DCOPY (12,0.0D0,0,AELPAT,1)
 C
 C------------------------------------------------------------
 C     CALCULATE AREA RATIOS FOR LUMPING UNIFORM LOAD
@@ -143,10 +135,6 @@ C
       AC2  = AXY(1,2)*AXY(2,3)-AXY(2,2)*AXY(1,3)
       AC3  = AXY(1,3)*AXY(2,4)-AXY(2,3)*AXY(1,4)
       AC4  = AXY(1,4)*AXY(2,1)-AXY(2,4)*AXY(1,1)
-C
-      DO   50 I = 1,12
-      AELPAT(I) = 0.0
-   50 CONTINUE
 C
       AELPAT(1)  = 0.25*(AC4+AC1)
       AELPAT(4)  = 0.25*(AC1+AC2)
@@ -165,12 +153,10 @@ C---------------------------------------------------------------
 C
    60 CALL FORMLT(ALT,AXY)
 C
-      CALL MCON(ALT,ADB,TEM,3,12)
-C
-      DO   70 I = 1,12
-      DO   70 J = 1,12
-      AEK(I,J)  = AEK(I,J)+TEM(I,J)*AI
-   70 CONTINUE
+C     TMP(3,12) = ADB(3,3)*ALT(3,12)
+      CALL DGEMM ('N','N',3,12,3,1.0D0,ADB,3,ALT,3,0.0D0,TMP,3)
+C     AEK(12,12) = AEK(12,12) + AI*ALT(3,12)^t*TMP(3,12)
+      CALL DGEMM ('T','N',12,12,3,AI,ALT,3,TMP,3,1.0D0,AEK,12)
 C
       IF (IPRINT .LE. 0)               GO TO   80
 C
@@ -183,20 +169,13 @@ C     CONTRIBUTED FROM H-MODES
 C------------------------------------------------------------
 C
    80 CONTINUE
-      S   = SQRT(AREA)
-      S   = 0.5*S
-      SI  = 1.0/S
+      S   = 0.5D0*SQRT(AREA)
+      SI  = 1.0D0/S
       SI2 = SI*SI
-C
-      IF (ISHEAR .LE. 0)               GO TO   90
-C
       SI3 = SI2*SI
       SI4 = SI3*SI
 C
-   90 DO  100 I = 1,2
-      DO  100 J = 1,4
-      AXY(I,J)  = SI*AXY(I,J)
-  100 CONTINUE
+      CALL DSCAL (8,SI,AXY,1)
 C
       A1 = 0.25*(-AXY(2,1)-AXY(2,2)+AXY(2,3)+AXY(2,4))
       A2 = 0.25*(-AXY(2,1)+AXY(2,2)+AXY(2,3)-AXY(2,4))
@@ -213,36 +192,32 @@ C
       CALL FGAH2 (AH,AHH,AXY,TH,RNY,IEL,ISHEAR,IPRINT,LUNPRF,IERR)
       IF (IERR .NE. 0)                 GO TO 902
 C
-      CALL MCON (AHH,AEKQH,TEM,6,12)
+C     TMP(6,12) = AEKQH(6,6)*AHH(6,12)
+      CALL DGEMM ('N','N',6,12,6,1.0D0,AEKQH,6,AHH,6,0.0D0,TMP,6)
+C     TEM(12,12) = AHH(6,12)^t*TMP(6,12)
+      CALL DGEMM ('T','N',12,12,6,1.0D0,AHH,6,TMP,6,0.0D0,TEM,12)
 C
       IF (IPRINT .LE. 0)               GO TO  110
 C
       WRITE(LUNPRF,6300)
       CALL WRIME (TEM,12,12,LUNPRF)
 C
-  110 DO  120 I = 1,12
-      DO  120 J = 1,12
-      AEK(I,J)  = AEK(I,J)+TEM(I,J)
-  120 CONTINUE
+  110 CALL DAXPY (12*12,1.0D0,TEM,1,AEK,1)
 C
 C-----------------------------------------------------------
 C     TRANSFORM THE ELEMENT STIFFNESS MATRIX FROM THE
 C     GLOBAL COORDINATE SYSTEM TO THE INCLINED DIRECTION
 C-----------------------------------------------------------
 C
-      DO  130 I  = 1,12
-      DO  130 J  = 1,12
-      TRANM(I,J) = 0.0
-  130 CONTINUE
+      CALL DCOPY (12*12,0.0D0,0,TRANM,1)
 C
       DO  140 I = 1,4
 C
       I3               = 3*I
-      ALFA             = AALF(I)
-      COSA             = COS(ALFA)
-      SINA             = SIN(ALFA)
+      COSA             = COS(AALF(I))
+      SINA             = SIN(AALF(I))
 C
-      TRANM(I3-2,I3-2) = 1.0
+      TRANM(I3-2,I3-2) = 1.0D0
       TRANM(I3-1,I3-1) = COSA
       TRANM(I3-1,I3)   =-SINA
       TRANM(I3,I3-1)   = SINA
@@ -255,12 +230,10 @@ C     CALCULATE THE ELEMENT STIFFNESS MATRIX REFERRED TO
 C     THE INCLINED DIRECTION
 C-------------------------------------------------------------
 C
-      CALL MCON (TRANM,AEK,TEMEK,12,12)
-C
-      DO  150 I = 1,12
-      DO  150 J = 1,12
-      AEK(I,J)  = TEMEK(I,J)
-  150 CONTINUE
+C     TMP(12,12) = AEK(12,12)*TRANM(12,12)
+      CALL DGEMM ('N','N',12,12,12,1.0D0,AEK,12,TRANM,12,0.0D0,TMP,12)
+C     AEK(12,12) = TRANM(12,12)^t*TMP(12,12)
+      CALL DGEMM ('T','N',12,12,12,1.0D0,TRANM,12,TMP,12,0.0D0,AEK,12)
 C
 C--------------------------------------------------------------
 C     PRINT RESULTS
@@ -410,7 +383,7 @@ C                                                - EXTERNAL VARIABLES
      +          TRANM(12,12),TEM1(3,12),ANSTRB(3,12),
      +          ANSTRS(2,12),AHMTRA(12,12)
 C                                                - COMMON
-      COMMON / XPARAX / ALFA,AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
+      COMMON / XPARAX / AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
 C
 C-------------------------------------------------------------------
 C     EXECUTABLE SECTION
@@ -427,12 +400,7 @@ C
       H2X2Y = 0.0
       P    = TH*TH/(1.0-RNY)/5.0
 C
-      DO  20 I = 1,4
-      AXY(1,I) = AX(I)
-      AXY(2,I) = AY(I)
-   20 CONTINUE
-C
-      CALL CENTPO (AXY)
+      CALL CENTPO (AX,AY,AXY)
 C
 C---------------------------------------------------------------------
 C     FORM THE TRANSFORMATION MATRIX TRANM WHICH TRANSFORMS THE
@@ -440,16 +408,12 @@ C     DISPLACEMENT FROM THE GLOBAL COORDINATE SYSTEM TO THE INCLINED
 C     DIRECTIONS
 C---------------------------------------------------------------------
 C
-      DO   30 I  = 1,12
-      DO   30 J  = 1,12
-      TRANM(I,J) = 0.0
-   30 CONTINUE
+      CALL DCOPY (12*12,0.0D0,0,TRANM,1)
 C
       DO   40 I = 1,4
 C
-      ALFA               = AALF(I)
-      COSA               = COS(ALFA)
-      SINA               = SIN(ALFA)
+      COSA               = COS(AALF(I))
+      SINA               = SIN(AALF(I))
 C
       TRANM(3*I-2,3*I-2) = 1.0
       TRANM(3*I-1,3*I-1) = COSA
@@ -466,20 +430,14 @@ C
      +            (AXY(1,2)-AXY(1,4))*(AXY(2,1)-AXY(2,3)))
 C
       IF (AREA .LE. 0)                 GO TO 903
-      S    = SQRT (AREA)
-      S    = 0.5*S
+C
+      S    = 0.5*SQRT(AREA)
       SI   = 1.0/S
       SI2  = SI*SI
-C
-C     IF (ISHEAR .LE. 0)               GO TO 1300
-C
       SI3  = SI2*SI
       SI4  = SI3*SI
 C
-      DO  60 I = 1,2
-      DO  60 J = 1,4
-      AXY(I,J) = SI*AXY(I,J)
-   60 CONTINUE
+      CALL DSCAL (8,SI,AXY,1)
 C
       A1 = 0.25*(-AXY(2,1)-AXY(2,2)+AXY(2,3)+AXY(2,4))
       A2 = 0.25*(-AXY(2,1)+AXY(2,2)+AXY(2,3)-AXY(2,4))
@@ -497,17 +455,11 @@ C
       CALL FGAH2 (AH,AHH,AXY,TH,RNY,IEL,ISHEAR,IPRINT,LUNPRF,IERR)
       IF (IERR .NE. 0)                 GO TO 901
 C
-      CALL MMM (AH,TRANM,AHMTRA,12,12,12)
+C     AHMTRA(12,12) = AH(12,12)*TRANM(12,12)
+      CALL DGEMM ('N','N',12,12,12,1.0D0,AH,12,TRANM,12,0.0D0,AHMTRA,12)
 C
-      DO 70 I = 1,3
-      DO 70 J = 1,12
-      BB(I,J) = 0.0
-   70 CONTINUE
-C
-      DO 80 I = 1,2
-      DO 80 J = 1,12
-      BS(I,J) = 0.0
-   80 CONTINUE
+      CALL DCOPY (3*12,0.0D0,0,BB,1)
+      CALL DCOPY (2*12,0.0D0,0,BS,1)
 C
 C-----------------------------------------------------------------
 C     FORM THE STRAIN MATRIX CORRESPONDING TO BENDING
@@ -525,7 +477,23 @@ C
       H1XY  = 6.0*F1*(2.0*A1*B1*F2+A1*B2*F1+A2*B1*F1)*SI2
       H2XY  = 6.0*F2*(2.0*A2*B2*F1+A2*B1*F2+A1*B2*F2)*SI2
 C
-      IF (ISHEAR .LE. 0)               GO TO   90
+      BB(1,4)  = -2.0*SI2
+      BB(1,7)  = -6.0*AXY(1,I)*SI2
+      BB(1,8)  = -2.0*AXY(2,I)*SI2
+      BB(1,11) = -H1X2
+      BB(1,12) = -H2X2
+      BB(2,6)  = -2.0*SI2
+      BB(2,9)  = -2.0*AXY(1,I)*SI2
+      BB(2,10) = -6.0*AXY(2,I)*SI2
+      BB(2,11) = -H1Y2
+      BB(2,12) = -H2Y2
+      BB(3,5)  = -2.0*SI2
+      BB(3,8)  = -4.0*AXY(1,I)*SI2
+      BB(3,9)  = -4.0*AXY(2,I)*SI2
+      BB(3,11) = -H1XY
+      BB(3,12) = -H2XY
+C
+      IF (ISHEAR .LE. 0)               GO TO  100
 C
       H1X3  = 6.0*A1*A1*(A1*F2+3.0*A2*F1)*SI3
       H2X3  = 6.0*A2*A2*(A2*F1+3.0*A1*F2)*SI3
@@ -547,24 +515,6 @@ C
       H1Y4  = 24.0*B1*B1*B1*B2*SI4
       H2Y4  = 24.0*B2*B2*B2*B1*SI4
 C
-   90 BB(1,4)  = -2.0*SI2
-      BB(1,7)  = -6.0*AXY(1,I)*SI2
-      BB(1,8)  = -2.0*AXY(2,I)*SI2
-      BB(1,11) = -H1X2
-      BB(1,12) = -H2X2
-      BB(2,6)  = -2.0*SI2
-      BB(2,9)  = -2.0*AXY(1,I)*SI2
-      BB(2,10) = -6.0*AXY(2,I)*SI2
-      BB(2,11) = -H1Y2
-      BB(2,12) = -H2Y2
-      BB(3,5)  = -2.0*SI2
-      BB(3,8)  = -4.0*AXY(1,I)*SI2
-      BB(3,9)  = -4.0*AXY(2,I)*SI2
-      BB(3,11) = -H1XY
-      BB(3,12) = -H2XY
-C
-      IF (ISHEAR .LE. 0)               GO TO  100
-C
       BB(1,11) = BB(1,11) - P*(H1X4+H1X2Y2)
       BB(1,12) = BB(1,12) - P*(H2X4+H2X2Y2)
       BB(2,11) = BB(2,11) - P*(H1Y4+H1X2Y2)
@@ -577,8 +527,11 @@ C     CALCULATE THE PART OF ELEMENT STRESS MATRIX CORRESPONDING
 C     TO MOMENTS
 C------------------------------------------------------------------
 C
-  100 CALL MMM (BB,AHMTRA,TEM1,3,12,12)
-      CALL MMM (ADB,TEM1,ANSTRB,3,3,12)
+  100 CONTINUE
+C     TEM1(3,12) = BB(3,12)*AHMTRA(12,12)
+      CALL DGEMM ('N','N',3,12,12,1.0D0,BB,3,AHMTRA,12,0.0D0,TEM1,3)
+C     ANSTRB(3,12) = ADB(3,3)*TEM1(3,12)
+      CALL DGEMM ('N','N',3,12,3,1.0D0,ADB,3,TEM1,3,0.0D0,ANSTRB,3)
 C
       DO  110 L     = 1,3
       DO  110 K     = 1,12
@@ -602,7 +555,8 @@ C
       BS(2,11)  = -D*(H1Y3 + H1X2Y)
       BS(2,12)  = -D*(H2Y3 + H2X2Y)
 C
-      CALL MMM (BS,AHMTRA,ANSTRS,2,12,12)
+C     ANSTRS(2,12) = BS(2,12)*AHMTRA(12,12)
+      CALL DGEMM ('N','N',2,12,12,1.0D0,BS,2,AHMTRA,12,0.0D0,ANSTRS,2)
 C
       DO  120 L     = 1,2
       DO  120 K     = 1,12
@@ -714,8 +668,7 @@ C                                                - EXTERNAL VARIABLES
 C                                                - INTERNAL VARIABLES
       DIMENSION IWORK(12)
 C                                                - COMMON
-      COMMON   / XPARAX / ALFA,AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,
-     +                    C1,C2
+      COMMON / XPARAX / AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
 C
 C----------------------------------------------------------------
 C     EXECUTABLE SECTION
@@ -727,10 +680,7 @@ C
 C
       P     = TH*TH/(1.0-RNY)/5.0
 C
-   10 I     = 0
-   20 I     = I + 1
-C
-      IF (I .GT. 4)                    GO TO   40
+   10 DO 40 I = 1, 4
 C
       X     = FXY(1,I)
       Y     = FXY(2,I)
@@ -765,8 +715,7 @@ C
       H2Y3  = 6.0*B2*B2*(B2*F1+3.0*B1*F2)*SI3
 C
 C-----------------------------------------------------------
-C     FORM THE PART OF THE MATRIX G CORRESPONDING TO
-C     BENDING
+C     FORM THE PART OF THE MATRIX G CORRESPONDING TO BENDING
 C-----------------------------------------------------------
 C
    30 I3         = 3*I
@@ -811,8 +760,7 @@ C
       IF (ISHEAR .LE. 0)               GO TO  20
 C
 C------------------------------------------------------------
-C     FORM THE PART OF THE MATRIX G CORRESPONDING TO
-C     SHEAR
+C     FORM THE PART OF THE MATRIX G CORRESPONDING TO SHEAR
 C------------------------------------------------------------
 C
       FG(I3,7)   = FG(I3,7)   - 6.0*P*SI3
@@ -824,7 +772,7 @@ C
       FG(I3-1,12)= FG(I3-1,12)+ P*(H2X2Y + H2Y3 )
       FG(I3,12)  = FG(I3,12)  - P*(H2X3  + H2XY2)
 C
-      GO TO  20
+   20 CONTINUE
 C
    40 CONTINUE
 C
@@ -839,7 +787,8 @@ C---------------------------------------------------------
 C
    50 CALL DINV12 (12,FG,FH,IWORK,LUNPRF,IERR)
       IF (IERR .NE. 0)                 GO TO  901
-      CALL DCOPY (144,FG,1,FH,1)
+C
+      CALL DCOPY (12*12,FG(1,1),1,FH,1)
 C
       IF (IPRINT .LE. 0)               GO TO   60
 C
@@ -847,8 +796,7 @@ C
       CALL WRIMF2 (FH,12,12,LUNPRF)
 C
 C---------------------------------------------------------
-C     PUT THE H-MODE PART OF THE MATRIX H INTO THE
-C     MATRIX HH
+C     PUT THE H-MODE PART OF THE MATRIX H INTO THE MATRIX HH
 C---------------------------------------------------------
 C
    60 DO  70 I = 1,6
@@ -952,11 +900,10 @@ C LAST UPDATE  : 86-04-30/1.1 BY: EGIL GIERTSEN - SINTEF DIV.71
 C ======================================================================
 C
 C                                                - EXTERNAL VARIABLES
-      DIMENSION FXY(2,4),FEKQH(6,6),XIETA(3),WEI(3),FDB(3,3),
-     +          FDS(2,2),DBMWJ(3,3),DSMWJ(2,2),BH(3,6),
-     +          BSH(2,6),BTMDMB(6,6)
+      DIMENSION FXY(2,4),FEKQH(6,6),XIETA(3),WEI(3),
+     +          FDB(3,3),FDS(2,2),BH(3,6),BSH(2,6),TMP(18)
 C                                                - COMMON
-      COMMON / XPARAX / ALFA,AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
+      COMMON / XPARAX / AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
 C
 C------------------------------------------------------------
 C     EXECUTABLE SECTION
@@ -989,20 +936,9 @@ C
       WEI(1)   =  1.0
       WEI(2)   =  1.0
 C
-   30 DO 40 I    = 1,6
-      DO 40 J    = 1,6
-      FEKQH(I,J) = 0.0
-   40 CONTINUE
-C
-      DO 50 I = 1,3
-      DO 50 J = 1,6
-      BH(I,J) = 0.0
-   50 CONTINUE
-C
-      DO  60 I = 1,2
-      DO  60 J = 1,6
-      BSH(I,J) = 0.0
-   60 CONTINUE
+   30 CALL DCOPY (6*6,0.0D0,0,FEKQH,1)
+      CALL DCOPY (3*6,0.0D0,0,BH,1)
+      CALL DCOPY (2*6,0.0D0,0,BSH,1)
 C
       DO 150 I = 1,N
       DO 150 J = 1,N
@@ -1019,7 +955,7 @@ C
 C
 C----------------------------------------------------------
 C     CALCULATE THE JACOBIAN DETERMINANT J CONNECTED TO
-C     NUMERICAL INTEGRATION
+C     NUMERICAL INTEGRATION, MULTIPLIED BY WEIGHT COEFFICIENTS
 C----------------------------------------------------------
 C
       DXDXI  = (ETAP*FXY(1,1)-ETAP*FXY(1,2)-ETAS*FXY(1,3)+
@@ -1031,34 +967,21 @@ C
       DYDETA = (XIP*FXY(2,1)+XIS*FXY(2,2)-XIS*FXY(2,3)-
      +          XIP*FXY(2,4))/4.0
 C
-      DETJ   = S*S*(DXDXI*DYDETA-DXDETA*DYDXI)
-C
-C----------------------------------------------------------
-C     CALCULATE THE ELASTICITY MATRIX MULTIPIED BY
-C     THE WEIGHT COEFFICIENTS AND THE JACOBIAN DETERMINANT
-C----------------------------------------------------------
-C
-      DO  70 K   = 1,3
-      DO  70 L   = 1,3
-      DBMWJ(K,L) = FDB(K,L)*WEI(I)*WEI(J)*DETJ
-   70 CONTINUE
-C
-      IF (ISHEAR .LE. 0)               GO TO  90
-C
-      DO  80 K   = 1,2
-      DO  80 L   = 1,2
-      DSMWJ(K,L) = FDS(K,L)*WEI(I)*WEI(J)*DETJ
-   80 CONTINUE
+      DETJW  = S*S*(DXDXI*DYDETA-DXDETA*DYDXI) * WEI(I)*WEI(J)
 C
 C----------------------------------------------------------
 C     CALCULATE THE COORDINATES X,Y EXPRESSED IN
 C     TERMS OF NORMALIZED COORDINATES XI AND ETA
 C----------------------------------------------------------
 C
-   90 X     = (XIP*ETAP*FXY(1,1)+XIS*ETAP*FXY(1,2)+XIS*ETAS*
+      X     = (XIP*ETAP*FXY(1,1)+XIS*ETAP*FXY(1,2)+XIS*ETAS*
      +                  FXY(1,3)+XIP*ETAS*FXY(1,4))/4.0
       Y     = (XIP*ETAP*FXY(2,1)+XIS*ETAP*FXY(2,2)+XIS*ETAS*
      +                  FXY(2,3)+XIP*ETAS*FXY(2,4))/4.0
+C
+C----------------------------------------------------------
+C     FORM THE STRAIN MATRIX BH CONTRIBUTED FROM BENDING
+C----------------------------------------------------------
 C
       F1    = A1*X+B1*Y+C1
       F2    = A2*X+B2*Y+C2
@@ -1069,6 +992,19 @@ C
       H2Y2  = 6.0*B2*F2*(B2*F1+B1*F2)*SI2
       H1XY  = 6.0*F1*(2.0*A1*B1*F2+A1*B2*F1+A2*B1*F1)*SI2
       H2XY  = 6.0*F2*(2.0*A2*B2*F1+A2*B1*F2+A1*B2*F2)*SI2
+C
+      BH(1,1) = 6.0*X*SI2
+      BH(1,2) = 2.0*Y*SI2
+      BH(1,5) = H1X2
+      BH(1,6) = H2X2
+      BH(2,3) = 2.0*X*SI2
+      BH(2,4) = 6.0*Y*SI2
+      BH(2,5) = H1Y2
+      BH(2,6) = H2Y2
+      BH(3,2) = 4.0*X*SI2
+      BH(3,3) = 4.0*Y*SI2
+      BH(3,5) = H1XY
+      BH(3,6) = H2XY
 C
       IF (ISHEAR .LE. 0)               GO TO 100
 C
@@ -1092,25 +1028,6 @@ C
       H1Y4  = 24.0*B1*B1*B1*B2*SI4
       H2Y4  = 24.0*B2*B2*B2*B1*SI4
 C
-C----------------------------------------------------------
-C     FORM THE STRAIN MATRIX BH CONTRIBUTED FROM BENDING
-C----------------------------------------------------------
-C
-  100 BH(1,1) = 6.0*X*SI2
-      BH(1,2) = 2.0*Y*SI2
-      BH(1,5) = H1X2
-      BH(1,6) = H2X2
-      BH(2,3) = 2.0*X*SI2
-      BH(2,4) = 6.0*Y*SI2
-      BH(2,5) = H1Y2
-      BH(2,6) = H2Y2
-      BH(3,2) = 4.0*X*SI2
-      BH(3,3) = 4.0*Y*SI2
-      BH(3,5) = H1XY
-      BH(3,6) = H2XY
-C
-      IF (ISHEAR .LE. 0)               GO TO 110
-C
       BH(1,5) = BH(1,5) + P*(H1X4+H1X2Y2)
       BH(1,6) = BH(1,6) + P*(H2X4+H2X2Y2)
       BH(2,5) = BH(2,5) + P*(H1Y4+H1X2Y2)
@@ -1122,16 +1039,14 @@ C---------------------------------------------------------
 C     CALCULATE THE MATRIX  KQH
 C---------------------------------------------------------
 C
-  110 CALL MCON (BH,DBMWJ,BTMDMB,3,6)
-C
-      DO 120 K   = 1,6
-      DO 120 L   = 1,6
-      FEKQH(K,L) = FEKQH(K,L) + BTMDMB(K,L)
-  120 CONTINUE
+  100 CONTINUE
+C     TMP(3,6) = DETJW*FDB(3,3)*BH(3,6)
+      CALL DGEMM ('N','N',3,6,3,DETJW,FDB,3,BH,3,0.0D0,TMP,3)
+C     FEKQH(6,6) = FEKQH(6,6) + BH(3,6)^t*TMP(3,6)
+      CALL DGEMM ('T','N',6,6,3,1.0D0,BH,3,TMP,3,1.0D0,FEKQH,6)
 C
 C---------------------------------------------------------
-C     FORM THE STRAIN MATRIX BSH CORRESPONDING TO
-C     SHEAR
+C     FORM THE STRAIN MATRIX BSH CORRESPONDING TO SHEAR
 C---------------------------------------------------------
 C
       IF (ISHEAR .LE. 0)               GO TO 140
@@ -1145,12 +1060,10 @@ C
       BSH(2,5) = P*(H1Y3 + H1X2Y)
       BSH(2,6) = P*(H2Y3 + H2X2Y)
 C
-      CALL MCON(BSH,DSMWJ,BTMDMB,2,6)
-C
-      DO  130  K = 1,6
-      DO  130  L = 1,6
-      FEKQH(K,L) = FEKQH(K,L)+BTMDMB(K,L)
-  130 CONTINUE
+C     TMP(2,6) = DETJW*FDS(2,2)*BSH(2,6)
+      CALL DGEMM ('N','N',2,6,2,DETJW,FDS,2,BSH,2,0.0D0,TMP,2)
+C     FEKQH(6,6) = FEKQH(6,6) + BSH(2,6)^t*TMP(2,6)
+      CALL DGEMM ('T','N',6,6,2,1.0D0,BSH,2,TMP,2,1.0D0,FEKQH,6)
 C
   140 CONTINUE
 C
@@ -1209,9 +1122,6 @@ C ======================================================================
 C
 C                                                - EXTERNAL VARIABLES
       DIMENSION FLT(3,12), DELTA(2,4), FXY(2,4)
-C                                                - COMMON
-      COMMON / XPARAX / ALFA,AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,
-     +                  C1,C2
 C
 C-----------------------------------------------------------
 C     CALCULATE THE DELTA MATRIX OF DIFFERENCES FOR THE
@@ -1233,10 +1143,7 @@ C----------------------------------------------------------
 C     FORM THE TRANSPOSE OF THE MATRIX L
 C----------------------------------------------------------
 C
-      DO  40 I = 1,3
-      DO  40 J = 1,12
-      FLT(I,J) = 0.0
-   40 CONTINUE
+      CALL DCOPY (3*12,0.0D0,0,FLT,1)
 C
       DO  50 I     = 1,4
       FLT(2,3*I-1) = DELTA(1,I)
@@ -1254,28 +1161,7 @@ C -------------------
       END
 C
 C
-      SUBROUTINE MMM(A,B,C,M,N,NP)
-C
-C---------------------------------------------------------
-C     RUTINEN MULTIPLISERER C(M,P)=A(M,N)*B(N,P)
-C            (ER HENTET FRA STATMAT)
-C---------------------------------------------------------
-C
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-      DIMENSION  A(M,N),B(N,NP),C(M,NP)
-C
-      DO 3 I=1,M
-         DO 2 J=1,NP
-            E=0.0D0
-            DO 1 K=1,N
-    1       E=E+A(I,K)*B(K,J)
-    2    C(I,J)=E
-    3 CONTINUE
-      RETURN
-      END
-C
-C
-      SUBROUTINE CENTPO (FXY)
+      SUBROUTINE CENTPO (AX,AY,FXY)
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
 C
@@ -1292,11 +1178,11 @@ C    THE NODAL POINTS REFERRED TO THE CENTROID. THE AXES OF THE
 C    LOCAL COORDINATE SYSTEM ARE TAKEN PARALLEL TO THE GLOBAL ONES
 C
 C    ARGUMENT INPUT:
-C      XY      - THE ARRAY CONTAINNING THE GLOBAL COORDINATE
-C                VALUES OF THE ELEMENT'S NODES
+C      AX      - GLOBAL X-COORDINATE VALUES OF THE ELEMENT'S NODES
+C      AY      - GLOBAL Y-COORDINATE VALUES OF THE ELEMENT'S NODES
 C
 C    ARGUMENT OUTPUT:
-C      XY      - THE ARRAY CONTAINNING THE LOCAL COORDINATE
+C      FXY     - ARRAY CONTAINING THE LOCAL COORDINATE
 C                VALUES OF THE ELEMENT'S NODES
 C
 C PROGRAMMED BY: XIUXI WANG
@@ -1307,21 +1193,16 @@ C Total rev    : Feb 98  /1.2 Karl Erik Thoresen
 C ======================================================================
 C
 C                                                - EXTERNAL VARIABLES
-      DIMENSION FXY(2,4),XYL(2,4)
-C                                                - COMMON
-      COMMON / XPARAX / ALFA,AREA,S,SI,SI2,SI3,SI4,A1,A2,B1,B2,C1,C2
+      DIMENSION AX(4),AY(4),FXY(2,4),XYL(2,4)
 C
 C------------------------------------------------------------
 C     TRANSFORM THE NODAL POINTS FROM GLOBAL COORDINATE
 C     SYSTEM TO LOCAL COORDINATE SYSTEM
 C-------------------------------------------------------------
 C
-      X1       = FXY(1,1)
-      Y1       = FXY(2,1)
-C
       DO  10 I = 1,4
-      FXY(1,I) = FXY(1,I)-X1
-      FXY(2,I) = FXY(2,I)-Y1
+      FXY(1,I) = AX(I)-AX(1)
+      FXY(2,I) = AY(I)-AY(1)
    10 CONTINUE
 C
       DLSQ     = FXY(1,2)**2+FXY(2,2)**2
@@ -1342,88 +1223,6 @@ C     Move the co-ordinate sentre to the centroid
       FXY(2,I) = FXY(2,I)-YC
    20 CONTINUE
 C
-      if(.true.) return
-C
-C     Below is out of date source code
-C
-C----------------------------------------------------------
-C     CALCULATE THE SLOPES AI, THEIR INVERSES VAI AND
-C     THE INTERCEPTS BI OF THE STRAIGHT LINES FORMING THE
-C     QUDRALATERAL REFERRED TO THE LOCAL COORDINATE SYSTEM
-C----------------------------------------------------------
-C
-      DEL   = XYL(1,4)-XYL(1,1)
-      ABDEL = ABS(DEL)
-C
-      IF (ABDEL .LT. 0.001)            GO TO   30  ! linje 4 vertikal
-C
-      A1    = (XYL(2,4)-XYL(2,1))/(XYL(1,4)-XYL(1,1))
-C
-      GO TO   40
-   30 A1    = 0.0
-   40 B1    = 0.0
-      C1    = (XYL(1,4)-XYL(1,1))/(XYL(2,4)-XYL(2,1))
-      D1    = 0.0
-      DEL   = XYL(2,3)-XYL(2,4)
-      ABDEL = ABS(DEL)
-C
-      IF (ABDEL .LT. 0.001)            GO TO   50  ! linje
-C
-      C2    =(XYL(1,3)-XYL(1,4))/(XYL(2,3)-XYL(2,4))
-C
-      GO TO   60
-   50 C2    = 0.0
-   60 A2    = (XYL(2,3)-XYL(2,4))/(XYL(1,3)-XYL(1,4))
-      B2    = XYL(2,4)-A2*XYL(1,4)
-      D2    = XYL(1,4)-C2*XYL(2,4)
-      DEL   = XYL(1,2)-XYL(1,3)
-      ABDEL = ABS(DEL)
-C
-      IF (ABDEL .LT. 0.001)            GO TO   70
-C
-      A3    = (XYL(2,2)-XYL(2,3))/(XYL(1,2)-XYL(1,3))
-C
-      GO TO    80
-   70 A3    = 0.0
-   80 B3    = XYL(2,3)-A3*XYL(1,3)
-      C3    = (XYL(1,2)-XYL(1,3))/(XYL(2,2)-XYL(2,3))
-      D3    = XYL(1,3)-C3*XYL(2,3)
-C
-C----------------------------------------------------------
-C     CALCULATE THE ELEMENT'S CENTROID POSITION
-C----------------------------------------------------------
-C
-C what if the slopes are infinite
-C
-      QX    = ((A1-A2)*XYL(1,4)**3     + (A2-A3)*XYL(1,3)**3
-     +       +      A3*XYL(1,2)**3)/3.0+((B1-B2)*XYL(1,4)**2
-     +       + (B2-B3)*XYL(1,3)**2     +      B3*XYL(1,2)**2)/2.0
-C
-      QY    =-((C1-C2)*XYL(2,4)**3+(C2-C3)*XYL(2,3)**3)/3.0-
-     +        ((D1-D2)*XYL(2,4)**2+(D2-D3)*XYL(2,3)**2)/2.0
-C
-      AA    = (XYL(1,3)*XYL(2,4)-(XYL(1,4)-XYL(1,2))*XYL(2,3))/2.0
-C
-      XCL   = QX/AA
-      YCL   = QY/AA
-C
-      XC    = XCL*COSINA-YCL*SINA
-      YC    = XCL*SINA+YCL*COSINA
-C
-C------------------------------------------------------------
-C     CALCULATE THE COORDINATE VALUES OF NODAL POINTS
-C     REFERRED TO THE LOCAL COORDINATE SYSTEM
-C-------------------------------------------------------------
-C
-      call findCenterofquad(XYl,Xc,Yc)
-C
-      DO  90 I = 1,4
-      FXY(1,I) = FXY(1,I)-XC
-      FXY(2,I) = FXY(2,I)-YC
-   90 CONTINUE
-C ------------------
-C --- ERROR EXIT ---
-C ------------------
 C -------------------
 C --- R E T U R N ---
 C -------------------
@@ -1567,76 +1366,6 @@ C ----------------
  6020 FORMAT(I5,9E14.7)
  6030 FORMAT(1H1)
  6040 FORMAT(1H )
-      END
-C
-C
-      SUBROUTINE MCON(A,B,C,M,N)
-C
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-C
-C =======================-----------------------------------------------
-C === FEDEM                                                MODUL: MCON
-C =======================-----------------------------------------------
-C
-C HENSIKT/
-C METODE  : KONGRUENT MULTIPLIKASJON MELLOM MATRISENE
-C           A(M,N) OG B(M,M), OG LAGRE RESULTATET I C(N,N)
-C
-C                          T
-C           C(N,N) = A(M,N) * B(M,M) * A(M,N)
-C
-C DATA INN: A(M,N) - MATRISE NUMMER 1
-C           B(M,M) - MATRISE NUMMER 2
-C           M      - ANTALL LINJER I -A-
-C           N      - ANTALL KOLONNER I -A-
-C
-C DATA UT : C(N,N) - RESULTATMATRISE
-C
-C KALL    : INGEN
-C
-C BEGRENSNINGER : INGEN
-C
-C MASKIN-
-C AVHENGIGHETER : INGEN
-C
-C PROGRAMMERT AV: EGIL GIERTSEN - SINTEF AVD.71
-C DATO/VERSJON  : 86-05-08/1.0
-C
-C SIST OPPDATERT:
-C ======================================================================
-C
-C                                                - EKSTERNE VARIABLE
-      INTEGER   M, N
-      DIMENSION A(M,N), B(M,M), C(N,N)
-C                                                - INTERNE VARIABLE
-      INTEGER   J, K, L
-      DIMENSION E(200)
-C
-C  UTF\R KONGRUENT MULTIPLIKASJON MELLOM A(M,N) OG B(M,M),
-C  LAGRE RESULTATET I C(N,N)
-C
-      DO 40 K = 1,N
-C
-      DO 20 L = 1,M
-      D       = B(L,1)*A(1,K)
-      DO 10 J = 2,M
-   10 D       = D + B(L,J)*A(J,K)
-   20 E(L)    = D
-C
-      DO 40 L = K,N
-      D       = A(1,L)*E(1)
-      DO 30 J = 2,M
-   30 D       = D + A(J,L)*E(J)
-      C(L,K)  = D
-C
-   40 C(K,L)  = D
-C ------------------
-C --- FEILUTGANG ---
-C ------------------
-C -------------------
-C --- R E T U R N ---
-C -------------------
-      RETURN
       END
 C
 C
