@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2023 SAP SE
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is part of FEDEM - https://openfedem.org
+
+name: Regression testing
+
+on:
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build solvers and execute tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install googletest
+        uses: Bacondish2023/setup-googletest@v1
+
+      - name: Silence some advice and hint
+        run: |
+          git config --global advice.detachedHead false
+          git config --global init.defaultBranch main
+
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure pFUnit-3
+        run: >
+          PFUNIT=./pFUnit3 cmake
+          -B ./pFUnit3-build -S ./fedem-foundation/pFUnit/pFUnit-3.3.3
+          -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./pFUnit3
+
+      - name: Build and install pFUnit-3
+        run: cmake --build ./pFUnit3-build --target install
+
+      - name: Install required python packages
+        run: pip install numpy pandas PyYAML
+
+      - name: Configure main build
+        run: >
+          GTEST_ROOT=/usr/local PFUNIT=./pFUnit3
+          cmake -B ./build -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_SOLVER_AS_DLL=ON
+          -DBUILD_CONTROL_AS_DLL=ON
+          -DUSE_CONCURRENT_RECOVERY=ON
+          -DUSE_SP_RECOVERY=ON
+          -DUSE_FFTPACK=ON
+          -DFT_LARGE_MODELS=OFF
+          -DFT_TOLERANCE=1.0e-10
+
+      - name: Build binaries and execute tests
+        run: cmake --build ./build --target check
