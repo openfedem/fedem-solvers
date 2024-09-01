@@ -146,6 +146,11 @@ contains
 
     !! --- Logic section ---
 
+    if (associated(samData%minex)) then
+       !! Avoid double free if mnnn points to minex
+       if (associated(samData%mnnn,samData%minex)) nullify(samData%mnnn)
+    end if
+
     call reAllocate ('deallocateSAM',samData%mpar)
     call reAllocate ('deallocateSAM',samData%mpmnpc)
     call reAllocate ('deallocateSAM',samData%mmnpc)
@@ -174,7 +179,7 @@ contains
   !> @param[in] samData The sammodule::samtype object to check consistency of
   !> @param[in] lpu File unit number for error messages
   !> @param[out] ierr Error flag
-  !> @param[in] checkEquations If present and @e .true., also check meqn array
+  !> @param[in] checkEquations If present and .true., also check the meqn array
   !>
   !> @callergraph
   !>
@@ -372,7 +377,7 @@ contains
   !>
   !> @param[in] sam The sammodule::samtype object to consider
   !> @param idof Global DOF number on input, local DOF number on output
-  !> @param extNum If present and @e .true., return external node number instead
+  !> @param extNum If present and .true., return external node number instead
   !> @return Internal node number in range [1,nnod]
   !> @return -1 if @a idof is out of range
   !>
@@ -422,7 +427,7 @@ contains
   !>
   !> @param[in] sam The sammodule::samtype object to consider
   !> @param ieq Equation number on input, local DOF number on output
-  !> @param extNum If present and @e .true., return external node number instead
+  !> @param extNum If present and .true., return external node number instead
   !> @return Internal node number in range [1,nnod]
   !> @return -1 if @a ieq is out of range
   !>
@@ -497,7 +502,9 @@ contains
     if (associated(sam%ttcc))    nwR = nwR + size(sam%ttcc,kind=i8)
     if (associated(sam%mpreac))  nwI = nwI + size(sam%mpreac,kind=i8)
     if (associated(sam%minex))   nwI = nwI + size(sam%minex,kind=i8)
-    if (associated(sam%mnnn))    nwI = nwI + size(sam%mnnn,kind=i8)
+    if (associated(sam%mnnn) .and. .not.associated(sam%mnnn,sam%minex)) then
+       nwI = nwI + size(sam%mnnn,kind=i8)
+    end if
     if (associated(sam%melcon))  nwI = nwI + size(sam%melcon,kind=i8)
     if (associated(sam%meqn))    nwI = nwI + size(sam%meqn,kind=i8)
     if (associated(sam%meqn1))   nwI = nwI + size(sam%meqn1,kind=i8)
