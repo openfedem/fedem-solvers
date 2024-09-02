@@ -17,8 +17,10 @@ endif ( FTENV_WARNINGS AND LINUX AND NOT USE_INTEL_FORTRAN )
 
 include_directories ( ${CMAKE_CURRENT_BINARY_DIR}/.. )
 
-add_library ( ${LIB_ID} ../elStressModule.f90 ffl.f90
-                        ../strainAndStressUtils.f90 )
+add_library ( ${LIB_ID} ../elStressModule.f90
+                        ../strainAndStressUtils.f90
+                        ../../vpmCommon/samModule.f90
+                        recKindModule.f90 ffl.f90 )
 target_link_libraries ( ${LIB_ID} FemLib )
 
 if ( pFUnit_FOUND )

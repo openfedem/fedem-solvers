@@ -7,6 +7,7 @@
 --->
 
 [![REUSE status](https://api.reuse.software/badge/github.com/openfedem/fedem-solvers)](https://api.reuse.software/info/github.com/openfedem/fedem-solvers)
+[![Test status](https://github.com/openfedem/fedem-solvers/actions/workflows/run_test.yml/badge.svg)](https://github.com/openfedem/fedem-solvers/actions/workflows/run_test.yml)
 
 # FEDEM Solvers
 
