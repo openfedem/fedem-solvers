@@ -560,20 +560,18 @@ contains
     integer             , intent(in) :: lpu
 
     !! Local variables
-    integer :: i, j, flabel
+    integer           :: i, j
+    character(len=80) :: cfmt
 
     !! --- Logic section ---
 
     write(lpu,600)
     do i = 1, size(strainCoats)
+       cfmt = "(2I8,A10,1PE14.5,I10,I11,I3,0PF12.3)"
        if (size(strainCoats(i)%results) > 1) then
-          assign 611 to flabel
-       else if (size(strainCoats(i)%results) == 1) then
-          assign 610 to flabel
-       else
-          cycle
+          cfmt(36:) = "/(14X,A12,1PE14.5,I10,I11,I3,0PF12.3))"
        end if
-       write(lpu,flabel) strainCoats(i)%tensorRosette%id%baseId, &
+       write(lpu,cfmt)   strainCoats(i)%tensorRosette%id%baseId, &
             &            strainCoats(i)%tensorRosette%id%userId, &
             (resultSet_p(strainCoats(i)%results(j)%resultSet), &
             &            strainCoats(i)%tensorRosette%data(j)%zPos, &
@@ -587,9 +585,6 @@ contains
 600 format(//5X,'STRAIN COAT PROPERTY SUMMARY' /5X,74('-') &
           & /5X,'Strain Coat  Result set  Z-position  Material Group  ', &
           &     'S-N curve  SCF factor')
-610 format(2I8,A10,1PE14.5,I10,I11,I3,0PF12.3)
-611 format(2I8,A10,1PE14.5,I10,I11,I3,0PF12.3 &
-         /(14X,A12,1PE14.5,I10,I11,I3,0PF12.3))
 620 format(4X,75('-')/)
 
   end subroutine printStrainCoatInput
@@ -608,20 +603,18 @@ contains
     integer             , intent(in) :: lpu
 
     !! Local variables
-    integer :: i, j, flabel
+    integer            :: i, j
+    character(len=112) :: cfmt
 
     !! --- Logic section ---
 
     write(lpu,600)
     do i = 1, size(strainCoats)
+       cfmt = "(2I8,A10,3X,1P,2(1X,3E13.5),1X,2E13.5,1X,0P,2F13.5)"
        if (size(strainCoats(i)%results) > 1) then
-          assign 611 to flabel
-       else if (size(strainCoats(i)%results) == 1) then
-          assign 610 to flabel
-       else
-          cycle
+          cfmt(51:) = "/(14X,A12,3X,1P,2(1X,3E13.5),1X,2E13.5,1X,0P,2F13.5))"
        end if
-       write(lpu,flabel) strainCoats(i)%tensorRosette%id%baseId, &
+       write(lpu,cfmt)   strainCoats(i)%tensorRosette%id%baseId, &
             &            strainCoats(i)%tensorRosette%id%userId, &
             (resultSet_p(strainCoats(i)%results(j)%resultSet), &
             &            strainCoats(i)%results(j)%sigMax, &
@@ -650,9 +643,6 @@ contains
          &      '    Max P1      Max shear  Max von Mises', &
          &      '    Max P1      Max shear  Max von Mises ', &
          &      '    Mean      Std. Dev.      Most popular    spread' )
-610 format(2I8,A10,3X,1P,2(1X,3E13.5),1X,2E13.5,1X,0P,2F13.5)
-611 format(2I8,A10,3X,1P,2(1X,3E13.5),1X,2E13.5,1X,0P,2F13.5 &
-         /(14X,A12,3X,1P,2(1X,3E13.5),1X,2E13.5,1X,0P,2F13.5))
 612 format(20X,'Damage =  ',1P3E13.5)
 620 format(4X,159('-')/)
 
