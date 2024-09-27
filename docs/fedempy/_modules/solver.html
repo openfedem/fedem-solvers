@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>solver &mdash; fedempy 3.4.1 documentation</title>
+  <title>solver &mdash; fedempy 3.5.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=149be4c9"></script>
+        <script src="../_static/documentation_options.js?v=654eae90"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -34,7 +34,7 @@
             fedempy
           </a>
               <div class="version">
-                3.3
+                3.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -88,6 +88,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">byref</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">cdll</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">empty</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">int32</span><span class="p">,</span> <span class="n">int64</span><span class="p">,</span> <span class="n">ndarray</span>
 
@@ -118,7 +119,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class mirrors the functionality of the fedem dynamics solver library</span>
 <span class="sd">    (libfedem_solver_core.so on Linux, fedem_solver_core.dll on Windows).</span>
-<span class="sd">    See also the header file ../../../proprietary/vpmSolver/solverInterface.h</span>
+<span class="sd">    See also the header file ../../../src/vpmSolver/solverInterface.h</span>
 
 <span class="sd">    In addition to the methods for conducting the simulation itself, the class</span>
 <span class="sd">    also contains several methods for accessing and manipulating the linearized</span>
@@ -969,15 +970,17 @@
 
 <div class="viewcode-block" id="FedemSolver.solver_done">
 <a class="viewcode-back" href="../solver.html#solver.FedemSolver.solver_done">[docs]</a>
-    <span class="k">def</span> <span class="nf">solver_done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">solver_done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">print_res</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method should be used when the time/load step loop is finished.</span>
 <span class="sd">        It closes down the model and cleans up heap memory and things on disk.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        remove_singletons : bool default=None</span>
+<span class="sd">        remove_singletons : bool, default=None</span>
 <span class="sd">            If True or None, heap-allocated singelton objects are also released</span>
+<span class="sd">        print_res : bool, default=False</span>
+<span class="sd">            If True, the res-file content is printed to console</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -993,7 +996,20 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_rsflag</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverDone</span><span class="p">(</span><span class="n">_rsflag</span><span class="p">)</span></div>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span><span class="o">.</span><span class="n">solverDone</span><span class="p">(</span><span class="n">_rsflag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">print_res</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;./fedem_solver.res&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./fedem_solver.res&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">resf</span><span class="p">:</span>
+                <span class="n">print_line</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">resf</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Error :&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">print_line</span> <span class="o">=</span> <span class="mi">2</span>
+                    <span class="k">elif</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">print_line</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">print_line</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     . . .&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">print_line</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%8d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#### End of file fedem_solver.res&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">status</span></div>
 
 
 <div class="viewcode-block" id="FedemSolver.solver_close">

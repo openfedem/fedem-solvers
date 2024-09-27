@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>solver module &mdash; fedempy 3.4.1 documentation</title>
+  <title>solver module &mdash; fedempy 3.5.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=149be4c9"></script>
+        <script src="_static/documentation_options.js?v=654eae90"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -37,7 +37,7 @@
             fedempy
           </a>
               <div class="version">
-                3.3
+                3.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -169,7 +169,7 @@ Used for convenience in order to hide native type convertions.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class mirrors the functionality of the fedem dynamics solver library
 (libfedem_solver_core.so on Linux, fedem_solver_core.dll on Windows).
-See also the header file ../../../proprietary/vpmSolver/solverInterface.h</p>
+See also the header file ../../../src/vpmSolver/solverInterface.h</p>
 <p>In addition to the methods for conducting the simulation itself, the class
 also contains several methods for accessing and manipulating the linearized
 equation system, to facilitate use by external solution algorithms.</p>
@@ -994,13 +994,15 @@ It will delete those singleton objects here instead.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="solver.FedemSolver.solver_done">
-<span class="sig-name descname"><span class="pre">solver_done</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remove_singletons</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.solver_done"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.solver_done" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">solver_done</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remove_singletons</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.solver_done"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.solver_done" title="Link to this definition"></a></dt>
 <dd><p>This method should be used when the time/load step loop is finished.
 It closes down the model and cleans up heap memory and things on disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>remove_singletons</strong><span class="classifier">bool default=None</span></dt><dd><p>If True or None, heap-allocated singelton objects are also released</p>
+<dt><strong>remove_singletons</strong><span class="classifier">bool, default=None</span></dt><dd><p>If True or None, heap-allocated singelton objects are also released</p>
+</dd>
+<dt><strong>print_res</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, the res-file content is printed to console</p>
 </dd>
 </dl>
 </dd>
