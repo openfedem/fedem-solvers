@@ -1,9 +1,10 @@
 <map id="fedem&#45;foundation/src/FFaLib/FFaAlgebra/FFa3PArc.C" name="fedem&#45;foundation/src/FFaLib/FFaAlgebra/FFa3PArc.C">
-<area shape="rect" id="node1" title=" " alt="" coords="24,5,243,47"/>
-<area shape="rect" id="node2" href="$FFa3PArc_8H.html" title=" " alt="" coords="26,95,241,121"/>
-<area shape="rect" id="node3" href="$FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="5,319,216,345"/>
-<area shape="rect" id="node6" href="$FFaMat34_8H.html" title=" " alt="" coords="98,169,318,196"/>
-<area shape="rect" id="node4" title=" " alt="" coords="23,393,103,420"/>
-<area shape="rect" id="node5" title=" " alt="" coords="127,393,190,420"/>
-<area shape="rect" id="node7" href="$FFaMat33_8H.html" title=" " alt="" coords="149,244,369,271"/>
+<area shape="rect" id="node1" title="Circular arcs in 3D space." alt="" coords="123,5,342,47"/>
+<area shape="rect" id="node2" href="$FFa3PArc_8H.html" title="Circular arcs in 3D space." alt="" coords="5,95,220,121"/>
+<area shape="rect" id="node7" href="$FFaMat34_8H.html" title=" " alt="" coords="244,95,464,121"/>
+<area shape="rect" id="node3" href="$FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="119,244,330,271"/>
+<area shape="rect" id="node6" title=" " alt="" coords="131,169,187,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="137,319,217,345"/>
+<area shape="rect" id="node5" title=" " alt="" coords="241,319,304,345"/>
+<area shape="rect" id="node8" href="$FFaMat33_8H.html" title=" " alt="" coords="263,169,483,196"/>
 </map>

@@ -67,29 +67,102 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FFa3PArc.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Circular arcs in 3D space.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="FFa3PArc_8H_source.html">FFaLib/FFaAlgebra/FFa3PArc.H</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="FFaMat34_8H_source.html">FFaLib/FFaAlgebra/FFaMat34.H</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FFa3PArc.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFa3PArc_8C__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaLib_2FFaAlgebra_2FFa3PArc_8C" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaLib_2FFaAlgebra_2FFa3PArc_8C" id="afedem-foundation_2src_2FFaLib_2FFaAlgebra_2FFa3PArc_8C">
-<area shape="rect" title=" " alt="" coords="24,5,243,47"/>
-<area shape="rect" href="FFa3PArc_8H.html" title=" " alt="" coords="26,95,241,121"/>
-<area shape="rect" href="FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="5,319,216,345"/>
-<area shape="rect" href="FFaMat34_8H.html" title=" " alt="" coords="98,169,318,196"/>
-<area shape="rect" title=" " alt="" coords="23,393,103,420"/>
-<area shape="rect" title=" " alt="" coords="127,393,190,420"/>
-<area shape="rect" href="FFaMat33_8H.html" title=" " alt="" coords="149,244,369,271"/>
+<area shape="rect" title="Circular arcs in 3D space." alt="" coords="123,5,342,47"/>
+<area shape="rect" href="FFa3PArc_8H.html" title="Circular arcs in 3D space." alt="" coords="5,95,220,121"/>
+<area shape="rect" href="FFaMat34_8H.html" title=" " alt="" coords="244,95,464,121"/>
+<area shape="rect" href="FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="119,244,330,271"/>
+<area shape="rect" title=" " alt="" coords="131,169,187,196"/>
+<area shape="rect" title=" " alt="" coords="137,319,217,345"/>
+<area shape="rect" title=" " alt="" coords="241,319,304,345"/>
+<area shape="rect" href="FFaMat33_8H.html" title=" " alt="" coords="263,169,483,196"/>
 </map>
 </div>
-</div></div><!-- contents -->
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa42af1b798cf8531651ec66a689752e4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classFaVec3.html">FaVec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFa3PArc_8C.html#aa42af1b798cf8531651ec66a689752e4">findArcCenter</a> (const <a class="el" href="classFaVec3.html">FaVec3</a> &amp;P1, <a class="el" href="classFaVec3.html">FaVec3</a> P1C, const <a class="el" href="classFaVec3.html">FaVec3</a> &amp;P2, <a class="el" href="classFaVec3.html">FaVec3</a> P2C)</td></tr>
+<tr class="memdesc:aa42af1b798cf8531651ec66a689752e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static helper to calculate the center point of the arc.  <a href="FFa3PArc_8C.html#aa42af1b798cf8531651ec66a689752e4">More...</a><br /></td></tr>
+<tr class="separator:aa42af1b798cf8531651ec66a689752e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Circular arcs in 3D space. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aa42af1b798cf8531651ec66a689752e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa42af1b798cf8531651ec66a689752e4">&#9670;&nbsp;</a></span>findArcCenter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classFaVec3.html">FaVec3</a> findArcCenter </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classFaVec3.html">FaVec3</a> &amp;&#160;</td>
+          <td class="paramname"><em>P1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classFaVec3.html">FaVec3</a>&#160;</td>
+          <td class="paramname"><em>P1C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classFaVec3.html">FaVec3</a> &amp;&#160;</td>
+          <td class="paramname"><em>P2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classFaVec3.html">FaVec3</a>&#160;</td>
+          <td class="paramname"><em>P2C</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Static helper to calculate the center point of the arc. </p>
+<p>Finds the center of a circle based on two points on circle and vectors twowards centre at the two locations.</p>
+<p>This is done based on equations: </p><div class="fragment"><div class="line">P1 + <a class="code" href="namespacediffractionmodule.html#ab4603a354d2e692e808efb5f182aed0b">a</a>*P1C = C</div>
+<div class="line">P2 + <a class="code" href="namespacediffractionmodule.html#a53abb614c01c9de0ab79bddc067019ae">b</a>*P2C = C</div>
+<div class="ttc" id="anamespacediffractionmodule_html_a53abb614c01c9de0ab79bddc067019ae"><div class="ttname"><a href="namespacediffractionmodule.html#a53abb614c01c9de0ab79bddc067019ae">diffractionmodule::b</a></div><div class="ttdeci">real(sp), dimension(:,:,:), pointer b</div><div class="ttdef"><b>Definition:</b> diffractionModule.f90:22</div></div>
+<div class="ttc" id="anamespacediffractionmodule_html_ab4603a354d2e692e808efb5f182aed0b"><div class="ttname"><a href="namespacediffractionmodule.html#ab4603a354d2e692e808efb5f182aed0b">diffractionmodule::a</a></div><div class="ttdeci">real(sp), dimension(:,:,:), pointer a</div><div class="ttdef"><b>Definition:</b> diffractionModule.f90:21</div></div>
+</div><!-- fragment --><p>Using x and y component equations as 4 equations with 4 unknowns. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 12 2024 12:24:54 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 27 2024 15:24:44 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
