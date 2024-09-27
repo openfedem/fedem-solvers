@@ -8,6 +8,21 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.0.5] (2024-09-27)
+
+### :rocket: Added
+
+- The fedempy package is automatically built whenever a new release tag is pushed,
+  and is deployed on the [Releases](https://github.com/openfedem/fedem-solvers/releases) page.
+- The regression and unit tests are automatically built and executed
+  whenever a new pull request is opened or updated.
+
+### :bug: Fixed
+
+- Issue https://github.com/openfedem/fedem-foundation/issues/11 :
+  This may sometimes cause the solver to crash if evaluating the function
+  outside its definition domain, when extrapolation is to take place.
+
 ## [fedem-8.0.4] (2024-07-12)
 
 ### :bug: Fixed
@@ -57,3 +72,4 @@
 [fedem-8.0.1]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.0...fedem-8.0.1
 [fedem-8.0.3]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.1...fedem-8.0.3
 [fedem-8.0.4]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.3...fedem-8.0.4
+[fedem-8.0.5]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.4...fedem-8.0.5
