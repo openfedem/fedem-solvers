@@ -205,10 +205,9 @@ size_t searchPoints (std::string& ftlFile, FFlLinkHandler*& feModel,
   // Lambda function searching for a matching node.
   auto&& findMatchingNode = [feModel,nodeTol](const FaVec3& X) -> int
   {
-    NodesCIter nit = feModel->findClosestNode(X);
-    if (nit != feModel->nodesEnd())
-      if ((X - (*nit)->getPos()).length() <= nodeTol)
-        return (*nit)->getID();
+    FFlNode* node = feModel->findClosestNode(X);
+    if (node && (X - node->getPos()).length() <= nodeTol)
+      return node->getID();
 
     return 0;
   };
