@@ -12,15 +12,14 @@ set ( UNIT_ID ${DOMAIN_ID}_${PACKAGE_ID}_${LIB_ID} )
 message ( STATUS "INFORMATION : Processing unit ${UNIT_ID}" )
 
 string ( APPEND CMAKE_CXX_FLAGS_DEBUG " -DFMU_DEBUG" )
-if ( FTENV_WARNINGS AND LINUX AND NOT USE_INTEL_FORTRAN )
+if ( ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU )
   string ( APPEND CMAKE_CXX_FLAGS " -Wno-unused-parameter" )
-endif ( FTENV_WARNINGS AND LINUX AND NOT USE_INTEL_FORTRAN )
+endif ( ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU )
 
 # Build and install
 
 include_directories ( "${CMAKE_CURRENT_SOURCE_DIR}/FMI2/headers" )
 add_library ( ${LIB_ID} SHARED fmu_template.C )
-add_dependencies ( all_solvers ${LIB_ID} )
 
 set ( CLOUD_DIR "${CMAKE_INSTALL_PREFIX}/bin/Templates/cloudsim" )
 install ( TARGETS ${LIB_ID}
