@@ -1,0 +1,110 @@
+# SPDX-FileCopyrightText: 2023 SAP SE
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is part of FEDEM - https://openfedem.org
+
+name: Build and release fedem FMU
+
+on:
+  push:
+    tags:
+      - fmu-*
+
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    name: Build FMU for Linux
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Silence some advice and hint
+        run: |
+          git config --global advice.detachedHead false
+          git config --global init.defaultBranch main
+
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure the build
+        run: cmake -S ./FMU -B ./build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build FMU library
+        run: cmake --build ./build --target fedem_fmu
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fmu-linux
+          path: build/src/libfedem_fmu.so
+
+  build-win:
+    name: Build FMU for Windows
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Silence some advice and hint
+        run: |
+          git config --global advice.detachedHead false
+          git config --global init.defaultBranch main
+
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure the build
+        run: cmake -S ./FMU -B ./build -G "Visual Studio 17 2022"
+
+      - name: Build FMU library
+        run: cmake --build ./build --config Release --target fedem_fmu
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fmu-win
+          path: build\src\Release\fedem_fmu.dll
+
+  release-fmu:
+    name: Release FMU package
+
+    needs: [ build-linux, build-win ]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Silence some advice and hint
+        run: |
+          git config --global advice.detachedHead false
+          git config --global init.defaultBranch main
+
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ACCESS_PAT }}
+
+      - name: Get latest release tag
+        run: |
+          git checkout `git tag | grep fmu- tail -1`
+          echo "MY_TAG=`git tag | grep fmu- tail -1`" >> $GITHUB_ENV
+          echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.MY_TAG }}
+          name: "Fedem FMU ${{ env.MY_VER }}"
+          token: ${{ secrets.ACCESS_PAT }}
+          artifacts: "fmu-linux/libfedem_fmu.so,fmu-win/fedem_fmu.dll"
+          body: "FMU libraries for the FEDEM dynamics solver"
