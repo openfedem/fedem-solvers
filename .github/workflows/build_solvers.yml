@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2023 SAP SE
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is part of FEDEM - https://openfedem.org
+
+name: Build and release fedem solvers
+
+on:
+  push:
+    tags:
+      - fedem-*
+
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  publish-solvers:
+    name: Publish solver packages
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Silence some advice and hint
+        run: |
+          git config --global advice.detachedHead false
+          git config --global init.defaultBranch main
+
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.ACCESS_PAT }}
+
+      - name: Checkout the latest release tag
+        run: |
+          git checkout `git tag | grep fedem- | tail -1`
+          echo "MY_TAG=`git tag | grep fedem- | tail -1`" >> $GITHUB_ENV
+          echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
+
+      - name: Configure main build
+        run: >
+          cmake -B ./build -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_TESTS=OFF
+          -DBUILD_SOLVER_AS_DLL=ON
+          -DBUILD_CONTROL_AS_DLL=ON
+          -DUSE_CONCURRENT_RECOVERY=ON
+          -DUSE_SP_RECOVERY=ON
+          -DUSE_FFTPACK=ON
+
+      - name: Build binaries
+        run: cmake --build ./build --target all_solvers
+
+      - name: Prepare release package
+        run: |
+          mkdir bin
+          find build/src -name '*.so' -exec cp -p {} bin/ \;
+          find build/src -name 'fedem_*' -type f -exec cp -p {} bin/ \;
+          tar cfvz fedem-solvers-${{ env.MY_VER }}_linux64.tar.gz bin
+          sed "1 s/.*$/Solver package for Fedem &/" cfg/RELEASE | tr '\n' ' ' > body.md
+          sed "1 s/^.*\./(build /;s/.*$/&) for Linux 64-bit (Ubuntu)/" cfg/VERSION >> body.md
+
+      - name: Build the fedempy package
+        run: |
+          sed "1 s/.*$/fedempy package for Fedem &/" cfg/RELEASE | tr '\n' ' ' >> body.md
+          sed "1 s/^.*\./(build /;s/.*$/& and later)/" cfg/VERSION >> body.md
+          cd PythonAPI
+          python -m setup sdist
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.MY_TAG }}
+          name: "Fedem solvers ${{ env.MY_VER }}"
+          token: ${{ secrets.ACCESS_PAT }}
+          artifacts: "fedem-solvers-${{ env.MY_VER }}_linux64.tar.gz,PythonAPI/dist/fedempy-${{ env.MY_VER }}.tar.gz"
+          bodyFile: "body.md"
+          allowUpdates: true

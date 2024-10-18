@@ -15,31 +15,27 @@
 #undef UNICODE
 
 #include "fmi2Functions.h"
-
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
+#include <cstring>
 
 #if defined _MSC_VER
-  #include <windows.h>
-  typedef HINSTANCE LibHandle;
-  std::string pathSeparator = "\\";
+#include <windows.h>
+typedef HINSTANCE LibHandle;
 #elif defined __GNUC__
-  #include <dlfcn.h>
-  #include <cstring>
-  typedef void* LibHandle;
-  std::string pathSeparator = "/";
+#include <dlfcn.h>
+typedef void* LibHandle;
+#else
+#error "Platform not supported, neither _MSC_VER nor __GNUC__ defined"
 #endif
-
 
 //Macro for printing debug info to terminal
 #ifdef FMU_DEBUG
-#define DEBUG_STDERR(x) { std::cerr << x << std::endl; }
-#define DEBUG_STDOUT(x) { std::cout << x << std::endl; }
+#define DEBUG_STDOUT(x) std::cout << x << std::endl;
 #else 
-#define DEBUG_STDERR(x) {}
-#define DEBUG_STDOUT(x) {}
+#define DEBUG_STDOUT(x)
 #endif
 
 typedef void (*DLPROC)();
@@ -55,24 +51,6 @@ typedef double (*DLPROC_EVALFUNC)(int,const char*,double,int*);
 typedef bool (*DLPROC_SAVETRANSFORMATIONSTATE)(double*,const int);
 typedef int (*DLPROC_RESTARTFROMSTATE)(const double*,const int,const int);
 
-
-DLPROC getFuncAddress(const LibHandle& lib,
-                      const std::string& fName)
-{
-#if defined _MSC_VER
-  DLPROC address = (DLPROC)GetProcAddress(lib,fName.c_str());
-#elif defined __GNUC__
-  DLPROC address = (DLPROC)dlsym(lib,fName.c_str());
-#else
-#error "Platform not supported, neither _MSC_VER nor __GNUC__ defined"
-#endif
-
-  if (!address)
-    DEBUG_STDERR(" *** Could not get function address for " + fName);
-  
-  return address;
-}
-
 DLPROC_INIT solverInit;
 DLPROC_DONE solverDone;
 DLPROC_GETSTATESIZE getStateSize;
@@ -84,20 +62,8 @@ DLPROC_SAVETRANSFORMATIONSTATE saveTransformationState;
 DLPROC_RESTARTFROMSTATE restartFromState;
 
 
-std::string parentPath(std::string path)
-{
-  size_t pos = 0;
-  while(path.find(pathSeparator,pos+1) != std::string::npos)
-  {
-    pos = path.find(pathSeparator,pos+1);
-  }
-  return path.substr(0,pos);
-}
+namespace {
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-  
   enum fmuStateCode
   {
     FMUSTART= 1u << 0,
@@ -145,18 +111,22 @@ extern "C" {
     fmi2Boolean logging = false;
     const fmi2CallbackFunctions *functions;
   };
-  
-  
-  void readConfig(componentInstance* comp, std::string path)
+
+  void readConfig(componentInstance* comp, const std::string& path)
   {
-    DEBUG_STDOUT("Configpath: " + path);
+    DEBUG_STDOUT("configPath: " + path);
+
+    // Lambda function allocating an integer array.
+    auto&& allocateInts = [comp](fmi2Integer nwi)
+    {
+      return (fmi2Integer*)comp->functions->allocateMemory(nwi,sizeof(fmi2Integer));
+    };
+
     // TODO(RunarHR): readConfig: Make this more robust
     std::string line;
     std::ifstream confFile(path);
-    std::getline(confFile,line);
-    comp->initialState.modelIdentifier = line;
-    std::getline(confFile,line);
-    comp->initialState.modelGuid = line;
+    std::getline(confFile,comp->initialState.modelIdentifier);
+    std::getline(confFile,comp->initialState.modelGuid);
     std::getline(confFile,line);
     comp->initialState.numReals = atoi(line.c_str());
     std::getline(confFile,line);
@@ -167,12 +137,12 @@ extern "C" {
     comp->initialState.numParams = atoi(line.c_str());
     std::getline(confFile,line);
     comp->initialState.numTransforms = atoi(line.c_str());
-    comp->initialState.fedemInputIndices = (fmi2Integer*)comp->functions->allocateMemory( comp->initialState.numInputs, sizeof(fmi2Integer) );
-    comp->initialState.fedemOutputIndices = (fmi2Integer*)comp->functions->allocateMemory( comp->initialState.numOutputs, sizeof(fmi2Integer) );
-    comp->initialState.fedemTransformIndices = (fmi2Integer*)comp->functions->allocateMemory( comp->initialState.numTransforms, sizeof(fmi2Integer) );
-    comp->state.fedemInputIndices = (fmi2Integer*)comp->functions->allocateMemory( comp->initialState.numInputs, sizeof(fmi2Integer) );
-    comp->state.fedemOutputIndices = (fmi2Integer*)comp->functions->allocateMemory( comp->initialState.numOutputs, sizeof(fmi2Integer) );
-    comp->state.fedemTransformIndices = (fmi2Integer*)comp->functions->allocateMemory( comp->initialState.numTransforms, sizeof(fmi2Integer) );
+    comp->initialState.fedemInputIndices = allocateInts(comp->initialState.numInputs);
+    comp->initialState.fedemOutputIndices = allocateInts(comp->initialState.numOutputs);
+    comp->initialState.fedemTransformIndices = allocateInts(comp->initialState.numTransforms);
+    comp->state.fedemInputIndices = allocateInts(comp->initialState.numInputs);
+    comp->state.fedemOutputIndices = allocateInts(comp->initialState.numOutputs);
+    comp->state.fedemTransformIndices = allocateInts(comp->initialState.numTransforms);
     
     for(int i=0; i< comp->initialState.numInputs; i++)
     {
@@ -189,16 +159,14 @@ extern "C" {
       std::getline(confFile,line);
       comp->initialState.fedemTransformIndices[i] = atoi(line.c_str());
     }
-    
-    confFile.close();
   }
   
   void copyModelState(modelState* destination, modelState* source)
   {
     //Copy arrays
     memcpy( destination->reals, source->reals, sizeof(fmi2Real)*source->numReals );
-    memcpy( destination->solverState, source->solverState, sizeof(fmi2Real)*(source->solverStateSize ));
-    memcpy( destination->transformationState, source->transformationState, sizeof(fmi2Real)*(source->transformationStateSize ));
+    memcpy( destination->solverState, source->solverState, sizeof(fmi2Real)*source->solverStateSize );
+    memcpy( destination->transformationState, source->transformationState, sizeof(fmi2Real)*source->transformationStateSize );
     
     //Copy variables
     destination->modelIdentifier = source->modelIdentifier;
@@ -217,102 +185,133 @@ extern "C" {
     memcpy( destination->fedemOutputIndices, source->fedemOutputIndices, sizeof(fmi2Integer)*source->numOutputs );
     memcpy( destination->fedemTransformIndices, source->fedemTransformIndices, sizeof(fmi2Integer)*source->numTransforms );
   }
-  
+
+} // closing brace for anonymous namespace
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
   fmi2Component fmi2Instantiate(fmi2String  instanceName, fmi2Type fmuType, fmi2String  GUID, fmi2String  fmuResourceLocation, const fmi2CallbackFunctions* functions, fmi2Boolean visible, fmi2Boolean loggingOn)
   {
-    componentInstance* comp = 0;
-    
-    comp = (componentInstance*)functions->allocateMemory(1,sizeof(componentInstance));
+    DEBUG_STDOUT("Hello, FMU world!");
+
+    const char* solverPath = getenv("FEDEM_SOLVER");
+    if (!solverPath)
+    {
+      std::cerr <<" *** Environment variable FEDEM_SOLVER not defined."<< std::endl;
+      return 0;
+    }
+
+    DEBUG_STDOUT("solverPath: " + std::string(solverPath));
+
+    componentInstance* comp = (componentInstance*)functions->allocateMemory(1,sizeof(componentInstance));
     comp->logging = loggingOn;
-    
     comp->functions = functions;
     comp->instanceName = instanceName;
-    
-    
+
+    // Lambda function returning the parent path of given pathname.
+    auto&& parentPath = [](const std::string& path)
+    {
+      size_t pos = path.find_last_of("/\\");
+      return path.substr(0, pos == std::string::npos ? 0 : pos);
+    };
+
+    // Lambda function appending a filename to a path name.
+    auto&& appendPath = [](const std::string& path, const std::string& fname)
+    {
+#if defined _MSC_VER
+      return path + "\\" + fname;
+#else
+      return path + "/" + fname;
+#endif
+    };
+
     //Get resource folder path
 #if defined _MSC_VER
     char path[1024];
     HMODULE hm = NULL;
-    
-    if (!GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | 
+    if (!GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
                             GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
-                            (LPCSTR) &fmi2GetTypesPlatform, 
-                            &hm))
-    {
-      int ret = GetLastError();
-      if(comp->logging)comp->functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
-                                               "fmi2Instantiate: Could not retrieve path of running module from GetModuleHandleEx.");
-    }
+                            (LPCSTR)&fmi2GetTypesPlatform, &hm))
+      if (comp->logging)
+        functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
+                          "fmi2Instantiate: Could not retrieve path of running module from GetModuleHandleEx.");
     GetModuleFileNameA(hm, path, sizeof(path));
 #elif defined __GNUC__
     Dl_info info;
-    if (dladdr((void*)fmi2Instantiate, &info))
+    if (!dladdr((void*)fmi2Instantiate, &info))
     {
-      DEBUG_STDOUT("FMU-library location: " + std::string(info.dli_fname));
-    }
-    else
-    {
-      DEBUG_STDERR(" *** Could not find location of FMU-library");
+      std::cerr <<" *** Could not find location of FMU-library."<< std::endl;
       return 0;
     }
     const char* path = info.dli_fname;
 #endif
-    
+    DEBUG_STDOUT("FMU-library location: " + std::string(path));
+
     std::string platformPath(parentPath(path));
     DEBUG_STDOUT("platformPath: " + platformPath);
-    std::string binariesPath(parentPath(platformPath.c_str()));
+    std::string binariesPath(parentPath(platformPath));
     DEBUG_STDOUT("binariesPath: " + binariesPath);
-    std::string rootPath(parentPath(binariesPath.c_str()));
-    std::string resourcePath = rootPath + pathSeparator + "resources";
-    DEBUG_STDOUT("resourcePath: " + resourcePath);
+    std::string rootPath(parentPath(binariesPath));
+    std::string resourcePath(appendPath(rootPath,"resources"));
+    std::string workingDir(appendPath(resourcePath,"model"));
+    DEBUG_STDOUT("workingDir: " + workingDir);
 
-    readConfig(comp, resourcePath + pathSeparator + "config.txt");
+    readConfig(comp, appendPath(resourcePath,"config.txt"));
 
-    if(strcmp(comp->initialState.modelGuid.c_str(), GUID ) != 0)
+    if (strcmp(comp->initialState.modelGuid.c_str(),GUID) != 0)
     {
-      DEBUG_STDOUT("fmi2Instantiate: GUIDs does not match");
+      std::cerr <<" *** GUIDs do not match: "<< comp->initialState.modelGuid <<" "<< GUID << std::endl;
       if(comp->logging)functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
                                          "fmi2Instantiate: GUIDs does not match.");
-      DEBUG_STDOUT(comp->initialState.modelGuid.c_str());
       functions->freeMemory(comp);
       return 0;
     }
 
-    std::string solverPath(getenv("FEDEM_SOLVER"));
-    DEBUG_STDOUT("solverPath: " + solverPath);
-
     // NOTE(RunarHR): Initialization of solver should be done in EnterInitializationMode, but must be done here to get solverState size. 
 #if defined _MSC_VER
-    std::string solverBinariesPath(parentPath(solverPath.c_str()));
+    std::string solverBinariesPath(parentPath(solverPath));
     SetDllDirectory(solverBinariesPath.c_str());
-    LibHandle h_solver = LoadLibrary(solverPath.c_str());
+    LibHandle h_solver = LoadLibrary(solverPath);
     SetDllDirectory(NULL);
 #elif defined __GNUC__
-    LibHandle h_solver = dlopen(solverPath.c_str(), RTLD_LAZY);
+    LibHandle h_solver = dlopen(solverPath,RTLD_LAZY);
 #endif
     if (!h_solver) {
-      DEBUG_STDERR(" *** Could not load solver library");
+      std::cerr <<" *** Could not load solver library "<< solverPath << std::endl;
       return 0;
     }
 
-    solverInit = (DLPROC_INIT)getFuncAddress(h_solver,"solverInit");
-    solverDone = (DLPROC_DONE)getFuncAddress(h_solver,"solverDone");
-    getStateSize = (DLPROC_GETSTATESIZE)getFuncAddress(h_solver,"getStateSize");
-    getTransformationStateSize = (DLPROC_GETSTATESIZE)getFuncAddress(h_solver,"getTransformationStateSize");
-    setExtFunc = (DLPROC_SETEXTFUNC)getFuncAddress(h_solver,"setExtFunc");
-    solveNext = (DLPROC_SOLVENEXT)getFuncAddress(h_solver,"solveNext");
-    evalFunc = (DLPROC_EVALFUNC)getFuncAddress(h_solver,"evalFunc");
-    saveTransformationState = (DLPROC_SAVETRANSFORMATIONSTATE)getFuncAddress(h_solver,"saveTransformationState");
-    restartFromState = (DLPROC_RESTARTFROMSTATE)getFuncAddress(h_solver,"restartFromState");
-
-    std::string workingDir = resourcePath + pathSeparator + "model";
-
-    // Lambda function adding option files to argvStart based on existance
-    std::vector<char*> argvStart;
-    auto&& addOptionFile=[workingDir,&argvStart](const char* opt,const char* fileName)
+    // Lambda function of optaining a function pointer from the solver library.
+    auto&& getFuncAddress = [h_solver](const char* fName)
     {
-      std::string filePath = workingDir + pathSeparator + fileName;
-      std::ifstream fs(filePath.c_str());
+#if defined _MSC_VER
+      DLPROC address = (DLPROC)GetProcAddress(h_solver,fName);
+#else
+      DLPROC address = (DLPROC)dlsym(h_solver,fName);
+#endif
+      if (!address)
+        std::cerr <<" *** Could not get function address for "<< fName << std::endl;
+      return address;
+    };
+
+    solverInit = (DLPROC_INIT)getFuncAddress("solverInit");
+    solverDone = (DLPROC_DONE)getFuncAddress("solverDone");
+    getStateSize = (DLPROC_GETSTATESIZE)getFuncAddress("getStateSize");
+    getTransformationStateSize = (DLPROC_GETSTATESIZE)getFuncAddress("getTransformationStateSize");
+    setExtFunc = (DLPROC_SETEXTFUNC)getFuncAddress("setExtFunc");
+    solveNext = (DLPROC_SOLVENEXT)getFuncAddress("solveNext");
+    evalFunc = (DLPROC_EVALFUNC)getFuncAddress("evalFunc");
+    saveTransformationState = (DLPROC_SAVETRANSFORMATIONSTATE)getFuncAddress("saveTransformationState");
+    restartFromState = (DLPROC_RESTARTFROMSTATE)getFuncAddress("restartFromState");
+
+    // Lambda function adding option files to argvStart based on existance.
+    std::vector<char*> argvStart;
+    auto&& addOptionFile=[workingDir,&argvStart,appendPath](const char* opt,const char* fileName)
+    {
+      std::ifstream fs(appendPath(workingDir,fileName).c_str());
       if (fs.good())
       {
         argvStart.push_back(const_cast<char*>(opt));
@@ -334,24 +333,27 @@ extern "C" {
     {
       if(comp->logging) functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
                                           "Could not initialize solver.");
-      DEBUG_STDERR(" *** Solver failed to initialize" + std::to_string(status));
+      std::cerr <<" *** Solver failed to initialize ("<< status <<")."<< std::endl;
       return 0;
     }
-    
+
+    // Lambda function allocating a real array.
+    auto&& allocateReals = [functions](fmi2Integer nwr)
+    {
+      return (fmi2Real*)functions->allocateMemory(nwr,sizeof(fmi2Real));
+    };
+
     comp->initialState.solverStateSize = getStateSize();
     comp->initialState.transformationStateSize = getTransformationStateSize();
-    
-    //Initial State
-    comp->initialState.reals = (fmi2Real*)functions->allocateMemory( comp->initialState.numReals, sizeof(fmi2Real) );
-    comp->initialState.solverState = (fmi2Real*)comp->functions->allocateMemory( comp->initialState.solverStateSize,sizeof(fmi2Real) );
-    comp->initialState.transformationState = (fmi2Real*)comp->functions->allocateMemory( comp->initialState.transformationStateSize,sizeof(fmi2Real) );
+
+    comp->initialState.reals = allocateReals(comp->initialState.numReals);
+    comp->initialState.solverState = allocateReals(comp->initialState.solverStateSize);
+    comp->initialState.transformationState = allocateReals(comp->initialState.transformationStateSize);
     comp->initialState.t = 0;
-    
-    //Working State
-    comp->state.reals = (fmi2Real*)functions->allocateMemory( comp->initialState.numReals, sizeof(fmi2Real) );
-    comp->state.solverState = (fmi2Real*)comp->functions->allocateMemory( comp->initialState.solverStateSize,sizeof(fmi2Real) );
-    comp->state.transformationState = (fmi2Real*)comp->functions->allocateMemory( comp->initialState.transformationStateSize,sizeof(fmi2Real) );
-    comp->state.t = 0;
+
+    comp->state.reals = allocateReals(comp->initialState.numReals);
+    comp->state.solverState = allocateReals(comp->initialState.solverStateSize);
+    comp->state.transformationState = allocateReals(comp->initialState.transformationStateSize);
     
     copyModelState( &(comp->state), &(comp->initialState) );
     comp->stateCode = fmuStateCode::FMUINSTANTIATED;
@@ -712,33 +714,7 @@ extern "C" {
   const char* fmi2GetVersion() {
     return fmi2Version;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -747,43 +723,11 @@ extern "C" {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   //////////////////////////////////////////////////////
   //        NOT IMPLEMENTED                           //
   //////////////////////////////////////////////////////
-  
+
   fmi2Status fmi2GetInteger(fmi2Component c, const fmi2ValueReference vr[], size_t nvr, fmi2Integer value[])
   {
     // TODO(RunarHR): [Optional] Implement fmi2GetInteger
@@ -940,7 +884,17 @@ extern "C" {
     comp->stateCode = fmuStateCode::FMUERROR;
     return fmi2Error;
   }
-  
+
+  fmi2Status fmi2GetDirectionalDerivative(fmi2Component c,
+                                          const fmi2ValueReference vUnknown_ref[], size_t,
+                                          const fmi2ValueReference vKnown_ref[], size_t,
+                                          const fmi2Real dvKnown[], fmi2Real dvUnknown[])
+  {
+    // TODO(RunarHR): [Optional] Implement fmi2GetDirectionalDerivative
+    static_cast<componentInstance*>(c)->stateCode = fmuStateCode::FMUERROR;
+    return fmi2Error;
+  }
+
 #ifdef __cplusplus
 } // closing brace for extern "C"
 #endif

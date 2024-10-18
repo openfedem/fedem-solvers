@@ -8,6 +8,25 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.0.6] (2024-10-18)
+
+### :rocket: Added
+
+- Binaries for the solvers are automatically built for the Linux platform
+  whenever a new release tag is pushed, and attached as an artifact together with
+  the fedempy package on the [Releases](https://github.com/openfedem/fedem-solvers/releases) page.
+- The FMU wrapper for the FEDEM solvers is built for both Windows and Linux platforms
+  and deployed as a separate release, whenever a tag named `fmu-*` is pushed.
+- The auto-generated source code tar-balls associated with each realease are now empty,
+  since they will be incomplete anyway (missing submodule parts).
+
+### :bug: Fixed
+
+- https://github.com/openfedem/fedem-gui/issues/32 :
+  Wrong data format in the FMU shared object library.
+  Also handle missing definition of environment variable FEDEM_SOLVER in the FMU,
+  such that is does not crash but exits with a console error message.
+
 ## [fedem-8.0.5] (2024-09-27)
 
 ### :rocket: Added
@@ -73,3 +92,4 @@
 [fedem-8.0.3]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.1...fedem-8.0.3
 [fedem-8.0.4]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.3...fedem-8.0.4
 [fedem-8.0.5]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.4...fedem-8.0.5
+[fedem-8.0.6]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.5...fedem-8.0.6
