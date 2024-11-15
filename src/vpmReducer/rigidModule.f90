@@ -237,12 +237,12 @@ contains
           end if
 
           if (refC >= 0) then
-             !! Compute constraint coefficients from the WAVGM definions
+             !! Compute constraint coefficients from the WAVGM definitions
              call wavgmConstrEqn (xel,i,nenod,indC,txc,tyc,tzc, &
                   &               mmnpc(mpmnpc(iel):mpmnpc(iel+1)-1), &
                   &               epsX,tolX,deltaX,work,weight,omega,ipsw,lpu)
-          else ! Explicit constraints
-             call explConstrEqn (nenod,indC(i),weight,omega)
+          else ! Explicit constraints (assuming 6 DOFs per independent node)
+             call explConstrEqn (6*nenod,indC(i),weight,omega)
           end if
 
           !! Find global DOF numbers for the independent DOFs
@@ -322,10 +322,10 @@ contains
          & /5X,'Dependent node',1P3E13.5, &
          &/(5X,'Node      ',I4, 1P3E13.5))
 620 format(/9X,'Ref node',I8 / 9X,'Nodes   ',10I8 /(17X,10I8))
-630 format(/5X,'Dependent DOF :   ',I8 / 5X,'Independent DOFs:',6I8)
+630 format(/5X,'Dependent DOF   :',I8 / 5X,'Independent DOFs:',6I8)
 631 format( 5X,'Weights         :',6F8.3)
-632 format(17X,6I8)
-633 format(17X,6F8.3)
+632 format(22X,6I8)
+633 format(22X,6F8.3)
 690 format('Dependent DOF(s)',I7,' of constraint element',I8,' are ignored.')
 
 900 continue
@@ -337,14 +337,14 @@ contains
   !> @details Assuming here that all independent nodes have six DOFs.
   !> See also FFlSesamReader::readLinearDependencies(), where the
   !> weight matrix is populated from the SESAM BLDEP records.
-  subroutine explConstrEqn (nenod,indC,weight,omega)
-    integer , intent(in)  :: nenod, indC
+  subroutine explConstrEqn (nedof,indC,weight,omega)
+    integer , intent(in)  :: nedof, indC
     real(dp), intent(in)  :: weight(:)
     real(dp), intent(out) :: omega(:)
-    if (indC > 0 .and. indC+6*nenod <= size(weight)) then
-       omega(1:6*nenod) = weight(indC:indC+6*nenod-1)
-    else
-       omega(1:6*nenod) = 1.0_dp ! Assume equal weight on all DOFs
+    if (indC > 0 .and. indC+nedof-1 <= size(weight)) then
+       call DCOPY (nedof,weight(indC),1,omega(1),1)
+    else ! Assume equal weight on all DOFs
+       call DCOPY (nedof,1.0_dp,0,omega(1),1)
     end if
   end subroutine explConstrEqn
 
