@@ -210,10 +210,10 @@ contains
     InternalError = -1
 
 #ifdef FT_DEBUG
-    call flush() ! Flush all open files before aborting
 #if defined(win32) || defined(win64)
-    InternalError = -1/0
+    call abort('due to internal error')
 #else
+    call flush() ! Flush all open files before aborting
     call abort()
 #endif
 #endif
