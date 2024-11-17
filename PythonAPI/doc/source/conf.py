@@ -28,7 +28,7 @@ copyright = "2023, SAP SE"
 author = "Knut Morten Okstad"
 
 # The short X.Y version
-version = "3.6"
+version = "3.7"
 # The full version, including alpha/beta/rc tags
 release = "3.6.1"
 
