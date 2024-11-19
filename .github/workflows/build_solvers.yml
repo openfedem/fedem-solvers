@@ -36,8 +36,8 @@ jobs:
 
       - name: Checkout the latest release tag
         run: |
-          git checkout `git tag | grep fedem- | tail -1`
-          echo "MY_TAG=`git tag | grep fedem- | tail -1`" >> $GITHUB_ENV
+          git checkout `git tag -l --sort=version:refname 'fedem-*' | tail -1`
+          echo "MY_TAG=`git tag -l --sort=version:refname 'fedem-*' | tail -1`" >> $GITHUB_ENV
           echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
 
       - name: Configure main build

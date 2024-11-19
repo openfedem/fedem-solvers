@@ -17,7 +17,7 @@ else
   exit 1
 fi
 
-current=`git tag | tail -1`
+current=`git -l --sort=version:refname "fedem-*" | tail -1`
 ftpyver=`cat ../version.txt`
 buildno=`sed "s/^.*\.//" ../version.txt`
 version=`sed "1 s/\"//g;1 s/.*$/& (build $buildno)/" ../../fedem-foundation/src/Admin/version.h`

@@ -93,8 +93,8 @@ jobs:
 
       - name: Get latest release tag
         run: |
-          git checkout `git tag | grep fmu- tail -1`
-          echo "MY_TAG=`git tag | grep fmu- tail -1`" >> $GITHUB_ENV
+          git checkout `git tag -l --sort=version:refname 'fmu-*' | tail -1`
+          echo "MY_TAG=`git tag -l --sort=version:refname 'fmu-*' | tail -1`" >> $GITHUB_ENV
           echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
 
       - name: Download artifacts
