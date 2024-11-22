@@ -59,9 +59,9 @@ contains
     use progressModule         , only : lterm
     use fileUtilitiesModule    , only : getDBGfile
     use dbgUnitsModule         , only : dbgShadowPos
-    use reportErrorModule      , only : reportError, debugFileOnly_p, note_p
+    use reportErrorModule      , only : debugFileOnly_p, note_p, warning_p
+    use reportErrorModule      , only : reportError, getErrorFile
     use reportErrorModule      , only : allocationError, internalError
-    use reportErrorModule      , only : getErrorFile
     use FFaBodyHandlerInterface, only : FFa_initbody
     use FFaFilePathInterface   , only : FFa_checkPath
     use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getbool
@@ -81,7 +81,7 @@ contains
     logical :: allPri, allSec, allRest, allSupel
     logical :: allCG, allHD, allGenDOF, allEnergy
     logical :: centripForceCorrIsOn(3), stressStiffIsOn(3)
-    logical :: scaledStructDamp, scaledStrDmp, haveDamping(0:2), hasScaling
+    logical :: scaledStructDamp, scaleD, haveDamping(0:2), hasScaling
     real(dp) :: oMassScale, oMassDmp, oStiffDmp, glbAlpha1, glbAlpha2, stopGD
     real(dp), parameter :: eps_p = 1.0e-16_dp
     type(BeamPropertyType), pointer :: beamProp(:), bProp
@@ -551,11 +551,11 @@ contains
           end if
        end if
 
-       scaledStrDmp = scaledStructDamp .or. stiffEngineId > 0
-       if (scaledStrDmp .or. .not.haveDamping(0)) then
+       scaleD = scaledStructDamp .or. stiffEngineId > 0 .or. .not.haveDamping(0)
+       if (scaleD) then
 
           !! Apply stiffness and/or mass scaling factors
-          !! before computing structural damping matrix
+          !! before computing the structural damping matrix, if any
           call scaleMatrices (sups(idIn)%KmMat,sups(idIn)%Mmat,sups(idIn)%fg)
           if (haveDamping(1) .and. hasScaling(massScale)) then
              call reportError (note_p,'Mass-proportional damping for '// &
@@ -577,7 +577,7 @@ contains
                &                     glbAlpha1+alpha1,glbAlpha2+alpha2)
 
        end if
-       if (.not.scaledStrDmp .and. haveDamping(0)) then
+       if (.not. scaleD) then
 
           !! Apply stiffness and/or mass scaling factors. The structural damping
           !! above is now based on the unscaled mass- and stiffness matrices.
@@ -610,14 +610,26 @@ contains
           sups(idIn)%genDOFs%alpha2 = alpha4(1:numGenDOFs)
        end if
 
+       if (massEngineId > 0) then
+
+          !! Time-dependent mass scaling
+          if (haveDamping(1)) then
+             call reportError (note_p,'The time-dependent mass scaling '// &
+                  'assigned to '//getSupElId(sups(idIn)), &
+                  'is not accounted for when calculating the '// &
+                  'mass-proportional damping contributions.')
+          end if
+          sups(idIn)%massSclIdx = massEngineId
+
+       end if
        if (stiffEngineId > 0) then
 
           !! Time-dependent stiffness scaling
           if (haveDamping(1)) then
-             err = err - 1
-             call ReportInputError('SUP_EL',idIn,sups(idIn)%id, &
-                  'Mass-proportional damping can not be combined with '// &
-                  'time-dependent stiffness scaling.')
+             call reportError (warning_p,'Time-dependent stiffness scaling '// &
+                  'can not be combined with mass-proportional damping.', &
+                  'The time-dependent scaling is therefore switched off for '//&
+                  getSupElId(sups(idIn)))
           else
              sups(idIn)%stifSclIdx = stiffEngineId
           end if
@@ -898,6 +910,14 @@ contains
        if (sups(idIn)%dmpSclIdx > 0) then
           if (.not. associated(GetPtrToId(engines,sups(idIn)%dmpSclIdx, &
                &                          index=sups(idIn)%dmpSclIdx))) then
+             lerr = lerr - 1
+             call ReportInputError('SUP_EL',idIn,sups(idIn)%id, &
+                  &                'Non-existing engine referred')
+          end if
+       end if
+       if (sups(idIn)%massSclIdx > 0) then
+          if (.not. associated(GetPtrToId(engines,sups(idIn)%massSclIdx, &
+               &                          index=sups(idIn)%massSclIdx))) then
              lerr = lerr - 1
              call ReportInputError('SUP_EL',idIn,sups(idIn)%id, &
                   &                'Non-existing engine referred')

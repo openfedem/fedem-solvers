@@ -40,7 +40,7 @@ contains
   !> @param Rhs Right-hand-side force vector
   !>
   !> @details The Newton matrix is a linear combination of the mass-, damping-
-  !> and stiffness matrices, Nmat = scaleM*M  + scaleC*C + scaleK*K.
+  !> and stiffness matrices, Nmat = scaleM*M + scaleC*C + scaleK*K.
   !> If @a Rhs is provided, contributions due to prescribed motions,
   !> if any, will be added.
   !>
@@ -142,6 +142,7 @@ contains
     do i = 1, size(mech%sups)
 
        if ( reComputeSupMat .or. mech%sups(i)%stressStiffFlag(1) == 1 .or. &
+            abs(mech%sups(i)%massScl(1)-mech%sups(i)%massScl(2)) > eps_p .or. &
             abs(mech%sups(i)%stifScl(1)-mech%sups(i)%stifScl(2)) > eps_p ) then
 
           call BuildSupNewtonMat (newTanStiff, scaleM, scaleC, scaleK, &
@@ -353,7 +354,8 @@ contains
 
     do i = 1, size(mech%sups)
        if (associated(mech%sups(i)%Mmat)) then
-          call addInSupMat (mech%sups(i)%Mmat, Mmat, mech%sups(i), sam, ierr)
+          call addInSupMat (mech%sups(i)%Mmat, Mmat, mech%sups(i), sam, ierr, &
+               &            scale=mech%sups(i)%massScl(1))
           if (ierr < 0) goto 900
        end if
        if (associated(mech%sups(i)%Mamat)) then

@@ -298,7 +298,8 @@ contains
 
        if (associated(sups(i)%Mmat)) then
           !! Calculate the inertia forces in the superelement, Fi = M*uldd
-          call scaledMatmul (m,n,1.0_dp,sups(i)%Mmat,sups(i)%uldd,sups(i)%Fi)
+          call scaledMatmul (m,n,sups(i)%massScl(1), &
+               &             sups(i)%Mmat,sups(i)%uldd,sups(i)%Fi)
        else
           call DCOPY (m,0.0_dp,0,sups(i)%Fi(1),1)
        end if
@@ -335,7 +336,7 @@ contains
 
        if (associated(sups(i)%fg)) then
           !! Calculate the gravitational forces which is an external force
-          call scaledMatmul (m,3,sups(i)%stifScl(1),sups(i)%fg, &
+          call scaledMatmul (m,3,sups(i)%massScl(1),sups(i)%fg, &
                &             matmul(env%gravity,sups(i)%supTr(:,1:3)),sups(i)%Q)
        else
           call DCOPY (m,0.0_dp,0,sups(i)%Q(1),1)
@@ -698,7 +699,8 @@ contains
   !> @param[out] ierr Error flag
   !>
   !> @details Effective with time-dependent structural damping coefficients.
-  !> This subroutine also updates the time-dependent stiffness scaling factor.
+  !> This subroutine also updates the time-dependent stiffness- and mass
+  !> scaling factors.
   !>
   !> @callgraph @callergraph
   !>
@@ -738,6 +740,10 @@ contains
           newDmp = abs(sups(i)%dmpScl(1) - sups(i)%dmpScl(2)) > eps_p
        else
           newDmp = .false.
+       end if
+       if (sups(i)%massSclIdx > 0) then
+          sups(i)%massScl(2) = sups(i)%massScl(1)
+          sups(i)%massScl(1) = EngineValue(engs(sups(i)%massSclIdx),ierr)
        end if
        if (sups(i)%stifSclIdx > 0) then
           sups(i)%stifScl(2) = sups(i)%stifScl(1)
@@ -1271,7 +1277,7 @@ contains
 
        !! Structural mass matrix contribution
        call DCOPY (n,sup%Mmat(1,1),1,sup%Nmat(1,1),1)
-       call DSCAL (n,scaleM,sup%Nmat(1,1),1)
+       call DSCAL (n,scaleM*sup%massScl(1),sup%Nmat(1,1),1)
 
     else
        call DCOPY (n,0.0_dp,0,sup%Nmat(1,1),1)
