@@ -278,6 +278,7 @@ contains
 #endif
     use reportErrorModule      , only : getErrorFile
     use reportErrorModule      , only : reportError, debugFileOnly_p
+    use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getstring
 
     real(dp)           , intent(in)    :: gravity(3)
     type(UserdefElType), intent(inout) :: elms(:)
@@ -286,13 +287,15 @@ contains
     !! Local variables
     integer            :: i, lpu
     character(ldesc_p) :: signature
+    character(len=520) :: plugin
 
     !! --- Logic section ---
 
     ierr = 0
     if (size(elms) < 1) return
 
-    call Fi_UDE_Init (gravity(1),signature,ierr)
+    call ffa_cmdlinearg_getstring ('plugin',plugin)
+    call Fi_UDE_Init (plugin,gravity(1),signature,ierr)
     if (ierr < 0) goto 900
 
     lpu = getErrorFile()
