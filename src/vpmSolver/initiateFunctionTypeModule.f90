@@ -139,6 +139,7 @@ contains
     use FiDeviceFunctionInterface, only : FiDF_Open
     use FFaFilePathInterface     , only : ffa_checkPath
     use FFaCmdLineArgInterface   , only : ffa_cmdlinearg_getbool
+    use FFaCmdLineArgInterface   , only : ffa_cmdlinearg_getstring
     use FFaCmdLineArgInterface   , only : ffa_cmdlinearg_intValue
     use FFaMathExprInterface     , only : ffame_create
     use FFaUserFuncInterface     , only : ffauf_init, ffauf_getnopar
@@ -158,6 +159,7 @@ contains
     real(dp)           :: H3, T1, Ga, W0, dW, g, sfunc(3,max_embsw_p), ramp(2)
     real(dp), pointer  :: waveData(:,:), tmpW(:)
     character(len=128) :: err_msg
+    character(len=520) :: plugin
 
     type(RAOType), pointer :: RAOlist, tmp
 
@@ -184,6 +186,8 @@ contains
 #endif
        end if
     end if
+
+    call ffa_cmdlinearg_getstring ('plugin',plugin)
 
     !! Gravitation constant
     g = sqrt(sum(gravity*gravity))
@@ -512,7 +516,7 @@ contains
        case (USER_DEFINED_p)
 
           !! User-defined function (plug-in)
-          stat = ffauf_init(channel,expression)
+          stat = ffauf_init(plugin,channel,expression)
           if (stat < 0) then
              err = err - 1
              call reportError (error_p, &

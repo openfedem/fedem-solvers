@@ -144,6 +144,8 @@ module SupElTypeModule
      real(dp) :: dmpScl(2)  !< Current and previous scaling of mDmp0 and kDmp0
      integer  :: dmpSclIdx  !< Index to structural damping scaling function
 
+     real(dp) :: massScl(2) !< Current and previous mass scaling factors
+     integer  :: massSclIdx !< Index to mass scaling function
      real(dp) :: stifScl(2) !< Current and previous stiffness scaling factors
      integer  :: stifSclIdx !< Index to stiffness scaling function
 
@@ -356,6 +358,7 @@ contains
     write(io,3) 'mDmpFactor    =', sup%mDmpFactor
     write(io,3) 'kDmpFactor    =', sup%kDmpFactor
     write(io,*) 'dmpScale(id)  =', sup%dmpSclIdx
+    write(io,*) 'massScale(id) =', sup%massSclIdx
     write(io,*) 'stifScale(id) =', sup%stifSclIdx
     write(io,*) 'savePos       =', sup%savePos
     write(io,*) 'saveVar       =', sup%saveVar
@@ -666,8 +669,10 @@ contains
     sup%mDmp0 = 0.0_dp
     sup%kDmp0 = 0.0_dp
     sup%dmpScl = 1.0_dp
+    sup%massScl = 1.0_dp
     sup%stifScl = 1.0_dp
     sup%dmpSclIdx = 0
+    sup%massSclIdx = 0
     sup%stifSclIdx = 0
     sup%savePos = .false.
     sup%saveVar = .false.
@@ -1273,6 +1278,7 @@ module SupElNamelistModule
   integer :: recoveryFlag          !< Flag for enabling stress recovery
   integer :: BC(maxGenDofs_p)      !< Boundary conditions for component modes
   integer :: strDmpEngineId        !< Base ID for structural damping function
+  integer :: massEngineId          !< Base ID for mass scaling function
   integer :: stiffEngineId         !< Base ID for stiffness scaling function
 
   integer :: savePos    !< Flag indicating whether position should be saved
@@ -1307,7 +1313,7 @@ module SupElNamelistModule
        &            refTriad2Id, offset2, &
        &            refTriad3Id, offset3, &
        &            stressStiffFlag, massCorrFlag, recoveryFlag, &
-       &            stiffEngineId, stiffScale, massScale, &
+       &            stiffEngineId, massEngineId, stiffScale, massScale, &
        &            dragParams, slamParams, &
        &            strDmpEngineId, alpha1, alpha2, alpha3, alpha4, BC, &
        &            savePos, saveVar
@@ -1343,7 +1349,8 @@ contains
     stressStiffFlag=-1; massCorrFlag=-1; recoveryFlag=-1
     stiffScale=1.0_dp; massScale=1.0_dp; dragParams=0.0_dp; slamParams=0.0_dp
     alpha1=0.0_dp; alpha2=0.0_dp; alpha3=0.0_dp; alpha4=0.0_dp
-    stiffEngineId=0; strDmpEngineId=0; BC=1; savePos=0; saveVar=0
+    massEngineId=0; stiffEngineId=0; strDmpEngineId=0
+    BC=1; savePos=0; saveVar=0
 
     read(infp,nml=SUP_EL,iostat=stat)
 

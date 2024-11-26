@@ -32,7 +32,7 @@ jobs:
 
       - name: Checkout the latest release tag
         run: |
-          git checkout `git tag | grep fedem- | tail -1`
+          git checkout `git tag -l --sort=version:refname 'fedem-*' | tail -1`
           git submodule update
 
       - name: Configure for build
