@@ -158,6 +158,7 @@ class FedemSolver:
         self._solver.solverInit.restype = c_int
         self._solver.restartFromState.restype = c_int
         self._solver.solveWindow.restype = c_bool
+        self._solver.haveResults.restype = c_int
         self._solver.getStateSize.restype = c_int
         self._solver.getTransformationStateSize.restype = c_int
         self._solver.getPartDeformationStateSize.restype = c_int
@@ -327,7 +328,7 @@ class FedemSolver:
         This method processes the input and sets up necessary data structures
         prior to the time integration loop. It also performs the license checks.
 
-        See the Fedem R7.5 Users Guide, Appendix C.3 for a complete list of all
+        See the Fedem R8.0 Users Guide, Appendix C.3 for a complete list of all
         command-line arguments that may be specified and their default values.
 
         If the argument fsi is None, the model is assumed defined in the file
@@ -492,6 +493,12 @@ class FedemSolver:
             outputs[:] = outputs_
 
         return outputs, not_done and success
+
+    def have_results(self):
+        """
+        Utility returning whether current time step have results to be saved.
+        """
+        return self._solver.haveResults()
 
     def get_state_size(self):
         """

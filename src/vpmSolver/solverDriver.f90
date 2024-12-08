@@ -483,3 +483,13 @@ subroutine slv_savepart (iopS,bid,data,ndat,ierr)
   integer , intent(out) :: ierr    !< Error flag
   call savePartState (iopS,bid,data,ndat,ierr)
 end subroutine slv_savepart
+
+!===============================================================================
+!> @brief Checks whether current time step have results to be saved.
+!> @callgraph
+function slv_haveresults ()
+  use solverModule, only : haveResults
+  implicit none
+  integer :: slv_haveresults
+  slv_haveresults = haveResults()
+end function slv_haveresults

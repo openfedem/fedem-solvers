@@ -112,6 +112,11 @@ extern "C" {
                    int nDat, double* stateData, int* ierr);
 
   /*!
+    \brief Returns whether current time step have results to be saved.
+  */
+  int haveResults();
+
+  /*!
     \brief Returns the required length of the state vector to be is used when
     restarting a simulation from an in-core array.
   */

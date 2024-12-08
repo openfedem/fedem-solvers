@@ -77,7 +77,7 @@ module solverModule
   public :: partStateVectorSize, savePartState
   public :: strainGagesSize, saveInitGageStrains
   public :: getSystemMatrix, getElementMatrix, getRhsVector, setRhsVector
-  public :: systemSize, objectEquations, objectStateVar
+  public :: systemSize, objectEquations, objectStateVar, haveResults
   public :: solverParameters, solveLinEqSystem
   public :: computeGageStrains, computeBeamForces, computeRelativeDistance
   public :: computeResponseVars, getJointSpringStiffness
@@ -1506,6 +1506,30 @@ contains
     solveDynamic = .not. isQuasiStatic(sys)
 
   end function solveDynamic
+
+
+  !!==========================================================================
+  !> @brief Returns whether current step have results to be saved.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 6 Dec 2024
+
+  integer function haveResults ()
+
+    !! --- Logic section ---
+
+    if (lRec /= 1 .and. lRec /= 3) then
+       haveResults = 1 ! Only transformation results (every time step)
+    else if (sys%time - lastRec < 1.0e-12_dp) then
+       haveResults = 2 ! This step have stress recovery results
+    else
+       haveResults = 0 ! No results for this time step
+    end if
+
+  end function haveResults
 
 
   !!============================================================================
