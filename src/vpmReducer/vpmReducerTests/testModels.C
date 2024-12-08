@@ -28,11 +28,9 @@
 
 #include "FFlLib/FFlLinkHandler.H"
 #include "FFlLib/FFlFEParts/FFlNode.H"
-#include "FFlLib/FFlFEParts/FFlBEAM2.H"
-#include "FFlLib/FFlFEParts/FFlTRI3.H"
-#include "FFlLib/FFlFEParts/FFlTRI6.H"
-#include "FFlLib/FFlFEParts/FFlQUAD4.H"
-#include "FFlLib/FFlFEParts/FFlQUAD8.H"
+#include "FFlLib/FFlFEParts/FFlBeams.H"
+#include "FFlLib/FFlFEParts/FFlShells.H"
+#include "FFlLib/FFlFEParts/FFlLoads.H"
 #include "FFlLib/FFlFEParts/FFlRGD.H"
 #include "FFlLib/FFlFEParts/FFlWAVGM.H"
 #include "FFlLib/FFlFEParts/FFlBUSH.H"
@@ -41,7 +39,10 @@
 #include "FFlLib/FFlFEParts/FFlPBEAMPIN.H"
 #include "FFlLib/FFlFEParts/FFlPTHICK.H"
 #include "FFlLib/FFlFEParts/FFlPMAT.H"
-#include "FFlLib/FFlFEParts/FFlCLOAD.H"
+
+#ifdef FF_NAMESPACE
+using namespace FF_NAMESPACE;
+#endif
 
 
 /*!
@@ -874,4 +875,11 @@ int createFEModel (int iPart, int nel, int nel2,
   }
 
   return 0;
+}
+
+
+//! \brief Releases the current FE model from memory.
+void clearFEModel ()
+{
+  ffl_setLink(NULL);
 }
