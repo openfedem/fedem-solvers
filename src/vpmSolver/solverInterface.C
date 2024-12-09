@@ -23,6 +23,7 @@
 */
 
 #include "vpmCommon/FFCmdLineArgInterface.H"
+#include "vpmCommon/SignalHandler.H"
 #include "FiDeviceFunctions/FiDeviceFunctionFactory.H"
 #include "FFrLib/FFrReadOpInit.H"
 #ifdef FT_HAS_RECOVERY
@@ -93,6 +94,7 @@ static void releaseGlobalHeapObjects (bool removeFFlSingeltons = true)
   FiDeviceFunctionFactory::removeInstance ();
   FFaMathExprFactory::removeInstance ();
   FFaCmdLineArg::removeInstance ();
+  SignalHandler::reset ();
   FFaMsg::setMessager ();
   iop = -99; // Reset the operation status variable when everything is released
 }

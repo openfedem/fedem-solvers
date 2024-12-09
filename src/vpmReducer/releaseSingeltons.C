@@ -9,6 +9,7 @@
   \brief Cleaning of global heap-allocated objects on program exit.
 */
 
+#include "vpmCommon/SignalHandler.H"
 #include "FFlLib/FFlInit.H"
 #include "FFaLib/FFaCmdLineArg/FFaCmdLineArg.H"
 #include "FFaLib/FFaDefinitions/FFaMsg.H"
@@ -33,6 +34,7 @@ void releaseSingeltons (bool lastPart)
     FFl::releaseAllReaders();
     FFl::releaseAllElements();
     FFaCmdLineArg::removeInstance();
+    SignalHandler::reset();
   }
   FFaMsg::setMessager();
 }
