@@ -361,6 +361,8 @@ contains
     b(1,2) = -a(1,2)/det
     b(2,1) = -a(2,1)/det
 
+    if (present(ierr)) ierr = 0
+
   end function invert22
 
 
