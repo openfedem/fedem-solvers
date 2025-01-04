@@ -1,14 +1,15 @@
 <map id="src/vpmReducer/releaseSingeltons.C" name="src/vpmReducer/releaseSingeltons.C">
-<area shape="rect" id="node1" title="Cleaning of global heap&#45;allocated objects on program exit." alt="" coords="99,5,359,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,87,125,114"/>
-<area shape="rect" id="node3" href="$FFaCmdLineArg_8H.html" title="General command&#45;line option handler." alt="" coords="333,80,501,121"/>
-<area shape="rect" id="node11" href="$FFaMsg_8H.html" title=" " alt="" coords="150,80,309,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="132,169,191,196"/>
-<area shape="rect" id="node5" title=" " alt="" coords="215,169,278,196"/>
-<area shape="rect" id="node6" title=" " alt="" coords="303,169,353,196"/>
-<area shape="rect" id="node7" title=" " alt="" coords="377,169,457,196"/>
-<area shape="rect" id="node8" title=" " alt="" coords="481,169,556,196"/>
-<area shape="rect" id="node9" title=" " alt="" coords="581,169,646,196"/>
+<area shape="rect" id="node1" title="Cleaning of global heap&#45;allocated objects on program exit." alt="" coords="291,5,551,32"/>
+<area shape="rect" id="node2" href="$SignalHandler_8H.html" title="Handling of various OS signals casing the program to abort." alt="" coords="5,87,224,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="624,87,744,114"/>
+<area shape="rect" id="node5" href="$FFaCmdLineArg_8H.html" title="General command&#45;line option handler." alt="" coords="432,80,600,121"/>
+<area shape="rect" id="node12" href="$FFaMsg_8H.html" title=" " alt="" coords="249,80,407,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="140,169,199,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="305,169,367,196"/>
+<area shape="rect" id="node7" title=" " alt="" coords="392,169,443,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="467,169,547,196"/>
+<area shape="rect" id="node9" title=" " alt="" coords="571,169,645,196"/>
 <area shape="rect" id="node10" title=" " alt="" coords="670,169,735,196"/>
-<area shape="rect" id="node12" title=" " alt="" coords="50,169,107,196"/>
+<area shape="rect" id="node11" title=" " alt="" coords="759,169,825,196"/>
+<area shape="rect" id="node13" title=" " alt="" coords="223,169,281,196"/>
 </map>

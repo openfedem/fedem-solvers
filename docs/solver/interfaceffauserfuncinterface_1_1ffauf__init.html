@@ -80,13 +80,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4ca1c96b0ef49724301e1ec9c6aea40f"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__init.html#a4ca1c96b0ef49724301e1ec9c6aea40f">ffauf_init</a> (funcId, sign)</td></tr>
-<tr class="separator:a4ca1c96b0ef49724301e1ec9c6aea40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae47cd6289e59b2281dc0165e45723233"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__init.html#ae47cd6289e59b2281dc0165e45723233">ffauf_init</a> (plugin, funcId, sign)</td></tr>
+<tr class="separator:ae47cd6289e59b2281dc0165e45723233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Loads the user-defined plugin(s) into core memory. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">plugin</td><td>List of user-defined plugin libraries </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">funcId</td><td>Index of function to return number of arguments for </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">sign</td><td>Signature string of the user-defined function plugin </td></tr>
   </table>
@@ -94,8 +95,8 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of arguments for specified user-defined function </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4ca1c96b0ef49724301e1ec9c6aea40f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ca1c96b0ef49724301e1ec9c6aea40f">&#9670;&nbsp;</a></span>ffauf_init()</h2>
+<a id="ae47cd6289e59b2281dc0165e45723233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae47cd6289e59b2281dc0165e45723233">&#9670;&nbsp;</a></span>ffauf_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -103,6 +104,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">integer function ffauserfuncinterface::ffauf_init::ffauf_init </td>
           <td>(</td>
+          <td class="paramtype">character(len=*), intent(in)&#160;</td>
+          <td class="paramname"><em>plugin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">integer, intent(in)&#160;</td>
           <td class="paramname"><em>funcId</em>, </td>
         </tr>
@@ -128,7 +135,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 17 2024 11:11:19 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

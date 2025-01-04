@@ -1,5 +1,7 @@
 <map id="src/vpmCommon/SignalHandler.H" name="src/vpmCommon/SignalHandler.H">
-<area shape="rect" id="node1" title="Handling of various OS signals casing the program to abort." alt="" coords="117,5,359,32"/>
-<area shape="rect" id="node2" href="$cmdLineArgInit_8C.html" title="This file contains C++ code for setting up the command&#45;line handler." alt="" coords="5,80,220,121"/>
-<area shape="rect" id="node3" href="$SignalHandler_8C.html" title="Handling of various OS signals casing the program to abort." alt="" coords="245,87,485,114"/>
+<area shape="rect" id="node1" title="Handling of various OS signals casing the program to abort." alt="" coords="400,5,641,32"/>
+<area shape="rect" id="node2" href="$solverInterface_8C.html" title="This file contains the C++ wrappers of the FEDEM dynamics solver API." alt="" coords="5,87,236,114"/>
+<area shape="rect" id="node3" href="$releaseSingeltons_8C.html" title="Cleaning of global heap&#45;allocated objects on program exit." alt="" coords="260,87,520,114"/>
+<area shape="rect" id="node4" href="$cmdLineArgInit_8C.html" title="This file contains C++ code for setting up the command&#45;line handler." alt="" coords="544,80,759,121"/>
+<area shape="rect" id="node5" href="$SignalHandler_8C.html" title="Handling of various OS signals casing the program to abort." alt="" coords="783,87,1023,114"/>
 </map>
