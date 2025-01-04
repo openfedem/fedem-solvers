@@ -81,7 +81,7 @@ contains
        je = js + nd-1
        iedof = NEDOF + 1
        NEDOF = NEDOF + nd
-       if (NEDOF < size(EV)) then
+       if (NEDOF <= size(EV)) then
           EV(iedof:NEDOF) = SV(js:je)
        end if
     end do
