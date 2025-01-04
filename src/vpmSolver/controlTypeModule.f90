@@ -350,7 +350,11 @@ contains
 
     mpar(45) = size(ctrl%input)                    ! nCIn
     mpar(46) = 0                                   ! nCOut
-    mpar(47) = size(ctrl%vreg)                     ! nCVar
+    if (associated(ctrl%vreg)) then
+       mpar(47) = size(ctrl%vreg)                  ! nCVar
+    else
+       mpar(47) = 0
+    end if
     mpar(48) = ctrl%mpireg(7) - ctrl%mpireg(6) - 1 ! nCEl
 
     !! Set array lengths

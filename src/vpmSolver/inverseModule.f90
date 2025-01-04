@@ -379,7 +379,7 @@ contains
       real(dp), intent(out)   :: x(:)
       integer,  intent(in)    :: n
       integer,  intent(out)   :: ierr
-      call DCOPY (n,b,1,x,1)
+      call DCOPY (n,b(1),1,x(1),1)
       if (doFactor) then
          call DGESV (n,1,A(1,1),size(A,1),ipiv(1),x(1),size(x),ierr)
       else

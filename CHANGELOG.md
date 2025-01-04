@@ -8,6 +8,19 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.0.8] (2025-01-04)
+
+### :rocket: Added
+
+- Issue https://github.com/openfedem/fedem-solvers/issues/18 :
+  Time-dependent mass scaling on superelements.
+- Print traceback to console on segmentation fault for Debug build on Linux.
+
+### :bug: Fixed
+
+- Issue https://github.com/openfedem/fedem-solvers/issues/21 :
+  Incorrect stress calculation for the 20-noded HEX element.
+
 ## [fedem-8.0.6] (2024-10-18)
 
 ### :rocket: Added
@@ -17,7 +30,7 @@
   the fedempy package on the [Releases](https://github.com/openfedem/fedem-solvers/releases) page.
 - The FMU wrapper for the FEDEM solvers is built for both Windows and Linux platforms
   and deployed as a separate release, whenever a tag named `fmu-*` is pushed.
-- The auto-generated source code tar-balls associated with each realease are now empty,
+- The auto-generated source code tar-balls associated with each release are now empty,
   since they will be incomplete anyway (missing submodule parts).
 
 ### :bug: Fixed
@@ -93,3 +106,4 @@
 [fedem-8.0.4]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.3...fedem-8.0.4
 [fedem-8.0.5]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.4...fedem-8.0.5
 [fedem-8.0.6]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.5...fedem-8.0.6
+[fedem-8.0.8]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.6...fedem-8.0.8

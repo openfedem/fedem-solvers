@@ -36,12 +36,12 @@ public:
 		    VoidFuncPtr f1 = NULL,
 		    VoidFuncPtr f2 = NULL,
 		    VoidFuncPtr f3 = NULL);
+  //! \brief Resets the signal handler to default behaviour.
+  static void reset ();
 
 protected:
   //! \brief Invokes the appropriate exit method based on the given signal.
   static void processSignal(int sig);
-  //! \brief Empty dummy method (used for function pointer initialization).
-  static void dummy() {}
 
   //! Function to invoke when exiting without saving
   static VoidFuncPtr emergencyExit;
