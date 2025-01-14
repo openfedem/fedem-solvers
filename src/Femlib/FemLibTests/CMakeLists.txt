@@ -18,6 +18,7 @@ if ( pFUnit_FOUND )
   add_fortran_test ( test_FqtSh testFqtS.pf  FemLib )
   add_fortran_test ( test_SCqtS testSCqtS.pf FemLib )
   add_fortran_test ( test_CongT testCongruenceTrans56.pf FemLib )
+  add_fortran_test ( test_MPRO3 testMPRO30.pf FemLib )
 endif ( pFUnit_FOUND )
 
 add_executable ( ${LIB_ID} linkTest.f90 )

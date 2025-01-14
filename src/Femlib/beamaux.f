@@ -29,7 +29,9 @@ C
       DOUBLE PRECISION  A(MA,NA)
       INTEGER           I,J,K,L
 C
-      DO 40 J=1,NA,8
+      IF(NA-12)100,100,5
+C
+    5 DO 40 J=1,NA,8
       K = J+7
       IF(K-NA)20,20,10
    10 K = NA
@@ -40,12 +42,20 @@ C
 C
       RETURN
 C
- 6000 FORMAT(/8I15)
- 6010 FORMAT(I5,1P,8E15.7)
+  100 WRITE(IW,6000) (L,L=1,NA)
+      DO 130 I=1,MA
+  130 WRITE(IW,6010) I,(A(I,L),L=1,NA)
+C
+      RETURN
+C
+ 6000 FORMAT(/12I15)
+ 6010 FORMAT(I5,1P,12E15.7)
 C
       END
-C>    @brief Computes a local-to-global transformation matrix.
-      SUBROUTINE DCOS30(C,X,Y,Z)
+C>    @brief Computes a global-to-local transformation matrix.
+C>    @details The local X-axis is defined from point 1 to point 2.
+C>    Point 3 is then used to define the local XZ-plane.
+      SUBROUTINE DCOS30(C,X,Y,Z,PHI)
 C
 C **********************************************************************
 C
@@ -64,16 +74,16 @@ C **********************************************************************
 C
       IMPLICIT NONE
 C
-      DOUBLE PRECISION  C(3,3),X(3),Y(3),Z(3)
-      DOUBLE PRECISION  AB,CX,CY,CZ
+      DOUBLE PRECISION  C(3,3),X(3),Y(3),Z(3),PHI
+      DOUBLE PRECISION  AB,CX,CY,CZ,ca,sa
+      INTEGER           i
 C
 C     THE DIRECTION COSINES OF THE LOCAL X-AXIS
 C
       CX = X(2) - X(1)
       CY = Y(2) - Y(1)
       CZ = Z(2) - Z(1)
-      AB = CX*CX + CY*CY + CZ*CZ
-      AB = DSQRT(AB)
+      AB = DSQRT(CX*CX + CY*CY + CZ*CZ)
       C(1,1) = CX/AB
       C(1,2) = CY/AB
       C(1,3) = CZ/AB
@@ -83,8 +93,7 @@ C
       CX = C(1,3)*(Y(3) - Y(1)) - C(1,2)*(Z(3) - Z(1))
       CY = C(1,1)*(Z(3) - Z(1)) - C(1,3)*(X(3) - X(1))
       CZ = C(1,2)*(X(3) - X(1)) - C(1,1)*(Y(3) - Y(1))
-      AB = CX*CX + CY*CY + CZ*CZ
-      AB = DSQRT(AB)
+      AB = DSQRT(CX*CX + CY*CY + CZ*CZ)
       C(2,1) = CX/AB
       C(2,2) = CY/AB
       C(2,3) = CZ/AB
@@ -94,15 +103,30 @@ C
       CX = C(1,2)*C(2,3) - C(1,3)*C(2,2)
       CY = C(1,3)*C(2,1) - C(1,1)*C(2,3)
       CZ = C(1,1)*C(2,2) - C(1,2)*C(2,1)
-      AB = CX*CX + CY*CY + CZ*CZ
-      AB = DSQRT(AB)
+      AB = DSQRT(CX*CX + CY*CY + CZ*CZ)
       C(3,1) = CX/AB
       C(3,2) = CY/AB
       C(3,3) = CZ/AB
 C
+      if (DABS(PHI) .le. 1.0D-6) return
+C
+C     ACCOUNT FOR ROTATED PRINCIPAL AXES
+C
+      ab = PHI*ATAN(1.0D0)/4.5D1
+      ca = cos(ab)
+      sa = sin(ab)
+      do 100 i = 1, 3
+         cy = ca*C(2,i) + sa*C(3,i)
+         cz = ca*C(3,i) - sa*C(2,i)
+         C(2,i) = cy
+         C(3,i) = cz
+  100 continue
+C
       RETURN
       END
 C>    @brief Performs a congruence transformation of a symmetric matrix.
+C>    @details @b EK=P'*EK*P where @b P is the transformation matrix
+C>    consisting of @b C repeated along the diagonal and zero elsewhere.
       SUBROUTINE MPRO30(EK,C,M)
 C
 C **********************************************************************
@@ -125,39 +149,30 @@ C
 C
       INTEGER           M
       DOUBLE PRECISION  EK(M,M),C(3,3),B(3,3)
-      INTEGER           I,IA,IB,J,JA,JB,K,KA,L
+      INTEGER           I,IA,J,JA,KA
 C
       DO 500 I=0,M-3,3
       DO 500 J=0,M-3,3
 C
-      DO 100 K=1,3
-      DO 100 L=1,3
-  100 B(K,L) = 0.0D0
+      DO 100 IA=1,3
+      DO 100 JA=1,3
+  100 B(IA,JA) = 0.0D0
 C
       DO 200 IA=1,3
-      IB = I + IA
       DO 200 KA=1,3
-      JB = J + KA
       DO 200 JA=1,3
-  200 B(JA,IA) = B(JA,IA) + C(KA,JA)*EK(JB,IB)
+  200 B(JA,IA) = B(JA,IA) + C(KA,JA)*EK(J+KA,I+IA)
 C
       DO 300 IA=1,3
-      IB = I + IA
       DO 300 KA=1,3
-      JB = J + KA
-  300 EK(JB,IB) = 0.0D0
+  300 EK(J+KA,I+IA) = 0.0D0
 C
       DO 400 IA=1,3
-      IB = I + IA
       DO 400 KA=1,3
-      JB = J + KA
       DO 400 JA=1,3
-  400 EK(JB,IB) = EK(JB,IB) + B(KA,JA)*C(JA,IA)
-  500 CONTINUE
+  400 EK(J+KA,I+IA) = EK(J+KA,I+IA) + B(KA,JA)*C(JA,IA)
 C
-      DO 1000 I=1,M
-      DO 1000 J=I,M
- 1000 EK(I,J) = EK(J,I)
+  500 CONTINUE
 C
       RETURN
       END
@@ -205,7 +220,9 @@ C
 C
       RETURN
       END
-C>    @brief Computes a local-to-global transformation matrix.
+C>    @brief Computes a global-to-local transformation matrix.
+C>    @details The local X-axis is defined from point 1 to point 2.
+C>    Point 3 is then used to define the local XY-plane.
       SUBROUTINE DIRC30(C,X,Y,Z)
 C
 C **********************************************************************
@@ -232,8 +249,7 @@ C
       CX = X(2)-X(1)
       CY = Y(2)-Y(1)
       CZ = Z(2)-Z(1)
-      AB = CX*CX + CY*CY + CZ*CZ
-      AB = DSQRT(AB)
+      AB = DSQRT(CX*CX + CY*CY + CZ*CZ)
       C(1,1) = CX/AB
       C(1,2) = CY/AB
       C(1,3) = CZ/AB
@@ -243,8 +259,7 @@ C
       CX = C(1,2)*(Z(3)-Z(1)) - C(1,3)*(Y(3)-Y(1))
       CY = C(1,3)*(X(3)-X(1)) - C(1,1)*(Z(3)-Z(1))
       CZ = C(1,1)*(Y(3)-Y(1)) - C(1,2)*(X(3)-X(1))
-      AB = CX*CX + CY*CY + CZ*CZ
-      AB = DSQRT(AB)
+      AB = DSQRT(CX*CX + CY*CY + CZ*CZ)
       C(3,1) = CX/AB
       C(3,2) = CY/AB
       C(3,3) = CZ/AB
@@ -254,8 +269,7 @@ C
       CX = C(3,2)*C(1,3) - C(3,3)*C(1,2)
       CY = C(3,3)*C(1,1) - C(3,1)*C(1,3)
       CZ = C(3,1)*C(1,2) - C(3,2)*C(1,1)
-      AB = CX*CX + CY*CY + CZ*CZ
-      AB = DSQRT(AB)
+      AB = DSQRT(CX*CX + CY*CY + CZ*CZ)
       C(2,1) = CX/AB
       C(2,2) = CY/AB
       C(2,3) = CZ/AB

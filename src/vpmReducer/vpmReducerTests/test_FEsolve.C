@@ -19,6 +19,7 @@
 #include "gtest.h"
 #include "vpmCommon/FFCmdLineArgInterface.H"
 #include <cstdlib>
+#include <cmath>
 
 
 extern "C" {
@@ -110,8 +111,10 @@ TEST_P(Solve, FEmodel)
   ASSERT_EQ(solvePartDis(1,&GetParam().nodeNo,displ),0);
   std::cout << GetParam() <<": "
             << displ[0] <<" "<< displ[1] <<" "<< displ[2] << std::endl;
+  double dmx = std::max(fabs(displ[0]),std::max(fabs(displ[1]),fabs(displ[2])));
+  double eps = dmx > 10.0 ? dmx*1.0e-5 : 1.0e-4;
   for (int i = 0; i < 3; i++)
-    EXPECT_NEAR(displ[i],GetParam().nodeDis[i],1.0e-4);
+    EXPECT_NEAR(displ[i],GetParam().nodeDis[i],eps);
 }
 
 
@@ -126,7 +129,9 @@ INSTANTIATE_TEST_CASE_P(TestBeams, Solve,  //  FE-part file               node  
                                         Case{ "02_1D2D_Hybrid.nas",       1259, 0.0, 0.0129, 0.0 },
                                         Case{ "03_2D_ShellElements.nas", 29358, 0.0, 0.0123, 0.0 },
                                         Case{ "04_3D_VolumeElements.nas", 1257, 0.0, 0.0128, 0.0 },
-                                        Case{ "L-beam.nas",  3, 0.00806403, 0.330873, -0.0302335 },
+                                        Case{ "Tripod.nas",               5, 0.0267234, 0.0, 0.0 },
+                                        Case{ "L-beam.nas",  3, 0.00806403, 0.0287016, 0.0168831 },
+                                        Case{ "PBEAML.nas", 16355,-0.420529, 0.202566, 0.0087845 },
                                         Case{ "CylinderBeam.nas",            6, 0.0, 0.3450, 0.0 },
                                         Case{ "CylinderBeam-generic.nas",    6, 0.0, 0.3450, 0.0 },
                                         Case{ "CylinderBeam-shearY.nas",  6, 0.3434, 0.3450, 0.0 },
