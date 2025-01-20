@@ -29,9 +29,12 @@ C     DATE/VERSION  :  23.02.77 / 01
 C
 C***********************************************************************
 C
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-      DIMENSION  EK(12,12),X(5),Y(5),Z(5),EP(6),CA(2),XS(2),T2(3,3)
-      DIMENSION  E1(3),E2(3),W(3)
+      IMPLICIT NONE
+C
+      DOUBLE PRECISION  EK(12,12),X(5),Y(5),Z(5),EP(6),CA(2),XS(2)
+      DOUBLE PRECISION  EFFLEN,PHI
+      INTEGER           IPINA,IPINB,ID,IW,IPSW,IERR
+      DOUBLE PRECISION  BA,BL,BX,BY,BZ,T2(3,3),E1(3),E2(3),W(3)
 C
       IERR = 0
 C
@@ -41,6 +44,7 @@ C
       WRITE(IW,6042) EP(1),EP(2),EP(3)
       WRITE(IW,6043) IPINA,IPINB
       WRITE(IW,6044) EFFLEN
+      WRITE(IW,6045) PHI
 C
 C     THE LENGTH OF THE ELEMENT
 C
@@ -71,24 +75,12 @@ C     CHECK THE PROPERTY PARAMETERS
 C
    40 if (EP(2) .le. 1.0D-16 .or. EP(3) .le. 1.0D-16) go to 1030
 C
-C     SET UP LOCAL TO GLOBAL TRANSFORMATION MATRIX
+C     SET UP GLOBAL-TO-LOCAL TRANSFORMATION MATRIX
 C
-      CALL DCOS30(T2,X,Y,Z)
-      if (ABS(PHI) .gt. 1.0D-6) then
-         fi = PHI*ATAN(1.0D0)/4.5D1
-         cf = cos(fi)
-         sf = sin(fi)
-         do i = 1, 3
-            a = cf*T2(2,i) + sf*T2(3,i)
-            b = cf*T2(3,i) - sf*T2(2,i)
-            T2(2,i) = a
-            T2(3,i) = b
-         end do
-         a = cf*XS(1) + sf*XS(2)
-         b = cf*XS(2) - sf*XS(1)
-         XS(1) = a
-         XS(2) = b
-      end if
+      CALL DCOS30(T2,X,Y,Z,PHI)
+C     Note: This will print the transpose of T2,
+C     i.e., the local-to-global transformation matrix
+      if (ipsw .gt. 2) write(iw,6046) T2
 C
 C     STIFFNESS MATRIX IN LOCAL COORDINATES
 C
@@ -119,6 +111,7 @@ C
       E2(3) = Z(5)-Z(2)
       if (iPinA .gt. 0) CALL VECTRA(T2,E1,W,3,3,1,1,IW,IERR)
       if (iPinB .gt. 0) CALL VECTRA(T2,E2,W,3,3,1,1,IW,IERR)
+      if (ipsw  .gt. 2) write(iw,6047) E1,E2
       CALL TRIX30(EK,E1(1),E1(2),E1(3),E2(1),E2(2),E2(3))
 C
       GO TO 2000
@@ -160,12 +153,15 @@ C
  6042 FORMAT(9H     E  =, E15.5/9H     G  =, E15.5/9H     A  =, E15.5)
  6043 FORMAT(9H     PA =, I7   /9H     PB =, I7)
  6044 FORMAT(9H     EL =, E15.5)
+ 6045 FORMAT(10H     PHI =, F10.5)
+ 6046 FORMAT(43H     LOCAL TO GLOBAL TRANSFORMATION MATRIX:/(4X,3F10.6))
+ 6047 FORMAT(9H     E1 =, 1P3E13.5 /9H     E2 =, 1P3E13.5)
  6050 FORMAT(//48H     GLOBAL STIFFNESS MATRIX (ECCENTRIC NODES) :)
  6060 FORMAT(/28H LEAVING BEAM31 FOR ELEMENT ,I7)
 C
       END
 C> @brief Computes stress resultants on a 12-dof beam element.
-      SUBROUTINE BEAM32(SR,EK,V,FP,FE,P,X,Y,Z,XS,XP,ZETA)
+      SUBROUTINE BEAM32(SR,EK,V,FP,FE,P,X,Y,Z,XS,XP,PHI,ZETA)
 C
 C***********************************************************************
 C
@@ -214,8 +210,7 @@ C
    20 BX = X(2) - X(1)
       BY = Y(2) - Y(1)
       BZ = Z(2) - Z(1)
-      BL = BX*BX + BY*BY + BZ*BZ
-      BL = SQRT(BL)
+      BL = SQRT(BX*BX + BY*BY + BZ*BZ)
 C
 C     NODAL FORCES IN GLOBAL COORDINATES
 C
@@ -235,16 +230,12 @@ C
 C
 C     TRANSFORM TO LOCAL COORDINATES
 C
-      CALL DCOS30(T2,X,Y,Z)
+      CALL DCOS30(T2,X,Y,Z,PHI)
 C
       DO 70 I=1,2
-      DO 60 K=1,3
-      N = 3*I-3+K
-      F(N) = 0.
-      DO 50 J=1,3
-      M = 3*I-3+J
-      F(N) = F(N) + T2(K,J)*FL(M)
-   50 CONTINUE
+      N = 3*I
+      DO 60 J=1,3
+      F(J+N-3) = T2(J,1)*FL(N-2) + T2(J,2)*FL(N-1) + T2(J,3)*FL(N)
    60 CONTINUE
    70 CONTINUE
 C
@@ -284,7 +275,7 @@ C
 C
       END
 C> @brief Computes consistent load vector due to line loads on a beam.
-      SUBROUTINE BEAM33(F,P,X,Y,Z,EP,CA,XS,XP)
+      SUBROUTINE BEAM33(F,P,X,Y,Z,EP,CA,XS,XP,PHI)
 C
 C***********************************************************************
 C
@@ -312,15 +303,12 @@ C                                               ** LOCAL LOAD VECTOR
       CALL BELS33(FP,P,BL,EP,CA,XS,XP)
 C                                               ** TRANSFORM TO GLOBAL
 C                                                  AXES
-      CALL DCOS30(T2,X,Y,Z)
+      CALL DCOS30(T2,X,Y,Z,PHI)
+C
       DO 30 I=1,4
-      DO 20 K=1,3
-      N = 3*I-3+K
-      F(N) = 0.
-      DO 10 J=1,3
-      M = 3*I-3+J
-      F(N) = F(N) + T2(J,K)*FP(M)
-   10 CONTINUE
+      N = 3*I
+      DO 20 J=1,3
+      F(J+N-3) = T2(1,J)*FP(N-2) + T2(2,J)*FP(N-1) + T2(3,J)*FP(N)
    20 CONTINUE
    30 CONTINUE
 C                                               ** TRANSFORM FROM END TO
@@ -364,15 +352,12 @@ C                                               ** LOCAL FORCE VECTOR
       CALL BELS34(FE,E0,EP)
 C                                               ** TRANSFORM TO GLOBAL
 C                                                  AXES
-      CALL DCOS30(T2,X,Y,Z)
+      CALL DCOS30(T2,X,Y,Z,0.0D0)
+C
       DO 30 I=1,4
-      DO 20 K=1,3
-      N = 3*I-3+K
-      F(N) = 0.
-      DO 10 J=1,3
-      M = 3*I-3+J
-      F(N) = F(N) + T2(J,K)*FE(M)
-   10 CONTINUE
+      N = 3*I
+      DO 20 J=1,3
+      F(J+N-3) = T2(1,J)*FE(N-2) + T2(2,J)*FE(N-1) + T2(3,J)*FE(N)
    20 CONTINUE
    30 CONTINUE
 C                                               ** TRANSFORM FROM END TO
@@ -492,7 +477,7 @@ C
 C     TRANSFORM FROM LOCAL TO GLOBAL COORDINATES
 C
   100 IF (IOP.EQ.1)  GO TO 200
-      CALL DCOS30(T2,X,Y,Z)
+      CALL DCOS30(T2,X,Y,Z,0.0D0)
       IF (IOP.EQ.3)  GO TO 120
 C                                               ** DIAGONAL MASS MATRIX
       X1 = EM(4,1)*T2(1,1)*T2(1,1) +
@@ -574,7 +559,7 @@ C
 C
       END
 C> @brief Generates a geometric stiffness matrix for a 12-dof beam element.
-      SUBROUTINE BEAM36(EKG,X,Y,Z,EP,CA,XS,S1,S2)
+      SUBROUTINE BEAM36(EKG,X,Y,Z,EP,CA,XS,PHI,S1,S2)
 C
 C***********************************************************************
 C
@@ -602,7 +587,7 @@ C                                                  IN LOCAL COORDINATES
       CALL BELS36(EKG,S1,S2,BL,EP,CA,XS)
 C                                               ** TRANSFORM TO GLOBAL
 C                                                  AXES
-      CALL DCOS30(T2,X,Y,Z)
+      CALL DCOS30(T2,X,Y,Z,PHI)
       CALL MPRO30(EKG,T2,12)
 C                                               ** TRANSFORM FROM END TO
 C                                                  NODAL POINTS
@@ -748,8 +733,7 @@ C
 C     DOUBLE SYMMETRICAL CROSS SECTION ?
 C
       BE = ABS(YS) + ABS(ZS)
-      BA = SQRT(A)
-      BA = .00001*BA
+      BA = 0.00001D0*SQRT(A)
       IF(BA-BE) 50,1000,1000
 C
 C     ADJUSTMENT OF EK DUE TO SINGLE OR NO SYMMETRY
@@ -1088,8 +1072,7 @@ C
 C     DOUBLE SYMMETRIC CROSS SECTION ?
 C
       BE = ABS(YS) + ABS(ZS)
-      BA = SQRT(A)
-      BA = .00001*BA
+      BA = 0.00001*SQRT(A)
       IF(BA-BE) 30,1000,1000
 C
 C     ADJUSTMENT OF EKG DUE TO SINGLE OR NO SYMMETRY

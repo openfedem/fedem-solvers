@@ -48,7 +48,7 @@ contains
        &                      ipsw,lpu,ierr,directSolve)
 
     use SamModule              , only : SamType, dp
-    use SamModule              , only : writeObject, writeSamSize
+    use SamModule              , only : nullifySAM, writeSAMSize, writeObject
     use SamReducerModule       , only : initiateSAM
     use SysMatrixTypeModule    , only : SysMatrixType, diagonalMatrix_p
     use SysMatrixTypeModule    , only : skylineMatrix_p, sparseMatrix_p
@@ -89,17 +89,18 @@ contains
 
     !! --- Logic section ---
 
+    nullify(tncoor)
     call ffl_init (0,0,ierr)
     if (ierr /= 0) then
+       call nullifySAM (sam)
        call reportError (error_p,'Failure parsing FE data file', &
             &            addString='ffl_reducer_init')
-       goto 900
+       goto 990
     end if
 
     linearSolve = present(directSolve)
 
     ! --- Initialize the SAM datastructure
-    nullify(tncoor)
     call initiateSAM (sam,tncoor,linearSolve,ipsw,lpu,ierr)
     if (ierr /= 0) goto 990
 

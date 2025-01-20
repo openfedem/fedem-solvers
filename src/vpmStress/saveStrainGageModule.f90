@@ -128,10 +128,13 @@ contains
        end if
 
        nGages = size(rosettes(i)%data(1)%gages)
-       nNodes = size(rosettes(i)%globalNodes)
        rdb%nBytes = rdb%nBytes + (8+2*nGages)*nbs_p
-       if (lDef .and. associated(rosettes(i)%disp)) then
+       if ( lDef .and. associated(rosettes(i)%disp) .and. &
+            associated(rosettes(i)%globalNodes) ) then
+          nNodes = size(rosettes(i)%globalNodes)
           rdb%nBytes = rdb%nBytes + 3*nNodes*nbs_p
+       else
+          nNodes = 0
        end if
        if (associated(rosettes(i)%ur)) then
           rdb%nBytes = rdb%nBytes + 6*nbs_p
@@ -158,16 +161,14 @@ contains
           if (iFile > 0) write(iFile,"(']')")
        end do
 
-       if (lDef .and. associated(rosettes(i)%disp)) then
-          do j = 1, nNodes
-             idNode = 0
-             call writeItGDef (rdb,idNode,iFile, &
-                  &            'Node'//trim(StrId(rosettes(i)%globalNodes(j))))
-             call writeVarDef (rdb,idDef,iFile,'Deformation', &
-                  &            'LENGTH','VEC3','"d_x","d_y","d_z"')
-             write(iFile,"(']')")
-          end do
-       end if
+       do j = 1, nNodes
+          idNode = 0
+          call writeItGDef (rdb,idNode,iFile, &
+               &            'Node'//trim(StrId(rosettes(i)%globalNodes(j))))
+          call writeVarDef (rdb,idDef,iFile,'Deformation', &
+               &            'LENGTH','VEC3','"d_x","d_y","d_z"')
+          write(iFile,"(']')")
+       end do
 
        if (associated(rosettes(i)%ur)) then
           call writeVarDef (rdb,idPos,idatd,'Position', &
