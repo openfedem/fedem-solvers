@@ -8,7 +8,7 @@
 # This is the top-level cmake project file for the Fedem FMU module.
 ################################################################################
 
-cmake_minimum_required ( VERSION 2.8...3.5 )
+cmake_minimum_required ( VERSION 2.8...3.10 )
 if ( POLICY CMP0076 )
   cmake_policy ( SET CMP0076 NEW ) # convert relative target source path names
 endif ( POLICY CMP0076 )
