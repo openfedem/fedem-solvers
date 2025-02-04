@@ -41,8 +41,8 @@ module ControlTypeModule
 
      type(CtrlPrm), pointer :: input(:)  !< Control input parameters
      real(dp)     , pointer :: vreg(:)   !< The control state variables
-     integer      , pointer :: ivar(:)   !< Control variables for extra lines
      type(IdType) , pointer :: vregId(:) !< Id for the control line variables
+     integer      , pointer :: ivar(:)   !< Control variables for extra lines
      logical                :: saveVar   !< .true. if variables should be saved
 
      integer           :: mpireg(9)  !< Matrix of pointers into IREG
@@ -100,10 +100,11 @@ contains
        allocate(ctrl%input(0))
     end if
 
-    nullify(ctrl%ireg)
-    nullify(ctrl%rreg)
     nullify(ctrl%vreg)
     nullify(ctrl%vregId)
+    nullify(ctrl%ivar)
+    nullify(ctrl%ireg)
+    nullify(ctrl%rreg)
     nullify(ctrl%delay)
 #ifdef FT_HAS_EXTCTRL
     nullify(ctrl%extCtrlSys)
@@ -139,17 +140,17 @@ contains
     !! --- Logic section ---
 
     if (associated(ctrl%input)) deallocate(ctrl%input)
-    if (associated(ctrl%ireg))  deallocate(ctrl%ireg)
-    if (associated(ctrl%rreg))  deallocate(ctrl%rreg)
-    if (associated(ctrl%delay)) deallocate(ctrl%delay)
     if (associated(ctrl%vreg))  deallocate(ctrl%vreg)
-
     if (associated(ctrl%vregId)) then
        do i = 1, size(ctrl%vregId)
           call deallocateId (ctrl%vregId(i))
        end do
        deallocate(ctrl%vregId)
     end if
+    if (associated(ctrl%ivar))  deallocate(ctrl%ivar)
+    if (associated(ctrl%ireg))  deallocate(ctrl%ireg)
+    if (associated(ctrl%rreg))  deallocate(ctrl%rreg)
+    call reAllocate ('deallocateCtrl',ctrl%delay)
 
 #ifdef FT_HAS_EXTCTRL
     if (associated(ctrl%extCtrlSys)) then
@@ -160,7 +161,6 @@ contains
     end if
 #endif
 
-    call reAllocate ('deallocateCtrl',ctrl%delay)
     call nullifyCtrl (ctrl,.true.)
 
   end subroutine deallocateCtrl
@@ -752,9 +752,15 @@ contains
           write(io,*) 'size(input)  =', size(ctrl%input)
           write(io,*) 'size(mpireg) =', size(ctrl%mpireg)
           write(io,*) 'size(mprreg) =', size(ctrl%mprreg)
-          write(io,*) 'size(ireg)   =', size(ctrl%ireg)
-          write(io,*) 'size(rreg)   =', size(ctrl%rreg)
-          write(io,*) 'size(delay)  =', size(ctrl%delay)
+          if (associated(ctrl%ireg)) then
+             write(io,*) 'size(ireg)   =', size(ctrl%ireg)
+          end if
+          if (associated(ctrl%rreg)) then
+             write(io,*) 'size(rreg)   =', size(ctrl%rreg)
+          end if
+          if (associated(ctrl%delay)) then
+             write(io,*) 'size(delay)  =', size(ctrl%delay)
+          end if
 #ifdef FT_HAS_EXTCTRL
           if (associated(ctrl%extCtrlSys)) then
              write(io,*) 'size(extCtrlSys) =', size(ctrl%extCtrlSys)
