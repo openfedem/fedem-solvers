@@ -157,7 +157,7 @@ int main (int argc, char** argv)
     for (int funcId : fId)
       outputs.push_back(getFunc(funcId));
     if (vfy) os.precision(9);
-    printOut(os,false,getCurrentTime(&status),outputs.data(),fId.size());
+    printOut(os,false,getCurrentTime(),outputs.data(),fId.size());
   }
 
   // Write external function values to file
@@ -185,7 +185,7 @@ int main (int argc, char** argv)
     const int nStep = 100;
     outputs.resize(nOut*nStep);
     // Caution: We here assume the time step size in the model is constant
-    double t  = getCurrentTime(&status);
+    double t  = getCurrentTime();
     double dt = getNextTime(&status) - t;
 
     // Generate inputs
