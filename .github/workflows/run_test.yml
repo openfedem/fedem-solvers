@@ -43,7 +43,7 @@ jobs:
         run: cmake --build ./pFUnit3-build --target install
 
       - name: Install required python packages
-        run: pip install numpy pandas PyYAML
+        run: pip install numpy pandas progress PyYAML
 
       - name: Configure main build
         run: >

@@ -39,7 +39,7 @@ from fedempy.exporter import Exporter
 from fedempy.fmm import FedemModel, FmType
 from fedempy.inverse import InverseSolver
 from fedempy.reducer import FedemReducer
-from fedempy.solver import FedemException, FedemSolver
+from fedempy.solver import FedemException, FedemProgressBar, FedemSolver
 
 
 def _solver_options(solver, rdbdir="", time_start=None, base_id=None):
@@ -512,8 +512,14 @@ class FmmSolver(FedemSolver):
             return ierr
 
         # Run through the entire time series
-        while self.solve_next():
-            self._export_step()
+        with FedemProgressBar(self) as pbar:
+            pbar.next()
+            while self.solve_next():
+                self._export_step()
+                pbar.next()
+            if self.ierr.value == 0:
+                self._export_step()
+                pbar.next()
 
         if self.solver_done() == 0 and self.ierr.value == 0:
             print("     Time step loop OK, solver closed")
