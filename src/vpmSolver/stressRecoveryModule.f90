@@ -256,8 +256,12 @@ contains
     end if
 
     do i = 1, size(part)
-       if (part(i)%baseId == id .and. associated(part(i)%vms)) then
-          ndat = size(part(i)%vms)
+       if (part(i)%baseId == id) then
+          if (associated(part(i)%vms)) then
+             ndat = size(part(i)%vms)
+          else
+             ndat = -2
+          end if
           return
        end if
     end do
@@ -632,7 +636,7 @@ contains
           if (mod(sups(i)%rcy%recovery,2) == 1) then
              write(lpu,"()")
              call reportError (note_p,'Stress recovery is performed'// &
-                  &            ' for Part'//getId(sups(i)%id),'')
+                  &            ' for Part'//getId(sups(i)%id))
 
              nnod = part(irec)%sam%mpar(33)
              if (nnod > 0 .and. nnod < part(irec)%sam%nnod) then
@@ -704,6 +708,7 @@ contains
        end do
 
     end if
+    write(lpu,"(/)")
 
     return
 

@@ -182,16 +182,16 @@ subroutine slv_done (ierr)
 end subroutine slv_done
 
 !===============================================================================
-!> @brief Returns the time of current or next time increment.
+!> @brief Returns the physical time of a specified simulation state.
 !> @callgraph
-function slv_gettime (nextStep,ierr) result(time)
+function slv_gettime (tflag,ierr) result(time)
   use kindModule  , only : dp
   use solverModule, only : getTime
   implicit none
-  logical, intent(in)    :: nextStep !< If .true, return the time of next step
-  integer, intent(inout) :: ierr     !< Error flag
+  integer, intent(in)    :: tflag !< Indicates which step to return the time for
+  integer, intent(inout) :: ierr  !< Error flag
   real(dp) :: time
-  call getTime (time,nextStep,ierr)
+  call getTime (time,tflag,ierr)
 end function slv_gettime
 
 !===============================================================================
@@ -483,3 +483,13 @@ subroutine slv_savepart (iopS,bid,data,ndat,ierr)
   integer , intent(out) :: ierr    !< Error flag
   call savePartState (iopS,bid,data,ndat,ierr)
 end subroutine slv_savepart
+
+!===============================================================================
+!> @brief Checks whether current time step have results to be saved.
+!> @callgraph
+function slv_haveresults ()
+  use solverModule, only : haveResults
+  implicit none
+  integer :: slv_haveresults
+  slv_haveresults = haveResults()
+end function slv_haveresults

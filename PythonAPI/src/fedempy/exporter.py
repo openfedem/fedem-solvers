@@ -45,6 +45,8 @@ class Exporter:
         Absolute path to the shared object library vtfxExporter.so
     vtfx_path : str, default=None
         Absolute path to vtfx-file, use a temporary file if None
+    case_name : str, default="Case"
+        Case identifier
 
     Methods
     -------
@@ -54,13 +56,13 @@ class Exporter:
         Converts temporary generated vtfx-file to CUG database and cleans up
     """
 
-    def __init__(self, fe_parts, vis_parts, lib_path, vtfx_path=None):
+    def __init__(self, fe_parts, vis_parts, lib_path, vtfx_path=None, case_name="Case"):
         """
         Constructor.
         Initializes the internal datastructure of the shared object library,
         and loads the finite element and visualization parts into memory.
         """
-        self._initialize(lib_path, vtfx_path)
+        self._initialize(lib_path, vtfx_path, None, case_name)
         self._fem_parts = []
         self._vis_parts = []
 
@@ -135,7 +137,7 @@ class Exporter:
         if rc != 0:
             raise ExporterException(rc)
 
-    def clean(self, time_step, lib_dir, out_dir=None, cug_path="/usr/bin/CugComposer"):
+    def clean(self, time_step, lib_dir=None, out_dir=None, fmax=-1.0):
         """
         Clears all data about included FE-parts and frs-files,
         and removes all transformation, stress and deformation results.
@@ -143,40 +145,44 @@ class Exporter:
 
         Parameters
         ----------
-        time_step : double
+        time_step : float
             Time step to use for animation speed
-        lib_dir : str
-            Absolute path to app location
+        lib_dir : str, default None
+            Absolute path for folder where to write CUG log-file
+            If None, current working directory will be used
         out_dir : str, default=None
             Absolute path for output folder of the CUG database
             If None, CUG data is not generated and the vtfx-file is retained
-        cug_path : str, default="/usr/bin/CugComposer"
-            Absolute path to Ceetron CUG composer executable
+        fmax : float, default=-1
+            Set fringe range to [0,fmax] if fmax is larger than 0.
+            If less than zero, the range will be set automatically.
         """
-        print("   * Writing VTFX-file", self.vtfx_file_path, flush=True)
-        rc = self.lib_exporter.finish(c_double(time_step))
-        if rc == 0 and out_dir and path.isfile(cug_path):
+        print("   * Writing VTFX-file", self.vtfx_path, flush=True)
+        rc = self.lib_exporter.finish(c_double(time_step), c_double(0), c_double(fmax))
+        if rc == 0 and out_dir and path.isfile(self.cug_path):
             logfile = lib_dir + "/Cug.log" if path.isdir(lib_dir) else "./Cug.log"
             with open(logfile, "w") as outfile:
                 print("   * Creating CUG database in", out_dir, flush=True)
                 rc = run(
-                    [cug_path, self.vtfx_file_path, out_dir], check=True, stdout=outfile
+                    [self.cug_path, self.vtfx_path, out_dir], check=True, stdout=outfile
                 ).returncode
 
         if rc != 0:
             print(f" *** Failed ({rc})")
         elif out_dir:
-            remove(self.vtfx_file_path)
+            remove(self.vtfx_path)
 
-    def _initialize(self, lib_path, vtfx_path):
+    def _initialize(self, lib_path, vtfx_path, cug_path, case_name):
         """
         Initialization
         """
         self.lib_exporter = cdll.LoadLibrary(lib_path)
         self.lib_exporter.initialize(c_bool(False))
-        self.vtfx_file_path = "/tmp/temp.vtfx" if vtfx_path is None else vtfx_path
+        self.vtfx_path = "/tmp/temp.vtfx" if vtfx_path is None else vtfx_path
+        self.cug_path = "/usr/bin/CugComposer" if cug_path is None else cug_path
         rc = self.lib_exporter.setVtfxPath(
-            c_char_p(self.vtfx_file_path.encode("utf-8"))
+            c_char_p(self.vtfx_path.encode("utf-8")),
+            c_char_p(case_name.encode("utf-8")),
         )
         if rc != 0:
             raise ExporterException(rc)
@@ -214,6 +220,8 @@ class Exporter:
             c_bool(surface_only),
             c_bool(include_spiders),
             c_float(1.0),
+            c_float(1.0),
+            None,
         )
         if rc != 0:
             raise ExporterException(rc)
@@ -242,6 +250,8 @@ class Exporter:
             c_char_p(part_name),
             c_int(base_id),
             c_float(1.0),
+            c_float(1.0),
+            None,
         )
         if rc != 0:
             raise ExporterException(rc)

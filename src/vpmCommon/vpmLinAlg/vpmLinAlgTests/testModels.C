@@ -26,11 +26,14 @@
 
 #include "FFlLib/FFlLinkHandler.H"
 #include "FFlLib/FFlFEParts/FFlNode.H"
-#include "FFlLib/FFlFEParts/FFlQUAD4.H"
-#include "FFlLib/FFlFEParts/FFlQUAD8.H"
+#include "FFlLib/FFlFEParts/FFlShells.H"
 #include "FFlLib/FFlFEParts/FFlRGD.H"
 #include "FFlLib/FFlFEParts/FFlPMAT.H"
 #include "FFlLib/FFlFEParts/FFlPTHICK.H"
+
+#ifdef FF_NAMESPACE
+using namespace FF_NAMESPACE;
+#endif
 
 
 /*!

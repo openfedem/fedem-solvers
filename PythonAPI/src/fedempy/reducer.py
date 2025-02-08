@@ -13,7 +13,6 @@ from ctypes import c_bool, c_char_p, c_int, cdll
 
 
 class FedemReducer:
-
     """
     This class mirrors the functionality of the Fedem FE part reducer library
     (libfedem_reducer_core.so on Linux, fedem_reducer_core.dll on Windows).
@@ -74,7 +73,7 @@ class FedemReducer:
         """
         This function initializes the command-line handler of the reducer.
 
-        See the Fedem R7.5 Users Guide, Appendix C.2 for a complete list of all
+        See the Fedem R8.0 Users Guide, Appendix C.2 for a complete list of all
         command-line arguments that may be specified and their default values.
 
         Parameters

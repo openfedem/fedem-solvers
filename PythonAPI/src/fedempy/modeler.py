@@ -162,6 +162,8 @@ class FedemModeler(FedemModel):
         Creates a sensor object
     make_fe_part:
         Creates an FE part
+    make_generic_part:
+        Creates a generic part
     make_strain_rosette:
         Creates a strain rosette on an FE part
     make_udelm:
@@ -346,6 +348,9 @@ class FedemModeler(FedemModel):
 
         self._fmlib.FmLoadPart.restype = c_int
         self._fmlib.FmLoadPart.argtypes = [c_char_p, c_char_p]
+
+        self._fmlib.FmCreatePart.restype = c_int
+        self._fmlib.FmCreatePart.argtypes = [c_char_p, c_int, POINTER(c_int)]
 
         self._fmlib.FmCreateStrainRosette.restype = c_int
         self._fmlib.FmCreateStrainRosette.argtypes = [
@@ -1161,6 +1166,53 @@ class FedemModeler(FedemModel):
             self.fm_tag_object(part, tag)
 
         return part
+
+    def make_generic_part(self, name, triads, **kwargs):
+        """
+        Creates a generic part.
+
+        Parameters
+        ----------
+        name : str
+            Description of the new part
+        triads : list of int or list of str
+            List of base Ids or tags of the connected triads
+        kwargs : dict
+            Keyword arguments defining some element properties.
+            Currently, the following keywords are recognized:
+
+            * `alpha1` : Mass-proportional damping coefficient
+            * `alpha2` : Stiffness-proportional damping coefficient
+            * `tag` : Tag to associate the created element with
+
+        Returns
+        -------
+        int
+            Base Id of the created generic part, zero of negative on error
+        """
+        n_triads = len(triads)
+        if n_triads < 1:
+            print(" *** make_generic_part: No triads specified")
+            return 0
+
+        n_ = c_int(n_triads)
+        t_ = (c_int * n_triads)()
+        tr_[:] = [self._convert_id(t, FmType.TRIAD) for t in triads]
+        base_id = self._fmlib.FmCreatePart(_convert_char(name), n_, tr_)
+        if base_id < 1:
+            return base_id
+
+        if "alpha1" in kwargs or "alpha2" in kwargs:
+            self._fmlib.FmStructDamp(
+                base_id,
+                _convert_real(kwargs.get("alpha1", 0.0)),
+                _convert_real(kwargs.get("alpha2", 0.0)),
+            )
+
+        if "tag" in kwargs:
+            self.fm_tag_object(base_id, _convert_char(kwargs["tag"]))
+
+        return base_id
 
     def make_strain_rosette(self, name, part_id, **kwargs):
         """

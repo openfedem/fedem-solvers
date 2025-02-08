@@ -10,17 +10,18 @@ which operates directly on fedem mechanism model files (`*.fmm`).
 
 This module relies on the following environment variables:
 
-| *FEDEM_REDUCER* = Full path to the Fedem reducer shared object library
-| *FEDEM_SOLVER* = Full path to the Fedem solver shared object library
 | *FEDEM_MDB* = Full path to the Fedem model database shared object library
-
-The first variable needs to be set only if FE model reduction
-is to be performed. The other two variables are mandatory.
+| *FEDEM_SOLVER* = Full path to the Fedem dynamics solver shared object library
+| *FEDEM_REDUCER* = Full path to the Fedem reducer shared object library
+| *VIS_EXPORTER* = Full path to the Fedem VTFx exporter shared object library
+The third variable needs to be set only if FE model reduction is to be performed.
+The fourth variable needs to be set only if a VTFx file is to be exported.
+The first two variables are mandatory.
 
 This module can also be launched directly, to run a specified model,
 using the syntax
 
-| ``python -m fedempy.fmm_solver -f mymodel.fmm [--reduce-fem] [--save-model]``
+| ``python -m fedempy.fmm_solver -f mymodel.fmm [--reduce-fem] [--save-model] [-v mymodel.vtfx]``
 
 This will then invoke the method :meth:`fmm_solver.FmmSolver.solve_all`
 on the specified model-file (`mymodel.fmm`). If you already have a directory
@@ -31,15 +32,17 @@ those files by launching this module without arguments, i.e.:
 """
 
 from argparse import ArgumentParser
+from ctypes import c_double
 from os import environ, getcwd, path
 
+from fedempy.exporter import Exporter
 from fedempy.fmm import FedemModel, FmType
 from fedempy.inverse import InverseSolver
 from fedempy.reducer import FedemReducer
-from fedempy.solver import FedemException, FedemSolver
+from fedempy.solver import FedemException, FedemProgressBar, FedemSolver
 
 
-def _solver_options(solver, rdbdir=""):
+def _solver_options(solver, rdbdir="", time_start=None, base_id=None):
     """
     Sets up the standard solver command-line options,
     taking into account the *.fco, *.fop and *.fao files, if they exist.
@@ -49,6 +52,12 @@ def _solver_options(solver, rdbdir=""):
         option_file = solver + "." + ext
         if path.isfile(rdbdir + option_file):
             opts += ["-" + ext, option_file]
+
+    if time_start:  # Add dynamics solver start time
+        opts.append("-timeStart=" + str(time_start))
+
+    if base_id:  # Add flag for in-core von Mises stress array
+        opts.append("-partVMStress=2")
 
     return opts
 
@@ -139,7 +148,13 @@ class FmmSolver(FedemSolver):
         super().__init__(environ["FEDEM_SOLVER"], None, use_internal_state)
         self._model = FedemModel(environ["FEDEM_MDB"])
         self._reducer = None
+        self._vtfx = None
         self._func_map = {}
+        self._c_transf = None
+        self._c_deform = {}
+        self._c_stress = {}
+        self._prev_time = 0
+        self._time_incr = 0
 
         # Start the Fedem dynamics solver
         status = self.start(model_file, keep_old_res)
@@ -160,22 +175,31 @@ class FmmSolver(FedemSolver):
             chn += 1
             tag = self._model.fm_get_func_tag(chn)
 
-    def _reduce_fe_model(self):
+    def _reduce_fe_model(self, do_reduce):
         """
         Reduces all FE parts in the currently open model,
         which are not already redused.
+
+        Parameters
+        ----------
+        do_reduce : bool
+            Skip the FE part reduction if False
 
         Returns
         -------
         int
             Number of FE parts that was reduced, negative on error
         """
-        if self._reducer is None:
-            if "FEDEM_REDUCER" not in environ:
-                return 0
-            self._reducer = FedemReducer(environ["FEDEM_REDUCER"])
 
         num_reduced = 0
+        if not do_reduce:
+            return num_reduced
+
+        if self._reducer is None:
+            if "FEDEM_REDUCER" not in environ:
+                return num_reduced
+            self._reducer = FedemReducer(environ["FEDEM_REDUCER"])
+
         # Get list (of base Id) of the FE parts in the model
         fe_parts = self._model.fm_get_objects(FmType.FEPART)
         for base_id in fe_parts:
@@ -196,6 +220,89 @@ class FmmSolver(FedemSolver):
             print("#### FE model reduction done.", flush=True)
         return num_reduced
 
+    def _open_vtfx_exporter(self, vtfx_file, model_file):
+        """
+        Opens the VTFx file exporter and write the FE models to it.
+
+        Parameters
+        ----------
+        vtfx_file : str
+            Absolute path of the VTFx output file
+        model_file : str
+            Fedem model file name to derive the case name from
+
+        Returns
+        -------
+        list of int
+            Base ID of FE parts for which stress recovery will be performed
+        """
+
+        if vtfx_file is None:
+            return None
+
+        if "VIS_EXPORTER" not in environ:
+            print("  ** Environment variable VIS_EXPORTER not defined, no VTFx export.")
+            return None
+
+        # Get list (of base Id) of the FE parts in the model
+        # and the associated FE data files
+        base_ids = []
+        fem_parts = []
+        vis_parts = []
+        all_parts = self._model.fm_get_objects(FmType.FEPART)
+        for base_id in all_parts:
+            fem_file, recover = self._model.fm_get_femodel(base_id)
+            if recover == -1:  # Generic part with visualization file only
+                vis_parts.append(
+                    {
+                        "path": fem_file,
+                        "name": path.splitext(path.basename(fem_file))[0],
+                        "base_id": base_id,
+                    }
+                )
+            elif recover >= 0:  # This is an FE part
+                fem_parts.append(
+                    {
+                        "path": fem_file,
+                        "name": path.splitext(path.basename(fem_file))[0],
+                        "base_id": base_id,
+                        "recovery": recover > 0,
+                    }
+                )
+            if recover > 0:  # Stress recovery will be performed for this FE part
+                base_ids.append(base_id)
+
+        # Create the VTFx exporter object
+        self._vtfx = Exporter(
+            fem_parts,
+            vis_parts,
+            environ["VIS_EXPORTER"],
+            vtfx_file,
+            path.splitext(path.basename(model_file))[0],
+        )
+
+        return base_ids
+
+    def _init_result_buffers(self, base_ids):
+        """
+        Allocates state arrays to pass results to the VTFx exporter module.
+
+        Parameters
+        ----------
+        base_ids : list of int
+            Base ID of FE parts for which stress recovery will be performed
+
+        """
+        self._c_transf = (c_double * self.get_transformation_state_size())()
+        self._c_deform = {}
+        self._c_stress = {}
+        for bid in base_ids:
+            def_size = self.get_part_deformation_state_size(bid)
+            if def_size > 0:
+                str_size = self.get_part_stress_state_size(bid)
+                self._c_deform[bid] = (c_double * def_size)()
+                self._c_stress[bid] = (c_double * (str_size if str_size > 0 else 0))()
+
     def start(
         self,
         model_file,
@@ -206,6 +313,7 @@ class FmmSolver(FedemSolver):
         gauge_data=None,
         extf_input=None,
         time_start=None,
+        vtfx_file=None,
     ):
         """
         Starts a simulation on the specified model file.
@@ -230,6 +338,8 @@ class FmmSolver(FedemSolver):
             Initial external function values, for initial equilibrium iterations
         time_start : float, default=None
             Optional start time of simulation, override setting in model file
+        vtfx_file : str, default=None
+            Absolute path of the VTFx output file for visualization in GLview
 
         Returns
         -------
@@ -268,9 +378,12 @@ class FmmSolver(FedemSolver):
         print("     Total number of mechanism objects:", self._model.fm_count())
 
         # Check for FE model reduction
-        num_red = self._reduce_fe_model() if reduce_fem else 0
+        num_red = self._reduce_fe_model(reduce_fem)
         if num_red < 0:
             return error_exit(-98)
+
+        # Initialize the VTFx file exporter
+        base_ids = self._open_vtfx_exporter(vtfx_file, model_file)
 
         # Create the results database file structure
         # populated with the solver input files
@@ -288,19 +401,39 @@ class FmmSolver(FedemSolver):
             self.close_model(num_red > 0)
 
         # Start the dynamics solver
-        options = _solver_options("fedem_solver", rdbdir)
-        if time_start is not None:
-            options.append("-timeStart=" + str(time_start))
+        options = _solver_options("fedem_solver", rdbdir, time_start, base_ids)
         status = self.solver_init(options, None, state_data, gauge_data, extf_input)
         if status < 0:
             if not close_model:
                 self._model.fm_close(True)
             print(" *** Failed to start the dynamics solver.")
             _print_res(_get_resfile(rdbdir, "fedem_solver"))
+        elif base_ids is not None:
+            self._init_result_buffers(base_ids)
 
         return status
 
-    def close_model(self, save=False, remove_singletons=False):
+    def _export_step(self):
+        """
+        Exports results for current step to the VTFx file, if any.
+        """
+        if not self._vtfx or self.have_results() == 0:
+            return
+
+        self.save_transformation_state(self._c_transf)
+        for bid, deformation in self._c_deform.items():
+            self.save_part_state(bid, deformation, self._c_stress[bid])
+
+        # Find the (largest) time increment, for setting the animation frame rate
+        ctime = self.get_current_time()
+        delta = ctime - self._prev_time
+        self._prev_time = ctime
+        if delta > self._time_incr:
+            self._time_incr = delta
+
+        self._vtfx.do_step(ctime, self._c_transf, self._c_deform, self._c_stress)
+
+    def close_model(self, save=False, remove_singletons=False, fringe_max=-1):
         """
         Closes the currently open model.
 
@@ -310,6 +443,9 @@ class FmmSolver(FedemSolver):
             If True, the model file is updated based on current result files
         remove_singletons : bool, default=False
             If True, heap-allocated singelton objects are also released
+        fringe_max : float, default=-1
+            Max fringe range value for VTFx output.
+            If less than zero, the range will be set automatically.
 
         Returns
         -------
@@ -323,9 +459,20 @@ class FmmSolver(FedemSolver):
             status = True
 
         self._model.fm_close(not status or remove_singletons)
+
+        if self._vtfx:
+            self._vtfx.clean(self._time_incr, fmax=fringe_max)
+
         return status
 
-    def solve_all(self, model_file, save_model=True, reduce_fem=False):
+    def solve_all(
+        self,
+        model_file,
+        save_model=True,
+        reduce_fem=False,
+        vtfx_file=None,
+        fringe_max=-1,
+    ):
         """
         Starts and runs through a simulation on the specified model file.
 
@@ -339,6 +486,11 @@ class FmmSolver(FedemSolver):
             If True, and the model contains FE parts, they will be reduced
             before the solver is started, unless the reduced matrix files
             already exist
+        vtfx_file : str, default=None
+            Absolute path of the VTFx output file for visualization in GLview
+        fringe_max : float, default=-1
+            Max fringe range value for VTFx output.
+            If less than zero, the range will be set automatically.
 
         Returns
         -------
@@ -354,20 +506,26 @@ class FmmSolver(FedemSolver):
             return self.run_all(options) if options else 0
 
         print("\n#### Running dynamics solver on", model_file)
-        ierr = self.start(model_file, True, False, reduce_fem)
+        ierr = self.start(model_file, True, False, reduce_fem, vtfx_file=vtfx_file)
         if ierr < 0:
             print(f" *** Solver failed to start ({ierr}).")
             return ierr
 
         # Run through the entire time series
-        while self.solve_next():
-            pass  # Dummy statement
+        with FedemProgressBar(self) as pbar:
+            pbar.next()
+            while self.solve_next():
+                self._export_step()
+                pbar.next()
+            if self.ierr.value == 0:
+                self._export_step()
+                pbar.next()
 
         if self.solver_done() == 0 and self.ierr.value == 0:
             print("     Time step loop OK, solver closed")
-            self.close_model(save_model)
+            self.close_model(save_model, False, fringe_max)
         else:
-            self.close_model(False, True)
+            self.close_model(False, True, fringe_max)
             print(" *** Dynamics solver failed", self.ierr.value)
 
         return self.ierr.value
@@ -426,13 +584,19 @@ class FmmInverse(FmmSolver, InverseSolver):
 if __name__ == "__main__":
     parser = ArgumentParser(description="Python Fedem Solver")
     parser.add_argument(
-        "-f", "--model-file", required=False, help="Fedem model file to open"
+        "-f", "--model-file", required=True, help="Fedem model file to open"
     )
     parser.add_argument(
         "-s", "--save-model", action="store_true", help="Save updated model file"
     )
     parser.add_argument(
         "-r", "--reduce-fem", action="store_true", help="Reduce model before solve"
+    )
+    parser.add_argument(
+        "-v", "--vtfx-file", help="Ceetron VTFx output file for visualization"
+    )
+    parser.add_argument(
+        "-m", "--fringe-max", type=float, default=-1, help="Max von Mises fringe value"
     )
     model = FmmSolver()
     model.solve_all(**vars(parser.parse_args()))

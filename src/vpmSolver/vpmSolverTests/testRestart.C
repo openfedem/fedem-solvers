@@ -95,7 +95,7 @@ int main (int argc, char** argv)
   double* gages = NULL;
 
   // Caution: We here assume the time step size in the model is constant
-  double t  = getCurrentTime(&status);
+  double t  = getCurrentTime();
   double dt = getNextTime(&status) - t;
 
   // Invoke the dynamics solver for the time windows
@@ -132,8 +132,11 @@ int main (int argc, char** argv)
     status = solverInit(argc,argv,NULL,state,stateSize,gages,gagesSize);
     if (status) return status; // Simulation failed, aborting...
 
-    t  = getCurrentTime(&status);
-    dt = getNextTime(&status) - t;
+    if (!outputs.empty())
+    {
+      t  = getCurrentTime();
+      dt = getNextTime(&status) - t;
+    }
   }
   delete[] state;
   delete[] gages;

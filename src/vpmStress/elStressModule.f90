@@ -470,7 +470,7 @@ contains
     Sg(6) = Sg(6) - Ey*Sg(1) + Ex*Sg(2)
 
     ! Transform to local coordinates
-    call DCOS30(T,Xg,Yg,Zg)
+    call DCOS30(T,Xg,Yg,Zg,BSEC(14))
     SN = matmul(T,Sg(1:3))
     SM = matmul(T,Sg(4:6))
 

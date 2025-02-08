@@ -140,7 +140,7 @@ SUBROUTINE (slv_rhsvec,SLV_RHSVEC) (double* Rvec, const int& iop, int& ierr);
 INTEGER_FUNCTION (slv_geteqn,SLV_GETEQN) (const int& bid, int* meqn);
 INTEGER_FUNCTION (slv_getvar,SLV_GETVAR) (const int& bid, double* var);
 INTEGER_FUNCTION (slv_syssize,SLV_SYSSIZE) (const int& dofs);
-DOUBLE_FUNCTION (slv_gettime,SLV_GETTIME) (const int& nextStep, int& ierr);
+DOUBLE_FUNCTION (slv_gettime,SLV_GETTIME) (const int& tFlag, int& ierr);
 SUBROUTINE(slv_settime,SLV_SETTIME) (const double& nextTime, int& ierr);
 DOUBLE_FUNCTION (slv_getfunc,SLV_GETFUNC) (const int& uid, const double& x,
                                            int& ierr);
@@ -150,6 +150,7 @@ DOUBLE_FUNCTION (slv_getfunction,SLV_GETFUNCTION) (int& ierr,
                                                    const int nchar);
 INTEGER_FUNCTION (slv_getfuncid,SLV_GETFUNCID) (const char* tag,
                                                 const int nchar);
+INTEGER_FUNCTION (slv_haveresults,SLV_HAVERESULTS) ();
 INTEGER_FUNCTION (slv_statesize,SLV_STATESIZE) (const int& posOnly);
 INTEGER_FUNCTION (slv_gagessize,SLV_GAGESSIZE) ();
 INTEGER_FUNCTION (slv_partsize,SLV_PARTSIZE) (const int& iop, const int& bid);
@@ -592,9 +593,8 @@ DLLexport(int) solverInit (int argc, char** argv, const char* cfsi,
   }
 
   // Initialization finished, check if we are doing a restart (iop = -3)
-  double startTime = 0.0;
   double currentTime = F90_NAME(slv_gettime,SLV_GETTIME) (0,ierr);
-  FFaCmdLineArg::instance()->getValue ("timeStart",startTime);
+  double startTime = F90_NAME(slv_gettime,SLV_GETTIME) (2,ierr);
   iop = currentTime > startTime ? -3 : 0;
   if (!cfsi || (stateData && ndat > 0))
     return 0;
@@ -728,9 +728,9 @@ DLLexport(void) solverClose ()
 }
 
 
-DLLexport(double) getTime (bool nextStep, int* ierr)
+DLLexport(double) getTime (int tFlag, int* ierr)
 {
-  return F90_NAME(slv_gettime,SLV_GETTIME) (nextStep,*ierr);
+  return F90_NAME(slv_gettime,SLV_GETTIME) (tFlag,*ierr);
 }
 
 
@@ -912,6 +912,12 @@ DLLexport(bool) solveWindow (const int nStep, int nInc, int nIn, int nOut,
   if (*ierr) releaseGlobalHeapObjects();
 
   return done == 0;
+}
+
+
+DLLexport(int) haveResults ()
+{
+  return F90_NAME(slv_haveresults,SLV_HAVERESULTS) ();
 }
 
 

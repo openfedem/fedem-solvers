@@ -1001,7 +1001,9 @@ contains
        do j = 1, joints(i)%nJointDOFs
           ipl = joints(i)%jointDofs(j)%loadIdx
           ipr = joints(i)%jointDofs(j)%sysDOF
-          if (associated(mpreac) .and. ipr <= size(mpreac)) then
+          if (.not.associated(mpreac)) then
+             ipr = 0
+          else if (ipr <= size(mpreac)) then
              ipr = mpreac(ipr)
           else
              ipr = 0

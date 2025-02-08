@@ -131,16 +131,15 @@ TEST_P(Solve, SystemModel)
   const std::vector<double>& refVar = GetParam().refVar;
 
   // Lambda function for checking the response for current time step.
-  auto&& checkResponse = [baseId,refVar](size_t ip, int& status)
+  auto&& checkResponse = [baseId,refVar](size_t ip)
   {
     // Extract response at the specified object
     double var[3];
-    double t = getCurrentTime(&status);
     int nvar = getStateVar(baseId,var);
     EXPECT_GT(nvar,0);
 
     // Print response
-    std::cout <<"Time="<< t <<":";
+    std::cout <<"Time="<< getCurrentTime() <<":";
     for (int j = 0; j < nvar; j++)
       std::cout <<" V"<< 1+j <<"="<< var[j];
     std::cout << std::endl;
@@ -153,7 +152,7 @@ TEST_P(Solve, SystemModel)
   // Read input, preprocess the model and setup/solve the initial configuration
   int ierr = solverInit(args.size(),args.data());
   ASSERT_GE(ierr,0);
-  checkResponse(0,ierr);
+  checkResponse(0);
 
   if (!GetParam().linear)
   {
@@ -162,11 +161,11 @@ TEST_P(Solve, SystemModel)
     while (solveNext(&ierr))
     {
       ASSERT_EQ(ierr,0);
-      checkResponse(ipr,ierr);
+      checkResponse(ipr);
       ipr += 3;
     }
     ASSERT_EQ(ierr,0);
-    checkResponse(ipr,ierr);
+    checkResponse(ipr);
   }
 
   // Simulation finished, terminate by closing down external files, etc.
@@ -238,14 +237,13 @@ TEST(Solve, Prescribed)
 
     // Extract response at the specified triads, 25 and 17
     double var[6];
-    double t = getCurrentTime(&ierr);
     int nvar = getStateVar(25,var);
     int nva2 = getStateVar(17,var+nvar);
     ASSERT_EQ(nvar,3);
     ASSERT_EQ(nva2,3);
 
     // Print response
-    std::cout <<"Time="<< t <<":";
+    std::cout <<"Time="<< getCurrentTime() <<":";
     for (int j = 0; j < 6; j++)
       std::cout <<" V"<< 1+j <<"="<< var[j];
     std::cout << std::endl;

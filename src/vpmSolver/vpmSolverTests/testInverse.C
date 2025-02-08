@@ -141,7 +141,7 @@ int main (int argc, char** argv)
   {
     os.open("outputs.asc");
     os.precision(9);
-    os << getCurrentTime(&status);
+    os << getCurrentTime();
     for (int funcId : fId) os <<" "<< evalFunc(funcId);
     os << std::endl;
   }

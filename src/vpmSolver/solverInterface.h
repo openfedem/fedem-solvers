@@ -112,6 +112,11 @@ extern "C" {
                    int nDat, double* stateData, int* ierr);
 
   /*!
+    \brief Returns whether current time step have results to be saved.
+  */
+  int haveResults();
+
+  /*!
     \brief Returns the required length of the state vector to be is used when
     restarting a simulation from an in-core array.
   */
@@ -342,11 +347,15 @@ extern "C" {
   bool setExtFunc(int funcId, double value);
 
   /*!
-    \brief Returns current or next physical time of the simulation.
-    \param[in] nextStep If \e true, return next time, otherwise current
-    \param[out] ierr Error flag
+    \brief Returns the physical time of a time step.
+    \param[in] tFlag Flag indicating which time step to return the time for
+    - 0 : Return for current time step
+    - 1 : Return for next time step
+    - 2 : Return the start time of the simulation
+    - 3 : Return the stop time of the simulation
+    \param ierr Error flag, untouched unless \a tFlag = 1
   */
-  double getTime(bool nextStep, int* ierr);
+  double getTime(int tFlag, int* ierr);
 
   /*!
     \brief Sets the time increment size of the next time step.
@@ -356,17 +365,16 @@ extern "C" {
 
   /*!
     \brief Returns the current physical time of the simulation.
-    \param[out] ierr Always equal to zero
   */
-  inline double getCurrentTime(int* ierr) { return getTime(false,ierr); }
+  inline double getCurrentTime() { int ierr; return getTime(0,&ierr); }
 
   /*!
     \brief Returns the physical time of the next step of the simulation.
-    \param[out] ierr Equal to zero on a successful call, a non-zero value may
-    occur only if the time step size in the model is defined via a general
-    function that could not be evaluated.
+    \param ierr Untouched on a successful call,
+    decremented if the time step size in the model is defined via
+    a general function that could not be evaluated.
   */
-  inline double getNextTime(int* ierr) { return getTime(true,ierr); }
+  inline double getNextTime(int* ierr) { return getTime(1,ierr); }
 
   /*!
     \brief Evaluates a specified general function in the model.

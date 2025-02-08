@@ -20,6 +20,9 @@ if ( USE_MEMPOOL )
   string ( APPEND CMAKE_CXX_FLAGS " -DFT_USE_MEMPOOL" )
 endif ( USE_MEMPOOL )
 
+# Need to use FFlLib classes in the FTK namespace
+string ( APPEND CMAKE_CXX_FLAGS " -DFF_NAMESPACE=FTK" )
+
 include_directories ( ${CMAKE_CURRENT_BINARY_DIR}/.. )
 
 add_library ( ${LIB_ID} smallReducer.f90 solveSupel.f90 )

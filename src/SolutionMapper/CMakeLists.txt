@@ -18,6 +18,9 @@ if ( USE_MEMPOOL )
   string ( APPEND CMAKE_CXX_FLAGS " -DFT_USE_MEMPOOL" )
 endif ( USE_MEMPOOL )
 
+# Need to use FFlLib classes in the FTK namespace
+string ( APPEND CMAKE_CXX_FLAGS " -DFF_NAMESPACE=FTK" )
+
 string ( APPEND CMAKE_CXX_FLAGS_DEBUG " -DFT_DEBUG=1" )
 
 

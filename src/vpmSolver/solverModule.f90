@@ -77,7 +77,7 @@ module solverModule
   public :: partStateVectorSize, savePartState
   public :: strainGagesSize, saveInitGageStrains
   public :: getSystemMatrix, getElementMatrix, getRhsVector, setRhsVector
-  public :: systemSize, objectEquations, objectStateVar
+  public :: systemSize, objectEquations, objectStateVar, haveResults
   public :: solverParameters, solveLinEqSystem
   public :: computeGageStrains, computeBeamForces, computeRelativeDistance
   public :: computeResponseVars, getJointSpringStiffness
@@ -1508,14 +1508,42 @@ contains
   end function solveDynamic
 
 
+  !!==========================================================================
+  !> @brief Returns whether current step have results to be saved.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 6 Dec 2024
+
+  integer function haveResults ()
+
+    !! --- Logic section ---
+
+    if (lRec /= 1 .and. lRec /= 3) then
+       haveResults = 1 ! Only transformation results (every time step)
+    else if (sys%time - lastRec < 1.0e-12_dp) then
+       haveResults = 2 ! This step have stress recovery results
+    else
+       haveResults = 0 ! No results for this time step
+    end if
+
+  end function haveResults
+
+
   !!============================================================================
-  !> @brief Returns the simulation time of the current or next time step.
+  !> @brief Returns the physical time of a specified simulation state.
   !>
-  !> @param[out] time The simulation time returned
-  !> @param[in] nextStep If .true., return for next step, otherwise current step
-  !> @param ierr Error flag
+  !> @param[out] time The physical time value
+  !> @param[in] tflag Flag indicating which time step to return for
+  !> - 0 : Return for current time step
+  !> - 1 : Return for next time step
+  !> - 2 : Return the start time of the simulation
+  !> - 3 : Return the stop time of the simulation
+  !> @param ierr Error flag, untouched unless @a tflag = 1
   !>
-  !> @details This subroutine does not always work with @a nextStep = .true.
+  !> @details This subroutine does not always work with @a tflag = 1
   !> if cut-back is performed, as the time step size then might be decreased.
   !>
   !> @callgraph @callergraph
@@ -1524,21 +1552,26 @@ contains
   !>
   !> @date 5 Dec 2016
 
-  subroutine getTime (time,nextStep,ierr)
+  subroutine getTime (time,tflag,ierr)
 
     use TimeStepModule, only : getTimeStepSize
 
     real(dp), intent(out)   :: time
-    logical , intent(in)    :: nextStep
+    integer , intent(in)    :: tflag
     integer , intent(inout) :: ierr
 
     !! --- Logic section ---
 
-    if (nextStep) then
+    select case (tflag)
+    case (1)
        time = sys%time + getTimeStepSize(sys,sam,ctrl,1.0_dp,ierr)
-    else
+    case (2)
+       time = sys%tStart
+    case (3)
+       time = sys%tEnd
+    case default
        time = sys%time
-    end if
+    end select
 
   end subroutine getTime
 

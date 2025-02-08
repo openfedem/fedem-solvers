@@ -9,7 +9,7 @@ Python wrapper for the Fedem Mechanism Model database library.
 Used for convenience in order to hide native type convertions.
 """
 
-from ctypes import c_bool, c_char_p, c_double, c_int, cdll, create_string_buffer
+from ctypes import byref, c_bool, c_char_p, c_double, c_int, cdll, create_string_buffer
 
 from fedempy.enums import Enum, FmType
 
@@ -141,6 +141,7 @@ class FedemModel:
         self._fmlib.FmTagObjects.restype = c_int
         self._fmlib.FmGetPosition.restype = c_bool
         self._fmlib.FmGetNode.restype = c_int
+        self._fmlib.FmGetFEModel.restype = c_bool
         self._fmlib.FmSync.restype = c_bool
         self._fmlib.FmSync.argstype = [c_int]
         self._fmlib.FmReduce.restype = c_bool
@@ -367,6 +368,32 @@ class FedemModel:
         pos_ = (c_double * 3)()
         pos_[:] = pos[0:3]
         return self._fmlib.FmGetNode(self._convert_id(part_id), pos_)
+
+    def fm_get_femodel(self, base_id):
+        """
+        This method returns the FE data file for the specified Part.
+
+        Parameters
+        ----------
+        base_id : int
+            Base Id of the FE part to get the FE model for
+
+        Returns
+        -------
+        str
+            Absolute path to the FE data file
+        int
+            If less than -1: No file is associated with this part.
+            If -1: This is a generic part with a visualization file.
+            If 0: This is a FE part but not subjected to stress recovery.
+            If 1: This FE part is subjected to stress recovery.
+        """
+        femfile = create_string_buffer(512)
+        recover = c_int(0)
+        if self._fmlib.FmGetFEModel(_convert_int(base_id), femfile, byref(recover)):
+            return femfile.value.decode("utf-8"), recover.value
+
+        return "", -2
 
     def fm_sync_part(self, base_id):
         """

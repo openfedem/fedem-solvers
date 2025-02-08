@@ -13,6 +13,37 @@ from ctypes import byref, c_bool, c_char_p, c_double, c_int, cdll
 from os import path
 
 from numpy import empty, float64, int32, int64, ndarray
+from progress.bar import Bar
+
+
+class FedemProgressBar(Bar):
+    """
+    Progress bar for the dynamics solver.
+
+    Parameters
+    ----------
+    solver : FedemSolver
+        The dynamics solver object to report progress for
+    """
+
+    suffix = "%(percent).1f%% - %(elapsed)ds"
+
+    def __init__(self, solver):
+        """
+        Constructor.
+        """
+        super().__init__("     Solving...")
+        self._solver = solver
+        self._tstart = solver.get_start_time()
+        self._trange = solver.get_stop_time() - self._tstart
+
+    @property
+    def progress(self):
+        """
+        Override the progress property using the physical time of the simulation.
+        """
+        current_time = self._solver.get_current_time() - self._tstart
+        return current_time / self._trange
 
 
 class FedemException(Exception):
@@ -101,6 +132,10 @@ class FedemSolver:
         Returns the current physical time of the simulation
     get_next_time:
         Returns the physical time of the next step of the simulation
+    get_start_time:
+        Returns the start time of the simulation
+    get_stop_time:
+        Returns the stop time of the simulation
     get_function:
         Evaluates a general function in the model and returns its value
     get_functions:
@@ -158,6 +193,7 @@ class FedemSolver:
         self._solver.solverInit.restype = c_int
         self._solver.restartFromState.restype = c_int
         self._solver.solveWindow.restype = c_bool
+        self._solver.haveResults.restype = c_int
         self._solver.getStateSize.restype = c_int
         self._solver.getTransformationStateSize.restype = c_int
         self._solver.getPartDeformationStateSize.restype = c_int
@@ -327,7 +363,7 @@ class FedemSolver:
         This method processes the input and sets up necessary data structures
         prior to the time integration loop. It also performs the license checks.
 
-        See the Fedem R7.5 Users Guide, Appendix C.3 for a complete list of all
+        See the Fedem R8.0 Users Guide, Appendix C.3 for a complete list of all
         command-line arguments that may be specified and their default values.
 
         If the argument fsi is None, the model is assumed defined in the file
@@ -492,6 +528,12 @@ class FedemSolver:
             outputs[:] = outputs_
 
         return outputs, not_done and success
+
+    def have_results(self):
+        """
+        Utility returning whether current time step have results to be saved.
+        """
+        return self._solver.haveResults()
 
     def get_state_size(self):
         """
@@ -891,8 +933,12 @@ class FedemSolver:
             print("     Check the fedem_solver.res file for error messages.")
             return status
 
-        while self.solve_next():
-            pass  # Dummy statement
+        with FedemProgressBar(self) as pbar:
+            pbar.next()
+            while self.solve_next():
+                pbar.next()
+            if self.ierr.value == 0:
+                pbar.next()
 
         if self.solver_done() == 0 and self.ierr.value == 0:
             print("     Time step loop OK")
@@ -928,7 +974,7 @@ class FedemSolver:
         Utility returning the current physical time of the simulation.
         The self.ierr variable is not touched.
         """
-        return self._solver.getTime(c_bool(False), byref(self.ierr))
+        return self._solver.getTime(c_int(0), byref(self.ierr))
 
     def get_next_time(self):
         """
@@ -937,7 +983,21 @@ class FedemSolver:
         evaluated, the self.ierr variable is decremented.
         Otherwise, it is not touched.
         """
-        return self._solver.getTime(c_bool(True), byref(self.ierr))
+        return self._solver.getTime(c_int(1), byref(self.ierr))
+
+    def get_start_time(self):
+        """
+        Utility returning the start time of the simulation.
+        The self.ierr variable is not touched.
+        """
+        return self._solver.getTime(c_int(2), byref(self.ierr))
+
+    def get_stop_time(self):
+        """
+        Utility returning the stop time of the simulation.
+        The self.ierr variable is not touched.
+        """
+        return self._solver.getTime(c_int(3), byref(self.ierr))
 
     def check_times(self, xtimes, use_times=True):
         """
