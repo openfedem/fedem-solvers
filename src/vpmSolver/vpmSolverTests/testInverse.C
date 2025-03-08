@@ -32,8 +32,8 @@
 
 int compareResponse (const char*, const char*, double, int = 0);
 
-typedef std::pair<int,int> Ipair;  //!< Convenience type definition
-typedef std::vector<Ipair> Ipairs; //!< Convenience type definition
+using Ipair  = std::pair<int,int>; //!< Convenience type definition
+using Ipairs = std::vector<Ipair>; //!< Convenience type definition
 
 
 /*!
@@ -60,7 +60,7 @@ int main (int argc, char** argv)
     if (!isdigit(argv[iarg][0]) || !isdigit(argv[iarg+1][0]))
       return false;
 
-    ip.push_back(std::make_pair(atoi(argv[iarg]),atoi(argv[iarg+1])));
+    ip.push_back({ atoi(argv[iarg]), atoi(argv[iarg+1]) });
     return true;
   };
 
@@ -165,6 +165,7 @@ int main (int argc, char** argv)
     // Perform the system iterations
     doContinue = solveInverse(dis.data(),meqn_d.data(),meqn_f.data(),
                               meqn_d.size(),meqn_f.size(),&status);
+    if (status < 0) return status; // Simulation failed, aborting...
 
     if (vfy) // Extract and print the outputs
     {
@@ -175,8 +176,11 @@ int main (int argc, char** argv)
   }
 
   // Simulation finished, terminate by closing down the result database, etc.
-  if (status < 0 || (status = solverDone()))
+  int dstat = solverDone();
+  if (status)
     return status;
+  else if (dstat)
+    return dstat;
 
   // Verify the simulation by comparing with some reference data
   return compareResponse("outputs.asc",vfy,eps);

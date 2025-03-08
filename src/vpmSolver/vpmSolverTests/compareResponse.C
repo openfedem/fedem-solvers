@@ -34,7 +34,7 @@
   \param[in] fn1 Path to the first file
   \param[in] fn2 Path to the second file (with reference data)
   \param[in] eps Comparison tolerance
-  \param[in] skip Number of initial lines to skip coomparison for
+  \param[in] skip Number of initial lines to skip comparison for
 
   \callergraph
 */
@@ -121,4 +121,37 @@ int compareResponse (const char* fn1, const char* fn2, double eps, int skip)
     std::cout <<"   * OK"<< std::endl;
 
   return numErrors;
+}
+
+
+/*!
+  \brief Utility function writing the beginning and end of a file to console.
+  \param[in] fileName Path to the file to bewritten
+  \param[in] nc1 Number of lines to write from beginning
+  \param[in] nc2 Number of lines to write before end
+
+  \callergraph
+*/
+
+void writeFile (const char* fileName, int nc1, int nc2)
+{
+  std::ifstream is(fileName);
+  if (!is) return;
+
+  std::cout <<"   * Here is the content of file "<< fileName <<":"<< std::endl;
+
+  int nline = 0;
+  std::string cline;
+  while (std::getline(is,cline))
+    if (++nline <= nc1)
+      std::cout << nline <<"\t"<< cline <<"\n";
+  if (nline <= nc1) return;
+
+  is.clear();
+  is.seekg(0);
+  if (nline > nc1+nc2)
+    std::cout <<"\n\t...\n\n";
+  for (int line = 1; std::getline(is,cline); line++)
+    if (line > nc1 && nline-line < nc2)
+      std::cout << line <<"\t"<< cline <<"\n";
 }

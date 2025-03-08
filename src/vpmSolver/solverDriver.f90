@@ -116,7 +116,7 @@ subroutine slv_next (iop,final,done,ierr)
   integer, intent(out)   :: ierr
   if (iop == 0) then
      call solveRampUp (iop,done,ierr)
-     if (ierr < 0) return
+     if (ierr /= 0) return
   end if
   if (iop < 1) then
      call solveFreqDomain (ierr)
@@ -367,7 +367,7 @@ subroutine slv_JointSpring (sprCoeff,bid,ierr)
   use solverModule, only : getJointSpringStiffness
   implicit none
   real(dp), intent(out) :: sprCoeff(*) !< Joint spring stiffness coefficients
-  integer,  intent(in)  :: bid         !< Base ID of the spring
+  integer,  intent(in)  :: bid         !< Base ID of joint
   integer,  intent(out) :: ierr        !< Error flag
   call getJointSpringStiffness (sprCoeff,bid,ierr)
 end subroutine slv_JointSpring

@@ -611,7 +611,7 @@ contains
     call startTimer (ini_p)
     call restartInit (sam,sys,mech,ctrl,stateData,ndat,IO,ierr)
     call stopTimer (ini_p)
-    if (ierr /= 0) goto 915
+    if (ierr < 0) goto 915
 
     call writeProgress (' --> TIME INTEGRATION')
     write(lterm,200)
@@ -633,7 +633,10 @@ contains
   !>                      time window
   !> @param[out] finished If .true., the end of the simulation has been reached,
   !>                      or the time integration failed
-  !> @param[out] ierr Error flag
+  !> @param[out] ierr Error flag:
+  !> - = 0 : All is good
+  !> - > 0 : The numerical simulation diverged due to erroneous model
+  !> - < 0 : Other errors of non-numerical kind (logics, internal, allocation)
   !>
   !> @details This subroutine performs different sub-tasks of the solution
   !> process, depending on the value of the control variable iop, as follows:
@@ -733,9 +736,6 @@ contains
        if (ierr < 0) goto 915
     end if
     if (eigInc >= 0.0_dp .and. hasReached(lastEig+eigInc)) then
-
-       lastEig = sys%time
-       numEigSol = numEigSol + 1
        call writeProgress (' --> EIGENVALUE CALCULATIONS')
 
        call eigenModes (sam,modes,sys,mech,iprint,ierr)
@@ -749,6 +749,7 @@ contains
                'No modal results were stored for this time step.', &
                'However, the time integration continues.')
        else if (ierr /= 0) then
+          if (ierr > 0) ierr = -ierr
           call reportError (error_p,'Eigenvalue analysis failed.', &
                'You can try to rerun the dynamic simulation', &
                'with the eigenvalue analysis switched off.')
@@ -763,8 +764,10 @@ contains
                &             modeDB,lDouble(1),ierr)
           call stopTimer (sav_p)
           if (ierr < 0) goto 915
+          numEigSol = numEigSol + 1
        end if
 
+       lastEig = sys%time
        if (resFilFM == 1) resFilFM = 2 ! Must write new convergence heading
     end if
 
@@ -904,7 +907,7 @@ contains
           lastRec = sys%time
           call stressRecovery (mech%sups,sys%nStep,lastRec,lSave, &
                &               rec_p,rec2_p,sav_p,resFilFM,iprint,IO,ierr)
-          if (ierr /= 0) goto 915
+          if (ierr < 0) goto 915
        end if
 
     end if
@@ -914,7 +917,7 @@ contains
        call gageRecovery (mech%sups,sys%nStep,sys%time, &
             &             max(0,iprint)*resFilFM,IO,ierr)
        call stopTimer (rec_p)
-       if (ierr /= 0) goto 915
+       if (ierr < 0) goto 915
 
        if (lSave) then
           call startTimer (sav_p)
@@ -973,10 +976,11 @@ contains
 
     !! --- Logic section ---
 
+    ierr = 0
     finished = .false.
     do while (.not.finished .and. sys%time < sys%tStart)
        call solveStep (iop,.false.,finished,ierr)
-       if (ierr < 0) then
+       if (ierr /= 0) then
           call reportError (debugFileOnly_p,'solveRampUp')
           return
        end if
@@ -1041,7 +1045,6 @@ contains
     end if
     if (ierr < 0) goto 915
 
-    numEigSol = numEigSol + 1
     call writeProgress (' --> EIGENVALUE CALCULATIONS')
     call eigenModes (sam,modes,sys,mech,iprint,ierr)
     if (ierr < -1) then
@@ -1080,6 +1083,7 @@ contains
        j = j + n
     end do
 
+    numEigSol = numEigSol + 1
     if (resFilFM == 1) resFilFM = 2 ! Must write new convergence heading
 
     !! Reset from command-line argument
@@ -1110,19 +1114,20 @@ contains
 
   subroutine finalize (ierr)
 
-    use KindModule                , only : i8
-    use SystemTypeModule          , only : isQuasiStatic
-    use SolverRoutinesModule      , only : dumpStep
-    use SaveModule                , only : res1DB, res2DB, modeDB, freqDB
-    use FiniteElementModule       , only : reportBeamEndForces
+    use KindModule             , only : i8
+    use SystemTypeModule       , only : isQuasiStatic
+    use SolverRoutinesModule   , only : dumpStep
+    use SaveModule             , only : res1DB, res2DB, modeDB, freqDB
+    use FiniteElementModule    , only : reportBeamEndForces
 #ifdef FT_HAS_RECOVERY
-    use StressRecoveryModule      , only : getGageRecoveryFiles
+    use StressRecoveryModule   , only : getGageRecoveryFiles
 #endif
-    use FileUtilitiesModule       , only : getFileName
-    use ProfilerModule            , only : startTimer, stopTimer, exp_p
-    use ProgressModule            , only : writeProgress, lterm
-    use ReportErrorModule         , only : reportError, debugFileOnly_p, error_p
-    use FFpBatchExportInterface   , only : ffp_crvexp
+    use FileUtilitiesModule    , only : getFileName
+    use ProfilerModule         , only : startTimer, stopTimer, exp_p
+    use ProgressModule         , only : writeProgress, lterm
+    use ReportErrorModule      , only : reportError
+    use ReportErrorModule      , only : debugFileOnly_p, error_p, empty_p
+    use FFpBatchExportInterface, only : ffp_crvexp
 
     integer, intent(out) :: ierr
 
@@ -1160,8 +1165,11 @@ contains
        end if
 1      format('Quasi-static Simulation aborted at T =',1PE12.5)
 2      format('Dynamic Simulation aborted at T =',1PE12.5)
-       call reportError (error_p,errMsg, &
-            &            'Results are saved until the last accepted time step.')
+       call reportError (error_p,errMsg)
+       if (sys%nStep > 0_i8) then
+          call reportError (empty_p,'Results are saved until '// &
+               &                    'the last accepted time step.')
+       end if
     else if (dumpBeams >= 0.0_dp .and. sys%time > dumpBeams) then
        !! Print out beam end force envelopes
        call reportBeamEndForces (-sys%time,mech%sups,mech%gravity,IO)
@@ -1172,15 +1180,17 @@ contains
     end if
 
     if (sys%nUpdates < 100000000_i8 .and. sys%nIter < 1000000000000_i8) then
-       write(IO   ,3) sys%nUpdates, sys%nIter
-       write(lterm,3) sys%nUpdates, sys%nIter
+       write(IO   ,3) sys%nUpdates, sys%nIter, sys%nStep
+       write(lterm,3) sys%nUpdates, sys%nIter, sys%nStep
 3      format(//5X,'NUMBER OF MATRIX UPDATES:',I8, &
-            &  /5X,'NUMBER OF ITERATIONS:',I12)
+            &  /5X,'NUMBER OF ITERATIONS:',I12, &
+            &  /5X,'NUMBER OF TIME STEPS:',I12)
     end if
 
 
     !! --- Batch curve export --------------------------------------------------
 
+    if (sys%nStep < 1_i8 .and. numEigSol < 0) goto 999
     call getFileName ('curvePlotFile',crvFile)
     if (crvFile == '') goto 999
 
@@ -1358,8 +1368,11 @@ contains
           else
              chname = '<...'//trim(chname(len_trim(chname)-51:))//'>'
           end if
-          chname(58:58) = '!'
-          write(lcon,650) chname
+          if (int(sys%nStep) > 0) then
+             write(lcon,650) chname
+          else
+             write(lcon,690) chname
+          end if
        end if
     else
        call getFileName ('resfile',chname)
@@ -1370,7 +1383,6 @@ contains
        else
           chname = '<...'//trim(chname(len_trim(chname)-51:))//'>'
        end if
-       chname(58:58) = '!'
        write(lcon,690) chname
     end if
 
@@ -1400,7 +1412,7 @@ contains
          & /11x,'!                                                         !' &
          & /11x,'!             ERROR MESSAGES ARE WRITTEN TO               !' &
          & /11X,'!                                                         !' &
-         & /11X,'!',A58, &
+         & /11X,'!',A57,'!' &
          & /11X,'!                                                         !' &
          & /11x,'!     RESULTS ARE KEPT UNTIL THE LAST ACCEPTED TIME STEP  !' &
          & /11X,'!                                                         !' &
@@ -1415,7 +1427,7 @@ contains
          & /11X,'!                                                         !' &
          & /11X,'!             ERROR MESSAGES ARE WRITTEN TO               !' &
          & /11X,'!                                                         !' &
-         & /11X,'!',A58, &
+         & /11X,'!',A57,'!' &
          & /11X,'!                                                         !' &
          & /11X,'-----------------------------------------------------------'/)
 
@@ -2798,10 +2810,10 @@ contains
 
 
   !!============================================================================
-  !> @brief Gets joint spring stiffness coefficients.
+  !> @brief Gets spring stiffness coefficients for a joint.
   !>
-  !> @param[out] sprCoeff Spring stiffness coefficient
-  !> @param[in]  bid      Base ID for spring
+  !> @param[out] sprCoeff Spring stiffness coefficients
+  !> @param[in]  bid      Base ID of joint
   !> @param[out] ierr     Error flag
   !>
   !> @callergraph

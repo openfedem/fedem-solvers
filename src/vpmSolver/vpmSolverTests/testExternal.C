@@ -197,7 +197,7 @@ int main (int argc, char** argv)
     // Invoke the dynamics solver for the time windows
     solveWindow(nStep,0,nIn,nOut,fId.data(),
                 NULL,inputs.data(),outputs.data(),0,NULL,&status);
-    if (status) return status; // Simulation failed, aborting...
+    if (status < 0) return status; // Simulation failed, aborting...
 
     // Print the outputs
     for (i = 1; i <= nStep; i++)
@@ -221,8 +221,9 @@ int main (int argc, char** argv)
       extOs << t <<"\t"<< extFunc(1,t) <<"\t2.0\t"<< extFunc(2,t) <<"\t4.0\n";
 
     // Invoke the solver to advance the time one step forward
-    if (!status) doContinue = solveNext(&status);
-    if (status) return status; // Simulation failed, aborting...
+    if (status == 0)
+      doContinue = solveNext(&status) && status >= 0;
+    if (status < 0) return status; // Simulation failed, aborting...
 
     // Extract and print the outputs
     outputs.clear();
@@ -238,8 +239,11 @@ int main (int argc, char** argv)
   if (extOs) extOs.close();
 
   // Simulation finished, terminate by closing down the result database, etc.
-  status = solverDone();
-  if (status) return status;
+  int dstat = solverDone();
+  if (status)
+    return status;
+  else if (dstat)
+    return dstat;
 
   // Verify the simulation by comparing with some reference data
   return compareResponse("outputs.asc",vfy,eps);

@@ -102,7 +102,7 @@ int main (int argc, char** argv)
   while (solveWindow(nStep,0,0,nOut,fId.data(),
                      NULL,NULL,outputs.data(),0,NULL,&status))
   {
-    if (status) return status; // Simulation failed, aborting...
+    if (status < 0) return status; // Simulation failed, aborting...
 
     // Save current state to core array
     if (!saveState(state,stateSize)) return -1;
@@ -115,8 +115,11 @@ int main (int argc, char** argv)
     }
 
     // Simulation finished, terminate by closing down the result database, etc.
-    status = solverDone(false);
-    if (status) return status;
+    int dstat = solverDone(false);
+    if (status)
+      return status;
+    else if (dstat)
+      return dstat;
 
     // Print the outputs
     if (!outputs.empty())
@@ -142,8 +145,11 @@ int main (int argc, char** argv)
   delete[] gages;
 
   // Simulation finished, terminate by closing down the result database, etc.
-  if (status || (status = solverDone()))
+  int dstat = status < 0 ? 0 : solverDone();
+  if (status)
     return status;
+  else if (dstat)
+    return dstat;
 
   // Verify the simulation by comparing with some reference data
   return compareResponse("outputs.asc",vfy,eps);
