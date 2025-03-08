@@ -492,11 +492,19 @@ extern "C" {
   bool addRhsVector(const double* Rvec);
 
   /*!
-    \brief Get joint spring stiffness coefficients.
-    \param[out] sprCoeff spring coefficient
-    \param[in]  bid Base ID of joint
+    \brief Gets spring stiffness coefficients for a joint.
+    \param[out] sprCoeff Spring stiffness coefficients
+    \param[in] bid Base ID of joint
   */
   bool getJointSprCoeff(double* sprCoeff, int bid);
+
+  /*!
+    \brief Gets a file name option from the command-line arguments.
+    \param[in] fileOpt Command-line option specifying a file name
+    \param[out] fileName Value of the specified command-line option
+    \param[in] nc Max length of fileName
+  */
+  const char* getFileName(const char* fileOpt, char* fileName, int nc);
 
 #ifdef __cplusplus
 }

@@ -1059,4 +1059,17 @@ DLLexport(bool) getJointSprCoeff (double* sprCoeff, int bid)
   return ierr >= 0;
 }
 
+
+DLLexport(const char*) getFileName (const char* fileOpt, char* fileName, int nc)
+{
+  fileName[0] = '\0';
+
+  std::string myName;
+  FFaCmdLineArg::instance()->getValue (fileOpt,myName);
+  if (myName.empty()) return NULL;
+
+  strncat(fileName,myName.c_str(),nc-1);
+  return static_cast<int>(myName.size()) < nc ? NULL : fileName;
+}
+
 //! \endcond
