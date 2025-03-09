@@ -637,7 +637,7 @@ contains
        call startTimer (wav_p)
        if (useFNV .and. istat == 0) then
           !! Use pre-evaluated wave kinematics
-          call getWaveKinematics (istep+1,inod,waterMotion,stat)
+          call getWaveKinematics (istep,inod,waterMotion,stat)
        else if (useHWAFLS .and. istat == 0) then
           !! Evaluate wave kinematics in hardware
           call startTW ()
