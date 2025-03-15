@@ -338,13 +338,18 @@ extern "C" {
     \brief Assigns a sensor value from a physical twin to the simulation model.
     \param[in] funcId ID of the external function to receive the sensor value
     \param[in] value The actual sensor value to be assigned
-    \return \e false if \a funcId is out of range, otherwise \e true
+    \return Zero on success, -1 if \a funcId is out of range,
+    -2 if there are no external functions in the model, and
+    -3 if an external function file has been specified and this method was
+    not invoked before the first time step (logic error by caller).
 
     \details This function may be used prior to the ::solveNext call,
     to assign a sensor value from a physical twin to the specified actuator
-    or load in the digital twin model.
+    or load in the digital twin model. If the model has specified a file to
+    read the external function values from, calling this method (before the first
+    time step), will override that file.
   */
-  bool setExtFunc(int funcId, double value);
+  int setExtFunc(int funcId, double value);
 
   /*!
     \brief Returns the physical time of a time step.

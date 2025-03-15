@@ -849,7 +849,7 @@ DLLexport(bool) addRhsVector (const double* Rvec)
 }
 
 
-DLLexport(bool) setExtFunc (int funcId, double value)
+DLLexport(int) setExtFunc (int funcId, double value)
 {
   return FiDeviceFunctionFactory::instance()->setValue (-funcId,0.0,value);
 }
@@ -887,27 +887,18 @@ DLLexport(bool) solveWindow (const int nStep, int nInc, int nIn, int nOut,
       if (*ierr > 0) *ierr = 0; // Don't abort on warnings
     }
 
-    if (nIn > 0)
-    {
-      // Update external function values (typically physical sensor readings)
-      for (j = 0; j < nIn; j++)
-        if (!setExtFunc (1+j,*(inputs+j)))
-          --(*ierr);
-      inputs += nIn;
-    }
+    // Update external function values (typically physical sensor readings)
+    for (j = 0; j < nIn; j++, inputs++)
+      *ierr += setExtFunc (1+j,*inputs);
 
     // Invoke the solver to advance the time one step forward
     int finalStep = i+1 < nStep ? 0 : 1;
     if (*ierr == 0)
       F90_NAME(slv_next,SLV_NEXT) (iop,finalStep,done,*ierr);
 
-    if (nOut > 0)
-    {
-      // Extract the output values
-      for (j = 0; j < nOut && *ierr == 0; j++)
-        outputs[j] = F90_NAME(slv_getfunc,SLV_GETFUNC) (fId[j],-1.0,*ierr);
-      outputs += nOut;
-    }
+    // Extract the output values
+    for (j = 0; j < nOut && *ierr == 0; j++, outputs++)
+      *outputs = F90_NAME(slv_getfunc,SLV_GETFUNC) (fId[j],-1.0,*ierr);
   }
 
   if (*ierr == 0 && nDat > 0)

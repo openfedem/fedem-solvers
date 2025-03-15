@@ -549,7 +549,8 @@ class FmmSolver(FedemSolver):
             Always True, unless the specified function is not found
         """
         if func_tag in self._func_map:
-            return self.set_ext_func(self._func_map[func_tag], value)
+            if self.set_ext_func(self._func_map[func_tag], value) == 0:
+                return True
         return False
 
 
