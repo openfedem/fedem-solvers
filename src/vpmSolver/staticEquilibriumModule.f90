@@ -76,7 +76,7 @@ contains
     use FFaCmdLineArgInterface  , only : ffa_cmdlinearg_getdoubles
     use FFaCmdLineArgInterface  , only : ffa_cmdlinearg_intValue
     use FFaCmdLineArgInterface  , only : ffa_cmdlinearg_isTrue
-    use FiDeviceFunctionInterface,only : fidf_initExtFunc, fidf_extFunc_ff
+    use FiDeviceFunctionInterface,only : fidf_initExtFunc
 
     type(SamType)      , intent(inout) :: sam
     type(SystemType)   , intent(inout) :: sys
@@ -143,7 +143,11 @@ contains
        if (ierr < 0) goto 915
     end if
 
-    !! Update all mechanism objects (initial configuration)
+    !! Update all mechanism objects (initial configuration).
+    !! Note(1): This call will also evaluate state-dependent general functions
+    !! if they are used to define external loads, prescribed motions, etc.
+    !! External functions are however not yet initialized at this point if they
+    !! take their values from a file, so they will all evaluate to zero here.
     call staticIncAndUpdate (sam,sys,mech,ierr,doIterations=doIterations>0)
     if (ierr < 0) goto 915
 
@@ -155,7 +159,8 @@ contains
           if (ierr < 0) goto 915
        end if
 
-       !! Quasi-static equilibrium iterations are not wanted
+       !! Quasi-static equilibrium iterations are not wanted.
+       !! Same comment as the Note(1) above applies here as well.
        call finalStaticUpdate (sam,sys,mech,ierr)
        if (ierr < 0) goto 915
 
@@ -223,7 +228,9 @@ contains
        initAero =  0
     end if
 
-    !! Initialize the external function values
+    !! Initialize the external function values.
+    !! TODO: Maybe this should be placed before the first mechanism update call?
+    !!       See the Note(1) above.
     if (present(xinp) .and. present(num_xinp)) then
        call fidf_initExtFunc (xinp,num_xinp,ierr)
        if (ierr < 0) then
@@ -232,7 +239,7 @@ contains
        end if
        num_xinp = ierr
     else
-       call fidf_extFunc_ff (1)
+       call fidf_initExtFunc (EPS,0,ierr)
     end if
 
 200 continue
