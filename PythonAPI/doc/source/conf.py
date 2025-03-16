@@ -30,7 +30,7 @@ author = "Knut Morten Okstad"
 # The short X.Y version
 version = "3.8"
 # The full version, including alpha/beta/rc tags
-release = "3.8.3"
+release = "3.8.4"
 
 # -- General configuration ---------------------------------------------------
 
