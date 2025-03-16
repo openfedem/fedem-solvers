@@ -252,11 +252,11 @@ contains
 
     call startTimer (upd_p)
 
-    if (sys%nStep > int(maxInt_p,i8)) then
+    if (sys%nStep >= int(maxInt_p,i8)) then
        iStep = 0 ! Avoid integer overflow, only used by FNV
        !! and possibly user-defined elements, so 99.9% harmless here
     else
-       iStep = int(sys%nStep)
+       iStep = int(sys%nStep)+1
     end if
 
     if (present(newVelocities)) then

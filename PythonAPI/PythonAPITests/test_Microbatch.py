@@ -78,7 +78,7 @@ for i in range(1,1+nsteps):
 df = DataFrame(inputs,index=tindex)
 
 # Set up keyword dictionary for the simulation driver
-slvopt = { "fco": "Setup.fco", "fsifile": "Model.fsi", "printFunc": "2" }
+slvopt = { "fco": "Setup.fco", "fsifile": "Model.fsi" }
 kwargs = { "lib_dir": wrkdir, "solver_options": slvopt }
 kwargs.update({ "output_ids": [3, 4, 5], "use_state": True })
 

@@ -15,10 +15,12 @@
 */
 
 #include "solverInterface.h"
+#include <iostream>
 #include <stdlib.h>
 #include <string.h>
 
 int compareResponse (const char*, const char*, double, int);
+void writeFile (const char*, int, int);
 
 
 /*!
@@ -36,6 +38,7 @@ int compareResponse (const char*, const char*, double, int);
 int main (int argc, char** argv)
 {
   // Check if a file for response verification was specified
+  const char* response = NULL;
   const char* verify = NULL;
   double epsTol = 0.0;
   int skipIL = 0;
@@ -53,24 +56,49 @@ int main (int argc, char** argv)
     argc -= 4;
   }
 
-  // Read input files, preprocess the model and setup the initial configuration
+  char resfile[128] = "\0";
+  char crvfile[128] = "\0";
+
+  // Lambda function printing a console error message on failure.
+  // It also prints portions of the fedem_solver.res file.
+  auto&& failure = [argv,verify,resfile](const char* prg, int stat)
+  {
+    std::cerr <<" *** "<< argv[0] <<": "<< prg
+              <<" failed ("<< stat <<")"<< std::endl;
+    if (verify) writeFile(resfile,200,100);
+    return stat;
+  };
+
+  // Read input files, preprocess the model and set up the initial configuration
   int status = solverInit(argc,argv);
-  if (status) return status;
+  if (status) return failure("solverInit",status);
+
+  // Get path to the fedem_solver.res file for this run
+  getFileName("resfile",resfile,128);
+  if (verify) // Get path to the exported curves file (if any) for this run
+    response = getFileName("curvePlotFile",crvfile,128);
 
   // Time step loop.
   // Invoke the solver step-by-step until specified end time is reached,
   // or an error occur.
   while (solveNext(&status))
-    if (status) return status; // Simulation failed, aborting...
+    if (status < 0)
+      return failure("solveNext",status); // Simulation failed, aborting...
 
   // Simulation finished, terminate by closing down the result database, etc.
-  if (status || (status = solverDone()))
-    return status;
+  int dstat = solverDone();
+  if (status)
+    return failure("solveNext",status);
+  else if (dstat)
+    return failure("solverDone",dstat);
 
   // Verify exported curve data against the reference data, if specified
-  for (int i = 1; i < argc; i++)
-    if (!strcmp(argv[i],"-curvePlotFile") && i+1 < argc)
-      return compareResponse(argv[i+1],verify,epsTol,skipIL);
+  if ((status = compareResponse(response,verify,epsTol,skipIL)))
+  {
+    std::cerr <<" *** "<< argv[0]
+              <<": Comparison failed ("<< status <<")"<< std::endl;
+    writeFile(resfile,200,100);
+  }
 
-  return 0;
+  return status;
 }

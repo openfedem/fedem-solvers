@@ -151,6 +151,8 @@ class FedemModel:
         self._fmlib.FmGetFuncTag.restype = c_bool
         self._fmlib.FmGetFuncTag.argtypes = [c_int, c_char_p]
 
+        self.__opened = False
+
     def _convert_id(self, obj_id, obj_type=FmType.ALL, multiple=False):
         """
         Converts `obj_id`, which can be either an integer base Id or a string tag,
@@ -189,8 +191,12 @@ class FedemModel:
         """
         if fname is None:
             return False
+        if self.__opened:
+            print(" *** The current model must be closed before opening a new")
+            return False
 
-        return self._fmlib.FmOpen(_convert_char(fname))
+        self.__opened = self._fmlib.FmOpen(_convert_char(fname))
+        return self.__opened
 
     def fm_save(self, fname=None):
         """
@@ -209,6 +215,9 @@ class FedemModel:
         bool
             True on success, otherwise False
         """
+        if not self.__opened:
+            return True
+
         return self._fmlib.FmSave(_convert_char(fname))
 
     def fm_new(self, fname=None):
@@ -227,6 +236,7 @@ class FedemModel:
             Always True
         """
         self._fmlib.FmNew(_convert_char(fname))
+        self.__opened = True
 
         return True
 
@@ -244,6 +254,8 @@ class FedemModel:
         bool
             Always True
         """
+        if not self.__opened:
+            return True
 
         if isinstance(remove_singletons, bool):
             self._fmlib.FmClose(c_bool(remove_singletons))
@@ -252,6 +264,7 @@ class FedemModel:
         else:
             self._fmlib.FmClose(c_bool(False))
 
+        self.__opened = False
         return True
 
     def fm_count(self, object_type=FmType.ALL):
@@ -268,6 +281,9 @@ class FedemModel:
         int
             Number of instances of the indicated object type
         """
+        if not self.__opened:
+            return 0
+
         return self._fmlib.FmCount(_convert_int(object_type, FmType))
 
     def fm_get_objects(self, object_type=FmType.ALL, tag=None):
@@ -288,6 +304,9 @@ class FedemModel:
             Base Id list of all instances in the model of the specified type
         """
         base_id = []
+        if not self.__opened:
+            return base_id
+
         if isinstance(tag, list):  # Process a list of tags
             for atag in tag:
                 base_id.extend(self.fm_get_objects(object_type, atag))
@@ -318,6 +337,9 @@ class FedemModel:
         int
             Number of tagged objects
         """
+        if not self.__opened:
+            return 0
+
         if isinstance(base_id, list):
             num_obj_ = c_int(len(base_id))
             base_id_ = (c_int * len(base_id))()
@@ -343,6 +365,9 @@ class FedemModel:
         (float, float, float)
             Global X-, Y-, and Z-coordinate
         """
+        if not self.__opened:
+            return None
+
         pos_ = (c_double * 3)()
         if not self._fmlib.FmGetPosition(self._convert_id(object_id), pos_):
             return None
@@ -365,6 +390,9 @@ class FedemModel:
         int
             Node Id
         """
+        if not self.__opened:
+            return 0
+
         pos_ = (c_double * 3)()
         pos_[:] = pos[0:3]
         return self._fmlib.FmGetNode(self._convert_id(part_id), pos_)
@@ -388,6 +416,9 @@ class FedemModel:
             If 0: This is a FE part but not subjected to stress recovery.
             If 1: This FE part is subjected to stress recovery.
         """
+        if not self.__opened:
+            return "", -2
+
         femfile = create_string_buffer(512)
         recover = c_int(0)
         if self._fmlib.FmGetFEModel(_convert_int(base_id), femfile, byref(recover)):
@@ -411,6 +442,9 @@ class FedemModel:
         bool
             True on success, otherwise (e.g., if base_id is invalid) False
         """
+        if not self.__opened:
+            return True
+
         return self._fmlib.FmSync(_convert_int(base_id))
 
     def fm_write_reducer(self, base_id):
@@ -428,6 +462,9 @@ class FedemModel:
         str
             Absolute path to the working directory of the reduction process
         """
+        if not self.__opened:
+            return ""
+
         rdbdir = create_string_buffer(512)
         if self._fmlib.FmReduce(rdbdir, _convert_int(base_id)):
             return rdbdir.value.decode("utf-8")
@@ -452,6 +489,9 @@ class FedemModel:
         str
             Absolute path to the working directory of the solver process
         """
+        if not self.__opened:
+            return ""
+
         rdbdir = create_string_buffer(512)
         if self._fmlib.FmSolve(
             rdbdir, c_bool(keep_old_res), _convert_char(ude), _convert_char(udf)
@@ -493,16 +533,16 @@ class FedemModel:
         add_opt : str, default=None
             Additional solver options
         """
-
-        self._fmlib.FmSolveSetup(
-            _convert_real(t_start),
-            _convert_real(t_inc),
-            _convert_real(t_end),
-            _convert_real(t_quasi),
-            _convert_real(e_inc),
-            _convert_int(n_modes),
-            _convert_char(add_opt),
-        )
+        if self.__opened:
+            self._fmlib.FmSolveSetup(
+                _convert_real(t_start),
+                _convert_real(t_inc),
+                _convert_real(t_end),
+                _convert_real(t_quasi),
+                _convert_real(e_inc),
+                _convert_int(n_modes),
+                _convert_char(add_opt),
+            )
 
     def fm_solver_tol(self, tol_ene=-1.0, tol_dis=-1.0, tol_vel=-1.0, tol_res=-1.0):
         """
@@ -519,13 +559,13 @@ class FedemModel:
         tol_res : float, default=-1.0
             Residual force norm tolerance
         """
-
-        self._fmlib.FmSolverTol(
-            _convert_real(tol_ene),
-            _convert_real(tol_dis),
-            _convert_real(tol_vel),
-            _convert_real(tol_res),
-        )
+        if self.__opened:
+            self._fmlib.FmSolverTol(
+                _convert_real(tol_ene),
+                _convert_real(tol_dis),
+                _convert_real(tol_vel),
+                _convert_real(tol_res),
+            )
 
     def fm_get_func_tag(self, channel):
         """
@@ -541,6 +581,8 @@ class FedemModel:
         str
             The tag of the function, None if channel is out of range
         """
+        if not self.__opened:
+            return None
 
         tag = create_string_buffer(512)
         if self._fmlib.FmGetFuncTag(_convert_int(channel), tag):

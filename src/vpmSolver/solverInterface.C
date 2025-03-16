@@ -612,7 +612,7 @@ DLLexport(int) restartFromState (const double* stateData, const int ndat,
   if (ierr < 0) return ierr;
 
   F90_NAME(slv_restart,SLV_RESTART) (stateData,ndat,writeToRDB,ierr);
-  if (ierr)
+  if (ierr < 0)
     releaseGlobalHeapObjects();
   else
     iop = -3; // Flag restart
@@ -631,7 +631,7 @@ DLLexport(bool) solveNext (int* ierr)
   // Solve for next time increment
   int done = 0;
   F90_NAME(slv_next,SLV_NEXT) (iop,0,done,*ierr);
-  if (*ierr) releaseGlobalHeapObjects();
+  if (*ierr < 0) releaseGlobalHeapObjects();
 
   return done == 0;
 }
@@ -649,7 +649,7 @@ DLLexport(bool) startStep (int* ierr)
   // Build the first coefficient matrix of current step and return
   int done = 0;
   F90_NAME(slv_next,SLV_NEXT) (iop,0,done,*ierr);
-  if (*ierr) releaseGlobalHeapObjects();
+  if (*ierr < 0) releaseGlobalHeapObjects();
 
   return done == 0;
 }
@@ -672,7 +672,7 @@ DLLexport(bool) solveIteration (int* ierr, bool all)
   // Solve current iteration, and assemble the next one
   int done = 0;
   F90_NAME(slv_next,SLV_NEXT) (iop,0,done,*ierr);
-  if (*ierr) releaseGlobalHeapObjects();
+  if (*ierr < 0) releaseGlobalHeapObjects();
 
   return all ? done == 0 : (done == 0 && iop > 0);
 }
@@ -701,7 +701,7 @@ DLLexport(bool) solveInverse (const double* x,
 
   int done = 0;
   F90_NAME(slv_inverse,SLV_INVERSE) (x,xeqs,feqs,ndis,nfrs,done,*ierr);
-  if (*ierr) releaseGlobalHeapObjects();
+  if (*ierr < 0) releaseGlobalHeapObjects();
 
   return done == 0 && *ierr == 0;
 }
@@ -880,8 +880,12 @@ DLLexport(bool) solveWindow (const int nStep, int nInc, int nIn, int nOut,
   int i, j, done = 0;
   for (i = 0; i < nStep && done == 0 && *ierr == 0; i++)
   {
-    if (nInc > 0) // Explicit time steps are specified
+    if (nInc > 0)
+    {
+      // Explicit time steps are specified
       F90_NAME(slv_settime,SLV_SETTIME) (times[i],*ierr);
+      if (*ierr > 0) *ierr = 0; // Don't abort on warnings
+    }
 
     if (nIn > 0)
     {
@@ -906,10 +910,14 @@ DLLexport(bool) solveWindow (const int nStep, int nInc, int nIn, int nOut,
     }
   }
 
-  if (*ierr == 0 && nDat > 0) // Save current state
+  if (*ierr == 0 && nDat > 0)
+  {
+    // Save current state
     F90_NAME(slv_savestate,SLV_SAVESTATE) (0,stateData,nDat,*ierr);
+    if (*ierr > 0) *ierr = 0; // State array too long - ignore
+  }
 
-  if (*ierr) releaseGlobalHeapObjects();
+  if (*ierr < 0) releaseGlobalHeapObjects();
 
   return done == 0;
 }
@@ -1057,6 +1065,19 @@ DLLexport(bool) getJointSprCoeff (double* sprCoeff, int bid)
 
   F90_NAME(slv_jointspring,SLV_JOINTSPRING) (sprCoeff,bid,ierr);
   return ierr >= 0;
+}
+
+
+DLLexport(const char*) getFileName (const char* fileOpt, char* fileName, int nc)
+{
+  fileName[0] = '\0';
+
+  std::string myName;
+  FFaCmdLineArg::instance()->getValue (fileOpt,myName);
+  if (myName.empty()) return NULL;
+
+  strncat(fileName,myName.c_str(),nc-1);
+  return static_cast<int>(myName.size()) < nc ? NULL : fileName;
 }
 
 //! \endcond
