@@ -8,6 +8,28 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.0.9] (2025-03-18)
+
+### :rocket: Added
+
+- New method `fedempy.modeler.make_generic_part()`
+- The method `fedempy.fmm_solver.solve_all()` is extended with option
+  to export the model and response (transformations, deformations and
+  von Mises stress on FE parts) to a VTFx-file during the simulation.
+  Requires the Ceetron VTFx exporter plugin (not part of openfedem).
+- Progress bar when running the solver from console using the methods
+  `fedempy.fmm_solver.solve_all()` and `fedempy.solver.run_all()`.
+
+### :bug: Fixed
+
+- Issue https://github.com/openfedem/fedem-foundation/issues/25 :
+  A specified external function file should be overridden if function
+  values are assigned explicitly from a fedempy script.
+- The dynamics solver may crash if invoked twice from the same fedempy script,
+  if the model file is saved before the simulation is started.
+- If the dynamics solver diverges during time integration, the end section
+  of the fedem_solver.res file (with timing information, etc.) is missing.
+
 ## [fedem-8.0.8] (2025-01-04)
 
 ### :rocket: Added
@@ -107,3 +129,4 @@
 [fedem-8.0.5]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.4...fedem-8.0.5
 [fedem-8.0.6]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.5...fedem-8.0.6
 [fedem-8.0.8]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.6...fedem-8.0.8
+[fedem-8.0.9]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.8...fedem-8.0.9
