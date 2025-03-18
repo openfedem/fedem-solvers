@@ -99,7 +99,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a99531993ddcb1d2ac9deada02f70911e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8514110d3715c193c2b5574aaa70d926"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a8514110d3715c193c2b5574aaa70d926">~FFaGenericFactory</a> ()</td></tr>
 <tr class="separator:a8514110d3715c193c2b5574aaa70d926"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a425fce07b94bd32fd4e7dff878dea96e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a425fce07b94bd32fd4e7dff878dea96e">registerCreator</a> (const Key &amp;key, const <a class="el" href="classFFaGenericFactory.html#a38aaaf49a057111a9c275f761ce961bb">CreatorCB</a> &amp;creator)</td></tr>
+<tr class="memitem:a425fce07b94bd32fd4e7dff878dea96e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a425fce07b94bd32fd4e7dff878dea96e">registerCreator</a> (const Key &amp;key, const <a class="el" href="classFFaGenericFactory.html#a52d482c330d5880635ca73ed6c38127a">CreatorCB</a> &amp;creator)</td></tr>
 <tr class="separator:a425fce07b94bd32fd4e7dff878dea96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56248dd3c13762879b397720e8794fef"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a56248dd3c13762879b397720e8794fef">create</a> (const Key &amp;key, ArgType id)</td></tr>
 <tr class="separator:a56248dd3c13762879b397720e8794fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,14 +110,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
-<tr class="memitem:a38aaaf49a057111a9c275f761ce961bb"><td class="memItemLeft" align="right" valign="top">typedef FFaDynCB2&lt; ArgType, T *&amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a38aaaf49a057111a9c275f761ce961bb">CreatorCB</a></td></tr>
-<tr class="separator:a38aaaf49a057111a9c275f761ce961bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcd2586cb23c29e34e3cec5df3f3083c"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; Key, <a class="el" href="classFFaGenericFactory.html#a38aaaf49a057111a9c275f761ce961bb">CreatorCB</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#abcd2586cb23c29e34e3cec5df3f3083c">CreatorType</a></td></tr>
-<tr class="separator:abcd2586cb23c29e34e3cec5df3f3083c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d482c330d5880635ca73ed6c38127a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a52d482c330d5880635ca73ed6c38127a">CreatorCB</a> = FFaDynCB2&lt; ArgType, T *&amp; &gt;</td></tr>
+<tr class="separator:a52d482c330d5880635ca73ed6c38127a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af30e695cef88a68fbfe78bc02034d1dd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#af30e695cef88a68fbfe78bc02034d1dd">CreatorType</a> = std::map&lt; Key, <a class="el" href="classFFaGenericFactory.html#a52d482c330d5880635ca73ed6c38127a">CreatorCB</a> &gt;</td></tr>
+<tr class="separator:af30e695cef88a68fbfe78bc02034d1dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a7d7b177d76317c3bbac2c013acef2972"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFFaGenericFactory.html#abcd2586cb23c29e34e3cec5df3f3083c">CreatorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a7d7b177d76317c3bbac2c013acef2972">myCreatorMap</a></td></tr>
+<tr class="memitem:a7d7b177d76317c3bbac2c013acef2972"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFFaGenericFactory.html#af30e695cef88a68fbfe78bc02034d1dd">CreatorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaGenericFactory.html#a7d7b177d76317c3bbac2c013acef2972">myCreatorMap</a></td></tr>
 <tr class="separator:a7d7b177d76317c3bbac2c013acef2972"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -144,8 +144,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a5fdc8569b719c2e66a58d68ff56c3612 inherit pro_methods_classFFaSingelton"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a38aaaf49a057111a9c275f761ce961bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38aaaf49a057111a9c275f761ce961bb">&#9670;&nbsp;</a></span>CreatorCB</h2>
+<a id="a52d482c330d5880635ca73ed6c38127a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d482c330d5880635ca73ed6c38127a">&#9670;&nbsp;</a></span>CreatorCB</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +156,7 @@ template&lt;class T , class Key  = std::string, class ArgType  = int&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">typedef FFaDynCB2&lt;ArgType,T*&amp;&gt; <a class="el" href="classFFaGenericFactory.html">FFaGenericFactory</a>&lt; T, Key, ArgType &gt;::<a class="el" href="classFFaGenericFactory.html#a38aaaf49a057111a9c275f761ce961bb">CreatorCB</a></td>
+          <td class="memname">using <a class="el" href="classFFaGenericFactory.html">FFaGenericFactory</a>&lt; T, Key, ArgType &gt;::<a class="el" href="classFFaGenericFactory.html#a52d482c330d5880635ca73ed6c38127a">CreatorCB</a> =  FFaDynCB2&lt;ArgType,T*&amp;&gt;</td>
         </tr>
       </table>
   </td>
@@ -168,8 +168,8 @@ template&lt;class T , class Key  = std::string, class ArgType  = int&gt; </div>
 
 </div>
 </div>
-<a id="abcd2586cb23c29e34e3cec5df3f3083c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcd2586cb23c29e34e3cec5df3f3083c">&#9670;&nbsp;</a></span>CreatorType</h2>
+<a id="af30e695cef88a68fbfe78bc02034d1dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af30e695cef88a68fbfe78bc02034d1dd">&#9670;&nbsp;</a></span>CreatorType</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,7 +180,7 @@ template&lt;class T , class Key  = std::string, class ArgType  = int&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;Key,<a class="el" href="classFFaGenericFactory.html#a38aaaf49a057111a9c275f761ce961bb">CreatorCB</a>&gt; <a class="el" href="classFFaGenericFactory.html">FFaGenericFactory</a>&lt; T, Key, ArgType &gt;::<a class="el" href="classFFaGenericFactory.html#abcd2586cb23c29e34e3cec5df3f3083c">CreatorType</a></td>
+          <td class="memname">using <a class="el" href="classFFaGenericFactory.html">FFaGenericFactory</a>&lt; T, Key, ArgType &gt;::<a class="el" href="classFFaGenericFactory.html#af30e695cef88a68fbfe78bc02034d1dd">CreatorType</a> =  std::map&lt;Key,<a class="el" href="classFFaGenericFactory.html#a52d482c330d5880635ca73ed6c38127a">CreatorCB</a>&gt;</td>
         </tr>
       </table>
   </td>
@@ -361,7 +361,7 @@ template&lt;class T , class Key  = std::string, class ArgType  = int&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classFFaGenericFactory.html#a38aaaf49a057111a9c275f761ce961bb">CreatorCB</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classFFaGenericFactory.html#a52d482c330d5880635ca73ed6c38127a">CreatorCB</a> &amp;&#160;</td>
           <td class="paramname"><em>creator</em>&#160;</td>
         </tr>
         <tr>
@@ -392,7 +392,7 @@ template&lt;class T , class Key  = std::string, class ArgType  = int&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classFFaGenericFactory.html#abcd2586cb23c29e34e3cec5df3f3083c">CreatorType</a> <a class="el" href="classFFaGenericFactory.html">FFaGenericFactory</a>&lt; T, Key, ArgType &gt;::myCreatorMap</td>
+          <td class="memname"><a class="el" href="classFFaGenericFactory.html#af30e695cef88a68fbfe78bc02034d1dd">CreatorType</a> <a class="el" href="classFFaGenericFactory.html">FFaGenericFactory</a>&lt; T, Key, ArgType &gt;::myCreatorMap</td>
         </tr>
       </table>
   </td>
@@ -410,7 +410,7 @@ template&lt;class T , class Key  = std::string, class ArgType  = int&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

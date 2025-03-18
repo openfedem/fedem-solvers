@@ -117,6 +117,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ad50e1d03504ebbfa39bd87f2f8d3d8d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#ad50e1d03504ebbfa39bd87f2f8d3d8d6">solveWindow</a> (int nStep, int nInc, int nIn, int nOut, const int *fOut, const double *times, const double *inputs, double *outputs, int nDat, double *stateData, int *ierr)</td></tr>
 <tr class="memdesc:ad50e1d03504ebbfa39bd87f2f8d3d8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the simulation for a specified time window.  <a href="solverInterface_8h.html#ad50e1d03504ebbfa39bd87f2f8d3d8d6">More...</a><br /></td></tr>
 <tr class="separator:ad50e1d03504ebbfa39bd87f2f8d3d8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ee479d1c31cb927d97429d064b9bda2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a4ee479d1c31cb927d97429d064b9bda2">haveResults</a> ()</td></tr>
+<tr class="memdesc:a4ee479d1c31cb927d97429d064b9bda2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether current time step have results to be saved.  <a href="solverInterface_8h.html#a4ee479d1c31cb927d97429d064b9bda2">More...</a><br /></td></tr>
+<tr class="separator:a4ee479d1c31cb927d97429d064b9bda2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9df75bc18b19bbeaab2f2b0156be6e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#aa9df75bc18b19bbeaab2f2b0156be6e8">getStateSize</a> ()</td></tr>
 <tr class="memdesc:aa9df75bc18b19bbeaab2f2b0156be6e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the required length of the state vector to be is used when restarting a simulation from an in-core array.  <a href="solverInterface_8h.html#aa9df75bc18b19bbeaab2f2b0156be6e8">More...</a><br /></td></tr>
 <tr class="separator:aa9df75bc18b19bbeaab2f2b0156be6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,18 +183,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a7c298a38fdd5a5d66ca383b3a22a01fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a7c298a38fdd5a5d66ca383b3a22a01fc">solverClose</a> ()</td></tr>
 <tr class="memdesc:a7c298a38fdd5a5d66ca383b3a22a01fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up singleton objects in core memory.  <a href="solverInterface_8h.html#a7c298a38fdd5a5d66ca383b3a22a01fc">More...</a><br /></td></tr>
 <tr class="separator:a7c298a38fdd5a5d66ca383b3a22a01fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dd4fccae0a0a6f195da03c878cf868d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a0dd4fccae0a0a6f195da03c878cf868d">setExtFunc</a> (int funcId, double value)</td></tr>
-<tr class="memdesc:a0dd4fccae0a0a6f195da03c878cf868d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a sensor value from a physical twin to the simulation model.  <a href="solverInterface_8h.html#a0dd4fccae0a0a6f195da03c878cf868d">More...</a><br /></td></tr>
-<tr class="separator:a0dd4fccae0a0a6f195da03c878cf868d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9f0284944d11b70d710b09883ee7212"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#ac9f0284944d11b70d710b09883ee7212">getTime</a> (bool nextStep, int *ierr)</td></tr>
-<tr class="memdesc:ac9f0284944d11b70d710b09883ee7212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns current or next physical time of the simulation.  <a href="solverInterface_8h.html#ac9f0284944d11b70d710b09883ee7212">More...</a><br /></td></tr>
-<tr class="separator:ac9f0284944d11b70d710b09883ee7212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ef752ea0feaa296f5ea0f36e9fe970"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a89ef752ea0feaa296f5ea0f36e9fe970">setExtFunc</a> (int funcId, double value)</td></tr>
+<tr class="memdesc:a89ef752ea0feaa296f5ea0f36e9fe970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a sensor value from a physical twin to the simulation model.  <a href="solverInterface_8h.html#a89ef752ea0feaa296f5ea0f36e9fe970">More...</a><br /></td></tr>
+<tr class="separator:a89ef752ea0feaa296f5ea0f36e9fe970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac5e555d52af45728c55b1940dacb015"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#aac5e555d52af45728c55b1940dacb015">getTime</a> (int tFlag, int *ierr)</td></tr>
+<tr class="memdesc:aac5e555d52af45728c55b1940dacb015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the physical time of a time step.  <a href="solverInterface_8h.html#aac5e555d52af45728c55b1940dacb015">More...</a><br /></td></tr>
+<tr class="separator:aac5e555d52af45728c55b1940dacb015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a5fee4b616fa785c0a5c49d47fef8c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a9a5fee4b616fa785c0a5c49d47fef8c5">setTime</a> (double nextTime)</td></tr>
 <tr class="memdesc:a9a5fee4b616fa785c0a5c49d47fef8c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the time increment size of the next time step.  <a href="solverInterface_8h.html#a9a5fee4b616fa785c0a5c49d47fef8c5">More...</a><br /></td></tr>
 <tr class="separator:a9a5fee4b616fa785c0a5c49d47fef8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4354e93ec1383d34a2b5ede7bad1e43d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a4354e93ec1383d34a2b5ede7bad1e43d">getCurrentTime</a> (int *ierr)</td></tr>
-<tr class="memdesc:a4354e93ec1383d34a2b5ede7bad1e43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current physical time of the simulation.  <a href="solverInterface_8h.html#a4354e93ec1383d34a2b5ede7bad1e43d">More...</a><br /></td></tr>
-<tr class="separator:a4354e93ec1383d34a2b5ede7bad1e43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee85a3385434e4615f588684cb7c5aca"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#aee85a3385434e4615f588684cb7c5aca">getCurrentTime</a> ()</td></tr>
+<tr class="memdesc:aee85a3385434e4615f588684cb7c5aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current physical time of the simulation.  <a href="solverInterface_8h.html#aee85a3385434e4615f588684cb7c5aca">More...</a><br /></td></tr>
+<tr class="separator:aee85a3385434e4615f588684cb7c5aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04594cfb573c7777217d091d755b2082"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#a04594cfb573c7777217d091d755b2082">getNextTime</a> (int *ierr)</td></tr>
 <tr class="memdesc:a04594cfb573c7777217d091d755b2082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the physical time of the next step of the simulation.  <a href="solverInterface_8h.html#a04594cfb573c7777217d091d755b2082">More...</a><br /></td></tr>
 <tr class="separator:a04594cfb573c7777217d091d755b2082"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,8 +244,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:a60feae3c38b3305b46def7d4d9a05cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the content of the system right-hand-side vector.  <a href="solverInterface_8h.html#a60feae3c38b3305b46def7d4d9a05cc0">More...</a><br /></td></tr>
 <tr class="separator:a60feae3c38b3305b46def7d4d9a05cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afaa057937e34b51ac26fc4bbd4ae4f47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#afaa057937e34b51ac26fc4bbd4ae4f47">getJointSprCoeff</a> (double *sprCoeff, int bid)</td></tr>
-<tr class="memdesc:afaa057937e34b51ac26fc4bbd4ae4f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get joint spring stiffness coefficients.  <a href="solverInterface_8h.html#afaa057937e34b51ac26fc4bbd4ae4f47">More...</a><br /></td></tr>
+<tr class="memdesc:afaa057937e34b51ac26fc4bbd4ae4f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets spring stiffness coefficients for a joint.  <a href="solverInterface_8h.html#afaa057937e34b51ac26fc4bbd4ae4f47">More...</a><br /></td></tr>
 <tr class="separator:afaa057937e34b51ac26fc4bbd4ae4f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8c7549c4860b1ad0d58ca1fe6a45eab"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverInterface_8h.html#ae8c7549c4860b1ad0d58ca1fe6a45eab">getFileName</a> (const char *fileOpt, char *fileName, int nc)</td></tr>
+<tr class="memdesc:ae8c7549c4860b1ad0d58ca1fe6a45eab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a file name option from the command-line arguments.  <a href="solverInterface_8h.html#ae8c7549c4860b1ad0d58ca1fe6a45eab">More...</a><br /></td></tr>
+<tr class="separator:ae8c7549c4860b1ad0d58ca1fe6a45eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines the API for the FEDEM dynamics solver core. </p>
@@ -386,8 +392,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4354e93ec1383d34a2b5ede7bad1e43d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4354e93ec1383d34a2b5ede7bad1e43d">&#9670;&nbsp;</a></span>getCurrentTime()</h2>
+<a id="aee85a3385434e4615f588684cb7c5aca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee85a3385434e4615f588684cb7c5aca">&#9670;&nbsp;</a></span>getCurrentTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -398,8 +404,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">double getCurrentTime </td>
           <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>ierr</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -411,12 +416,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the current physical time of the simulation. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Always equal to zero </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -523,6 +522,50 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae8c7549c4860b1ad0d58ca1fe6a45eab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8c7549c4860b1ad0d58ca1fe6a45eab">&#9670;&nbsp;</a></span>getFileName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* getFileName </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fileOpt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a file name option from the command-line arguments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileOpt</td><td>Command-line option specifying a file name </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fileName</td><td>Value of the specified command-line option </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nc</td><td>Max length of fileName </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8d8fa539bc9a6624b55925249ac8517a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d8fa539bc9a6624b55925249ac8517a">&#9670;&nbsp;</a></span>getFunc()</h2>
 
@@ -626,10 +669,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get joint spring stiffness coefficients. </p>
+<p>Gets spring stiffness coefficients for a joint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">sprCoeff</td><td>spring coefficient </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">sprCoeff</td><td>Spring stiffness coefficients </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bid</td><td>Base ID of joint </td></tr>
   </table>
   </dd>
@@ -716,7 +759,7 @@ Functions</h2></td></tr>
 <p>Returns the physical time of the next step of the simulation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Equal to zero on a successful call, a non-zero value may occur only if the time step size in the model is defined via a general function that could not be evaluated. </td></tr>
+    <tr><td class="paramname">ierr</td><td>Untouched on a successful call, decremented if the time step size in the model is defined via a general function that could not be evaluated. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1135,8 +1178,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac9f0284944d11b70d710b09883ee7212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9f0284944d11b70d710b09883ee7212">&#9670;&nbsp;</a></span>getTime()</h2>
+<a id="aac5e555d52af45728c55b1940dacb015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac5e555d52af45728c55b1940dacb015">&#9670;&nbsp;</a></span>getTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1144,8 +1187,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">double getTime </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>nextStep</em>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tFlag</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1161,11 +1204,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns current or next physical time of the simulation. </p>
+<p>Returns the physical time of a time step. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">nextStep</td><td>If <em>true</em>, return next time, otherwise current </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tFlag</td><td>Flag indicating which time step to return the time for<ul>
+<li>0 : Return for current time step</li>
+<li>1 : Return for next time step</li>
+<li>2 : Return the start time of the simulation</li>
+<li>3 : Return the stop time of the simulation </li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag, untouched unless <em>tFlag</em> = 1 </td></tr>
   </table>
   </dd>
 </dl>
@@ -1188,6 +1237,25 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the required length of the state vector which contains translation and rotation information for all triads and superelements. </p>
+
+</div>
+</div>
+<a id="a4ee479d1c31cb927d97429d064b9bda2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ee479d1c31cb927d97429d064b9bda2">&#9670;&nbsp;</a></span>haveResults()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int haveResults </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether current time step have results to be saved. </p>
 
 </div>
 </div>
@@ -1446,14 +1514,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0dd4fccae0a0a6f195da03c878cf868d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dd4fccae0a0a6f195da03c878cf868d">&#9670;&nbsp;</a></span>setExtFunc()</h2>
+<a id="a89ef752ea0feaa296f5ea0f36e9fe970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89ef752ea0feaa296f5ea0f36e9fe970">&#9670;&nbsp;</a></span>setExtFunc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool setExtFunc </td>
+          <td class="memname">int setExtFunc </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>funcId</em>, </td>
@@ -1480,8 +1548,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><em>false</em> if <em>funcId</em> is out of range, otherwise <em>true</em> </dd></dl>
-<p>This function may be used prior to the <a class="el" href="solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward.">solveNext</a> call, to assign a sensor value from a physical twin to the specified actuator or load in the digital twin model. </p>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success, -1 if <em>funcId</em> is out of range, -2 if there are no external functions in the model, and -3 if an external function file has been specified and this method was not invoked before the first time step (logic error by caller).</dd></dl>
+<p>This function may be used prior to the <a class="el" href="solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward.">solveNext</a> call, to assign a sensor value from a physical twin to the specified actuator or load in the digital twin model. If the model has specified a file to read the external function values from, calling this method (before the first time step), will override that file. </p>
 
 </div>
 </div>
@@ -2009,7 +2077,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

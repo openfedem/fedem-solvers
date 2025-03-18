@@ -109,9 +109,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a688267739853d43d34189be1365d3e33"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33">slv_done</a> (ierr)</td></tr>
 <tr class="memdesc:a688267739853d43d34189be1365d3e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminates the running solver process by deallocating all memory, etc.  <a href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33">More...</a><br /></td></tr>
 <tr class="separator:a688267739853d43d34189be1365d3e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33e63ef93705c8623bcd5d1b89e0013c"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverDriver_8f90.html#a33e63ef93705c8623bcd5d1b89e0013c">slv_gettime</a> (nextStep, ierr)</td></tr>
-<tr class="memdesc:a33e63ef93705c8623bcd5d1b89e0013c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the time of current or next time increment.  <a href="solverDriver_8f90.html#a33e63ef93705c8623bcd5d1b89e0013c">More...</a><br /></td></tr>
-<tr class="separator:a33e63ef93705c8623bcd5d1b89e0013c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74b48540bf7b957e5955eac4a9d7d212"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverDriver_8f90.html#a74b48540bf7b957e5955eac4a9d7d212">slv_gettime</a> (tflag, ierr)</td></tr>
+<tr class="memdesc:a74b48540bf7b957e5955eac4a9d7d212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the physical time of a specified simulation state.  <a href="solverDriver_8f90.html#a74b48540bf7b957e5955eac4a9d7d212">More...</a><br /></td></tr>
+<tr class="separator:a74b48540bf7b957e5955eac4a9d7d212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a747a6d7a55ea21ed3128a46b8ea069bd"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverDriver_8f90.html#a747a6d7a55ea21ed3128a46b8ea069bd">slv_settime</a> (nextTime, ierr)</td></tr>
 <tr class="memdesc:a747a6d7a55ea21ed3128a46b8ea069bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the time increment size of the next time step.  <a href="solverDriver_8f90.html#a747a6d7a55ea21ed3128a46b8ea069bd">More...</a><br /></td></tr>
 <tr class="separator:a747a6d7a55ea21ed3128a46b8ea069bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +175,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a30c0ad19a086e4397689e79f67a2fbfb"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverDriver_8f90.html#a30c0ad19a086e4397689e79f67a2fbfb">slv_savepart</a> (iopS, bid, data, ndat, ierr)</td></tr>
 <tr class="memdesc:a30c0ad19a086e4397689e79f67a2fbfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves current deformation state for an FE part to an array in core.  <a href="solverDriver_8f90.html#a30c0ad19a086e4397689e79f67a2fbfb">More...</a><br /></td></tr>
 <tr class="separator:a30c0ad19a086e4397689e79f67a2fbfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d8d51143e032382b82ea3980ffee35a"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solverDriver_8f90.html#a6d8d51143e032382b82ea3980ffee35a">slv_haveresults</a> ()</td></tr>
+<tr class="memdesc:a6d8d51143e032382b82ea3980ffee35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether current time step have results to be saved.  <a href="solverDriver_8f90.html#a6d8d51143e032382b82ea3980ffee35a">More...</a><br /></td></tr>
+<tr class="separator:a6d8d51143e032382b82ea3980ffee35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Global driver routines for the FEDEM Dynamics Solver. </p>
@@ -732,8 +735,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a33e63ef93705c8623bcd5d1b89e0013c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33e63ef93705c8623bcd5d1b89e0013c">&#9670;&nbsp;</a></span>slv_gettime()</h2>
+<a id="a74b48540bf7b957e5955eac4a9d7d212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74b48540bf7b957e5955eac4a9d7d212">&#9670;&nbsp;</a></span>slv_gettime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -741,8 +744,8 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">real(dp) function slv_gettime </td>
           <td>(</td>
-          <td class="paramtype">logical, intent(in)&#160;</td>
-          <td class="paramname"><em>nextStep</em>, </td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>tflag</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -758,10 +761,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the time of current or next time increment. </p>
+<p>Returns the physical time of a specified simulation state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">nextstep</td><td>If .true, return the time of next step </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tflag</td><td>Indicates which step to return the time for </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
   </table>
   </dd>
@@ -769,10 +772,10 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="solverDriver_8f90_a33e63ef93705c8623bcd5d1b89e0013c_cgraph.png" border="0" usemap="#asolverDriver_8f90_a33e63ef93705c8623bcd5d1b89e0013c_cgraph" alt=""/></div>
-<map name="asolverDriver_8f90_a33e63ef93705c8623bcd5d1b89e0013c_cgraph" id="asolverDriver_8f90_a33e63ef93705c8623bcd5d1b89e0013c_cgraph">
-<area shape="rect" title="Returns the time of current or next time increment." alt="" coords="5,5,104,32"/>
-<area shape="rect" href="namespacesolvermodule.html#a6d5b38f3a985d92f9a9da349cb2c130d" title="Returns the simulation time of the current or next time step." alt="" coords="152,5,323,32"/>
+<div class="center"><img src="solverDriver_8f90_a74b48540bf7b957e5955eac4a9d7d212_cgraph.png" border="0" usemap="#asolverDriver_8f90_a74b48540bf7b957e5955eac4a9d7d212_cgraph" alt=""/></div>
+<map name="asolverDriver_8f90_a74b48540bf7b957e5955eac4a9d7d212_cgraph" id="asolverDriver_8f90_a74b48540bf7b957e5955eac4a9d7d212_cgraph">
+<area shape="rect" title="Returns the physical time of a specified simulation state." alt="" coords="5,5,104,32"/>
+<area shape="rect" href="namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5" title="Returns the physical time of a specified simulation state." alt="" coords="152,5,323,32"/>
 <area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title=" " alt="" coords="371,5,613,32"/>
 </map>
 </div>
@@ -820,6 +823,31 @@ Here is the call graph for this function:</div>
 <map name="asolverDriver_8f90_a526d44e9f1d8c82f7d02250d5cf14368_cgraph" id="asolverDriver_8f90_a526d44e9f1d8c82f7d02250d5cf14368_cgraph">
 <area shape="rect" title="Returns the state variables for a given mechanism object." alt="" coords="5,5,96,32"/>
 <area shape="rect" href="namespacesolvermodule.html#a91f56e58c4c8357a3ae311fd38d9c73d" title="Returns the current state variables for the specified object." alt="" coords="144,5,357,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6d8d51143e032382b82ea3980ffee35a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d8d51143e032382b82ea3980ffee35a">&#9670;&nbsp;</a></span>slv_haveresults()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer function slv_haveresults</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether current time step have results to be saved. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="solverDriver_8f90_a6d8d51143e032382b82ea3980ffee35a_cgraph.png" border="0" usemap="#asolverDriver_8f90_a6d8d51143e032382b82ea3980ffee35a_cgraph" alt=""/></div>
+<map name="asolverDriver_8f90_a6d8d51143e032382b82ea3980ffee35a_cgraph" id="asolverDriver_8f90_a6d8d51143e032382b82ea3980ffee35a_cgraph">
+<area shape="rect" title="Checks whether current time step have results to be saved." alt="" coords="5,5,129,32"/>
+<area shape="rect" href="namespacesolvermodule.html#aae35957763d95342b5d6660e99176bc9" title="Returns whether current step have results to be saved." alt="" coords="177,5,372,32"/>
 </map>
 </div>
 
@@ -1490,7 +1518,7 @@ Here is the call graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">sprcoeff</td><td>Joint spring stiffness coefficients </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bid</td><td>Base ID of the spring </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bid</td><td>Base ID of joint </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
   </table>
   </dd>
@@ -1501,7 +1529,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="solverDriver_8f90_af80250c54756d2434a6a165cb07e269e_cgraph.png" border="0" usemap="#asolverDriver_8f90_af80250c54756d2434a6a165cb07e269e_cgraph" alt=""/></div>
 <map name="asolverDriver_8f90_af80250c54756d2434a6a165cb07e269e_cgraph" id="asolverDriver_8f90_af80250c54756d2434a6a165cb07e269e_cgraph">
 <area shape="rect" title="Gets joint spring stiffness coefficients." alt="" coords="5,5,123,32"/>
-<area shape="rect" href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539" title="Gets joint spring stiffness coefficients." alt="" coords="171,5,435,32"/>
+<area shape="rect" href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539" title="Gets spring stiffness coefficients for a joint." alt="" coords="171,5,435,32"/>
 </map>
 </div>
 
@@ -2506,7 +2534,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -102,6 +102,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a599d899ea3c3ab5606c8dbce2a1233d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compareResponse_8C.html#a599d899ea3c3ab5606c8dbce2a1233d7">compareResponse</a> (const char *fn1, const char *fn2, double eps, int skip)</td></tr>
 <tr class="memdesc:a599d899ea3c3ab5606c8dbce2a1233d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function to compare two ASCII files with numerical data.  <a href="compareResponse_8C.html#a599d899ea3c3ab5606c8dbce2a1233d7">More...</a><br /></td></tr>
 <tr class="separator:a599d899ea3c3ab5606c8dbce2a1233d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a528f7e0ac3601c1f45b5f9b69cf5ec20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compareResponse_8C.html#a528f7e0ac3601c1f45b5f9b69cf5ec20">writeFile</a> (const char *fileName, int nc1, int nc2)</td></tr>
+<tr class="memdesc:a528f7e0ac3601c1f45b5f9b69cf5ec20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function writing the beginning and end of a file to console.  <a href="compareResponse_8C.html#a528f7e0ac3601c1f45b5f9b69cf5ec20">More...</a><br /></td></tr>
+<tr class="separator:a528f7e0ac3601c1f45b5f9b69cf5ec20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utility for comparing two ASCII files with numerical data. </p>
@@ -153,7 +156,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fn1</td><td>Path to the first file </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fn2</td><td>Path to the second file (with reference data) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">eps</td><td>Comparison tolerance </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">skip</td><td>Number of initial lines to skip coomparison for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">skip</td><td>Number of initial lines to skip comparison for </td></tr>
   </table>
   </dd>
 </dl>
@@ -169,10 +172,63 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a528f7e0ac3601c1f45b5f9b69cf5ec20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a528f7e0ac3601c1f45b5f9b69cf5ec20">&#9670;&nbsp;</a></span>writeFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeFile </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nc1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nc2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Utility function writing the beginning and end of a file to console. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Path to the file to bewritten </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nc1</td><td>Number of lines to write from beginning </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nc2</td><td>Number of lines to write before end </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="compareResponse_8C_a528f7e0ac3601c1f45b5f9b69cf5ec20_icgraph.png" border="0" usemap="#acompareResponse_8C_a528f7e0ac3601c1f45b5f9b69cf5ec20_icgraph" alt=""/></div>
+<map name="acompareResponse_8C_a528f7e0ac3601c1f45b5f9b69cf5ec20_icgraph" id="acompareResponse_8C_a528f7e0ac3601c1f45b5f9b69cf5ec20_icgraph">
+<area shape="rect" title="Utility function writing the beginning and end of a file to console." alt="" coords="108,5,187,32"/>
+<area shape="rect" href="vpmSolver_2main_8C.html#a3c04138a5bfe5d72780bb7e82a18e627" title="Main program for the FEDEM dynamics solver." alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

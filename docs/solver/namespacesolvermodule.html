@@ -106,9 +106,12 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aa8a194b7b7a4ef929ac7f744269e6a3b"><td class="memItemLeft" align="right" valign="top">logical function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#aa8a194b7b7a4ef929ac7f744269e6a3b">solvedynamic</a> ()</td></tr>
 <tr class="memdesc:aa8a194b7b7a4ef929ac7f744269e6a3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the next step should be solved dynamically or not.  <a href="namespacesolvermodule.html#aa8a194b7b7a4ef929ac7f744269e6a3b">More...</a><br /></td></tr>
 <tr class="separator:aa8a194b7b7a4ef929ac7f744269e6a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d5b38f3a985d92f9a9da349cb2c130d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#a6d5b38f3a985d92f9a9da349cb2c130d">gettime</a> (time, nextStep, ierr)</td></tr>
-<tr class="memdesc:a6d5b38f3a985d92f9a9da349cb2c130d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the simulation time of the current or next time step.  <a href="namespacesolvermodule.html#a6d5b38f3a985d92f9a9da349cb2c130d">More...</a><br /></td></tr>
-<tr class="separator:a6d5b38f3a985d92f9a9da349cb2c130d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae35957763d95342b5d6660e99176bc9"><td class="memItemLeft" align="right" valign="top">integer function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#aae35957763d95342b5d6660e99176bc9">haveresults</a> ()</td></tr>
+<tr class="memdesc:aae35957763d95342b5d6660e99176bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether current step have results to be saved.  <a href="namespacesolvermodule.html#aae35957763d95342b5d6660e99176bc9">More...</a><br /></td></tr>
+<tr class="separator:aae35957763d95342b5d6660e99176bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee11f240a987ec00b0339a031adc38b5"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5">gettime</a> (time, tflag, ierr)</td></tr>
+<tr class="memdesc:aee11f240a987ec00b0339a031adc38b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the physical time of a specified simulation state.  <a href="namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5">More...</a><br /></td></tr>
+<tr class="separator:aee11f240a987ec00b0339a031adc38b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6cd83066183e3110ef0d2e99a5c2e72"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#af6cd83066183e3110ef0d2e99a5c2e72">setnewtime</a> (nextTime, ierr)</td></tr>
 <tr class="memdesc:af6cd83066183e3110ef0d2e99a5c2e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the time increment size to be used for next time step.  <a href="namespacesolvermodule.html#af6cd83066183e3110ef0d2e99a5c2e72">More...</a><br /></td></tr>
 <tr class="separator:af6cd83066183e3110ef0d2e99a5c2e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,7 +179,7 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a78a479ffd569dd6d0f66949a945ee112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes response variables for input displacements.  <a href="namespacesolvermodule.html#a78a479ffd569dd6d0f66949a945ee112">More...</a><br /></td></tr>
 <tr class="separator:a78a479ffd569dd6d0f66949a945ee112"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7671011a082e640181da4e3a9088b539"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539">getjointspringstiffness</a> (sprCoeff, bid, ierr)</td></tr>
-<tr class="memdesc:a7671011a082e640181da4e3a9088b539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets joint spring stiffness coefficients.  <a href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539">More...</a><br /></td></tr>
+<tr class="memdesc:a7671011a082e640181da4e3a9088b539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets spring stiffness coefficients for a joint.  <a href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539">More...</a><br /></td></tr>
 <tr class="separator:a7671011a082e640181da4e3a9088b539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -1157,11 +1160,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Gets joint spring stiffness coefficients. </p>
+<p>Gets spring stiffness coefficients for a joint. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">sprCoeff</td><td>Spring stiffness coefficient </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">bid</td><td>Base ID for spring </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">sprCoeff</td><td>Spring stiffness coefficients </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bid</td><td>Base ID of joint </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
@@ -1173,7 +1176,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a7671011a082e640181da4e3a9088b539_icgraph.png" border="0" usemap="#anamespacesolvermodule_a7671011a082e640181da4e3a9088b539_icgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a7671011a082e640181da4e3a9088b539_icgraph" id="anamespacesolvermodule_a7671011a082e640181da4e3a9088b539_icgraph">
-<area shape="rect" title="Gets joint spring stiffness coefficients." alt="" coords="171,5,435,32"/>
+<area shape="rect" title="Gets spring stiffness coefficients for a joint." alt="" coords="171,5,435,32"/>
 <area shape="rect" href="solverDriver_8f90.html#af80250c54756d2434a6a165cb07e269e" title="Gets joint spring stiffness coefficients." alt="" coords="5,5,123,32"/>
 </map>
 </div>
@@ -1318,8 +1321,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a6d5b38f3a985d92f9a9da349cb2c130d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d5b38f3a985d92f9a9da349cb2c130d">&#9670;&nbsp;</a></span>gettime()</h2>
+<a id="aee11f240a987ec00b0339a031adc38b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee11f240a987ec00b0339a031adc38b5">&#9670;&nbsp;</a></span>gettime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1333,8 +1336,8 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">logical, intent(in)&#160;</td>
-          <td class="paramname"><em>nextStep</em>, </td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>tflag</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1350,34 +1353,67 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the simulation time of the current or next time step. </p>
+<p>Returns the physical time of a specified simulation state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">time</td><td>The simulation time returned </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nextStep</td><td>If .true., return for next step, otherwise current step </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">time</td><td>The physical time value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tflag</td><td>Flag indicating which time step to return for<ul>
+<li>0 : Return for current time step</li>
+<li>1 : Return for next time step</li>
+<li>2 : Return the start time of the simulation</li>
+<li>3 : Return the stop time of the simulation </li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ierr</td><td>Error flag, untouched unless <em>tflag</em> = 1</td></tr>
   </table>
   </dd>
 </dl>
-<p>This subroutine does not always work with <em>nextStep</em> = .true. if cut-back is performed, as the time step size then might be decreased.</p>
+<p>This subroutine does not always work with <em>tflag</em> = 1 if cut-back is performed, as the time step size then might be decreased.</p>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>5 Dec 2016 </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_cgraph.png" border="0" usemap="#anamespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_cgraph" alt=""/></div>
-<map name="anamespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_cgraph" id="anamespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_cgraph">
-<area shape="rect" title="Returns the simulation time of the current or next time step." alt="" coords="5,5,176,32"/>
+<div class="center"><img src="namespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph.png" border="0" usemap="#anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph" alt=""/></div>
+<map name="anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph" id="anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph">
+<area shape="rect" title="Returns the physical time of a specified simulation state." alt="" coords="5,5,176,32"/>
 <area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title=" " alt="" coords="224,5,467,32"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_icgraph.png" border="0" usemap="#anamespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_icgraph" alt=""/></div>
-<map name="anamespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_icgraph" id="anamespacesolvermodule_a6d5b38f3a985d92f9a9da349cb2c130d_icgraph">
-<area shape="rect" title="Returns the simulation time of the current or next time step." alt="" coords="152,5,323,32"/>
-<area shape="rect" href="solverDriver_8f90.html#a33e63ef93705c8623bcd5d1b89e0013c" title="Returns the time of current or next time increment." alt="" coords="5,5,104,32"/>
+<div class="center"><img src="namespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_icgraph.png" border="0" usemap="#anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_icgraph" alt=""/></div>
+<map name="anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_icgraph" id="anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_icgraph">
+<area shape="rect" title="Returns the physical time of a specified simulation state." alt="" coords="152,5,323,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a74b48540bf7b957e5955eac4a9d7d212" title="Returns the physical time of a specified simulation state." alt="" coords="5,5,104,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aae35957763d95342b5d6660e99176bc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae35957763d95342b5d6660e99176bc9">&#9670;&nbsp;</a></span>haveresults()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer function, public solvermodule::haveresults</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether current step have results to be saved. </p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>6 Dec 2024 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesolvermodule_aae35957763d95342b5d6660e99176bc9_icgraph.png" border="0" usemap="#anamespacesolvermodule_aae35957763d95342b5d6660e99176bc9_icgraph" alt=""/></div>
+<map name="anamespacesolvermodule_aae35957763d95342b5d6660e99176bc9_icgraph" id="anamespacesolvermodule_aae35957763d95342b5d6660e99176bc9_icgraph">
+<area shape="rect" title="Returns whether current step have results to be saved." alt="" coords="177,5,372,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a6d8d51143e032382b82ea3980ffee35a" title="Checks whether current time step have results to be saved." alt="" coords="5,5,129,32"/>
 </map>
 </div>
 
@@ -2602,11 +2638,12 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir"></td><td class="paramname">iop</td><td>Control variable defining what to do (see below) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">finalStep</td><td>If .true., this is the final step of current time window </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">finished</td><td>If .true., the end of the simulation has been reached, or the time integration failed </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This subroutine performs different sub-tasks of the solution process, depending on the value of the control variable iop, as follows:</p><ul>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag:<ul>
+<li>= 0 : All is good</li>
+<li>&gt; 0 : The numerical simulation diverged due to erroneous model</li>
+<li><p class="startli">&lt; 0 : Other errors of non-numerical kind (logics, internal, allocation)</p>
+<p class="startli">This subroutine performs different sub-tasks of the solution process, depending on the value of the control variable iop, as follows:</p>
+</li>
 <li>= 0 : Normal operation, solve the entire step with iterations</li>
 <li>= -1 : Establish the linear system of the first (prediction) iteration, and then return to the calling module</li>
 <li>= -2 : Same as -1, but also factorize the Newton matrix</li>
@@ -2618,6 +2655,10 @@ Here is the caller graph for this function:</div>
 <li>= 5 : As 3, and then continue until equilibrium</li>
 <li>= 6 : As 4, and then continue until equilibrium</li>
 </ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>30 Nov 2016 </dd></dl>
 <div class="dynheader">
@@ -3164,7 +3205,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:35 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

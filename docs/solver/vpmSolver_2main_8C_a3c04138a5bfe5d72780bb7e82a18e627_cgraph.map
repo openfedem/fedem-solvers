@@ -1,7 +1,9 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title="Main program for the FEDEM dynamics solver." alt="" coords="5,81,60,108"/>
+<area shape="rect" id="node1" title="Main program for the FEDEM dynamics solver." alt="" coords="5,132,60,159"/>
 <area shape="rect" id="node2" href="$vpmSolver_2main_8C.html#aafc639d479968175e9f5a24924c2f87c" title="Utility function to compare two ASCII files with numerical data." alt="" coords="108,5,251,32"/>
-<area shape="rect" id="node3" href="$solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward." alt="" coords="135,56,223,83"/>
-<area shape="rect" id="node4" href="$solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="131,107,227,133"/>
-<area shape="rect" id="node5" href="$solverInterface_8h.html#a7323a44a81be57003d689b5adee5e7ec" title="Initializes a new solver process." alt="" coords="138,157,221,184"/>
+<area shape="rect" id="node3" href="$solverInterface_8h.html#ae8c7549c4860b1ad0d58ca1fe6a45eab" title="Gets a file name option from the command&#45;line arguments." alt="" coords="127,56,232,83"/>
+<area shape="rect" id="node4" href="$solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward." alt="" coords="135,107,223,133"/>
+<area shape="rect" id="node5" href="$solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="131,157,227,184"/>
+<area shape="rect" id="node6" href="$solverInterface_8h.html#a7323a44a81be57003d689b5adee5e7ec" title="Initializes a new solver process." alt="" coords="138,208,221,235"/>
+<area shape="rect" id="node7" href="$vpmSolver_2main_8C.html#a76464007ae861409dfa48c6c20e98a26" title="Utility function writing the beginning and end of a file to console." alt="" coords="140,259,219,285"/>
 </map>

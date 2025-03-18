@@ -1,21 +1,21 @@
 <map id="sammodule::nullifysam" name="sammodule::nullifysam">
-<area shape="rect" id="node1" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="1433,123,1608,149"/>
-<area shape="rect" id="node2" href="$namespacesamstressmodule.html#ac92e4718f898abf21cbe409e81b53a96" title="Initializes the SAM data structure for the recovery processes." alt="" coords="1160,173,1380,200"/>
-<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="925,217,1092,258"/>
-<area shape="rect" id="node10" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="1155,123,1385,149"/>
+<area shape="rect" id="node1" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="1433,148,1608,175"/>
+<area shape="rect" id="node2" href="$namespacesamstressmodule.html#ac92e4718f898abf21cbe409e81b53a96" title="Initializes the SAM data structure for the recovery processes." alt="" coords="1160,224,1380,251"/>
+<area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="925,225,1092,266"/>
+<area shape="rect" id="node10" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="1155,173,1385,200"/>
+<area shape="rect" id="node11" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="688,122,841,163"/>
 <area shape="rect" id="node15" href="$namespacesamsolvermodule.html#a4421108415c5aacaf9304ff650020d14" title="Initializes the SAM data structure for fedem_solver." alt="" coords="911,5,1107,32"/>
 <area shape="rect" id="node17" href="$namespacesammodule.html#aa09713b5bb0c2dc87ebd300272d95353" title="Duplicates the SAM object to emulate a model with 1&#45;DOF elements." alt="" coords="1178,68,1362,95"/>
-<area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,124,305,151"/>
-<area shape="rect" id="node5" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,23,83,49"/>
-<area shape="rect" id="node6" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,73,83,100"/>
-<area shape="rect" id="node7" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,124,83,151"/>
-<area shape="rect" id="node8" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,175,82,201"/>
-<area shape="rect" id="node9" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,225,83,252"/>
-<area shape="rect" id="node11" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="688,118,841,159"/>
-<area shape="rect" id="node12" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="451,175,521,201"/>
-<area shape="rect" id="node13" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="433,73,539,100"/>
-<area shape="rect" id="node14" href="$solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="455,124,517,151"/>
-<area shape="rect" id="node16" href="$namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,23,619,49"/>
-<area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="927,59,1090,101"/>
-<area shape="rect" id="node19" href="$namespacesamsolvermodule.html#a0cf83f9fe742b5383b2d1dbe1f142d9a" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="667,53,863,94"/>
+<area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,129,305,156"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,28,83,55"/>
+<area shape="rect" id="node6" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,79,83,105"/>
+<area shape="rect" id="node7" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,129,83,156"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,180,82,207"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,231,83,257"/>
+<area shape="rect" id="node12" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="451,180,521,207"/>
+<area shape="rect" id="node13" href="$smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="433,79,539,105"/>
+<area shape="rect" id="node14" href="$solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="455,129,517,156"/>
+<area shape="rect" id="node16" href="$namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,28,619,55"/>
+<area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="927,57,1090,98"/>
+<area shape="rect" id="node19" href="$namespacesamsolvermodule.html#a0cf83f9fe742b5383b2d1dbe1f142d9a" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="667,57,863,98"/>
 </map>

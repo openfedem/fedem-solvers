@@ -82,9 +82,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a2991c831d0c11797c6d7d6667a24ce12"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="beamaux_8f.html#a2991c831d0c11797c6d7d6667a24ce12">mprt30</a> (A, MA, NA, IW)</td></tr>
 <tr class="memdesc:a2991c831d0c11797c6d7d6667a24ce12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the rectangular matrix <em>A(MA,NA)</em> to unit <em>IW</em>.  <a href="beamaux_8f.html#a2991c831d0c11797c6d7d6667a24ce12">More...</a><br /></td></tr>
 <tr class="separator:a2991c831d0c11797c6d7d6667a24ce12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d57ce48f612720bc56038d3e4e574a7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="beamaux_8f.html#a3d57ce48f612720bc56038d3e4e574a7">dcos30</a> (C, X, Y, Z)</td></tr>
-<tr class="memdesc:a3d57ce48f612720bc56038d3e4e574a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a local-to-global transformation matrix.  <a href="beamaux_8f.html#a3d57ce48f612720bc56038d3e4e574a7">More...</a><br /></td></tr>
-<tr class="separator:a3d57ce48f612720bc56038d3e4e574a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a393c8eab1e47fa3f123e0dffe881d4eb"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="beamaux_8f.html#a393c8eab1e47fa3f123e0dffe881d4eb">dcos30</a> (C, X, Y, Z, PHI)</td></tr>
+<tr class="memdesc:a393c8eab1e47fa3f123e0dffe881d4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a global-to-local transformation matrix.  <a href="beamaux_8f.html#a393c8eab1e47fa3f123e0dffe881d4eb">More...</a><br /></td></tr>
+<tr class="separator:a393c8eab1e47fa3f123e0dffe881d4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad1bf9ce48ec891fe9d2c4c36e7a5a9e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="beamaux_8f.html#aad1bf9ce48ec891fe9d2c4c36e7a5a9e">mpro30</a> (EK, C, M)</td></tr>
 <tr class="memdesc:aad1bf9ce48ec891fe9d2c4c36e7a5a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a congruence transformation of a symmetric matrix.  <a href="beamaux_8f.html#aad1bf9ce48ec891fe9d2c4c36e7a5a9e">More...</a><br /></td></tr>
 <tr class="separator:aad1bf9ce48ec891fe9d2c4c36e7a5a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,14 +92,14 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:aa02621698cb9a7b72f8321e107c67503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms an element matrix from end points to nodal points.  <a href="beamaux_8f.html#aa02621698cb9a7b72f8321e107c67503">More...</a><br /></td></tr>
 <tr class="separator:aa02621698cb9a7b72f8321e107c67503"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a8892490a480278fad8dcacedd3a4fc"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="beamaux_8f.html#a5a8892490a480278fad8dcacedd3a4fc">dirc30</a> (C, X, Y, Z)</td></tr>
-<tr class="memdesc:a5a8892490a480278fad8dcacedd3a4fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a local-to-global transformation matrix.  <a href="beamaux_8f.html#a5a8892490a480278fad8dcacedd3a4fc">More...</a><br /></td></tr>
+<tr class="memdesc:a5a8892490a480278fad8dcacedd3a4fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a global-to-local transformation matrix.  <a href="beamaux_8f.html#a5a8892490a480278fad8dcacedd3a4fc">More...</a><br /></td></tr>
 <tr class="separator:a5a8892490a480278fad8dcacedd3a4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Auxilliary subroutines for beam finite elements. </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="a3d57ce48f612720bc56038d3e4e574a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d57ce48f612720bc56038d3e4e574a7">&#9670;&nbsp;</a></span>dcos30()</h2>
+<a id="a393c8eab1e47fa3f123e0dffe881d4eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a393c8eab1e47fa3f123e0dffe881d4eb">&#9670;&nbsp;</a></span>dcos30()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +126,13 @@ Functions/Subroutines</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double precision, dimension(3)&#160;</td>
-          <td class="paramname"><em>Z</em>&#160;</td>
+          <td class="paramname"><em>Z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double precision&#160;</td>
+          <td class="paramname"><em>PHI</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -136,7 +142,8 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes a local-to-global transformation matrix. </p>
+<p>Computes a global-to-local transformation matrix. </p>
+<p>The local X-axis is defined from point 1 to point 2. Point 3 is then used to define the local XZ-plane. </p>
 
 </div>
 </div>
@@ -178,7 +185,8 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes a local-to-global transformation matrix. </p>
+<p>Computes a global-to-local transformation matrix. </p>
+<p>The local X-axis is defined from point 1 to point 2. Point 3 is then used to define the local XY-plane. </p>
 
 </div>
 </div>
@@ -215,6 +223,7 @@ Functions/Subroutines</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Performs a congruence transformation of a symmetric matrix. </p>
+<p><b>EK=P'*EK*P</b> where <b>P</b> is the transformation matrix consisting of <b>C</b> repeated along the diagonal and zero elsewhere. </p>
 
 </div>
 </div>
@@ -323,7 +332,7 @@ Functions/Subroutines</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

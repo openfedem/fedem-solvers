@@ -1,0 +1,4 @@
+<map id="slv_haveresults" name="slv_haveresults">
+<area shape="rect" id="node1" title="Checks whether current time step have results to be saved." alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node2" href="$namespacesolvermodule.html#aae35957763d95342b5d6660e99176bc9" title="Returns whether current step have results to be saved." alt="" coords="177,5,372,32"/>
+</map>

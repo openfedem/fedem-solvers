@@ -123,9 +123,12 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aa8a194b7b7a4ef929ac7f744269e6a3b"><td class="memItemLeft" align="right" valign="top">logical function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#aa8a194b7b7a4ef929ac7f744269e6a3b">solvermodule::solvedynamic</a> ()</td></tr>
 <tr class="memdesc:aa8a194b7b7a4ef929ac7f744269e6a3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the next step should be solved dynamically or not.  <a href="namespacesolvermodule.html#aa8a194b7b7a4ef929ac7f744269e6a3b">More...</a><br /></td></tr>
 <tr class="separator:aa8a194b7b7a4ef929ac7f744269e6a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d5b38f3a985d92f9a9da349cb2c130d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#a6d5b38f3a985d92f9a9da349cb2c130d">solvermodule::gettime</a> (time, nextStep, ierr)</td></tr>
-<tr class="memdesc:a6d5b38f3a985d92f9a9da349cb2c130d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the simulation time of the current or next time step.  <a href="namespacesolvermodule.html#a6d5b38f3a985d92f9a9da349cb2c130d">More...</a><br /></td></tr>
-<tr class="separator:a6d5b38f3a985d92f9a9da349cb2c130d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae35957763d95342b5d6660e99176bc9"><td class="memItemLeft" align="right" valign="top">integer function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#aae35957763d95342b5d6660e99176bc9">solvermodule::haveresults</a> ()</td></tr>
+<tr class="memdesc:aae35957763d95342b5d6660e99176bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether current step have results to be saved.  <a href="namespacesolvermodule.html#aae35957763d95342b5d6660e99176bc9">More...</a><br /></td></tr>
+<tr class="separator:aae35957763d95342b5d6660e99176bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee11f240a987ec00b0339a031adc38b5"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5">solvermodule::gettime</a> (time, tflag, ierr)</td></tr>
+<tr class="memdesc:aee11f240a987ec00b0339a031adc38b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the physical time of a specified simulation state.  <a href="namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5">More...</a><br /></td></tr>
+<tr class="separator:aee11f240a987ec00b0339a031adc38b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6cd83066183e3110ef0d2e99a5c2e72"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#af6cd83066183e3110ef0d2e99a5c2e72">solvermodule::setnewtime</a> (nextTime, ierr)</td></tr>
 <tr class="memdesc:af6cd83066183e3110ef0d2e99a5c2e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the time increment size to be used for next time step.  <a href="namespacesolvermodule.html#af6cd83066183e3110ef0d2e99a5c2e72">More...</a><br /></td></tr>
 <tr class="separator:af6cd83066183e3110ef0d2e99a5c2e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,7 +211,7 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a660f7320b8927fe9af55cf1569cf5b41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the configuration by applying given displacement vector.  <a href="solverModule_8f90.html#a660f7320b8927fe9af55cf1569cf5b41">More...</a><br /></td></tr>
 <tr class="separator:a660f7320b8927fe9af55cf1569cf5b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7671011a082e640181da4e3a9088b539"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539">solvermodule::getjointspringstiffness</a> (sprCoeff, bid, ierr)</td></tr>
-<tr class="memdesc:a7671011a082e640181da4e3a9088b539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets joint spring stiffness coefficients.  <a href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539">More...</a><br /></td></tr>
+<tr class="memdesc:a7671011a082e640181da4e3a9088b539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets spring stiffness coefficients for a joint.  <a href="namespacesolvermodule.html#a7671011a082e640181da4e3a9088b539">More...</a><br /></td></tr>
 <tr class="separator:a7671011a082e640181da4e3a9088b539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -450,7 +453,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

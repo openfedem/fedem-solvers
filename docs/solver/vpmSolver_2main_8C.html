@@ -77,6 +77,7 @@ $(function() {
 <p>This file contains the C++ main program for the FEDEM dynamics solver.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="solverInterface_8h_source.html">solverInterface.h</a>&quot;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -84,10 +85,11 @@ Include dependency graph for main.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="vpmSolver_2main_8C__incl.png" border="0" usemap="#asrc_2vpmSolver_2main_8C" alt=""/></div>
 <map name="asrc_2vpmSolver_2main_8C" id="asrc_2vpmSolver_2main_8C">
-<area shape="rect" title="This file contains the C++ main program for the FEDEM dynamics solver." alt="" coords="136,5,301,32"/>
+<area shape="rect" title="This file contains the C++ main program for the FEDEM dynamics solver." alt="" coords="191,5,356,32"/>
 <area shape="rect" href="solverInterface_8h.html" title="This file defines the API for the FEDEM dynamics solver core." alt="" coords="27,80,159,107"/>
-<area shape="rect" title=" " alt="" coords="183,80,254,107"/>
-<area shape="rect" title=" " alt="" coords="278,80,349,107"/>
+<area shape="rect" title=" " alt="" coords="184,80,264,107"/>
+<area shape="rect" title=" " alt="" coords="289,80,359,107"/>
+<area shape="rect" title=" " alt="" coords="383,80,454,107"/>
 <area shape="rect" title=" " alt="" coords="5,155,80,181"/>
 <area shape="rect" title=" " alt="" coords="104,155,187,181"/>
 </map>
@@ -98,6 +100,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aafc639d479968175e9f5a24924c2f87c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vpmSolver_2main_8C.html#aafc639d479968175e9f5a24924c2f87c">compareResponse</a> (const char *, const char *, double, int)</td></tr>
 <tr class="memdesc:aafc639d479968175e9f5a24924c2f87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function to compare two ASCII files with numerical data.  <a href="vpmSolver_2main_8C.html#aafc639d479968175e9f5a24924c2f87c">More...</a><br /></td></tr>
 <tr class="separator:aafc639d479968175e9f5a24924c2f87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76464007ae861409dfa48c6c20e98a26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vpmSolver_2main_8C.html#a76464007ae861409dfa48c6c20e98a26">writeFile</a> (const char *, int, int)</td></tr>
+<tr class="memdesc:a76464007ae861409dfa48c6c20e98a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function writing the beginning and end of a file to console.  <a href="vpmSolver_2main_8C.html#a76464007ae861409dfa48c6c20e98a26">More...</a><br /></td></tr>
+<tr class="separator:a76464007ae861409dfa48c6c20e98a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vpmSolver_2main_8C.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main program for the FEDEM dynamics solver.  <a href="vpmSolver_2main_8C.html#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,7 +156,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fn1</td><td>Path to the first file </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fn2</td><td>Path to the second file (with reference data) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">eps</td><td>Comparison tolerance </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">skip</td><td>Number of initial lines to skip coomparison for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">skip</td><td>Number of initial lines to skip comparison for </td></tr>
   </table>
   </dd>
 </dl>
@@ -200,11 +205,66 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="vpmSolver_2main_8C_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.png" border="0" usemap="#avpmSolver_2main_8C_a3c04138a5bfe5d72780bb7e82a18e627_cgraph" alt=""/></div>
 <map name="avpmSolver_2main_8C_a3c04138a5bfe5d72780bb7e82a18e627_cgraph" id="avpmSolver_2main_8C_a3c04138a5bfe5d72780bb7e82a18e627_cgraph">
-<area shape="rect" title="Main program for the FEDEM dynamics solver." alt="" coords="5,81,60,108"/>
+<area shape="rect" title="Main program for the FEDEM dynamics solver." alt="" coords="5,132,60,159"/>
 <area shape="rect" href="vpmSolver_2main_8C.html#aafc639d479968175e9f5a24924c2f87c" title="Utility function to compare two ASCII files with numerical data." alt="" coords="108,5,251,32"/>
-<area shape="rect" href="solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward." alt="" coords="135,56,223,83"/>
-<area shape="rect" href="solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="131,107,227,133"/>
-<area shape="rect" href="solverInterface_8h.html#a7323a44a81be57003d689b5adee5e7ec" title="Initializes a new solver process." alt="" coords="138,157,221,184"/>
+<area shape="rect" href="solverInterface_8h.html#ae8c7549c4860b1ad0d58ca1fe6a45eab" title="Gets a file name option from the command&#45;line arguments." alt="" coords="127,56,232,83"/>
+<area shape="rect" href="solverInterface_8h.html#abdc62931c69999aee714215fda32f1d0" title="Advances the solution one time/load step forward." alt="" coords="135,107,223,133"/>
+<area shape="rect" href="solverInterface_8h.html#a950be28446ab790d5b8d0c68c64a9b08" title="Closes down current model and cleans up core memory and on disk." alt="" coords="131,157,227,184"/>
+<area shape="rect" href="solverInterface_8h.html#a7323a44a81be57003d689b5adee5e7ec" title="Initializes a new solver process." alt="" coords="138,208,221,235"/>
+<area shape="rect" href="vpmSolver_2main_8C.html#a76464007ae861409dfa48c6c20e98a26" title="Utility function writing the beginning and end of a file to console." alt="" coords="140,259,219,285"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a76464007ae861409dfa48c6c20e98a26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76464007ae861409dfa48c6c20e98a26">&#9670;&nbsp;</a></span>writeFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeFile </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nc1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nc2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Utility function writing the beginning and end of a file to console. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Path to the file to bewritten </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nc1</td><td>Number of lines to write from beginning </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nc2</td><td>Number of lines to write before end </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="vpmSolver_2main_8C_a76464007ae861409dfa48c6c20e98a26_icgraph.png" border="0" usemap="#avpmSolver_2main_8C_a76464007ae861409dfa48c6c20e98a26_icgraph" alt=""/></div>
+<map name="avpmSolver_2main_8C_a76464007ae861409dfa48c6c20e98a26_icgraph" id="avpmSolver_2main_8C_a76464007ae861409dfa48c6c20e98a26_icgraph">
+<area shape="rect" title="Utility function writing the beginning and end of a file to console." alt="" coords="108,5,187,32"/>
+<area shape="rect" href="vpmSolver_2main_8C.html#a3c04138a5bfe5d72780bb7e82a18e627" title="Main program for the FEDEM dynamics solver." alt="" coords="5,5,60,32"/>
 </map>
 </div>
 
@@ -213,7 +273,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

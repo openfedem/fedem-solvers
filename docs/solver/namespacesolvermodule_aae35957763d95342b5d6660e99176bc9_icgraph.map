@@ -1,0 +1,4 @@
+<map id="solvermodule::haveresults" name="solvermodule::haveresults">
+<area shape="rect" id="node1" title="Returns whether current step have results to be saved." alt="" coords="177,5,372,32"/>
+<area shape="rect" id="node2" href="$solverDriver_8f90.html#a6d8d51143e032382b82ea3980ffee35a" title="Checks whether current time step have results to be saved." alt="" coords="5,5,129,32"/>
+</map>

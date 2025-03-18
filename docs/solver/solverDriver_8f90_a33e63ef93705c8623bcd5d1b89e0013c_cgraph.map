@@ -1,5 +1,0 @@
-<map id="slv_gettime" name="slv_gettime">
-<area shape="rect" id="node1" title="Returns the time of current or next time increment." alt="" coords="5,5,104,32"/>
-<area shape="rect" id="node2" href="$namespacesolvermodule.html#a6d5b38f3a985d92f9a9da349cb2c130d" title="Returns the simulation time of the current or next time step." alt="" coords="152,5,323,32"/>
-<area shape="rect" id="node3" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title=" " alt="" coords="371,5,613,32"/>
-</map>

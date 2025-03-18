@@ -1,8 +1,9 @@
 <map id="src/vpmSolver/main.C" name="src/vpmSolver/main.C">
-<area shape="rect" id="node1" title="This file contains the C++ main program for the FEDEM dynamics solver." alt="" coords="136,5,301,32"/>
+<area shape="rect" id="node1" title="This file contains the C++ main program for the FEDEM dynamics solver." alt="" coords="191,5,356,32"/>
 <area shape="rect" id="node2" href="$solverInterface_8h.html" title="This file defines the API for the FEDEM dynamics solver core." alt="" coords="27,80,159,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="183,80,254,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="278,80,349,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="184,80,264,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="289,80,359,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="383,80,454,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
 <area shape="rect" id="node4" title=" " alt="" coords="104,155,187,181"/>
 </map>

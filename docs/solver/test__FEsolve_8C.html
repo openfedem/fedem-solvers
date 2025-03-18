@@ -81,17 +81,19 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="gtest_8h_source.html">gtest.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFCmdLineArgInterface_8H_source.html">vpmCommon/FFCmdLineArgInterface.H</a>&quot;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for test_FEsolve.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="test__FEsolve_8C__incl.png" border="0" usemap="#asrc_2vpmReducer_2vpmReducerTests_2test__FEsolve_8C" alt=""/></div>
 <map name="asrc_2vpmReducer_2vpmReducerTests_2test__FEsolve_8C" id="asrc_2vpmReducer_2vpmReducerTests_2test__FEsolve_8C">
-<area shape="rect" title="Unit testing for the linear FE solver." alt="" coords="220,5,433,47"/>
-<area shape="rect" href="gtest_8h.html" title="Google test wrapper." alt="" coords="95,95,161,121"/>
-<area shape="rect" href="FFCmdLineArgInterface_8H.html" title="Wrapper for FFaCmdLineArg to facilitate use in shared object libraries." alt="" coords="186,95,467,121"/>
+<area shape="rect" title="Unit testing for the linear FE solver." alt="" coords="336,5,549,47"/>
+<area shape="rect" href="gtest_8h.html" title="Google test wrapper." alt="" coords="121,95,188,121"/>
+<area shape="rect" href="FFCmdLineArgInterface_8H.html" title="Wrapper for FFaCmdLineArg to facilitate use in shared object libraries." alt="" coords="213,95,494,121"/>
 <area shape="rect" title=" " alt="" coords="543,259,609,285"/>
-<area shape="rect" title=" " alt="" coords="76,177,180,203"/>
-<area shape="rect" href="FFaCmdLineArg_8H.html" title="General command&#45;line option handler." alt="" coords="224,169,392,211"/>
+<area shape="rect" title=" " alt="" coords="570,95,633,121"/>
+<area shape="rect" title=" " alt="" coords="103,177,207,203"/>
+<area shape="rect" href="FFaCmdLineArg_8H.html" title="General command&#45;line option handler." alt="" coords="251,169,419,211"/>
 <area shape="rect" title=" " alt="" coords="5,259,64,285"/>
 <area shape="rect" title=" " alt="" coords="89,259,151,285"/>
 <area shape="rect" title=" " alt="" coords="176,259,227,285"/>
@@ -132,8 +134,8 @@ Functions</h2></td></tr>
 <tr class="separator:abcb744f6e464fcdcece81855a9c6e91f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae13f12c16e053fe43eaa7ae9f416250c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__FEsolve_8C.html#ae13f12c16e053fe43eaa7ae9f416250c">TEST_P</a> (<a class="el" href="classSolve.html">Solve</a>, FEmodel)</td></tr>
 <tr class="separator:ae13f12c16e053fe43eaa7ae9f416250c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6707a7d3466b5c912f2cde1b22d7bb63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__FEsolve_8C.html#a6707a7d3466b5c912f2cde1b22d7bb63">INSTANTIATE_TEST_CASE_P</a> (TestBeams, <a class="el" href="classSolve.html">Solve</a>, testing::Values(<a class="el" href="structCase.html">Case</a>{ &quot;01_1D_BeamElements.nas&quot;, 1251, 0.0, 0.0128, 0.0 }, Case{ &quot;02_1D2D_Hybrid.nas&quot;, 1259, 0.0, 0.0129, 0.0 }, Case{ &quot;03_2D_ShellElements.nas&quot;, 29358, 0.0, 0.0123, 0.0 }, Case{ &quot;04_3D_VolumeElements.nas&quot;, 1257, 0.0, 0.0128, 0.0 }, Case{ &quot;L-beam.nas&quot;, 3, 0.00806403, 0.330873, -0.0302335 }, Case{ &quot;CylinderBeam.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-generic.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-shearY.nas&quot;, 6, 0.3434, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-noshear.nas&quot;, 6, 0.0, 0.3434, 0.0 }))</td></tr>
-<tr class="separator:a6707a7d3466b5c912f2cde1b22d7bb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa1bdacabe8ab71d640667c30f65a5c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__FEsolve_8C.html#a7aa1bdacabe8ab71d640667c30f65a5c">INSTANTIATE_TEST_CASE_P</a> (TestBeams, <a class="el" href="classSolve.html">Solve</a>, testing::Values(<a class="el" href="structCase.html">Case</a>{ &quot;01_1D_BeamElements.nas&quot;, 1251, 0.0, 0.0128, 0.0 }, Case{ &quot;02_1D2D_Hybrid.nas&quot;, 1259, 0.0, 0.0129, 0.0 }, Case{ &quot;03_2D_ShellElements.nas&quot;, 29358, 0.0, 0.0123, 0.0 }, Case{ &quot;04_3D_VolumeElements.nas&quot;, 1257, 0.0, 0.0128, 0.0 }, Case{ &quot;Tripod.nas&quot;, 5, 0.0267234, 0.0, 0.0 }, Case{ &quot;L-beam.nas&quot;, 3, 0.00806403, 0.0287016, 0.0168831 }, Case{ &quot;PBEAML.nas&quot;, 16355,-0.420529, 0.202566, 0.0087845 }, Case{ &quot;CylinderBeam.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-generic.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-shearY.nas&quot;, 6, 0.3434, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-noshear.nas&quot;, 6, 0.0, 0.3434, 0.0 }))</td></tr>
+<tr class="separator:a7aa1bdacabe8ab71d640667c30f65a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -226,8 +228,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6707a7d3466b5c912f2cde1b22d7bb63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6707a7d3466b5c912f2cde1b22d7bb63">&#9670;&nbsp;</a></span>INSTANTIATE_TEST_CASE_P()</h2>
+<a id="a7aa1bdacabe8ab71d640667c30f65a5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa1bdacabe8ab71d640667c30f65a5c">&#9670;&nbsp;</a></span>INSTANTIATE_TEST_CASE_P()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +249,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">testing::Values(<a class="el" href="structCase.html">Case</a>{ &quot;01_1D_BeamElements.nas&quot;, 1251, 0.0, 0.0128, 0.0 }, Case{ &quot;02_1D2D_Hybrid.nas&quot;, 1259, 0.0, 0.0129, 0.0 }, Case{ &quot;03_2D_ShellElements.nas&quot;, 29358, 0.0, 0.0123, 0.0 }, Case{ &quot;04_3D_VolumeElements.nas&quot;, 1257, 0.0, 0.0128, 0.0 }, Case{ &quot;L-beam.nas&quot;, 3, 0.00806403, 0.330873, -0.0302335 }, Case{ &quot;CylinderBeam.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-generic.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-shearY.nas&quot;, 6, 0.3434, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-noshear.nas&quot;, 6, 0.0, 0.3434, 0.0 })&#160;</td>
+          <td class="paramtype">testing::Values(<a class="el" href="structCase.html">Case</a>{ &quot;01_1D_BeamElements.nas&quot;, 1251, 0.0, 0.0128, 0.0 }, Case{ &quot;02_1D2D_Hybrid.nas&quot;, 1259, 0.0, 0.0129, 0.0 }, Case{ &quot;03_2D_ShellElements.nas&quot;, 29358, 0.0, 0.0123, 0.0 }, Case{ &quot;04_3D_VolumeElements.nas&quot;, 1257, 0.0, 0.0128, 0.0 }, Case{ &quot;Tripod.nas&quot;, 5, 0.0267234, 0.0, 0.0 }, Case{ &quot;L-beam.nas&quot;, 3, 0.00806403, 0.0287016, 0.0168831 }, Case{ &quot;PBEAML.nas&quot;, 16355,-0.420529, 0.202566, 0.0087845 }, Case{ &quot;CylinderBeam.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-generic.nas&quot;, 6, 0.0, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-shearY.nas&quot;, 6, 0.3434, 0.3450, 0.0 }, Case{ &quot;CylinderBeam-noshear.nas&quot;, 6, 0.0, 0.3434, 0.0 })&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -414,7 +416,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 4 2025 14:49:34 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
