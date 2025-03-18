@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yaml_parser &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>yaml_parser &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -117,21 +117,21 @@
 <span class="sd">on the specified input file (`mymodel.yaml`).</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dump</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">makedirs</span><span class="p">,</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copy2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">argparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dump</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">makedirs</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shutil</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy2</span>
 
-<span class="kn">from</span> <span class="nn">yaml</span> <span class="kn">import</span> <span class="n">FullLoader</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">FullLoader</span><span class="p">,</span> <span class="n">load</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.enums</span> <span class="kn">import</span> <span class="n">FmDof</span><span class="p">,</span> <span class="n">FmDofStat</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="p">,</span> <span class="n">FmType</span><span class="p">,</span> <span class="n">FmVar</span>
-<span class="kn">from</span> <span class="nn">fedempy.fmm_solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FmmSolver</span>
-<span class="kn">from</span> <span class="nn">fedempy.modeler</span> <span class="kn">import</span> <span class="n">FedemModeler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">FmDof</span><span class="p">,</span> <span class="n">FmDofStat</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="p">,</span> <span class="n">FmType</span><span class="p">,</span> <span class="n">FmVar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.fmm_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FmmSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.modeler</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemModeler</span>
 
 
-<span class="k">def</span> <span class="nf">_check_target</span><span class="p">(</span><span class="n">rel_path</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">exists</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_target</span><span class="p">(</span><span class="n">rel_path</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">exists</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check for existing target file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -156,7 +156,7 @@
     <span class="k">return</span> <span class="n">rel_path</span> <span class="o">+</span> <span class="n">fname</span>
 
 
-<span class="k">def</span> <span class="nf">_merge</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_merge</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Merges the `source` dictionary into the `target` dictionary.</span>
 <span class="sd">    Entries for already existing keys shall _not_ be overwritten.</span>
@@ -181,7 +181,7 @@
     <span class="k">return</span> <span class="n">target</span>
 
 
-<span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_process</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic function for invoking the method `generator`</span>
 <span class="sd">    on the data dictionary `properties`.</span>
@@ -197,7 +197,7 @@
 
 <div class="viewcode-block" id="ModelYAML">
 <a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML">[docs]</a>
-<span class="k">class</span> <span class="nc">ModelYAML</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelYAML</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class contains methods for parsing a YAML-formated input file</span>
 <span class="sd">    and creating a Fedem model from it. It is an extension of the class</span>
@@ -218,7 +218,7 @@
 <span class="sd">        Executes the dynamics solver on the created model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -291,7 +291,7 @@
 
 <div class="viewcode-block" id="ModelYAML.build">
 <a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML.build">[docs]</a>
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dump_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dump_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads and parses all model attributes into the model instance.</span>
 
@@ -325,7 +325,7 @@
 
 <div class="viewcode-block" id="ModelYAML.save">
 <a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML.save">[docs]</a>
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_as</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_as</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the model with the defined file name,</span>
 <span class="sd">        or save it as a new file if `save_as` is set.</span>
@@ -342,7 +342,7 @@
 
 <div class="viewcode-block" id="ModelYAML.solve">
 <a class="viewcode-back" href="../yaml_parser.html#yaml_parser.ModelYAML.solve">[docs]</a>
-    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Executes the dynamics solver on the created model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -351,7 +351,7 @@
             <span class="k">raise</span> <span class="n">FedemException</span><span class="p">(</span><span class="s2">&quot;Failure solving the Fedem model.&quot;</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_include</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yaml_files</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_include</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yaml_files</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handles the inclusion of other yaml-files.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -378,7 +378,7 @@
 
         <span class="k">return</span> <span class="n">model_input</span>
 
-    <span class="k">def</span> <span class="nf">_get_triad_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_triad_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the base id of Triad(s) with matching tag.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -391,7 +391,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** No triad matches the tag(s)&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_get_joint_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_joint_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the base id of Joint(s) with matching tag.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -404,7 +404,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** No joint matches the tag(s)&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_get_part_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_part_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">get_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the base id of FE part(s) with matching tag.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -417,7 +417,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** No FE part matches the tag(s)&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">__make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a triad to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -440,7 +440,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Neither position data nor node index is given.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a triad to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -463,7 +463,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span>
 
-    <span class="k">def</span> <span class="nf">_make_beam_material</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_beam_material</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a beam material object to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -487,7 +487,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span>
 
-    <span class="k">def</span> <span class="nf">_make_beam_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_beam_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a beam cross section object to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -514,7 +514,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span>
 
-    <span class="k">def</span> <span class="nf">_make_beam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_beam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Append a beam element to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -535,7 +535,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">_make_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a joint to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -558,7 +558,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span>
 
-    <span class="k">def</span> <span class="nf">_make_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a sensor object to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -578,7 +578,7 @@
 
         <span class="k">return</span> <span class="n">user_id</span>
 
-    <span class="k">def</span> <span class="nf">_make_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a load to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -591,7 +591,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span>
 
-    <span class="k">def</span> <span class="nf">__make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends an FE part to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -620,7 +620,7 @@
 
         <span class="k">return</span> <span class="n">base_id</span>
 
-    <span class="k">def</span> <span class="nf">_make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends an FE part to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -632,7 +632,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** FE part </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with values </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s2"> has wrong syntax.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_make_spring_damper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_spring_damper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends an axial spring/damper object to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -652,7 +652,7 @@
 
         <span class="k">return</span> <span class="n">bid</span>
 
-    <span class="k">def</span> <span class="nf">_make_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends a function object to the model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -661,7 +661,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_edit_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_edit_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Modifies the position or properties of a triad.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -671,7 +671,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed to edit Triad </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_edit_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_edit_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Modifies the position or properties of a joint.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -693,7 +693,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed to edit Joint </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_edit_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_edit_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Modifies the position or properties of an FE part.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -703,7 +703,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Failed to edit Part </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> with data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">_edit_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_edit_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Setting solver parameters like t_start, t_inc, t_end, t_quasi, e_inc, n_modes.</span>
 <span class="sd">        Usage in yaml file, e.g.:</span>
@@ -721,7 +721,7 @@
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../yaml_parser.html#yaml_parser.main">[docs]</a>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">dump_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solve</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">dump_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solve</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main driver.</span>
 

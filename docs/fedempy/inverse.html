@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>inverse module &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>inverse module &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -194,11 +194,17 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rhs_vector</span></code>()</p></td>
 <td><p>Utility returning current content of the system right-hand-side vector.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_state_size</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_start_time</span></code>()</p></td>
+<td><p>Utility returning the start time of the simulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_state_size</span></code>()</p></td>
 <td><p>Utility returning the required length of the state vector which is used when restarting a simulation from an in-core array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_stiffness_matrix</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_stiffness_matrix</span></code>()</p></td>
 <td><p>Utility returning current content of the system stiffness matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_stop_time</span></code>()</p></td>
+<td><p>Utility returning the stop time of the simulation.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_system_dofs</span></code>()</p></td>
 <td><p>Utiloty returning the total number of DOFs of the system.</p></td>
@@ -209,64 +215,67 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transformation_state_size</span></code>()</p></td>
 <td><p>Utility returning the required length of the vector which stores the transformation matrices (rotation and translation) for Triads, Parts and Beams.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">restart_from_state</span></code>(state_data[, write_to_rdb])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">have_results</span></code>()</p></td>
+<td><p>Utility returning whether current time step have results to be saved.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">restart_from_state</span></code>(state_data[, write_to_rdb])</p></td>
 <td><p>This method re-initializes the mechanism objects with data from the provided state array, such that the simulation can continue from there.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_all</span></code>(options)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_all</span></code>(options)</p></td>
 <td><p>This method runs the dynamics solver with given command-line <cite>options</cite>, without any user intervention.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse</span></code>(inp_data, out_def)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse</span></code>(inp_data, out_def)</p></td>
 <td><p>Collector for different inverse methods.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse_dyn</span></code>(inp_data, out_def)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse_dyn</span></code>(inp_data, out_def)</p></td>
 <td><p>Inverse solution driver (dynamic case).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse_fedem</span></code>(inp_data, out_def)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_inverse_fedem</span></code>(inp_data, out_def)</p></td>
 <td><p>This method uses fedem's inverse solution in fortran</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_gauges</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_gauges</span></code>()</p></td>
 <td><p>This method stores initial gauge strains in the self.gauge_data array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_part_state</span></code>(base_id, def_state, str_state)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_part_state</span></code>(base_id, def_state, str_state)</p></td>
 <td><p>This method stores current deformation- and stress states for the specified FE Part in the provided core arrays.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_state</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_state</span></code>()</p></td>
 <td><p>This method stores current solver state in the self.state_data array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_transformation_state</span></code>(state_data)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_transformation_state</span></code>(state_data)</p></td>
 <td><p>This method stores current transformation state for Triads, Parts and Beams in the provided core array.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_ext_func</span></code>(func_id[, value])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_ext_func</span></code>(func_id[, value])</p></td>
 <td><p>This method may be used prior to the solve_next call, to assign a sensor value from a physical twin to the specified actuator or load in the model, identified by the argument func_id (external function Id).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_rhs_vector</span></code>(r_vec)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_rhs_vector</span></code>(r_vec)</p></td>
 <td><p>Utility replacing current content of the system right-hand-side vector.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_inverse</span></code>(x_val, x_def, g_def[, out_def])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_inverse</span></code>(x_val, x_def, g_def[, out_def])</p></td>
 <td><p>This method solves the inverse problem at current time/load step, assuming small deformations only (linear response).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_iteration</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_iteration</span></code>()</p></td>
 <td><p>This method solves the current linearized equation system and updates all state variables.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_modes</span></code>(n_modes[, dof_order, use_lapack])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_modes</span></code>(n_modes[, dof_order, use_lapack])</p></td>
 <td><p>This method solves the eigenvalue problem at current time step, and returns the computed eigenvalues and associated eigenvectors.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_next</span></code>([inp, inp_def, out_def, time_next])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_next</span></code>([inp, inp_def, out_def, time_next])</p></td>
 <td><p>This method advances the solution one time/load step forward.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_window</span></code>(n_step[, inputs, f_out, xtimes])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_window</span></code>(n_step[, inputs, f_out, xtimes])</p></td>
 <td><p>This method solves the problem for a time/load step window, with given values for the external functions, and extraction of results from another set of general functions in the model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_close</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_close</span></code>()</p></td>
 <td><p>This method needs to be used if solver_done() was invoked with its <cite>remove_singletons</cite> argument set to False.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_done</span></code>([remove_singletons, print_res])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_done</span></code>([remove_singletons, print_res])</p></td>
 <td><p>This method should be used when the time/load step loop is finished.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_init</span></code>(options[, fsi, state_data, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver_init</span></code>(options[, fsi, state_data, ...])</p></td>
 <td><p>This method processes the input and sets up necessary data structures prior to the time integration loop.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_step</span></code>([time_next])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_step</span></code>([time_next])</p></td>
 <td><p>This method starts a new time (or load) step, by calculating the predicted response, the coefficient matrix and right-hand-side vector of the first nonlinear iteration.</p></td>
 </tr>
 </tbody>

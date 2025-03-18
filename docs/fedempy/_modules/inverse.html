@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>inverse &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>inverse &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -81,18 +81,18 @@
 <span class="sd">Python implementation of inverse solution methods with Fedem.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
 
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">c_</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">transpose</span><span class="p">,</span> <span class="n">vstack</span><span class="p">,</span> <span class="n">zeros</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span><span class="p">,</span> <span class="n">lstsq</span><span class="p">,</span> <span class="n">solve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">c_</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">transpose</span><span class="p">,</span> <span class="n">vstack</span><span class="p">,</span> <span class="n">zeros</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">inv</span><span class="p">,</span> <span class="n">lstsq</span><span class="p">,</span> <span class="n">solve</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.enums</span> <span class="kn">import</span> <span class="n">FmType</span>
-<span class="kn">from</span> <span class="nn">fedempy.log_conf</span> <span class="kn">import</span> <span class="n">get_logger</span>
-<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">FmType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.log_conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
 
     <span class="n">have_sci_py</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -104,7 +104,7 @@
 
 <div class="viewcode-block" id="InverseException">
 <a class="viewcode-back" href="../inverse.html#inverse.InverseException">[docs]</a>
-<span class="k">class</span> <span class="nc">InverseException</span><span class="p">(</span><span class="n">FedemException</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InverseException</span><span class="p">(</span><span class="n">FedemException</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    General exception type for inverse solver exceptions.</span>
 <span class="sd">    Used to generalize error messages from the FedemSolver methods.</span>
@@ -117,7 +117,7 @@
 <span class="sd">        Error flag value that is embedded into the error message</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">,</span> <span class="n">ierr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">,</span> <span class="n">ierr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor. Forwards to the parent class constructor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -133,7 +133,7 @@
 
 <div class="viewcode-block" id="InverseSolver">
 <a class="viewcode-back" href="../inverse.html#inverse.InverseSolver">[docs]</a>
-<span class="k">class</span> <span class="nc">InverseSolver</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InverseSolver</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class handles the inverse solution through proper methods.</span>
 <span class="sd">    It accesses the Fedem model through the provided FedemSolver instance.</span>
@@ -155,7 +155,7 @@
 <span class="sd">        Performs the inverse solution (static case)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor. Initializes the object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -177,12 +177,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">internal_force_mat</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># initial force matrix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># loop number over simulation</span>
 
-    <span class="k">def</span> <span class="nf">_init_equations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_equations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find internal equation number related to triad_id and dof</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">__get_equations</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__get_equations</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Return the equation numbers associated with given object(s).</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -296,12 +296,12 @@
                                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                                     <span class="s2">&quot;Check if triadID is correct, &quot;</span>
                                     <span class="o">+</span> <span class="s2">&quot;dof is not found or may be fixed&quot;</span>
-                                <span class="p">)</span> <span class="kn">from</span> <span class="nn">value_error</span>
+                                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">value_error</span>
                             <span class="k">if</span> <span class="n">eq_num</span><span class="p">[</span><span class="n">dof</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                                     <span class="s2">&quot;Check if triadID is correct, &quot;</span>
                                     <span class="o">+</span> <span class="s2">&quot;dof is likely dependent&quot;</span>
-                                <span class="p">)</span> <span class="kn">from</span> <span class="nn">value_error</span>
+                                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">value_error</span>
 
                             <span class="n">eq_num</span> <span class="o">=</span> <span class="n">eq_num</span><span class="p">[</span><span class="n">dof</span><span class="p">]</span>
 
@@ -319,12 +319,12 @@
                 <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="n">eq_list</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span>  <span class="c1"># known_sprF - spring force</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">frc_spring_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_equations</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">_inverse_get_boundary_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">one_based</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_get_boundary_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">one_based</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts boundary conditions related to measurements and forces.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">__get_equation_numbers</span><span class="p">(</span><span class="n">equation_set</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__get_equation_numbers</span><span class="p">(</span><span class="n">equation_set</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Extracts equation numbers from given dictionary.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -357,7 +357,7 @@
 
 <div class="viewcode-block" id="InverseSolver.convert_rev_joint_force">
 <a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.convert_rev_joint_force">[docs]</a>
-    <span class="k">def</span> <span class="nf">convert_rev_joint_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert_rev_joint_force</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Modify the data set for spring force input for revolute joints</span>
 <span class="sd">        with defined spring forces</span>
@@ -393,7 +393,7 @@
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_inverse_build_mat_from_ndef</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">mat_def</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_build_mat_from_ndef</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">mat_def</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Building position matrices for active dofs (sensor/force)</span>
 <span class="sd">        Indicating related dof by 1</span>
@@ -404,7 +404,7 @@
 
         <span class="k">return</span> <span class="n">mat</span>
 
-    <span class="k">def</span> <span class="nf">_init_mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Memory initialisation for dynamic inverse solution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -414,7 +414,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fa_vec</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">ndof</span><span class="p">,</span> <span class="n">incs</span><span class="p">),</span> <span class="nb">float</span><span class="p">)</span>  <span class="c1"># RHS force vector</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_newmark_coefficients</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_newmark_coefficients</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameter calculation for Newmark and HHT algorithm</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -432,7 +432,7 @@
 
 <div class="viewcode-block" id="InverseSolver.run_inverse_dyn">
 <a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.run_inverse_dyn">[docs]</a>
-    <span class="k">def</span> <span class="nf">run_inverse_dyn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_inverse_dyn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inverse solution driver (dynamic case).</span>
 
@@ -567,7 +567,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_functions</span><span class="p">(</span><span class="n">out_def</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_inverse_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">,</span> <span class="n">f0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_mat</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">,</span> <span class="n">f0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Central inverse algorithm</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -591,7 +591,7 @@
 
 <div class="viewcode-block" id="InverseSolver.run_inverse_fedem">
 <a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.run_inverse_fedem">[docs]</a>
-    <span class="k">def</span> <span class="nf">run_inverse_fedem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_inverse_fedem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method uses fedem&#39;s inverse solution in fortran</span>
 
@@ -615,12 +615,12 @@
         <span class="k">return</span> <span class="n">out</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_build_sensor_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_sensor_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Store sensor IDs</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">__get_base_id</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__get_base_id</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Converts an object tag into corresponsing base Id.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -740,7 +740,7 @@
         <span class="k">return</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">nr</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_inverse_disp_sensor</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_disp_sensor</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard inverse solution for displacement sensor input</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -760,7 +760,7 @@
 
         <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
 
-    <span class="k">def</span> <span class="nf">_inverse_strain_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_strain_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inverse solution for strain sensor input (e.g. strain gage measurements)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -796,7 +796,7 @@
 
         <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
 
-    <span class="k">def</span> <span class="nf">_inverse_section_forces_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_section_forces_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inverse solution for section forces (N,Qy,Qz,Mx,My,Mz)</span>
 <span class="sd">        6 components solution</span>
@@ -831,7 +831,7 @@
 
         <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
 
-    <span class="k">def</span> <span class="nf">_inverse_rel_dist_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_rel_dist_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inverse solution for relative distance change</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -862,7 +862,7 @@
 
         <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
 
-    <span class="k">def</span> <span class="nf">_inverse_spring_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spr_var</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_spring_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spr_var</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inverse solution for spring variables</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -893,7 +893,7 @@
 
         <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
 
-    <span class="k">def</span> <span class="nf">_inverse_int_force_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inverse_int_force_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u_vec</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inverse solution for known internal force</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -927,7 +927,7 @@
         <span class="k">return</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">pos</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_unit_load</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">g_def</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_unit_load</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">g_def</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Force vector based on unit loads (generalized forces)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -940,7 +940,7 @@
         <span class="k">return</span> <span class="n">f_mat</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_mode_load_scipy</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mode_load_scipy</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Force vector based on natural frequency shapes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -994,7 +994,7 @@
         <span class="k">return</span> <span class="n">f_vec</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_mode_load</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">use_lapack</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mode_load</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">use_lapack</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Force vector based on natural frequency shapes.</span>
 <span class="sd">        New and faster implementation, using Fedem&#39;s internal eigenvalue solver.</span>
@@ -1030,7 +1030,7 @@
 
 <div class="viewcode-block" id="InverseSolver.run_inverse">
 <a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.run_inverse">[docs]</a>
-    <span class="k">def</span> <span class="nf">run_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp_data</span><span class="p">,</span> <span class="n">out_def</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Collector for different inverse methods.</span>
 
@@ -1212,7 +1212,7 @@
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_calc_eigen_values</span><span class="p">(</span><span class="n">solver</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_eigen_values</span><span class="p">(</span><span class="n">solver</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calulates eigenvalues and eigenvectors (test routine, only for testing)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1261,7 +1261,7 @@
 
 <div class="viewcode-block" id="FedemRun">
 <a class="viewcode-back" href="../inverse.html#inverse.FedemRun">[docs]</a>
-<span class="k">class</span> <span class="nc">FedemRun</span><span class="p">(</span><span class="n">FedemSolver</span><span class="p">,</span> <span class="n">InverseSolver</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FedemRun</span><span class="p">(</span><span class="n">FedemSolver</span><span class="p">,</span> <span class="n">InverseSolver</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class augments FedemSolver with inverse solution capabilities.</span>
 
@@ -1273,7 +1273,7 @@
 <span class="sd">        Content of yaml input file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrkdir</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrkdir</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor. Initializes the object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

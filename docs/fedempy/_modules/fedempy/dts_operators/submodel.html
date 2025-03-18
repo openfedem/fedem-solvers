@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fedempy.dts_operators.submodel &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+  <title>fedempy.dts_operators.submodel &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../../../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -82,22 +82,22 @@
 <span class="sd">To use, call sub_model_run(df) with input data in df.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">uuid</span>
-<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">CalledProcessError</span><span class="p">,</span> <span class="n">run</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">subprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalledProcessError</span><span class="p">,</span> <span class="n">run</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemSolver</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_common_args</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">result_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_common_args</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">result_id</span><span class="p">):</span>
     <span class="n">solver_args</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;-cwd=&quot;</span> <span class="o">+</span> <span class="n">model_dir</span><span class="p">,</span>
         <span class="s2">&quot;-allPrimaryVars-&quot;</span><span class="p">,</span>
@@ -117,7 +117,7 @@
     <span class="k">return</span> <span class="n">solver_args</span>
 
 
-<span class="k">def</span> <span class="nf">_recovery_args</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">frs_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_recovery_args</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">frs_file</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span>
         <span class="s2">&quot;-frs3file=&quot;</span> <span class="o">+</span> <span class="n">out_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">frs_file</span><span class="p">,</span>
         <span class="s2">&quot;-recovery=1&quot;</span><span class="p">,</span>
@@ -126,7 +126,7 @@
     <span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_solve_global</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">n_funcs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_solve_global</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">n_funcs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solve top-level global FEDEM model.</span>
 <span class="sd">    input_data must contain n_funcs columns,</span>
@@ -146,7 +146,7 @@
     <span class="k">return</span> <span class="n">result_id</span>
 
 
-<span class="k">def</span> <span class="nf">_solve_sub_level</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">parent_frsfile</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_solve_sub_level</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">parent_frsfile</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solve sub-level model. Recover strain-gauges if bottom-level</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -220,7 +220,7 @@
 
 <div class="viewcode-block" id="sub_model_run">
 <a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.submodel.sub_model_run">[docs]</a>
-<span class="k">def</span> <span class="nf">sub_model_run</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sub_model_run</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run sub-model simulation.</span>
 <span class="sd">    First solves the global model, then recursively solves the submodels.</span>

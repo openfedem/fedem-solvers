@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm module &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>fmm module &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -53,6 +53,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#fmm.FedemModel"><code class="docutils literal notranslate"><span class="pre">FedemModel</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_close"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_close()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_count"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_femodel"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_femodel()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_func_tag"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_func_tag()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_node"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_node()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_objects"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_objects()</span></code></a></li>
@@ -212,6 +213,31 @@ Used for convenience in order to hide native type convertions.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>int</dt><dd><p>Number of instances of the indicated object type</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fmm.FedemModel.fm_get_femodel">
+<span class="sig-name descname"><span class="pre">fm_get_femodel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm.html#FedemModel.fm_get_femodel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm.FedemModel.fm_get_femodel" title="Link to this definition"></a></dt>
+<dd><p>This method returns the FE data file for the specified Part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>base_id</strong><span class="classifier">int</span></dt><dd><p>Base Id of the FE part to get the FE model for</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Absolute path to the FE data file</p>
+</dd>
+<dt>int</dt><dd><p>If less than -1: No file is associated with this part.
+If -1: This is a generic part with a visualization file.
+If 0: This is a FE part but not subjected to stress recovery.
+If 1: This FE part is subjected to stress recovery.</p>
 </dd>
 </dl>
 </dd>

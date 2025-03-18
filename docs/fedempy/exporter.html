@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>exporter module &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>exporter module &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -100,7 +100,7 @@
 <p>Python wrapper for the native VTFX exporter.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="exporter.Exporter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">Exporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fe_parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vis_parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lib_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">Exporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fe_parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vis_parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lib_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Case'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class provides functionality for exporting fedem animations
 to Ceetron CUG format.</p>
@@ -114,6 +114,8 @@ to Ceetron CUG format.</p>
 <dt><strong>lib_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to the shared object library vtfxExporter.so</p>
 </dd>
 <dt><strong>vtfx_path</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to vtfx-file, use a temporary file if None</p>
+</dd>
+<dt><strong>case_name</strong><span class="classifier">str, default=”Case”</span></dt><dd><p>Case identifier</p>
 </dd>
 </dl>
 </dd>
@@ -131,21 +133,23 @@ to Ceetron CUG format.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="exporter.Exporter.clean">
-<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lib_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cug_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/usr/bin/CugComposer'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter.clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter.clean" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lib_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/exporter.html#Exporter.clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#exporter.Exporter.clean" title="Link to this definition"></a></dt>
 <dd><p>Clears all data about included FE-parts and frs-files,
 and removes all transformation, stress and deformation results.
 Closes the vtfx-file and converts it to a CUG database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>time_step</strong><span class="classifier">double</span></dt><dd><p>Time step to use for animation speed</p>
+<dt><strong>time_step</strong><span class="classifier">float</span></dt><dd><p>Time step to use for animation speed</p>
 </dd>
-<dt><strong>lib_dir</strong><span class="classifier">str</span></dt><dd><p>Absolute path to app location</p>
+<dt><strong>lib_dir</strong><span class="classifier">str, default None</span></dt><dd><p>Absolute path for folder where to write CUG log-file
+If None, current working directory will be used</p>
 </dd>
 <dt><strong>out_dir</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path for output folder of the CUG database
 If None, CUG data is not generated and the vtfx-file is retained</p>
 </dd>
-<dt><strong>cug_path</strong><span class="classifier">str, default=”/usr/bin/CugComposer”</span></dt><dd><p>Absolute path to Ceetron CUG composer executable</p>
+<dt><strong>fmax</strong><span class="classifier">float, default=-1</span></dt><dd><p>Set fringe range to [0,fmax] if fmax is larger than 0.
+If less than zero, the range will be set automatically.</p>
 </dd>
 </dl>
 </dd>

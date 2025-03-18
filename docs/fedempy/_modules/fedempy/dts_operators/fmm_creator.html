@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fedempy.dts_operators.fmm_creator &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+  <title>fedempy.dts_operators.fmm_creator &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../../../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -81,16 +81,16 @@
 <span class="sd">Utility module, for generating fmm-files from low/no-code model files.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
-<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
-<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">isfunction</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">glob</span><span class="w"> </span><span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">isfunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.yaml_parser</span> <span class="kn">import</span> <span class="n">ModelYAML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.yaml_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelYAML</span>
 
 
-<span class="k">def</span> <span class="nf">_abs_path</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">dir_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_abs_path</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">dir_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the absolute path of a file.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">file_name</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
@@ -100,7 +100,7 @@
     <span class="k">return</span> <span class="n">file_name</span>
 
 
-<span class="k">def</span> <span class="nf">_call_func</span><span class="p">(</span><span class="n">full_module_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_call_func</span><span class="p">(</span><span class="n">full_module_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic function invoking a low-code modeling script.&quot;&quot;&quot;</span>
     <span class="n">module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">full_module_name</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">attribute_name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
@@ -111,7 +111,7 @@
 
 <div class="viewcode-block" id="create_fmm">
 <a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.fmm_creator.create_fmm">[docs]</a>
-<span class="k">def</span> <span class="nf">create_fmm</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">,</span> <span class="n">fmm_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mod_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_fmm</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">,</span> <span class="n">fmm_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mod_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates a Fedem model file (fmm) based on a low-code (python)</span>
 <span class="sd">    or no-code (yaml) model file. If the `fmm_file` is specified</span>

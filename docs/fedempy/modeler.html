@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>modeler module &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>modeler module &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_damper"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_damper()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_fe_part"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_fe_part()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_function"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_generic_part"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_generic_part()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_joint"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_joint()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_load"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_load()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#modeler.FedemModeler.make_sensor"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_sensor()</span></code></a></li>
@@ -181,25 +182,28 @@ and for modifying existing ones.</p>
 <tr class="row-even"><td><p><strong>make_fe_part:</strong></p></td>
 <td><p>Creates an FE part</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>make_strain_rosette:</strong></p></td>
+<tr class="row-odd"><td><p><strong>make_generic_part:</strong></p></td>
+<td><p>Creates a generic part</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>make_strain_rosette:</strong></p></td>
 <td><p>Creates a strain rosette on an FE part</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>make_udelm:</strong></p></td>
+<tr class="row-odd"><td><p><strong>make_udelm:</strong></p></td>
 <td><p>Creates a string of user-defined elements</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>edit_triad:</strong></p></td>
+<tr class="row-even"><td><p><strong>edit_triad:</strong></p></td>
 <td><p>Modifies an existing triad</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>edit_part:</strong></p></td>
+<tr class="row-odd"><td><p><strong>edit_part:</strong></p></td>
 <td><p>Modifies an existing FE part</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>edit_joint:</strong></p></td>
+<tr class="row-even"><td><p><strong>edit_joint:</strong></p></td>
 <td><p>Modifies an existing joint</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>edit_function:</strong></p></td>
+<tr class="row-odd"><td><p><strong>edit_function:</strong></p></td>
 <td><p>Modifies an existing function</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>solver_setup:</strong></p></td>
+<tr class="row-even"><td><p><strong>solver_setup:</strong></p></td>
 <td><p>Setting dynamics solver parameters</p></td>
 </tr>
 </tbody>
@@ -699,6 +703,36 @@ function should be returned, instead of the default user Id.</p>
 <dd class="field-even"><dl class="simple">
 <dt>int</dt><dd><p>User Id or base Id of created function object.
 Will be 0 or negative if an error occurs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modeler.FedemModeler.make_generic_part">
+<span class="sig-name descname"><span class="pre">make_generic_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triads</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_generic_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_generic_part" title="Link to this definition"></a></dt>
+<dd><p>Creates a generic part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Description of the new part</p>
+</dd>
+<dt><strong>triads</strong><span class="classifier">list of int or list of str</span></dt><dd><p>List of base Ids or tags of the connected triads</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments defining some element properties.
+Currently, the following keywords are recognized:</p>
+<ul class="simple">
+<li><p><cite>alpha1</cite> : Mass-proportional damping coefficient</p></li>
+<li><p><cite>alpha2</cite> : Stiffness-proportional damping coefficient</p></li>
+<li><p><cite>tag</cite> : Tag to associate the created element with</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of the created generic part, zero of negative on error</p>
 </dd>
 </dl>
 </dd>

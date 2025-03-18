@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fedempy.dts_operators.window &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+  <title>fedempy.dts_operators.window &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../../../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -81,18 +81,18 @@
 <span class="sd">Convenience module for running Fedem simulations as an operator.</span>
 <span class="sd">Usage: Invoke `run(df)` with the input data in the DataFrame `df`.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sys</span><span class="w"> </span><span class="kn">import</span> <span class="n">stdout</span>
 
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">zeros</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.divergence</span> <span class="kn">import</span> <span class="n">jump_state</span><span class="p">,</span> <span class="n">ramp_dataframe</span><span class="p">,</span> <span class="n">restart</span>
-<span class="kn">from</span> <span class="nn">fedempy.fmm_solver</span> <span class="kn">import</span> <span class="n">FmmSolver</span>
-<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.divergence</span><span class="w"> </span><span class="kn">import</span> <span class="n">jump_state</span><span class="p">,</span> <span class="n">ramp_dataframe</span><span class="p">,</span> <span class="n">restart</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.fmm_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FmmSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
 
 
-<span class="k">def</span> <span class="nf">_check_state</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">use_state</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_state</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">use_state</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks whether solver state transfer should be used or not.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -117,7 +117,7 @@
 
 <div class="viewcode-block" id="start_solver">
 <a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.window.start_solver">[docs]</a>
-<span class="k">def</span> <span class="nf">start_solver</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">start_solver</span><span class="p">(</span>
     <span class="n">solver_options</span><span class="p">,</span> <span class="n">cw_dir</span><span class="p">,</span> <span class="n">use_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">old_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tstart</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -146,7 +146,7 @@
 <span class="sd">        Zero on success, negative values indicate errors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -173,7 +173,7 @@
 
 <div class="viewcode-block" id="start_fmm_solver">
 <a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.window.start_fmm_solver">[docs]</a>
-<span class="k">def</span> <span class="nf">start_fmm_solver</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">start_fmm_solver</span><span class="p">(</span>
     <span class="n">fmm_file</span><span class="p">,</span>
     <span class="n">lib_dir</span><span class="p">,</span>
     <span class="n">use_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -232,7 +232,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_get_start_state</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">use_times</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_start_state</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">use_times</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extracts start condition (time and input values) from given DataFrame.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -250,7 +250,7 @@
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">_run_window</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">n_step</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_run_window</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">n_step</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">xtimes</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Runs a new time window, with optional restart on divergence.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -289,7 +289,7 @@
 
 <div class="viewcode-block" id="run">
 <a class="viewcode-back" href="../../../dts_operators.html#fedempy.dts_operators.window.run">[docs]</a>
-<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run Fedem simulation over a time window with `df` as input.</span>
 

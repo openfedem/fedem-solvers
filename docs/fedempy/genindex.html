@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>Index &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -80,6 +80,7 @@
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#J"><strong>J</strong></a>
  | <a href="#L"><strong>L</strong></a>
@@ -230,6 +231,8 @@
 </li>
       <li><a href="modeler.html#modeler.FedemModeler">FedemModeler (class in modeler)</a>
 </li>
+      <li><a href="solver.html#solver.FedemProgressBar">FedemProgressBar (class in solver)</a>
+</li>
       <li>
     fedempy.dts_operators.driver
 
@@ -281,16 +284,18 @@
 </li>
       <li><a href="fmm.html#fmm.FedemModel.fm_count">fm_count() (fmm.FedemModel method)</a>
 </li>
+      <li><a href="fmm.html#fmm.FedemModel.fm_get_femodel">fm_get_femodel() (fmm.FedemModel method)</a>
+</li>
       <li><a href="fmm.html#fmm.FedemModel.fm_get_func_tag">fm_get_func_tag() (fmm.FedemModel method)</a>
 </li>
       <li><a href="fmm.html#fmm.FedemModel.fm_get_node">fm_get_node() (fmm.FedemModel method)</a>
 </li>
       <li><a href="fmm.html#fmm.FedemModel.fm_get_objects">fm_get_objects() (fmm.FedemModel method)</a>
 </li>
-      <li><a href="fmm.html#fmm.FedemModel.fm_get_pos">fm_get_pos() (fmm.FedemModel method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="fmm.html#fmm.FedemModel.fm_get_pos">fm_get_pos() (fmm.FedemModel method)</a>
+</li>
       <li><a href="fmm.html#fmm.FedemModel.fm_new">fm_new() (fmm.FedemModel method)</a>
 </li>
       <li><a href="fmm.html#fmm.FedemModel.fm_open">fm_open() (fmm.FedemModel method)</a>
@@ -385,10 +390,10 @@
 </li>
       <li><a href="solver.html#solver.FedemSolver.get_joint_spring_stiffness">get_joint_spring_stiffness() (solver.FedemSolver method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="solver.html#solver.FedemSolver.get_mass_matrix">get_mass_matrix() (solver.FedemSolver method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="solver.html#solver.FedemSolver.get_newton_matrix">get_newton_matrix() (solver.FedemSolver method)</a>
 </li>
       <li><a href="solver.html#solver.FedemSolver.get_next_time">get_next_time() (solver.FedemSolver method)</a>
@@ -399,9 +404,13 @@
 </li>
       <li><a href="solver.html#solver.FedemSolver.get_rhs_vector">get_rhs_vector() (solver.FedemSolver method)</a>
 </li>
+      <li><a href="solver.html#solver.FedemSolver.get_start_time">get_start_time() (solver.FedemSolver method)</a>
+</li>
       <li><a href="solver.html#solver.FedemSolver.get_state_size">get_state_size() (solver.FedemSolver method)</a>
 </li>
       <li><a href="solver.html#solver.FedemSolver.get_stiffness_matrix">get_stiffness_matrix() (solver.FedemSolver method)</a>
+</li>
+      <li><a href="solver.html#solver.FedemSolver.get_stop_time">get_stop_time() (solver.FedemSolver method)</a>
 </li>
       <li><a href="solver.html#solver.FedemSolver.get_system_dofs">get_system_dofs() (solver.FedemSolver method)</a>
 </li>
@@ -414,6 +423,14 @@
       <li><a href="enums.html#enums.FmVar.GLOBAL_FORCE">GLOBAL_FORCE (enums.FmVar attribute)</a>
 </li>
       <li><a href="enums.html#enums.FmVar.GLOBAL_VEL">GLOBAL_VEL (enums.FmVar attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="solver.html#solver.FedemSolver.have_results">have_results() (solver.FedemSolver method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -490,6 +507,8 @@
 </li>
       <li><a href="modeler.html#modeler.FedemModeler.make_function">make_function() (modeler.FedemModeler method)</a>
 </li>
+      <li><a href="modeler.html#modeler.FedemModeler.make_generic_part">make_generic_part() (modeler.FedemModeler method)</a>
+</li>
       <li><a href="modeler.html#modeler.FedemModeler.make_joint">make_joint() (modeler.FedemModeler method)</a>
 </li>
       <li><a href="modeler.html#modeler.FedemModeler.make_load">make_load() (modeler.FedemModeler method)</a>
@@ -510,6 +529,8 @@
 </li>
       <li><a href="enums.html#enums.FmDof.MIN_PR">MIN_PR (enums.FmDof attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     modeler
 
@@ -517,8 +538,6 @@
         <li><a href="modeler.html#module-modeler">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="yaml_parser.html#yaml_parser.ModelYAML">ModelYAML (class in yaml_parser)</a>
 </li>
       <li>
@@ -574,11 +593,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="enums.html#enums.FmVar.POS">POS (enums.FmVar attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="enums.html#enums.FmDofStat.PRESCRIBED">PRESCRIBED (enums.FmDofStat attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="enums.html#enums.FmType.PRISMATIC_JOINT">PRISMATIC_JOINT (enums.FmType attribute)</a>
+</li>
+      <li><a href="solver.html#solver.FedemProgressBar.progress">progress (solver.FedemProgressBar property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -727,6 +748,8 @@
       <li><a href="dts_operators.html#fedempy.dts_operators.stress_visualization.stress_visualization_run">stress_visualization_run() (in module fedempy.dts_operators.stress_visualization)</a>
 </li>
       <li><a href="dts_operators.html#fedempy.dts_operators.submodel.sub_model_run">sub_model_run() (in module fedempy.dts_operators.submodel)</a>
+</li>
+      <li><a href="solver.html#solver.FedemProgressBar.suffix">suffix (solver.FedemProgressBar attribute)</a>
 </li>
   </ul></td>
 </tr></table>

@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>fmm &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -82,12 +82,12 @@
 <span class="sd">Used for convenience in order to hide native type convertions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">c_bool</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">cdll</span><span class="p">,</span> <span class="n">create_string_buffer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ctypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">byref</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">cdll</span><span class="p">,</span> <span class="n">create_string_buffer</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.enums</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">FmType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">FmType</span>
 
 
-<span class="k">def</span> <span class="nf">_convert_char</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_char</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a string argument from Python to C type.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -103,7 +103,7 @@
     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">str</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_char_p</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_convert_int</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">enum_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">int_or_none</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_int</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">enum_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">int_or_none</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts an integer from Python to C type.</span>
 <span class="sd">    If `enum_type` is specified, then `arg` needs to be an enum of that type.</span>
@@ -133,7 +133,7 @@
     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">Enum</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">int</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_int</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_convert_real</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_real</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a float from Python to C type.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -151,7 +151,7 @@
 
 <div class="viewcode-block" id="FedemModel">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel">[docs]</a>
-<span class="k">class</span> <span class="nc">FedemModel</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FedemModel</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class wraps the Fedem model file handling functionality.</span>
 
@@ -198,7 +198,7 @@
 <span class="sd">        Returns the tag of an indexed external function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lib_path</span><span class="p">,</span> <span class="n">plugin1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plugin2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lib_path</span><span class="p">,</span> <span class="n">plugin1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plugin2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        Initializes the internal datastructure of the shared object library.</span>
@@ -216,6 +216,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmTagObjects</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetPosition</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetNode</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetFEModel</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSync</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSync</span><span class="o">.</span><span class="n">argstype</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_int</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmReduce</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
@@ -225,7 +226,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetFuncTag</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_bool</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetFuncTag</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_int</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">_convert_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">=</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_convert_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">=</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts `obj_id`, which can be either an integer base Id or a string tag,</span>
 <span class="sd">        into C type base Id. If `multiple` is True and `obj_id` is a tag,</span>
@@ -248,7 +251,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_open">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_open">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method opens the specified Fedem model file</span>
 <span class="sd">        and reads its content into the internal datastructure.</span>
@@ -265,13 +268,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">fname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** The current model must be closed before opening a new&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmOpen</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">fname</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmOpen</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">fname</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_save">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_save">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method saves the currently open Fedem model such that the model</span>
 <span class="sd">        file is updated to reflect the current results data found on disk.</span>
@@ -288,12 +295,15 @@
 <span class="sd">        bool</span>
 <span class="sd">            True on success, otherwise False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSave</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">fname</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_new">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_new">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method initializes an empty Fedem model.</span>
 
@@ -309,13 +319,14 @@
 <span class="sd">            Always True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmNew</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">fname</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_close">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_close">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method closes the currently open Fedem model to clean up memory.</span>
 
@@ -329,6 +340,8 @@
 <span class="sd">        bool</span>
 <span class="sd">            Always True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remove_singletons</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmClose</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="n">remove_singletons</span><span class="p">))</span>
@@ -337,12 +350,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmClose</span><span class="p">(</span><span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_count">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_count">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the number of objects of the given type.</span>
 
@@ -356,12 +370,15 @@
 <span class="sd">        int</span>
 <span class="sd">            Number of instances of the indicated object type</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCount</span><span class="p">(</span><span class="n">_convert_int</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">FmType</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_get_objects">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_get_objects">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_type</span><span class="o">=</span><span class="n">FmType</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the base Id of all objects of the given type,</span>
 <span class="sd">        and/or those with the specified tag.</span>
@@ -379,6 +396,9 @@
 <span class="sd">            Base Id list of all instances in the model of the specified type</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">base_id</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">base_id</span>
+
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>  <span class="c1"># Process a list of tags</span>
             <span class="k">for</span> <span class="n">atag</span> <span class="ow">in</span> <span class="n">tag</span><span class="p">:</span>
                 <span class="n">base_id</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">atag</span><span class="p">))</span>
@@ -396,7 +416,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_tag_object">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_tag_object">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_tag_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_tag_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method tags the specified object(s) identified by the base Id.</span>
 
@@ -412,6 +432,9 @@
 <span class="sd">        int</span>
 <span class="sd">            Number of tagged objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">num_obj_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">base_id</span><span class="p">))</span>
             <span class="n">base_id_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_id</span><span class="p">))()</span>
@@ -426,7 +449,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_get_pos">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_get_pos">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_id</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_id</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the global position of the specified object.</span>
 
@@ -440,6 +463,9 @@
 <span class="sd">        (float, float, float)</span>
 <span class="sd">            Global X-, Y-, and Z-coordinate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
         <span class="n">pos_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetPosition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">object_id</span><span class="p">),</span> <span class="n">pos_</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -449,7 +475,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_get_node">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_get_node">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_get_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_get_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the FE node number matching a spatial point.</span>
 
@@ -465,14 +491,49 @@
 <span class="sd">        int</span>
 <span class="sd">            Node Id</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
         <span class="n">pos_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)()</span>
         <span class="n">pos_</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">part_id</span><span class="p">),</span> <span class="n">pos_</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="FedemModel.fm_get_femodel">
+<a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_get_femodel">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_get_femodel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns the FE data file for the specified Part.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        base_id : int</span>
+<span class="sd">            Base Id of the FE part to get the FE model for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Absolute path to the FE data file</span>
+<span class="sd">        int</span>
+<span class="sd">            If less than -1: No file is associated with this part.</span>
+<span class="sd">            If -1: This is a generic part with a visualization file.</span>
+<span class="sd">            If 0: This is a FE part but not subjected to stress recovery.</span>
+<span class="sd">            If 1: This FE part is subjected to stress recovery.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span>
+
+        <span class="n">femfile</span> <span class="o">=</span> <span class="n">create_string_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+        <span class="n">recover</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetFEModel</span><span class="p">(</span><span class="n">_convert_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span> <span class="n">femfile</span><span class="p">,</span> <span class="n">byref</span><span class="p">(</span><span class="n">recover</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">femfile</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">recover</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span></div>
+
+
 <div class="viewcode-block" id="FedemModel.fm_sync_part">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_sync_part">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_sync_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_sync_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method syncronizes the currently open Fedem model with contents</span>
 <span class="sd">        on disk for the specified FE part. It is typically used after the</span>
@@ -488,12 +549,15 @@
 <span class="sd">        bool</span>
 <span class="sd">            True on success, otherwise (e.g., if base_id is invalid) False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSync</span><span class="p">(</span><span class="n">_convert_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_write_reducer">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_write_reducer">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_write_reducer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_write_reducer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method writes reducer input files for the specified FE part,</span>
 <span class="sd">        unless that part is already reduced.</span>
@@ -508,6 +572,9 @@
 <span class="sd">        str</span>
 <span class="sd">            Absolute path to the working directory of the reduction process</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
         <span class="n">rdbdir</span> <span class="o">=</span> <span class="n">create_string_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmReduce</span><span class="p">(</span><span class="n">rdbdir</span><span class="p">,</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">rdbdir</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
@@ -517,7 +584,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_write_solver">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_write_solver">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_write_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_old_res</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">udf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_write_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_old_res</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">udf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method writes solver input files for the currently loaded model.</span>
 
@@ -535,6 +602,9 @@
 <span class="sd">        str</span>
 <span class="sd">            Absolute path to the working directory of the solver process</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
         <span class="n">rdbdir</span> <span class="o">=</span> <span class="n">create_string_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSolve</span><span class="p">(</span>
             <span class="n">rdbdir</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">(</span><span class="n">keep_old_res</span><span class="p">),</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">ude</span><span class="p">),</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">udf</span><span class="p">)</span>
@@ -546,7 +616,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_solver_setup">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_solver_setup">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_solver_setup</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_solver_setup</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">t_start</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
         <span class="n">t_end</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
@@ -579,21 +649,21 @@
 <span class="sd">        add_opt : str, default=None</span>
 <span class="sd">            Additional solver options</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSolveSetup</span><span class="p">(</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_start</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_inc</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_end</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_quasi</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">e_inc</span><span class="p">),</span>
-            <span class="n">_convert_int</span><span class="p">(</span><span class="n">n_modes</span><span class="p">),</span>
-            <span class="n">_convert_char</span><span class="p">(</span><span class="n">add_opt</span><span class="p">),</span>
-        <span class="p">)</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSolveSetup</span><span class="p">(</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_start</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_inc</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_end</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">t_quasi</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">e_inc</span><span class="p">),</span>
+                <span class="n">_convert_int</span><span class="p">(</span><span class="n">n_modes</span><span class="p">),</span>
+                <span class="n">_convert_char</span><span class="p">(</span><span class="n">add_opt</span><span class="p">),</span>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_solver_tol">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_solver_tol">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_solver_tol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol_ene</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol_dis</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol_vel</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol_res</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_solver_tol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol_ene</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol_dis</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol_vel</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol_res</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method (re)defines the solver convergence tolerances.</span>
 
@@ -608,18 +678,18 @@
 <span class="sd">        tol_res : float, default=-1.0</span>
 <span class="sd">            Residual force norm tolerance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSolverTol</span><span class="p">(</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_ene</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_dis</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_vel</span><span class="p">),</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_res</span><span class="p">),</span>
-        <span class="p">)</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmSolverTol</span><span class="p">(</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_ene</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_dis</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_vel</span><span class="p">),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">tol_res</span><span class="p">),</span>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_get_func_tag">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_get_func_tag">[docs]</a>
-    <span class="k">def</span> <span class="nf">fm_get_func_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_get_func_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the tag of an indexed external function.</span>
 
@@ -633,6 +703,8 @@
 <span class="sd">        str</span>
 <span class="sd">            The tag of the function, None if channel is out of range</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
         <span class="n">tag</span> <span class="o">=</span> <span class="n">create_string_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetFuncTag</span><span class="p">(</span><span class="n">_convert_int</span><span class="p">(</span><span class="n">channel</span><span class="p">),</span> <span class="n">tag</span><span class="p">):</span>

@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm_solver &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>fmm_solver &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -83,17 +83,18 @@
 
 <span class="sd">This module relies on the following environment variables:</span>
 
-<span class="sd">| *FEDEM_REDUCER* = Full path to the Fedem reducer shared object library</span>
-<span class="sd">| *FEDEM_SOLVER* = Full path to the Fedem solver shared object library</span>
 <span class="sd">| *FEDEM_MDB* = Full path to the Fedem model database shared object library</span>
-
-<span class="sd">The first variable needs to be set only if FE model reduction</span>
-<span class="sd">is to be performed. The other two variables are mandatory.</span>
+<span class="sd">| *FEDEM_SOLVER* = Full path to the Fedem dynamics solver shared object library</span>
+<span class="sd">| *FEDEM_REDUCER* = Full path to the Fedem reducer shared object library</span>
+<span class="sd">| *VIS_EXPORTER* = Full path to the Fedem VTFx exporter shared object library</span>
+<span class="sd">The third variable needs to be set only if FE model reduction is to be performed.</span>
+<span class="sd">The fourth variable needs to be set only if a VTFx file is to be exported.</span>
+<span class="sd">The first two variables are mandatory.</span>
 
 <span class="sd">This module can also be launched directly, to run a specified model,</span>
 <span class="sd">using the syntax</span>
 
-<span class="sd">| ``python -m fedempy.fmm_solver -f mymodel.fmm [--reduce-fem] [--save-model]``</span>
+<span class="sd">| ``python -m fedempy.fmm_solver -f mymodel.fmm [--reduce-fem] [--save-model] [-v mymodel.vtfx]``</span>
 
 <span class="sd">This will then invoke the method :meth:`fmm_solver.FmmSolver.solve_all`</span>
 <span class="sd">on the specified model-file (`mymodel.fmm`). If you already have a directory</span>
@@ -103,16 +104,18 @@
 <span class="sd">| ``python -m fedempy.fmm_solver``</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">argparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ctypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">c_double</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">path</span>
 
-<span class="kn">from</span> <span class="nn">fedempy.fmm</span> <span class="kn">import</span> <span class="n">FedemModel</span><span class="p">,</span> <span class="n">FmType</span>
-<span class="kn">from</span> <span class="nn">fedempy.inverse</span> <span class="kn">import</span> <span class="n">InverseSolver</span>
-<span class="kn">from</span> <span class="nn">fedempy.reducer</span> <span class="kn">import</span> <span class="n">FedemReducer</span>
-<span class="kn">from</span> <span class="nn">fedempy.solver</span> <span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Exporter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.fmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemModel</span><span class="p">,</span> <span class="n">FmType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.inverse</span><span class="w"> </span><span class="kn">import</span> <span class="n">InverseSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.reducer</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemReducer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemProgressBar</span><span class="p">,</span> <span class="n">FedemSolver</span>
 
 
-<span class="k">def</span> <span class="nf">_solver_options</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">rdbdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_solver_options</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">rdbdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">time_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">base_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets up the standard solver command-line options,</span>
 <span class="sd">    taking into account the *.fco, *.fop and *.fao files, if they exist.</span>
@@ -123,10 +126,16 @@
         <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">rdbdir</span> <span class="o">+</span> <span class="n">option_file</span><span class="p">):</span>
             <span class="n">opts</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">ext</span><span class="p">,</span> <span class="n">option_file</span><span class="p">]</span>
 
+    <span class="k">if</span> <span class="n">time_start</span><span class="p">:</span>  <span class="c1"># Add dynamics solver start time</span>
+        <span class="n">opts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-timeStart=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time_start</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">base_id</span><span class="p">:</span>  <span class="c1"># Add flag for in-core von Mises stress array</span>
+        <span class="n">opts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-partVMStress=2&quot;</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">opts</span>
 
 
-<span class="k">def</span> <span class="nf">_count_lines</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_count_lines</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Counts the number of lines in a file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -139,7 +148,7 @@
     <span class="k">return</span> <span class="n">count</span>
 
 
-<span class="k">def</span> <span class="nf">_get_resfile</span><span class="p">(</span><span class="n">rdbdir</span><span class="p">,</span> <span class="n">solver_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_resfile</span><span class="p">(</span><span class="n">rdbdir</span><span class="p">,</span> <span class="n">solver_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extracts the actual res-file name from the fop-file for a solver process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -153,7 +162,7 @@
     <span class="k">return</span> <span class="n">rdbdir</span> <span class="o">+</span> <span class="n">solver_name</span> <span class="o">+</span> <span class="s2">&quot;.res&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">_print_res</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_print_res</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Prints the contents of the specified res-file, the first 100 lines</span>
 <span class="sd">    and the last part of it from the first Error message occuring, if any.</span>
@@ -175,7 +184,7 @@
 
 <div class="viewcode-block" id="FmmSolver">
 <a class="viewcode-back" href="../fmm_solver.html#fmm_solver.FmmSolver">[docs]</a>
-<span class="k">class</span> <span class="nc">FmmSolver</span><span class="p">(</span><span class="n">FedemSolver</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FmmSolver</span><span class="p">(</span><span class="n">FedemSolver</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This subclass of FedemSolver adds the possibility</span>
 <span class="sd">    to start a simulation on a specified fedem model file.</span>
@@ -201,7 +210,7 @@
 <span class="sd">        Assigns sensor value to a tagged external function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_internal_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">keep_old_res</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_internal_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">keep_old_res</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        Optionally starts the simulation, if a model file is specified.</span>
@@ -214,7 +223,13 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_SOLVER&quot;</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_internal_state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">FedemModel</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_MDB&quot;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reducer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vtfx</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_func_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_transf</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_deform</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_stress</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_incr</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># Start the Fedem dynamics solver</span>
         <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="n">keep_old_res</span><span class="p">)</span>
@@ -223,7 +238,7 @@
                 <span class="s2">&quot;Failed to start Fedem on &quot;</span> <span class="o">+</span> <span class="n">model_file</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">)&quot;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_init_func_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_func_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the tag -&gt; channel_index map for external functions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -235,22 +250,31 @@
             <span class="n">chn</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">tag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_get_func_tag</span><span class="p">(</span><span class="n">chn</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_reduce_fe_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reduce_fe_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">do_reduce</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reduces all FE parts in the currently open model,</span>
 <span class="sd">        which are not already redused.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        do_reduce : bool</span>
+<span class="sd">            Skip the FE part reduction if False</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Number of FE parts that was reduced, negative on error</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reducer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;FEDEM_REDUCER&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
-                <span class="k">return</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_reducer</span> <span class="o">=</span> <span class="n">FedemReducer</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_REDUCER&quot;</span><span class="p">])</span>
 
         <span class="n">num_reduced</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">do_reduce</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">num_reduced</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reducer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;FEDEM_REDUCER&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">num_reduced</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reducer</span> <span class="o">=</span> <span class="n">FedemReducer</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_REDUCER&quot;</span><span class="p">])</span>
+
         <span class="c1"># Get list (of base Id) of the FE parts in the model</span>
         <span class="n">fe_parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">base_id</span> <span class="ow">in</span> <span class="n">fe_parts</span><span class="p">:</span>
@@ -271,9 +295,92 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#### FE model reduction done.&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">num_reduced</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_open_vtfx_exporter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vtfx_file</span><span class="p">,</span> <span class="n">model_file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens the VTFx file exporter and write the FE models to it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vtfx_file : str</span>
+<span class="sd">            Absolute path of the VTFx output file</span>
+<span class="sd">        model_file : str</span>
+<span class="sd">            Fedem model file name to derive the case name from</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of int</span>
+<span class="sd">            Base ID of FE parts for which stress recovery will be performed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">vtfx_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="s2">&quot;VIS_EXPORTER&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Environment variable VIS_EXPORTER not defined, no VTFx export.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Get list (of base Id) of the FE parts in the model</span>
+        <span class="c1"># and the associated FE data files</span>
+        <span class="n">base_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">fem_parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">vis_parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_get_objects</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">base_id</span> <span class="ow">in</span> <span class="n">all_parts</span><span class="p">:</span>
+            <span class="n">fem_file</span><span class="p">,</span> <span class="n">recover</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_get_femodel</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">recover</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># Generic part with visualization file only</span>
+                <span class="n">vis_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">fem_file</span><span class="p">,</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fem_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s2">&quot;base_id&quot;</span><span class="p">:</span> <span class="n">base_id</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">recover</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># This is an FE part</span>
+                <span class="n">fem_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">fem_file</span><span class="p">,</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fem_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s2">&quot;base_id&quot;</span><span class="p">:</span> <span class="n">base_id</span><span class="p">,</span>
+                        <span class="s2">&quot;recovery&quot;</span><span class="p">:</span> <span class="n">recover</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">recover</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Stress recovery will be performed for this FE part</span>
+                <span class="n">base_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span>
+
+        <span class="c1"># Create the VTFx exporter object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vtfx</span> <span class="o">=</span> <span class="n">Exporter</span><span class="p">(</span>
+            <span class="n">fem_parts</span><span class="p">,</span>
+            <span class="n">vis_parts</span><span class="p">,</span>
+            <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;VIS_EXPORTER&quot;</span><span class="p">],</span>
+            <span class="n">vtfx_file</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">model_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_ids</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_result_buffers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_ids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allocates state arrays to pass results to the VTFx exporter module.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        base_ids : list of int</span>
+<span class="sd">            Base ID of FE parts for which stress recovery will be performed</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_transf</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_transformation_state_size</span><span class="p">())()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_deform</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_stress</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">bid</span> <span class="ow">in</span> <span class="n">base_ids</span><span class="p">:</span>
+            <span class="n">def_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_part_deformation_state_size</span><span class="p">(</span><span class="n">bid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">def_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">str_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_part_stress_state_size</span><span class="p">(</span><span class="n">bid</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_c_deform</span><span class="p">[</span><span class="n">bid</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">def_size</span><span class="p">)()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_c_stress</span><span class="p">[</span><span class="n">bid</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="p">(</span><span class="n">str_size</span> <span class="k">if</span> <span class="n">str_size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">))()</span>
+
 <div class="viewcode-block" id="FmmSolver.start">
 <a class="viewcode-back" href="../fmm_solver.html#fmm_solver.FmmSolver.start">[docs]</a>
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">model_file</span><span class="p">,</span>
         <span class="n">keep_old_res</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -283,6 +390,7 @@
         <span class="n">gauge_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">extf_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">time_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">vtfx_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Starts a simulation on the specified model file.</span>
@@ -307,6 +415,8 @@
 <span class="sd">            Initial external function values, for initial equilibrium iterations</span>
 <span class="sd">        time_start : float, default=None</span>
 <span class="sd">            Optional start time of simulation, override setting in model file</span>
+<span class="sd">        vtfx_file : str, default=None</span>
+<span class="sd">            Absolute path of the VTFx output file for visualization in GLview</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -321,7 +431,7 @@
         <span class="n">this_log</span> <span class="o">=</span> <span class="n">_count_lines</span><span class="p">(</span><span class="n">log_file</span><span class="p">)</span>
 
         <span class="c1"># Local function for printing the model log-file when shit happens.</span>
-        <span class="k">def</span> <span class="nf">error_exit</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">error_exit</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_close</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Here is the model log:&quot;</span><span class="p">)</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">logf</span><span class="p">:</span>
@@ -345,9 +455,12 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Total number of mechanism objects:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_count</span><span class="p">())</span>
 
         <span class="c1"># Check for FE model reduction</span>
-        <span class="n">num_red</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_fe_model</span><span class="p">()</span> <span class="k">if</span> <span class="n">reduce_fem</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">num_red</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_fe_model</span><span class="p">(</span><span class="n">reduce_fem</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">num_red</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">error_exit</span><span class="p">(</span><span class="o">-</span><span class="mi">98</span><span class="p">)</span>
+
+        <span class="c1"># Initialize the VTFx file exporter</span>
+        <span class="n">base_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_vtfx_exporter</span><span class="p">(</span><span class="n">vtfx_file</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
 
         <span class="c1"># Create the results database file structure</span>
         <span class="c1"># populated with the solver input files</span>
@@ -365,22 +478,42 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="n">num_red</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># Start the dynamics solver</span>
-        <span class="n">options</span> <span class="o">=</span> <span class="n">_solver_options</span><span class="p">(</span><span class="s2">&quot;fedem_solver&quot;</span><span class="p">,</span> <span class="n">rdbdir</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">time_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-timeStart=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time_start</span><span class="p">))</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">_solver_options</span><span class="p">(</span><span class="s2">&quot;fedem_solver&quot;</span><span class="p">,</span> <span class="n">rdbdir</span><span class="p">,</span> <span class="n">time_start</span><span class="p">,</span> <span class="n">base_ids</span><span class="p">)</span>
         <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver_init</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">state_data</span><span class="p">,</span> <span class="n">gauge_data</span><span class="p">,</span> <span class="n">extf_input</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">close_model</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_close</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to start the dynamics solver.&quot;</span><span class="p">)</span>
             <span class="n">_print_res</span><span class="p">(</span><span class="n">_get_resfile</span><span class="p">(</span><span class="n">rdbdir</span><span class="p">,</span> <span class="s2">&quot;fedem_solver&quot;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">base_ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_result_buffers</span><span class="p">(</span><span class="n">base_ids</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">status</span></div>
 
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_export_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exports results for current step to the VTFx file, if any.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vtfx</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">have_results</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_transformation_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_c_transf</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">bid</span><span class="p">,</span> <span class="n">deformation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_deform</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_part_state</span><span class="p">(</span><span class="n">bid</span><span class="p">,</span> <span class="n">deformation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_stress</span><span class="p">[</span><span class="n">bid</span><span class="p">])</span>
+
+        <span class="c1"># Find the (largest) time increment, for setting the animation frame rate</span>
+        <span class="n">ctime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">ctime</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_time</span> <span class="o">=</span> <span class="n">ctime</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_incr</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_time_incr</span> <span class="o">=</span> <span class="n">delta</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vtfx</span><span class="o">.</span><span class="n">do_step</span><span class="p">(</span><span class="n">ctime</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_transf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_deform</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_stress</span><span class="p">)</span>
+
 <div class="viewcode-block" id="FmmSolver.close_model">
 <a class="viewcode-back" href="../fmm_solver.html#fmm_solver.FmmSolver.close_model">[docs]</a>
-    <span class="k">def</span> <span class="nf">close_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fringe_max</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closes the currently open model.</span>
 
@@ -390,6 +523,9 @@
 <span class="sd">            If True, the model file is updated based on current result files</span>
 <span class="sd">        remove_singletons : bool, default=False</span>
 <span class="sd">            If True, heap-allocated singelton objects are also released</span>
+<span class="sd">        fringe_max : float, default=-1</span>
+<span class="sd">            Max fringe range value for VTFx output.</span>
+<span class="sd">            If less than zero, the range will be set automatically.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -403,12 +539,23 @@
             <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_close</span><span class="p">(</span><span class="ow">not</span> <span class="n">status</span> <span class="ow">or</span> <span class="n">remove_singletons</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vtfx</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vtfx</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_incr</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="n">fringe_max</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">status</span></div>
 
 
 <div class="viewcode-block" id="FmmSolver.solve_all">
 <a class="viewcode-back" href="../fmm_solver.html#fmm_solver.FmmSolver.solve_all">[docs]</a>
-    <span class="k">def</span> <span class="nf">solve_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="p">,</span> <span class="n">save_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reduce_fem</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve_all</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_file</span><span class="p">,</span>
+        <span class="n">save_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">reduce_fem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">vtfx_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">fringe_max</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Starts and runs through a simulation on the specified model file.</span>
 
@@ -422,6 +569,11 @@
 <span class="sd">            If True, and the model contains FE parts, they will be reduced</span>
 <span class="sd">            before the solver is started, unless the reduced matrix files</span>
 <span class="sd">            already exist</span>
+<span class="sd">        vtfx_file : str, default=None</span>
+<span class="sd">            Absolute path of the VTFx output file for visualization in GLview</span>
+<span class="sd">        fringe_max : float, default=-1</span>
+<span class="sd">            Max fringe range value for VTFx output.</span>
+<span class="sd">            If less than zero, the range will be set automatically.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -437,20 +589,26 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_all</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="k">if</span> <span class="n">options</span> <span class="k">else</span> <span class="mi">0</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#### Running dynamics solver on&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
-        <span class="n">ierr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">reduce_fem</span><span class="p">)</span>
+        <span class="n">ierr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">reduce_fem</span><span class="p">,</span> <span class="n">vtfx_file</span><span class="o">=</span><span class="n">vtfx_file</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ierr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Solver failed to start (</span><span class="si">{</span><span class="n">ierr</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">ierr</span>
 
         <span class="c1"># Run through the entire time series</span>
-        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">solve_next</span><span class="p">():</span>
-            <span class="k">pass</span>  <span class="c1"># Dummy statement</span>
+        <span class="k">with</span> <span class="n">FedemProgressBar</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">solve_next</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_step</span><span class="p">()</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_step</span><span class="p">()</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Time step loop OK, solver closed&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="n">save_model</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="n">save_model</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">fringe_max</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fringe_max</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Dynamics solver failed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span></div>
@@ -458,7 +616,7 @@
 
 <div class="viewcode-block" id="FmmSolver.set_input">
 <a class="viewcode-back" href="../fmm_solver.html#fmm_solver.FmmSolver.set_input">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_tag</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_tag</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method may be used prior to the solve_next call, to assign a</span>
 <span class="sd">        sensor value from a physical twin to the specified actuator or load in</span>
@@ -477,7 +635,8 @@
 <span class="sd">            Always True, unless the specified function is not found</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">func_tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_map</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_ext_func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func_map</span><span class="p">[</span><span class="n">func_tag</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_ext_func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func_map</span><span class="p">[</span><span class="n">func_tag</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 </div>
 
@@ -485,7 +644,7 @@
 
 <div class="viewcode-block" id="FmmInverse">
 <a class="viewcode-back" href="../fmm_solver.html#fmm_solver.FmmInverse">[docs]</a>
-<span class="k">class</span> <span class="nc">FmmInverse</span><span class="p">(</span><span class="n">FmmSolver</span><span class="p">,</span> <span class="n">InverseSolver</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FmmInverse</span><span class="p">(</span><span class="n">FmmSolver</span><span class="p">,</span> <span class="n">InverseSolver</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class augments FmmSolver with inverse solution capabilities.</span>
 
@@ -501,7 +660,7 @@
 <span class="sd">        Option to not overwrite any existing res-file in the RDB directory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">use_internal_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">keep_res</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">use_internal_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">keep_res</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        Optionally starts the simulation, if a model file is specified.</span>
@@ -517,13 +676,19 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Python Fedem Solver&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--model-file&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Fedem model file to open&quot;</span>
+        <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--model-file&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Fedem model file to open&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--save-model&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Save updated model file&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--reduce-fem&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Reduce model before solve&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="s2">&quot;--vtfx-file&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Ceetron VTFx output file for visualization&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;--fringe-max&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Max von Mises fringe value&quot;</span>
     <span class="p">)</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">()</span>
     <span class="n">model</span><span class="o">.</span><span class="n">solve_all</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()))</span>

@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>divergence &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>divergence &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=30f795a6"></script>
+      <script src="../_static/documentation_options.js?v=4122dfff"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -80,14 +80,14 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Convenience module for automatic simulation restart of diverging models.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">c_double</span>
-<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">mkdir</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ctypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">c_double</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">mkdir</span><span class="p">,</span> <span class="n">path</span>
 
 
 <div class="viewcode-block" id="ramp_dataframe">
 <a class="viewcode-back" href="../divergence.html#divergence.ramp_dataframe">[docs]</a>
-<span class="k">def</span> <span class="nf">ramp_dataframe</span><span class="p">(</span><span class="n">dfr</span><span class="p">,</span> <span class="n">start_pos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ramp_dataframe</span><span class="p">(</span><span class="n">dfr</span><span class="p">,</span> <span class="n">start_pos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creating a s-shape ramp, starting with 0 and ending with 1</span>
 <span class="sd">    Second derivative at start/end will be zero</span>
@@ -107,7 +107,7 @@
 
 <div class="viewcode-block" id="jump_state">
 <a class="viewcode-back" href="../divergence.html#divergence.jump_state">[docs]</a>
-<span class="k">def</span> <span class="nf">jump_state</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">jump_state</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks whether the current state should be jumped over or not.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -127,12 +127,12 @@
 
 
 
-<span class="k">def</span> <span class="nf">_opts_list</span><span class="p">(</span><span class="n">opts_dict</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_opts_list</span><span class="p">(</span><span class="n">opts_dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper converting option dictionary into a list of solver options.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -144,7 +144,7 @@
 
 <div class="viewcode-block" id="restart">
 <a class="viewcode-back" href="../divergence.html#divergence.restart">[docs]</a>
-<span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">c_opts</span><span class="p">,</span> <span class="n">x_times</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">restart</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">c_opts</span><span class="p">,</span> <span class="n">x_times</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Restarts the simulation over a time window in case of divergence issues.</span>
 <span class="sd">    When a divergent solution is detected, one (or more) of the following</span>

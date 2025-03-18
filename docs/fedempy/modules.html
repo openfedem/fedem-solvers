@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fedempy modules &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>fedempy modules &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -191,6 +191,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fmm.html#fmm.FedemModel"><code class="docutils literal notranslate"><span class="pre">FedemModel</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="fmm.html#fmm.FedemModel.fm_close"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_close()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="fmm.html#fmm.FedemModel.fm_count"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fmm.html#fmm.FedemModel.fm_get_femodel"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_femodel()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="fmm.html#fmm.FedemModel.fm_get_func_tag"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_func_tag()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="fmm.html#fmm.FedemModel.fm_get_node"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_node()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="fmm.html#fmm.FedemModel.fm_get_objects"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_objects()</span></code></a></li>
@@ -245,6 +246,7 @@
 <li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_damper"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_damper()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_fe_part"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_fe_part()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_function"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_generic_part"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_generic_part()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_joint"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_joint()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_load"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_load()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modeler.html#modeler.FedemModeler.make_sensor"><code class="docutils literal notranslate"><span class="pre">FedemModeler.make_sensor()</span></code></a></li>
@@ -269,6 +271,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="solver.html">solver module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="solver.html#solver.FedemException"><code class="docutils literal notranslate"><span class="pre">FedemException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver.html#solver.FedemProgressBar"><code class="docutils literal notranslate"><span class="pre">FedemProgressBar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemProgressBar.progress"><code class="docutils literal notranslate"><span class="pre">FedemProgressBar.progress</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemProgressBar.suffix"><code class="docutils literal notranslate"><span class="pre">FedemProgressBar.suffix</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="solver.html#solver.FedemSolver"><code class="docutils literal notranslate"><span class="pre">FedemSolver</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.add_rhs_vector"><code class="docutils literal notranslate"><span class="pre">FedemSolver.add_rhs_vector()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.check_times"><code class="docutils literal notranslate"><span class="pre">FedemSolver.check_times()</span></code></a></li>
@@ -294,11 +301,14 @@
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_part_deformation_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_part_deformation_state_size()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_part_stress_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_part_stress_state_size()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_rhs_vector"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_rhs_vector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_start_time"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_start_time()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_state_size()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_stiffness_matrix"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_stiffness_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_stop_time"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_stop_time()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_system_dofs"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_system_dofs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_system_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_system_size()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.get_transformation_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_transformation_state_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.have_results"><code class="docutils literal notranslate"><span class="pre">FedemSolver.have_results()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.restart_from_state"><code class="docutils literal notranslate"><span class="pre">FedemSolver.restart_from_state()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.run_all"><code class="docutils literal notranslate"><span class="pre">FedemSolver.run_all()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html#solver.FedemSolver.save_gauges"><code class="docutils literal notranslate"><span class="pre">FedemSolver.save_gauges()</span></code></a></li>

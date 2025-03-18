@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>solver module &mdash; fedempy 3.8.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+  <title>solver module &mdash; fedempy 3.9.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=30f795a6"></script>
+      <script src="_static/documentation_options.js?v=4122dfff"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -56,6 +56,11 @@
 <li class="toctree-l2"><a class="reference internal" href="reducer.html">reducer module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">solver module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#solver.FedemException"><code class="docutils literal notranslate"><span class="pre">FedemException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solver.FedemProgressBar"><code class="docutils literal notranslate"><span class="pre">FedemProgressBar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#solver.FedemProgressBar.progress"><code class="docutils literal notranslate"><span class="pre">FedemProgressBar.progress</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solver.FedemProgressBar.suffix"><code class="docutils literal notranslate"><span class="pre">FedemProgressBar.suffix</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#solver.FedemSolver"><code class="docutils literal notranslate"><span class="pre">FedemSolver</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.add_rhs_vector"><code class="docutils literal notranslate"><span class="pre">FedemSolver.add_rhs_vector()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.check_times"><code class="docutils literal notranslate"><span class="pre">FedemSolver.check_times()</span></code></a></li>
@@ -81,11 +86,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_part_deformation_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_part_deformation_state_size()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_part_stress_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_part_stress_state_size()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_rhs_vector"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_rhs_vector()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_start_time"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_start_time()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_state_size()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_stiffness_matrix"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_stiffness_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_stop_time"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_stop_time()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_system_dofs"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_system_dofs()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_system_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_system_size()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.get_transformation_state_size"><code class="docutils literal notranslate"><span class="pre">FedemSolver.get_transformation_state_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.have_results"><code class="docutils literal notranslate"><span class="pre">FedemSolver.have_results()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.restart_from_state"><code class="docutils literal notranslate"><span class="pre">FedemSolver.restart_from_state()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.run_all"><code class="docutils literal notranslate"><span class="pre">FedemSolver.run_all()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solver.FedemSolver.save_gauges"><code class="docutils literal notranslate"><span class="pre">FedemSolver.save_gauges()</span></code></a></li>
@@ -156,6 +164,77 @@ Used for convenience in order to hide native type convertions.</p>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="solver.FedemProgressBar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solver.</span></span><span class="sig-name descname"><span class="pre">FedemProgressBar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemProgressBar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemProgressBar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Bar</span></code></p>
+<p>Progress bar for the dynamics solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>solver</strong><span class="classifier">FedemSolver</span></dt><dd><p>The dynamics solver object to report progress for</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>color</strong></dt><dd></dd>
+<dt><strong>elapsed</strong></dt><dd></dd>
+<dt><strong>elapsed_td</strong></dt><dd></dd>
+<dt><strong>eta</strong></dt><dd></dd>
+<dt><strong>eta_td</strong></dt><dd></dd>
+<dt><strong>percent</strong></dt><dd></dd>
+<dt><a class="reference internal" href="#solver.FedemProgressBar.progress" title="solver.FedemProgressBar.progress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">progress</span></code></a></dt><dd><p>Override the progress property using the physical time of the simulation.</p>
+</dd>
+<dt><strong>remaining</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>finish</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>goto</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>is_tty</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>iter</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>next</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>start</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>update</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>update_avg</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>writeln</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="solver.FedemProgressBar.progress">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">progress</span></span><a class="headerlink" href="#solver.FedemProgressBar.progress" title="Link to this definition"></a></dt>
+<dd><p>Override the progress property using the physical time of the simulation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="solver.FedemProgressBar.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%(percent).1f%%</span> <span class="pre">-</span> <span class="pre">%(elapsed)ds'</span></em><a class="headerlink" href="#solver.FedemProgressBar.suffix" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -254,6 +333,12 @@ equation system, to facilitate use by external solution algorithms.</p>
 </tr>
 <tr class="row-even"><td><p><strong>get_next_time:</strong></p></td>
 <td><p>Returns the physical time of the next step of the simulation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>get_start_time:</strong></p></td>
+<td><p>Returns the start time of the simulation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_stop_time:</strong></p></td>
+<td><p>Returns the stop time of the simulation</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>get_function:</strong></p></td>
 <td><p>Evaluates a general function in the model and returns its value</p></td>
@@ -628,6 +713,13 @@ Part does not contain any (shell or solid) elements with stresses.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="solver.FedemSolver.get_start_time">
+<span class="sig-name descname"><span class="pre">get_start_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.get_start_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.get_start_time" title="Link to this definition"></a></dt>
+<dd><p>Utility returning the start time of the simulation.
+The self.ierr variable is not touched.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="solver.FedemSolver.get_state_size">
 <span class="sig-name descname"><span class="pre">get_state_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.get_state_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.get_state_size" title="Link to this definition"></a></dt>
 <dd><p>Utility returning the required length of the state vector
@@ -638,6 +730,13 @@ which is used when restarting a simulation from an in-core array.</p>
 <dt class="sig sig-object py" id="solver.FedemSolver.get_stiffness_matrix">
 <span class="sig-name descname"><span class="pre">get_stiffness_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.get_stiffness_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.get_stiffness_matrix" title="Link to this definition"></a></dt>
 <dd><p>Utility returning current content of the system stiffness matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solver.FedemSolver.get_stop_time">
+<span class="sig-name descname"><span class="pre">get_stop_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.get_stop_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.get_stop_time" title="Link to this definition"></a></dt>
+<dd><p>Utility returning the stop time of the simulation.
+The self.ierr variable is not touched.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -665,6 +764,12 @@ for Triads, Parts and Beams.</p>
 <div class="line">(number of Parts) * 14</div>
 <div class="line">(number of Beams) * 14</div>
 </div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solver.FedemSolver.have_results">
+<span class="sig-name descname"><span class="pre">have_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.have_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.have_results" title="Link to this definition"></a></dt>
+<dd><p>Utility returning whether current time step have results to be saved.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -815,7 +920,7 @@ the model, identified by the argument func_id (external function Id).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>bool</dt><dd><p>Always True, unless the specified function is not found</p>
+<dt>int</dt><dd><p>Always zero, unless an error condition occurs</p>
 </dd>
 </dl>
 </dd>
@@ -1015,7 +1120,7 @@ It closes down the model and cleans up heap memory and things on disk.</p>
 <span class="sig-name descname"><span class="pre">solver_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gauge_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extf_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/solver.html#FedemSolver.solver_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solver.FedemSolver.solver_init" title="Link to this definition"></a></dt>
 <dd><p>This method processes the input and sets up necessary data structures
 prior to the time integration loop. It also performs the license checks.</p>
-<p>See the Fedem R7.5 Users Guide, Appendix C.3 for a complete list of all
+<p>See the Fedem R8.0 Users Guide, Appendix C.3 for a complete list of all
 command-line arguments that may be specified and their default values.</p>
 <p>If the argument fsi is None, the model is assumed defined in the file
 specified via the command-line argument -fsifile instead.</p>
