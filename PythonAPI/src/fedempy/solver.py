@@ -210,7 +210,7 @@ class FedemSolver:
         self._solver.solveEigenModes.restype = c_bool
         self._solver.solveInverse.restype = c_bool
         self._solver.solverDone.restype = c_int
-        self._solver.setExtFunc.restype = c_bool
+        self._solver.setExtFunc.restype = c_int
         self._solver.getTime.restype = c_double
         self._solver.evalFunc.restype = c_double
         self._solver.getEquations.restype = c_int
@@ -423,12 +423,12 @@ class FedemSolver:
         if self.state_data is None:
             self.state_data = (c_double * self.state_size.value)()
         elif len(self.state_data) != self.state_size.value:
-            raise FedemException(f"Invalid valid array size {len(self.state_data)}")
+            raise FedemException(f"Invalid state array size {len(self.state_data)}")
         if self.gauge_size.value > 0:
             if self.gauge_data is None:
                 self.gauge_data = (c_double * self.gauge_size.value)()
             elif len(self.gauge_data) != self.gauge_size.value:
-                raise FedemException(f"Invalid valid array size {len(self.gauge_data)}")
+                raise FedemException(f"Invalid state array size {len(self.gauge_data)}")
 
         return nxin_.value
 
@@ -704,14 +704,18 @@ class FedemSolver:
             success = self._solver.setTime(self._convert_c_double(time_next))
 
         if inp is not None:
+            ierr = 0
             for i, val in enumerate(inp):
                 if val is not None:
                     if inp_def is None:
-                        self.set_ext_func(i + 1, val)
+                        ierr += self.set_ext_func(i + 1, val)
                     elif i < len(inp_def):
-                        self.set_ext_func(inp_def[i], val)
+                        ierr += self.set_ext_func(inp_def[i], val)
+            if ierr < 0:
+                success = False
 
-        success &= self._solver.solveNext(byref(self.ierr))
+        if success:
+            success = self._solver.solveNext(byref(self.ierr))
         if out_def is None:
             return success
 
@@ -962,8 +966,8 @@ class FedemSolver:
 
         Returns
         -------
-        bool
-            Always True, unless the specified function is not found
+        int
+            Always zero, unless an error condition occurs
         """
         func_id_ = self._convert_c_int(func_id)
         f_value_ = self._convert_c_double(value, 0)

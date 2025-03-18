@@ -211,8 +211,7 @@ int main (int argc, char** argv)
     // Evaluate the external functions
     double t = getNextTime(&status);
     for (j = 1; j <= nIn; j++)
-      if (!setExtFunc(j,extFunc(j,t)))
-        --status;
+      status += setExtFunc(j,extFunc(j,t));
 
     long int ms = t*1.0e6+0.1;
     if (writeCSV) // Write external function values to file

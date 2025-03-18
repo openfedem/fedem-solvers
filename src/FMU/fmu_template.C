@@ -389,8 +389,7 @@ extern "C" {
       //SET INPUT FUNCTIONS IN FEDEM.
       int err = 0;
       for (int i = 0; i < comp->state.numInputs && err == 0; i++)
-        if (!setExtFunc(comp->state.fedemInputIndices[i], comp->state.reals[i]))
-          --err;
+        err = setExtFunc(comp->state.fedemInputIndices[i], comp->state.reals[i]);
 
       if (err == 0) solveNext(&err);
 

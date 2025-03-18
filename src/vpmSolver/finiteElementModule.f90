@@ -297,12 +297,19 @@ contains
     !! Local variables
     real(dp) :: Xg(5,3), Xl(3), Tlg(3,3), bL, Area, rhoM, rhoG, M
     real(dp) :: Z1, Z2, MorPar(11)
+    integer  :: necc
 
     !! --- Logic section ---
 
+    if (associated(beam%eccVec)) then
+       necc = size(beam%eccVec,2)
+    else
+       necc = 0
+    end if
+
     Xg(4,:) = beam%TrUndeformed(:,4,1)
     Xg(5,:) = beam%TrUndeformed(:,4,2)
-    if (associated(beam%eccVec)) then
+    if (necc >= 2) then
        !! Eccentric beam ends w.r.t. the triads
        Xg(1,:) = Xg(4,:) + beam%eccVec(:,1)
        Xg(2,:) = Xg(5,:) + beam%eccVec(:,2)
@@ -452,7 +459,7 @@ contains
        z1   = bProp%Ix
        z2   = bProp%Ix
     end if
-    if (associated(beam%eccVec) .and. size(beam%eccVec,2) >= 4) then
+    if (necc >= 4) then
        !! Eccentric mass w.r.t. the triads
        Xg(1,:) = Xg(1,:) + beam%eccVec(:,3)
        Xg(2,:) = Xg(2,:) + beam%eccVec(:,4)
