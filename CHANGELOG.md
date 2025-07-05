@@ -8,6 +8,16 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.1.0] (2025-07-05)
+
+### :rocket: Initial release of FEDEM R8.1
+
+Except for some minor fixes in the Nastran bulk data file parser in
+the fedem-foundation submodule, which has relevance only if running
+the FE Part Reducer directly on a Nastran bulk data file,
+this release has no changes in the solver modules.
+Only the version tags are updated to align with the FEDEM GUI.
+
 ## [fedem-8.0.9] (2025-03-18)
 
 ### :rocket: Added
@@ -130,3 +140,4 @@
 [fedem-8.0.6]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.5...fedem-8.0.6
 [fedem-8.0.8]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.6...fedem-8.0.8
 [fedem-8.0.9]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.8...fedem-8.0.9
+[fedem-8.1.0]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.9...fedem-8.1.0
