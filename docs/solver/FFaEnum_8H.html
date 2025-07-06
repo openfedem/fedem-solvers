@@ -141,10 +141,10 @@ Macros</h2></td></tr>
 <tr class="memitem:abdee71b051865681f58dcca8e4cd28fa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaEnum_8H.html#abdee71b051865681f58dcca8e4cd28fa">FFaEnumMapping</a>(EnumType)</td></tr>
 <tr class="memdesc:abdee71b051865681f58dcca8e4cd28fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the start of an enum mapping definition.  <a href="FFaEnum_8H.html#abdee71b051865681f58dcca8e4cd28fa">More...</a><br /></td></tr>
 <tr class="separator:abdee71b051865681f58dcca8e4cd28fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0feaef8fb31d2160a0370d257fd3ad7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">FFaEnumEntry</a>(EnumValue,  EnumText)&#160;&#160;&#160;  enumMap.push_back(std::make_pair(EnumValue,EnumText));</td></tr>
-<tr class="memdesc:ac0feaef8fb31d2160a0370d257fd3ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds one entry to the current enum mapping definition.  <a href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">More...</a><br /></td></tr>
-<tr class="separator:ac0feaef8fb31d2160a0370d257fd3ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aa90570d337afec5810b2a495076b27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">FFaEnumEntryEnd</a>&#160;&#160;&#160;  } return enumMap; }</td></tr>
+<tr class="memitem:ae7c67709ee877452124922d8f7173e6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">FFaEnumEntry</a>(Value,  Text)&#160;&#160;&#160;enumMap.emplace_back(Value,Text);</td></tr>
+<tr class="memdesc:ae7c67709ee877452124922d8f7173e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds one entry to the current enum mapping definition.  <a href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">More...</a><br /></td></tr>
+<tr class="separator:ae7c67709ee877452124922d8f7173e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa90570d337afec5810b2a495076b27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">FFaEnumEntryEnd</a>&#160;&#160;&#160;} return enumMap; }</td></tr>
 <tr class="memdesc:a7aa90570d337afec5810b2a495076b27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the end of an enum mapping definition.  <a href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">More...</a><br /></td></tr>
 <tr class="separator:a7aa90570d337afec5810b2a495076b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -162,8 +162,8 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Enum variables with text representations. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ac0feaef8fb31d2160a0370d257fd3ad7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0feaef8fb31d2160a0370d257fd3ad7">&#9670;&nbsp;</a></span>FFaEnumEntry</h2>
+<a id="ae7c67709ee877452124922d8f7173e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c67709ee877452124922d8f7173e6f">&#9670;&nbsp;</a></span>FFaEnumEntry</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,18 +172,18 @@ Functions</h2></td></tr>
           <td class="memname">#define FFaEnumEntry</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">EnumValue, </td>
+          <td class="paramname">Value, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">EnumText&#160;</td>
+          <td class="paramname">Text&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;  enumMap.push_back(std::make_pair(EnumValue,EnumText));</td>
+          <td></td><td>&#160;&#160;&#160;enumMap.emplace_back(Value,Text);</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -199,7 +199,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FFaEnumEntryEnd&#160;&#160;&#160;  } return enumMap; }</td>
+          <td class="memname">#define FFaEnumEntryEnd&#160;&#160;&#160;} return enumMap; }</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -307,7 +307,7 @@ template&lt;class EnumType , class ETMapping &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 6 2025 07:23:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

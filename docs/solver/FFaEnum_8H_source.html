@@ -220,13 +220,11 @@ $(function() {
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor">      std::vector&lt;EnumType##Pair&gt; enumMap;              \</span></div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="preprocessor">      if (enumMap.empty())</span></div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">  234</a></span>&#160;<span class="preprocessor">#define FFaEnumEntry(EnumValue,EnumText)            \</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="preprocessor">  enumMap.push_back(std::make_pair(EnumValue,EnumText));</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">  238</a></span>&#160;<span class="preprocessor">#define FFaEnumEntryEnd             \</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="preprocessor">  } return enumMap; }</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">  234</a></span>&#160;<span class="preprocessor">#define FFaEnumEntry(Value,Text) enumMap.emplace_back(Value,Text);</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">  237</a></span>&#160;<span class="preprocessor">#define FFaEnumEntryEnd } return enumMap; }</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFFaEnum_8H_html_a10cd92d0fd2fae7c5beda694749e2f8f"><div class="ttname"><a href="FFaEnum_8H.html#a10cd92d0fd2fae7c5beda694749e2f8f">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;s, const FFaEnum&lt; EnumType, ETMapping &gt; &amp;e)</div><div class="ttdoc">Global output stream operator.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:186</div></div>
 <div class="ttc" id="aFFaEnum_8H_html_a73ccfb456eb1be36a6a2f7b4a75bba64"><div class="ttname"><a href="FFaEnum_8H.html#a73ccfb456eb1be36a6a2f7b4a75bba64">operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;s, FFaEnum&lt; EnumType, ETMapping &gt; &amp;e)</div><div class="ttdoc">Global input stream operator.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:193</div></div>
 <div class="ttc" id="aclassFFaEnum_html"><div class="ttname"><a href="classFFaEnum.html">FFaEnum</a></div><div class="ttdoc">Class to be used as a enum variable with text representations.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:87</div></div>
@@ -246,7 +244,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 6 2025 07:23:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

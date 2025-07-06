@@ -140,9 +140,9 @@ class FFaEnum&lt; EnumType, ETMapping &gt;</h3>
 <div class="line">  };</div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="FFaEnum_8H.html#abdee71b051865681f58dcca8e4cd28fa">FFaEnumMapping</a>(SomeEnumType) {</div>
-<div class="line">    <a class="code" href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">FFaEnumEntry</a>(AONE,  <span class="stringliteral">&quot;AONE&quot;</span>);</div>
-<div class="line">    <a class="code" href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">FFaEnumEntry</a>(ATWO,  <span class="stringliteral">&quot;ATWO&quot;</span>);</div>
-<div class="line">    <a class="code" href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">FFaEnumEntry</a>(ATHREE,<span class="stringliteral">&quot;ATHREE&quot;</span>);</div>
+<div class="line">    <a class="code" href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">FFaEnumEntry</a>(AONE,  <span class="stringliteral">&quot;AONE&quot;</span>);</div>
+<div class="line">    <a class="code" href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">FFaEnumEntry</a>(ATWO,  <span class="stringliteral">&quot;ATWO&quot;</span>);</div>
+<div class="line">    <a class="code" href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">FFaEnumEntry</a>(ATHREE,<span class="stringliteral">&quot;ATHREE&quot;</span>);</div>
 <div class="line">    <a class="code" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">FFaEnumEntryEnd</a>;</div>
 <div class="line">  };</div>
 <div class="line"> </div>
@@ -151,11 +151,11 @@ class FFaEnum&lt; EnumType, ETMapping &gt;</h3>
 <div class="line">  <span class="comment">// Or within a field:</span></div>
 <div class="line">  FFaField&lt;SomeEnumTypeEnum&gt; myEnumField;</div>
 <div class="line">};</div>
-<div class="ttc" id="aFFaEnum_8H_html_a7aa90570d337afec5810b2a495076b27"><div class="ttname"><a href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">FFaEnumEntryEnd</a></div><div class="ttdeci">#define FFaEnumEntryEnd</div><div class="ttdoc">Defines the end of an enum mapping definition.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:238</div></div>
+<div class="ttc" id="aFFaEnum_8H_html_a7aa90570d337afec5810b2a495076b27"><div class="ttname"><a href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27">FFaEnumEntryEnd</a></div><div class="ttdeci">#define FFaEnumEntryEnd</div><div class="ttdoc">Defines the end of an enum mapping definition.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:237</div></div>
 <div class="ttc" id="aFFaEnum_8H_html_abdee71b051865681f58dcca8e4cd28fa"><div class="ttname"><a href="FFaEnum_8H.html#abdee71b051865681f58dcca8e4cd28fa">FFaEnumMapping</a></div><div class="ttdeci">#define FFaEnumMapping(EnumType)</div><div class="ttdoc">Defines the start of an enum mapping definition.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:221</div></div>
-<div class="ttc" id="aFFaEnum_8H_html_ac0feaef8fb31d2160a0370d257fd3ad7"><div class="ttname"><a href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7">FFaEnumEntry</a></div><div class="ttdeci">#define FFaEnumEntry(EnumValue, EnumText)</div><div class="ttdoc">Adds one entry to the current enum mapping definition.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:234</div></div>
+<div class="ttc" id="aFFaEnum_8H_html_ae7c67709ee877452124922d8f7173e6f"><div class="ttname"><a href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f">FFaEnumEntry</a></div><div class="ttdeci">#define FFaEnumEntry(Value, Text)</div><div class="ttdoc">Adds one entry to the current enum mapping definition.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:234</div></div>
 <div class="ttc" id="aclassFFaEnum_html"><div class="ttname"><a href="classFFaEnum.html">FFaEnum</a></div><div class="ttdoc">Class to be used as a enum variable with text representations.</div><div class="ttdef"><b>Definition:</b> FFaEnum.H:87</div></div>
-</div><!-- fragment --><p> As you can see, the initialization of the text to enum mappings are to be set up using the macros <a class="el" href="FFaEnum_8H.html#abdee71b051865681f58dcca8e4cd28fa" title="Defines the start of an enum mapping definition.">FFaEnumMapping()</a>, <a class="el" href="FFaEnum_8H.html#ac0feaef8fb31d2160a0370d257fd3ad7" title="Adds one entry to the current enum mapping definition.">FFaEnumEntry()</a> and <a class="el" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27" title="Defines the end of an enum mapping definition.">FFaEnumEntryEnd()</a>. The <a class="el" href="classFFaEnum.html" title="Class to be used as a enum variable with text representations.">FFaEnum</a> class supports all kinds of assigning, so it can be used as a normal enum variable. </p><div class="fragment"><div class="line">...</div>
+</div><!-- fragment --><p> As you can see, the initialization of the text to enum mappings are to be set up using the macros <a class="el" href="FFaEnum_8H.html#abdee71b051865681f58dcca8e4cd28fa" title="Defines the start of an enum mapping definition.">FFaEnumMapping()</a>, <a class="el" href="FFaEnum_8H.html#ae7c67709ee877452124922d8f7173e6f" title="Adds one entry to the current enum mapping definition.">FFaEnumEntry()</a> and <a class="el" href="FFaEnum_8H.html#a7aa90570d337afec5810b2a495076b27" title="Defines the end of an enum mapping definition.">FFaEnumEntryEnd()</a>. The <a class="el" href="classFFaEnum.html" title="Class to be used as a enum variable with text representations.">FFaEnum</a> class supports all kinds of assigning, so it can be used as a normal enum variable. </p><div class="fragment"><div class="line">...</div>
 <div class="line">ClassWithEnum::ClassWithEnum()</div>
 <div class="line">{</div>
 <div class="line">  ...</div>
@@ -570,7 +570,7 @@ template&lt;class EnumType , class ETMapping &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 18 2025 15:51:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 6 2025 07:23:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

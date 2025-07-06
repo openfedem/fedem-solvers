@@ -81,7 +81,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacefmxwriter"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefmxwriter.html">fmxwriter</a></td></tr>
-<tr class="memdesc:namespacefmxwriter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module encapsulation of the IO_FXM subroutine. <br /></td></tr>
+<tr class="memdesc:namespacefmxwriter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module encapsulation of the IO_FMX subroutine. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -95,12 +95,34 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a299b8efe32d3e65050458915a322a048"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fmxWriter_8f90.html#a299b8efe32d3e65050458915a322a048">readfmx</a> (prefix, itype, data, nval)</td></tr>
 <tr class="memdesc:a299b8efe32d3e65050458915a322a048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a double precision array from the specified fmx-file.  <a href="fmxWriter_8f90.html#a299b8efe32d3e65050458915a322a048">More...</a><br /></td></tr>
 <tr class="separator:a299b8efe32d3e65050458915a322a048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f11794e53350417125b4a4b0298a994"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fmxWriter_8f90.html#a3f11794e53350417125b4a4b0298a994">initfmx</a> ()</td></tr>
+<tr class="memdesc:a3f11794e53350417125b4a4b0298a994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the Fortran file unit to be used for error messages.  <a href="fmxWriter_8f90.html#a3f11794e53350417125b4a4b0298a994">More...</a><br /></td></tr>
+<tr class="separator:a3f11794e53350417125b4a4b0298a994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadc456af55a161325c9eec23fa79fb20"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fmxWriter_8f90.html#aadc456af55a161325c9eec23fa79fb20">readfsm</a> (prefix, ndof, ndof1, ndof2, nceq, nmmceq, meqn, meqn1, meqn2, mmceq, mpmceq, ttcc)</td></tr>
+<tr class="memdesc:aadc456af55a161325c9eec23fa79fb20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads some SAM data arrays from the specified fsm-file.  <a href="fmxWriter_8f90.html#aadc456af55a161325c9eec23fa79fb20">More...</a><br /></td></tr>
+<tr class="separator:aadc456af55a161325c9eec23fa79fb20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Shared library wrapper for reading and writing FEDEM fmx files. </p>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad, SAP SE </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>22 Nov 2019 </dd></dl>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a3f11794e53350417125b4a4b0298a994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f11794e53350417125b4a4b0298a994">&#9670;&nbsp;</a></span>initfmx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine initfmx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the Fortran file unit to be used for error messages. </p>
+
+</div>
+</div>
 <a id="a299b8efe32d3e65050458915a322a048"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a299b8efe32d3e65050458915a322a048">&#9670;&nbsp;</a></span>readfmx()</h2>
 
@@ -150,6 +172,115 @@ Functions/Subroutines</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Error status. Negative value indicates an error, otherwise OK </dd></dl>
+
+</div>
+</div>
+<a id="aadc456af55a161325c9eec23fa79fb20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadc456af55a161325c9eec23fa79fb20">&#9670;&nbsp;</a></span>readfsm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer function readfsm </td>
+          <td>(</td>
+          <td class="paramtype">character(len=*), intent(in)&#160;</td>
+          <td class="paramname"><em>prefix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>ndof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>ndof1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>ndof2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>nceq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>nmmceq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(*), intent(out)&#160;</td>
+          <td class="paramname"><em>meqn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(*), intent(out)&#160;</td>
+          <td class="paramname"><em>meqn1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(*), intent(out)&#160;</td>
+          <td class="paramname"><em>meqn2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(*), intent(out)&#160;</td>
+          <td class="paramname"><em>mmceq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(*), intent(out)&#160;</td>
+          <td class="paramname"><em>mpmceq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(*), intent(out)&#160;</td>
+          <td class="paramname"><em>ttcc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads some SAM data arrays from the specified fsm-file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">prefix</td><td>File name prefix </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ndof</td><td>Size of the <em>meqn</em> array </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ndof1</td><td>Size of the <em>meqn1</em> array </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ndof2</td><td>Size of the <em>meqn2</em> array </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">nceq</td><td>Size of the @ mpmceq array </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">nmmceq</td><td>Size of the <em>mmceq</em> and <em>ttcc</em> arrays </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">meqn</td><td>Matrix of equation numbers for all DOFs </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">meqn1</td><td>Matrix of status 1 equation numbers </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">meqn2</td><td>Matrix of status 2 equation numbers </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">mmceq</td><td>Matrix of matrices of constraint equations </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">mpmceq</td><td>Matrix of pointers to matrices of constraint equations </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ttcc</td><td>Table of tables of constraint equation coefficients </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Error status. Negative value indicates an error, otherwise OK</dd></dl>
+<p>This function should be invoked twice. In the first call, <em>prefix</em> should point to the file to read from and the size parameters <em>ndof</em>, <em>ndof1</em> ... <em>nmmceq</em> are extracted. The file remains open. Before the second call, the arrays <em>meqn</em>, <em>meqn1</em> ... <em>ttcc</em> need to be allocated to the lenghts returned by the first call. These arrays are then read in the second call of this function (with a blank <em>prefix</em> argument). </p>
 
 </div>
 </div>
@@ -208,7 +339,7 @@ Functions/Subroutines</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 18 2025 15:51:07 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 6 2025 07:23:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
