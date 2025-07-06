@@ -177,12 +177,12 @@ contains
   !> @brief Write a progress message with optional memory usage to the terminal.
   !>
 
-  subroutine writeMessage (msg,reportMemoryUsage)
+  subroutine writeMessage (msg,reportMemoryUsage,newLine)
 
     use FFaProfilerInterface, only : ffa_getMemUsage
 
     character(len=*), intent(in) :: msg
-    logical,optional, intent(in) :: reportMemoryUsage
+    logical,optional, intent(in) :: reportMemoryUsage, newLine
 
     !! Local variables
     real(sp) :: time(3), usage(4)
@@ -194,6 +194,12 @@ contains
        last = 0.0_sp
        firstCall = .false.
        write(lterm,600)
+    end if
+
+    if (.not. present(newLine)) then
+       write(lterm,"()")
+    else if (newLine) then
+       write(lterm,"()")
     end if
 
     if (getTimeUsage(time,.true.)) then
@@ -216,10 +222,10 @@ contains
     call flush (lterm)
 
 600 format(/T57,'Incremental Rel. Total'/T57,' Wall time  CPU  Wall t')
-601 format(/2X,A,T57,'=>',F8.2,I4,'%',F8.1)
-602 format(/2X,A,T57,'=>',F8.2,5X,F8.1)
-603 format(/2X,A,T57,'=>',13X,F8.1)
-610 format( 7X,A,' memory:',F9.2,' MB',2PF7.2,'% of peak')
+601 format(2X,A,T57,'=>',F8.2,I4,'%',F8.1)
+602 format(2X,A,T57,'=>',F8.2,5X,F8.1)
+603 format(2X,A,T57,'=>',13X,F8.1)
+610 format(7X,A,' memory:',F9.2,' MB',2PF7.2,'% of peak')
 
   end subroutine writeMessage
 

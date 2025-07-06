@@ -51,6 +51,8 @@ module AsmExtensionModule
 
   type(Sam8Type), private, save :: mySam !< 64-bit integer version of SAM arrays
 
+  logical, private, save :: bigModel !< Flag for extra progress logging
+
   private :: csExpandElMat, csGetElmEq, writeMEQN
 #ifdef FT_HAS_MKL
   private :: csPreAssSparse
@@ -236,6 +238,7 @@ contains
     use SysMatrixTypeModule, only : denseMatrix_p, outOfCore_p, pardiso_p
     use SysMatrixTypeModule, only : reAllocate, nullifySysMatrix
     use allocationModule   , only : reAllocate
+    use progressModule     , only : writeProgress
     use FELinearSolver     , only : FEInitialize, FEAnalyze, FEMatrixOrder
     use FELinearSolver     , only : FEGetActiveOrder, FEGetSuperelementOrder
     use FELinearSolver     , only : FEPermuteIndices, SetLinearSolverType
@@ -283,6 +286,7 @@ contains
     end if
     lumpedElMats = matrixType < 0 .and. matrixType /= -pardiso_p
     firstMatrix = samData%neq == 0
+    bigModel = samData%nnod > 100000
 
     if (lumpedElMats) then
        !! All element matrix contributions are lumped (diagonalized), and
@@ -362,10 +366,12 @@ contains
 
           !! Preprocessing for consistent element matrices
           n0 = count(mySam%msc == 0)
+          if (bigModel) call writeProgress ('     SPRPRP ...',newline=.false.)
           call SPRPRP (mySam%madof(1), mySam%minex(1),  mySam%mpmnpc(1), &
                &       mySam%mmnpc(1), mySam%mpmceq(1), mySam%mmceq(1), &
                &       mySam%msc(1), nspar_p, int(lpu,ik), mySam%mpar(1), &
                &       sparse%mspar(1), sysMat%meqn8(1), iWork(1), lerr)
+          if (bigModel) call writeProgress ('     SPRPRP done',newline=.false.)
           if (lerr < 0_ik) goto 998
 
           n0 = count(mySam%msc == 0) - n0
@@ -412,10 +418,12 @@ contains
        if (ierr < 0) return
 
        !! Perform symbolic assembly
+       if (bigModel) call writeProgress ('     SPRSAS ...',newline=.false.)
        call SPRSAS (mySam%mpar(1),  mySam%mpmnpc(1), mySam%mmnpc(1), &
             &       mySam%madof(1), mySam%msc(1),    mySam%mpmceq(1), &
             &       mySam%mmceq(1), sysMat%meqn8(1), sparse%mspar(1), &
             &       sparse%msica(1), iWork(1), nspar_p, int(lpu,ik), lerr)
+       if (bigModel) call writeProgress ('     SPRSAS done',newline=.false.)
        if (lerr < 0) goto 998
 
        if (ik > i4) call castInt (samData%ndof,sysMat%meqn8,sysMat%meqn)
@@ -581,6 +589,7 @@ contains
     use SysMatrixTypeModule, only : SysMatrixType
     use SysMatrixTypeModule, only : skylineMatrix_p, sparseMatrix_p
     use allocationModule   , only : reAllocate
+    use progressModule     , only : writeProgress
     use scratchArrayModule , only : getIntegerScratchArray
     use reportErrorModule  , only : error_p, reportError
 
@@ -626,8 +635,10 @@ contains
        iWork => getIntegerScratchArray(nWork,ierr)
        if (ierr < 0) goto 999
 
+       if (bigModel) call writeProgress ('     SPRRNM ...',newline=.false.)
        call SPRRNM (sysMat%sparse%mspar(1), sysMat%sparse%msica(1), &
             &       iWork(1), int(lpu,ik), lerr)
+       if (bigModel) call writeProgress ('     SPRRNM done',newline=.false.)
        if (lerr < 0) goto 998
 
     end select
