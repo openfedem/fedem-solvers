@@ -299,7 +299,7 @@ endif ( BUILD_SOLVER_AS_DLL )
 
 install ( TARGETS ${TARGET_LIST}
           RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
-          LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" )
+          LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" )
 
 if ( AeroDyn_DLL )
   install ( FILES ${AeroDyn_DLL}
