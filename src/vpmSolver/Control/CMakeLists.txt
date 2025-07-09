@@ -31,7 +31,7 @@ if ( BUILD_CONTROL_AS_DLL )
   target_link_libraries ( ${LIB_ID} LINK_PRIVATE ${LAPACK_LIBRARIES} )
   install ( TARGETS ${LIB_ID}
             RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
-            LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" )
+            LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" )
 else ( BUILD_CONTROL_AS_DLL )
   add_library ( ${LIB_ID} STATIC ${F77_SOURCE_FILES} ${F90_SOURCE_FILES} )
   target_link_libraries ( ${LIB_ID} vpmUtilities_F90 ${LAPACK_LIBRARIES} )
