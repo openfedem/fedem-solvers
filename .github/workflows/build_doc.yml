@@ -11,6 +11,8 @@ on:
     tags:
       - fedem-*
 
+  workflow_dispatch:
+
 jobs:
   build-doc:
     name: Build API documentation
@@ -51,7 +53,7 @@ jobs:
           set +e
           git config user.name github-actions
           git config user.email github-actions@github.com
-          ./.github/scripts/check_doc.sh
+          .github/scripts/check_doc.sh
           echo "NEW_DOC=$?" >> $GITHUB_ENV
 
       - name: Push updated solver documentation
