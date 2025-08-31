@@ -34,8 +34,11 @@ jobs:
 
       - name: Checkout the latest release tag
         run: |
-          git checkout `git tag -l --sort=version:refname 'fedem-*' | tail -1`
+          echo "MY_TAG=`git tag -l --sort=version:refname 'fedem-*' | tail -1`" >> $GITHUB_ENV
+          git checkout ${{ env.MY_TAG }}
           git submodule update
+          echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
+          echo "FT_VER=`.github/scripts/get_version.sh cfg/VERSION fedem-foundation/src/Admin/version.h`" >> $GITHUB_ENV
 
       - name: Configure for build
         run: cmake . -DCMAKE_BUILD_TYPE=Release
@@ -46,7 +49,9 @@ jobs:
       - name: Build the fedempy documentation
         run: |
           pip install -r PythonAPI/requirements.txt
-          PythonAPI/doc/make.sh
+          cd PythonAPI/doc
+          sphinx-build -M html source build
+          sed -i "s/#FEDEM_TAG#/${{ env.MY_TAG }}/;s/#FEDEMPY_VERSION#/${{ env.MY_VER }}/;s/#FEDEM_VERSION#/${{ env.FT_VER }}/;/fedempy-/s/\"c1\"/\"n\"/" build/html/howto-install.html
 
       - name: Check build status
         run: |

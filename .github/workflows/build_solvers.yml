@@ -36,8 +36,8 @@ jobs:
 
       - name: Checkout the latest release tag
         run: |
-          git checkout `git tag -l --sort=version:refname 'fedem-*' | tail -1`
           echo "MY_TAG=`git tag -l --sort=version:refname 'fedem-*' | tail -1`" >> $GITHUB_ENV
+          git checkout ${{ env.MY_TAG }}
           echo "MY_VER=`cat cfg/VERSION`" >> $GITHUB_ENV
 
       - name: Configure main build
