@@ -6,7 +6,7 @@
  */
 /*!
   \file fmu_template.cpp
-  \brief FMU implementation for FEDEM
+  \brief FMU implementation for FEDEM.
   \details This file implements the subset of the functions declared in the file
   fmi2Functions.h from the FMI2 standard, necessary to run a FEDEM model as an
   FMU in a co-simulation context.
@@ -31,10 +31,9 @@ typedef void* LibHandle;
 #error "Platform not supported, neither _MSC_VER nor __GNUC__ defined"
 #endif
 
-//Macro for printing debug info to terminal
 #ifdef FMU_DEBUG
 #define DEBUG_STDOUT(x) std::cout << x << std::endl;
-#else 
+#else
 #define DEBUG_STDOUT(x)
 #endif
 
@@ -48,71 +47,74 @@ typedef int (*DLPROC_GETSTATESIZE)();
 typedef bool (*DLPROC_SETEXTFUNC)(int,double);
 typedef bool (*DLPROC_SOLVENEXT)(int*);
 typedef double (*DLPROC_EVALFUNC)(int,const char*,double,int*);
-typedef bool (*DLPROC_SAVETRANSFORMATIONSTATE)(double*,const int);
+typedef bool (*DLPROC_SAVETRANSFORMATIONS)(double*,const int);
 typedef int (*DLPROC_RESTARTFROMSTATE)(const double*,const int,const int);
 
-DLPROC_INIT solverInit;
-DLPROC_DONE solverDone;
-DLPROC_GETSTATESIZE getStateSize;
-DLPROC_GETSTATESIZE getTransformationStateSize;
-DLPROC_SETEXTFUNC setExtFunc;
-DLPROC_SOLVENEXT solveNext;
-DLPROC_EVALFUNC evalFunc;
-DLPROC_SAVETRANSFORMATIONSTATE saveTransformationState;
-DLPROC_RESTARTFROMSTATE restartFromState;
 
-
-namespace {
+namespace
+{
+  DLPROC_INIT                solverInit;
+  DLPROC_DONE                solverDone;
+  DLPROC_GETSTATESIZE        getStateSize;
+  DLPROC_GETSTATESIZE        getTransformationStateSize;
+  DLPROC_SETEXTFUNC          setExtFunc;
+  DLPROC_SOLVENEXT           solveNext;
+  DLPROC_EVALFUNC            evalFunc;
+  DLPROC_SAVETRANSFORMATIONS saveTransformationState;
+  DLPROC_RESTARTFROMSTATE    restartFromState;
 
   enum fmuStateCode
   {
-    FMUSTART= 1u << 0,
-    FMUEND = 1u << 1,
-    FMUINSTANTIATED = 1u << 2,
+    FMUSTART          = 1u << 0,
+    FMUEND            = 1u << 1,
+    FMUINSTANTIATED   = 1u << 2,
     FMUINITIALIZATION = 1u << 3,
-    FMUSTEPCOMPLETE= 1u << 4,
+    FMUSTEPCOMPLETE   = 1u << 4,
     FMUSTEPINPROGRESS = 1u << 5,
-    FMUSTEPFAILED = 1u << 6,
-    FMUSTEPCANCELED = 1u << 7,
-    FMUTERMINATED = 1u << 8,
-    FMUERROR = 1u << 9,
-    FMUFATAL = 1u << 10
+    FMUSTEPFAILED     = 1u << 6,
+    FMUSTEPCANCELED   = 1u << 7,
+    FMUTERMINATED     = 1u << 8,
+    FMUERROR          = 1u << 9,
+    FMUFATAL          = 1u << 10
   };
-  
-  //State of internal fmu parameters and variables, as well as solver state for restart.
+
+  fmuStateCode ourState = fmuStateCode::FMUEND;
+
+  //! \brief State of internal FMU-parameters and variables.
   struct modelState
   {
-    std::string modelIdentifier;
-    std::string modelGuid;
+    char modelIdentifier[128];
+    char modelGuid[64];
+
     fmi2Integer numReals;
     fmi2Integer numInputs;
     fmi2Integer numOutputs;
     fmi2Integer numParams;
     fmi2Integer numTransforms;
-    
+
     fmi2Integer* fedemInputIndices;
     fmi2Integer* fedemOutputIndices;
     fmi2Integer* fedemTransformIndices;
-    
+
+    fmi2Real*   reals;
     fmi2Integer solverStateSize;
-    fmi2Real* solverState;
+    fmi2Real*   solverState;
     fmi2Integer transformationStateSize;
-    fmi2Real* transformationState;
-    fmi2Real t;
-    fmi2Real* reals;
+    fmi2Real*   transformationState;
   };
-  
+
   struct componentInstance
   {
     fmuStateCode stateCode;
-    modelState state;
-    modelState initialState;
-    fmi2String instanceName;
-    fmi2Boolean logging = false;
-    const fmi2CallbackFunctions *functions;
+    modelState   state;
+    modelState   initialState;
+    fmi2String   instanceName;
+    fmi2Boolean  logging;
+
+    const fmi2CallbackFunctions* functions;
   };
 
-  void readConfig(componentInstance* comp, const std::string& path)
+  bool readConfig(componentInstance* comp, const std::string& path)
   {
     DEBUG_STDOUT("configPath: " + path);
 
@@ -122,68 +124,65 @@ namespace {
       return (fmi2Integer*)comp->functions->allocateMemory(nwi,sizeof(fmi2Integer));
     };
 
-    // TODO(RunarHR): readConfig: Make this more robust
-    std::string line;
     std::ifstream confFile(path);
-    std::getline(confFile,comp->initialState.modelIdentifier);
-    std::getline(confFile,comp->initialState.modelGuid);
-    std::getline(confFile,line);
-    comp->initialState.numReals = atoi(line.c_str());
-    std::getline(confFile,line);
-    comp->initialState.numInputs = atoi(line.c_str());
-    std::getline(confFile,line);
-    comp->initialState.numOutputs = atoi(line.c_str());
-    std::getline(confFile,line);
-    comp->initialState.numParams = atoi(line.c_str());
-    std::getline(confFile,line);
-    comp->initialState.numTransforms = atoi(line.c_str());
+    confFile.getline(comp->initialState.modelIdentifier,128);
+    confFile.getline(comp->initialState.modelGuid,64);
+
+    DEBUG_STDOUT("Model identifier: "<< comp->initialState.modelIdentifier);
+    DEBUG_STDOUT("Model GUID: "<< comp->initialState.modelGuid);
+
+    confFile >> comp->initialState.numReals
+             >> comp->initialState.numInputs
+             >> comp->initialState.numOutputs
+             >> comp->initialState.numParams
+             >> comp->initialState.numTransforms;
+    if (!confFile) return false;
+
+    DEBUG_STDOUT("Size parameters: "
+                 << comp->initialState.numReals <<" "
+                 << comp->initialState.numInputs <<" "
+                 << comp->initialState.numOutputs <<" "
+                 << comp->initialState.numParams <<" "
+                 << comp->initialState.numTransforms);
+
     comp->initialState.fedemInputIndices = allocateInts(comp->initialState.numInputs);
     comp->initialState.fedemOutputIndices = allocateInts(comp->initialState.numOutputs);
     comp->initialState.fedemTransformIndices = allocateInts(comp->initialState.numTransforms);
+
     comp->state.fedemInputIndices = allocateInts(comp->initialState.numInputs);
     comp->state.fedemOutputIndices = allocateInts(comp->initialState.numOutputs);
     comp->state.fedemTransformIndices = allocateInts(comp->initialState.numTransforms);
-    
-    for(int i=0; i< comp->initialState.numInputs; i++)
-    {
-      std::getline(confFile,line);
-      comp->initialState.fedemInputIndices[i] = atoi(line.c_str());
-    }
-    for(int i=0; i< comp->initialState.numOutputs; i++)
-    {
-      std::getline(confFile,line);
-      comp->initialState.fedemOutputIndices[i] = atoi(line.c_str());
-    }
-    for(int i=0; i< comp->initialState.numTransforms; i++)
-    {
-      std::getline(confFile,line);
-      comp->initialState.fedemTransformIndices[i] = atoi(line.c_str());
-    }
+
+    for (fmi2Integer i = 0; i < comp->initialState.numInputs && confFile; i++)
+      confFile >> comp->initialState.fedemInputIndices[i];
+    for (fmi2Integer i = 0; i < comp->initialState.numOutputs && confFile; i++)
+      confFile >> comp->initialState.fedemOutputIndices[i];
+    for (fmi2Integer i = 0; i < comp->initialState.numTransforms && confFile; i++)
+      confFile >> comp->initialState.fedemTransformIndices[i];
+
+    return confFile.good();
   }
-  
-  void copyModelState(modelState* destination, modelState* source)
+
+  void copyModelState(modelState& destination, modelState& source)
   {
-    //Copy arrays
-    memcpy( destination->reals, source->reals, sizeof(fmi2Real)*source->numReals );
-    memcpy( destination->solverState, source->solverState, sizeof(fmi2Real)*source->solverStateSize );
-    memcpy( destination->transformationState, source->transformationState, sizeof(fmi2Real)*source->transformationStateSize );
-    
-    //Copy variables
-    destination->modelIdentifier = source->modelIdentifier;
-    destination->modelGuid = source->modelGuid;
-    destination->numReals = source->numReals;
-    destination->numInputs = source->numInputs;
-    destination->numOutputs = source->numOutputs;
-    destination->numParams = source->numParams;
-    destination->numTransforms = source->numTransforms;
-    
-    destination->t = source->t;
-    destination->solverStateSize = source->solverStateSize;
-    destination->transformationStateSize = source->transformationStateSize;
-    
-    memcpy( destination->fedemInputIndices, source->fedemInputIndices, sizeof(fmi2Integer)*source->numInputs );
-    memcpy( destination->fedemOutputIndices, source->fedemOutputIndices, sizeof(fmi2Integer)*source->numOutputs );
-    memcpy( destination->fedemTransformIndices, source->fedemTransformIndices, sizeof(fmi2Integer)*source->numTransforms );
+    strcpy(destination.modelIdentifier, source.modelIdentifier);
+    strcpy(destination.modelGuid, source.modelGuid);
+
+    destination.numReals = source.numReals;
+    destination.numInputs = source.numInputs;
+    destination.numOutputs = source.numOutputs;
+    destination.numParams = source.numParams;
+    destination.numTransforms = source.numTransforms;
+    destination.solverStateSize = source.solverStateSize;
+    destination.transformationStateSize = source.transformationStateSize;
+
+    memcpy(destination.fedemInputIndices, source.fedemInputIndices, sizeof(fmi2Integer)*source.numInputs);
+    memcpy(destination.fedemOutputIndices, source.fedemOutputIndices, sizeof(fmi2Integer)*source.numOutputs);
+    memcpy(destination.fedemTransformIndices, source.fedemTransformIndices, sizeof(fmi2Integer)*source.numTransforms);
+
+    memcpy(destination.reals, source.reals, sizeof(fmi2Real)*source.numReals);
+    memcpy(destination.solverState, source.solverState, sizeof(fmi2Real)*source.solverStateSize);
+    memcpy(destination.transformationState, source.transformationState, sizeof(fmi2Real)*source.transformationStateSize);
   }
 
 } // closing brace for anonymous namespace
@@ -193,23 +192,19 @@ namespace {
 extern "C" {
 #endif
 
-  fmi2Component fmi2Instantiate(fmi2String  instanceName, fmi2Type fmuType, fmi2String  GUID, fmi2String  fmuResourceLocation, const fmi2CallbackFunctions* functions, fmi2Boolean visible, fmi2Boolean loggingOn)
+  //! \brief Loads the fedem solver library and starts the solver.
+  fmi2Component fmi2Instantiate(fmi2String instanceName, fmi2Type,
+                                fmi2String GUID, fmi2String,
+                                const fmi2CallbackFunctions* functions,
+                                fmi2Boolean, fmi2Boolean loggingOn)
   {
     DEBUG_STDOUT("Hello, FMU world!");
 
-    const char* solverPath = getenv("FEDEM_SOLVER");
-    if (!solverPath)
+    if (ourState != fmuStateCode::FMUEND)
     {
-      std::cerr <<" *** Environment variable FEDEM_SOLVER not defined."<< std::endl;
+      std::cerr <<" *** This FMU is already running."<< std::endl;
       return 0;
     }
-
-    DEBUG_STDOUT("solverPath: " + std::string(solverPath));
-
-    componentInstance* comp = (componentInstance*)functions->allocateMemory(1,sizeof(componentInstance));
-    comp->logging = loggingOn;
-    comp->functions = functions;
-    comp->instanceName = instanceName;
 
     // Lambda function returning the parent path of given pathname.
     auto&& parentPath = [](const std::string& path)
@@ -228,17 +223,28 @@ extern "C" {
 #endif
     };
 
-    //Get resource folder path
+    // Get path to the fedem solver shared object library
+    const char* solverPath = getenv("FEDEM_SOLVER");
+    if (!solverPath)
+    {
+      std::cerr <<" *** Environment variable FEDEM_SOLVER not defined."<< std::endl;
+      return 0;
+    }
+    DEBUG_STDOUT("solverPath: "<< solverPath);
+
+    // Get path to the FMU library
 #if defined _MSC_VER
     char path[1024];
     HMODULE hm = NULL;
-    if (!GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
-                            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
-                            (LPCSTR)&fmi2GetTypesPlatform, &hm))
-      if (comp->logging)
-        functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
-                          "fmi2Instantiate: Could not retrieve path of running module from GetModuleHandleEx.");
-    GetModuleFileNameA(hm, path, sizeof(path));
+    if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+                           GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                           (LPCSTR)&fmi2GetTypesPlatform, &hm))
+      GetModuleFileNameA(hm, path, sizeof(path));
+    else
+    {
+      std::cerr <<" *** Could not retrieve path of running model."<< std::endl;
+      return 0;
+    }
 #elif defined __GNUC__
     Dl_info info;
     if (!dladdr((void*)fmi2Instantiate, &info))
@@ -248,8 +254,9 @@ extern "C" {
     }
     const char* path = info.dli_fname;
 #endif
-    DEBUG_STDOUT("FMU-library location: " + std::string(path));
+    DEBUG_STDOUT("FMU-library location: "<< path);
 
+    // Get resource folder path
     std::string platformPath(parentPath(path));
     DEBUG_STDOUT("platformPath: " + platformPath);
     std::string binariesPath(parentPath(platformPath));
@@ -259,18 +266,7 @@ extern "C" {
     std::string workingDir(appendPath(resourcePath,"model"));
     DEBUG_STDOUT("workingDir: " + workingDir);
 
-    readConfig(comp, appendPath(resourcePath,"config.txt"));
-
-    if (strcmp(comp->initialState.modelGuid.c_str(),GUID) != 0)
-    {
-      std::cerr <<" *** GUIDs do not match: "<< comp->initialState.modelGuid <<" "<< GUID << std::endl;
-      if(comp->logging)functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
-                                         "fmi2Instantiate: GUIDs does not match.");
-      functions->freeMemory(comp);
-      return 0;
-    }
-
-    // NOTE(RunarHR): Initialization of solver should be done in EnterInitializationMode, but must be done here to get solverState size. 
+    // Load the fedem solver shared object library
 #if defined _MSC_VER
     std::string solverBinariesPath(parentPath(solverPath));
     SetDllDirectory(solverBinariesPath.c_str());
@@ -279,7 +275,8 @@ extern "C" {
 #elif defined __GNUC__
     LibHandle h_solver = dlopen(solverPath,RTLD_LAZY);
 #endif
-    if (!h_solver) {
+    if (!h_solver)
+    {
       std::cerr <<" *** Could not load solver library "<< solverPath << std::endl;
       return 0;
     }
@@ -297,6 +294,7 @@ extern "C" {
       return address;
     };
 
+    // Set up the function pointers
     solverInit = (DLPROC_INIT)getFuncAddress("solverInit");
     solverDone = (DLPROC_DONE)getFuncAddress("solverDone");
     getStateSize = (DLPROC_GETSTATESIZE)getFuncAddress("getStateSize");
@@ -304,14 +302,16 @@ extern "C" {
     setExtFunc = (DLPROC_SETEXTFUNC)getFuncAddress("setExtFunc");
     solveNext = (DLPROC_SOLVENEXT)getFuncAddress("solveNext");
     evalFunc = (DLPROC_EVALFUNC)getFuncAddress("evalFunc");
-    saveTransformationState = (DLPROC_SAVETRANSFORMATIONSTATE)getFuncAddress("saveTransformationState");
+    saveTransformationState = (DLPROC_SAVETRANSFORMATIONS)getFuncAddress("saveTransformationState");
     restartFromState = (DLPROC_RESTARTFROMSTATE)getFuncAddress("restartFromState");
 
-    // Lambda function adding option files to argvStart based on existance.
     std::vector<char*> argvStart;
-    auto&& addOptionFile=[workingDir,&argvStart,appendPath](const char* opt,const char* fileName)
+    argvStart.reserve(9);
+
+    // Lambda function adding option files to argvStart based on existance.
+    auto&& addOptionFile=[workingDir,&argvStart,appendPath](const char* opt, const char* fileName)
     {
-      std::ifstream fs(appendPath(workingDir,fileName).c_str());
+      std::ifstream fs(appendPath(workingDir,fileName));
       if (fs.good())
       {
         argvStart.push_back(const_cast<char*>(opt));
@@ -319,20 +319,17 @@ extern "C" {
       }
     };
 
-    argvStart.reserve(9);
+    // Start the solver
+    DEBUG_STDOUT("Initializing solver");
     argvStart.push_back(const_cast<char*>("fedem_solver"));
     argvStart.push_back(const_cast<char*>("-cwd"));
     argvStart.push_back(const_cast<char*>(workingDir.c_str()));
     addOptionFile("-fco","fedem_solver.fco");
     addOptionFile("-fop","fedem_solver.fop");
     addOptionFile("-fao","fedem_solver.fao");
-
-    DEBUG_STDOUT("Initializing solver");
     int status = solverInit(argvStart.size(),argvStart.data(),NULL,NULL,0,NULL,0,NULL,NULL);
     if (status < 0)
     {
-      if(comp->logging) functions->logger(functions->componentEnvironment, instanceName, fmi2Error, "error",
-                                          "Could not initialize solver.");
       std::cerr <<" *** Solver failed to initialize ("<< status <<")."<< std::endl;
       return 0;
     }
@@ -343,146 +340,157 @@ extern "C" {
       return (fmi2Real*)functions->allocateMemory(nwr,sizeof(fmi2Real));
     };
 
+    // Initialize the FMU component instance
+    componentInstance* comp = (componentInstance*)functions->allocateMemory(1,sizeof(componentInstance));
+    comp->logging = loggingOn;
+    comp->functions = functions;
+    comp->instanceName = instanceName;
+
+    if (!readConfig(comp, appendPath(resourcePath,"config.txt")))
+    {
+      std::cerr <<" *** Failed to read "<< appendPath(resourcePath,"config.txt") << std::endl;
+      functions->freeMemory(comp);
+      return 0;
+    }
+
+    if (strcmp(comp->initialState.modelGuid,GUID) != 0)
+    {
+      std::cerr <<" *** GUIDs do not match: "<< comp->initialState.modelGuid <<" "<< GUID << std::endl;
+      functions->freeMemory(comp);
+      return 0;
+    }
+
     comp->initialState.solverStateSize = getStateSize();
     comp->initialState.transformationStateSize = getTransformationStateSize();
 
     comp->initialState.reals = allocateReals(comp->initialState.numReals);
     comp->initialState.solverState = allocateReals(comp->initialState.solverStateSize);
     comp->initialState.transformationState = allocateReals(comp->initialState.transformationStateSize);
-    comp->initialState.t = 0;
 
     comp->state.reals = allocateReals(comp->initialState.numReals);
     comp->state.solverState = allocateReals(comp->initialState.solverStateSize);
     comp->state.transformationState = allocateReals(comp->initialState.transformationStateSize);
-    
-    copyModelState( &(comp->state), &(comp->initialState) );
-    comp->stateCode = fmuStateCode::FMUINSTANTIATED;
-    
+
+    copyModelState(comp->state, comp->initialState);
+
+    comp->stateCode = ourState = fmuStateCode::FMUINSTANTIATED;
+
     return comp;
   }
-  
-  //Stop simulation
-  fmi2Status fmi2Terminate(fmi2Component c)
-  {
-    componentInstance* comp = (componentInstance *)c;
-    
-    if(comp->stateCode & (fmuStateCode::FMUSTEPCOMPLETE | fmuStateCode::FMUSTEPFAILED))
-    {
-      //Close solver
-      //solverDone(true);
-      return fmi2OK;
-    }
-    
-    comp->stateCode = fmuStateCode::FMUERROR;
-    return fmi2Error;
-  }
-  
-  fmi2Status fmi2DoStep(fmi2Component c, fmi2Real currentCommunicationPoint, fmi2Real communicationStepSize, fmi2Boolean newStep)
-  {
-    DEBUG_STDOUT("fmi2DoStep");
 
-    componentInstance* comp = (componentInstance *)c;
-    if(comp->stateCode & fmuStateCode::FMUSTEPCOMPLETE)
-    {
-      comp->state.t = currentCommunicationPoint;
+  //! \brief Solves the next time step.
+  fmi2Status fmi2DoStep(fmi2Component c, fmi2Real, fmi2Real, fmi2Boolean)
+  {
+    componentInstance* comp = (componentInstance*)c;
+    DEBUG_STDOUT("fmi2DoStep "<< comp->state.numInputs <<" --> "<< comp->state.numOutputs);
 
-      //SET INPUT FUNCTIONS IN FEDEM.
+    if (comp->stateCode & fmuStateCode::FMUSTEPCOMPLETE)
+    {
+      // Set input function values in Fedem
       int err = 0;
-      for (int i = 0; i < comp->state.numInputs && err == 0; i++)
-        err = setExtFunc(comp->state.fedemInputIndices[i], comp->state.reals[i]);
+      fmi2Integer i, j = 0;
+      for (i = 0; i < comp->state.numInputs && err == 0; i++)
+        err = setExtFunc(comp->state.fedemInputIndices[i], comp->state.reals[j++]);
 
-      if (err == 0) solveNext(&err);
+      // Solve the next step
+      bool done = err != 0 || !solveNext(&err);
 
-      if (err != 0)
+      // Get output from Fedem
+      for (i = 0; i < comp->state.numOutputs && err == 0; i++)
+        comp->state.reals[j++] = evalFunc(comp->state.fedemOutputIndices[i], NULL, -1.0, &err);
+
+      if (err == 0)
+        comp->stateCode = done ? fmuStateCode::FMUTERMINATED : fmuStateCode::FMUSTEPCOMPLETE;
+      else
       {
-        if(comp->logging)comp->functions->logger(comp->functions->componentEnvironment, comp->instanceName, fmi2Error, "error",
-                                                 "fmi2DoStep: Solver step failed.");
+        if (comp->logging)
+          comp->functions->logger(comp->functions->componentEnvironment, comp->instanceName,
+                                  fmi2Error, "error", "fmi2DoStep: Solver step failed.");
+        std::cerr <<" *** Solver step failed ("<< err <<")."<< std::endl;
         comp->stateCode = fmuStateCode::FMUSTEPFAILED;
         return fmi2Error;
       }
 
-      //GET OUTPUT FROM FEDEM
-      for (int i = 0; i < comp->state.numOutputs && err == 0; i++)
-        comp->state.reals[comp->state.numInputs+i] = evalFunc(comp->state.fedemOutputIndices[i], NULL, -1.0, &err);
-
-      if (err != 0)
+      if (comp->state.numTransforms > 0)
       {
-        comp->stateCode = fmuStateCode::FMUSTEPFAILED;
-        return fmi2Error;
-      }     
+        j += comp->state.numParams;
 
-      //GET TRANSFORMATION OUTPUT FROM FEDEM.
-      if(comp->state.numTransforms > 0)
-      {
+        // Get transformation state from Fedem
         saveTransformationState(comp->state.transformationState, comp->state.transformationStateSize);
 
-        size_t idat = 3; //advance past timestep data
-        //Loop over all objects in transformationState. Size per object is 14.
-        fmi2Real* mem = comp->state.transformationState;
-        for (int i = 0; i < (comp->state.transformationStateSize-3)/14; i++)
+        // Loop over all objects in transformationState.
+        // Size per object is 14 (typeId, baseId, 3x4 transformation matrix).
+        fmi2Real* mem = comp->state.transformationState + 3; // skip time step data
+        for (i = 0; i < (comp->state.transformationStateSize-3)/14; i++)
         {
-          idat++; //Skip typeId
-          fmi2Integer baseID = (fmi2Integer)mem[idat++];
+          fmi2Integer baseID = mem[1]; // skip the typeId
+          mem += 2;
 
-          //Check if baseID of transformation object match any of the
-          //ones specified for the FMU.
-          for (int j = 0; j < comp->state.numTransforms; j++)
-            if (comp->state.fedemTransformIndices[j] == baseID)
+          // Check if baseID of transformation object
+          // matches any of the ones specified for the FMU
+          for (fmi2Integer k = 0; k < comp->state.numTransforms; k++)
+            if (comp->state.fedemTransformIndices[k] == baseID)
             {
-              fmi2Integer offset = comp->state.numInputs + comp->state.numOutputs + comp->state.numParams + j*12;
-              memcpy(comp->state.reals+offset, mem+idat, sizeof(fmi2Real)*12);
+              memcpy(comp->state.reals+j+12*k, mem, sizeof(fmi2Real)*12);
               break;
             }
 
-          idat += 12;
+          mem += 12;
         }
       }
 
-      comp->stateCode = fmuStateCode::FMUSTEPCOMPLETE;
       return fmi2OK;
     }
-    
-    // TODO(RunarHR): fmi2DoStep: If communicationStepSize is not equal to predefined step-size: return fmi2Error and write log-message
-    
+
     comp->stateCode = fmuStateCode::FMUSTEPFAILED;
     return fmi2Error;
   }
-  
-  
+
+  //! \brief Stops the simulation.
+  fmi2Status fmi2Terminate(fmi2Component c)
+  {
+    DEBUG_STDOUT("fmi2Terminate");
+
+    componentInstance* comp = (componentInstance *)c;
+
+    if (comp->stateCode & (fmuStateCode::FMUSTEPCOMPLETE | fmuStateCode::FMUSTEPFAILED | fmuStateCode::FMUTERMINATED))
+    {
+      // Close solver
+      solverDone(true);
+      comp->stateCode = fmuStateCode::FMUTERMINATED;
+      return fmi2OK;
+    }
+
+    comp->stateCode = fmuStateCode::FMUERROR;
+    return fmi2Error;
+  }
+
+  //! \brief Cleans up componentInstance, free all memory and resources.
   void fmi2FreeInstance(fmi2Component c)
   {
-    //Clean up componentInstance, free all memory and resources
-    
-    if(c == 0)
-      return;
-    
-    componentInstance* comp = (componentInstance *)c;
-    
-    if(comp->stateCode & (fmuStateCode::FMUINSTANTIATED | fmuStateCode::FMUINITIALIZATION | fmuStateCode::FMUSTEPCOMPLETE | fmuStateCode::FMUSTEPFAILED | fmuStateCode::FMUSTEPCANCELED | fmuStateCode::FMUTERMINATED | fmuStateCode::FMUERROR))
-    {
-      //Free state
-      comp->functions->freeMemory( comp->state.reals );
-      comp->functions->freeMemory( comp->state.solverState );
-      comp->functions->freeMemory( comp->state.transformationState );
-      comp->functions->freeMemory( comp->state.fedemInputIndices );
-      comp->functions->freeMemory( comp->state.fedemOutputIndices );
-      
-      //Free initial state
-      comp->functions->freeMemory( comp->initialState.reals );
-      comp->functions->freeMemory( comp->initialState.solverState );
-      comp->functions->freeMemory( comp->initialState.transformationState );
-      comp->functions->freeMemory( comp->initialState.fedemInputIndices );
-      comp->functions->freeMemory( comp->initialState.fedemOutputIndices );
-      
-      comp->functions->freeMemory( comp );
-      
-      //Close solver
-      solverDone(true);
-    }
-    
-    return;
+    DEBUG_STDOUT("fmi2FreeInstance");
+
+    if (!c) return;
+
+    componentInstance* comp = (componentInstance*)c;
+
+    comp->functions->freeMemory(comp->state.reals);
+    comp->functions->freeMemory(comp->state.solverState);
+    comp->functions->freeMemory(comp->state.transformationState);
+    comp->functions->freeMemory(comp->state.fedemInputIndices);
+    comp->functions->freeMemory(comp->state.fedemOutputIndices);
+
+    comp->functions->freeMemory(comp->initialState.reals);
+    comp->functions->freeMemory(comp->initialState.solverState);
+    comp->functions->freeMemory(comp->initialState.transformationState);
+    comp->functions->freeMemory(comp->initialState.fedemInputIndices);
+    comp->functions->freeMemory(comp->initialState.fedemOutputIndices);
+
+    comp->functions->freeMemory(comp);
+
+    ourState = fmuStateCode::FMUEND;
   }
-  
+
   fmi2Status fmi2SetupExperiment(fmi2Component c, fmi2Boolean toleranceDefined, fmi2Real tolerance, fmi2Real startTime, fmi2Boolean stopTimeDefined, fmi2Real stopTime)
   {
     componentInstance* comp = (componentInstance *)c;
@@ -523,9 +531,7 @@ extern "C" {
     comp->stateCode = fmuStateCode::FMUERROR;
     return fmi2Error;
   }
-  
-  
-  //WARNING: This fails with Ansys TwinBuilder. The fmi2FMUstate pointer is not NULL on first call.
+
   fmi2Status fmi2GetFMUstate (fmi2Component c, fmi2FMUstate* FMUstate) {
     
     /*From Doc: fmi2GetFMUstate makes a copy of the internal FMU state and returns a pointer to this copy
@@ -549,7 +555,7 @@ extern "C" {
         state->transformationState = (fmi2Real*)comp->functions->allocateMemory(comp->state.transformationStateSize,sizeof(fmi2Real));
       }
       
-      copyModelState(state, &(comp->state));
+      copyModelState(*state, comp->state);
       
       return fmi2OK;
     }
@@ -575,7 +581,7 @@ extern "C" {
       }
       
       //Copy input state to stored state
-      copyModelState(&(comp->state), state);
+      copyModelState(comp->state, *state);
       
       //Reset solver.
       restartFromState(comp->state.solverState, comp->state.solverStateSize,0); // NOTE(RunarHR): writeToRDB is 0. No results saved.
@@ -615,43 +621,11 @@ extern "C" {
   
   fmi2Status fmi2SetReal(fmi2Component c, const fmi2ValueReference vr[], size_t nvr, const fmi2Real value[])
   {
-    DEBUG_STDOUT("fmi2SetReal");
-    componentInstance* comp = (componentInstance *)c;
-    
+    componentInstance* comp = (componentInstance*)c;
+    DEBUG_STDOUT("fmi2SetReal: stateCode="<< comp->stateCode);
+
     if(comp->stateCode & (fmuStateCode::FMUINSTANTIATED | fmuStateCode::FMUINITIALIZATION | fmuStateCode::FMUSTEPCOMPLETE))
     {
-      if(comp->state.numReals == 0)
-      {
-        comp->stateCode = fmuStateCode::FMUERROR;
-        return fmi2Error;
-      }
-
-      for(size_t i = 0; i < nvr; i++)
-      {
-        if((fmi2Integer)vr[i] >= ( comp->state.numInputs + comp->state.numOutputs + comp->state.numParams + comp->state.numTransforms))
-        {
-          comp->stateCode = fmuStateCode::FMUERROR;
-          return fmi2Error;
-        }
-        comp->state.reals[vr[i]] = value[i];
-      }
-      
-      return fmi2OK;
-    }
-    
-    comp->stateCode = fmuStateCode::FMUERROR;
-    return fmi2Error;
-  }
-  
-  fmi2Status fmi2GetReal(fmi2Component c, const fmi2ValueReference vr[], size_t nvr, fmi2Real value[])
-  {
-    DEBUG_STDOUT("fmi2GetReal");
-    componentInstance* comp = (componentInstance *)c;
-    
-    if(comp->stateCode & (fmuStateCode::FMUINITIALIZATION | fmuStateCode::FMUSTEPCOMPLETE | fmuStateCode::FMUSTEPFAILED
-                          | fmuStateCode::FMUSTEPCANCELED | fmuStateCode::FMUTERMINATED | fmuStateCode::FMUERROR))
-    {
-      DEBUG_STDOUT("stateCode-correct");
       if(comp->state.numReals == 0)
       {
         DEBUG_STDOUT("num reals == 0");
@@ -659,27 +633,55 @@ extern "C" {
         return fmi2Error;
       }
 
-      for(size_t i = 0; i < nvr; i++)
-      {
-        if((fmi2Integer)vr[i] >= ( comp->state.numInputs + comp->state.numOutputs + comp->state.numParams + comp->state.numTransforms*12 ))
+      fmi2Integer vrMax = comp->state.numInputs + comp->state.numOutputs + comp->state.numParams + comp->state.numTransforms*12;
+      for (size_t i = 0; i < nvr; i++)
+        if (fmi2Integer j = vr[i]; j < vrMax)
+          comp->state.reals[j] = value[i];
+        else
         {
-          DEBUG_STDOUT("Vr > numInputs + numOutputs + numParams + numTransforms*12");
+          DEBUG_STDOUT("Vr="<< j <<" >= numInputs+numOutputs+numParams+numTransforms*12="<< vrMax);
           comp->stateCode = fmuStateCode::FMUERROR;
           return fmi2Error;
         }
-        value[i] = comp->state.reals[vr[i]];
-      }
-      
+
       return fmi2OK;
     }
-    
+
     comp->stateCode = fmuStateCode::FMUERROR;
     return fmi2Error;
   }
   
-  const char* fmi2GetTypesPlatform() {
-    DEBUG_STDOUT("fmi2GetTypesPlatform");
-    return "default";
+  fmi2Status fmi2GetReal(fmi2Component c, const fmi2ValueReference vr[], size_t nvr, fmi2Real value[])
+  {
+    componentInstance* comp = (componentInstance*)c;
+    DEBUG_STDOUT("fmi2GetReal: stateCode="<< comp->stateCode);
+
+    if(comp->stateCode & (fmuStateCode::FMUINITIALIZATION | fmuStateCode::FMUSTEPCOMPLETE | fmuStateCode::FMUSTEPFAILED
+                          | fmuStateCode::FMUSTEPCANCELED | fmuStateCode::FMUTERMINATED | fmuStateCode::FMUERROR))
+    {
+      if(comp->state.numReals == 0)
+      {
+        DEBUG_STDOUT("num reals == 0");
+        comp->stateCode = fmuStateCode::FMUERROR;
+        return fmi2Error;
+      }
+
+      fmi2Integer vrMax = comp->state.numInputs + comp->state.numOutputs + comp->state.numParams + comp->state.numTransforms*12;
+      for (size_t i = 0; i < nvr; i++)
+        if (fmi2Integer j = vr[i]; j < vrMax)
+          value[i] = comp->state.reals[j];
+        else
+        {
+          DEBUG_STDOUT("Vr="<< j <<" >= numInputs+numOutputs+numParams+numTransforms*12="<< vrMax);
+          comp->stateCode = fmuStateCode::FMUERROR;
+          return fmi2Error;
+        }
+
+      return fmi2OK;
+    }
+
+    comp->stateCode = fmuStateCode::FMUERROR;
+    return fmi2Error;
   }
   
   fmi2Status fmi2Reset(fmi2Component c)
@@ -695,9 +697,6 @@ extern "C" {
       memcpy( comp->state.solverState, comp->initialState.solverState, sizeof(fmi2Real)*(comp->initialState.solverStateSize));
       memcpy( comp->state.transformationState, comp->initialState.transformationState, sizeof(fmi2Real)*(comp->initialState.transformationStateSize));
       
-      //Reset variables
-      comp->state.t = comp->initialState.t;
-      
       //Reset solver.
       //restartFromState(comp->state.solverState, comp->state.solverStateSize,0); // NOTE(RunarHR): writeToRDB is 0. No results saved.
       
@@ -709,8 +708,30 @@ extern "C" {
     comp->stateCode = fmuStateCode::FMUERROR;
     return fmi2Error;
   }
-  
-  const char* fmi2GetVersion() {
+
+  fmi2Status fmi2GetBooleanStatus(fmi2Component c, const fmi2StatusKind s, fmi2Boolean* value)
+  {
+    switch (static_cast<componentInstance*>(c)->stateCode) {
+    case fmuStateCode::FMUTERMINATED:
+      *value = s == fmi2Terminated ? fmi2True : fmi2False;
+      break;
+    case fmuStateCode::FMUSTEPCOMPLETE:
+      *value = s == fmi2DoStepStatus ? fmi2True : fmi2False;
+      break;
+    default:
+      return fmi2Error;
+    }
+
+    return fmi2OK;
+  }
+
+  const char* fmi2GetTypesPlatform()
+  {
+    return "default";
+  }
+
+  const char* fmi2GetVersion()
+  {
     return fmi2Version;
   }
 
@@ -794,14 +815,6 @@ extern "C" {
   fmi2Status fmi2GetIntegerStatus(fmi2Component c, const fmi2StatusKind s, fmi2Integer* value)
   {
     // TODO(RunarHR): [Optional] Implement fmi2GetIntegerStatus
-    componentInstance* comp = (componentInstance *)c;
-    comp->stateCode = fmuStateCode::FMUERROR;
-    return fmi2Error;
-  }
-  
-  fmi2Status fmi2GetBooleanStatus(fmi2Component c, const fmi2StatusKind s, fmi2Boolean* value)
-  {
-    // TODO(RunarHR): [Optional] Implement fmi2GetBooleanStatus
     componentInstance* comp = (componentInstance *)c;
     comp->stateCode = fmuStateCode::FMUERROR;
     return fmi2Error;
