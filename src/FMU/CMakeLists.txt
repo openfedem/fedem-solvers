@@ -20,6 +20,7 @@ endif ( ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU )
 
 include_directories ( "${CMAKE_CURRENT_SOURCE_DIR}/FMI2/headers" )
 add_library ( ${LIB_ID} SHARED fmu_template.C )
+target_link_libraries ( ${LIB_ID} Admin )
 
 set ( CLOUD_DIR "${CMAKE_INSTALL_PREFIX}/bin/Templates/cloudsim" )
 install ( TARGETS ${LIB_ID}
