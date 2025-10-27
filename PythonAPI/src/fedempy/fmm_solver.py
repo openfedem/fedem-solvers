@@ -14,7 +14,7 @@ This module relies on the following environment variables:
 | *FEDEM_SOLVER* = Full path to the Fedem dynamics solver shared object library
 | *FEDEM_REDUCER* = Full path to the Fedem reducer shared object library
 | *VIS_EXPORTER* = Full path to the Fedem VTFx exporter shared object library
-The third variable needs to be set only if FE model reduction is to be performed.
+The third variable is needed only if FE model reduction is to be performed.
 The fourth variable needs to be set only if a VTFx file is to be exported.
 The first two variables are mandatory.
 
@@ -314,6 +314,7 @@ class FmmSolver(FedemSolver):
         extf_input=None,
         time_start=None,
         vtfx_file=None,
+        reduce_only=False,
     ):
         """
         Starts a simulation on the specified model file.
@@ -340,6 +341,10 @@ class FmmSolver(FedemSolver):
             Optional start time of simulation, override setting in model file
         vtfx_file : str, default=None
             Absolute path of the VTFx output file for visualization in GLview
+        reduce_only : bool, default=False
+            If True, and the model contains FE parts, they will be reduced
+            unless the reduced matrix files already exist.
+            The dynamics solver will _not_ be started.
 
         Returns
         -------
@@ -378,9 +383,12 @@ class FmmSolver(FedemSolver):
         print("     Total number of mechanism objects:", self._model.fm_count())
 
         # Check for FE model reduction
-        num_red = self._reduce_fe_model(reduce_fem)
+        num_red = self._reduce_fe_model(reduce_fem or reduce_only)
         if num_red < 0:
             return error_exit(-98)
+        if reduce_only:
+            self.close_model(num_red > 0)
+            return 0
 
         # Initialize the VTFx file exporter
         base_ids = self._open_vtfx_exporter(vtfx_file, model_file)
@@ -470,6 +478,7 @@ class FmmSolver(FedemSolver):
         model_file,
         save_model=True,
         reduce_fem=False,
+        reduce_only=False,
         vtfx_file=None,
         fringe_max=-1,
     ):
@@ -486,6 +495,10 @@ class FmmSolver(FedemSolver):
             If True, and the model contains FE parts, they will be reduced
             before the solver is started, unless the reduced matrix files
             already exist
+        reduce_only : bool, default=False
+            If True, and the model contains FE parts, they will be reduced
+            unless the reduced matrix files already exist.
+            The dynamics solver will not be started.
         vtfx_file : str, default=None
             Absolute path of the VTFx output file for visualization in GLview
         fringe_max : float, default=-1
@@ -505,11 +518,17 @@ class FmmSolver(FedemSolver):
             options = _solver_options("fedem_solver")
             return self.run_all(options) if options else 0
 
-        print("\n#### Running dynamics solver on", model_file)
-        ierr = self.start(model_file, True, False, reduce_fem, vtfx_file=vtfx_file)
+        if reduce_only:
+            print("\n#### Running FE model reduction on", model_file)
+            ierr = self.start(model_file, reduce_only=True)
+        else:
+            print("\n#### Running dynamics solver on", model_file)
+            ierr = self.start(model_file, True, False, reduce_fem, vtfx_file=vtfx_file)
         if ierr < 0:
             print(f" *** Solver failed to start ({ierr}).")
             return ierr
+        if reduce_only:
+            return 0
 
         # Run through the entire time series
         with FedemProgressBar(self) as pbar:
@@ -592,6 +611,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-r", "--reduce-fem", action="store_true", help="Reduce model before solve"
+    )
+    parser.add_argument(
+        "--reduce-only", action="store_true", help="Run model reduction only"
     )
     parser.add_argument(
         "-v", "--vtfx-file", help="Ceetron VTFx output file for visualization"
