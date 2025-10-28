@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>modeler module &mdash; fedempy 4.1.1 documentation</title>
+  <title>modeler module &mdash; fedempy 4.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=e6a937a4"></script>
+      <script src="_static/documentation_options.js?v=752939d7"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -122,7 +122,7 @@
 and for modifying existing ones.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modeler.FedemModeler">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modeler.</span></span><span class="sig-name descname"><span class="pre">FedemModeler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plugins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modeler.</span></span><span class="sig-name descname"><span class="pre">FedemModeler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plugins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FedemModel</span></code></p>
 <p>This subclass of <a class="reference internal" href="fmm.html#fmm.FedemModel" title="fmm.FedemModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">fmm.FedemModel</span></code></a> adds some basic modeling methods.</p>
 <dl class="field-list simple">
@@ -133,6 +133,8 @@ and for modifying existing ones.</p>
 <dt><strong>force_new</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, any existing model will be overwritten on save</p>
 </dd>
 <dt><strong>plugins</strong><span class="classifier">str or list of str, default=None</span></dt><dd><p>Plugin libraries with user-defined elements and functions</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str, default=None</span></dt><dd><p>Description of the new model, not used if opening existing model</p>
 </dd>
 </dl>
 </dd>

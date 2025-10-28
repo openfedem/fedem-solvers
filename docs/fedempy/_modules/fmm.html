@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm &mdash; fedempy 4.1.1 documentation</title>
+  <title>fmm &mdash; fedempy 4.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+      <script src="../_static/documentation_options.js?v=752939d7"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -176,6 +176,8 @@
 <span class="sd">        Closes current model</span>
 <span class="sd">    fm_count:</span>
 <span class="sd">        Counts mechanism objects of specified type</span>
+<span class="sd">    fm_get_refplane:</span>
+<span class="sd">        Returns the base Id for the reference plane</span>
 <span class="sd">    fm_get_objects:</span>
 <span class="sd">        Returns a list of base Ids for all objects of specified type</span>
 <span class="sd">    fm_tag_object:</span>
@@ -303,7 +305,7 @@
 
 <div class="viewcode-block" id="FedemModel.fm_new">
 <a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_new">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fm_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">descr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method initializes an empty Fedem model.</span>
 
@@ -312,13 +314,15 @@
 <span class="sd">        fname : str, default=None</span>
 <span class="sd">            Absolute path to the fmm-file to write to on next save.</span>
 <span class="sd">            If not given, the name &quot;untitled.fmm&quot; will be used.</span>
+<span class="sd">        descr : str, default=None</span>
+<span class="sd">            Optional model description</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            Always True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmNew</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">fname</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmNew</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">descr</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">return</span> <span class="kc">True</span></div>
@@ -374,6 +378,28 @@
             <span class="k">return</span> <span class="mi">0</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCount</span><span class="p">(</span><span class="n">_convert_int</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">FmType</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FedemModel.fm_get_refplane">
+<a class="viewcode-back" href="../fmm.html#fmm.FedemModel.fm_get_refplane">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fm_get_refplane</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns the base Id of the reference plane object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Base Id of the reference plane instance in the model</span>
+<span class="sd">            (there should only be one)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__opened</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">base_id_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">obj_typ_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">REFERENCE_PLANE</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmGetObjects</span><span class="p">(</span><span class="n">base_id_</span><span class="p">,</span> <span class="n">obj_typ_</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base_id_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="FedemModel.fm_get_objects">

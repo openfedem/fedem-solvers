@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm_solver &mdash; fedempy 4.1.1 documentation</title>
+  <title>fmm_solver &mdash; fedempy 4.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+      <script src="../_static/documentation_options.js?v=752939d7"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -87,7 +87,7 @@
 <span class="sd">| *FEDEM_SOLVER* = Full path to the Fedem dynamics solver shared object library</span>
 <span class="sd">| *FEDEM_REDUCER* = Full path to the Fedem reducer shared object library</span>
 <span class="sd">| *VIS_EXPORTER* = Full path to the Fedem VTFx exporter shared object library</span>
-<span class="sd">The third variable needs to be set only if FE model reduction is to be performed.</span>
+<span class="sd">The third variable is needed only if FE model reduction is to be performed.</span>
 <span class="sd">The fourth variable needs to be set only if a VTFx file is to be exported.</span>
 <span class="sd">The first two variables are mandatory.</span>
 
@@ -391,6 +391,7 @@
         <span class="n">extf_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">time_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">vtfx_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">reduce_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Starts a simulation on the specified model file.</span>
@@ -417,6 +418,10 @@
 <span class="sd">            Optional start time of simulation, override setting in model file</span>
 <span class="sd">        vtfx_file : str, default=None</span>
 <span class="sd">            Absolute path of the VTFx output file for visualization in GLview</span>
+<span class="sd">        reduce_only : bool, default=False</span>
+<span class="sd">            If True, and the model contains FE parts, they will be reduced</span>
+<span class="sd">            unless the reduced matrix files already exist.</span>
+<span class="sd">            The dynamics solver will _not_ be started.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -455,9 +460,12 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Total number of mechanism objects:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">fm_count</span><span class="p">())</span>
 
         <span class="c1"># Check for FE model reduction</span>
-        <span class="n">num_red</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_fe_model</span><span class="p">(</span><span class="n">reduce_fem</span><span class="p">)</span>
+        <span class="n">num_red</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_fe_model</span><span class="p">(</span><span class="n">reduce_fem</span> <span class="ow">or</span> <span class="n">reduce_only</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">num_red</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">error_exit</span><span class="p">(</span><span class="o">-</span><span class="mi">98</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reduce_only</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close_model</span><span class="p">(</span><span class="n">num_red</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
 
         <span class="c1"># Initialize the VTFx file exporter</span>
         <span class="n">base_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_vtfx_exporter</span><span class="p">(</span><span class="n">vtfx_file</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
@@ -553,6 +561,7 @@
         <span class="n">model_file</span><span class="p">,</span>
         <span class="n">save_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">reduce_fem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">reduce_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">vtfx_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">fringe_max</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
     <span class="p">):</span>
@@ -569,6 +578,10 @@
 <span class="sd">            If True, and the model contains FE parts, they will be reduced</span>
 <span class="sd">            before the solver is started, unless the reduced matrix files</span>
 <span class="sd">            already exist</span>
+<span class="sd">        reduce_only : bool, default=False</span>
+<span class="sd">            If True, and the model contains FE parts, they will be reduced</span>
+<span class="sd">            unless the reduced matrix files already exist.</span>
+<span class="sd">            The dynamics solver will not be started.</span>
 <span class="sd">        vtfx_file : str, default=None</span>
 <span class="sd">            Absolute path of the VTFx output file for visualization in GLview</span>
 <span class="sd">        fringe_max : float, default=-1</span>
@@ -588,11 +601,17 @@
             <span class="n">options</span> <span class="o">=</span> <span class="n">_solver_options</span><span class="p">(</span><span class="s2">&quot;fedem_solver&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_all</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="k">if</span> <span class="n">options</span> <span class="k">else</span> <span class="mi">0</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#### Running dynamics solver on&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
-        <span class="n">ierr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">reduce_fem</span><span class="p">,</span> <span class="n">vtfx_file</span><span class="o">=</span><span class="n">vtfx_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reduce_only</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#### Running FE model reduction on&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
+            <span class="n">ierr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="n">reduce_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#### Running dynamics solver on&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
+            <span class="n">ierr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">reduce_fem</span><span class="p">,</span> <span class="n">vtfx_file</span><span class="o">=</span><span class="n">vtfx_file</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ierr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; *** Solver failed to start (</span><span class="si">{</span><span class="n">ierr</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">ierr</span>
+        <span class="k">if</span> <span class="n">reduce_only</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
 
         <span class="c1"># Run through the entire time series</span>
         <span class="k">with</span> <span class="n">FedemProgressBar</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
@@ -683,6 +702,9 @@
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--reduce-fem&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Reduce model before solve&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--reduce-only&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run model reduction only&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="s2">&quot;--vtfx-file&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Ceetron VTFx output file for visualization&quot;</span>

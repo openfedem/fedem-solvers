@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>modeler &mdash; fedempy 4.1.1 documentation</title>
+  <title>modeler &mdash; fedempy 4.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=e6a937a4"></script>
+      <script src="../_static/documentation_options.js?v=752939d7"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -206,6 +206,8 @@
 <span class="sd">        If True, any existing model will be overwritten on save</span>
 <span class="sd">    plugins : str or list of str, default=None</span>
 <span class="sd">        Plugin libraries with user-defined elements and functions</span>
+<span class="sd">    name : str, default=None</span>
+<span class="sd">        Description of the new model, not used if opening existing model</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
@@ -255,7 +257,7 @@
 <span class="sd">        Setting dynamics solver parameters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force_new</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plugins</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force_new</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plugins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        Optionally opens a Fedem model, if a model file name is specified.</span>
@@ -466,7 +468,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmRecoverOpts</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_int</span><span class="p">,</span> <span class="n">c_int</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">model_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">force_new</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fm_new</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fm_new</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_open</span><span class="p">(</span><span class="n">model_file</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to open model file&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
 

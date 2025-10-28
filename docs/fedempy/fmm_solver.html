@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm_solver module &mdash; fedempy 4.1.1 documentation</title>
+  <title>fmm_solver module &mdash; fedempy 4.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=e6a937a4"></script>
+      <script src="_static/documentation_options.js?v=752939d7"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -108,7 +108,7 @@ which operates directly on fedem mechanism model files (<cite>*.fmm</cite>).</p>
 <div class="line"><em>FEDEM_REDUCER</em> = Full path to the Fedem reducer shared object library</div>
 <div class="line"><em>VIS_EXPORTER</em> = Full path to the Fedem VTFx exporter shared object library</div>
 </div>
-<p>The third variable needs to be set only if FE model reduction is to be performed.
+<p>The third variable is needed only if FE model reduction is to be performed.
 The fourth variable needs to be set only if a VTFx file is to be exported.
 The first two variables are mandatory.</p>
 <p>This module can also be launched directly, to run a specified model,
@@ -406,7 +406,7 @@ the model, identified by the argument func_tag.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fmm_solver.FmmSolver.solve_all">
-<span class="sig-name descname"><span class="pre">solve_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_fem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fringe_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.solve_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.solve_all" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">solve_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_fem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fringe_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.solve_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.solve_all" title="Link to this definition"></a></dt>
 <dd><p>Starts and runs through a simulation on the specified model file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -418,6 +418,10 @@ the model, identified by the argument func_tag.</p>
 <dt><strong>reduce_fem</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, and the model contains FE parts, they will be reduced
 before the solver is started, unless the reduced matrix files
 already exist</p>
+</dd>
+<dt><strong>reduce_only</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, and the model contains FE parts, they will be reduced
+unless the reduced matrix files already exist.
+The dynamics solver will not be started.</p>
 </dd>
 <dt><strong>vtfx_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path of the VTFx output file for visualization in GLview</p>
 </dd>
@@ -437,7 +441,7 @@ If less than zero, the range will be set automatically.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fmm_solver.FmmSolver.start">
-<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_old_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_fem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gauge_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extf_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.start" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_old_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_fem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gauge_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extf_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtfx_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm_solver.html#FmmSolver.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm_solver.FmmSolver.start" title="Link to this definition"></a></dt>
 <dd><p>Starts a simulation on the specified model file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -461,6 +465,10 @@ already exist</p>
 <dt><strong>time_start</strong><span class="classifier">float, default=None</span></dt><dd><p>Optional start time of simulation, override setting in model file</p>
 </dd>
 <dt><strong>vtfx_file</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path of the VTFx output file for visualization in GLview</p>
+</dd>
+<dt><strong>reduce_only</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, and the model contains FE parts, they will be reduced
+unless the reduced matrix files already exist.
+The dynamics solver will _not_ be started.</p>
 </dd>
 </dl>
 </dd>

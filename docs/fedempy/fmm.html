@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fmm module &mdash; fedempy 4.1.1 documentation</title>
+  <title>fmm module &mdash; fedempy 4.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=e6a937a4"></script>
+      <script src="_static/documentation_options.js?v=752939d7"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -58,6 +58,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_node"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_node()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_objects"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_objects()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_pos"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_pos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_get_refplane"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_get_refplane()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_new"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_new()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_open"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_open()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fmm.FedemModel.fm_save"><code class="docutils literal notranslate"><span class="pre">FedemModel.fm_save()</span></code></a></li>
@@ -147,34 +148,37 @@ Used for convenience in order to hide native type convertions.</p>
 <tr class="row-odd"><td><p><strong>fm_count:</strong></p></td>
 <td><p>Counts mechanism objects of specified type</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>fm_get_objects:</strong></p></td>
+<tr class="row-even"><td><p><strong>fm_get_refplane:</strong></p></td>
+<td><p>Returns the base Id for the reference plane</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>fm_get_objects:</strong></p></td>
 <td><p>Returns a list of base Ids for all objects of specified type</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>fm_tag_object:</strong></p></td>
+<tr class="row-even"><td><p><strong>fm_tag_object:</strong></p></td>
 <td><p>Tags the specified object(s) in the model</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>fm_get_pos:</strong></p></td>
+<tr class="row-odd"><td><p><strong>fm_get_pos:</strong></p></td>
 <td><p>Returns the global position of the specified object</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>fm_get_node:</strong></p></td>
+<tr class="row-even"><td><p><strong>fm_get_node:</strong></p></td>
 <td><p>Returns the FE node number matching a spatial point</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>fm_sync_part:</strong></p></td>
+<tr class="row-odd"><td><p><strong>fm_sync_part:</strong></p></td>
 <td><p>Syncronizes an FE part with content on disk</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>fm_write_reducer:</strong></p></td>
+<tr class="row-even"><td><p><strong>fm_write_reducer:</strong></p></td>
 <td><p>Writes reducer input files for an FE part</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>fm_write_solver:</strong></p></td>
+<tr class="row-odd"><td><p><strong>fm_write_solver:</strong></p></td>
 <td><p>Writes solver input files</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>fm_solver_setup:</strong></p></td>
+<tr class="row-even"><td><p><strong>fm_solver_setup:</strong></p></td>
 <td><p>Defines some basis solver setup parameters</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>fm_solver_tol:</strong></p></td>
+<tr class="row-odd"><td><p><strong>fm_solver_tol:</strong></p></td>
 <td><p>Defines the solver convergence tolerances</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>def fm_get_func_tag:</strong></p></td>
+<tr class="row-even"><td><p><strong>def fm_get_func_tag:</strong></p></td>
 <td><p>Returns the tag of an indexed external function</p></td>
 </tr>
 </tbody>
@@ -330,14 +334,31 @@ and/or those with the specified tag.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="fmm.FedemModel.fm_get_refplane">
+<span class="sig-name descname"><span class="pre">fm_get_refplane</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm.html#FedemModel.fm_get_refplane"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm.FedemModel.fm_get_refplane" title="Link to this definition"></a></dt>
+<dd><p>This method returns the base Id of the reference plane object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>Base Id of the reference plane instance in the model
+(there should only be one)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="fmm.FedemModel.fm_new">
-<span class="sig-name descname"><span class="pre">fm_new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm.html#FedemModel.fm_new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm.FedemModel.fm_new" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">fm_new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fmm.html#FedemModel.fm_new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fmm.FedemModel.fm_new" title="Link to this definition"></a></dt>
 <dd><p>This method initializes an empty Fedem model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>fname</strong><span class="classifier">str, default=None</span></dt><dd><p>Absolute path to the fmm-file to write to on next save.
 If not given, the name “untitled.fmm” will be used.</p>
+</dd>
+<dt><strong>descr</strong><span class="classifier">str, default=None</span></dt><dd><p>Optional model description</p>
 </dd>
 </dl>
 </dd>
