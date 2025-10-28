@@ -101,6 +101,8 @@ class FedemModel:
         Closes current model
     fm_count:
         Counts mechanism objects of specified type
+    fm_get_refplane:
+        Returns the base Id for the reference plane
     fm_get_objects:
         Returns a list of base Ids for all objects of specified type
     fm_tag_object:
@@ -220,7 +222,7 @@ class FedemModel:
 
         return self._fmlib.FmSave(_convert_char(fname))
 
-    def fm_new(self, fname=None):
+    def fm_new(self, fname=None, descr=None):
         """
         This method initializes an empty Fedem model.
 
@@ -229,13 +231,15 @@ class FedemModel:
         fname : str, default=None
             Absolute path to the fmm-file to write to on next save.
             If not given, the name "untitled.fmm" will be used.
+        descr : str, default=None
+            Optional model description
 
         Returns
         -------
         bool
             Always True
         """
-        self._fmlib.FmNew(_convert_char(fname))
+        self._fmlib.FmNew(_convert_char(fname), _convert_char(descr))
         self.__opened = True
 
         return True
@@ -285,6 +289,25 @@ class FedemModel:
             return 0
 
         return self._fmlib.FmCount(_convert_int(object_type, FmType))
+
+    def fm_get_refplane(self):
+        """
+        This method returns the base Id of the reference plane object.
+
+        Returns
+        -------
+        int
+            Base Id of the reference plane instance in the model
+            (there should only be one)
+        """
+        if not self.__opened:
+            return 0
+
+        base_id_ = (c_int * 1)(0)
+        obj_typ_ = c_int(FmType.REFERENCE_PLANE.value)
+        self._fmlib.FmGetObjects(base_id_, obj_typ_)
+
+        return base_id_[0]
 
     def fm_get_objects(self, object_type=FmType.ALL, tag=None):
         """

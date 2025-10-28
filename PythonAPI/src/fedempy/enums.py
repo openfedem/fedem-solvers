@@ -43,6 +43,8 @@ class FmType(Enum):
     AXIAL_SPRING = 17
     AXIAL_DAMPER = 18
     STRAIN_ROSETTE = 19
+    USERDEF_ELEMENT = 20
+    REFERENCE_PLANE = 21
 
 
 class FmLoadType(Enum):

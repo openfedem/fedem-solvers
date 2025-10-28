@@ -38,4 +38,9 @@ unset ( _MODULES CACHE )
 
 include ( FedemConfig )
 
+set ( CONFIG_DIR ${PARENT_SOURCE_DIR}/cfg )
+add_subdirectory ( ${PARENT_SOURCE_DIR}/fedem-foundation/src/Admin
+                  "${CMAKE_CURRENT_BINARY_DIR}/Admin" )
+
+include_directories ( ${PARENT_SOURCE_DIR}/fedem-foundation/src )
 add_subdirectory ( ../src/FMU "${CMAKE_CURRENT_BINARY_DIR}/src" )

@@ -14,6 +14,7 @@
 
 #undef UNICODE
 
+#include "Admin/FedemAdmin.H"
 #include "fmi2Functions.h"
 #include <iostream>
 #include <fstream>
@@ -47,6 +48,7 @@ typedef int (*DLPROC_GETSTATESIZE)();
 typedef bool (*DLPROC_SETEXTFUNC)(int,double);
 typedef bool (*DLPROC_SOLVENEXT)(int*);
 typedef double (*DLPROC_EVALFUNC)(int,const char*,double,int*);
+typedef double (*DLPROC_GETTIME)(int,int*);
 typedef bool (*DLPROC_SAVETRANSFORMATIONS)(double*,const int);
 typedef int (*DLPROC_RESTARTFROMSTATE)(const double*,const int,const int);
 
@@ -60,6 +62,7 @@ namespace
   DLPROC_SETEXTFUNC          setExtFunc;
   DLPROC_SOLVENEXT           solveNext;
   DLPROC_EVALFUNC            evalFunc;
+  DLPROC_GETTIME             getTime;
   DLPROC_SAVETRANSFORMATIONS saveTransformationState;
   DLPROC_RESTARTFROMSTATE    restartFromState;
 
@@ -79,6 +82,7 @@ namespace
   };
 
   fmuStateCode ourState = fmuStateCode::FMUEND;
+  std::string cwd;
 
   //! \brief State of internal FMU-parameters and variables.
   struct modelState
@@ -192,13 +196,18 @@ namespace
 extern "C" {
 #endif
 
-  //! \brief Loads the fedem solver library and starts the solver.
+  //! \brief Loads the fedem solver library and starts the dynamics solver.
   fmi2Component fmi2Instantiate(fmi2String instanceName, fmi2Type,
                                 fmi2String GUID, fmi2String,
                                 const fmi2CallbackFunctions* functions,
                                 fmi2Boolean, fmi2Boolean loggingOn)
   {
-    DEBUG_STDOUT("Hello, FMU world!");
+    // Print header with the FMU version and build date
+    const char* fmu_version = FedemAdmin::getVersion();
+    const char* build_date = FedemAdmin::getBuildDate();
+    std::cout <<"\n>>> Instantiating FEDEM FMU \""<< instanceName <<"\" <<<"
+              <<"\n    Version "<< fmu_version <<" "<< build_date
+              <<"\n"<< std::endl;
 
     if (ourState != fmuStateCode::FMUEND)
     {
@@ -216,7 +225,7 @@ extern "C" {
     // Lambda function appending a filename to a path name.
     auto&& appendPath = [](const std::string& path, const std::string& fname)
     {
-#if defined _MSC_VER
+#ifdef _MSC_VER
       return path + "\\" + fname;
 #else
       return path + "/" + fname;
@@ -230,7 +239,7 @@ extern "C" {
       std::cerr <<" *** Environment variable FEDEM_SOLVER not defined."<< std::endl;
       return 0;
     }
-    DEBUG_STDOUT("solverPath: "<< solverPath);
+    std::cout <<"Using "<< solverPath << std::endl;
 
     // Get path to the FMU library
 #if defined _MSC_VER
@@ -263,8 +272,9 @@ extern "C" {
     DEBUG_STDOUT("binariesPath: " + binariesPath);
     std::string rootPath(parentPath(binariesPath));
     std::string resourcePath(appendPath(rootPath,"resources"));
-    std::string workingDir(appendPath(resourcePath,"model"));
-    DEBUG_STDOUT("workingDir: " + workingDir);
+    // Get working directory for the solver
+    cwd = appendPath(resourcePath,"model");
+    std::cout <<"Working directory: "<< cwd << std::endl;
 
     // Load the fedem solver shared object library
 #if defined _MSC_VER
@@ -277,14 +287,18 @@ extern "C" {
 #endif
     if (!h_solver)
     {
-      std::cerr <<" *** Could not load solver library "<< solverPath << std::endl;
+      std::cerr <<" *** Could not load solver library "<< solverPath;
+#ifdef __GNUC__
+      std::cerr <<"\n     "<< dlerror();
+#endif
+      std::cerr << std::endl;
       return 0;
     }
 
     // Lambda function of optaining a function pointer from the solver library.
     auto&& getFuncAddress = [h_solver](const char* fName)
     {
-#if defined _MSC_VER
+#ifdef _MSC_VER
       DLPROC address = (DLPROC)GetProcAddress(h_solver,fName);
 #else
       DLPROC address = (DLPROC)dlsym(h_solver,fName);
@@ -302,16 +316,16 @@ extern "C" {
     setExtFunc = (DLPROC_SETEXTFUNC)getFuncAddress("setExtFunc");
     solveNext = (DLPROC_SOLVENEXT)getFuncAddress("solveNext");
     evalFunc = (DLPROC_EVALFUNC)getFuncAddress("evalFunc");
+    getTime = (DLPROC_GETTIME)getFuncAddress("getTime");
     saveTransformationState = (DLPROC_SAVETRANSFORMATIONS)getFuncAddress("saveTransformationState");
     restartFromState = (DLPROC_RESTARTFROMSTATE)getFuncAddress("restartFromState");
 
     std::vector<char*> argvStart;
-    argvStart.reserve(9);
-
     // Lambda function adding option files to argvStart based on existance.
-    auto&& addOptionFile=[workingDir,&argvStart,appendPath](const char* opt, const char* fileName)
+    auto&& addOptionFile=[&argvStart,appendPath](const char* opt,
+                                                 const char* fileName)
     {
-      std::ifstream fs(appendPath(workingDir,fileName));
+      std::ifstream fs(appendPath(cwd,fileName));
       if (fs.good())
       {
         argvStart.push_back(const_cast<char*>(opt));
@@ -320,25 +334,32 @@ extern "C" {
     };
 
     // Start the solver
-    DEBUG_STDOUT("Initializing solver");
+    DEBUG_STDOUT("Starting solver");
+    argvStart.reserve(9);
     argvStart.push_back(const_cast<char*>("fedem_solver"));
     argvStart.push_back(const_cast<char*>("-cwd"));
-    argvStart.push_back(const_cast<char*>(workingDir.c_str()));
+    argvStart.push_back(const_cast<char*>(cwd.c_str()));
     addOptionFile("-fco","fedem_solver.fco");
     addOptionFile("-fop","fedem_solver.fop");
     addOptionFile("-fao","fedem_solver.fao");
-    int status = solverInit(argvStart.size(),argvStart.data(),NULL,NULL,0,NULL,0,NULL,NULL);
+#ifdef FMU_DEBUG
+    std::cout <<"$";
+    for (char* arg : argvStart) std::cout <<" "<< arg;
+    std::cout << std::endl;
+#endif
+    int status = solverInit(argvStart.size(),argvStart.data(),NULL,
+                            NULL,0,NULL,0,NULL,NULL);
     if (status < 0)
     {
-      std::cerr <<" *** Solver failed to initialize ("<< status <<")."<< std::endl;
+      if (loggingOn)
+        functions->logger(functions->componentEnvironment,
+                          instanceName, fmi2Error, "error",
+                          "fmi2Instantiate: Solver initialization failed.");
+      std::cerr <<" *** Solver failed to initialize ("<< status
+                <<").\n     Please check for error messages in the file "
+                << appendPath(cwd,"fedem_solver.res") << std::endl;
       return 0;
     }
-
-    // Lambda function allocating a real array.
-    auto&& allocateReals = [functions](fmi2Integer nwr)
-    {
-      return (fmi2Real*)functions->allocateMemory(nwr,sizeof(fmi2Real));
-    };
 
     // Initialize the FMU component instance
     componentInstance* comp = (componentInstance*)functions->allocateMemory(1,sizeof(componentInstance));
@@ -359,6 +380,12 @@ extern "C" {
       functions->freeMemory(comp);
       return 0;
     }
+
+    // Lambda function allocating a real array.
+    auto&& allocateReals = [functions](fmi2Integer nwr)
+    {
+      return (fmi2Real*)functions->allocateMemory(nwr,sizeof(fmi2Real));
+    };
 
     comp->initialState.solverStateSize = getStateSize();
     comp->initialState.transformationStateSize = getTransformationStateSize();
@@ -382,7 +409,8 @@ extern "C" {
   fmi2Status fmi2DoStep(fmi2Component c, fmi2Real, fmi2Real, fmi2Boolean)
   {
     componentInstance* comp = (componentInstance*)c;
-    DEBUG_STDOUT("fmi2DoStep "<< comp->state.numInputs <<" --> "<< comp->state.numOutputs);
+    DEBUG_STDOUT("fmi2DoStep: stateCode= "<< comp->stateCode <<", "<<
+                 comp->state.numInputs <<" --> "<< comp->state.numOutputs);
 
     if (comp->stateCode & fmuStateCode::FMUSTEPCOMPLETE)
     {
@@ -404,9 +432,17 @@ extern "C" {
       else
       {
         if (comp->logging)
-          comp->functions->logger(comp->functions->componentEnvironment, comp->instanceName,
-                                  fmi2Error, "error", "fmi2DoStep: Solver step failed.");
-        std::cerr <<" *** Solver step failed ("<< err <<")."<< std::endl;
+          comp->functions->logger(comp->functions->componentEnvironment,
+                                  comp->instanceName, fmi2Error, "error",
+                                  "fmi2DoStep: Solver step failed.");
+        std::cerr <<" *** Solver step failed ("<< err
+                  <<").\n     Please check for error messages in the file "
+#ifdef _MSC_VER
+                  << cwd <<"\\fedem_solver.res"
+#else
+                  << cwd <<"/fedem_solver.res"
+#endif
+                  << std::endl;
         comp->stateCode = fmuStateCode::FMUSTEPFAILED;
         return fmi2Error;
       }
@@ -442,6 +478,12 @@ extern "C" {
       return fmi2OK;
     }
 
+    if (comp->logging)
+      comp->functions->logger(comp->functions->componentEnvironment,
+                              comp->instanceName, fmi2Error, "error",
+                              "fmi2DoStep: Invalid execution order.");
+    std::cerr <<" *** fmi2DoStep: Invalid execution order ("
+              << comp->stateCode <<")."<< std::endl;
     comp->stateCode = fmuStateCode::FMUSTEPFAILED;
     return fmi2Error;
   }
@@ -449,9 +491,8 @@ extern "C" {
   //! \brief Stops the simulation.
   fmi2Status fmi2Terminate(fmi2Component c)
   {
-    DEBUG_STDOUT("fmi2Terminate");
-
-    componentInstance* comp = (componentInstance *)c;
+    componentInstance* comp = (componentInstance*)c;
+    DEBUG_STDOUT("fmi2Terminate: stateCode="<< comp->stateCode);
 
     if (comp->stateCode & (fmuStateCode::FMUSTEPCOMPLETE | fmuStateCode::FMUSTEPFAILED | fmuStateCode::FMUTERMINATED))
     {
@@ -468,11 +509,8 @@ extern "C" {
   //! \brief Cleans up componentInstance, free all memory and resources.
   void fmi2FreeInstance(fmi2Component c)
   {
-    DEBUG_STDOUT("fmi2FreeInstance");
-
-    if (!c) return;
-
     componentInstance* comp = (componentInstance*)c;
+    DEBUG_STDOUT("fmi2FreeInstance: stateCode="<< comp->stateCode);
 
     comp->functions->freeMemory(comp->state.reals);
     comp->functions->freeMemory(comp->state.solverState);
@@ -507,7 +545,6 @@ extern "C" {
   
   fmi2Status fmi2EnterInitializationMode(fmi2Component c) {
     componentInstance* comp = (componentInstance *)c;
-    
     if(comp->stateCode == fmuStateCode::FMUINSTANTIATED)
     {
       comp->stateCode = fmuStateCode::FMUINITIALIZATION;
@@ -709,19 +746,109 @@ extern "C" {
     return fmi2Error;
   }
 
-  fmi2Status fmi2GetBooleanStatus(fmi2Component c, const fmi2StatusKind s, fmi2Boolean* value)
+  fmi2Status fmi2GetInteger(fmi2Component c,
+                            const fmi2ValueReference vr[],
+                            size_t nvr, fmi2Integer value[])
+  {
+    DEBUG_STDOUT("fmiGetInteger "<< nvr);
+    componentInstance* comp = static_cast<componentInstance*>(c);
+
+    for (size_t i = 0; i < nvr; i++)
+      switch (vr[i]) {
+      case 0: value[i] = comp->state.numReals; break;
+      case 1: value[i] = comp->state.numInputs; break;
+      case 2: value[i] = comp->state.numOutputs; break;
+      case 3: value[i] = comp->state.numParams; break;
+      case 4: value[i] = comp->state.numTransforms; break;
+      default: value[i] = 0;
+      }
+
+#ifdef FMU_DEBUG
+    for (size_t i = 0; i < nvr; i++)
+      std::cout << vr[i] <<" --> "<< value[i] << std::endl;
+#endif
+    return fmi2OK;
+  }
+
+  fmi2Status fmi2GetStatus(fmi2Component c,
+                           const fmi2StatusKind s, fmi2Status* value)
   {
     switch (static_cast<componentInstance*>(c)->stateCode) {
-    case fmuStateCode::FMUTERMINATED:
-      *value = s == fmi2Terminated ? fmi2True : fmi2False;
+    case fmuStateCode::FMUSTEPCOMPLETE:
+      if (s == fmi2DoStepStatus || s == fmi2LastSuccessfulTime)
+        *value = fmi2OK;
+      else
+        *value = fmi2Discard;
       break;
+    case fmuStateCode::FMUTERMINATED:
+      if (s == fmi2Terminated)
+        *value = fmi2OK;
+      else
+        *value = fmi2Discard;
+      break;
+    case fmuStateCode::FMUERROR:
+      *value = fmi2Error;
+      break;
+    case fmuStateCode::FMUFATAL:
+      *value = fmi2Fatal;
+      break;
+    default:
+      *value = fmi2Error;
+      return fmi2Error;
+    }
+
+    DEBUG_STDOUT("fmi2GetStatus "<< s <<": "<< *value);
+    return fmi2OK;
+  }
+
+  fmi2Status fmi2GetBooleanStatus(fmi2Component c,
+                                  const fmi2StatusKind s, fmi2Boolean* value)
+  {
+    switch (static_cast<componentInstance*>(c)->stateCode) {
     case fmuStateCode::FMUSTEPCOMPLETE:
       *value = s == fmi2DoStepStatus ? fmi2True : fmi2False;
+      break;
+    case fmuStateCode::FMUTERMINATED:
+      *value = s == fmi2Terminated ? fmi2True : fmi2False;
       break;
     default:
       return fmi2Error;
     }
 
+    DEBUG_STDOUT("fmi2GetBooleanStatus "<< s <<": "<< std::boolalpha << *value);
+    return fmi2OK;
+  }
+
+  fmi2Status fmi2GetIntegerStatus(fmi2Component c,
+                                  const fmi2StatusKind s, fmi2Integer* value)
+  {
+    switch (static_cast<componentInstance*>(c)->stateCode) {
+    case fmuStateCode::FMUSTEPCOMPLETE:
+    case fmuStateCode::FMUTERMINATED:
+      *value = 0; // TODO: Maybe time step number, number of iterations, etc.
+      break;
+    default:
+      return fmi2Error;
+    }
+
+    DEBUG_STDOUT("fmi2GetIntegerStatus "<< s <<": "<< *value);
+    return fmi2OK;
+  }
+
+  fmi2Status fmi2GetRealStatus(fmi2Component c,
+                               const fmi2StatusKind s, fmi2Real* value)
+  {
+    int ierr = 0;
+    switch (static_cast<componentInstance*>(c)->stateCode) {
+    case fmuStateCode::FMUSTEPCOMPLETE:
+    case fmuStateCode::FMUTERMINATED:
+      *value = getTime(0,&ierr); // current simulation time
+      break;
+    default:
+      return fmi2Error;
+    }
+
+    DEBUG_STDOUT("fmi2GetRealStatus "<< s <<": "<< *value);
     return fmi2OK;
   }
 
@@ -748,14 +875,6 @@ extern "C" {
   //        NOT IMPLEMENTED                           //
   //////////////////////////////////////////////////////
 
-  fmi2Status fmi2GetInteger(fmi2Component c, const fmi2ValueReference vr[], size_t nvr, fmi2Integer value[])
-  {
-    // TODO(RunarHR): [Optional] Implement fmi2GetInteger
-    DEBUG_STDOUT("fmiGetInteger");
-    return fmi2OK;
-  }
-  
-  
   fmi2Status fmi2GetBoolean(fmi2Component c, const fmi2ValueReference vr[], size_t nvr, fmi2Boolean value[])
   {
     // TODO(RunarHR): [Optional] Implement fmi2GetBoolean
@@ -791,30 +910,6 @@ extern "C" {
   {
     // TODO(RunarHR): [Optional] Implement fmi2CancelStep
     // Only relevant if doStep runs asynchronously.
-    componentInstance* comp = (componentInstance *)c;
-    comp->stateCode = fmuStateCode::FMUERROR;
-    return fmi2Error;
-  }
-  
-  fmi2Status fmi2GetStatus(fmi2Component c, const fmi2StatusKind s, fmi2Status* value)
-  {
-    // TODO(RunarHR): [Optional] Implement fmi2GetStatus
-    componentInstance* comp = (componentInstance *)c;
-    comp->stateCode = fmuStateCode::FMUERROR;
-    return fmi2Error;
-  }
-  
-  fmi2Status fmi2GetRealStatus(fmi2Component c, const fmi2StatusKind s, fmi2Real* value)
-  {
-    // TODO(RunarHR): [Optional] Implement fmi2GetRealStatus
-    componentInstance* comp = (componentInstance *)c;
-    comp->stateCode = fmuStateCode::FMUERROR;
-    return fmi2Error;
-  }
-  
-  fmi2Status fmi2GetIntegerStatus(fmi2Component c, const fmi2StatusKind s, fmi2Integer* value)
-  {
-    // TODO(RunarHR): [Optional] Implement fmi2GetIntegerStatus
     componentInstance* comp = (componentInstance *)c;
     comp->stateCode = fmuStateCode::FMUERROR;
     return fmi2Error;

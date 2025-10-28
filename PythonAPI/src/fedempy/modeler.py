@@ -131,6 +131,8 @@ class FedemModeler(FedemModel):
         If True, any existing model will be overwritten on save
     plugins : str or list of str, default=None
         Plugin libraries with user-defined elements and functions
+    name : str, default=None
+        Description of the new model, not used if opening existing model
 
     Methods
     -------
@@ -180,7 +182,7 @@ class FedemModeler(FedemModel):
         Setting dynamics solver parameters
     """
 
-    def __init__(self, model_file=None, force_new=False, plugins=None):
+    def __init__(self, model_file=None, force_new=False, plugins=None, name=None):
         """
         Constructor.
         Optionally opens a Fedem model, if a model file name is specified.
@@ -391,7 +393,7 @@ class FedemModeler(FedemModel):
         self._fmlib.FmRecoverOpts.argtypes = [c_int, c_int, c_bool]
 
         if model_file is None or not path.isfile(model_file) or force_new:
-            self.fm_new(model_file)
+            self.fm_new(model_file, name)
         elif not self.fm_open(model_file):
             print(" *** Failed to open model file", model_file)
 
