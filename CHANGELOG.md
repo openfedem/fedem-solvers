@@ -8,6 +8,23 @@
 
 # FEDEM solvers Changelog
 
+## [fmu-8.1.2] (2025-11-01)
+
+### :rocket: Added
+
+- Extend the FMU with methods to inquire some status variables
+  (like current time, number of input and output variables).
+- New command-line option `--reduce_only` for `fedempy.fmm_solver`.
+- New method `fedempy.modeler.fm_get_refplane()`.
+- Optional `name` argument for `fedempy.FedemModeler` constructor
+  and in `fedempy.fmm.fm_new()` assigning the model description string.
+
+### :bug: Fixed
+
+- Issue https://github.com/openfedem/fedem-solvers/issues/38 :
+  FMU exported from the Windows GUI fail to run on Linux hosts.
+- Exported FMUs fail to start when running on Windows hosts.
+
 ## [fedem-8.1.0] (2025-07-05)
 
 ### :rocket: Initial release of FEDEM R8.1
@@ -141,3 +158,4 @@ Only the version tags are updated to align with the FEDEM GUI.
 [fedem-8.0.8]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.6...fedem-8.0.8
 [fedem-8.0.9]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.8...fedem-8.0.9
 [fedem-8.1.0]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.9...fedem-8.1.0
+[fmu-8.1.2]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.1...fmu-8.1.2
