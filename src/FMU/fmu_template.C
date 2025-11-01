@@ -121,6 +121,16 @@ namespace
   bool readConfig(componentInstance* comp, const std::string& path)
   {
     DEBUG_STDOUT("configPath: " + path);
+    std::ifstream confFile(path);
+
+    // Lambda function for reading a line while removing trailing '\r'
+    // if the FMU was created on Windows but run on Linux.
+    auto&& readLine = [&confFile](char* cline, size_t nchar)
+    {
+      confFile.getline(cline,nchar);
+      if (size_t iend = strlen(cline); iend > 0 && cline[--iend] == '\r')
+        cline[iend] = '\0';
+    };
 
     // Lambda function allocating an integer array.
     auto&& allocateInts = [comp](fmi2Integer nwi)
@@ -128,10 +138,8 @@ namespace
       return (fmi2Integer*)comp->functions->allocateMemory(nwi,sizeof(fmi2Integer));
     };
 
-    std::ifstream confFile(path);
-    confFile.getline(comp->initialState.modelIdentifier,128);
-    confFile.getline(comp->initialState.modelGuid,64);
-
+    readLine(comp->initialState.modelIdentifier,128);
+    readLine(comp->initialState.modelGuid,64);
     DEBUG_STDOUT("Model identifier: "<< comp->initialState.modelIdentifier);
     DEBUG_STDOUT("Model GUID: "<< comp->initialState.modelGuid);
 
@@ -402,6 +410,7 @@ extern "C" {
 
     comp->stateCode = ourState = fmuStateCode::FMUINSTANTIATED;
 
+    DEBUG_STDOUT("FEDEM FMU \""<< instanceName <<"\" instantiated.\n");
     return comp;
   }
 
