@@ -16,7 +16,7 @@ from numpy.linalg import inv, lstsq, solve
 
 from fedempy.enums import FmType
 from fedempy.log_conf import get_logger
-from fedempy.solver import FedemException, FedemSolver
+from fedempy.solver import FedemException, FedemSolver, FedemProgressBar
 
 try:
     from scipy import linalg
@@ -66,6 +66,9 @@ class InverseSolver:
         The Fedem dynamics solver instance
     config : dictionary
         Inverse solver configuration
+    print_stepping : bool, default=False
+        If True, print some time stepping info.
+        Otherwise use progress bar only.
 
     Methods
     -------
@@ -75,9 +78,11 @@ class InverseSolver:
         Performs the inverse static solution using the internal inverse solver
     run_inverse:
         Performs the inverse solution (static case)
+    done_inverse:
+        Closes down the dynamics solver after run_inverse()
     """
 
-    def __init__(self, solver, config):
+    def __init__(self, solver, config, print_stepping):
         """
         Constructor. Initializes the object.
         """
@@ -89,6 +94,10 @@ class InverseSolver:
             logger.info("initialisation list finished\n")
 
         self.solver = solver
+        if print_stepping:
+            self.prbar = None
+        else:
+            self.prbar = FedemProgressBar(solver)
 
         # Memory for dynamic inverse solution
         self.u_vec = None  # displacement vector
@@ -306,7 +315,8 @@ class InverseSolver:
                     dof = dof_set_rev[dof]
                     rev_joints.append(jid)
                     stiff = self.solver.get_joint_spring_stiffness(jid)[0][dof]
-                    print("spring stiffness: ", stiff)
+                    if self.prbar is None:
+                        print("spring stiffness: ", stiff)
                     data[idx] /= stiff
 
         return rev_joints
@@ -371,6 +381,11 @@ class InverseSolver:
         t_0 = self.solver.get_current_time()
 
         # run start step
+        if self.prbar is None:
+            print("\n+++++++++++++++++++++++++++++++++++++++++++++")
+            print("Solving time step", self.solver.get_current_time())
+        else:
+            self.prbar.next()
         do_continue = self.solver.start_step()
         if self.solver.ierr.value < 0:  # Simulation failure
             raise InverseException("start_step", self.solver.ierr.value)
@@ -384,7 +399,8 @@ class InverseSolver:
             raise InverseException("get_external_force_vector")
 
         x_def, g_def = self._inverse_get_boundary_conditions()
-        print("x_def and g_def: ", x_def, "  ", g_def)
+        if self.prbar is None:
+            print("x_def and g_def: ", x_def, "  ", g_def)
 
         # simulation parameters
         h = -0.1  # default Newmark alpha value
@@ -499,7 +515,8 @@ class InverseSolver:
         b0 = dot(bt_inv_k, f0)
 
         opt_alpha = lstsq(c_val, (x_vec - b0), rcond=-1)[0]
-        print("scaling: ", opt_alpha)
+        if self.prbar is None:
+            print("scaling: ", opt_alpha)
         force_eval = dot(f_mat, opt_alpha) + f0
         pos_eval = dot(inv_k, force_eval)  # displacement vector
 
@@ -647,8 +664,6 @@ class InverseSolver:
                     nr += 1
             elif identifier in ("relID", "deflID", "frcID"):
                 nr += 1
-
-        print(f"No. of sensors for {sensor_type}: {nr}, sensor_id={sensor_id}")
 
         return sensor_id, nr
 
@@ -853,7 +868,7 @@ class InverseSolver:
         return f_mat
 
     @staticmethod
-    def _mode_load_scipy(solver, modes):
+    def _mode_load_scipy(solver, modes, do_print=False):
         """
         Force vector based on natural frequency shapes
         """
@@ -866,7 +881,8 @@ class InverseSolver:
             raise InverseException("get_mass_matrix")
 
         # check is matrix m_mat positive definite (via Cholesky factorization)
-        print("Check Mass Matrix for positive definiteness:")
+        if do_print:
+            print("Check Mass Matrix for positive definiteness:")
         try:
             linalg.cholesky(m_mat)
         except linalg.LinAlgError:
@@ -880,12 +896,14 @@ class InverseSolver:
 
         # take into account modes up to max mode number in the array modes
         up_to_mode = max(modes) - 1
-        print("calculate modes up to mode No.: ", up_to_mode)
+        if do_print:
+            print("calculate modes up to mode No.: ", up_to_mode)
         logger.info("Calculate modes up to mode No.: %s" % up_to_mode)
 
         # calculate natural frequencies (e) and natural frequency modes (u)
         (e_val, e_vec) = linalg.eigh(k_mat, m_mat, eigvals=(0, up_to_mode))
-        print("Eigenvalues (low, high):", e_val[0], e_val[-1])
+        if do_print:
+            print("Eigenvalues (low, high):", e_val[0], e_val[-1])
         logger.info("Eigenvalues: %s" % e_val)
 
         dim = solver.get_system_size()
@@ -907,14 +925,15 @@ class InverseSolver:
         return f_vec
 
     @staticmethod
-    def _mode_load(solver, modes, use_lapack):
+    def _mode_load(solver, modes, use_lapack, do_print=False):
         """
         Force vector based on natural frequency shapes.
         New and faster implementation, using Fedem's internal eigenvalue solver.
         """
         # take into account modes up to max mode number in the array modes
         n_modes = max(modes)
-        print("Calculating the modes: ", modes)
+        if do_print:
+            print("Calculating the modes: ", modes)
         logger.info("Calculate the first %s eigenmodes." % n_modes)
 
         # calculate natural frequencies (e_val)
@@ -928,7 +947,8 @@ class InverseSolver:
             print("Please check the fedem_solver.res file content above.")
             raise InverseException("solve_modes", solver.ierr.value)
 
-        print("Eigenvalues (low, high):", e_val[0], e_val[-1])
+        if do_print:
+            print("Eigenvalues (low, high):", e_val[0], e_val[-1])
         logger.info("Eigenvalues: %s" % e_val)
 
         # Pick eigenvectors as given by the modes indices
@@ -957,7 +977,14 @@ class InverseSolver:
         list of float
             Evaluated response variables
         """
+        do_print = self.prbar is None
+
         # run start step
+        if do_print:
+            print("\n+++++++++++++++++++++++++++++++++++++++++++++")
+            print("Solving time step", self.solver.get_current_time())
+        else:
+            self.prbar.next()
         logger.info("================================")
         logger.info("Running step start %s" % self.loop_nr)
         do_continue = self.solver.start_step()
@@ -979,7 +1006,8 @@ class InverseSolver:
 
         logger.info("Setting boundary conditions")
         x_def, g_def = self._inverse_get_boundary_conditions()
-        print("x_def and g_def: ", x_def, "  ", g_def)
+        if do_print:
+            print("x_def and g_def: ", x_def, "  ", g_def)
 
         # displacement field based on unit loads/modal forces
         # F matrix (generalized fore part) will not change during the simulation,
@@ -996,9 +1024,9 @@ class InverseSolver:
 
             if self.modes:
                 if self.modes_solver == 3 and have_sci_py:
-                    f_vec = self._mode_load_scipy(self.solver, self.modes)
+                    f_vec = self._mode_load_scipy(self.solver, self.modes, do_print)
                 else:
-                    f_vec = self._mode_load(self.solver, self.modes, self.modes_solver)
+                    f_vec = self._mode_load(self.solver, self.modes, self.modes_solver, do_print)
                 if f_mat is None:
                     f_mat = f_vec
                 else:
@@ -1081,7 +1109,7 @@ class InverseSolver:
         lhs = delete(lhs, (0), axis=0)
 
         # check number of equations and pointer position (pos)
-        if (len(lhs) != len(rhs)) or (len(rhs) != pos):
+        if len(lhs) != len(rhs) or len(rhs) != pos:
             print("InCorrect dimension of equation system lhs: ", len(lhs))
             print("dimension of rhs: ", len(rhs))
             print("pos of position pointer: ", pos)
@@ -1089,13 +1117,15 @@ class InverseSolver:
                 "Equation system has incorrect dimensions: [%s/%s]" % (len(lhs), pos)
             )
 
-        print("Size of the equation system: ", len(lhs), "x", len(lhs[0]))
+        if do_print:
+            print("Size of the equation system: ", len(lhs), "x", len(lhs[0]))
 
         # compute scaling factor and force vector
         alpha = lstsq(lhs, rhs, rcond=-1)[0]
         force = dot(f_mat[:, :-1], alpha)
 
-        print("scaling factor: ", alpha)
+        if do_print:
+            print("scaling factor: ", alpha)
         logger.info("Scaling factors: %s" % alpha)
 
         # update right hand side vector
@@ -1103,14 +1133,16 @@ class InverseSolver:
         if not self.solver.add_rhs_vector(force):
             raise InverseException("add_rhs_vector")
 
-        print("force vector added")
+        if do_print:
+            print("force vector added")
 
         # equilibrium iterations (fedem)
         self.solver.finish_step()
         if self.solver.ierr.value != 0:
             raise InverseException("finish_step", self.solver.ierr.value)
 
-        print("equlibrium iterations done")
+        if do_print:
+            print("equlibrium iterations done")
         logger.info("Equlibrium iterations finished")
 
         # increment counter
@@ -1120,6 +1152,16 @@ class InverseSolver:
 
         # return output function values
         return self.solver.get_functions(out_def)
+
+    def done_inverse(self):
+        """
+        Terminates the dynamics solver.
+        """
+        if self.prbar is not None:
+            self.prbar.next()
+            print("\n     Done.")
+
+        self.solver.solver_done()
 
     @staticmethod
     def _calc_eigen_values(solver):
@@ -1178,9 +1220,12 @@ class FedemRun(FedemSolver, InverseSolver):
         Current working directory for the fedem dynamics solver
     config : dictionary
         Content of yaml input file
+    print_stepping : bool, default=False
+        If True, print some time stepping info.
+        Otherwise use progress bar only.
     """
 
-    def __init__(self, wrkdir, config):
+    def __init__(self, wrkdir, config, print_stepping=False):
         """
         Constructor. Initializes the object.
         """
@@ -1199,4 +1244,4 @@ class FedemRun(FedemSolver, InverseSolver):
         FedemSolver.__init__(self, environ["FEDEM_SOLVER"], args)
 
         # Initialize the inverse solver
-        InverseSolver.__init__(self, self, config)
+        InverseSolver.__init__(self, self, config, print_stepping)
