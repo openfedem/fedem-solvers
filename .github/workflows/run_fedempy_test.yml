@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2023 SAP SE
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is part of FEDEM - https://openfedem.org
+
+name: fedempy testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-it:
+    name: Execute fedempy tests
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Silence some advice and hint and set environment variables
+        run: |
+          git config --global advice.detachedHead false
+          git config --global init.defaultBranch main
+          echo "PYTHONPATH=${{ github.workspace }}/solverTests/InversePy
+          echo "LD_LIBRARY_PATH=${{ github.workspace }}/bin:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+          echo "FEDEM_REDUCER=libfedem_reducer_core.so" >> $GITHUB_ENV
+          echo "FEDEM_SOLVER=libfedem_solver_core.so" >> $GITHUB_ENV
+          echo "USE_FTNINV=1" >> $GITHUB_ENV
+
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Download the latest FEDEM release
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: openfedem/fedem-solvers
+          fileName: 'fedem-*_linux64.tar.gz'
+          latest: true
+          extract: true
+
+      - name: Install python
+        uses: actions/setup-python@v5
+
+      - name: Install required python packages
+        run: pip install numpy pandas progress PyYAML
+
+      - name: Execute all fedempy regression tests
+        run: .github/scripts/run_fedempy_test.sh ${{ env.PYTHONPATH }}
