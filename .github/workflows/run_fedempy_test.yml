@@ -20,7 +20,6 @@ jobs:
         run: |
           git config --global advice.detachedHead false
           git config --global init.defaultBranch main
-          echo "PYTHONPATH=${{ github.workspace }}/solverTests/InversePy
           echo "LD_LIBRARY_PATH=${{ github.workspace }}/bin:$LD_LIBRARY_PATH" >> $GITHUB_ENV
           echo "FEDEM_REDUCER=libfedem_reducer_core.so" >> $GITHUB_ENV
           echo "FEDEM_SOLVER=libfedem_solver_core.so" >> $GITHUB_ENV
@@ -41,9 +40,11 @@ jobs:
 
       - name: Install python
         uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
 
       - name: Install required python packages
         run: pip install numpy pandas progress PyYAML
 
       - name: Execute all fedempy regression tests
-        run: .github/scripts/run_fedempy_test.sh ${{ env.PYTHONPATH }}
+        run: .github/scripts/test_fedempy.sh ${{ github.workspace }}/solverTests

@@ -12,7 +12,7 @@ Used for convenience in order to hide native type convertions.
 from ctypes import byref, c_bool, c_char_p, c_double, c_int, cdll
 from os import path
 
-from numpy import empty, float64, int32, int64, ndarray
+from numpy import empty, float64, int32, int64, ndarray, ascontiguousarray
 from progress.bar import Bar
 
 
@@ -307,8 +307,13 @@ class FedemSolver:
 
         if type(arg) in (list, ndarray):
             argc = len(arg)
-            argv = (c_double * argc)()
-            argv[:] = arg
+            if isinstance(arg, ndarray):
+                # Ensure C double dtype and contiguous memory, then flatten to 1-D
+                arrv = ascontiguousarray(arg, dtype=float64).ravel()
+                # Create a ctypes array and copy the flattened values into it
+                argv = (c_double * argc)(*arrv)
+            else:
+                argv = (c_double * argc)(*arg)
             if ndiv is None:
                 return c_int(argc), argv
             return c_int(argc // ndiv), argv
