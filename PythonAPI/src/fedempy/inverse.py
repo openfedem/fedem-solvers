@@ -16,7 +16,7 @@ from numpy.linalg import inv, lstsq, solve
 
 from fedempy.enums import FmType
 from fedempy.log_conf import get_logger
-from fedempy.solver import FedemException, FedemSolver, FedemProgressBar
+from fedempy.solver import FedemException, FedemProgressBar, FedemSolver
 
 try:
     from scipy import linalg
@@ -66,9 +66,9 @@ class InverseSolver:
         The Fedem dynamics solver instance
     config : dictionary
         Inverse solver configuration
-    print_stepping : bool, default=False
+    print_stepping : bool
         If True, print some time stepping info.
-        Otherwise use progress bar only.
+        Otherwise use the progress bar only.
 
     Methods
     -------
@@ -1026,7 +1026,9 @@ class InverseSolver:
                 if self.modes_solver == 3 and have_sci_py:
                     f_vec = self._mode_load_scipy(self.solver, self.modes, do_print)
                 else:
-                    f_vec = self._mode_load(self.solver, self.modes, self.modes_solver, do_print)
+                    f_vec = self._mode_load(
+                        self.solver, self.modes, self.modes_solver, do_print
+                    )
                 if f_mat is None:
                     f_mat = f_vec
                 else:
@@ -1222,7 +1224,7 @@ class FedemRun(FedemSolver, InverseSolver):
         Content of yaml input file
     print_stepping : bool, default=False
         If True, print some time stepping info.
-        Otherwise use progress bar only.
+        Otherwise use the progress bar only.
     """
 
     def __init__(self, wrkdir, config, print_stepping=False):
