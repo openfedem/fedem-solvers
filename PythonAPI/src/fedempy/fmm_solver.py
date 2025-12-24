@@ -589,7 +589,14 @@ class FmmInverse(FmmSolver, InverseSolver):
         Option to not overwrite any existing res-file in the RDB directory
     """
 
-    def __init__(self, model_file, config, use_internal_state=False, keep_res=False):
+    def __init__(
+        self,
+        model_file,
+        config,
+        use_internal_state=False,
+        keep_res=False,
+        print_step=True,
+    ):
         """
         Constructor.
         Optionally starts the simulation, if a model file is specified.
@@ -598,7 +605,7 @@ class FmmInverse(FmmSolver, InverseSolver):
         FmmSolver.__init__(self, model_file, use_internal_state, keep_res)
 
         # Initialize the inverse solver
-        InverseSolver.__init__(self, self, config)
+        InverseSolver.__init__(self, self, config, print_step)
 
 
 if __name__ == "__main__":
