@@ -5,10 +5,30 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
-subroutine GetConnectivityFEData (T, nels, nnpc, xnpc, npc)
+!> @file feDataRoutines.f90
+!> @brief Call-backs for the GSF equation solver.
 
-  use kind_values, only : is
-  use FEData     , only : FEDataInput
+!> @cond FULL_DOC
+!!==============================================================================
+!> @brief Module with kind-parameters for the GSF equation solver call-backs.
+!> @details The two kind parameters defined in this module have to match the
+!> corresponding parameters of the kind_values module of the GSF library.
+
+module FEKind
+  integer, parameter :: is = SELECTED_INT_KIND(9)
+  integer, parameter :: wp = SELECTED_REAL_KIND(15,307)
+end module FEKind
+!> @endcond
+
+
+!!=============================================================================
+!> @brief Extracts the element connectivity table for the FE model.
+
+subroutine GetConnectivityFEData (T, nels, nnpc, xnpc, npc)
+  !DEC$ ATTRIBUTES DLLEXPORT :: GetConnectivityFEData
+
+  use FEKind, only : is
+  use FEData, only : FEDataInput
 
   implicit none
 
@@ -24,10 +44,14 @@ subroutine GetConnectivityFEData (T, nels, nnpc, xnpc, npc)
 end subroutine GetConnectivityFEData
 
 
-subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
+!!=============================================================================
+!> @brief Extracts the constraint equations of the linear couplings.
 
-  use kind_values, only : is, wp
-  use FEData     , only : FEDataInput
+subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
+  !DEC$ ATTRIBUTES DLLEXPORT :: GetConstraintsFEData
+
+  use FEKind, only : is, wp
+  use FEData, only : FEDataInput
 
   implicit none
 
@@ -40,15 +64,21 @@ subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
   nnceq =  T%sam%nmmceq
   xceq  => T%sam%mpmceq
   ceq   => T%sam%mmceq
-  if (present(tcc)) tcc => T%sam%ttcc
+  if (present(tcc)) then
+     tcc => T%sam%ttcc
+  end if
 
 end subroutine GetConstraintsFEData
 
 
-subroutine GetPartitionFEData (T, nnod, ndof, madof, msc, minex)
+!!=============================================================================
+!> @brief Extracts the nodal DOF information.
 
-  use kind_values, only : is
-  use FEData     , only : FEDataInput
+subroutine GetPartitionFEData (T, nnod, ndof, madof, msc, minex)
+  !DEC$ ATTRIBUTES DLLEXPORT :: GetPartitionFEData
+
+  use FEKind, only : is
+  use FEData, only : FEDataInput
 
   implicit none
 
