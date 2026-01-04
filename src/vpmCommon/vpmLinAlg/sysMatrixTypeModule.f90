@@ -104,9 +104,8 @@ end module sprKindModule
 module SysMatrixTypeModule
 
   use sprKindModule , only : dp, ik
-  use ErrorFlag     , only : Error_Flag
   use FEData        , only : FEDataInput
-  use FELinearSolver, only : SAM, CAM, GSFColSup, MessageLevel
+  use FELinearSolver, only : SAM, CAM, GSFColSup, MessageLevel, Error_Flag
 #ifdef FT_HAS_MKL
   use MKL_pardiso   , only : MKL_PARDISO_HANDLE
 #endif
@@ -226,7 +225,7 @@ module SysMatrixTypeModule
   private :: checkSparseStorage, checkGSFStorage, checkPardisoStorage
   private :: writeSysMat, writeSkyMat, writePardisoMat
   private :: writeSparseMat, writeSparseStructure
-  private :: FEDataInput, SAM, CAM, GSFColSup, MessageLevel
+  private :: FEDataInput, SAM, CAM, GSFColSup, MessageLevel, Error_Flag
 
 
 contains
@@ -1210,7 +1209,7 @@ contains
   !> @brief Inspects the GSF error flag and outputs the error messages, if any.
   !>
   !> @param[in] gsf The sysmatrixtypemodule::gsfstoragetype to check
-  !> @param INFO Error handling  object from the GSF package
+  !> @param INFO Error handling object from the GSF package
   !> @return Negative value if an error was detected, otherwise zero
   !>
   !> @callergraph
@@ -1221,7 +1220,6 @@ contains
 
   function checkGSFinfo (INFO,gsf) result(ierr)
 
-    use ErrorFlag        , only : Print_ErrStat, Destroy_Error_Flag
     use FELinearSolver   , only : FEErrorHandler
     use ReportErrorModule, only : getErrorFile
 
@@ -1237,10 +1235,9 @@ contains
     if (present(gsf)) then
        call FEErrorHandler (INFO, gsf%P, gsf%Q, getErrorFile())
     else
-       call Print_ErrStat (INFO, getErrorFile())
+       call FEErrorHandler (INFO, output=getErrorFile())
     end if
 
-    call Destroy_Error_Flag (INFO)
     nullify(INFO)
     ierr = -1
 
@@ -1353,7 +1350,7 @@ contains
   subroutine WriteSysMat (this,mpar,io,text,nelL,complexity)
 
     use ManipMatrixModule, only : writeObject
-    use FELinearSolver   , only : SAMDump, CAMDump, GSFDump
+    use FELinearSolver   , only : GSFDump
 
     type(SysMatrixType),     intent(inout) :: this
     integer                   , intent(in) :: mpar(:), io
@@ -1417,11 +1414,10 @@ contains
 
     case (outOfCore_p)
 
-       if (.not. associated(this%gsf)) return
-       if (associated(this%gsf%Q)) call SAMDump(this%gsf%Q,io,2)
-       if (associated(this%gsf%S)) call CAMDump(this%gsf%S,io,2,GSFInfo)
-       if (associated(this%gsf%T)) call GSFDump(this%gsf%T,io,2)
-       i = checkGSFinfo(GSFinfo)
+       if (associated(this%gsf)) then
+          call GSFDump (this%gsf%Q,this%gsf%S,this%gsf%T,io,GSFInfo)
+          i = checkGSFinfo(GSFinfo)
+       end if
 
     case (pardiso_p)
 
@@ -1898,7 +1894,6 @@ contains
   subroutine extractDiagonal (this,diag,ierr)
 
     use FELinearSolver   , only : FEExtractDiagA
-    use ErrorFlag        , only : Error_Flag, Print_ErrStat, Destroy_Error_Flag
     use ReportErrorModule, only : internalError, getErrorFile
     use ReportErrorModule, only : reportError, debugFileOnly_p
 
