@@ -218,20 +218,14 @@ contains
     else if (ffa_cmdlinearg_isTrue('denseSolver')) then
        matrixType = denseMatrix_p
     else
-#ifdef FT_HAS_GSF
        call ffa_cmdlinearg_getint ('gsfSolver',matrixType)
        if (demoEdition .or. nenod == sam%nnod .or. matrixType < 1) then
           matrixType = sparseMatrix_p
        else if (matrixType == 1) then
           matrixType = outOfCore_p + sparseMatrix_p
-          write(lpu,"(' BEGIN EQUATION SOLVER INFO'/)")
        else
           matrixType = outOfCore_p
-          write(lpu,"(' BEGIN EQUATION SOLVER INFO'/)")
        end if
-#else
-       matrixType = sparseMatrix_p
-#endif
     end if
 
     ngen = 0
@@ -251,6 +245,8 @@ contains
     if (matrixType == sparseMatrix_p) then
        call castToInt8 (sam,ierr)
        if (ierr < 0) goto 990
+    else if (matrixType >= outOfCore_p) then
+       write(lpu,"(/' BEGIN EQUATION SOLVER INFO')")
     end if
 
     call csAllocPointerArrays (sam,sysK,matrixType,lpu,ierr,ipsw, &
