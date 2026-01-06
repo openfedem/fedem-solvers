@@ -203,6 +203,56 @@ contains
 
 
   !!============================================================================
+  !> @brief compute permutation between two different sparse matrix orderings.
+  !>
+  !> @param sysMat The system matrix to compute permutation for
+  !> @param[in] meqn Matrix of equation numbers for the other matrix
+  !> @param[in] lpu File unit number for res-file output
+  !> @param[out] ierr Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !> @date 6 Jan 2026
+
+  subroutine csRepermute (sysMat, meqn, lpu, ierr)
+
+    use SysMatrixTypeModule, only : SysMatrixType
+    use sprKindModule      , only : castInt
+    use allocationModule   , only : reAllocate
+
+    type(SysMatrixType), intent(inout) :: sysMat
+    integer, target    , intent(in)    :: meqn(:)
+    integer            , intent(in)    :: lpu
+    integer            , intent(out)   :: ierr
+
+    !! Local variables
+    integer(ik)          :: lerr
+    integer(ik), pointer :: meqn8(:)
+
+    !! --- Logic section ---
+
+#ifdef FT_SPR_INT_DEFAULT
+    meqn8 => meqn
+#else
+    nullify(meqn8)
+    call reAllocate ('csRepermute',meqn8,size(meqn),ierr)
+    if (ierr < 0) return
+    call castInt (size(meqn),meqn,meqn8)
+#endif
+
+    call SPRABC (sysMat%sparse%mspar(1), sysMat%sparse%msifa(1), &
+         &       sysMat%meqn8(1), meqn8(1), mySam%mpar(3), int(lpu,ik), lerr)
+    ierr = int(lerr)
+
+#ifndef FT_SPR_INT_DEFAULT
+    call reAllocate ('csRepermute',meqn8)
+#endif
+
+  end subroutine csRepermute
+
+
+  !!============================================================================
   !> @brief Initializes pointer arrays for the equation solvers.
   !>
   !> @param samData Data for managing system matrix assembly
@@ -211,7 +261,7 @@ contains
   !> @param[in] lpu File unit number for res-file output
   !> @param[out] ierr Error flag
   !> @param[in] ipsw Print switch
-  !> @param[in] cacheSize Sparse matricx cache size
+  !> @param[in] cacheSize Sparse matrix cache size
   !> @param[in] needsFactorization If .true., this matrix will be factorized
   !> @param[in] masterGSF GSF data structure of sibling system matrix
   !>
@@ -424,7 +474,7 @@ contains
             &       mySam%mmceq(1), sysMat%meqn8(1), sparse%mspar(1), &
             &       sparse%msica(1), iWork(1), nspar_p, int(lpu,ik), lerr)
        if (bigModel) call writeProgress ('     SPRSAS done',newline=.false.)
-       if (lerr < 0) goto 998
+       if (lerr < 0_ik) goto 998
 
        if (ik > i4) call castInt (samData%ndof,sysMat%meqn8,sysMat%meqn)
 
@@ -713,10 +763,9 @@ contains
     integer, optional  , intent(in)    :: ipsw, meqnK(:)
 
     !! Local variables
-    integer(ik)          :: lerr
-    integer              :: nWork
-    integer    , pointer :: iWork(:)
-    integer(ik), pointer :: meqnK8(:)
+    integer(ik)      :: lerr
+    integer          :: nWork
+    integer, pointer :: iWork(:)
 
     type(SkylineStorageType), pointer :: skyline
     type(SparseStorageType) , pointer :: sparse
@@ -771,19 +820,8 @@ contains
        if (ierr < 0) return
 
        if (sparse%mspar(51) > 0_ik .and. present(meqnK)) then
-#ifdef FT_SPR_INT_DEFAULT
-          call SPRABC (sparse%mspar(1), sparse%msifa(1), sysMat%meqn(1), &
-               &       meqnK(1),        mySam%mpar(3),   int(lpu,ik), lerr)
-#else
-          nullify(meqnK8)
-          call reAllocate (prgnam_p,meqnK8,size(meqnK),ierr)
-          if (ierr < 0) return
-          call castInt (size(meqnK),meqnK,meqnK8)
-          call SPRABC (sparse%mspar(1), sparse%msifa(1), sysMat%meqn8(1), &
-               &       meqnK8(1),       mySam%mpar(3),   int(lpu,ik), lerr)
-          call reAllocate (prgnam_p,meqnK8)
-#endif
-          if (lerr < 0_ik) goto 998
+          call csRepermute (sysMat,meqnK,lpu,ierr)
+          if (ierr < 0) goto 998
        end if
 
        nWork = 3*int(sparse%mspar(6)) + 2*int(sparse%mspar(8)) + 1
@@ -1264,6 +1302,7 @@ contains
     integer           :: nrhs
     integer , pointer :: iWork(:)
     real(dp), pointer :: rhs(:), tmpMat(:,:)
+    real(dp), target  :: dummyR(1)
 
     type(SkylineStorageType), pointer :: skyline
     type(SparseStorageType) , pointer :: sparse
@@ -1281,7 +1320,8 @@ contains
        rhs => sysRhs ! contributions from prescribed DOFs will be added
     else
        nrhs = 0
-       rhs => sysMat%value ! dummy, but should point to something
+       rhs => dummyR ! dummy, but should point to something
+       dummyR = 0.0_dp
     end if
 
     call startTimer (16)
@@ -1439,6 +1479,7 @@ contains
     integer            :: i, j, ipnod, nndof
     integer, parameter :: nrhs_p = 0
     integer, pointer   :: iWork(:)
+    real(dp)           :: dummy(1)
 
     type(SparseStorageType), pointer :: sparse
 
@@ -1496,13 +1537,14 @@ contains
     case (outOfCore_p)
 
        !TODO,kmo: This works only when NEDOF = NNDOF*NENOD and NNDOF = constant
+       dummy = 0.0_dp
        ipnod = samData%mpmnpc(iel)
        nndof = nedof/(samData%mpmnpc(iel+1)-ipnod)
        do i = 1, nedof
           j = samData%madof(samData%mmnpc(ipnod+(i-1)/NNDOF)) + mod(i-1,NNDOF)
           call FEAssembleElement (1, j, reshape(elMat(i:i),(/1,1/)), &
                &                  sysMat%gsf%P, sysMat%gsf%Q, &
-               &                  sysMat%gsf%S, nrhs_p, sysMat%value, GSFinfo)
+               &                  sysMat%gsf%S, nrhs_p, dummy, GSFinfo)
           ierr = checkGSFinfo(GSFinfo)
           if (ierr < 0) goto 999
        end do

@@ -36,7 +36,7 @@ subroutine reducer (ierr)
   use DiskMatrixModule          , only : dmNullify, dmOpen, dmClose
   use DiskMatrixModule          , only : dmFindMinConnections
   use AsmExtensionModule        , only : csBeginAssembly, csEndAssembly
-  use AsmExtensionModule        , only : castToInt8
+  use AsmExtensionModule        , only : csRepermute, castToInt8
   use InputReducerModule        , only : readReducerData
   use InaddModule               , only : INADD, extractSubMat
   use CmstrsModule              , only : CMSTRS, EIGVAL, EIGCMS, JCMS, GRAV
@@ -459,8 +459,7 @@ subroutine reducer (ierr)
           csMassMat%storageType == sparseMatrix_p ) then
         ! Recompute the internal permutation arrays for the SPR mass matrix
         ! now based on the external equation ordering
-        call SPRABC (csMassMat%sparse%mspar(1), csMassMat%sparse%msifa(1), &
-             &       csMassMat%meqn(1), sam%meqn(1), sam%ndof, lpu, ierr)
+        call csRepermute (csMassMat, sam%meqn, lpu, ierr)
         if (ierr < 0) goto 900
      end if
 

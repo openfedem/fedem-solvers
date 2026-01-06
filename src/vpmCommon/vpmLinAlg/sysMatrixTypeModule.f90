@@ -993,7 +993,7 @@ contains
           write(lpu,*) '*** Error: sysMat%meqn8 is not allocated'
        else if (size(sysMat%meqn8) < mpar(7)) then
           ierr = ierr - 1
-          write(lpu,*) '*** Error: size(sysMat%meqn8) =',size(sysMat%meqn)
+          write(lpu,*) '*** Error: size(sysMat%meqn8) =',size(sysMat%meqn8)
           write(lpu,*) '                         nceq =',mpar(7)
        end if
     end if
