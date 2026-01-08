@@ -29,6 +29,9 @@ subroutine GetConnectivityFEData (T, nels, nnpc, xnpc, npc)
 
   use FEKind, only : is
   use FEData, only : FEDataInput
+#ifdef __GNUC__
+  use FEModel, only : ourSams
+#endif
 
   implicit none
 
@@ -36,10 +39,17 @@ subroutine GetConnectivityFEData (T, nels, nnpc, xnpc, npc)
   integer(is)      , intent(out) :: nels, nnpc
   integer(is)      , pointer     :: xnpc(:), npc(:)
 
+#ifdef __GNUC__
+  nels =  ourSams(T%idx)%p%nel
+  nnpc =  ourSams(T%idx)%p%nmmnpc
+  xnpc => ourSams(T%idx)%p%mpmnpc
+  npc  => ourSams(T%idx)%p%mmnpc
+#else
   nels =  T%sam%nel
   nnpc =  T%sam%nmmnpc
   xnpc => T%sam%mpmnpc
   npc  => T%sam%mmnpc
+#endif
 
 end subroutine GetConnectivityFEData
 
@@ -52,6 +62,9 @@ subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
 
   use FEKind, only : is, wp
   use FEData, only : FEDataInput
+#ifdef __GNUC__
+  use FEModel, only : ourSams
+#endif
 
   implicit none
 
@@ -60,6 +73,15 @@ subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
   integer(is)      , pointer           :: xceq(:), ceq(:)
   real(wp)         , pointer, optional :: tcc(:)
 
+#ifdef __GNUC__
+  nceq  =  ourSams(T%idx)%p%nceq
+  nnceq =  ourSams(T%idx)%p%nmmceq
+  xceq  => ourSams(T%idx)%p%mpmceq
+  ceq   => ourSams(T%idx)%p%mmceq
+  if (present(tcc)) then
+     tcc => ourSams(T%idx)%p%ttcc
+  endif
+#else
   nceq  =  T%sam%nceq
   nnceq =  T%sam%nmmceq
   xceq  => T%sam%mpmceq
@@ -67,6 +89,7 @@ subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
   if (present(tcc)) then
      tcc => T%sam%ttcc
   end if
+#endif
 
 end subroutine GetConstraintsFEData
 
@@ -79,6 +102,9 @@ subroutine GetPartitionFEData (T, nnod, ndof, madof, msc, minex)
 
   use FEKind, only : is
   use FEData, only : FEDataInput
+#ifdef __GNUC__
+  use FEModel, only : ourSams
+#endif
 
   implicit none
 
@@ -86,10 +112,18 @@ subroutine GetPartitionFEData (T, nnod, ndof, madof, msc, minex)
   integer(is)      , intent(out) :: nnod, ndof
   integer(is)      , pointer     :: madof(:), msc(:), minex(:)
 
+#ifdef __GNUC__
+  nnod  =  ourSams(T%idx)%p%nnod
+  ndof  =  ourSams(T%idx)%p%ndof
+  madof => ourSams(T%idx)%p%madof
+  msc   => ourSams(T%idx)%p%msc
+  minex => ourSams(T%idx)%p%minex
+#else
   nnod  =  T%sam%nnod
   ndof  =  T%sam%ndof
   madof => T%sam%madof
   msc   => T%sam%msc
   minex => T%sam%minex
+#endif
 
 end subroutine GetPartitionFEData

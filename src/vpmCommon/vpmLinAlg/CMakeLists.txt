@@ -24,6 +24,10 @@ if ( USE_LINALG_GSF )
   if ( GSF_LIBRARY )
     message ( STATUS "INFORMATION : Building ${LIB_ID} with GSF support" )
   endif ( GSF_LIBRARY )
+else ( USE_LINALG_GSF )
+  unset ( GSF_INCLUDE CACHE )
+  unset ( GSF_LIBRARY CACHE )
+  unset ( GSF_DLL CACHE )
 endif ( USE_LINALG_GSF )
 
 if ( USE_INTEL_FORTRAN )
@@ -64,7 +68,12 @@ set ( F90_FILE_LIST asmExtensionModule
                     sysMatrixTypeModule
     )
 ## Fortran90 callbacks from the linear equation solver
-set ( CB_FILE_LIST feDataModule feDataRoutines )
+if ( USE_INTEL_FORTRAN )
+  set ( CB_FILE_LIST feDataModule )
+else ( USE_INTEL_FORTRAN )
+  set ( CB_FILE_LIST feDataModel )
+endif ( USE_INTEL_FORTRAN )
+list ( APPEND CB_FILE_LIST feDataRoutines )
 
 foreach ( FILE ${F90_FILE_LIST} )
   list ( APPEND F90_SOURCE_FILES ${FILE}.f90 )
@@ -77,7 +86,7 @@ add_library ( ${LIB_ID} ${F90_SOURCE_FILES} )
 if ( GSF_LIBRARY )
   set ( GSF_CB GSF_FEinterface ) # Pre-defined name of call-back library
   add_library ( ${GSF_CB} SHARED ${CB_SOURCE_FILES} )
-  target_link_libraries ( ${GSF_CB} vpmCommon_F90 )
+  target_link_libraries ( ${GSF_CB} LINK_PRIVATE vpmCommon_F90 )
   target_link_libraries ( ${LIB_ID} ${GSF_LIBRARY} ${GSF_CB} )
 else ( GSF_LIBRARY )
 # The module files of the dummy library should not be exported.
