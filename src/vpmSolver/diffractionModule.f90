@@ -437,8 +437,8 @@ contains
 
     ierr = 1
     Fex = 0.0_dp
-    if (.not. associated(Fe) .or. size(wave,2) < 3) return
-    if (ibody < 0 .or. ibody*6+6 > size(Fe,1)) return
+    if (.not.associated(Fe) .or. .not.allocated(wave)) return
+    if (ibody < 0 .or. ibody*6+6 > size(Fe,1) .or. size(wave,2) < 3) return
 
     ierr = 0
     do i = 1, size(wave,1)
