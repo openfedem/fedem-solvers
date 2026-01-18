@@ -14,6 +14,10 @@ module FELinearSolver
 
   implicit none
 
+  type Error_Flag
+     integer :: dummy
+  end type Error_Flag
+
   type MessageLevel
      integer :: dummy
   end type MessageLevel
@@ -66,14 +70,14 @@ module FELinearSolver
 contains
 
   subroutine errorMsg (prgnam,INFO,Msg)
-    use ErrorFlag        , only :  Error_Flag
-    use reportErrorModule, only :  error_p, reportError
+    use reportErrorModule, only : error_p, reportError
     character(len=*)            , intent(in) :: prgnam
     type(Error_Flag)            , pointer    :: INFO
     type(MessageLevel), optional, intent(in) :: Msg
     call reportError (error_p, &
          'The GSF equation solver is not available in this version.', &
-         addString=prgnam)
+         'Toggle off the "Equation solver out-of-core" option in the GUI,', &
+         'or remove -gsfSolver as additional option.', addString=prgnam)
     allocate(INFO)
     if (present(Msg)) then
        INFO%dummy = -max(1,abs(Msg%dummy))
@@ -112,7 +116,6 @@ contains
   end subroutine WriteMessageData
 
   subroutine FEInitialize (Msg,INFO)
-    use ErrorFlag     , only       :  Error_Flag
     type(MessageLevel), intent(in) :: Msg
     type(Error_Flag)  , pointer    :: INFO
     call errorMsg ('FEInitialize',INFO,Msg)
@@ -120,7 +123,6 @@ contains
 
   subroutine FEAnalyzeA (Msg,P,Q,T,INFO)
     use FEData        , only          :  FEDataInput
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(inout) :: Msg
     type(FEDataInput) , intent(in)    :: P
     type(SAM)         , pointer       :: Q
@@ -132,7 +134,6 @@ contains
   end subroutine FEAnalyzeA
 
   subroutine FEAnalyzeB (Msg,Q,T,INFO)
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(inout) :: Msg
     type(SAM)         , intent(inout) :: Q
     type(GSFColSup)   , pointer       :: T
@@ -143,7 +144,6 @@ contains
 
   subroutine FEAnalyzeC (Msg,P,Q,Qsub,T,INFO)
     use FEData        , only          :  FEDataInput
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(inout) :: Msg
     type(FEDataInput) , intent(in)    :: P
     type(SAM)         , intent(in)    :: Q
@@ -157,7 +157,6 @@ contains
 
   subroutine FEAnalyzeD (Msg,P,Q,Qsub,INFO)
     use FEData        , only          :  FEDataInput
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(inout) :: Msg
     type(FEDataInput) , intent(in)    :: P
     type(SAM)         , intent(in)    :: Q
@@ -183,17 +182,14 @@ contains
   end subroutine FEGetSuperelementOrder
 
   subroutine FEGetActiveOrder (Q,MEQN,INFO)
-    use ErrorFlag   , only        :  Error_Flag
     type(SAM)       , intent(in)  :: Q
     integer         , intent(out) :: MEQN(:)
     type(Error_Flag), pointer     :: INFO
+    print *,' ** FEGetActiveOrder dummy: ',Q%dummy,associated(INFO)
     MEQN = 0
-    print *,' ** FEGetActiveOrder dummy: ',Q%dummy
-    call errorMsg ('FEGetActiveOrder',INFO)
   end subroutine FEGetActiveOrder
 
   subroutine FEBeginAssembly (Q,S,INFO)
-    use ErrorFlag   , only       :  Error_Flag
     type(SAM)       , intent(in) :: Q
     type(CAM)       , pointer    :: S
     type(Error_Flag), pointer    :: INFO
@@ -204,7 +200,6 @@ contains
   subroutine FEAssembleElement (OPT,iE,k,P,Q,S,NRHS,B,INFO)
     use kindModule   , only          :  dp
     use FEData       , only          :  FEDataInput
-    use ErrorFlag    , only          :  Error_Flag
     integer          , intent(in)    :: OPT, iE
     real(dp)         , intent(in)    :: k(:,:)
     type(FEDataInput), intent(in)    :: P
@@ -219,7 +214,6 @@ contains
   end subroutine FEAssembleElement
 
   subroutine FEEndAssemblyA (Msg,Q,S,T,INFO)
-    use ErrorFlag     , only          :  Error_Flag
     Type(MessageLevel), intent(in)    :: Msg
     Type(SAM)         , intent(inout) :: Q
     Type(CAM)         , intent(inout) :: S
@@ -236,7 +230,6 @@ contains
   end subroutine FEEndAssemblyB
 
   subroutine FEFactorize (Msg,S,T,INFO)
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(inout) :: Msg
     type(CAM)         , intent(inout) :: S
     type(GSFColSup)   , intent(inout) :: T
@@ -247,7 +240,6 @@ contains
 
   subroutine FESolve (Msg,Action,N,NRHS,Q,T,B,X,INFO,KEEPB)
     use kindModule    , only          :  dp
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(in)    :: Msg
     character(len=4)  , intent(in)    :: Action
     integer           , intent(in)    :: N, NRHS
@@ -265,7 +257,6 @@ contains
 
   subroutine FEExtractS (Q,T,NRHS,B,R,INFO)
     use kindModule  , only        :  dp
-    use ErrorFlag   , only        :  Error_Flag
     type(SAM)       , intent(in)  :: Q
     type(GSFColSup) , intent(in)  :: T
     integer         , intent(in)  :: NRHS
@@ -278,7 +269,6 @@ contains
   end subroutine FEExtractS
 
   subroutine FEFindIsolatedZeroPivots (S,indices,INFO)
-    use ErrorFlag   , only          :  Error_Flag
     type(CAM)       , intent(inout) :: S
     integer         , pointer       :: indices(:)
     type(Error_Flag), pointer       :: INFO
@@ -289,7 +279,6 @@ contains
 
   subroutine FEInsertPivots (S,indices,values,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     type(CAM)       , intent(inout) :: S
     integer         , intent(in)    :: indices(:)
     real(dp)        , intent(in)    :: values(:)
@@ -300,7 +289,6 @@ contains
 
   subroutine FEExtractDiagAA (M,Q,S,A,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     integer         , intent(in)    :: M
     type(SAM)       , intent(in)    :: Q
     type(CAM)       , intent(inout) :: S
@@ -313,7 +301,6 @@ contains
 
   subroutine FEExtractDiagAB (S,A,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     type(CAM)       , intent(inout) :: S
     real(dp)        , intent(out)   :: A(:)
     type(Error_Flag), pointer       :: INFO
@@ -324,7 +311,6 @@ contains
 
   subroutine FEExtractK12A (S,T,A,IntExt,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     type(SAM)       , intent(in)    :: S
     type(CAM)       , intent(inout) :: T
     real(dp)        , intent(out)   :: A(:,:)
@@ -338,7 +324,6 @@ contains
 
   subroutine FEExtractK12B (S,T,IROW,JCOL,A,IntExt,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     type(SAM)       , intent(in)    :: S
     type(CAM)       , intent(inout) :: T
     integer         , pointer       :: IROW(:), JCOL(:)
@@ -353,7 +338,6 @@ contains
 
   subroutine FEExtractK22 (LowAll,S,T,A,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: LowAll
     type(SAM)       , intent(in)    :: S
     type(CAM)       , intent(inout) :: T
@@ -366,7 +350,6 @@ contains
 
   subroutine FEExtractB12 (Msg,Q,T,B,FstCol,LstCol,IntExt,INFO)
     use kindModule    , only          :  dp
-    use ErrorFlag     , only          :  Error_Flag
     type(MessageLevel), intent(in)    :: Msg
     type(SAM)         , intent(in)    :: Q
     type(GSFColSup)   , intent(inout) :: T
@@ -382,7 +365,6 @@ contains
 
   subroutine FEExtractL22 (LowAll,Q,T,A,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: LowAll
     type(SAM)       , intent(in)    :: Q
     type(GSFColSup) , intent(inout) :: T
@@ -395,7 +377,6 @@ contains
 
   subroutine FEPRM (AllInt,perm,M,N,Q,alpha,A,B,beta,C,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: AllInt, perm
     integer         , intent(in)    :: M, N
     type(SAM)       , intent(in)    :: Q
@@ -412,7 +393,6 @@ contains
 
   subroutine FETRA (AllInt,perm,M,N,Q,alpha,A,B,beta,C,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: AllInt, perm
     integer         , intent(in)    :: M, N
     type(SAM)       , intent(in)    :: Q
@@ -429,7 +409,6 @@ contains
 
   subroutine FETRMM (AllInt,transa,diag,perm,M,N,Q,alpha,A,B,C,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: AllInt, transa, diag, perm
     integer         , intent(in)    :: M, N
     type(SAM)       , intent(in)    :: Q
@@ -445,7 +424,6 @@ contains
 
   subroutine FEPermuteVectorsA (AllInt,Ext2Int,M,Q,B,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: AllInt, Ext2Int
     integer         , intent(in)    :: M
     type(SAM)       , intent(in)    :: Q
@@ -457,7 +435,6 @@ contains
 
   subroutine FEPermuteVectorsB (AllInt,Ext2Int,M,N,Q,B,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: AllInt, Ext2Int
     integer         , intent(in)    :: M, N
     type(SAM)       , intent(in)    :: Q
@@ -469,7 +446,6 @@ contains
 
   subroutine FEPermuteVectorsC (AllInt,Ext2Int,M,N,Q,B,C,INFO)
     use kindModule  , only          :  dp
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: AllInt, Ext2Int
     integer         , intent(in)    :: M, N
     type(SAM)       , intent(in)    :: Q
@@ -482,7 +458,6 @@ contains
   end subroutine FEPermuteVectorsC
 
   subroutine FEPermuteIndices (Ext2Int,Q,indices,INFO)
-    use ErrorFlag   , only          :  Error_Flag
     character(len=1), intent(in)    :: Ext2Int
     type(SAM)       , intent(in)    :: Q
     integer         , intent(inout) :: indices(:)
@@ -492,7 +467,6 @@ contains
   end subroutine FEPermuteIndices
 
   subroutine FEDestroyA (Msg,Q,S,T,INFO)
-    use ErrorFlag            , only       :  Error_Flag
     type(MessageLevel)       , intent(in) :: Msg
     type(SAM)      , optional, pointer    :: Q
     type(CAM)      , optional, pointer    :: S
@@ -503,7 +477,6 @@ contains
   end subroutine FEDestroyA
 
   subroutine FEDestroyB (Q,S,T,INFO)
-    use ErrorFlag            , only    :  Error_Flag
     type(SAM)      , optional, pointer :: Q
     type(CAM)      , optional, pointer :: S
     type(GSFColSup), optional, pointer :: T
@@ -512,36 +485,45 @@ contains
     call errorMsg ('FEDestroy',INFO)
   end subroutine FEDestroyB
 
-  subroutine FEErrorHandler (INFO,P,Q,lpu)
-    use FEData       , only       :  FEDataInput
-    use ErrorFlag    , only       :  Error_Flag
-    type(Error_Flag) , pointer    :: INFO
-    type(FEDataInput), intent(in) :: P
-    type(SAM)        , intent(in) :: Q
-    integer, optional, intent(in) :: lpu
-    print *,' ** FEErrorHandler: ',associated(INFO),associated(P%sam), &
-         &                         Q%dummy,present(lpu)
+  subroutine FEErrorHandler (INFO,P,Q,output)
+    use FEData, only : FEDataInput
+    type(Error_Flag) , pointer              :: INFO
+    type(FEDataInput), optional, intent(in) :: P
+    type(SAM)        , optional, intent(in) :: Q
+    integer          , optional, intent(in) :: output
+    if (present(output) .and. associated(INFO)) then
+       write(output,*) ' ** FEErrorHandler: ',present(P),present(Q)
+    end if
   end subroutine FEErrorHandler
 
-  subroutine SAMDump (Q,lpu,msglvl)
-    type(SAM), intent(in) :: Q
-    integer  , intent(in) :: lpu, msglvl
-    print *,' ** SAMDump: ',Q%dummy,lpu,msglvl
-  end subroutine SAMDump
+  function FEPivotError (INFO,checkNegative)
+    Logical                       :: FEPivotError
+    Type(Error_Flag) , pointer    :: INFO
+    Logical, optional, intent(in) :: checkNegative
+    if (associated(INFO)) then
+       FEPivotError = .true.
+    else if (present(checkNegative)) then
+       FEPivotError = checkNegative
+    else
+       FEPivotError = .false.
+    end if
+  end function FEPivotError
 
-  subroutine CAMDump (S,lpu,msglvl,INFO)
-    use ErrorFlag   , only       :  Error_Flag
+  subroutine FESetError (INFO,ProcName,ErrorNumber)
+    Type(Error_Flag) , pointer    :: INFO
+    Character(len=*) , intent(in) :: ProcName
+    Integer, optional, intent(in) :: ErrorNumber
+    call errorMsg (ProcName,INFO)
+    if (present(ErrorNumber)) print *,'    Error =',ErrorNumber
+  end subroutine FESetError
+
+  subroutine GSFDump (Q,S,T,lpu,INFO)
+    type(SAM)       , intent(in) :: Q
     type(CAM)       , intent(in) :: S
-    integer         , intent(in) :: lpu, msglvl
+    type(GSFColSup) , intent(in) :: T
+    integer         , intent(in) :: lpu
     type(Error_Flag), pointer    :: INFO
-    print *,' ** CAMDump: ',S%dummy,lpu,msglvl
-    call errorMsg ('CAMDump',INFO)
-  end subroutine CAMDump
-
-  subroutine GSFDump (T,lpu,msglvl)
-    type(GSFColSup), intent(in) :: T
-    integer        , intent(in) :: lpu, msglvl
-    print *,' ** GSFDump: ',T%dummy,lpu,msglvl
+    write(lpu,*) ' ** GSFDump: ',Q%dummy,S%dummy,T%dummy,associated(INFO)
   end subroutine GSFDump
 
 end module FELinearSolver

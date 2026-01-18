@@ -216,7 +216,8 @@ contains
 
     !! --- Build element stiffness matrix in global system
 
-    eM = 0.0_dp
+    eM    = 0.0_dp
+    sFull = 0.0_dp
 
     !! Take into account possible eccentricity
     !!    | Fm | = |    I    :  0 || Kt : 0  || I : Spin(e)' |
@@ -225,7 +226,6 @@ contains
     !! Triad1 (follower) stiffness
     nDOFs = cElem%triad1%nDOFs
     if (ignoreEccN) then
-       sFull = 0.0_dp
        sFull(1:3,1:3) = stiffInG
     else if (nDOFs > 0) then
        call EccExpand (cElem%eVec(:,2),stiffInG,sFull)
@@ -414,7 +414,8 @@ contains
 
     !! --- Build element damping matrix in global system
 
-    eM = 0.0_dp
+    eM    = 0.0_dp
+    dFull = 0.0_dp
 
     !! Take into account possible eccentricity
     !!    | Fm | = |    I    :  0 || Ct : 0  || I : Spin(e)' |
@@ -423,7 +424,6 @@ contains
     !! Triad1 (follower) damping
     nDOFs = cElem%triad1%nDOFs
     if (ignoreEccN) then
-       dFull = 0.0_dp
        dFull(1:3,1:3) = dampInG
     else if (nDOFs > 0) then
        call EccExpand (cElem%eVec(:,2),dampInG,dFull)

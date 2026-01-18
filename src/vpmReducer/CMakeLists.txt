@@ -32,12 +32,6 @@ foreach ( FOLDER ${LIB_ID_LIST} )
   add_subdirectory ( ${FOLDER} )
 endforeach ( FOLDER ${LIB_ID_LIST} )
 
-if ( FTLINALG_LIBRARY_ID MATCHES GSF )
-  message ( STATUS "INFORMATION : Building ${LIB_ID} with GSF support" )
-  string ( APPEND CMAKE_CXX_FLAGS " -DFT_HAS_GSF" )
-  string ( APPEND CMAKE_Fortran_FLAGS " -DFT_HAS_GSF" )
-endif ( FTLINALG_LIBRARY_ID MATCHES GSF )
-
 
 ## Files with header and source with same name
 set ( COMPONENT_FILE_LIST )

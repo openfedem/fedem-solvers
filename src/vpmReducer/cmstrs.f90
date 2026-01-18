@@ -241,9 +241,7 @@ contains
             &            'Check that the FE-model is consistent.')
     end if
 
-    do i = 1, nEigVal
-       phi(:,i) = phiFull(:,i)
-    end do
+    call DCOPY (ndof1*nEigVal,phiFull(1,1),1,phi(1,1),1)
 
     if (54.ge.sam%mpar(25).and.54.le.sam%mpar(26)) then
        call writeObject(evl,lpu,'Angular Eigenfrequencies')
@@ -422,6 +420,7 @@ contains
        do idof = 1, ndof2
           vec_ndof1 => dmGetColPtr(BmatDisk,idof,ierr)
           if (ierr < 0) goto 900
+
           call DSCATR (ndof1,sam%meqn1(1),vec_ndof1(1),vec_neq(1),1)
           vec_neq(sam%meqn2(idof)) = 1.0_dp
           do idir = 1, 3
@@ -538,7 +537,8 @@ contains
     integer               , intent(inout) :: iStiff
     integer               , intent(in)    :: NGEN, NRHS, LPU
     real(dp)              , intent(in)    :: tolFactorize
-    real(dp)              , intent(in)    :: SMEE(:,:), SKEE(:,:), PHI(:,:)
+    real(dp)              , intent(in)    :: SMEE(:,:), SKEE(:,:)
+    real(dp), target      , intent(in)    :: PHI(:,:)
     real(dp)              , intent(in)    :: fullRHS(:,:)
     real(dp)              , intent(out)   :: SMMAT(:,:), SKMAT(:,:)
     real(dp)              , intent(out)   :: RHS(:,:), VGI(:,:)
@@ -551,10 +551,9 @@ contains
     real(dp)                 :: dummy(1,1)
     real(dp),    allocatable :: SM11(:,:), SM12(:,:), SM22(:,:)
     real(dp),    allocatable :: SK11(:,:), SK22(:,:)
-    real(dp),    allocatable :: RHS1(:,:), RHS2(:,:)
-    real(dp),    pointer     :: vec_ndof1(:)
-    real(dp),    allocatable :: vec_ndof2(:), vec_neq(:), vec2_neq(:)
-    real(dp),    allocatable :: phiFull(:,:), gFull(:,:)
+    real(dp),    allocatable :: RHS1(:,:), RHS2(:,:), gFull(:,:)
+    real(dp),    allocatable :: vec_ndof2(:), vec2_neq(:)
+    real(dp),    pointer     :: vec_neq(:), vec_ndof1(:), phiFull(:,:)
     real(dp),    external    :: DDOT
 
     !! --- Logic section ---
@@ -593,11 +592,9 @@ contains
 
        !! Special build of RHS if NDOF1=0 (i.e., no internal DOFs)
 
-       if (NRHS > 0) then
-          do I = 1, NDOF2
-             RHS(I,:) = fullRHS(sam%dofPosIn2(I),:)
-          end do
-       end if
+       do I = 1, NRHS
+          call DGATHR (NDOF2,sam%dofPosIn2(1),fullRHS(1,I),RHS(1,I),1)
+       end do
 
        if (sam%mpar(25) < 83 .and. sam%mpar(26) > 80) then
           call writeMatrices (sam%mpar,lpu)
@@ -717,12 +714,16 @@ contains
        neq1 = sam%neq ! Use full system
     end if
 
-    allocate(vec_neq(neq1),STAT=ierr)
-    if (ierr /= 0) then
-       ierr = AllocationError('CMSTRS: vec_neq')
-       return
-    else if (doLogMem) then
-       call logAllocMem ('CMSTRS',0,size(vec_neq),nbd_p)
+    if (neq1 > NDOF1 .or. (ngen > 0 .and. nrhs > 0)) then
+       allocate(vec_neq(neq1),STAT=ierr)
+       if (ierr /= 0) then
+          ierr = AllocationError('CMSTRS: vec_neq')
+          return
+       else if (doLogMem) then
+          call logAllocMem ('CMSTRS',0,size(vec_neq),nbd_p)
+       end if
+    else
+       nullify(vec_neq)
     end if
 
     if (ngen > 0) then
@@ -736,18 +737,29 @@ contains
           if (ierr < 0) goto 900
        end if
 
-       allocate(phiFull(neq1,ngen),sk11(ngen,ngen),STAT=ierr)
-       if (ierr /= 0) then
-          ierr = AllocationError('CMSTRS: phiFull and sk11')
-          return
-       else if (doLogMem) then
-          call logAllocMem ('CMSTRS',0,size(phiFull)+size(sk11),nbd_p)
+       if (neq1 == NDOF1) then
+          phiFull => phi ! Using internal DOFs only
+       else
+          allocate(phiFull(neq1,ngen),STAT=ierr)
+          if (ierr /= 0) then
+             ierr = AllocationError('CMSTRS: phiFull')
+             return
+          else if (doLogMem) then
+             call logAllocMem ('CMSTRS',0,size(phiFull),nbd_p)
+          end if
+          call DCOPY (size(phiFull),0.0_dp,0,phiFull(1,1),1)
+          do i = 1, ngen
+             call DSCATR (NDOF1,sam%meqn1(1),phi(1,i),phiFull(1,i),1)
+          end do
        end if
 
-       call DCOPY (size(phiFull),0.0_dp,0,phiFull(1,1),1)
-       do i = 1, ngen
-          call DSCATR (ndof1,sam%meqn1(1),phi(1,i),phiFull(1,i),1)
-       end do
+       allocate(sk11(ngen,ngen),STAT=ierr)
+       if (ierr /= 0) then
+          ierr = AllocationError('CMSTRS: sk11')
+          return
+       else if (doLogMem) then
+          call logAllocMem ('CMSTRS',0,size(sk11),nbd_p)
+       end if
        call csTransform (skii,phiFull,sk11,ierr)
        if (ierr < 0) goto 900
 
@@ -768,7 +780,7 @@ contains
              call logAllocMem ('CMSTRS',0,size(rhs1),nbd_p)
           end if
 
-          if (neq1 == ndof1) then
+          if (neq1 == NDOF1) then
              !! phiFull is of dimension NDOF1*NGEN, whereas fullRHS is NEQ*NRHS
              !! Must extract the NDOF1 internal DOFs from fullRHS
              do i = 1, nrhs
@@ -801,6 +813,10 @@ contains
        end if
     end if
 
+    if (neq1 > NDOF1) then
+       call DCOPY (neq1,0.0_dp,0,vec_neq(1),1)
+    end if
+
     if (ngen > 0) then
 
        allocate(sm11(ngen,ngen),sm12(ngen,ndof2),STAT=ierr)
@@ -820,21 +836,20 @@ contains
        if (ierr < 0) goto 900
 
        !! Compute M21 = M12' = B'*Mii*Phi
-       call DCOPY (neq1,0.0_dp,0,vec_neq(1),1)
        do i = ndof2, 1, -1 ! Loop backwards to minimize read operations
-          vec_ndof1 => dmGetColPtr(bmatDisk,i,ierr)
+          vec_ndof1 => getBcolumn(i,ierr)
           if (ierr < 0) goto 900
-
-          call DSCATR (ndof1,sam%meqn1(1),vec_ndof1(1),vec_neq(1),1)
           do j = 1, ngen
-             sm12(j,i) = DDOT(neq1,vec_neq(1),1,phiFull(1,j),1)
+             sm12(j,i) = DDOT(neq1,vec_ndof1(1),1,phiFull(1,j),1)
           end do
        end do
 
-       if (doLogMem) then
-          call logAllocMem ('CMSTRS',size(phiFull),0,nbd_p)
+       if (neq1 > NDOF1) then
+          if (doLogMem) then
+             call logAllocMem ('CMSTRS',size(phiFull),0,nbd_p)
+          end if
+          deallocate(phiFull)
        end if
-       deallocate(phiFull)
 
        if (smSize(smie,3) > 0) then
           !! Compute M12 = M12 + Phi'*Mie
@@ -858,24 +873,21 @@ contains
     end if
 
     !! Compute M22 = B'*Mii*B
-    call DCOPY (neq1,0.0_dp,0,vec_neq(1),1)
     do j = 1, ndof2
-       vec_ndof1 => dmGetColPtr(bmatDisk,j,ierr)
+       vec_ndof1 => getBcolumn(j,ierr)
        if (ierr < 0) goto 900
 
-       call DSCATR (ndof1,sam%meqn1(1),vec_ndof1(1),vec_neq(1),1)
-       call csPremult (smii,vec_neq,vec2_neq,1,ierr)
+       call csPremult (smii,vec_ndof1,vec2_neq,1,ierr)
        if (ierr < 0) goto 900
 
-       sm22(j,j) = DDOT(neq1,vec_neq(1),1,vec2_neq(1),1)
+       sm22(j,j) = DDOT(neq1,vec_ndof1(1),1,vec2_neq(1),1)
 
        do i = j-1, 1, -1 ! Loop backwards to minimize read operations
 
-          vec_ndof1 => dmGetColPtr(bmatDisk,i,ierr)
+          vec_ndof1 => getBcolumn(i,ierr)
           if (ierr < 0) goto 900
 
-          call DSCATR (ndof1,sam%meqn1(1),vec_ndof1(1),vec_neq(1),1)
-          sm22(i,j) = DDOT(neq1,vec_neq(1),1,vec2_neq(1),1)
+          sm22(i,j) = DDOT(neq1,vec_ndof1(1),1,vec2_neq(1),1)
           sm22(j,i) = sm22(i,j)
 
        end do
@@ -898,6 +910,7 @@ contains
        do i = 1, ndof2
           vec_ndof1 => dmGetColPtr(bmatDisk,i,ierr)
           if (ierr < 0) goto 900
+
           call smMatTransTimesVec (smie,vec_ndof1,vec_ndof2,ierr)
           if (ierr < 0) goto 900
 
@@ -944,15 +957,20 @@ contains
     call padRedMatrix (smmat,ndof2+ngen)
 
 800 continue
-    if (nrhs > 0) then
+    if (allocated(rhs2)) then
 
        !! Add RHS2 into RHS
-       do i = 1, ndof2
-          rhs(i,:) = rhs2(sam%dofPosIn2(i),:)
+       do i = 1, nrhs
+          call DGATHR (ndof2,sam%dofPosIn2(1),rhs2(1,i),rhs(1,i),1)
        end do
 
+    end if
+    if (allocated(rhs1)) then
+
        !! Add RHS1 into RHS
-       if (ngen > 0) rhs(ndof2+1:ndof2+ngen,:) = rhs1
+       do i = 1, nrhs
+          call DCOPY (ngen,rhs1(1,i),1,rhs(ndof2+1,1),1)
+       end do
 
     end if
 
@@ -962,7 +980,7 @@ contains
        if (doLogMem) call logAllocMem ('CMSTRS',size(vec_ndof2),0,nbd_p)
        deallocate(vec_ndof2)
     end if
-    if (allocated(vec_neq)) then
+    if (associated(vec_neq)) then
        if (doLogMem) call logAllocMem ('CMSTRS',size(vec_neq),0,nbd_p)
        deallocate(vec_neq)
     end if
@@ -1019,6 +1037,18 @@ contains
          call DCOPY (size(A,1)*n,0.0_dp,0,A(1,NDIM+1),1)
       end if
     end subroutine padRedMatrix
+
+    !> @brief Extracts a column from the B-matrix expanded to length @a neq1.
+    function getBcolumn (icol,ierr) result(vec_ndof1)
+      integer , intent(in)  :: icol
+      integer , intent(out) :: ierr
+      real(dp), pointer     :: vec_ndof1(:)
+      vec_ndof1 => dmGetColPtr(bmatDisk,icol,ierr)
+      if (ierr == 0 .and. neq1 > NDOF1) then
+         call DSCATR (NDOF1,sam%meqn1(1),vec_ndof1(1),vec_neq(1),1)
+         vec_ndof1 => vec_neq
+      end if
+    end function getBcolumn
 
     !> @brief Debug print of some matrices used in the CMS-reduction.
     subroutine writeMatrices (mpar,lpu)

@@ -52,11 +52,10 @@ contains
     !!==========================================================================
 
     use SprKindModule , only : ik
-    use ErrorFlag     , only : Error_Flag, Set_Traceback, Set_MemoryAlloc_Error
-    use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup
+    use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup, Error_Flag
     use FELinearSolver, only : FEMatrixOrder, FEExtractDiagA, FESolve
     use FELinearSolver, only : FEPermuteVectors, FEPermuteIndices
-    use FELinearSolver, only : SetLinearSolverType
+    use FELinearSolver, only : FESetError, SetLinearSolverType
     use ProgressModule, only : writeProgress
 
     use FFaProfilerInterface, only : ffa_startTimer, ffa_stopTImer
@@ -83,8 +82,9 @@ contains
          &                      NACEV,NEQA,NEQB,NGDEV
     real(wp)                 :: ALFA,AUX,BETA,RAN,RLPR,SIGMA,SMALL,TRSH,VPMAX
     integer    , external    :: IMP
+    real(wp)   , external    :: DDOT
     integer(ik), allocatable :: LWA(:,:), IPDIAG(:)
-    real(wp)   , allocatable :: RWA(:,:), RWE(:,:), EVERR(:), R(:,:)
+    real(wp)   , allocatable :: RWA(:,:), RWE(:,:), EVERR(:), R(:)
 
     !! --- Logic section ---
 
@@ -131,6 +131,7 @@ contains
     SMALL  = 10.0_wp**REAL(-NSDIG+NSDIG/5,wp)
     RAN    = 0.1234567891234567_wp
     MOP    = 0_ik
+    J      = 0_ik
 
     if (N == FEMatrixOrder(structA)) then
        AllInt = 'A'
@@ -143,7 +144,7 @@ contains
     IF (TOL(2) <= 0.0_wp) TOL(2) = TOL(1)
     IF (TOL(3) <  1.0_wp) TOL(3) = 10.0_wp
 
-    allocate(R(N,2),work1(N,NEVEC),work2(N,1),stat=IERR)
+    allocate(R(N),work1(N,NEVEC),work2(N,1),stat=IERR)
     IF (IERR /= 0) GOTO 980
 
     IF (KSB == 2_ik) THEN
@@ -154,13 +155,13 @@ contains
 
     !! Start vector
     IF (KSR == 1_ik) THEN
-       call FERandomVec (R(:,1),RAN)
+       call FERandomVec (R,RAN)
     ELSE IF (KSR == 3_ik) THEN
-       R(:,1) = 1.0_wp
+       call DCOPY (N,1.0_wp,0,R(1),1)
     ELSE IF (KSR == 2_ik) THEN
        IF (KSB == 1_ik) THEN
           !! Extract the diagonal from the GSF-matrix B
-          call FEExtractDiagA (coeffB,R(:,1),INFO)
+          call FEExtractDiagA (coeffB,R,INFO)
           IF (associated(INFO)) THEN
              CALL SPRLER (20_ik,J,J,J,LLLP,LERR)
              GOTO 989
@@ -169,18 +170,19 @@ contains
           !! Extract the diagonal from the SPR-matrix B
           allocate(IPDIAG(N),stat=IERR)
           IF (IERR /= 0) GOTO 980
-          CALL SPRDG1 (MPARB,MTREEB,MSIFB,IPDIAG,LLLP,LERR)
+          CALL SPRDG1 (MPARB(1),MTREEB(1),MSIFB(1), &
+               &       IPDIAG(1),LLLP,LERR)
           IF (LERR .LT. 0_ik) THEN
              CALL SPRLER (20_ik,J,J,J,LLLP,LERR)
              GOTO 989
           END IF
           DO I = 1, N
-             R(I,1) = valueB(IPDIAG(I))
+             R(I) = valueB(IPDIAG(I))
           END DO
           deallocate(IPDIAG)
        ELSE
           !! Matrix B is diagonal
-          R(:,1) = diagB(1:N)
+          call DCOPY (N,diagB(1),1,R(1),1)
        END IF
     END IF
 
@@ -208,8 +210,8 @@ contains
     IF (IERR /= 0) GOTO 980
 
     LWA = 0_ik
-    RWA = 0.0_wp
-    EVL = 0.0_wp
+    call DCOPY (MAXLAN*7,0.0_wp,0,RWA(1,1),1)
+    call DCOPY (MAXLAN,0.0_wp,0,EVL(1),1)
 
     !!--------------------------------------------------------------------------
     !! Generate Lanczos vectors and reduce the inverse eigenproblem to
@@ -234,30 +236,29 @@ contains
        END IF
        if (abs(KSB) == 2_ik) then
           !! Matrix A is GSF and matrix B is diagonal
-          call FESMM (INFO,LLP,IFLAG,N,AllInt,R(:,1),R(:,2), &
-               &      MsgA,structA,factorA,diagB=diagB)
+          call FESMM (INFO,LLP,IFLAG,N,AllInt,R,R,MsgA,structA,factorA, &
+               &      diagB=diagB)
        else if (abs(KSB) == 3_ik) then
           !! Matrix A is GSF and matrix B is SPR
-          call FESMM (INFO,LLP,IFLAG,N,AllInt,R(:,1),R(:,2), &
-               &      MsgA,structA,factorA, &
+          call FESMM (INFO,LLP,IFLAG,N,AllInt,R,R,MsgA,structA,factorA, &
                &      MPARB=MPARB,MTREEB=MTREEB,MSIFB=MSIFB,valueB=valueB)
        else
           !! Both matrices are GSF
-          call FESMM (INFO,LLP,IFLAG,N,AllInt,R(:,1),R(:,2), &
-               &      MsgA,structA,factorA,structB,coeffB,factorB)
+          call FESMM (INFO,LLP,IFLAG,N,AllInt,R,R,MsgA,structA,factorA, &
+               &      structB,coeffB,factorB)
        end if
        IF (associated(INFO)) THEN
-          CALL SPRLER (24_ik,0_ik,J,J,LLLP,LERR)
+          CALL SPRLER (24_ik,J,J,J,LLLP,LERR)
           GOTO 989
        END IF
 
     END IF
 
     !! Length of R
-    AUX = dot_product(R(:,1),R(:,1))
+    AUX = DDOT(N,R(1),1,R(1),1)
     IF (AUX < SMALL) THEN
-       call FERandomVec (R(:,1),RAN)
-       AUX = dot_product(R(:,1),R(:,1))
+       call FERandomVec (R,RAN)
+       AUX = DDOT(N,R(1),1,R(1),1)
     END IF
     BETA = SQRT(AUX)
     IF (KPD == 1_ik) THEN
@@ -277,19 +278,20 @@ contains
     call writeProgress ('     Starting Lanczos loop')
     do K = 1, MAXLAN ! ====================================== Start Lanczos loop
        J = int(K,ik)
+       KM1 = K - 1
        call ffa_startTimer ('LanczosLoop')
        IF (.not. solveAllInOneGo) KEVEX = KEVEX-1
 
        !! Form Lanczos vector
-       EVC(1:N,K) = R(:,1)/BETA
+       AUX = 1.0_wp / BETA
+       call DMVV (N,R(1),1,AUX,0,EVC(1,K))
 
-       IF (K > 1 .AND. .not.reStart) THEN
+       IF (KM1 > 0 .AND. .not.reStart) THEN
 
           !! --- Reorthogonalization - if necessary and/or if specified --------
 
-          KM1 = K-1
           IF (KORT > 0_ik) THEN
-             MOP(8) = MOP(8)+1_ik
+             MOP(8) = MOP(8) + 1_ik
              DO I = 1, int(KORT)
                 call FEMGSOrth (EVC(1:N,:),EVC(1:N,K),KM1)
                 IF (IPSW > 1) WRITE (LPU,6010) K
@@ -299,10 +301,10 @@ contains
              IF (JORT == 1) THEN
                 call FEMGSOrth (EVC(1:N,:),EVC(1:N,K),KM1)
                 IF (IPSW > 1) WRITE (LPU,6010) K
-                MOP(8) = MOP(8)+1_ik
-                MOP(9) = MOP(9)+KM1
-                RWA(1:K,IPK) = RLPR
-                RWA(1:K,IPKM1) = RLPR
+                MOP(8) = MOP(8) + 1_ik
+                MOP(9) = MOP(9) + int(KM1,ik)
+                call DCOPY (K,RLPR,0,RWA(1,IPK),1)
+                call DCOPY (K,RLPR,0,RWA(1,IPKM1),1)
                 JORT = 0
              ELSE
                 call FEReOrl (RWA(1:KM1,IPA),RWA(1:KM1,IPB),RWA(1:KM1,IPK), &
@@ -312,8 +314,8 @@ contains
                 IF (VPMAX > TRSH) THEN
                    call FEMGSOrth (EVC(1:N,:),EVC(1:N,K),KM1)
                    IF (IPSW > 1) WRITE (LPU,6010) K
-                   MOP(8) = MOP(8)+1_ik
-                   MOP(9) = MOP(9)+KM1
+                   MOP(8) = MOP(8) + 1_ik
+                   MOP(9) = MOP(9) + int(KM1,ik)
                    JORT   = 1
                 END IF
              END IF
@@ -322,8 +324,8 @@ contains
              IF (JORT > 0) THEN
                 call FEMGSOrth (EVC(1:N,:),EVC(1:N,K),KM1)
                 IF (IPSW > 1) WRITE (LPU,6010) K
-                MOP(8) = MOP(8)+1_ik
-                MOP(9) = MOP(9)+KM1
+                MOP(8) = MOP(8) + 1_ik
+                MOP(9) = MOP(9) + int(KM1,ik)
              END IF
              IF (JORT == 2) JORT = -2
           END IF
@@ -333,16 +335,16 @@ contains
        !! Prepare new R
        if (abs(KSB) == 2_ik) then
           !! Matrix A is GSF and matrix B is diagonal
-          call FESMM (INFO,LLP,IFLAG,N,AllInt,EVC(1:N,K),R(:,1), &
+          call FESMM (INFO,LLP,IFLAG,N,AllInt,EVC(1:N,K),R, &
                &      MsgA,structA,factorA,diagB=diagB)
        else if (abs(KSB) == 3_ik) then
           !! Matrix A is GSF and matrix B is SPR
-          call FESMM (INFO,LLP,IFLAG,N,AllInt,EVC(1:N,K),R(:,1), &
+          call FESMM (INFO,LLP,IFLAG,N,AllInt,EVC(1:N,K),R, &
                &      MsgA,structA,factorA, &
                &      MPARB=MPARB,MTREEB=MTREEB,MSIFB=MSIFB,valueB=valueB)
        else
           !! Both matrices are GSF
-          call FESMM (INFO,LLP,IFLAG,N,AllInt,EVC(1:N,K),R(:,1), &
+          call FESMM (INFO,LLP,IFLAG,N,AllInt,EVC(1:N,K),R, &
                &      MsgA,structA,factorA,structB,coeffB,factorB)
        end if
        IF (associated(INFO)) THEN
@@ -350,13 +352,13 @@ contains
           GOTO 989
        END IF
 
-       IF (K > 1 .AND. .not.reStart) THEN
-          R(:,1) = R(:,1) - BETA*EVC(1:N,K-1)
+       IF (KM1 > 0 .AND. .not.reStart) THEN
+          call DAXPY (N,-BETA,EVC(1,KM1),1,R(1),1)
        END IF
        reStart = .false.
 
-       !! Element alpha_k of tridiag. form
-       ALFA = dot_product(EVC(1:N,K),R(:,1))
+       !! Element alpha_k of tridiagonal form
+       ALFA = DDOT(N,EVC(1,K),1,R(1),1)
        RWA(K,IPA) = ALFA
 
        NLV = K
@@ -367,8 +369,8 @@ contains
 
           IF (NEVEXT > 0) LWA(:,1) = LWA(:,2)
 
-          CALL SPRLTD (NLV,LWA(1,2),LWA(1,1), &
-               &       EVERR,EVL,RWA(1,IPA),RWA(1,IPB),RWA(1,IPD),RWA(1,IPS), &
+          CALL SPRLTD (NLV,LWA(1,2),LWA(1,1),EVERR(1),EVL(1), &
+               &       RWA(1,IPA),RWA(1,IPB),RWA(1,IPD),RWA(1,IPS), &
                &       TOL(1),NGDEV,NACEV,int(IPSW,ik),int(LPU,ik),LERR)
           IF (LERR < 0_ik) GOTO 989
 
@@ -385,20 +387,20 @@ contains
        END IF
 
        !! --- Next (unscaled) Lanczos vector -----------------------------------
-       R(:,1) = R(:,1) - ALFA*EVC(1:N,K)
+       call DAXPY (N,-ALFA,EVC(1,K),1,R(1),1)
 
        !! Length of R
-       BETA = sqrt(dot_product(R(:,1),R(:,1)))
+       BETA = sqrt(DDOT(N,R(1),1,R(1),1))
        AUX  = abs(RWA(1,IPA))
 
        IF (BETA < RLPR*AUX) THEN
 
           !! ------ Breakdown; generate new (random) start vector and make it
           !!        ortonormal to previous Lanczos vectors, and start again
-          call FERandomVec (R(:,1),RAN)
-          AUX = 1.0_wp / sqrt(dot_product(R(:,1),R(:,1)))
-          EVC(1:N,K) = R(:,1)*AUX
-          call FEMGSOrth (EVC(1:N,:),R(:,1),K)
+          call FERandomVec (R,RAN)
+          AUX = 1.0_wp / sqrt(DDOT(N,R(1),1,R(1),1))
+          call DMVV (N,R(1),1,AUX,0,EVC(1,K))
+          call FEMGSOrth (EVC(1:N,:),R,K)
           BETA = 1.0_wp
           RWA(K,IPB) = 0.0_wp
 
@@ -481,18 +483,19 @@ contains
        SIGMA = minval(RWA(1:NVC,IPA))
        IF (SIGMA < TRSH) THEN
           SIGMA = ABS(SIGMA) + TRSH
-          RWA(1:NVC,IPA) = RWA(1:NVC,IPA) + SIGMA
+          call DAXPY (NVC,1.0_wp,SIGMA,0,RWA(1,IPA),1)
        ELSE
           SIGMA = 0.0_wp
        END IF
        DO K = 1, NVC
-          RWE(:,K) = RWE(:,K) / SQRT(RWA(K,IPA))
-          RWA(K,IPA) = RWA(K,IPA) - SIGMA
+          call DSCAL (NLV,1.0_wp/SQRT(RWA(K,IPA)),RWE(1,K),1)
+          call DAXPY (NVC,-1.0_wp,SIGMA,0,RWA(1,IPA),1)
        END DO
 
     END IF
 
-    work1(:,1:NVC) = matmul(EVC(1:N,1:NLV),RWE(:,1:NVC))
+    call DGEMM ('N','N',N,NVC,NLV,1.0_wp,EVC(1,1),size(EVC,1), &
+         &      RWE(1,1),NLV,0.0_wp,work1(1,1),N)
 
     !! --- Restore desired eigenvectors ----------------------------------------
 
@@ -545,8 +548,11 @@ contains
     ELSE IF (MOP(6) == 0_ik) THEN
 
        !! Matrix B is diagonal
+       DO K = 1, N
+          R(K) = 1.0_wp / diagB(K)
+       END DO
        DO K = 1, NVC
-          EVC(1:N,K) = work1(1:N,K) / diagB(1:N)
+          call DMVV (N,work1(1,K),1,R(1),1,EVC(1,K))
        END DO
 
        call FEPermuteVectors (AllInt,'F',N,NVC,structA,EVC,INFO)
@@ -554,15 +560,14 @@ contains
     ELSE
 
        DO K = 1, NVC
-          R(:,1) = work1(:,K) ! Make a copy first because the first column
-          !                   ! of work1 is destroyed by FESMM
-          call FESMM (INFO,LLP,2,N,AllInt,R(:,1),EVC(1:N,K), &
+          call DCOPY (N,work1(1,K),1,R(1),1)
+          call FESMM (INFO,LLP,2,N,AllInt,R,EVC(1:N,K), &
                &      MsgA,structA,factorA,diagB=diagB)
           IF (associated(INFO)) THEN
              CALL SPRLER (26_ik,int(K,ik),J,J,LLLP,LERR)
              GOTO 989
           END IF
-          EVC(1:N,K) = EVC(1:N,K) / RWA(K,IPA)
+          call DSCAL (N,1.0_wp/RWA(K,IPA),EVC(1,K),1)
        END DO
 
        call FEPermuteVectors (AllInt,'F',N,NVC,structA,EVC(1:N,1:NVC),INFO)
@@ -574,12 +579,12 @@ contains
     !! ------------------------------------------------ Exit -------------------
 
 980 CONTINUE
-    call Set_MemoryAlloc_Error (INFO,'FELanczosSolve',-1)
+    call FESetError (INFO,'FELanczosSolve',-1)
     goto 999
 989 CONTINUE
     IERR = int(LERR)
 990 CONTINUE
-    call Set_Traceback (INFO,'FELanczosSolve')
+    call FESetError (INFO,'FELanczosSolve')
 999 CONTINUE
     if (allocated(R))     deallocate(R)
     if (allocated(LWA))   deallocate(LWA)
@@ -607,11 +612,11 @@ contains
       IF (LLP > 0) WRITE(LLP,*) 'ENTERING FEMGSOrth',M
 #endif
       do j = 1, M
-         x = dot_product(V,G(:,j))
-         V = V - x*G(:,j)
+         x = DDOT(N,V(1),1,G(1,j),1)
+         call DAXPY (N,-x,G(1,j),1,V(1),1)
       end do
-      x = 1.0_wp / sqrt(dot_product(V,V))
-      V = x*V
+      x = 1.0_wp / sqrt(DDOT(N,V(1),1,V(1),1))
+      call DSCAL (N,x,V(1),1)
     end subroutine FEMGSOrth
 
     subroutine FERandomVec (V,x)
@@ -686,11 +691,9 @@ contains
     !!==========================================================================
 
     use SprKindModule , only : ik
-    use ErrorFlag     , only : Error_Flag, Set_Traceback, Set_MemoryAlloc_Error
-    use ErrorFlag     , only : ZeroPivotError, NegativePivotError
-    use ErrorFlag     , only : Print_ErrStat, Destroy_Error_Flag
-    use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup
+    use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup, Error_Flag
     use FELinearSolver, only : SetLinearSolverType, FEFactorize
+    use FELinearSolver, only : FEErrorHandler, FESetError, FEPivotError
 
     use FFaProfilerInterface, only : ffa_startTimer, ffa_stopTImer
 
@@ -749,8 +752,7 @@ contains
        call FEFactorize (MsgA,coeffA,factorA,INFO)
        call ffa_stopTimer ('FEFactorize')
        if (associated(INFO)) then
-          if (ZeroPivotError(INFO)) LERR = -3_ik
-          if (NegativePivotError(INFO) .and. KSA == 3_ik) LERR = -3_ik
+          if (FEPivotError(INFO, KSA == 3_ik)) LERR = -3_ik
           CALL SPRLER (21_ik,I,I,I,int(LPU,ik),LERR)
           if (LERR /= -2_ik) goto 900
        end if
@@ -777,8 +779,7 @@ contains
           call FEFactorize (MsgB,coeffB,factorB,INFO)
           call ffa_stopTimer ('FEFactorize')
           if (associated(INFO)) then
-             if (ZeroPivotError(INFO)) LERR = -3_ik
-             if (NegativePivotError(INFO)) LERR = -3_ik
+             if (FEPivotError(INFO)) LERR = -3_ik
              CALL SPRLER (22_ik,KSB,I,I,int(LPU,ik),LERR)
           end if
 
@@ -790,14 +791,14 @@ contains
           allocate(LWA(MPARB(14)+1_ik),RWA(MPARB(17)),stat=LERR)
           if (LERR /= 0_ik) then
              LERR = -1_ik
-             call Set_MemoryAlloc_Error (INFO,'FELFac',-1)
+             call FESetError (INFO,'FELFac',-1)
              goto 900
           end if
 
           KSB = -3
           TPR(1) = EPS
-          CALL SPRFC2 (MPARB,MTREEB,MSIFB,valueB,TPR,LWA,RWA,int(LPU,ik),LERR, &
-               &       CMVY18,CMMY18)
+          CALL SPRFC2 (MPARB(1),MTREEB(1),MSIFB(1),valueB(1),TPR(1), &
+               &       LWA(1),RWA(1),int(LPU,ik),LERR,CMVY18,CMMY18)
           IF (LERR < 0_ik) CALL SPRLER (22_ik,int(KSB,ik),I,I,int(LPU,ik),LERR)
 
           IF (LERR < 0_ik .AND. MPARB(27) > 0_ik .AND. NZP < size(MSING)) THEN
@@ -832,10 +833,9 @@ contains
     END IF
 
 900 if (LERR < 0_ik) then
-       call Set_Traceback (INFO,'FELFac')
+       call FESetError (INFO,'FELFac')
     else if (associated(INFO)) then
-       if (LPU >= 0) call Print_ErrStat (INFO,LPU)
-       call Destroy_Error_Flag (INFO)
+       call FEErrorHandler (INFO, output=LPU)
        nullify(INFO)
     end if
 
@@ -856,8 +856,8 @@ contains
     !!==========================================================================
 
     use SprKindModule , only : ik
-    use ErrorFlag     , only : Error_Flag, Get_ErrStat
-    use FELinearSolver, only : SAM, CAM, FEPermuteIndices
+    use FELinearSolver, only : SAM, CAM, Error_Flag
+    use FELinearSolver, only : FEPermuteIndices, FESetError
     use FELinearSolver, only : FEFindIsolatedZeroPivots, FEInsertPivots
 
     type(SAM)       , pointer       :: struct
@@ -875,18 +875,18 @@ contains
 
     nullify(iWork)
     call FEFindIsolatedZeroPivots (coeff,iWork,INFO)
-    if (Get_ErrStat(INFO,'FEFindAndFixZeroPivots')) return
+    if (Get_ErrStat()) return
     if (.not. associated(iWork)) return
 
     !! Isolated zero pivots were found,
     !! fix them by inserting 1.0 on the diagonal
-    work1(1:size(iWork),1) = 1.0_wp
+    call DCOPY (size(iWork),1.0_wp,0,work1(1,1),1)
     call FEInsertPivots (coeff,iWork,work1(:,1),INFO)
-    if (Get_ErrStat(INFO,'FEFindAndFixZeroPivots')) return
+    if (Get_ErrStat()) return
 
     !! Convert to external equation numbers
     call FEPermuteIndices ('F',struct,iWork,INFO)
-    if (Get_ErrStat(INFO,'FEFindAndFixZeroPivots')) return
+    if (Get_ErrStat()) return
 
     !! Store the singular equation numbers in MSING, making sure the same
     !! equation is not counted twice (in case both matrices are singular)
@@ -903,6 +903,16 @@ contains
     end do
 
     deallocate(iWork)
+
+  contains
+
+    function Get_ErrStat ()
+      logical :: Get_ErrStat
+      Get_ErrStat = associated(INFO)
+      if (Get_ErrStat) then
+         call FESetError (INFO,'FEFindAndFixZeroPivots')
+      end if
+    end function Get_ErrStat
 
   end subroutine FEFindAndFixZeroPivots
 
@@ -936,9 +946,8 @@ contains
     !!==========================================================================
 
     use SprKindModule , only : ik
-    use ErrorFlag     , only : Error_Flag, Set_Traceback, Set_Internal_Error
-    use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup
-    use FELinearSolver, only : FESolve, FETRMM, FEPRM
+    use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup, Error_Flag
+    use FELinearSolver, only : FESolve, FETRMM, FEPRM, FESetError
 
     use FFaProfilerInterface, only : ffa_startTimer, ffa_stopTImer
 
@@ -974,7 +983,7 @@ contains
     case(1:4) ! Compute (A-1)*UbT*X
 
        if (present(diagB)) then
-          work1(:,1) = diagB(1:Ndim)*X
+          call DMVV (Ndim,diagB(1),1,X(1),1,work1(1,1))
        else if (present(structB) .and. present(factorB)) then
 #if FT_DEBUG > 1
           IF (LPU > 0) WRITE(LPU,*) 'CALLING  FETRMM(B,'//AllInt//',N,N)'
@@ -987,7 +996,7 @@ contains
           if (associated(INFO)) goto 90
        else if (present(MPARB) .and. present(valueB)) then
           if (.not.present(MTREEB) .or. .not.present(MTREEB)) then
-             call Set_Internal_Error (INFO,'FESMM',-99)
+             call FESetError (INFO,'FESMM',-99)
              goto 100
           end if
           call SPRTMM (valueB(MPARB(8)+1),X(1),X(1),work1(1,1), &
@@ -995,7 +1004,7 @@ contains
                &       1_ik,1_ik,22_ik,int(LPU,ik),IERR)
           if (IERR < 0_ik) goto 90
        else
-          call Set_Internal_Error (INFO,'FESMM',-99)
+          call FESetError (INFO,'FESMM',-99)
           goto 100
        end if
 
@@ -1011,16 +1020,16 @@ contains
 
        case(1) ! Store result in X (overwriting the input)
 
-          X = work2(:,1)
+          call DCOPY (Ndim,work2(1,1),1,X(1),1)
 
        case(2) ! Store result in Y
 
-          Y = work2(:,1)
+          call DCOPY (Ndim,work2(1,1),1,Y(1),1)
 
        case(3:4) ! Compute Ub*(A-1)*UbT*X
 
           if (present(diagB)) then
-             work1(:,1) = diagB(1:Ndim)*work2(:,1)
+             call DMVV (Ndim,diagB(1),1,work2(1,1),1,work1(1,1))
           else if (present(structB) .and. present(factorB)) then
 #if FT_DEBUG > 1
              IF (LPU > 0) WRITE(LPU,*) 'CALLING  FETRMM(B,'//AllInt//',T,N)'
@@ -1051,7 +1060,7 @@ contains
        if (associated(INFO)) goto 90
 
        if (present(diagB)) then
-          work2(:,1) = diagB(1:Ndim)*work1(:,1)
+          call DMVV (Ndim,diagB(1),1,work1(1,1),1,work2(1,1))
        else if (present(structB) .and. present(coeffB)) then
 #if FT_DEBUG > 1
           IF (LPU > 0) WRITE(LPU,*) 'CALLING  FEPRM(B,'//AllInt//')'
@@ -1063,7 +1072,7 @@ contains
           if (associated(INFO)) goto 90
        else if (present(MPARB) .and. present(valueB)) then
           if (.not.present(MTREEB) .or. .not.present(MTREEB)) then
-             call Set_Internal_Error (INFO,'FESMM',-98)
+             call FESetError (INFO,'FESMM',-98)
              goto 100
           end if
           call SPRPRM (valueB(MPARB(8)+1),work1(1,1),X(1),work2(1,1), &
@@ -1071,7 +1080,7 @@ contains
                &       1_ik,1_ik,88_ik,int(LPU,ik),IERR)
           if (IERR < 0_ik) goto 90
        else
-          call Set_Internal_Error (INFO,'FESMM',-98)
+          call FESetError (INFO,'FESMM',-98)
           goto 100
        end if
 
@@ -1084,18 +1093,19 @@ contains
        if (associated(INFO)) goto 90
 
     case default
-       call Set_Internal_Error (INFO,'FESMM',-97)
+       call FESetError (INFO,'FESMM',-97)
        goto 100
     end select
 
     select case (IFLAG)
     case(3,5) ! Store result in X (overwriting the input)
+       call DCOPY (Ndim,work1(1,1),1,X(1),1)
        X = work1(:,1)
     case(4,6) ! Store result in Y
-       Y = work1(:,1)
+       call DCOPY (Ndim,work1(1,1),1,Y(1),1)
     end select
 
- 90 if (associated(INFO) .or. IERR < 0_ik) call Set_Traceback (INFO,'FESMM')
+ 90 if (associated(INFO) .or. IERR < 0_ik) call FESetError (INFO,'FESMM')
 #if FT_DEBUG > 1
     IF (LPU > 0) WRITE(LPU,"(5X,'Y =',1P6E12.4/(8X,6E12.4))") work1(:,1)
     IF (LPU > 0) WRITE(LPU,*) 'LEAVING  FESMM'

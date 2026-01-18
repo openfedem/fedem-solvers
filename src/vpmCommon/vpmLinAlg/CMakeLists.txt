@@ -17,8 +17,13 @@ message ( STATUS "INFORMATION : Processing unit ${UNIT_ID}" )
 
 # Find external libraries for the 3rd-party linear equation solver
 
+option ( USE_LINALG_GSF "Build with GSF linear equation solver" OFF )
+mark_as_advanced ( USE_LINALG_GSF )
 if ( USE_LINALG_GSF )
-  find_package ( FTLinAlg )
+  find_package ( GSF )
+  if ( GSF_LIBRARY )
+    message ( STATUS "INFORMATION : Building ${LIB_ID} with GSF support" )
+  endif ( GSF_LIBRARY )
 endif ( USE_LINALG_GSF )
 
 if ( USE_INTEL_FORTRAN )
@@ -38,13 +43,13 @@ endif ( TARGET SPR_I8 )
 # Subfolder handling
 
 set ( SUBFOLDER_LIST ${LIB_ID_LIST} )
-if ( NOT FTLINALG_FOUND )
+if ( NOT GSF_LIBRARY )
 # When the 3rd-party equation solver is not available,
 # add a dummy library containing the expected symbols.
 # This library is compiled in a sub-folder, to avoid that
 # its generated module files are mixed with the others.
   list ( INSERT SUBFOLDER_LIST 0 vpmLinAlgDummy )
-endif ( NOT FTLINALG_FOUND )
+endif ( NOT GSF_LIBRARY )
 foreach ( FOLDER ${SUBFOLDER_LIST} )
   add_subdirectory ( ${FOLDER} )
 endforeach ( FOLDER ${SUBFOLDER_LIST} )
@@ -69,16 +74,17 @@ foreach ( FILE ${CB_FILE_LIST} )
 endforeach ( FILE ${CB_FILE_LIST} )
 
 add_library ( ${LIB_ID} ${F90_SOURCE_FILES} )
-if ( FTLINALG_FOUND )
-  add_library ( ${LIB_ID}_CB ${CB_SOURCE_FILES} )
-  target_link_libraries ( ${LIB_ID}_CB vpmCommon_F90 )
-  target_link_libraries ( ${LIB_ID} ${FTLINALG_LIBRARIES} ${LIB_ID}_CB )
-else ( FTLINALG_FOUND )
+if ( GSF_LIBRARY )
+  set ( GSF_CB GSF_FEinterface ) # Pre-defined name of call-back library
+  add_library ( ${GSF_CB} SHARED ${CB_SOURCE_FILES} )
+  target_link_libraries ( ${GSF_CB} vpmCommon_F90 )
+  target_link_libraries ( ${LIB_ID} ${GSF_LIBRARY} ${GSF_CB} )
+else ( GSF_LIBRARY )
 # The module files of the dummy library should not be exported.
 # Search for them in the build directory of this library instead.
   include_directories ( BEFORE ${PROJECT_BINARY_DIR}/src/vpmCommon/vpmLinAlg/vpmLinAlgDummy )
   target_link_libraries ( ${LIB_ID} vpmLinAlg_dummy )
-endif ( FTLINALG_FOUND )
+endif ( GSF_LIBRARY )
 target_link_libraries ( ${LIB_ID} vpmCommon_F90 ${LAPACK_LIBRARIES} )
 if ( TARGET SPR_I8 )
   target_link_libraries ( ${LIB_ID} SPR_I8 )

@@ -63,14 +63,10 @@ DLLexport(int) initSolverArgs (int argc, char** argv, bool first, bool muted)
 
   // Define the command-line options here
   ADDOPTION ("printArray",0,"Additional debug print switch for some arrays");
-#ifdef FT_HAS_GSF
   ADDOPTION ("cachesize",0,"Cache size (KB) to be used by the SPR solver, or"
              "\ncore memory (MB) reserved for numerical data for the GSF solver"
              "\nApplies to the stiffness matrix only when lumped mass is used"
              "\n= 0: Let all numerical data be in core for the GSF solver");
-#else
-  ADDOPTION ("cachesize",0,"Cache size (KB) to be used by the SPR solver");
-#endif
   ADDOPTION ("bufsize_rigid",0,"Buffer size (in DP-words) per rigid element"
              "\n<= 0: Use conservative estimate computed internally");
   ADDOPTION ("linkId",1,"Link base-ID number");
@@ -90,12 +86,10 @@ DLLexport(int) initSolverArgs (int argc, char** argv, bool first, bool muted)
              "\nDefault: Use the SPR equation solver");
   ADDOPTION ("denseSolver",false,"Use LAPACK dense matrix equation solver"
              "\nDefault: Use the SPR equation solver");
-#ifdef FT_HAS_GSF
   ADDOPTION ("gsfSolver",0,"Use the GSF equation solver"
              "\n= 0: Use SPR solver for both stiffness and mass matrix"
              "\n= 1: Use GSF solver for stiffness matrix, and SPR for mass"
              "\n= 2: Use GSF solver for both stiffness and mass matrix");
-#endif
   ADDOPTION ("tolWAVGM",1.0e-4,"Geometric tolerance for WAVGM elements");
   ADDOPTION ("tolFactorize",1.0e-12,"Equation solver singularity criterion"
              "\n(smaller values are less restrictive)"

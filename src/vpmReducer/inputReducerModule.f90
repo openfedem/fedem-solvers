@@ -218,20 +218,14 @@ contains
     else if (ffa_cmdlinearg_isTrue('denseSolver')) then
        matrixType = denseMatrix_p
     else
-#ifdef FT_HAS_GSF
        call ffa_cmdlinearg_getint ('gsfSolver',matrixType)
        if (demoEdition .or. nenod == sam%nnod .or. matrixType < 1) then
           matrixType = sparseMatrix_p
        else if (matrixType == 1) then
           matrixType = outOfCore_p + sparseMatrix_p
-          write(lpu,"(' BEGIN EQUATION SOLVER INFO'/)")
        else
           matrixType = outOfCore_p
-          write(lpu,"(' BEGIN EQUATION SOLVER INFO'/)")
        end if
-#else
-       matrixType = sparseMatrix_p
-#endif
     end if
 
     ngen = 0
@@ -251,6 +245,8 @@ contains
     if (matrixType == sparseMatrix_p) then
        call castToInt8 (sam,ierr)
        if (ierr < 0) goto 990
+    else if (matrixType >= outOfCore_p) then
+       write(lpu,"(/' BEGIN EQUATION SOLVER INFO')")
     end if
 
     call csAllocPointerArrays (sam,sysK,matrixType,lpu,ierr,ipsw, &
@@ -291,6 +287,8 @@ contains
 
        if (matrixType == outOfCore_p+sparseMatrix_p) then
           ! Use the SPR solver for the mass matrix
+          call castToInt8 (sam,ierr)
+          if (ierr < 0) goto 990
           call csAllocPointerArrays (sam,sysM,-sparseMatrix_p,lpu,ierr,ipsw)
        else
           ! Use the same solver for the lumped mass as used for the stiffness
@@ -380,7 +378,7 @@ contains
 
 
   !!============================================================================
-  !> @brief Checks the dof status correctness for all linear couplings.
+  !> @brief Checks the DOF status correctness for all linear couplings.
   !>
   !> @callergraph
   !>
@@ -459,8 +457,8 @@ contains
     nConnected => getIntegerScratchArray(nnod,numSing)
     if (numSing < 0) return
 
-    !! Flag all nodes with specified dofs as connected,
-    !! and nodes with one or more free dofs as unconnected
+    !! Flag all nodes with specified DOFs as connected,
+    !! and nodes with one or more free DOFs as unconnected
     do inod = 1, nnod
        nConnected(inod) = 1 ! assume the node is constrained
        do ip = madof(inod), madof(inod+1)-1
@@ -525,22 +523,21 @@ contains
     use KindModule             , only : dp
     use FFlLinkHandlerInterface, only : ffl_getElmId
 
-    integer ,intent(in) :: LINK,MPAR(:),MPMNPC(:),MNPC(:),MEKN(:),MINEX(:)
-    integer ,intent(in) :: MADOF(:),MSC(:),MPMCEQ(:),MCEQ(:),INODE(:),LPU
-    real(dp),intent(in) :: COEFF(:),X(:),Y(:),Z(:)
+    integer , intent(in) :: LINK, MPAR(:), MPMNPC(:), MNPC(:), MEKN(:), MINEX(:)
+    integer , intent(in) :: MADOF(:), MSC(:), MPMCEQ(:), MCEQ(:), INODE(:), LPU
+    real(dp), intent(in) :: COEFF(:), X(:), Y(:), Z(:)
 
+    !! Local variables
     logical :: lFirst
     integer :: I,ICOMPM,ICOMPS,J,INODM,INODS,NMST
 
-    ! ----------------------------------------------------------------------
-    !
-    ! --- PRINTER KONTROLLDATA FOR SUBSTRUKTUREN
-    !
+    !! --- Logic section ---
+
     write(LPU,600) LINK,MPAR(1:13)
     write(LPU,601) MPAR(14:28)
-    !
-    ! --- PRINTER ELEMENTDATA
-    !
+
+    ! --- Print out element data
+
     write(LPU,610)
     do I = 1, MPAR(2)
        if (MPMNPC(I+1)-MPMNPC(I) <= 10) then
@@ -549,17 +546,17 @@ contains
           write(LPU,612) I,ffl_getElmId(I),MEKN(I),MNPC(MPMNPC(I):MPMNPC(I+1)-1)
        end if
     end do
-    !
-    ! --- PRINTER KNUTEPUNKTSDATA
-    !
+
+    ! --- Print out nodal data
+
     write(LPU,630)
     do I = 1, MPAR(1)
        write(LPU,631) I,MINEX(I),INODE(I),X(I),Y(I),Z(I), &
             &         MSC(MADOF(I):MADOF(I+1)-1)
     end do
-    !
-    ! --- PRINTER EVENTUELLE GITTE ELLER AVHENGIGE FORSKYVNINGER
-    !
+
+    ! --- Print out prescribed displacements
+
     lFirst = .true.
     do I = 1, MPAR(7)
        if (MPMCEQ(I+1)-MPMCEQ(I) == 1) then
@@ -570,7 +567,9 @@ contains
           write(LPU,641) INODS,ICOMPS,COEFF(MPMCEQ(I))
        end if
     end do
-    !
+
+    ! --- Print out dependent displacements
+
     lFirst = .true.
     do I = 1, MPAR(7)
        NMST = MPMCEQ(I+1)-MPMCEQ(I) - 1
@@ -589,7 +588,7 @@ contains
           end do
        end if
     end do
-    !
+
 600 format(/4X,'SUBSTRUCTURE TYPE NUMBER :',I8 /4X,34('=') &
          &//4X,' 1. NNOD   =',I10 &
          & /4X,' 2. NEL    =',I10 &
@@ -619,27 +618,27 @@ contains
          & /4X,'26. IPRIN2 =',I10 &
          & /4X,'27. NPROP  =',I10 &
          & /4X,'28. NLMPC  =',I10 )
-    !
+
 610 format(/4X,'ELEMENT DATA' &
          & /4X,'------------' &
          //'  ELEMENT NUMBER   ELEMENT' &
          &/' INTERNAL EXTERNAL PROPERTY   INTERNAL NODE NUMBERS' /)
 611 format(2I9,I5,2X,10I8 )
 612 format(2I9,I5,2X,10I8 / (25X,10I8) )
-    !
+
 630 format(/4X,'NODE DATA' &
          & /4X,'---------' &
          &//4X,'NODE NUMBER' &
          &/' INTERNAL EXTERNAL  IST',6X,'XCOOR',9X,'YCOOR',9X,'ZCOOR', &
          & '     IX  IY  IZ  IRX IRY IRZ'/)
 631 format(2I9,I4,1X,1P3E14.6,6I4)
-    !
+
 640 format(/4X,'PRESCRIBED DISPLACEMENTS' &
          & /4X,'------------------------' &
          &//4X,'NODE    COMPONENT    DISPLACEMENT' &
          & /4X,'NUMBER'/)
 641 format(2I9,5X,1PE12.3)
-    !
+
 650 format(/4X,'DEPENDENT DISPLACEMENTS' &
          & /4X,'-----------------------')
 651 format(//4X,'DEPENDENT NODE :',I6,    11X,'INDEPENDENT NODE :',I6, &
@@ -648,13 +647,13 @@ contains
 652 format(/37X,'INDEPENDENT NODE :',I6 &
          & /37X,'COMPONENT   :',I6 &
          & /37X,'COEFFICIENT :',1PE12.3)
-    !
+
   contains
 
     !> @brief Returns the node number and local DOF for a global DOF.
     function nodeNumFromEqNum (IDOF) result(INOD)
-      integer,intent(inout) :: IDOF
-      integer               :: INOD
+      integer, intent(inout) :: IDOF
+      integer                :: INOD
       do INOD = 1, size(MADOF)-1
          if (IDOF >= MADOF(INOD) .and. IDOF < MADOF(INOD+1)) then
             IDOF = IDOF+1 - MADOF(INOD)
