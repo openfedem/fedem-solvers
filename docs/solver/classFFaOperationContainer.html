@@ -88,9 +88,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4eb38cd0448f111c222fb7b47c4e7f4d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a4eb38cd0448f111c222fb7b47c4e7f4d">getOperations</a> (std::vector&lt; std::string &gt; &amp;names)</td></tr>
 <tr class="memdesc:a4eb38cd0448f111c222fb7b47c4e7f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all operations of type <em>OperationCB</em>.  <a href="classFFaOperationContainer.html#a4eb38cd0448f111c222fb7b47c4e7f4d">More...</a><br /></td></tr>
 <tr class="separator:a4eb38cd0448f111c222fb7b47c4e7f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad21d60428835860e04e8696be33ebf7a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#ad21d60428835860e04e8696be33ebf7a">setDefaultOperation</a> (const std::string &amp;o)</td></tr>
-<tr class="memdesc:ad21d60428835860e04e8696be33ebf7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the default operation of type <em>OperationCB</em>.  <a href="classFFaOperationContainer.html#ad21d60428835860e04e8696be33ebf7a">More...</a><br /></td></tr>
-<tr class="separator:ad21d60428835860e04e8696be33ebf7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c96a1f3b986b410b86035e982764c40"><td class="memItemLeft" align="right" valign="top">static const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a2c96a1f3b986b410b86035e982764c40">getDefaultOperation</a> ()</td></tr>
 <tr class="memdesc:a2c96a1f3b986b410b86035e982764c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the default operation of type <em>OperationCB</em>.  <a href="classFFaOperationContainer.html#a2c96a1f3b986b410b86035e982764c40">More...</a><br /></td></tr>
 <tr class="separator:a2c96a1f3b986b410b86035e982764c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,7 +95,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad1380b61a01d1573b70967273cea030e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#ad1380b61a01d1573b70967273cea030e">FFaOperationContainer</a> ()</td></tr>
-<tr class="memdesc:ad1380b61a01d1573b70967273cea030e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor defines the default operation.  <a href="classFFaOperationContainer.html#ad1380b61a01d1573b70967273cea030e">More...</a><br /></td></tr>
+<tr class="memdesc:ad1380b61a01d1573b70967273cea030e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor selects the default operation.  <a href="classFFaOperationContainer.html#ad1380b61a01d1573b70967273cea030e">More...</a><br /></td></tr>
 <tr class="separator:ad1380b61a01d1573b70967273cea030e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d96f716b9d857c7d3292d47a65dec21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a6d96f716b9d857c7d3292d47a65dec21">selectOperation</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a6d96f716b9d857c7d3292d47a65dec21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the named operation to use.  <a href="classFFaOperationContainer.html#a6d96f716b9d857c7d3292d47a65dec21">More...</a><br /></td></tr>
@@ -112,18 +109,15 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
-<tr class="memitem:a637733ca85c6d2ac4460811388cb2032"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; std::string, OperationCB &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a637733ca85c6d2ac4460811388cb2032">OperCBMap</a></td></tr>
-<tr class="memdesc:a637733ca85c6d2ac4460811388cb2032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience type definition, name-to-operation mapping.  <a href="classFFaOperationContainer.html#a637733ca85c6d2ac4460811388cb2032">More...</a><br /></td></tr>
-<tr class="separator:a637733ca85c6d2ac4460811388cb2032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d976d8d7bc3446684ccc4d62a84dc19"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a9d976d8d7bc3446684ccc4d62a84dc19">NamedOper</a> = std::pair&lt; std::string, OperationCB &gt;</td></tr>
+<tr class="memdesc:a9d976d8d7bc3446684ccc4d62a84dc19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience type alias for a named operations.  <a href="classFFaOperationContainer.html#a9d976d8d7bc3446684ccc4d62a84dc19">More...</a><br /></td></tr>
+<tr class="separator:a9d976d8d7bc3446684ccc4d62a84dc19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:a84ed7afe7e912e114db6ffa67c5ce1d5"><td class="memItemLeft" align="right" valign="top">static std::map&lt; std::string, OperationCB &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a84ed7afe7e912e114db6ffa67c5ce1d5">ourOperations</a> = NULL</td></tr>
-<tr class="memdesc:a84ed7afe7e912e114db6ffa67c5ce1d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static container for operations of type <em>OperationCB</em>.  <a href="classFFaOperationContainer.html#a84ed7afe7e912e114db6ffa67c5ce1d5">More...</a><br /></td></tr>
-<tr class="separator:a84ed7afe7e912e114db6ffa67c5ce1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f4bc0faa7b68cdaa02862773f036b38"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#a0f4bc0faa7b68cdaa02862773f036b38">ourDefaultOper</a></td></tr>
-<tr class="memdesc:a0f4bc0faa7b68cdaa02862773f036b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the default operation type <em>OperationCB</em>.  <a href="classFFaOperationContainer.html#a0f4bc0faa7b68cdaa02862773f036b38">More...</a><br /></td></tr>
-<tr class="separator:a0f4bc0faa7b68cdaa02862773f036b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5f18fb9f0299c47ba2966e4a4275f88"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="classFFaOperationContainer.html#a9d976d8d7bc3446684ccc4d62a84dc19">NamedOper</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFFaOperationContainer.html#ad5f18fb9f0299c47ba2966e4a4275f88">ourOperations</a> = NULL</td></tr>
+<tr class="memdesc:ad5f18fb9f0299c47ba2966e4a4275f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static container for operations of type <em>OperationCB</em>.  <a href="classFFaOperationContainer.html#ad5f18fb9f0299c47ba2966e4a4275f88">More...</a><br /></td></tr>
+<tr class="separator:ad5f18fb9f0299c47ba2966e4a4275f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class OperationCB&gt;<br />
@@ -132,8 +126,8 @@ class FFaOperationContainer&lt; OperationCB &gt;</h3>
 <p>A class used to manage and store callbacks of a certain type. </p>
 <p>This must be a base class of all operations that are supposed to have changeable calculations. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a637733ca85c6d2ac4460811388cb2032"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a637733ca85c6d2ac4460811388cb2032">&#9670;&nbsp;</a></span>OperCBMap</h2>
+<a id="a9d976d8d7bc3446684ccc4d62a84dc19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d976d8d7bc3446684ccc4d62a84dc19">&#9670;&nbsp;</a></span>NamedOper</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +138,7 @@ template&lt;class OperationCB &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;std::string,OperationCB&gt; <a class="el" href="classFFaOperationContainer.html">FFaOperationContainer</a>&lt; OperationCB &gt;::<a class="el" href="classFFaOperationContainer.html#a637733ca85c6d2ac4460811388cb2032">OperCBMap</a></td>
+          <td class="memname">using <a class="el" href="classFFaOperationContainer.html">FFaOperationContainer</a>&lt; OperationCB &gt;::<a class="el" href="classFFaOperationContainer.html#a9d976d8d7bc3446684ccc4d62a84dc19">NamedOper</a> =  std::pair&lt;std::string,OperationCB&gt;</td>
         </tr>
       </table>
   </td>
@@ -154,7 +148,7 @@ template&lt;class OperationCB &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Convenience type definition, name-to-operation mapping. </p>
+<p>Convenience type alias for a named operations. </p>
 
 </div>
 </div>
@@ -184,7 +178,7 @@ template&lt;class OperationCB &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>The default constructor defines the default operation. </p>
+<p>The default constructor selects the default operation. </p>
 
 </div>
 </div>
@@ -315,37 +309,7 @@ template&lt;class OperationCB &gt; </div>
 </div><div class="memdoc">
 
 <p>Selects the named operation to use. </p>
-<p>The given <em>name</em> has to be in the <a class="el" href="classFFaOperationContainer.html#a84ed7afe7e912e114db6ffa67c5ce1d5">ourOperations</a> container. If not, this operation will be undefined and when invoked it will not change the output argument. </p>
-
-</div>
-</div>
-<a id="ad21d60428835860e04e8696be33ebf7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad21d60428835860e04e8696be33ebf7a">&#9670;&nbsp;</a></span>setDefaultOperation()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OperationCB &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="classFFaOperationContainer.html">FFaOperationContainer</a>&lt; OperationCB &gt;::setDefaultOperation </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Defines the default operation of type <em>OperationCB</em>. </p>
+<p>The given <em>name</em> has to be in the <a class="el" href="classFFaOperationContainer.html#ad5f18fb9f0299c47ba2966e4a4275f88">ourOperations</a> container. If not, this operation will be undefined and when invoked it will not change the output argument. </p>
 
 </div>
 </div>
@@ -376,8 +340,8 @@ template&lt;class OperationCB &gt; </div>
 
 </div>
 </div>
-<a id="a0f4bc0faa7b68cdaa02862773f036b38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f4bc0faa7b68cdaa02862773f036b38">&#9670;&nbsp;</a></span>ourDefaultOper</h2>
+<a id="ad5f18fb9f0299c47ba2966e4a4275f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5f18fb9f0299c47ba2966e4a4275f88">&#9670;&nbsp;</a></span>ourOperations</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -388,33 +352,7 @@ template&lt;class OperationCB &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string <a class="el" href="classFFaOperationContainer.html">FFaOperationContainer</a>&lt; OperationCB &gt;::ourDefaultOper</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Name of the default operation type <em>OperationCB</em>. </p>
-
-</div>
-</div>
-<a id="a84ed7afe7e912e114db6ffa67c5ce1d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84ed7afe7e912e114db6ffa67c5ce1d5">&#9670;&nbsp;</a></span>ourOperations</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OperationCB &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::map&lt; std::string, OperationCB &gt; * <a class="el" href="classFFaOperationContainer.html">FFaOperationContainer</a>&lt; OperationCB &gt;::ourOperations = NULL</td>
+          <td class="memname">std::vector&lt; std::pair&lt; std::string, OperationCB &gt; &gt; * <a class="el" href="classFFaOperationContainer.html">FFaOperationContainer</a>&lt; OperationCB &gt;::ourOperations = NULL</td>
         </tr>
       </table>
   </td>
@@ -434,7 +372,7 @@ template&lt;class OperationCB &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 15 2025 14:36:57 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Jan 19 2026 20:17:00 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

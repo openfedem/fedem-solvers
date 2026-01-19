@@ -101,6 +101,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a2156f997e930be4ec4f43a67170c7018"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cmstrs_8f90.html#a2156f997e930be4ec4f43a67170c7018">padredmatrix</a> (A, ndim)</td></tr>
 <tr class="memdesc:a2156f997e930be4ec4f43a67170c7018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pads a reduced matrix with zeroes if larger than <em>ndim</em>.  <a href="cmstrs_8f90.html#a2156f997e930be4ec4f43a67170c7018">More...</a><br /></td></tr>
 <tr class="separator:a2156f997e930be4ec4f43a67170c7018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad2dfdf6aedce2299450e9249f8bbd8c"><td class="memItemLeft" align="right" valign="top">real(dp) function, dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c">getbcolumn</a> (icol, ierr)</td></tr>
+<tr class="memdesc:aad2dfdf6aedce2299450e9249f8bbd8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a column from the B-matrix expanded to length <em>neq1</em>.  <a href="cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c">More...</a><br /></td></tr>
+<tr class="separator:aad2dfdf6aedce2299450e9249f8bbd8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa99e05a7d5eabf26533ee23d3e42b996"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996">writematrices</a> (mpar, lpu)</td></tr>
 <tr class="memdesc:aa99e05a7d5eabf26533ee23d3e42b996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug print of some matrices used in the CMS-reduction.  <a href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996">More...</a><br /></td></tr>
 <tr class="separator:aa99e05a7d5eabf26533ee23d3e42b996"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +120,36 @@ Functions/Subroutines</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Subroutines for Component Mode Synthesis (CMS) transformation. </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aad2dfdf6aedce2299450e9249f8bbd8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2dfdf6aedce2299450e9249f8bbd8c">&#9670;&nbsp;</a></span>getbcolumn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function, dimension(:), pointer cmstrs::getbcolumn </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>icol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out)&#160;</td>
+          <td class="paramname"><em>ierr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extracts a column from the B-matrix expanded to length <em>neq1</em>. </p>
+
+</div>
+</div>
 <a id="a2156f997e930be4ec4f43a67170c7018"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2156f997e930be4ec4f43a67170c7018">&#9670;&nbsp;</a></span>padredmatrix()</h2>
 
@@ -180,7 +213,7 @@ Functions/Subroutines</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 15 2025 14:36:57 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Jan 19 2026 20:16:59 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

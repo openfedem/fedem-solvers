@@ -1,52 +1,52 @@
 <map id="reducer" name="reducer">
-<area shape="rect" id="node1" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,1357,76,1383"/>
+<area shape="rect" id="node1" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,1317,76,1343"/>
 <area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="516,5,679,47"/>
-<area shape="rect" id="node3" href="$closeLogFiles_8f90.html#a5532a1d604cc2bf79b3aea46f8ce88f1" title="Global subroutine (callable from C++) used by signal handlers, etc." alt="" coords="221,599,324,626"/>
-<area shape="rect" id="node4" href="$namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="189,829,356,855"/>
-<area shape="rect" id="node12" href="$namespacesysmatrixtypemodule.html#a7b93225fdea89c58fb693c94703c3c2a" title="Restores the given system matrix from temporary file." alt="" coords="515,1069,680,1111"/>
-<area shape="rect" id="node17" href="$namespaceasmextensionmodule.html#af8756381919cc6b45c27d5332eafe0f2" title="Initializes the element assembly." alt="" coords="191,981,354,1023"/>
-<area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#ac0ef0da561c2f45bf3ac1acf6511b3ce" title="Finalizes the element assembly." alt="" coords="191,1047,354,1088"/>
-<area shape="rect" id="node19" href="$namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="171,1113,374,1139"/>
-<area shape="rect" id="node20" href="$namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="190,1164,355,1205"/>
-<area shape="rect" id="node21" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="171,1230,375,1257"/>
-<area shape="rect" id="node22" href="$namespacediskmatrixmodule.html#aa06e02705ac753582ecf46aef1af9dfe" title=" " alt="" coords="124,1281,421,1307"/>
-<area shape="rect" id="node23" href="$namespacediskmatrixmodule.html#a07dca70d14fe2f177b4f6add61538f3a" title=" " alt="" coords="147,1331,398,1358"/>
-<area shape="rect" id="node24" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="167,1382,378,1409"/>
-<area shape="rect" id="node25" href="$namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85" title=" " alt="" coords="171,1433,374,1459"/>
-<area shape="rect" id="node26" href="$namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title=" " alt="" coords="175,1483,371,1510"/>
-<area shape="rect" id="node27" href="$namespacecmstrsmodule.html#a02b874a253406b24688b53f92b67b390" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="187,1534,358,1561"/>
-<area shape="rect" id="node29" href="$namespacecmstrsmodule.html#aabb37c12078bebda799a65a02816c11b" title="Solves the eigenvalue problem of the FE model." alt="" coords="191,930,354,957"/>
-<area shape="rect" id="node32" href="$namespaceinaddmodule.html#af325593f4ec11b954047fcb2b91e281c" title=" " alt="" coords="167,1585,378,1611"/>
-<area shape="rect" id="node33" href="$stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="223,1635,323,1662"/>
-<area shape="rect" id="node34" href="$namespacecmstrsmodule.html#a2ddea9a18a507addd0325dbd601388f0" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="197,650,349,677"/>
-<area shape="rect" id="node35" href="$namespacecmstrsmodule.html#a2818382e67764148b32e565b64652799" title="Computes and prints the inertia properties of the superelement." alt="" coords="195,1686,350,1713"/>
-<area shape="rect" id="node36" href="$inputReducerModule_8f90.html#a3931be5c96baca5539248aa0e6610d37" title="Returns the node number and local DOF for a global DOF." alt="" coords="193,1737,352,1763"/>
-<area shape="rect" id="node37" href="$namespaceversionmodule.html#a27b0515f99082f419d4ebf8b00acf0a0" title="Opens the solver res&#45;file and print header information to it." alt="" coords="173,1787,372,1814"/>
-<area shape="rect" id="node38" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="196,253,349,295"/>
-<area shape="rect" id="node46" href="$namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="189,1839,356,1880"/>
-<area shape="rect" id="node47" href="$namespacesamreducermodule.html#a34a8690bef6a35e78d72fb3d522d7337" title="Writes arrays of the SAM data structure to binary file." alt="" coords="165,1905,380,1931"/>
-<area shape="rect" id="node48" href="$namespacesysmatrixtypemodule.html#ac49bf5a5ffd372675992098f163fe9fd" title="Saves the given system matrix to temporary file." alt="" coords="190,1956,355,1997"/>
-<area shape="rect" id="node49" href="$namespacesparsematrixmodule.html#a48e36aa33a87d959883a141c12918a7c" title=" " alt="" coords="194,2021,351,2063"/>
-<area shape="rect" id="node50" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="193,2087,352,2128"/>
-<area shape="rect" id="node5" href="$namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="520,851,675,892"/>
-<area shape="rect" id="node6" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="483,551,711,578"/>
-<area shape="rect" id="node7" href="$namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428" title=" " alt="" coords="474,917,721,943"/>
-<area shape="rect" id="node8" href="$namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8" title=" " alt="" coords="496,967,699,994"/>
-<area shape="rect" id="node9" href="$namespacecmstrsmodule.html#a5223f5b91f57a2ddf104d2adcd33d5bc" title="Establishes the full gravitational force vectors." alt="" coords="511,501,684,527"/>
-<area shape="rect" id="node10" href="$cmstrs_8f90.html#a2156f997e930be4ec4f43a67170c7018" title="Pads a reduced matrix with zeroes if larger than ndim." alt="" coords="542,1018,653,1045"/>
-<area shape="rect" id="node11" href="$namespacecmstrsmodule.html#a53814a7cf8508ddb1ca2b41ef236c825" title="Prints an error message on singular system system." alt="" coords="487,1135,707,1162"/>
-<area shape="rect" id="node13" href="$namespacesparsematrixmodule.html#a0164e8c60fc6209874338ae8d9ecbb0e" title=" " alt="" coords="513,603,682,644"/>
-<area shape="rect" id="node14" href="$namespacesparsematrixmodule.html#a458aa60de8db318680b266a96b74ebb4" title=" " alt="" coords="519,668,676,709"/>
-<area shape="rect" id="node15" href="$namespacesparsematrixmodule.html#a4b2bef0c7c9f9742ddd97c73e4d3558a" title=" " alt="" coords="519,733,676,775"/>
-<area shape="rect" id="node16" href="$cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="541,799,653,826"/>
-<area shape="rect" id="node28" href="$namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title=" " alt="" coords="469,1534,725,1561"/>
-<area shape="rect" id="node30" href="$namespacematextensionmodule.html#a404b0d1dd69c6d84c33fd4d13b5e819d" title="Extracts the 11 sub&#45;matrix from a system matrix." alt="" coords="517,1252,678,1293"/>
-<area shape="rect" id="node31" href="$namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="515,1187,679,1228"/>
-<area shape="rect" id="node39" href="$namespaceinputreducermodule.html#a10152fa957ff8d5a9e018ff073e3e88a" title="Checks the dof status correctness for all linear couplings." alt="" coords="514,123,681,164"/>
-<area shape="rect" id="node40" href="$namespaceinputreducermodule.html#a28e86609e97d7cef3162ca604dc437b2" title="Checks that all nodes are connected to an element." alt="" coords="518,188,677,229"/>
-<area shape="rect" id="node41" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="516,253,679,295"/>
-<area shape="rect" id="node42" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="516,319,679,360"/>
-<area shape="rect" id="node43" href="$namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="516,384,679,425"/>
-<area shape="rect" id="node44" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="773,253,944,295"/>
-<area shape="rect" id="node45" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="482,71,713,98"/>
+<area shape="rect" id="node3" href="$closeLogFiles_8f90.html#a5532a1d604cc2bf79b3aea46f8ce88f1" title="Global subroutine (callable from C++) used by signal handlers, etc." alt="" coords="221,522,324,549"/>
+<area shape="rect" id="node4" href="$namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="189,749,356,775"/>
+<area shape="rect" id="node13" href="$namespacesysmatrixtypemodule.html#a7b93225fdea89c58fb693c94703c3c2a" title="Restores the given system matrix from temporary file." alt="" coords="515,1017,680,1059"/>
+<area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#af8756381919cc6b45c27d5332eafe0f2" title="Initializes the element assembly." alt="" coords="191,901,354,943"/>
+<area shape="rect" id="node19" href="$namespaceasmextensionmodule.html#ac0ef0da561c2f45bf3ac1acf6511b3ce" title="Finalizes the element assembly." alt="" coords="191,967,354,1008"/>
+<area shape="rect" id="node20" href="$namespaceasmextensionmodule.html#a066e01fdc794850b7690a1687aa59403" title="compute permutation between two different sparse matrix orderings." alt="" coords="191,1032,354,1073"/>
+<area shape="rect" id="node21" href="$namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="171,1098,374,1125"/>
+<area shape="rect" id="node22" href="$namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="190,1149,355,1191"/>
+<area shape="rect" id="node23" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="171,1215,375,1242"/>
+<area shape="rect" id="node24" href="$namespacediskmatrixmodule.html#aa06e02705ac753582ecf46aef1af9dfe" title=" " alt="" coords="124,1266,421,1293"/>
+<area shape="rect" id="node25" href="$namespacediskmatrixmodule.html#a07dca70d14fe2f177b4f6add61538f3a" title=" " alt="" coords="147,1317,398,1343"/>
+<area shape="rect" id="node26" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="167,1367,378,1394"/>
+<area shape="rect" id="node27" href="$namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85" title=" " alt="" coords="171,1418,374,1445"/>
+<area shape="rect" id="node28" href="$namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title=" " alt="" coords="175,1469,371,1495"/>
+<area shape="rect" id="node29" href="$namespacecmstrsmodule.html#a02b874a253406b24688b53f92b67b390" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="187,1519,358,1546"/>
+<area shape="rect" id="node31" href="$namespacecmstrsmodule.html#aabb37c12078bebda799a65a02816c11b" title="Solves the eigenvalue problem of the FE model." alt="" coords="191,850,354,877"/>
+<area shape="rect" id="node34" href="$namespaceinaddmodule.html#af325593f4ec11b954047fcb2b91e281c" title=" " alt="" coords="167,1570,378,1597"/>
+<area shape="rect" id="node35" href="$stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="223,1621,323,1647"/>
+<area shape="rect" id="node36" href="$namespacecmstrsmodule.html#a2ddea9a18a507addd0325dbd601388f0" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="197,573,349,599"/>
+<area shape="rect" id="node37" href="$namespacecmstrsmodule.html#a2818382e67764148b32e565b64652799" title="Computes and prints the inertia properties of the superelement." alt="" coords="195,1671,350,1698"/>
+<area shape="rect" id="node38" href="$inputReducerModule_8f90.html#a3931be5c96baca5539248aa0e6610d37" title="Returns the node number and local DOF for a global DOF." alt="" coords="193,1722,352,1749"/>
+<area shape="rect" id="node39" href="$namespaceversionmodule.html#a27b0515f99082f419d4ebf8b00acf0a0" title="Opens the solver res&#45;file and print header information to it." alt="" coords="173,1773,372,1799"/>
+<area shape="rect" id="node40" href="$namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="196,201,349,243"/>
+<area shape="rect" id="node46" href="$namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="189,1824,356,1865"/>
+<area shape="rect" id="node47" href="$namespacesamreducermodule.html#a34a8690bef6a35e78d72fb3d522d7337" title="Writes arrays of the SAM data structure to binary file." alt="" coords="165,1890,380,1917"/>
+<area shape="rect" id="node48" href="$namespacesysmatrixtypemodule.html#ac49bf5a5ffd372675992098f163fe9fd" title="Saves the given system matrix to temporary file." alt="" coords="190,1941,355,1983"/>
+<area shape="rect" id="node49" href="$namespacesparsematrixmodule.html#a48e36aa33a87d959883a141c12918a7c" title=" " alt="" coords="194,2007,351,2048"/>
+<area shape="rect" id="node50" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="193,2072,352,2113"/>
+<area shape="rect" id="node5" href="$namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="520,683,675,724"/>
+<area shape="rect" id="node6" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="483,398,711,425"/>
+<area shape="rect" id="node7" href="$namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428" title=" " alt="" coords="474,749,721,775"/>
+<area shape="rect" id="node8" href="$namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8" title=" " alt="" coords="496,799,699,826"/>
+<area shape="rect" id="node9" href="$cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c" title="Extracts a column from the B&#45;matrix expanded to length neq1." alt="" coords="548,850,647,877"/>
+<area shape="rect" id="node10" href="$namespacecmstrsmodule.html#a5223f5b91f57a2ddf104d2adcd33d5bc" title="Establishes the full gravitational force vectors." alt="" coords="511,449,684,475"/>
+<area shape="rect" id="node11" href="$cmstrs_8f90.html#a2156f997e930be4ec4f43a67170c7018" title="Pads a reduced matrix with zeroes if larger than ndim." alt="" coords="542,901,653,927"/>
+<area shape="rect" id="node12" href="$namespacecmstrsmodule.html#a53814a7cf8508ddb1ca2b41ef236c825" title="Prints an error message on singular system system." alt="" coords="487,1083,707,1110"/>
+<area shape="rect" id="node14" href="$namespacesparsematrixmodule.html#a0164e8c60fc6209874338ae8d9ecbb0e" title=" " alt="" coords="513,952,682,993"/>
+<area shape="rect" id="node15" href="$namespacesparsematrixmodule.html#a458aa60de8db318680b266a96b74ebb4" title=" " alt="" coords="519,500,676,541"/>
+<area shape="rect" id="node16" href="$namespacesparsematrixmodule.html#a4b2bef0c7c9f9742ddd97c73e4d3558a" title=" " alt="" coords="519,565,676,607"/>
+<area shape="rect" id="node17" href="$cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="541,631,653,658"/>
+<area shape="rect" id="node30" href="$namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title=" " alt="" coords="469,1519,725,1546"/>
+<area shape="rect" id="node32" href="$namespacematextensionmodule.html#a404b0d1dd69c6d84c33fd4d13b5e819d" title="Extracts the 11 sub&#45;matrix from a system matrix." alt="" coords="517,1135,678,1176"/>
+<area shape="rect" id="node33" href="$namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="515,1200,679,1241"/>
+<area shape="rect" id="node41" href="$namespaceinputreducermodule.html#a10152fa957ff8d5a9e018ff073e3e88a" title="Checks the DOF status correctness for all linear couplings." alt="" coords="514,136,681,177"/>
+<area shape="rect" id="node42" href="$namespaceinputreducermodule.html#a28e86609e97d7cef3162ca604dc437b2" title="Checks that all nodes are connected to an element." alt="" coords="518,201,677,243"/>
+<area shape="rect" id="node43" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="516,267,679,308"/>
+<area shape="rect" id="node44" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="516,332,679,373"/>
+<area shape="rect" id="node45" href="$namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="516,71,679,112"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="inputreducermodule::readreducerdata" name="inputreducermodule::readreducerdata">
 <area shape="rect" id="node1" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="5,428,159,470"/>
 <area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="241,43,403,84"/>
-<area shape="rect" id="node3" href="$namespaceinputreducermodule.html#a10152fa957ff8d5a9e018ff073e3e88a" title="Checks the dof status correctness for all linear couplings." alt="" coords="239,108,405,150"/>
+<area shape="rect" id="node3" href="$namespaceinputreducermodule.html#a10152fa957ff8d5a9e018ff073e3e88a" title="Checks the DOF status correctness for all linear couplings." alt="" coords="239,108,405,150"/>
 <area shape="rect" id="node4" href="$namespaceinputreducermodule.html#a28e86609e97d7cef3162ca604dc437b2" title="Checks that all nodes are connected to an element." alt="" coords="243,174,401,215"/>
 <area shape="rect" id="node5" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="241,239,403,280"/>
 <area shape="rect" id="node6" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="241,304,403,346"/>

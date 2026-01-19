@@ -89,6 +89,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ab2313422d646443a1792e1a1c476c769"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769">casttoint8</a> (samData, ierr)</td></tr>
 <tr class="memdesc:ab2313422d646443a1792e1a1c476c769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a 64-bit integer version of the SAM-arrays needed by SPR.  <a href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769">More...</a><br /></td></tr>
 <tr class="separator:ab2313422d646443a1792e1a1c476c769"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066e01fdc794850b7690a1687aa59403"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceasmextensionmodule.html#a066e01fdc794850b7690a1687aa59403">csrepermute</a> (sysMat, meqn, lpu, ierr)</td></tr>
+<tr class="memdesc:a066e01fdc794850b7690a1687aa59403"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute permutation between two different sparse matrix orderings.  <a href="namespaceasmextensionmodule.html#a066e01fdc794850b7690a1687aa59403">More...</a><br /></td></tr>
+<tr class="separator:a066e01fdc794850b7690a1687aa59403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a122643b3527b45a229c0696a604a0196"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196">csallocpointerarrays</a> (samData, sysMat, matrixType, lpu, ierr, ipsw, cacheSize, needsFactorization, masterGSF)</td></tr>
 <tr class="memdesc:a122643b3527b45a229c0696a604a0196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pointer arrays for the equation solvers.  <a href="namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196">More...</a><br /></td></tr>
 <tr class="separator:a122643b3527b45a229c0696a604a0196"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -761,7 +764,7 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir">[in]</td><td class="paramname">lpu</td><td>File unit number for res-file output </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ipsw</td><td>Print switch </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cacheSize</td><td>Sparse matricx cache size </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cacheSize</td><td>Sparse matrix cache size </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">needsFactorization</td><td>If .true., this matrix will be factorized </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">masterGSF</td><td>GSF data structure of sibling system matrix</td></tr>
   </table>
@@ -1564,6 +1567,80 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a066e01fdc794850b7690a1687aa59403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066e01fdc794850b7690a1687aa59403">&#9670;&nbsp;</a></span>csrepermute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine asmextensionmodule::csrepermute </td>
+          <td>(</td>
+          <td class="paramtype">type(<a class="el" href="structsysmatrixtypemodule_1_1sysmatrixtype.html">sysmatrixtype</a>), intent(inout)&#160;</td>
+          <td class="paramname"><em>sysMat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(:), intent(in), target&#160;</td>
+          <td class="paramname"><em>meqn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>lpu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out)&#160;</td>
+          <td class="paramname"><em>ierr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>compute permutation between two different sparse matrix orderings. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">sysMat</td><td>The system matrix to compute permutation for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">meqn</td><td>Matrix of equation numbers for the other matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lpu</td><td>File unit number for res-file output </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>6 Jan 2026 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceasmextensionmodule_a066e01fdc794850b7690a1687aa59403_icgraph.png" border="0" usemap="#anamespaceasmextensionmodule_a066e01fdc794850b7690a1687aa59403_icgraph" alt=""/></div>
+<map name="anamespaceasmextensionmodule_a066e01fdc794850b7690a1687aa59403_icgraph" id="anamespaceasmextensionmodule_a066e01fdc794850b7690a1687aa59403_icgraph">
+<area shape="rect" title="compute permutation between two different sparse matrix orderings." alt="" coords="1121,27,1284,69"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="911,57,1073,98"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="451,5,521,32"/>
+<area shape="rect" href="namespacesamsolvermodule.html#a0cf83f9fe742b5383b2d1dbe1f142d9a" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="667,135,863,177"/>
+<area shape="rect" href="namespaceinputreducermodule.html#a41a9bcb7cd4d53ba0bd9ae6d7e7e30e2" title="Administers data input and preprocessing for fedem_reducer." alt="" coords="688,57,841,98"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,157,619,184"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,157,305,184"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,157,83,184"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,208,82,235"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,259,83,285"/>
+<area shape="rect" href="smallReducer_8f90.html#a21f1b9673030484fac3f870674ad32ff" title="Test driver for the FE part reducer operating on full matrices only." alt="" coords="433,107,539,133"/>
+<area shape="rect" href="solver_8f90.html#ae09f6746388cd93c4d3f45a72214b200" title="Driver for the FEDEM linear FE part solver." alt="" coords="455,56,517,83"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a4f16499ed7ca60c19dc76a5c5eb1686a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f16499ed7ca60c19dc76a5c5eb1686a">&#9670;&nbsp;</a></span>writemeqn()</h2>
 
@@ -1699,7 +1776,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 15 2025 14:36:58 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Jan 19 2026 20:17:00 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
