@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>inverse &mdash; fedempy 4.1.3 documentation</title>
+  <title>inverse &mdash; fedempy 4.3.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=752939d7"></script>
+      <script src="../_static/documentation_options.js?v=0503a316"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -89,7 +89,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">FmType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.log_conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fedempy.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FedemException</span><span class="p">,</span> <span class="n">FedemProgressBar</span><span class="p">,</span> <span class="n">FedemSolver</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
@@ -144,6 +144,9 @@
 <span class="sd">        The Fedem dynamics solver instance</span>
 <span class="sd">    config : dictionary</span>
 <span class="sd">        Inverse solver configuration</span>
+<span class="sd">    print_stepping : bool</span>
+<span class="sd">        If True, print some time stepping info.</span>
+<span class="sd">        Otherwise use the progress bar only.</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
@@ -153,9 +156,11 @@
 <span class="sd">        Performs the inverse static solution using the internal inverse solver</span>
 <span class="sd">    run_inverse:</span>
 <span class="sd">        Performs the inverse solution (static case)</span>
+<span class="sd">    done_inverse:</span>
+<span class="sd">        Closes down the dynamics solver after run_inverse()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">print_stepping</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor. Initializes the object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -167,6 +172,10 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;initialisation list finished</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span>
+        <span class="k">if</span> <span class="n">print_stepping</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="o">=</span> <span class="n">FedemProgressBar</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
 
         <span class="c1"># Memory for dynamic inverse solution</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u_vec</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># displacement vector</span>
@@ -386,7 +395,8 @@
                     <span class="n">dof</span> <span class="o">=</span> <span class="n">dof_set_rev</span><span class="p">[</span><span class="n">dof</span><span class="p">]</span>
                     <span class="n">rev_joints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jid</span><span class="p">)</span>
                     <span class="n">stiff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_joint_spring_stiffness</span><span class="p">(</span><span class="n">jid</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">dof</span><span class="p">]</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spring stiffness: &quot;</span><span class="p">,</span> <span class="n">stiff</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spring stiffness: &quot;</span><span class="p">,</span> <span class="n">stiff</span><span class="p">)</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/=</span> <span class="n">stiff</span>
 
         <span class="k">return</span> <span class="n">rev_joints</span></div>
@@ -454,6 +464,11 @@
         <span class="n">t_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
 
         <span class="c1"># run start step</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">+++++++++++++++++++++++++++++++++++++++++++++&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solving time step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
         <span class="n">do_continue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">start_step</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Simulation failure</span>
             <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;start_step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -467,7 +482,8 @@
             <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_external_force_vector&quot;</span><span class="p">)</span>
 
         <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_get_boundary_conditions</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_def and g_def: &quot;</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_def and g_def: &quot;</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
 
         <span class="c1"># simulation parameters</span>
         <span class="n">h</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>  <span class="c1"># default Newmark alpha value</span>
@@ -583,7 +599,8 @@
         <span class="n">b0</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">bt_inv_k</span><span class="p">,</span> <span class="n">f0</span><span class="p">)</span>
 
         <span class="n">opt_alpha</span> <span class="o">=</span> <span class="n">lstsq</span><span class="p">(</span><span class="n">c_val</span><span class="p">,</span> <span class="p">(</span><span class="n">x_vec</span> <span class="o">-</span> <span class="n">b0</span><span class="p">),</span> <span class="n">rcond</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaling: &quot;</span><span class="p">,</span> <span class="n">opt_alpha</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaling: &quot;</span><span class="p">,</span> <span class="n">opt_alpha</span><span class="p">)</span>
         <span class="n">force_eval</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">f_mat</span><span class="p">,</span> <span class="n">opt_alpha</span><span class="p">)</span> <span class="o">+</span> <span class="n">f0</span>
         <span class="n">pos_eval</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">inv_k</span><span class="p">,</span> <span class="n">force_eval</span><span class="p">)</span>  <span class="c1"># displacement vector</span>
 
@@ -734,8 +751,6 @@
                     <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;relID&quot;</span><span class="p">,</span> <span class="s2">&quot;deflID&quot;</span><span class="p">,</span> <span class="s2">&quot;frcID&quot;</span><span class="p">):</span>
                 <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No. of sensors for </span><span class="si">{</span><span class="n">sensor_type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">nr</span><span class="si">}</span><span class="s2">, sensor_id=</span><span class="si">{</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">nr</span>
 
@@ -940,7 +955,7 @@
         <span class="k">return</span> <span class="n">f_mat</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_mode_load_scipy</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mode_load_scipy</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">do_print</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Force vector based on natural frequency shapes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -953,7 +968,8 @@
             <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;get_mass_matrix&quot;</span><span class="p">)</span>
 
         <span class="c1"># check is matrix m_mat positive definite (via Cholesky factorization)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check Mass Matrix for positive definiteness:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check Mass Matrix for positive definiteness:&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">m_mat</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
@@ -967,12 +983,14 @@
 
         <span class="c1"># take into account modes up to max mode number in the array modes</span>
         <span class="n">up_to_mode</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calculate modes up to mode No.: &quot;</span><span class="p">,</span> <span class="n">up_to_mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calculate modes up to mode No.: &quot;</span><span class="p">,</span> <span class="n">up_to_mode</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculate modes up to mode No.: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">up_to_mode</span><span class="p">)</span>
 
         <span class="c1"># calculate natural frequencies (e) and natural frequency modes (u)</span>
         <span class="p">(</span><span class="n">e_val</span><span class="p">,</span> <span class="n">e_vec</span><span class="p">)</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">k_mat</span><span class="p">,</span> <span class="n">m_mat</span><span class="p">,</span> <span class="n">eigvals</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">up_to_mode</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues (low, high):&quot;</span><span class="p">,</span> <span class="n">e_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues (low, high):&quot;</span><span class="p">,</span> <span class="n">e_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Eigenvalues: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e_val</span><span class="p">)</span>
 
         <span class="n">dim</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_system_size</span><span class="p">()</span>
@@ -994,14 +1012,15 @@
         <span class="k">return</span> <span class="n">f_vec</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_mode_load</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">use_lapack</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mode_load</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">use_lapack</span><span class="p">,</span> <span class="n">do_print</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Force vector based on natural frequency shapes.</span>
 <span class="sd">        New and faster implementation, using Fedem&#39;s internal eigenvalue solver.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># take into account modes up to max mode number in the array modes</span>
         <span class="n">n_modes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating the modes: &quot;</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating the modes: &quot;</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculate the first </span><span class="si">%s</span><span class="s2"> eigenmodes.&quot;</span> <span class="o">%</span> <span class="n">n_modes</span><span class="p">)</span>
 
         <span class="c1"># calculate natural frequencies (e_val)</span>
@@ -1015,7 +1034,8 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please check the fedem_solver.res file content above.&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;solve_modes&quot;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues (low, high):&quot;</span><span class="p">,</span> <span class="n">e_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues (low, high):&quot;</span><span class="p">,</span> <span class="n">e_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Eigenvalues: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e_val</span><span class="p">)</span>
 
         <span class="c1"># Pick eigenvectors as given by the modes indices</span>
@@ -1046,7 +1066,14 @@
 <span class="sd">        list of float</span>
 <span class="sd">            Evaluated response variables</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">do_print</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="ow">is</span> <span class="kc">None</span>
+
         <span class="c1"># run start step</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">+++++++++++++++++++++++++++++++++++++++++++++&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solving time step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;================================&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Running step start </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop_nr</span><span class="p">)</span>
         <span class="n">do_continue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">start_step</span><span class="p">()</span>
@@ -1068,7 +1095,8 @@
 
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting boundary conditions&quot;</span><span class="p">)</span>
         <span class="n">x_def</span><span class="p">,</span> <span class="n">g_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse_get_boundary_conditions</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_def and g_def: &quot;</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_def and g_def: &quot;</span><span class="p">,</span> <span class="n">x_def</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g_def</span><span class="p">)</span>
 
         <span class="c1"># displacement field based on unit loads/modal forces</span>
         <span class="c1"># F matrix (generalized fore part) will not change during the simulation,</span>
@@ -1085,9 +1113,11 @@
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">have_sci_py</span><span class="p">:</span>
-                    <span class="n">f_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode_load_scipy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+                    <span class="n">f_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode_load_scipy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">,</span> <span class="n">do_print</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">f_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span><span class="p">)</span>
+                    <span class="n">f_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode_load</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes_solver</span><span class="p">,</span> <span class="n">do_print</span>
+                    <span class="p">)</span>
                 <span class="k">if</span> <span class="n">f_mat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">f_mat</span> <span class="o">=</span> <span class="n">f_vec</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -1170,7 +1200,7 @@
         <span class="n">lhs</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># check number of equations and pointer position (pos)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pos</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;InCorrect dimension of equation system lhs: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dimension of rhs: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pos of position pointer: &quot;</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
@@ -1178,13 +1208,15 @@
                 <span class="s2">&quot;Equation system has incorrect dimensions: [</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span> <span class="n">pos</span><span class="p">)</span>
             <span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of the equation system: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of the equation system: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lhs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
         <span class="c1"># compute scaling factor and force vector</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">lstsq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">force</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">f_mat</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaling factor: &quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaling factor: &quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Scaling factors: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">alpha</span><span class="p">)</span>
 
         <span class="c1"># update right hand side vector</span>
@@ -1192,14 +1224,16 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">add_rhs_vector</span><span class="p">(</span><span class="n">force</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;add_rhs_vector&quot;</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;force vector added&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;force vector added&quot;</span><span class="p">)</span>
 
         <span class="c1"># equilibrium iterations (fedem)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">finish_step</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InverseException</span><span class="p">(</span><span class="s2">&quot;finish_step&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;equlibrium iterations done&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">do_print</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;equlibrium iterations done&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Equlibrium iterations finished&quot;</span><span class="p">)</span>
 
         <span class="c1"># increment counter</span>
@@ -1209,6 +1243,19 @@
 
         <span class="c1"># return output function values</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">get_functions</span><span class="p">(</span><span class="n">out_def</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="InverseSolver.done_inverse">
+<a class="viewcode-back" href="../inverse.html#inverse.InverseSolver.done_inverse">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">done_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Terminates the dynamics solver.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prbar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">     Done.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span></div>
 
 
     <span class="nd">@staticmethod</span>
@@ -1271,9 +1318,12 @@
 <span class="sd">        Current working directory for the fedem dynamics solver</span>
 <span class="sd">    config : dictionary</span>
 <span class="sd">        Content of yaml input file</span>
+<span class="sd">    print_stepping : bool, default=False</span>
+<span class="sd">        If True, print some time stepping info.</span>
+<span class="sd">        Otherwise use the progress bar only.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrkdir</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrkdir</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">print_stepping</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor. Initializes the object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1292,7 +1342,7 @@
         <span class="n">FedemSolver</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FEDEM_SOLVER&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">)</span>
 
         <span class="c1"># Initialize the inverse solver</span>
-        <span class="n">InverseSolver</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></div>
+        <span class="n">InverseSolver</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">print_stepping</span><span class="p">)</span></div>
 
 </pre></div>
 
