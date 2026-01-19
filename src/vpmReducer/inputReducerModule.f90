@@ -235,8 +235,8 @@ contains
        nFreeMem = ffa_getPhysMem(.false.)
        if (nFreeMem > 0) then
           ngen = min(32,nFreeMem/4)
-          write(errmsg,650) ngen, 100*ngen/nFreeMem
-650       format('Setting GSF solver RAM size to',I4,'MB (',I3, &
+          write(errmsg,650) ngen, real(100*ngen,dp)/real(nFreeMem,dp)
+650       format('Setting GSF solver RAM size to',I4,'MB (',F5.1, &
                & '% of available memory).')
           call reportError (note_p,errmsg,'Use option -cachesize to override.')
        end if

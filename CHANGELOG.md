@@ -8,6 +8,15 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.1.3] (2026-01-20)
+
+### :rocket: Added
+
+The out-of-core GSF eqution solver from DNVS can now be included in the build
+through the cmake option `-DUSE_LINALG_GSF=ON`.
+This equation solver is not part of the open source project by may be obtained
+from the developers on request.
+
 ## [fmu-8.1.2] (2025-11-01)
 
 ### :rocket: Added
