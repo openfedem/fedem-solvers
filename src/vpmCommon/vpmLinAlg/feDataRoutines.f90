@@ -23,6 +23,16 @@ end module FEKind
 
 !!=============================================================================
 !> @brief Extracts the element connectivity table for the FE model.
+!>
+!> @param[in] T Object with FE input data
+!> @param[out] nels Number of elements in the FE model
+!> @param[out] nnpc Size of the nodal correspondance array
+!> @param[out] xnpc Pointer to index array for the nodal point correspondances
+!> @param[out] npc Pointer to the nodal point correspondance array
+!>
+!> @author Knut Morten Okstad
+!>
+!> @date 17 Sep 2004
 
 subroutine GetConnectivityFEData (T, nels, nnpc, xnpc, npc)
   !DEC$ ATTRIBUTES DLLEXPORT :: GetConnectivityFEData
@@ -56,6 +66,17 @@ end subroutine GetConnectivityFEData
 
 !!=============================================================================
 !> @brief Extracts the constraint equations of the linear couplings.
+!>
+!> @param[in] T Object with FE input data
+!> @param[out] nceq Number of constraint equations in the FE model
+!> @param[out] nnceq Size of the constraint equation definition array
+!> @param[out] xceq Pointer to index array for the constraint equations
+!> @param[out] ceq Pointer to the constraint equation definition array
+!> @param[out] tcc Pointer to the constraint equation coefficients
+!>
+!> @author Knut Morten Okstad
+!>
+!> @date 17 Sep 2004
 
 subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
   !DEC$ ATTRIBUTES DLLEXPORT :: GetConstraintsFEData
@@ -68,10 +89,10 @@ subroutine GetConstraintsFEData (T, nceq, nnceq, xceq, ceq, tcc)
 
   implicit none
 
-  type(FEDataInput), intent(in)        :: T
-  integer(is)      , intent(out)       :: nceq, nnceq
-  integer(is)      , pointer           :: xceq(:), ceq(:)
-  real(wp)         , pointer, optional :: tcc(:)
+  type(FEDataInput) , intent(in)  :: T
+  integer(is)       , intent(out) :: nceq, nnceq
+  integer(is)       , pointer     :: xceq(:), ceq(:)
+  real(wp), optional, pointer     :: tcc(:)
 
 #ifdef __GNUC__
   nceq  =  ourSams(T%idx)%p%nceq
@@ -96,6 +117,17 @@ end subroutine GetConstraintsFEData
 
 !!=============================================================================
 !> @brief Extracts the nodal DOF information.
+!>
+!> @param[in] T Object with FE input data
+!> @param[out] nnod Number of nodes in the FE model
+!> @param[out] ndof Number of degrees if freedom in the FE model
+!> @param[out] madof Pointer to the array of accumulated DOFs for the nodes
+!> @param[out] msc Pointer to the array of DOF status codes
+!> @param[out] minex Pointer to the internal-to-external node number mapping
+!>
+!> @author Knut Morten Okstad
+!>
+!> @date 17 Sep 2004
 
 subroutine GetPartitionFEData (T, nnod, ndof, madof, msc, minex)
   !DEC$ ATTRIBUTES DLLEXPORT :: GetPartitionFEData

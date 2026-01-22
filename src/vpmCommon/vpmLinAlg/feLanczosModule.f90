@@ -5,6 +5,14 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file feLanczosModule.f90
+!> @brief Eigenvalue solver based on the Lanczos method.
+
+!!==============================================================================
+!> @brief Module with a Lanczos-based eigenvalue solver.
+!> @details This module contains subroutines implementing
+!> the Lanczos eigenvalue solver on top of the GSF linear equation solver.
+
 module FELanczosModule
 
   use kindModule, only : wp => dp
@@ -13,43 +21,77 @@ module FELanczosModule
 
   private
 
-  real(wp), allocatable, save :: work1(:,:), work2(:,:)
+  real(wp), allocatable, save :: work1(:,:) !< Internal work array
+  real(wp), allocatable, save :: work2(:,:) !< Internal work array
 
   public :: FELanczosSolve
 
 
 contains
 
+  !!============================================================================
+  !> @brief Solves a generalized symmetric eigenvalue problem.
+  !>
+  !> @param MsgA GSF information for matrix @b A
+  !> @param MsgB GSF information for matrix @b B
+  !> @param structA Symbolic assembly data for matrix @b A
+  !> @param structB Symbolic assembly data for matrix @b B
+  !> @param coeffA Coefficient assembly data for matrix @b A
+  !> @param coeffB Coefficient assembly data for matrix @b B
+  !> @param factorA Factorization data for matrix @b A
+  !> @param factorB Factorization data for matrix @b B
+  !> @param[in] MPARB Sparse PARameters for SPR-matrix @b B
+  !> @param[in] MTREEB Elimination assembly TREES for SPR-matrix @b B
+  !> @param[in] MSIFB Storage Information for SPR-matrix @b B
+  !> @param valueB Matrix values for SPR-matrix @b B
+  !> @param diagB The diagonal values for SPR-matrix @b B
+  !> @param TOL Tolerances
+  !> @param[out] EVL Computed eigenvalues
+  !> @param[out] EVC Computed eigenvectors
+  !> @param[in] MIP Input options
+  !> @param[in] N Dimension of the equation system
+  !> @param[in] NEVAL Number of eigenvalues to return
+  !> @param[in] NEVEC Number of eigenvectors to return
+  !> @param[in] MAXLAN Maximum number of Lanczos vectors
+  !> @param[in] LPU File unit number for res-file output
+  !> @param[in] IPSW Print switch for debug output
+  !> @param[out] MOP Output options
+  !> @param[out] MSING Array of singular equations detected during factorization
+  !> @param[out] INFO Error handler object, nullified on success
+  !>
+  !> @details This subroutine determines the @a NEVAL smallest eigenvalues
+  !> &lambda;<sub>i</sub> of the generalized, symmetric eigenproblem
+  !>
+  !> (<b>A</b> - &lambda;<sub>i</sub>*<b>B</b>) * <b>q</b><sub>i</sub> = 0
+  !>
+  !> The routine also returns @a NLV (=MOP(3)) ortogonal Lanczos vectors or,
+  !> optionally, approximations to @a NEVEC eigenvectors (corresponding to the
+  !> @a NEVEC first eigenvalues). The eigenvectors, which are B-orthonormal,
+  !> are returned as the first @a NEVEC vectors in @a EVC.
+  !>
+  !> @b A is a symmetric matrix stored in sparse (compressed) format.
+  !> @b B is either a symmetric sparse (KSB=1) or a diagonal (KSB=2) matrix.
+  !> For both @b A and @b B the original matrices or their appropriate factors
+  !> are accepted as input (in coeffA/factorA and coeffB/factorB).
+  !> A truncated Lanczos method is used to transform the problem to tridiagonal,
+  !> special form. The reduced, tridiagonal eigenproblem is solved by implicit
+  !> QL transformation. Various reorthogonalization schemes may be specified.
+  !>
+  !> This is the GSF version of the SPRLAN subroutine of the SAM library.
+  !> The matrix @b B may optionally be represented by an SPR data structure,
+  !> when @a KSB = MIP(2) = 3.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 12 May 2005
+
   subroutine FELanczosSolve (MsgA,structA,coeffA,factorA, &
        &                     MsgB,structB,coeffB,factorB, &
        &                     MPARB,MTREEB,MSIFB,valueB,diagB, &
        &                     TOL,EVL,EVC,MIP,MOP, &
        &                     N,NEVAL,NEVEC,MAXLAN,MSING,LPU,IPSW,INFO)
-
-    !!==========================================================================
-    !!    TASK :  To determine the NEVAL smallest eigenvalues Lambda_i
-    !!            of the generalized, symmetric eigenproblem
-    !!                 (A - Lambda_i*B)*q_i = 0
-    !!            The routine also returns NLV (=MOP(3)) ortogonal Lanczos
-    !!            vectors (in V) or, optionally, approximations to NEVEC
-    !!            eigenvectors (corresponding to the NEVEC first eigenvalues).
-    !!            values).  The eigenvectors, which are B-orthonormal,
-    !!            are returned as the first NEVEC vectors in V.
-    !!    A is a symmetric matrix stored in sparse (compressed) format.
-    !!    B is either a symmetric sparse (KSB=1) or a diagonal (KSB=2) matrix.
-    !!    For both A and B the original matrices or their appropriate factors
-    !!    are accepted as input (in coeffA/factorA and coeffB/factorB).
-    !!    A truncated Lanczos method is used to transform the problem to
-    !!    tridiagonal, special form. The reduced, tridiagonal eigenproblem
-    !!    is solved by implicit QL transformation.
-    !!    Various reorthogonalization schemes may be specified.
-    !!
-    !!    This is the GSF version of SPRLAN (out-of-core matrices).
-    !!    The matrix B may optionally be represented by an SPR data structure,
-    !!    when KSB=MIP(2)=3.
-    !!
-    !! Programmer : Knut Morten Okstad                   date/rev : Jan 2005/1.0
-    !!==========================================================================
 
     use SprKindModule , only : ik
     use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup, Error_Flag
@@ -536,7 +578,7 @@ contains
           allocate(RWA(MPARB(14),1_ik),stat=IERR)
           if (IERR /= 0) goto 980
        end if
-       CALL SPRBS2 (MPARB(1),MTREEB(1),MSIFB(1),valueB(1),work1(1,1), &
+       call SPRBS2 (MPARB(1),MTREEB(1),MSIFB(1),valueB(1),work1(1,1), &
             &       int(N,ik),int(NVC,ik),RWA(1,1),LLLP,LERR)
        IF (LERR < 0_ik) THEN
           CALL SPRLER (27_ik,J,J,J,LLLP,LERR)
@@ -602,6 +644,7 @@ contains
 
   contains
 
+    !> @brief Fortran90-version of the SAM subroutine MGSOR1.
     subroutine FEMGSOrth (G,V,M)
       real(wp), intent(in)    :: G(:,:)
       real(wp), intent(inout) :: V(:)
@@ -619,6 +662,8 @@ contains
       call DSCAL (N,x,V(1),1)
     end subroutine FEMGSOrth
 
+    !> @brief Fortran90-version of the SAM subroutine RANVEC
+    !> (generation of a pseudo-random vector).
     subroutine FERandomVec (V,x)
       real(wp), intent(out)   :: V(:)
       real(wp), intent(inout) :: x
@@ -637,6 +682,7 @@ contains
       end do
     end subroutine FERandomVec
 
+    !> @brief Fortran90-version of the SAM subroutine REORL2.
     subroutine FEReOrl (ALFA,BETA,VVK,VVKM1,VVKP1,BTAKP1,RLPR,TRSH,K,VPMAX)
       real(wp), intent(in)    :: ALFA(:), BETA(:)
       real(wp), intent(inout) :: VVK(:), VVKM1(:), VVKP1(:)
@@ -679,16 +725,43 @@ contains
   end subroutine FELanczosSolve
 
 
+  !!============================================================================
+  !> @brief Administers the matrix factorizations for the Lanczos eigensolver.
+  !>
+  !> @param[out] INFO Error handler object, nullified on success
+  !> @param[in] LPU File unit number for res-file output
+  !> @param[in] KSA Factorization option for matrix @b A
+  !> @param[in] KSB Factorization option for matrix @b B
+  !> @param[in] KPD Factorization option
+  !> @param[in] N Dimension of the equation system
+  !> @param[in] NEVAL Number of eigenvalues to return
+  !> @param[in] EPS Singularity tolerance
+  !> @param[in] NN Number of singular equations when @b B is diagonal
+  !> @param[out] MSING Array of singular equations detected during factorization
+  !> @param MsgA GSF information for matrix @b A
+  !> @param structA Symbolic assembly data for matrix @b A
+  !> @param coeffA Coefficient assembly data for matrix @b A
+  !> @param factorA Factorization data for matrix @b A
+  !> @param MsgB GSF information for matrix @b B
+  !> @param structB Symbolic assembly data for matrix @b B
+  !> @param coeffB Coefficient assembly data for matrix @b B
+  !> @param factorB Factorization data for matrix @b B
+  !> @param diagB The diagonal values for SPR-matrix @b B
+  !> @param[in] MPARB Sparse PARameters for SPR-matrix @b B
+  !> @param[in] MTREEB Elimination assembly TREES for SPR-matrix @b B
+  !> @param[in] MSIFB Storage Information for SPR-matrix @b B
+  !> @param valueB Matrix values for SPR-matrix @b B
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 12 May 2005
+
   subroutine FELFac (INFO,LPU,KSA,KSB,KPD,N,NEVAL,EPS,NN,MSING, &
        &             MsgA,structA,coeffA,factorA, &
        &             MsgB,structB,coeffB,factorB,diagB, &
        &             MPARB,MTREEB,MSIFB,valueB)
-
-    !!==========================================================================
-    !! Administer the matrix factorizations needed for the Lanczos eigensolver.
-    !!
-    !! Programmer : Knut Morten Okstad                   date/rev : Sep 2004/1.0
-    !!==========================================================================
 
     use SprKindModule , only : ik
     use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup, Error_Flag
@@ -797,7 +870,7 @@ contains
 
           KSB = -3
           TPR(1) = EPS
-          CALL SPRFC2 (MPARB(1),MTREEB(1),MSIFB(1),valueB(1),TPR(1), &
+          call SPRFC2 (MPARB(1),MTREEB(1),MSIFB(1),valueB(1),TPR(1), &
                &       LWA(1),RWA(1),int(LPU,ik),LERR,CMVY18,CMMY18)
           IF (LERR < 0_ik) CALL SPRLER (22_ik,int(KSB,ik),I,I,int(LPU,ik),LERR)
 
@@ -847,13 +920,22 @@ contains
   end subroutine FELFac
 
 
-  subroutine FEFindAndFixZeroPivots (struct,coeff,NZERO,MSING,INFO)
+  !!============================================================================
+  !> @brief Repairs isolated zero pivot elements in the matrix.
+  !>
+  !> @param struct Symbolic assembly data for the matrix
+  !> @param coeff Coefficient assembly data for the matrix
+  !> @param[out] NZERO Number of zero pivot elements in the matrix
+  !> @param[out] MSING Array of singular equations detected during factorization
+  !> @param[out] INFO Error handler object, nullified on success
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 20 Sep 2005
 
-    !!==========================================================================
-    !! Repair isolated zero pivot elements in the matrix prior to factorization.
-    !!
-    !! Programmer : Knut Morten Okstad                   date/rev : Sep 2005/1.0
-    !!==========================================================================
+  subroutine FEFindAndFixZeroPivots (struct,coeff,NZERO,MSING,INFO)
 
     use SprKindModule , only : ik
     use FELinearSolver, only : SAM, CAM, Error_Flag
@@ -906,6 +988,7 @@ contains
 
   contains
 
+    !> @brief Returns .true. if an error has been detected.
     function Get_ErrStat ()
       logical :: Get_ErrStat
       Get_ErrStat = associated(INFO)
@@ -917,33 +1000,57 @@ contains
   end subroutine FEFindAndFixZeroPivots
 
 
+  !!============================================================================
+  !> @brief Performs some linear algebra operations for the Lanczos eigensolver.
+  !>
+  !> @param[out] INFO Error handler object, nullified on success
+  !> @param[in] LPU File unit number for res-file output
+  !> @param[in] IFLAG Option telling which operation to perform (see below)
+  !> @param[in] Ndim Dimension of the equation system
+  !> @param[in] AllInt If 'A', use full matrix, if 'I' use internal DOFs only
+  !> @param X Vector of dimension @a Ndim
+  !> @param[out] Y Vector of dimension @a Ndim
+  !> @param MsgA GSF information for matrix @b A
+  !> @param structA Symbolic assembly data for matrix @b A
+  !> @param factorA Factorization data for matrix @b A
+  !> @param structB Symbolic assembly data for matrix @b B
+  !> @param coeffB Coefficient assembly data for matrix @b B
+  !> @param factorB Factorization data for matrix @b B
+  !> @param[in] diagB The diagonal values for SPR-matrix @b B
+  !> @param[in] MPARB Sparse PARameters for SPR-matrix @b B
+  !> @param[in] MTREEB Elimination assembly TREES for SPR-matrix @b B
+  !> @param[in] MSIFB Storage Information for SPR-matrix @b B
+  !> @param[in] valueB Matrix values for SPR-matrix @b B
+  !>
+  !> @details This subroutine calculates one of the following:
+  !>
+  !> - IFLAG = 1:  X := (A-1)*UbT*X
+  !> - IFLAG = 2:  Y  = (A-1)*UbT*X
+  !> - IFLAG = 3:  X := Ub*(A-1)*UbT*X
+  !> - IFLAG = 4:  Y  = Ub*(A-1)*UbT*X
+  !> - IFLAG = 5:  X := (Ua-T)*B*(Ua-1)*X
+  !> - IFLAG = 6:  Y  = (Ua-T)*B*(Ua-1)*X
+  !>
+  !> where @b X and @b Y are vectors,
+  !> @b A is a symmetric sparse matrix, represented by
+  !> its factors @a La*Da*LaT, stored in @a structA and @a factorA,
+  !> @a Ua is the Cholesky factor of @b A, also stored in @a structA,factorA,
+  !> @b B is either a symmetric sparse matrix, stored in @a structB,coeffB,
+  !> a symmetric sparse in-core matrix, stored in @a MPARB, ..., @a valueB,
+  !> or a diagonal matrix, stored in @a diagB.
+  !> @a Ub is the Cholesky factor of @b B, stored in @a structB,factorB or in
+  !> @a MPARB, ..., @a valueB, or in @a diagB if @b B is just a diagonal matrix.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 12 May 2005
+
   subroutine FESMM (INFO,LPU,IFLAG,Ndim,AllInt,X,Y, &
        &            MsgA,structA,factorA, &
        &            structB,coeffB,factorB,diagB, &
        &            MPARB,MTREEB,MSIFB,valueB)
-
-    !!==========================================================================
-    !! To determine:
-    !!
-    !!    X := (A-1)*UbT*X         IFLAG = 1
-    !!    Y  = (A-1)*UbT*X         IFLAG = 2
-    !!    X := Ub*(A-1)*UbT*X      IFLAG = 3
-    !!    Y  = Ub*(A-1)*UbT*X      IFLAG = 4
-    !!    X := (Ua-T)*B*(Ua-1)*X   IFLAG = 5
-    !!    Y  = (Ua-T)*B*(Ua-1)*X   IFLAG = 6
-    !!
-    !!  where X and Y are vectors,
-    !!        A is a symmetric sparse matrix, represented by
-    !!        its factors La*Da*LaT, stored in (structA,factorA),
-    !!        Ua is the Cholesky factor of A, stored in (structA,factorA),
-    !!        B is either a symmetric sparse matrix, stored in (structB,coeffB),
-    !!        a symmetric sparse in-core matrix, stored in (MPARB,...,valueB),
-    !!        or a diagonal matrix, stored in diagB.
-    !!        Ub is the Cholesky factor of B, stored in (structB,factorB), or in
-    !!        (MPARB,...,valueB), or in diagB if B is a diagonal matrix.
-    !!
-    !! Programmer : Knut Morten Okstad                   date/rev : Jan 2005/1.0
-    !!==========================================================================
 
     use SprKindModule , only : ik
     use FELinearSolver, only : MessageLevel, SAM, CAM, GSFColSup, Error_Flag
@@ -1114,6 +1221,7 @@ contains
 
   contains
 
+    !> @brief Returns a matrix pointer to an array.
     function MatrixPointToArray (array,rows,columns)
       integer , intent(in)         :: rows, columns
       real(wp), intent(in), target :: array(rows,columns)

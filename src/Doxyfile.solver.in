@@ -843,9 +843,6 @@ RECURSIVE              = NO
 EXCLUDE                = src/vpmSolver/dummyResStressModule.f90 \
                          src/vpmSolver/HWAFLSmanager.C \
                          src/vpmSolver/vpmSolverTests/xerbla.f \
-                         src/vpmCommon/vpmLinAlg/feDataModule.f90 \
-                         src/vpmCommon/vpmLinAlg/feDataRoutines.f90 \
-                         src/vpmCommon/vpmLinAlg/feLanczosModule.f90 \
                          src/vpmUtilities/sparseMatrixUtils.C \
                          src/vpmUtilities/sparseMatrixInterface.f90
 
