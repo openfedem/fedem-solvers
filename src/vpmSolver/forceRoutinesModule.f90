@@ -90,11 +90,15 @@ contains
           !! Set up a vector describing the force direction
           if (associated(forces(i)%sup1)) then
              fDir = matmul34(forces(i)%sup1%supTr,forces(i)%v1)
+          else if (associated(forces(i)%trp1)) then
+             fDir = matmul34(forces(i)%trp1%ur,forces(i)%v1)
           else
              fDir = forces(i)%v1
           end if
           if (associated(forces(i)%sup2)) then
              fDir = matmul34(forces(i)%sup2%supTr,forces(i)%v2) - fDir
+          else if (associated(forces(i)%trp2)) then
+             fDir = matmul34(forces(i)%trp2%ur,forces(i)%v2)
           else
              fDir = forces(i)%v2 - fDir
           end if

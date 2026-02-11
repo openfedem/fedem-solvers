@@ -80,6 +80,8 @@ module ForceTypeModule
      real(dp) :: v2(3) !< End point of the force direction vector
      type(SupElType), pointer :: sup1 !< Local coordinate system for v1
      type(SupElType), pointer :: sup2 !< Local coordinate system for v2
+     type(TriadType), pointer :: trp1 !< Start point of force direction vector
+     type(TriadType), pointer :: trp2 !< End point of force direction vector
 
      real(dp) :: F               !< Current force value
      real(dp) :: Fprev           !< Previous force value
@@ -148,7 +150,8 @@ contains
 
     !! Define the LOAD namelist
     integer            :: id, extId(10), lDof, updateFlag, loadType
-    integer            :: triadId, jointId, loadEngineId, supEl1Id, supEl2Id
+    integer            :: triadId, jointId, loadEngineId
+    integer            :: supEl1Id, supEl2Id, triad1Id, triad2Id
     character(ldesc_p) :: extDescr
     character(lfnam_p) :: fileName
     character(len=20)  :: type
@@ -156,7 +159,7 @@ contains
     integer            :: saveVar(3)
     namelist /LOAD/ id, extId, extDescr, type, lDof, updateFlag, loadType, &
          &          triadId, jointId, loadEngineId, supEl1Id, supEl2Id, &
-         &          vec1, vec2, f0, f1, saveVar, fileName
+         &          triad1Id, triad2Id, vec1, vec2, f0, f1, saveVar, fileName
 
     !! --- Logic section ---
 
@@ -189,7 +192,8 @@ contains
        !! Default values
        id=0; extId=0; extDescr=''
        type=''; lDof=0; updateFlag=2; loadType=0; fileName=''
-       triadId=0; jointId=0; loadEngineId=0; supEl1Id=0; supEl2Id=0
+       triadId=0; jointId=0; loadEngineId=0
+       supEl1Id=0; supEl2Id=0; triad1Id=0; triad2Id=0
        vec1=0.0_dp; vec2=0.0_dp; f0=0.0_dp; f1=0.0_dp; saveVar=0
 
        read(infp,nml=LOAD,iostat=stat)
@@ -230,6 +234,44 @@ contains
           call allocateNodeForce (forces(idIn)%triad,err)
           if (err < stat) exit
 
+          !! Set the pointer to triad or superelement for the FROM point
+          if (supEl1Id > 0) then
+             forces(idIn)%sup1 => GetPtrToId(sups,supEl1Id)
+             if (.not. associated(forces(idIn)%sup1)) then
+                err = err - 1
+                call ReportInputError ('LOAD',idIn,forces(idIn)%id, &
+                     &                 'Invalid superelement ID for FROM-point')
+                cycle
+             end if
+          else if (triad1Id > 0) then
+             forces(idIn)%trp1 => GetPtrToId(triads,triad1Id)
+             if (.not. associated(forces(idIn)%trp1)) then
+                err = err - 1
+                call ReportInputError ('LOAD',idIn,forces(idIn)%id, &
+                     &                 'Invalid triad ID for FROM-point')
+                cycle
+             end if
+          end if
+
+          !! Set the pointer to triad or superelement for the TO point
+          if (supEl2Id > 0) then
+             forces(idIn)%sup2 => GetPtrToId(sups,supEl2Id)
+             if (.not. associated(forces(idIn)%sup2)) then
+                err = err - 1
+                call ReportInputError ('LOAD',idIn,forces(idIn)%id, &
+                     &                 'Invalid superelement ID for TO-point')
+                cycle
+             end if
+          else if (triad2Id > 0) then
+             forces(idIn)%trp2 => GetPtrToId(triads,triad2Id)
+             if (.not. associated(forces(idIn)%trp2)) then
+                err = err - 1
+                call ReportInputError ('LOAD',idIn,forces(idIn)%id, &
+                     &                 'Invalid triad ID for TO-point')
+                cycle
+             end if
+          end if
+
        else if (jointId > 0) then ! Force is acting on a joint dof
 
           !! Set the pointer to the joint the load is acting on
@@ -259,28 +301,6 @@ contains
           err = err - 1
           call ReportInputError ('LOAD',idIn,forces(idIn)%id)
           cycle
-       end if
-
-       !! Set the pointer to link for the FROM point
-       if (supEl1Id > 0 .and. triadId > 0) then
-          forces(idIn)%sup1 => GetPtrToId(sups,supEl1Id)
-          if (.not. associated(forces(idIn)%sup1)) then
-             err = err - 1
-             call ReportInputError ('LOAD',idIn,forces(idIn)%id, &
-                  &                 'Invalid superelement ID for FROM-point')
-             cycle
-          end if
-       end if
-
-       !! Set the pointer to link for the TO point
-       if (supEl2Id > 0 .and. triadId > 0) then
-          forces(idIn)%sup2 => GetPtrToId(sups,supEl2Id)
-          if (.not. associated(forces(idIn)%sup2)) then
-             err = err - 1
-             call ReportInputError ('LOAD',idIn,forces(idIn)%id, &
-                  &                 'Invalid superelement ID for TO-point')
-             cycle
-          end if
        end if
 
        !! Set the load engine pointer
@@ -372,6 +392,16 @@ contains
     else
        write(io,*) 'sup2        = NULL'
     end if
+    if (associated(force%trp1)) then
+       write(io,*) 'trp1(id)    =', force%trp1%id%baseId,force%trp1%id%userId
+    else
+       write(io,*) 'trp1        = NULL'
+    end if
+    if (associated(force%trp2)) then
+       write(io,*) 'trp2(id)    =', force%trp2%id%baseId,force%trp2%id%userId
+    else
+       write(io,*) 'trp2        = NULL'
+    end if
 
     write(io,*) 'updateFlag  =', force%updateFlag
     write(io,*) 'loadType    =', force%loadType
@@ -430,6 +460,8 @@ contains
 
     nullify(force%sup1)
     nullify(force%sup2)
+    nullify(force%trp1)
+    nullify(force%trp2)
 
     force%F = 0.0_dp
     force%Fprev = 0.0_dp
