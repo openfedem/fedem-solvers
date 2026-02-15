@@ -1,3 +1,10 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classFFaOptionFileCreator.html" title="Class for writing command&#45;line option files for the solver modules." alt="" coords="5,5,164,32"/>
+<area shape="rect" id="node1" href="$classFFaOperationBase.html" title="Base class for all operations." alt="" coords="5,79,145,105"/>
+<area shape="rect" id="node2" href="$classFFaOperation.html" title=" " alt="" coords="197,5,380,32"/>
+<area shape="rect" id="node3" href="$classFFaOperation.html" title="The base class used as argument in other operations." alt="" coords="193,152,384,179"/>
+<area shape="rect" id="node4" href="$classFFaNToOneOp.html" title="A class for vector operations." alt="" coords="432,91,627,117"/>
+<area shape="rect" id="node5" href="$classFFaUnaryOp.html" title="A class for scalar operations." alt="" coords="443,206,615,247"/>
+<area shape="rect" id="node6" href="$classFFrReadOp.html" title=" " alt="" coords="442,152,617,179"/>
+<area shape="rect" id="node7" href="$classFFaOperationContainer.html" title=" " alt="" coords="199,203,378,259"/>
+<area shape="rect" id="node8" href="$classFFaOperationContainer.html" title=" " alt="" coords="199,57,378,127"/>
 </map>
