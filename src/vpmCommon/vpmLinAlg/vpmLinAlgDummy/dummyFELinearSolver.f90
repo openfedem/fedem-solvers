@@ -5,12 +5,14 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
-module FELinearSolver
+!> @file dummyFELinearSolver.f90
+!> @brief Dummy implementation of the FE linear solver API.
+!> @details This file is a dummy implementation of the felinearsolver module
+!> which defines the API of the GSF quation solver from DNVS.
+!> It is used when this equation solver is not included in the build.
+!> @cond NO_DOCUMENTATION
 
-  !!============================================================================
-  !! This module is a dummy implementation of the FE linear solver from DNVS.
-  !! It is only used on platforms where this equation solver is not supported.
-  !!============================================================================
+module FELinearSolver
 
   implicit none
 
@@ -64,10 +66,25 @@ module FELinearSolver
   private :: FEExtractK12A, FEExtractK12B
   private :: FEPermuteVectorsA, FEPermuteVectorsB
   private :: FEDestroyA, FEDestroyB
-  private :: errorMsg
+  private :: dummyMsg, errorMsg
 
 
 contains
+
+  subroutine dummyMsg (prgnam,P,Q,R)
+    use FEData       , only       :  FEDataInput
+    character(len=*) , intent(in) :: prgnam
+    type(FEDataInput), intent(in) :: P
+    logical, optional, intent(in) :: Q
+    integer, optional, intent(in) :: R
+    print *,' ** ',prgnam,'dummy: ', &
+#ifdef __GNUC__
+         & P%idx, &
+#else
+         & associated(P%sam), &
+#endif
+         & present(Q), present(R)
+  end subroutine dummyMsg
 
   subroutine errorMsg (prgnam,INFO,Msg)
     use reportErrorModule, only : error_p, reportError
@@ -107,7 +124,7 @@ contains
   subroutine SetScratchFileLocation (Msg,tmpDir)
     type(MessageLevel), intent(inout) :: Msg
     character(len=*)  , intent(in)    :: tmpDir
-    print *,' ** SetScratchFileLocation dummy: ',Msg%dummy,tmpDir
+    print *,' ** SetScratchFileLocation dummy: ',Msg%dummy,len_trim(tmpDir)
   end subroutine SetScratchFileLocation
 
   subroutine WriteMessageData (Msg)
@@ -128,8 +145,7 @@ contains
     type(SAM)         , pointer       :: Q
     type(GSFColSup)   , pointer       :: T
     type(Error_Flag)  , pointer       :: INFO
-    print *,' ** FEAnalyzeA dummy: ',associated(P%sam), &
-         &                           associated(Q),associated(T)
+    call dummyMsg ('FEAnalyzeA',P,associated(Q).and.associated(T))
     call errorMsg ('FEAnalyze',INFO,Msg)
   end subroutine FEAnalyzeA
 
@@ -150,8 +166,7 @@ contains
     type(SAM)         , pointer       :: Qsub
     type(GSFColSup)   , pointer       :: T
     type(Error_Flag)  , pointer       :: INFO
-    print *,' ** FEAnalyzeC dummy: ',associated(P%sam),Q%dummy, &
-         &                           associated(Qsub),associated(T)
+    call dummyMsg ('FEAnalyzeC',P,associated(Qsub).and.associated(T),Q%dummy)
     call errorMsg ('FEAnalyze',INFO,Msg)
   end subroutine FEAnalyzeC
 
@@ -162,7 +177,7 @@ contains
     type(SAM)         , intent(in)    :: Q
     type(SAM)         , pointer       :: Qsub
     type(Error_Flag)  , pointer       :: INFO
-    print *,' ** FEAnalyzeD dummy: ',associated(P%sam),Q%dummy,associated(Qsub)
+    call dummyMsg ('FEAnalyzeD',P,associated(Qsub),Q%dummy)
     call errorMsg ('FEAnalyze',INFO,Msg)
   end subroutine FEAnalyzeD
 
@@ -208,8 +223,8 @@ contains
     integer          , intent(in)    :: NRHS
     real(dp)         , intent(inout) :: B(:)
     type(Error_Flag) , pointer       :: INFO
-    print *,' ** FEAssembleElement dummy: ',OPT,iE,size(k),associated(P%sam), &
-         &                                  Q%dummy,S%dummy,NRHS,size(B)
+    call dummyMsg ('FEAssembleElement',P, &
+         &         OPT+size(k)+size(B)+Q%dummy+S%dummy+NRHS > 0, iE)
     call errorMsg ('FEAssembleElement',INFO)
   end subroutine FEAssembleElement
 
@@ -472,8 +487,9 @@ contains
     type(CAM)      , optional, pointer    :: S
     type(GSFColSup), optional, pointer    :: T
     type(Error_Flag)         , pointer    :: INFO
-    print *,' ** FEDestroyA dummy: ',present(Q),present(S),present(T)
-    call errorMsg ('FEDestroy',INFO,Msg)
+    if (present(Q) .or. present(S) .or. present(T)) then
+       call errorMsg ('FEDestroy',INFO,Msg)
+    end if
   end subroutine FEDestroyA
 
   subroutine FEDestroyB (Q,S,T,INFO)
@@ -481,8 +497,9 @@ contains
     type(CAM)      , optional, pointer :: S
     type(GSFColSup), optional, pointer :: T
     type(Error_Flag)         , pointer :: INFO
-    print *,' ** FEDestroyB dummy: ',present(Q),present(S),present(T)
-    call errorMsg ('FEDestroy',INFO)
+    if (present(Q) .or. present(S) .or. present(T)) then
+       call errorMsg ('FEDestroy',INFO)
+    end if
   end subroutine FEDestroyB
 
   subroutine FEErrorHandler (INFO,P,Q,output)
@@ -491,8 +508,11 @@ contains
     type(FEDataInput), optional, intent(in) :: P
     type(SAM)        , optional, intent(in) :: Q
     integer          , optional, intent(in) :: output
-    if (present(output) .and. associated(INFO)) then
-       write(output,*) ' ** FEErrorHandler: ',present(P),present(Q)
+    if (associated(INFO)) then
+       call dummyMsg ('FEErrorHandler',P,present(Q),INFO%dummy)
+       deallocate(INFO)
+    else if (present(output)) then
+       call dummyMsg ('FEErrorHandler',P,present(Q))
     end if
   end subroutine FEErrorHandler
 
@@ -527,3 +547,5 @@ contains
   end subroutine GSFDump
 
 end module FELinearSolver
+
+!> @endcond

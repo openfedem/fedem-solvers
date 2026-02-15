@@ -289,6 +289,9 @@ contains
     use SysMatrixTypeModule, only : reAllocate, nullifySysMatrix
     use allocationModule   , only : reAllocate
     use progressModule     , only : writeProgress
+#ifdef __GNUC__
+    use FEModel            , only : ourSams
+#endif
     use FELinearSolver     , only : FEInitialize, FEAnalyze, FEMatrixOrder
     use FELinearSolver     , only : FEGetActiveOrder, FEGetSuperelementOrder
     use FELinearSolver     , only : FEPermuteIndices, SetLinearSolverType
@@ -508,11 +511,21 @@ contains
           !! the only off-diagonal terms may result from constraint equations.
           !! Create a separate SAM structure accounting for these only.
 
+#ifdef __GNUC__
+          sysMat%gsf%P%idx = 2
+          call LumpedSAM (samData,ourSams(2)%p,ierr)
+#else
           call LumpedSAM (samData,sysMat%gsf%P%sam,ierr)
+#endif
           if (ierr /= 0) goto 999
 
        else
+#ifdef __GNUC__
+          sysMat%gsf%P%idx = 1
+          ourSams(1)%p => samData
+#else
           sysMat%gsf%P%sam => samData
+#endif
        end if
 
        !! Initialize the out-of-core matrix management system (this needs to be

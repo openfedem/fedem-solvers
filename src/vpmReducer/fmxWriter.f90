@@ -126,7 +126,7 @@ end subroutine initFMX
 !> @param ndof Size of the @a meqn array
 !> @param ndof1 Size of the @a meqn1 array
 !> @param ndof2 Size of the @a meqn2 array
-!> @param nceq Size of the @ mpmceq array
+!> @param nceq Size of the @a mpmceq array
 !> @param nmmceq Size of the @a mmceq and @a ttcc arrays
 !> @param[out] meqn Matrix of equation numbers for all DOFs
 !> @param[out] meqn1 Matrix of status 1 equation numbers

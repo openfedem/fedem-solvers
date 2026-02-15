@@ -8,6 +8,13 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.1.3] (2026-02-14)
+
+### :rocket: Added
+
+The two points defining the state-dependent direction of a point load may
+now be specified by triads in addition to points on a superelement.
+
 ## [fedem-8.1.3] (2026-01-20)
 
 ### :rocket: Added
