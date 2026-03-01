@@ -29,6 +29,8 @@ contains
   !> @param[in] sv Superelement displacement vector
   !> @param[out] sf Superelement nodal forces
   !> @param[out] vms von Mises stress state array
+  !> @param[out] vmMax Maximum von Mises stress
+  !> @param[out] ieMax Element where the maximum von Mises stress occurs
   !> @param[in] irec Recovery timer handle
   !> @param[in] isav Saving timer handle
   !> @param[in] iprint Print switch
@@ -46,7 +48,7 @@ contains
   !> @date 11 Oct 2000
 
   subroutine calcStresses (addStress0,rdb,sam,vtf,vtfId,isup,sv,sf,vms, &
-       &                   irec,isav,iprint,lpu,ierr)
+       &                   vmMax,ieMax,irec,isav,iprint,lpu,ierr)
 
     use KindModule                    , only : dp, i8, hugeVal_p
     use RecKindModule                 , only : rk
@@ -78,15 +80,16 @@ contains
     integer ,optional, intent(in)    :: vtf, vtfId, isup, irec, isav
     real(rk),optional, intent(in)    :: sv(:)
     integer          , intent(in)    :: iprint, lpu
-    real(dp),optional, intent(out)   :: sf(:)
-    real(dp),optional, intent(out)   :: vms(:)
+    real(dp),optional, intent(out)   :: sf(:), vms(:)
+    integer ,optional, intent(out)   :: ieMax
+    real(dp),optional, intent(out)   :: vmMax
     integer          , intent(out)   :: ierr
 
     !! Local variables
     integer, parameter :: iReSet = VTF_RESSET_ABSMAX ! hard-coded for now
     integer, parameter :: maxstp = 50, maxnod = 10, nStrRes = 8
     logical, parameter :: lSS  = .false. ! No stress resultant conjugate strains
-    logical     :: lDouble, lForce, lSave, lStoreVMS
+    logical     :: lDouble, lForce, lSave, lCalcVMS, lStoreVMS
     logical     :: lSR, lStress, lStrain, lStrRes(nStrRes)
     integer     :: i, j, iel, jel, idat, iBlock, lerr, iReMap, vtfFile
     integer     :: n, ncmp0, ncmp1, ncmp2, nenod, nstrp
@@ -96,6 +99,7 @@ contains
 
     !! --- Logic section ---
 
+    lCalcVMS = present(vmMax)
     if (present(isup)) then
        call ffa_cmdlinearg_getbool ('double',lDouble)
        call ffa_cmdlinearg_getbool ('SR',lSR)
@@ -109,6 +113,7 @@ contains
        call ffa_cmdlinearg_getbool ('minPStrain',lStrRes(7))
        call ffa_cmdlinearg_getbool ('maxSStress',lStrRes(4))
        call ffa_cmdlinearg_getbool ('maxSStrain',lStrRes(8))
+       if (lStrRes(1)) lCalcVMS = .true.
        lSave = lSR .or. lStress .or. lStrain .or. any(lStrRes)
        lStoreVMS = .false.
     else ! Solver mode, recover von Mises stress only
@@ -133,6 +138,7 @@ contains
     end if
     if (present(vtf) .and. present(vtfId) .and. present(isup) .and. lSave) then
        vtfFile = vtf
+       if (vtf >= 0) lCalcVMS = .true.
     else
        vtfFile = -1
     end if
@@ -164,6 +170,9 @@ contains
 
        if (present(isav)) call stopTimer (isav)
     end if
+
+    if (present(ieMax)) ieMax = 0
+    if (present(vmMax)) vmMax = 0.0_dp
 
     idat = 0 ! Index counter for the von Mises Stress vector
     nBytes = rdb%nBytes
@@ -274,8 +283,14 @@ contains
              j = 1
              resMat = 0.0_dp
              do i = 1, nstrp
-                if (lStrRes(1) .or. vtfFile >= 0) then
+                if (lCalcVMS) then
                    resMat(1,i) = vonMises(n,Stress(j))
+                   if (present(vmMax)) then
+                      if (resMat(1,i) > vmMax) then
+                         vmMax = resMat(1,i)
+                         if (present(ieMax)) ieMax = iel
+                      end if
+                   end if
                 end if
                 if (any(lStrRes(2:4))) then
                    call princval (n,Stress(j),resMat(2:4,i))

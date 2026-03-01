@@ -8,7 +8,7 @@
 subroutine stress (ierr)
 
   use KindModule             , only : dp, i8, maxInt_p, lfNam_p
-  use SamModule              , only : SamType, deAllocateSAM, writeObject
+  use SamModule              , only : SamType, deAllocateSAM, writeObject, Norm
   use SamStressModule        , only : initiateSAM
   use InitiateStressModule   , only : readSolverData
   use DisplacementModule     , only : openBandEmatrices, closeBandEmatrices
@@ -58,11 +58,12 @@ subroutine stress (ierr)
   integer, intent(out)     :: ierr
   integer(i8)              :: iStep
   integer                  :: lpu, iprint, isup
-  integer                  :: vtfFile, vtfInfo, idVTF(2)
+  integer                  :: ieMax, vtfFile, vtfInfo, idVTF(2)
   integer(ptr),allocatable :: rPointers(:)
   integer(ptr)             :: disPtr
   logical                  :: lDeformation, lDumpDef, lGrav, addStress0, lVTFAt0
   real(dp)                 :: currTime, startTime, stopTime, tInc, dsVTF, grv(3)
+  real(dp)                 :: vmMax
   real(dp), allocatable    :: sv(:), sf(:), vii(:)
   type(RDBType)            :: rdb
   type(SamType)            :: samSup
@@ -392,7 +393,7 @@ subroutine stress (ierr)
      end if
 
      ! Read or calculate the internal displacements
-     write(lterm,6020)
+     write(lterm,6020,advance='NO')
      if (disPtr > 0_ptr) then
         call readIntDisplacements (disPtr,sup%id,samSup,sv,iprint,lpu,ierr)
      else if (lGrav) then
@@ -403,6 +404,7 @@ subroutine stress (ierr)
         call calcIntDisplacements (samSup,sv,sup%finit,sup%genDOFs%ur, &
              &                     iprint,lpu,ierr)
      end if
+     write(lterm,"(1X,1P2D13.5)") Norm(sv,samSup,0),Norm(sv,samSup,3)
      if (ierr < 0) goto 900
 
      if (lDeformation) then
@@ -427,9 +429,11 @@ subroutine stress (ierr)
      end if
 
      ! Calculate and save stresses to results database file and VTF
-     write(lterm,6030)
+     write(lterm,6030,advance='NO')
      call calcStresses (addStress0,rdb,samSup,vtfFile,idVTF(2),sup%id%baseId, &
-          &             sv,sf,iprint=iprint,lpu=lpu,ierr=ierr)
+          &             sv,sf,vmMax=vmMax,ieMax=ieMax, &
+          &             iprint=iprint,lpu=lpu,ierr=ierr)
+     write(lterm,"(1PD13.5,I9)") vmMax,ieMax
      if (ierr < 0) goto 900
 
   end do
