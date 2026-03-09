@@ -488,7 +488,7 @@ contains
        if (associated(args(i)%p)) then
           call UpdateSensor (args(i)%p,ierr)
           x(i) = args(i)%p%value
-          if (args(i)%p%type == TIME_p) then
+          if (args(i)%p%type == TIME_p .and. iDer >= 0) then
              call getRampValue (x(i),iDer,rVal,ierr)
           end if
        else
