@@ -224,7 +224,7 @@ contains
     call preprocessSolverData (sam,sys,ctrl,modes,mech,iprint,ierr)
     if (ierr /= 0) goto 915
 
-    if (isQuasiStatic(sys,sys%tStart)) then
+    if (isQuasiStatic(sys)) then
        !! The simulation will start with quasi-static load increments
        if (size(mech%tires) > 0) then
           ierr = -1
@@ -979,6 +979,11 @@ contains
     ierr = 0
     finished = .false.
     do while (.not.finished .and. sys%time < sys%tStart)
+       if (sys%time+sys%timeStep > sys%tStart-0.1_dp*sys%minInc) then
+          !! Adjust the length of the last ramp-up step such that
+          !! the physical time will be exactly sys%tStart
+          sys%timeStep = sys%tStart - sys%time
+       end if
        call solveStep (iop,.false.,finished,ierr)
        if (ierr /= 0) then
           call reportError (debugFileOnly_p,'solveRampUp')
