@@ -97,6 +97,7 @@ contains
     call ffa_cmdlinearg_getdouble ('timeInc',sys%tInc)
     call ffa_cmdlinearg_getdouble ('maxInc',sys%maxInc)
     call ffa_cmdlinearg_getdouble ('minInc',sys%minInc)
+    call ffa_cmdlinearg_getdouble ('quasiStatic',sys%tQStatic)
     call ffa_cmdlinearg_getdouble ('cutbackFactor',sys%cutbck(1))
     call ffa_cmdlinearg_getint ('cutbackSteps',sys%nCutStp)
     call ffa_cmdlinearg_getint ('autoTimeStep',sys%varInc)
@@ -124,11 +125,6 @@ contains
        end if
     else if (sys%tInc > 0.8_dp*sys%maxInc .and. sys%varInc < 1) then
        sys%maxInc = 1.25_dp*sys%tInc
-    end if
-
-    call ffa_cmdlinearg_getdouble ('quasiStatic',sys%tQStatic)
-    if (sys%tQStatic <= sys%tStart) then
-       sys%tQStatic = -1.0e99_dp ! No quasi-static increments
     end if
 
     !! Newton-Raphson iteration parameters
