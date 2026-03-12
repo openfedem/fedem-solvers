@@ -812,7 +812,7 @@ contains
 
 
   !!============================================================================
-  !> @brief Initiates all hydrodynamic bodies in the model.
+  !> @brief Initializes all hydrodynamic bodies in the model.
   !>
   !> @param sups All superelements in the model
   !> @param elms All user-defined elements in the model

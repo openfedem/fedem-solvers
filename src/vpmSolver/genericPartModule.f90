@@ -16,16 +16,24 @@ module GenericPartModule
 
 contains
 
-  subroutine ReadGenericPart (infp,sup,ierr)
+  !!============================================================================
+  !> @brief Reads generic part properties from the solver input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param sup The superelement object which is a generic part
+  !> @param[out] ierr Error flag
+  !>
+  !> @details This subroutine reads stiffness and mass properties for a generic
+  !> part and generate the equivalent superelement matrices.
+  !> Optionally, the center of gravity (CoG) triad is condensed condense out.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 16 Jan 2004
 
-    !!==========================================================================
-    !! Read stiffness and mass properties for a generic part from the solver
-    !! input file and generate the equivalent superelement matrices.
-    !! Optionally condense out the center of gravity (CoG) triad.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 16 Jan 2004/1.0
-    !!==========================================================================
+  subroutine ReadGenericPart (infp,sup,ierr)
 
     use SupElTypeModule  , only : SupElType, dp
     use IdTypeModule     , only : getId, StrId, ReportInputError
@@ -143,16 +151,27 @@ contains
   end subroutine ReadGenericPart
 
 
-  subroutine EstimateRigidStiffness (sup,mass,inertia,kt,kr)
+  !!============================================================================
+  !> @brief Calculates semi-rigid stiffness coefficients for a generic part.
+  !>
+  !> @param[in] sup The superelement object representing the generic part
+  !> @param[in] mass Total mass of the superelement
+  !> @param[in] inertia Total inertial of the superelement
+  !> @param[out] kt Translational stiffness coefficient
+  !> @param[out] kr Rotational stiffness coefficient
+  !>
+  !> @details This subroutine estimates the stiffness coefficients to be
+  !> assigned at each triad of the superelement, such that it behaves like
+  !> completely rigid. The estimate is based on the given mass and a
+  !> user-specified target eigenfrequency.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 28 Oct 2004
 
-    !!==========================================================================
-    !! Estimate stiffness coefficients to be assigned at each triad of the
-    !! superelement, such that it behaves as completely rigid. The estimate
-    !! is based on the given mass and a user-specified target eigenfrequency.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 28 Oct 2004/1.0
-    !!==========================================================================
+  subroutine EstimateRigidStiffness (sup,mass,inertia,kt,kr)
 
     use kindModule            , only : dp, epsDiv0_p, pi_p
     use SupElTypeModule       , only : SupElType
@@ -199,8 +218,7 @@ contains
 
   contains
 
-    !! Computes the size of the bounding box of the given superelement.
-    !! The square of the diameter is returned.
+    !> @brief Computes the size of the bounding box of the given superelement.
     function getBoundingBoxSize (sup)
       type(SupElType), intent(in) :: sup
       real(dp) :: getBoundingBoxSize, BB(3)
@@ -209,11 +227,11 @@ contains
          BB(i) = maxval(sup%TrUndeformed(i,4,:)) &
               -  minval(sup%TrUndeformed(i,4,:))
       end do
+      !! Return square of the bounding box diameter
       getBoundingBoxSize = BB(1)*BB(1) + BB(2)*BB(2) + BB(3)*BB(3)
     end function getBoundingBoxSize
 
-    !! Computes the square of the diameter of a ball with the given mass
-    !! and an assumed mass density half that of steel.
+    !> @brief Computes the square of the diameter of a ball with the given mass.
     function estimateBallSize (totalMass)
       use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getdouble
       real(dp), intent(in) :: totalMass
@@ -221,6 +239,7 @@ contains
       real(dp) :: estimateBallSize, scaleToKG, scaleToM, ballVolume
       call ffa_cmdlinearg_getdouble('scaleToKG',scaleToKG)
       call ffa_cmdlinearg_getdouble('scaleToM',scaleToM)
+      !! Assume the mass density is half that of steel
       ballVolume = (totalMass*scaleToKG*2.0_dp/density_p) / scaleToM**3.0_dp
       estimateBallSize = (6.0_dp*ballVolume/pi_p) ** (2.0_dp/3.0_dp)
     end function estimateBallSize
@@ -228,26 +247,34 @@ contains
   end subroutine EstimateRigidStiffness
 
 
-  subroutine AssembleStiffness (sup,K,kt,kr,stiffness)
+  !!============================================================================
+  !> @brief Assembles the stiffness matrix for a generic part.
+  !>
+  !> @param[in] sup The superelement object representing the generic part
+  !> @param[out] K Assembled superelement stiffness matrix
+  !> @param[in] kt Translational stiffness coefficient
+  !> @param[in] kr Rotational stiffness coefficient
+  !> @param[in] stiffness Individual nodal stiffness coefficients
+  !>
+  !> @details The part of the stiffness matrix associated with the CoG and one
+  !> of the other triads of the generic part is assumed to be:
+  !> @code
+  !> [K] = |  kt           -kt*spin(e)               -kt           0  |
+  !>       |         kr + spin(e)'*kt*spin(e)   spin(e)'*kt      -kr  |
+  !>       |                                          kt           0  |
+  !>       |  symm.                                               kr  |
+  !> @endcode
+  !> where kt and kr are diagonal 3x3 stiffness matrices for translational and
+  !> rotational DOFs, respectively, and e is the eccentricity vector giving
+  !> the relative position of the hard-point with respect to the CoG.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 21 Jan 2004
 
-    !!==========================================================================
-    !! Assemble the stiffness matrix for a generic part.
-    !!
-    !! The part of the stiffness matrix associated with the CoG and one of the
-    !! other triads of the generic part is assumed to be:
-    !!
-    !! [K] = |  kt           -kt*spin(e)               -kt           0  |
-    !!       |         kr + spin(e)'*kt*spin(e)   spin(e)'*kt      -kr  |
-    !!       |                                          kt           0  |
-    !!       |  symm.                                               kr  |
-    !!
-    !! where kt and kr are diagonal 3x3 stiffness matrices for translational and
-    !! rotational DOFs, respectively, and e is the eccentricity vector giving
-    !! the relative position of the hard-point with respect to the CoG.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 21 Jan 2004/1.0
-    !!==========================================================================
+  subroutine AssembleStiffness (sup,K,kt,kr,stiffness)
 
     use SupElTypeModule, only : SupElType, dp
     use rotationModule , only : EccExpand
@@ -295,15 +322,22 @@ contains
   end subroutine AssembleStiffness
 
 
-  subroutine AssembleMass (M,mass,inertia)
+  !!============================================================================
+  !> @brief Assembles the mass matrix for a generic part.
+  !>
+  !> @param[out] M Assembled superelement mass matrix
+  !> @param[in] mass Total mass of the superelement
+  !> @param[in] inertia Total inertia of the superelement
+  !>
+  !> @details Assuming that all mass is coupled to the first triad (the CoG).
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 21 Jan 2004
 
-    !!==========================================================================
-    !! Assemble the mass matrix for a generic part.
-    !! Assume that all mass is coupled to the first triad (CoG).
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 21 Jan 2004/1.0
-    !!==========================================================================
+  subroutine AssembleMass (M,mass,inertia)
 
     use KindModule, only : dp
 
@@ -330,14 +364,16 @@ contains
   end subroutine AssembleMass
 
 
-  subroutine InitiateGenericParts (sups)
+  !!============================================================================
+  !> @brief Initializes more generic part data after system initialization.
+  !>
+  !> @param sups Array of all superelements in the model
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 28 Aug 2013
 
-    !!==========================================================================
-    !! Initiates some more generic part data after system initialization.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 28 Aug 2013/1.0
-    !!==========================================================================
+  subroutine InitiateGenericParts (sups)
 
     use SupElTypeModule  , only : SupElType
     use IdTypeModule     , only : getId
@@ -374,6 +410,7 @@ contains
 
   contains
 
+    !> @brief Calculates the velocity and acceleration at the CoG triad.
     subroutine findCoGVelAcc (urd,urdd,triads)
       use TriadTypeModule, only : TriadPtrType, dp
       real(dp)          , intent(out) :: urd(:), urdd(:)
