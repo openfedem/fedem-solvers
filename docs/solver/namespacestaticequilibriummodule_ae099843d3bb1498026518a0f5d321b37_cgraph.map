@@ -5,7 +5,7 @@
 <area shape="rect" id="node4" href="$namespaceffacmdlinearginterface.html#a5762b6bd35e833d000e6db4bcda3df60" title="Returns the value of an integer command&#45;line option id." alt="" coords="907,203,1093,245"/>
 <area shape="rect" id="node5" href="$namespacemasterslavejointtypemodule.html#a87513466fdd7d04d288e6f0fb2e81363" title=" " alt="" coords="249,1617,460,1658"/>
 <area shape="rect" id="node6" href="$namespacetriadtypemodule.html#a44b604e25854d87b15ba72d611157428" title="Gets current velocity and acceleration from all triads." alt="" coords="235,1683,474,1709"/>
-<area shape="rect" id="node7" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initiates all hydrodynamic bodies in the model." alt="" coords="265,1734,445,1775"/>
+<area shape="rect" id="node7" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initializes all hydrodynamic bodies in the model." alt="" coords="265,1734,445,1775"/>
 <area shape="rect" id="node11" href="$namespacemotionroutinesmodule.html#aec1bbdcb23335b3ed28c03fd19c2acde" title="Inserts prescribed motion values into the system vectors." alt="" coords="269,1799,440,1841"/>
 <area shape="rect" id="node13" href="$namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="235,1865,474,1892"/>
 <area shape="rect" id="node14" href="$namespacesupelroutinesmodule.html#aa037b6b078b27ab2c2841e906c28ea6b" title="Extracts local velocities and accelerations for the superelements." alt="" coords="275,1917,434,1958"/>

@@ -13,7 +13,7 @@
 <area shape="rect" id="node42" href="$structtiretypemodule_1_1tiretype.html" title=" " alt="" coords="1817,515,1998,541"/>
 <area shape="rect" id="node44" href="$structmotiontypemodule_1_1motiontype.html" title="Data type representing a prescribed motion object." alt="" coords="2981,823,3211,849"/>
 <area shape="rect" id="node45" href="$structbushingelementtypemodule_1_1bushingelementtype.html" title=" " alt="" coords="1310,1697,1515,1738"/>
-<area shape="rect" id="node49" href="$structmasstypemodule_1_1masstype.html" title=" " alt="" coords="1309,1544,1516,1571"/>
+<area shape="rect" id="node49" href="$structmasstypemodule_1_1masstype.html" title="Data type representing a point mass object." alt="" coords="1309,1544,1516,1571"/>
 <area shape="rect" id="node4" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,1985,167,2012"/>
 <area shape="rect" id="node5" href="$structdampertypemodule_1_1damperbasetype.html" title="Data type representing a base damper object." alt="" coords="1773,408,2041,435"/>
 <area shape="rect" id="node6" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="895,695,1049,737"/>
@@ -27,7 +27,7 @@
 <area shape="rect" id="node29" href="$structspringtypemodule_1_1springtype.html" title="Data type representing multi&#45;DOF spring element." alt="" coords="2187,2315,2404,2341"/>
 <area shape="rect" id="node39" href="$structroadtypemodule_1_1roadtype.html" title=" " alt="" coords="1315,255,1510,281"/>
 <area shape="rect" id="node48" href="$structmasterslavejointtypemodule_1_1higherpairtype.html" title=" " alt="" coords="2991,2449,3201,2490"/>
-<area shape="rect" id="node50" href="$structsupelloadtypemodule_1_1supelloadtype.html" title=" " alt="" coords="2214,1474,2377,1515"/>
+<area shape="rect" id="node50" href="$structsupelloadtypemodule_1_1supelloadtype.html" title="Data type representing a superelement load object." alt="" coords="2214,1474,2377,1515"/>
 <area shape="rect" id="node41" href="$structdampertypemodule_1_1damperptrtype.html" title="Data type representing a base damper pointer." alt="" coords="2168,692,2423,719"/>
 <area shape="rect" id="node16" href="$structfunctiontypemodule_1_1engineptrtype.html" title="Data type representing a general function pointer." alt="" coords="1336,699,1489,741"/>
 <area shape="rect" id="node27" href="$structfrictiontypemodule_1_1frictiontype.html" title=" " alt="" coords="2222,2239,2369,2281"/>

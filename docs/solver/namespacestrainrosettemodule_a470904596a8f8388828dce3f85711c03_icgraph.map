@@ -1,6 +1,6 @@
 <map id="strainrosettemodule::checkrosette" name="strainrosettemodule::checkrosette">
 <area shape="rect" id="node1" title="Checks the nodal ordering of a strain rosette element." alt="" coords="1053,99,1208,141"/>
-<area shape="rect" id="node2" href="$namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="839,66,1005,107"/>
+<area shape="rect" id="node2" href="$namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="839,66,1005,107"/>
 <area shape="rect" id="node10" href="$namespacestrainrosettemodule.html#a366910d102f09fcfb00898c710158c49" title="Initializes strain elements with data from the solver input file." alt="" coords="843,131,1001,173"/>
 <area shape="rect" id="node3" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="381,70,548,111"/>
 <area shape="rect" id="node4" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>

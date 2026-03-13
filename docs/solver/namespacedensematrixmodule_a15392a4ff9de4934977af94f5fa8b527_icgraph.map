@@ -1,6 +1,14 @@
 <map id="densematrixmodule::solveaxb" name="densematrixmodule::solveaxb">
-<area shape="rect" id="node1" title="Solves the linear equation system A*x = B." alt="" coords="320,57,481,98"/>
-<area shape="rect" id="node2" href="$namespacecorotutilmodule.html#a856fb738c65ae2c4bcc1a3a38a6469e0" title=" " alt="" coords="5,5,272,32"/>
-<area shape="rect" id="node3" href="$namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722" title=" " alt="" coords="25,57,252,98"/>
-<area shape="rect" id="node4" href="$namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title=" " alt="" coords="62,122,215,163"/>
+<area shape="rect" id="node1" title="Solves the linear equation system A*x = B." alt="" coords="1168,57,1329,98"/>
+<area shape="rect" id="node2" href="$namespacecorotutilmodule.html#a856fb738c65ae2c4bcc1a3a38a6469e0" title=" " alt="" coords="853,5,1120,32"/>
+<area shape="rect" id="node3" href="$namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722" title=" " alt="" coords="873,57,1100,98"/>
+<area shape="rect" id="node4" href="$namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="910,122,1063,163"/>
+<area shape="rect" id="node5" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,122,805,163"/>
+<area shape="rect" id="node6" href="$namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,129,576,156"/>
+<area shape="rect" id="node7" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,129,305,156"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,28,83,55"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,79,83,105"/>
+<area shape="rect" id="node10" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,129,83,156"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,180,82,207"/>
+<area shape="rect" id="node12" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,231,83,257"/>
 </map>

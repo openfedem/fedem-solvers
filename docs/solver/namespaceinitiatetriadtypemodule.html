@@ -69,15 +69,22 @@ $(function() {
 <div class="title">initiatetriadtypemodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Initialization of triads from the solver input file.  
+<a href="namespaceinitiatetriadtypemodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a4158a534ee1a02c6a5edd2c0a9c9bc35"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatetriadtypemodule.html#a4158a534ee1a02c6a5edd2c0a9c9bc35">readtriads</a> (infp, triads, err)</td></tr>
+<tr class="memdesc:a4158a534ee1a02c6a5edd2c0a9c9bc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes triads with data from the input file.  <a href="namespaceinitiatetriadtypemodule.html#a4158a534ee1a02c6a5edd2c0a9c9bc35">More...</a><br /></td></tr>
 <tr class="separator:a4158a534ee1a02c6a5edd2c0a9c9bc35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8baf29dd831f5498306edf3d63522ca"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatetriadtypemodule.html#ad8baf29dd831f5498306edf3d63522ca">initiatetriads2</a> (sam, triads, err)</td></tr>
+<tr class="memdesc:ad8baf29dd831f5498306edf3d63522ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes more triad arrays after system initialization.  <a href="namespaceinitiatetriadtypemodule.html#ad8baf29dd831f5498306edf3d63522ca">More...</a><br /></td></tr>
 <tr class="separator:ad8baf29dd831f5498306edf3d63522ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Initialization of triads from the solver input file. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="ad8baf29dd831f5498306edf3d63522ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad8baf29dd831f5498306edf3d63522ca">&#9670;&nbsp;</a></span>initiatetriads2()</h2>
 
@@ -109,6 +116,33 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes more triad arrays after system initialization. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">triads</td><td>All triads in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jul 2000 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatetriadtypemodule_ad8baf29dd831f5498306edf3d63522ca_icgraph.png" border="0" usemap="#anamespaceinitiatetriadtypemodule_ad8baf29dd831f5498306edf3d63522ca_icgraph" alt=""/></div>
+<map name="anamespaceinitiatetriadtypemodule_ad8baf29dd831f5498306edf3d63522ca_icgraph" id="anamespaceinitiatetriadtypemodule_ad8baf29dd831f5498306edf3d63522ca_icgraph">
+<area shape="rect" title="Initializes more triad arrays after system initialization." alt="" coords="667,99,843,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -144,12 +178,52 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes triads with data from the input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">triads</td><td>Array of all triads in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jul 2000 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_cgraph.png" border="0" usemap="#anamespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_cgraph" alt=""/></div>
+<map name="anamespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_cgraph" id="anamespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_cgraph">
+<area shape="rect" title="Initializes triads with data from the input file." alt="" coords="5,99,181,141"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a8367c97a2ee48bc490ebdf38ccd254e3" title="Deallocates an array of triad objects." alt="" coords="235,5,477,32"/>
+<area shape="rect" href="namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="229,56,483,83"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="235,107,477,133"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a66168e0771293c46984ed7b402118612" title="Initializes a triad object." alt="" coords="252,157,460,184"/>
+<area shape="rect" href="namespacerotationmodule.html#a1074f5915042f7e80b4dd66a4e4e62b2" title="Makes a rotation tensor orthonormal through use of quaternions." alt="" coords="253,208,459,235"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_icgraph.png" border="0" usemap="#anamespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_icgraph" alt=""/></div>
+<map name="anamespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_icgraph" id="anamespaceinitiatetriadtypemodule_a4158a534ee1a02c6a5edd2c0a9c9bc35_icgraph">
+<area shape="rect" title="Initializes triads with data from the input file." alt="" coords="624,99,800,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 15 2026 16:34:02 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

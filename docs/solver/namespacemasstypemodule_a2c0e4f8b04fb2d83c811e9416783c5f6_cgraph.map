@@ -1,0 +1,9 @@
+<map id="masstypemodule::initiatemasses" name="masstypemodule::initiatemasses">
+<area shape="rect" id="node1" title="Initializes the mass objects with data from the solver input file." alt="" coords="5,144,244,171"/>
+<area shape="rect" id="node2" href="$namespacetriadtypemodule.html#a70b4b5104d0d081f25390ef4340959b1" title="Allocates the total nodal force vector associated with a triad." alt="" coords="295,5,550,32"/>
+<area shape="rect" id="node3" href="$namespacemasstypemodule.html#a36adc079ba9e2b9b06a16ad065dd87b1" title="Deallocates the point mass objects." alt="" coords="292,56,553,83"/>
+<area shape="rect" id="node4" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="337,107,508,149"/>
+<area shape="rect" id="node5" href="$namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="296,173,549,200"/>
+<area shape="rect" id="node6" href="$namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="301,224,544,251"/>
+<area shape="rect" id="node7" href="$namespacemasstypemodule.html#addfd6348b1c8515ee889fa680d3c2941" title="Initializes a point mass object." alt="" coords="313,275,532,301"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="hydrodynamicsmodule::initiatehydrodynbodies" name="hydrodynamicsmodule::initiatehydrodynbodies">
-<area shape="rect" id="node1" title="Initiates all hydrodynamic bodies in the model." alt="" coords="5,71,185,112"/>
+<area shape="rect" id="node1" title="Initializes all hydrodynamic bodies in the model." alt="" coords="5,71,185,112"/>
 <area shape="rect" id="node2" href="$namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="237,5,400,47"/>
 <area shape="rect" id="node3" href="$namespacediffractionmodule.html#ac302cf473b07c195e154fb3fd639ad37" title=" " alt="" coords="246,71,391,112"/>
 <area shape="rect" id="node4" href="$namespacehydrodynamicsmodule.html#ae3488b0b99cc90f1011f7d14c3160f44" title="Updates the hydrodynamic body quantities." alt="" coords="233,136,404,177"/>

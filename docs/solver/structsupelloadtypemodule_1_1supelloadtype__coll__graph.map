@@ -1,5 +1,5 @@
 <map id="supelloadtypemodule::supelloadtype" name="supelloadtypemodule::supelloadtype">
-<area shape="rect" id="node1" title=" " alt="" coords="1336,113,1499,154"/>
+<area shape="rect" id="node1" title="Data type representing a superelement load object." alt="" coords="1336,113,1499,154"/>
 <area shape="rect" id="node2" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1059,113,1212,154"/>
 <area shape="rect" id="node3" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,120,167,147"/>
 <area shape="rect" id="node4" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="479,113,632,154"/>

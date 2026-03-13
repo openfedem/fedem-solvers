@@ -113,6 +113,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a69fd810a4c8b2fdea3b306017996214a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesammodule.html#a69fd810a4c8b2fdea3b306017996214a">inverteqpartition</a> (lp1, lp2, sam, ierr)</td></tr>
 <tr class="memdesc:a69fd810a4c8b2fdea3b306017996214a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms the control arrays <em>dofPosIn1</em> and/or <em>dofPosIn2</em> in SAM.  <a href="namespacesammodule.html#a69fd810a4c8b2fdea3b306017996214a">More...</a><br /></td></tr>
 <tr class="separator:a69fd810a4c8b2fdea3b306017996214a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf9f504468b6e17dd5c3cbfb578aa881"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesammodule.html#adf9f504468b6e17dd5c3cbfb578aa881">norm</a> (vec, sam, itype)</td></tr>
+<tr class="memdesc:adf9f504468b6e17dd5c3cbfb578aa881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns some norm of a nodal solution vector.  <a href="namespacesammodule.html#adf9f504468b6e17dd5c3cbfb578aa881">More...</a><br /></td></tr>
+<tr class="separator:adf9f504468b6e17dd5c3cbfb578aa881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -526,6 +529,61 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="adf9f504468b6e17dd5c3cbfb578aa881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf9f504468b6e17dd5c3cbfb578aa881">&#9670;&nbsp;</a></span>norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function sammodule::norm </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), dimension(:), intent(in)&#160;</td>
+          <td class="paramname"><em>vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(<a class="el" href="structsammodule_1_1samtype.html">samtype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>sam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>itype</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns some norm of a nodal solution vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vec</td><td>The solution vector to calculate the norm for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Assembly management data associated with the solution vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">itype</td><td>The type of norm to return (see below) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The calculated norm value</dd></dl>
+<p>The following norm types can be calculated, controlled by the value of <em>itype</em> parameter:</p><ul>
+<li><em>itype</em> = 0 : Infinity norm of translations</li>
+<li><em>itype</em> = 1 : L1-norm of translations</li>
+<li><em>itype</em> = 2 : L2-norm of translations</li>
+<li><em>itype</em> = 3 : Infinity norm of rotations</li>
+<li><em>itype</em> = 4 : L1-norm of rotations</li>
+<li><em>itype</em> = 5 : L2-norm of rotations</li>
+</ul>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 Feb 2026 </dd></dl>
+
+</div>
+</div>
 <a id="a3b485dc310e4344a9620649c62ddc644"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3b485dc310e4344a9620649c62ddc644">&#9670;&nbsp;</a></span>nullifysam()</h2>
 
@@ -700,7 +758,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 15 2026 16:34:02 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

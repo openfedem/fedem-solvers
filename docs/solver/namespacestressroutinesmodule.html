@@ -75,15 +75,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a2419bb555006773af3ef0d6b01370f0f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f">calcstresses</a> (addStress0, rdb, sam, vtf, vtfId, isup, sv, sf, vms, irec, isav, iprint, lpu, ierr)</td></tr>
-<tr class="memdesc:a2419bb555006773af3ef0d6b01370f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates element stresses and stores on results database file.  <a href="namespacestressroutinesmodule.html#a2419bb555006773af3ef0d6b01370f0f">More...</a><br /></td></tr>
-<tr class="separator:a2419bb555006773af3ef0d6b01370f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0b5112d4c4666dea5b221356e228a4a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestressroutinesmodule.html#af0b5112d4c4666dea5b221356e228a4a">calcstresses</a> (addStress0, rdb, sam, vtf, vtfId, isup, sv, sf, vms, vmMax, ieMax, irec, isav, iprint, lpu, ierr)</td></tr>
+<tr class="memdesc:af0b5112d4c4666dea5b221356e228a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates element stresses and stores on results database file.  <a href="namespacestressroutinesmodule.html#af0b5112d4c4666dea5b221356e228a4a">More...</a><br /></td></tr>
+<tr class="separator:af0b5112d4c4666dea5b221356e228a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Module with subroutine for superelement stress calculation/storage. </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="a2419bb555006773af3ef0d6b01370f0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2419bb555006773af3ef0d6b01370f0f">&#9670;&nbsp;</a></span>calcstresses()</h2>
+<a id="af0b5112d4c4666dea5b221356e228a4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0b5112d4c4666dea5b221356e228a4a">&#9670;&nbsp;</a></span>calcstresses()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,6 +145,18 @@ Functions/Subroutines</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">real(dp), intent(out), optional&#160;</td>
+          <td class="paramname"><em>vmMax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out), optional&#160;</td>
+          <td class="paramname"><em>ieMax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">integer, intent(in), optional&#160;</td>
           <td class="paramname"><em>irec</em>, </td>
         </tr>
@@ -192,6 +204,8 @@ Functions/Subroutines</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">sv</td><td>Superelement displacement vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">sf</td><td>Superelement nodal forces </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">vms</td><td>von Mises stress state array </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vmMax</td><td>Maximum von Mises stress </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ieMax</td><td>Element where the maximum von Mises stress occurs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">irec</td><td>Recovery timer handle </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">isav</td><td>Saving timer handle </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">iprint</td><td>Print switch </td></tr>
@@ -206,8 +220,8 @@ Functions/Subroutines</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_cgraph.png" border="0" usemap="#anamespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_cgraph" alt=""/></div>
-<map name="anamespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_cgraph" id="anamespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_cgraph">
+<div class="center"><img src="namespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_cgraph.png" border="0" usemap="#anamespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_cgraph" alt=""/></div>
+<map name="anamespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_cgraph" id="anamespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_cgraph">
 <area shape="rect" title="Calculates element stresses and stores on results database file." alt="" coords="5,158,168,199"/>
 <area shape="rect" href="stressRoutines_8f90.html#afc7bf06bbbcff94a025943dfd224c442" title="Adds element nodal forces into the global vector." alt="" coords="283,5,341,32"/>
 <area shape="rect" href="namespaceelstressmodule.html#abe20ae8eb4988818b5d797cf5d38a98a" title="Computes FE stresses and strains for the specified element." alt="" coords="221,56,403,83"/>
@@ -221,8 +235,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_icgraph.png" border="0" usemap="#anamespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_icgraph" alt=""/></div>
-<map name="anamespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_icgraph" id="anamespacestressroutinesmodule_a2419bb555006773af3ef0d6b01370f0f_icgraph">
+<div class="center"><img src="namespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_icgraph.png" border="0" usemap="#anamespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_icgraph" alt=""/></div>
+<map name="anamespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_icgraph" id="anamespacestressroutinesmodule_af0b5112d4c4666dea5b221356e228a4a_icgraph">
 <area shape="rect" title="Calculates element stresses and stores on results database file." alt="" coords="1009,23,1172,65"/>
 <area shape="rect" href="stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="835,5,961,32"/>
 <area shape="rect" href="stressRecoveryModule_8f90.html#a95b545071779f077fcb177ad41e71ab1" title="Recovers internal displacements and stresses without saving." alt="" coords="837,56,959,83"/>
@@ -239,7 +253,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 15 2026 16:34:02 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Mar 13 2026 19:45:09 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

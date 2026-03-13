@@ -1,7 +1,7 @@
 <map id="hydrodynamicsmodule::updatehydrodynbody" name="hydrodynamicsmodule::updatehydrodynbody">
 <area shape="rect" id="node1" title="Updates the hydrodynamic body quantities." alt="" coords="2285,214,2456,255"/>
 <area shape="rect" id="node2" href="$namespacehydrodynamicsmodule.html#aba4271cbefa81017b5f49a83f98d3641" title="Calculates buoyancy force resultant for a superelement or beam." alt="" coords="2062,246,2233,287"/>
-<area shape="rect" id="node32" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initiates all hydrodynamic bodies in the model." alt="" coords="2057,149,2237,190"/>
+<area shape="rect" id="node32" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initializes all hydrodynamic bodies in the model." alt="" coords="2057,149,2237,190"/>
 <area shape="rect" id="node3" href="$namespaceuserdefelroutinesmodule.html#a389010241f5d9e5ac3f65cb56088c1c0" title="Calculates buoyancy force contributions for a two&#45;noded element." alt="" coords="1806,307,1991,349"/>
 <area shape="rect" id="node24" href="$namespacesupelroutinesmodule.html#ad6fc0213b4c19b628cfec3bfaa624127" title="Calculates buoyancy forces and associated load correction stiffness." alt="" coords="1567,246,1726,287"/>
 <area shape="rect" id="node4" href="$namespaceuserdefelroutinesmodule.html#a145a2c99105ad2c826fe6833f3dddc03" title="Updates a user&#45;defined element." alt="" coords="1554,311,1739,353"/>

@@ -1,5 +1,5 @@
 <map id="stressrecoverymodule::initstrainrosettes" name="stressrecoverymodule::initstrainrosettes">
-<area shape="rect" id="node1" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="5,181,172,223"/>
+<area shape="rect" id="node1" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="5,181,172,223"/>
 <area shape="rect" id="node2" href="$namespacestrainrosettemodule.html#a470904596a8f8388828dce3f85711c03" title="Checks the nodal ordering of a strain rosette element." alt="" coords="224,51,379,92"/>
 <area shape="rect" id="node3" href="$namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="220,116,383,157"/>
 <area shape="rect" id="node7" href="$namespacestrainrosettemodule.html#a51992ccd7638c87950dfc1d85ac40202" title="Initializes the strain gage objects." alt="" coords="224,181,379,223"/>

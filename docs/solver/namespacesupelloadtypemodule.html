@@ -70,26 +70,38 @@ $(function() {
 <div class="title">supelloadtypemodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with data types representing superelement load objects.  
+<a href="namespacesupelloadtypemodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsupelloadtypemodule_1_1supelloadtype.html">supelloadtype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a superelement load object.  <a href="structsupelloadtypemodule_1_1supelloadtype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacesupelloadtypemodule_1_1writeobject.html">writeobject</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to file.  <a href="interfacesupelloadtypemodule_1_1writeobject.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aa8ef60bb173885dd0bd0cb7dd1915f32"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesupelloadtypemodule.html#aa8ef60bb173885dd0bd0cb7dd1915f32">initiateloads</a> (infp, sups, engines, loads, err)</td></tr>
+<tr class="memdesc:aa8ef60bb173885dd0bd0cb7dd1915f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes superelement loads with data from the solver input file.  <a href="namespacesupelloadtypemodule.html#aa8ef60bb173885dd0bd0cb7dd1915f32">More...</a><br /></td></tr>
 <tr class="separator:aa8ef60bb173885dd0bd0cb7dd1915f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a081b7d9dde71834b9f817bae7eda24"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesupelloadtypemodule.html#a3a081b7d9dde71834b9f817bae7eda24">writeloadtype</a> (load, io, complexity)</td></tr>
+<tr class="memdesc:a3a081b7d9dde71834b9f817bae7eda24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to file.  <a href="namespacesupelloadtypemodule.html#a3a081b7d9dde71834b9f817bae7eda24">More...</a><br /></td></tr>
 <tr class="separator:a3a081b7d9dde71834b9f817bae7eda24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab49d5af41636dab49c7e2b13800e673d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesupelloadtypemodule.html#ab49d5af41636dab49c7e2b13800e673d">nullifyload</a> (load)</td></tr>
+<tr class="memdesc:ab49d5af41636dab49c7e2b13800e673d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a superelement load object.  <a href="namespacesupelloadtypemodule.html#ab49d5af41636dab49c7e2b13800e673d">More...</a><br /></td></tr>
 <tr class="separator:ab49d5af41636dab49c7e2b13800e673d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a275adf3de16c3dca825dc12ddb121c10"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesupelloadtypemodule.html#a275adf3de16c3dca825dc12ddb121c10">deallocateloads</a> (loads)</td></tr>
+<tr class="memdesc:a275adf3de16c3dca825dc12ddb121c10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates an array of superelement load objects.  <a href="namespacesupelloadtypemodule.html#a275adf3de16c3dca825dc12ddb121c10">More...</a><br /></td></tr>
 <tr class="separator:a275adf3de16c3dca825dc12ddb121c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with data types representing superelement load objects. </p>
+<p>The module also contains subroutines for accessing or manipulating the superelement load data. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a275adf3de16c3dca825dc12ddb121c10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a275adf3de16c3dca825dc12ddb121c10">&#9670;&nbsp;</a></span>deallocateloads()</h2>
 
@@ -105,6 +117,44 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Deallocates an array of superelement load objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loads</td><td>The <a class="el" href="structsupelloadtypemodule_1_1supelloadtype.html" title="Data type representing a superelement load object.">supelloadtypemodule::supelloadtype</a> objects to deallocate</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<p>date 23 Jan 2017 </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesupelloadtypemodule_a275adf3de16c3dca825dc12ddb121c10_icgraph.png" border="0" usemap="#anamespacesupelloadtypemodule_a275adf3de16c3dca825dc12ddb121c10_icgraph" alt=""/></div>
+<map name="anamespacesupelloadtypemodule_a275adf3de16c3dca825dc12ddb121c10_icgraph" id="anamespacesupelloadtypemodule_a275adf3de16c3dca825dc12ddb121c10_icgraph">
+<area shape="rect" title="Deallocates an array of superelement load objects." alt="" coords="1369,234,1532,275"/>
+<area shape="rect" href="namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="1145,177,1321,218"/>
+<area shape="rect" href="namespacesupelloadtypemodule.html#aa8ef60bb173885dd0bd0cb7dd1915f32" title="Initializes superelement loads with data from the solver input file." alt="" coords="1152,266,1315,307"/>
+<area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="895,168,1097,195"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="651,168,820,195"/>
+<area shape="rect" href="namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="399,67,566,93"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="395,360,570,387"/>
+<area shape="rect" href="namespacesolvermodule.html#ad942a07a7186496388f9fd3a54918faf" title="Restarts a running simulation model from the provided state." alt="" coords="389,117,576,144"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="405,241,561,282"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,168,574,195"/>
+<area shape="rect" href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33" title="Terminates the running solver process by deallocating all memory, etc." alt="" coords="196,5,276,32"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,411,275,437"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,461,275,488"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,512,275,539"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,309,274,336"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,360,275,387"/>
+<area shape="rect" href="solverDriver_8f90.html#a53a8d5ea2434ae00f5bf28cf66196cc3" title="Restarts a running solver process from the provided state." alt="" coords="191,56,281,83"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,157,83,184"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,208,341,235"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,107,338,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="624,332,847,359"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -152,6 +202,47 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes superelement loads with data from the solver input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sups</td><td>Array of all superelements in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">engines</td><td>Array of all engines in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">loads</td><td>Array of all loads in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9 Apr 2008 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_cgraph.png" border="0" usemap="#anamespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_cgraph" alt=""/></div>
+<map name="anamespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_cgraph" id="anamespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_cgraph">
+<area shape="rect" title="Initializes superelement loads with data from the solver input file." alt="" coords="5,89,168,131"/>
+<area shape="rect" href="namespacesupelloadtypemodule.html#a275adf3de16c3dca825dc12ddb121c10" title="Deallocates an array of superelement load objects." alt="" coords="261,5,424,47"/>
+<area shape="rect" href="namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="216,71,469,98"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="221,122,464,149"/>
+<area shape="rect" href="namespacesupelloadtypemodule.html#ab49d5af41636dab49c7e2b13800e673d" title="Initializes a superelement load object." alt="" coords="261,173,424,215"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_icgraph.png" border="0" usemap="#anamespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_icgraph" alt=""/></div>
+<map name="anamespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_icgraph" id="anamespacesupelloadtypemodule_aa8ef60bb173885dd0bd0cb7dd1915f32_icgraph">
+<area shape="rect" title="Initializes superelement loads with data from the solver input file." alt="" coords="624,99,787,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="ab49d5af41636dab49c7e2b13800e673d"></a>
@@ -169,6 +260,32 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a superelement load object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">load</td><td>The <a class="el" href="structsupelloadtypemodule_1_1supelloadtype.html" title="Data type representing a superelement load object.">supelloadtypemodule::supelloadtype</a> object to initialize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9 Apr 2008 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesupelloadtypemodule_ab49d5af41636dab49c7e2b13800e673d_icgraph.png" border="0" usemap="#anamespacesupelloadtypemodule_ab49d5af41636dab49c7e2b13800e673d_icgraph" alt=""/></div>
+<map name="anamespacesupelloadtypemodule_ab49d5af41636dab49c7e2b13800e673d_icgraph" id="anamespacesupelloadtypemodule_ab49d5af41636dab49c7e2b13800e673d_icgraph">
+<area shape="rect" title="Initializes a superelement load object." alt="" coords="835,99,997,141"/>
+<area shape="rect" href="namespacesupelloadtypemodule.html#aa8ef60bb173885dd0bd0cb7dd1915f32" title="Initializes superelement loads with data from the solver input file." alt="" coords="624,99,787,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -204,12 +321,24 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Standard routine for writing an object to file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">load</td><td>The <a class="el" href="structsupelloadtypemodule_1_1supelloadtype.html" title="Data type representing a superelement load object.">supelloadtypemodule::supelloadtype</a> object to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">io</td><td>File unit number to write to </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">complexity</td><td>If present, the value indicates the amount of print</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9 Apr 2008 </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 15 2026 16:34:02 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Mar 13 2026 19:45:09 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

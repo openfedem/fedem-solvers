@@ -7,8 +7,8 @@
 <area shape="rect" id="node21" href="$stressRecoveryModule_8f90.html#a216ae814fbef3cce2e487339a370ffcb" title="Returns the size of the in&#45;core array with von Mises stresses." alt="" coords="263,1024,397,1051"/>
 <area shape="rect" id="node22" href="$namespacesamstressmodule.html#ac92e4718f898abf21cbe409e81b53a96" title="Initializes the SAM data structure for the recovery processes." alt="" coords="220,1129,440,1156"/>
 <area shape="rect" id="node25" href="$namespacesammodule.html#a3b485dc310e4344a9620649c62ddc644" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="533,1231,708,1257"/>
-<area shape="rect" id="node27" href="$namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initiates all strain rosettes with recovery data from superelements." alt="" coords="247,1314,413,1355"/>
-<area shape="rect" id="node43" href="$namespacestressrecoverymodule.html#a341d5cd78cb64693ea6226254523dda1" title="Initiates all strain rosettes that are on parts marked for recovery." alt="" coords="230,1379,430,1421"/>
+<area shape="rect" id="node27" href="$namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="247,1314,413,1355"/>
+<area shape="rect" id="node43" href="$namespacestressrecoverymodule.html#a341d5cd78cb64693ea6226254523dda1" title="Initializes strain rosettes that are on parts marked for recovery." alt="" coords="230,1379,430,1421"/>
 <area shape="rect" id="node44" href="$namespacerdbmodule.html#a61e32840f6162d281a5b8723648f4e92" title="Initializes a rdbmodule::rdbtype object." alt="" coords="249,1445,411,1472"/>
 <area shape="rect" id="node45" href="$namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="251,195,409,237"/>
 <area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="515,356,726,383"/>

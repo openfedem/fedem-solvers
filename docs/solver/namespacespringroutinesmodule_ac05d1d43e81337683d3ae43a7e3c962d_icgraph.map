@@ -1,5 +1,29 @@
 <map id="springroutinesmodule::addinspringstiffmat" name="springroutinesmodule::addinspringstiffmat">
-<area shape="rect" id="node1" title="Assembles system stiffness contributions from a spring element." alt="" coords="296,23,460,65"/>
-<area shape="rect" id="node2" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="5,5,248,32"/>
-<area shape="rect" id="node3" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="17,56,237,83"/>
+<area shape="rect" id="node1" title="Assembles system stiffness contributions from a spring element." alt="" coords="1485,111,1649,152"/>
+<area shape="rect" id="node2" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="1195,53,1437,79"/>
+<area shape="rect" id="node8" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="1206,143,1426,170"/>
+<area shape="rect" id="node3" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="939,5,1124,47"/>
+<area shape="rect" id="node4" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="663,35,846,62"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,86,83,113"/>
+<area shape="rect" id="node6" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="383,35,593,62"/>
+<area shape="rect" id="node7" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="131,86,335,113"/>
+<area shape="rect" id="node9" href="$namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="947,136,1115,177"/>
+<area shape="rect" id="node12" href="$namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="916,219,1147,246"/>
+<area shape="rect" id="node20" href="$namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="941,347,1122,388"/>
+<area shape="rect" id="node27" href="$namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="941,71,1122,112"/>
+<area shape="rect" id="node10" href="$namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="655,86,854,113"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="442,137,534,163"/>
+<area shape="rect" id="node13" href="$namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="641,137,868,163"/>
+<area shape="rect" id="node14" href="$namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="677,188,833,229"/>
+<area shape="rect" id="node16" href="$namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="677,253,833,295"/>
+<area shape="rect" id="node18" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="677,319,833,360"/>
+<area shape="rect" id="node19" href="$solverDriver_8f90.html#ae6e1f5b931c2ce470c9bb64e87c362a8" title="Returns a system matrix in full format." alt="" coords="703,385,806,411"/>
+<area shape="rect" id="node15" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="155,217,311,259"/>
+<area shape="rect" id="node17" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="410,247,566,288"/>
+<area shape="rect" id="node21" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="667,450,842,477"/>
+<area shape="rect" id="node22" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="449,363,527,390"/>
+<area shape="rect" id="node23" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="449,414,527,441"/>
+<area shape="rect" id="node24" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="449,465,527,491"/>
+<area shape="rect" id="node25" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="450,515,526,542"/>
+<area shape="rect" id="node26" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="449,566,527,593"/>
 </map>

@@ -69,25 +69,33 @@ $(function() {
 <div class="title">initiatespringtypemodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Initialization of spring objects from the solver input file.  
+<a href="namespaceinitiatespringtypemodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aca66a9a677c3fc97a67d8d48a19382f7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#aca66a9a677c3fc97a67d8d48a19382f7">initiatespringfailures</a> (infp, springFailures, err)</td></tr>
+<tr class="memdesc:aca66a9a677c3fc97a67d8d48a19382f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes spring failure objects with data from the input file.  <a href="namespaceinitiatespringtypemodule.html#aca66a9a677c3fc97a67d8d48a19382f7">More...</a><br /></td></tr>
 <tr class="separator:aca66a9a677c3fc97a67d8d48a19382f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a436fb57d6c38f7a30c1da5fb1e1cdf2e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#a436fb57d6c38f7a30c1da5fb1e1cdf2e">initiatespringyields</a> (infp, engines, springYields, err)</td></tr>
+<tr class="memdesc:a436fb57d6c38f7a30c1da5fb1e1cdf2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes spring yield objects with data from the input file.  <a href="namespaceinitiatespringtypemodule.html#a436fb57d6c38f7a30c1da5fb1e1cdf2e">More...</a><br /></td></tr>
 <tr class="separator:a436fb57d6c38f7a30c1da5fb1e1cdf2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c339a6c791081c8965ea500921ddc12"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#a3c339a6c791081c8965ea500921ddc12">initiatesprings</a> (infp, triads, baseSprings, springs, err)</td></tr>
+<tr class="memdesc:a3c339a6c791081c8965ea500921ddc12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes spring elements with data from the solver input file.  <a href="namespaceinitiatespringtypemodule.html#a3c339a6c791081c8965ea500921ddc12">More...</a><br /></td></tr>
 <tr class="separator:a3c339a6c791081c8965ea500921ddc12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f7a13baa0a1dd4a58af83981643f28e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#a7f7a13baa0a1dd4a58af83981643f28e">initiatebasesprings</a> (infp, engines, functions, springFailures, springYields, springs, err)</td></tr>
+<tr class="memdesc:a7f7a13baa0a1dd4a58af83981643f28e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes spring base objects with data from the input file.  <a href="namespaceinitiatespringtypemodule.html#a7f7a13baa0a1dd4a58af83981643f28e">More...</a><br /></td></tr>
 <tr class="separator:a7f7a13baa0a1dd4a58af83981643f28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00b4d8d3f73f543392adebcb453ea90a"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#a00b4d8d3f73f543392adebcb453ea90a">connectfunctions</a> (lengthId, stiffId, forceId, posScaleId, negScaleId, engines, functions, spr, err)</td></tr>
-<tr class="separator:a00b4d8d3f73f543392adebcb453ea90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba1caaf230a3e05a7c208e7503001f6e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#aba1caaf230a3e05a7c208e7503001f6e">checkspringconnections</a> (baseSprings, stat)</td></tr>
-<tr class="separator:aba1caaf230a3e05a7c208e7503001f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e36c3fb6d40e3fe0042cf4a84a263e7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatespringtypemodule.html#a3e36c3fb6d40e3fe0042cf4a84a263e7">checkspringconnections</a> (springs, stat)</td></tr>
+<tr class="memdesc:a3e36c3fb6d40e3fe0042cf4a84a263e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivates all base springs that are not referred, for consistency.  <a href="namespaceinitiatespringtypemodule.html#a3e36c3fb6d40e3fe0042cf4a84a263e7">More...</a><br /></td></tr>
+<tr class="separator:a3e36c3fb6d40e3fe0042cf4a84a263e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="aba1caaf230a3e05a7c208e7503001f6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba1caaf230a3e05a7c208e7503001f6e">&#9670;&nbsp;</a></span>checkspringconnections()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Initialization of spring objects from the solver input file. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a3e36c3fb6d40e3fe0042cf4a84a263e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e36c3fb6d40e3fe0042cf4a84a263e7">&#9670;&nbsp;</a></span>checkspringconnections()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -96,7 +104,7 @@ Functions/Subroutines</h2></td></tr>
           <td class="memname">subroutine initiatespringtypemodule::checkspringconnections </td>
           <td>(</td>
           <td class="paramtype">type(<a class="el" href="structspringtypemodule_1_1springbasetype.html">springbasetype</a>), dimension(:), intent(inout)&#160;</td>
-          <td class="paramname"><em>baseSprings</em>, </td>
+          <td class="paramname"><em>springs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -112,83 +120,31 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Deactivates all base springs that are not referred, for consistency. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">springs</td><td>Array of all spring base objects in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">stat</td><td>Number of spring base objects that are deactivated</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5 Jul 2004 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a3e36c3fb6d40e3fe0042cf4a84a263e7_icgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a3e36c3fb6d40e3fe0042cf4a84a263e7_icgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a3e36c3fb6d40e3fe0042cf4a84a263e7_icgraph" id="anamespaceinitiatespringtypemodule_a3e36c3fb6d40e3fe0042cf4a84a263e7_icgraph">
+<area shape="rect" title="Deactivates all base springs that are not referred, for consistency." alt="" coords="624,99,811,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
 </div>
-</div>
-<a id="a00b4d8d3f73f543392adebcb453ea90a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00b4d8d3f73f543392adebcb453ea90a">&#9670;&nbsp;</a></span>connectfunctions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine, private initiatespringtypemodule::connectfunctions </td>
-          <td>(</td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>lengthId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>stiffId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>forceId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>posScaleId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>negScaleId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">type(<a class="el" href="structfunctiontypemodule_1_1enginetype.html">enginetype</a>), dimension(:), intent(in)&#160;</td>
-          <td class="paramname"><em>engines</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">type(<a class="el" href="structfunctiontypemodule_1_1functiontype.html">functiontype</a>), dimension(:), intent(in)&#160;</td>
-          <td class="paramname"><em>functions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">type(<a class="el" href="structspringtypemodule_1_1springbasetype.html">springbasetype</a>), intent(out)&#160;</td>
-          <td class="paramname"><em>spr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(out)&#160;</td>
-          <td class="paramname"><em>err</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -248,6 +204,50 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes spring base objects with data from the input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">engines</td><td>Array of all engines in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">functions</td><td>Array of all functions in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">springFailures</td><td>Array of all spring failure objects in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">springYields</td><td>Array of all spring yield objects in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">springs</td><td>Array of all spring base objects in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Apr 2002</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Jul 2002 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_cgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_cgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_cgraph" id="anamespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_cgraph">
+<area shape="rect" title="Initializes spring base objects with data from the input file." alt="" coords="5,49,192,90"/>
+<area shape="rect" href="initiateDamperTypeModule_8f90.html#a5ef7764da665df5ad290dae9425d74fb" title="Connects engines and functions to the given damper object." alt="" coords="300,5,433,32"/>
+<area shape="rect" href="namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="240,56,493,83"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="245,107,488,133"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_icgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_icgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_icgraph" id="anamespaceinitiatespringtypemodule_a7f7a13baa0a1dd4a58af83981643f28e_icgraph">
+<area shape="rect" title="Initializes spring base objects with data from the input file." alt="" coords="624,99,811,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="aca66a9a677c3fc97a67d8d48a19382f7"></a>
@@ -281,6 +281,45 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes spring failure objects with data from the input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">springFailures</td><td>Array of all spring failure objects in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Apr 2005 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_cgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_cgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_cgraph" id="anamespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_cgraph">
+<area shape="rect" title="Initializes spring failure objects with data from the input file." alt="" coords="5,74,192,115"/>
+<area shape="rect" href="namespacespringtypemodule.html#a626d162111bdbe05b698f87b1b43f4f9" title="Deallocates an array of spring failure objects." alt="" coords="240,5,505,32"/>
+<area shape="rect" href="namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="246,56,499,83"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="251,107,494,133"/>
+<area shape="rect" href="namespacespringtypemodule.html#acdb015c8bcc4051d42c83d0edfcb29d8" title="Initializes a spring failure object." alt="" coords="257,157,488,184"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_icgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_icgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_icgraph" id="anamespaceinitiatespringtypemodule_aca66a9a677c3fc97a67d8d48a19382f7_icgraph">
+<area shape="rect" title="Initializes spring failure objects with data from the input file." alt="" coords="624,99,811,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -328,6 +367,48 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes spring elements with data from the solver input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">triads</td><td>Array of all triads in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">baseSprings</td><td>Array of all spring base objects in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">springs</td><td>Array of all spring elements in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Karl Erik Thoresen and Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 1998</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Jul 2002 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_cgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_cgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_cgraph" id="anamespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_cgraph">
+<area shape="rect" title="Initializes spring elements with data from the solver input file." alt="" coords="5,49,192,90"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a70b4b5104d0d081f25390ef4340959b1" title="Allocates the total nodal force vector associated with a triad." alt="" coords="240,5,495,32"/>
+<area shape="rect" href="namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="241,56,494,83"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="246,107,489,133"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_icgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_icgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_icgraph" id="anamespaceinitiatespringtypemodule_a3c339a6c791081c8965ea500921ddc12_icgraph">
+<area shape="rect" title="Initializes spring elements with data from the solver input file." alt="" coords="624,99,811,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a436fb57d6c38f7a30c1da5fb1e1cdf2e"></a>
@@ -368,12 +449,52 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes spring yield objects with data from the input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">engines</td><td>Array of all engines in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">springYields</td><td>Array of all spring yield objects in the model </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Apr 2005 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_cgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_cgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_cgraph" id="anamespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_cgraph">
+<area shape="rect" title="Initializes spring yield objects with data from the input file." alt="" coords="5,74,192,115"/>
+<area shape="rect" href="namespacespringtypemodule.html#a8bcbf4a109eef24b9d229c87d4cb02c0" title="Deallocates an array of spring yield objects." alt="" coords="240,5,495,32"/>
+<area shape="rect" href="namespaceinpututilities.html#a7fc8ab6fd7aa6467233771427cbd8e76" title="Counts number of entries of a text string in a solver input file." alt="" coords="241,56,494,83"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="246,107,489,133"/>
+<area shape="rect" href="namespacespringtypemodule.html#a8a3de4531507ce56673ff037e06f7fdf" title="Initializes a spring yield object." alt="" coords="257,157,477,184"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_icgraph.png" border="0" usemap="#anamespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_icgraph" alt=""/></div>
+<map name="anamespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_icgraph" id="anamespaceinitiatespringtypemodule_a436fb57d6c38f7a30c1da5fb1e1cdf2e_icgraph">
+<area shape="rect" title="Initializes spring yield objects with data from the input file." alt="" coords="624,99,811,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 15 2026 16:34:02 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

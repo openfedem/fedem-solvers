@@ -73,14 +73,19 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a560687df31d496021d03da59eae75af4"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4">readgenericpart</a> (infp, sup, ierr)</td></tr>
+<tr class="memdesc:a560687df31d496021d03da59eae75af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads generic part properties from the solver input file.  <a href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4">More...</a><br /></td></tr>
 <tr class="separator:a560687df31d496021d03da59eae75af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9ba83acde789af06ca5a62e36a392af"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenericpartmodule.html#ac9ba83acde789af06ca5a62e36a392af">estimaterigidstiffness</a> (sup, mass, inertia, kt, kr)</td></tr>
+<tr class="memdesc:ac9ba83acde789af06ca5a62e36a392af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates semi-rigid stiffness coefficients for a generic part.  <a href="namespacegenericpartmodule.html#ac9ba83acde789af06ca5a62e36a392af">More...</a><br /></td></tr>
 <tr class="separator:ac9ba83acde789af06ca5a62e36a392af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d1bcba0bf3c714f6cc9fe0f8a3c73fd"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenericpartmodule.html#a1d1bcba0bf3c714f6cc9fe0f8a3c73fd">assemblestiffness</a> (sup, K, kt, kr, stiffness)</td></tr>
+<tr class="memdesc:a1d1bcba0bf3c714f6cc9fe0f8a3c73fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the stiffness matrix for a generic part.  <a href="namespacegenericpartmodule.html#a1d1bcba0bf3c714f6cc9fe0f8a3c73fd">More...</a><br /></td></tr>
 <tr class="separator:a1d1bcba0bf3c714f6cc9fe0f8a3c73fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0778fdb8a379cc3ee1cc86a3c1e6073"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenericpartmodule.html#ac0778fdb8a379cc3ee1cc86a3c1e6073">assemblemass</a> (M, mass, inertia)</td></tr>
+<tr class="memdesc:ac0778fdb8a379cc3ee1cc86a3c1e6073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the mass matrix for a generic part.  <a href="namespacegenericpartmodule.html#ac0778fdb8a379cc3ee1cc86a3c1e6073">More...</a><br /></td></tr>
 <tr class="separator:ac0778fdb8a379cc3ee1cc86a3c1e6073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c74411453d5115290dae857791b9c93"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenericpartmodule.html#a3c74411453d5115290dae857791b9c93">initiategenericparts</a> (sups)</td></tr>
+<tr class="memdesc:a3c74411453d5115290dae857791b9c93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes more generic part data after system initialization.  <a href="namespacegenericpartmodule.html#a3c74411453d5115290dae857791b9c93">More...</a><br /></td></tr>
 <tr class="separator:a3c74411453d5115290dae857791b9c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function/Subroutine Documentation</h2>
@@ -115,6 +120,36 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Assembles the mass matrix for a generic part. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">M</td><td>Assembled superelement mass matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mass</td><td>Total mass of the superelement </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inertia</td><td>Total inertia of the superelement</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Assuming that all mass is coupled to the first triad (the CoG).</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacegenericpartmodule_ac0778fdb8a379cc3ee1cc86a3c1e6073_icgraph.png" border="0" usemap="#anamespacegenericpartmodule_ac0778fdb8a379cc3ee1cc86a3c1e6073_icgraph" alt=""/></div>
+<map name="anamespacegenericpartmodule_ac0778fdb8a379cc3ee1cc86a3c1e6073_icgraph" id="anamespacegenericpartmodule_ac0778fdb8a379cc3ee1cc86a3c1e6073_icgraph">
+<area shape="rect" title="Assembles the mass matrix for a generic part." alt="" coords="1055,99,1208,141"/>
+<area shape="rect" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -162,6 +197,42 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Assembles the stiffness matrix for a generic part. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sup</td><td>The superelement object representing the generic part </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">K</td><td>Assembled superelement stiffness matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">kt</td><td>Translational stiffness coefficient </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">kr</td><td>Rotational stiffness coefficient </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stiffness</td><td>Individual nodal stiffness coefficients</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The part of the stiffness matrix associated with the CoG and one of the other triads of the generic part is assumed to be: </p><div class="fragment"><div class="line">[k] = |  kt           -kt*spin(e)               -kt           0  |</div>
+<div class="line">      |         kr + spin(e)<span class="stringliteral">&#39;*kt*spin(e)   spin(e)&#39;</span>*kt      -kr  |</div>
+<div class="line">      |                                          kt           0  |</div>
+<div class="line">      |  symm.                                               kr  |</div>
+</div><!-- fragment --><p> where kt and kr are diagonal 3x3 stiffness matrices for translational and rotational DOFs, respectively, and e is the eccentricity vector giving the relative position of the hard-point with respect to the CoG.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacegenericpartmodule_a1d1bcba0bf3c714f6cc9fe0f8a3c73fd_icgraph.png" border="0" usemap="#anamespacegenericpartmodule_a1d1bcba0bf3c714f6cc9fe0f8a3c73fd_icgraph" alt=""/></div>
+<map name="anamespacegenericpartmodule_a1d1bcba0bf3c714f6cc9fe0f8a3c73fd_icgraph" id="anamespacegenericpartmodule_a1d1bcba0bf3c714f6cc9fe0f8a3c73fd_icgraph">
+<area shape="rect" title="Assembles the stiffness matrix for a generic part." alt="" coords="1055,99,1208,141"/>
+<area shape="rect" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="ac9ba83acde789af06ca5a62e36a392af"></a>
@@ -208,6 +279,38 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Calculates semi-rigid stiffness coefficients for a generic part. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sup</td><td>The superelement object representing the generic part </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mass</td><td>Total mass of the superelement </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inertia</td><td>Total inertial of the superelement </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">kt</td><td>Translational stiffness coefficient </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">kr</td><td>Rotational stiffness coefficient</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This subroutine estimates the stiffness coefficients to be assigned at each triad of the superelement, such that it behaves like completely rigid. The estimate is based on the given mass and a user-specified target eigenfrequency.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 Oct 2004 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacegenericpartmodule_ac9ba83acde789af06ca5a62e36a392af_icgraph.png" border="0" usemap="#anamespacegenericpartmodule_ac9ba83acde789af06ca5a62e36a392af_icgraph" alt=""/></div>
+<map name="anamespacegenericpartmodule_ac9ba83acde789af06ca5a62e36a392af_icgraph" id="anamespacegenericpartmodule_ac9ba83acde789af06ca5a62e36a392af_icgraph">
+<area shape="rect" title="Calculates semi&#45;rigid stiffness coefficients for a generic part." alt="" coords="1055,99,1219,141"/>
+<area shape="rect" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a3c74411453d5115290dae857791b9c93"></a>
@@ -225,6 +328,16 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes more generic part data after system initialization. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sups</td><td>Array of all superelements in the model</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 Aug 2013 </dd></dl>
 
 </div>
 </div>
@@ -260,12 +373,54 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Reads generic part properties from the solver input file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">sup</td><td>The superelement object which is a generic part </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This subroutine reads stiffness and mass properties for a generic part and generate the equivalent superelement matrices. Optionally, the center of gravity (CoG) triad is condensed condense out.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacegenericpartmodule_a560687df31d496021d03da59eae75af4_cgraph.png" border="0" usemap="#anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_cgraph" alt=""/></div>
+<map name="anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_cgraph" id="anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_cgraph">
+<area shape="rect" title="Reads generic part properties from the solver input file." alt="" coords="5,136,159,177"/>
+<area shape="rect" href="namespacegenericpartmodule.html#ac0778fdb8a379cc3ee1cc86a3c1e6073" title="Assembles the mass matrix for a generic part." alt="" coords="251,5,405,47"/>
+<area shape="rect" href="namespacegenericpartmodule.html#a1d1bcba0bf3c714f6cc9fe0f8a3c73fd" title="Assembles the stiffness matrix for a generic part." alt="" coords="251,71,405,112"/>
+<area shape="rect" href="namespacegenericpartmodule.html#ac9ba83acde789af06ca5a62e36a392af" title="Calculates semi&#45;rigid stiffness coefficients for a generic part." alt="" coords="246,136,410,177"/>
+<area shape="rect" href="namespaceinpututilities.html#a851c8920109ce0f9c5cebcb005449ca4" title="Sets position at the next entry of a text string in a file." alt="" coords="207,202,449,229"/>
+<area shape="rect" href="namespacedensematrixmodule.html#a15392a4ff9de4934977af94f5fa8b527" title="Solves the linear equation system A*x = B." alt="" coords="247,253,409,295"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph.png" border="0" usemap="#anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph" alt=""/></div>
+<map name="anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph" id="anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph">
+<area shape="rect" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 15 2026 16:34:02 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

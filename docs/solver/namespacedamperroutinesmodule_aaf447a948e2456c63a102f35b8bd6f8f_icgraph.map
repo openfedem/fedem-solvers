@@ -1,5 +1,21 @@
 <map id="damperroutinesmodule::addindampermat" name="damperroutinesmodule::addindampermat">
-<area shape="rect" id="node1" title="Assembles system damping matrix contributions from a damper element." alt="" coords="299,23,473,65"/>
-<area shape="rect" id="node2" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="5,5,251,32"/>
-<area shape="rect" id="node3" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="7,56,249,83"/>
+<area shape="rect" id="node1" title="Assembles system damping matrix contributions from a damper element." alt="" coords="1488,279,1663,320"/>
+<area shape="rect" id="node2" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="1195,254,1440,281"/>
+<area shape="rect" id="node18" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="1196,311,1439,338"/>
+<area shape="rect" id="node3" href="$namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="947,247,1115,288"/>
+<area shape="rect" id="node10" href="$namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="916,111,1147,138"/>
+<area shape="rect" id="node4" href="$namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="655,254,854,281"/>
+<area shape="rect" id="node6" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="663,319,846,346"/>
+<area shape="rect" id="node5" href="$solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="442,254,534,281"/>
+<area shape="rect" id="node7" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,305,83,331"/>
+<area shape="rect" id="node8" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="383,406,593,433"/>
+<area shape="rect" id="node9" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="131,305,335,331"/>
+<area shape="rect" id="node11" href="$namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="641,86,868,113"/>
+<area shape="rect" id="node12" href="$namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="410,123,566,164"/>
+<area shape="rect" id="node14" href="$namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="677,188,833,229"/>
+<area shape="rect" id="node16" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="410,17,566,59"/>
+<area shape="rect" id="node17" href="$solverDriver_8f90.html#ae6e1f5b931c2ce470c9bb64e87c362a8" title="Returns a system matrix in full format." alt="" coords="703,35,806,62"/>
+<area shape="rect" id="node13" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="155,156,311,197"/>
+<area shape="rect" id="node15" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="410,188,566,229"/>
+<area shape="rect" id="node19" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="939,312,1124,353"/>
 </map>

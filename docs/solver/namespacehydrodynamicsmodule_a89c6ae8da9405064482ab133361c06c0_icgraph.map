@@ -26,7 +26,7 @@
 <area shape="rect" id="node23" href="$namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="853,13,1039,55"/>
 <area shape="rect" id="node25" href="$namespacesupelroutinesmodule.html#a4fa23a365d753487fee11a133a8c43af" title="Updates all superelements in the model based on the computed state." alt="" coords="1333,127,1492,168"/>
 <area shape="rect" id="node27" href="$namespacehydrodynamicsmodule.html#aba4271cbefa81017b5f49a83f98d3641" title="Calculates buoyancy force resultant for a superelement or beam." alt="" coords="2062,179,2233,220"/>
-<area shape="rect" id="node36" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initiates all hydrodynamic bodies in the model." alt="" coords="2057,256,2237,297"/>
+<area shape="rect" id="node36" href="$namespacehydrodynamicsmodule.html#a169a4323c107fa6452a1ce2835735411" title="Initializes all hydrodynamic bodies in the model." alt="" coords="2057,256,2237,297"/>
 <area shape="rect" id="node28" href="$namespaceuserdefelroutinesmodule.html#a389010241f5d9e5ac3f65cb56088c1c0" title="Calculates buoyancy force contributions for a two&#45;noded element." alt="" coords="1806,136,1991,177"/>
 <area shape="rect" id="node29" href="$namespacesupelroutinesmodule.html#ad6fc0213b4c19b628cfec3bfaa624127" title="Calculates buoyancy forces and associated load correction stiffness." alt="" coords="1567,136,1726,177"/>
 <area shape="rect" id="node30" href="$namespacesupelroutinesmodule.html#a31e9f3faf29bf864b624805c99318516" title="Updates all superelements in the model based on the computed state." alt="" coords="1333,384,1492,425"/>
