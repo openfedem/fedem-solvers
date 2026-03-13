@@ -20,7 +20,58 @@ module AddInSysModule
 
   implicit none
 
+  private ::  hasL0Change
+
+
 contains
+
+  !!============================================================================
+  !> @brief Returns .true. if @a spring has a stress-free length change.
+  !>
+  !> @param[in] spring Spring element to check for stress-free length change
+  !>
+  !> @details The stiffness-proportional damping value is then set to a
+  !> large negative value to deactivate such damping for that spring.
+  !> A warning is issued if this happens to suggest a model change.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Mar 2026
+
+  function hasL0Change (spring)
+
+    use kindModule       , only : hugeVal_p
+    use SpringTypeModule , only : SpringType
+    use IdTypeModule     , only : getId
+    use reportErrorModule, only : reportError, warning_p
+
+    type(SpringType), intent(inout) :: spring
+    logical                         :: hasL0Change
+
+    !! Local variables
+    integer :: i
+
+    !! --- Logic section ---
+
+    do i = 1, size(spring%spr)
+       if (associated(spring%spr(i)%p)) then
+          if (associated(spring%spr(i)%p%length0Engine)) then
+             hasL0Change = .true.
+             spring%alpha2 = -hugeVal_p
+             call reportError (warning_p,'Stiffness-proportional damping '//&
+                  'for Axial spring'//trim(getId(spring%id)), &
+                  'is deactivated due to stress-free length change.', &
+                  'Use an Axial damper instead.')
+             return
+          end if
+       end if
+    end do
+
+    hasL0Change = .false.
+
+  end function hasL0Change
 
   !!============================================================================
   !> @brief Builds the system Newton matrix.
@@ -44,6 +95,8 @@ contains
   !> If @a Rhs is provided, contributions due to prescribed motions,
   !> if any, will be added.
   !>
+  !> @callgraph @callergraph
+  !>
   !> @author Karl Erik Thoresen                                   @date Feb 1999
   !> @author Bjorn Haugen                                         @date Des 2000
   !> @author Knut Morten Okstad                                   @date Jul 2002
@@ -66,10 +119,8 @@ contains
     use TireRoutinesModule          , only : addInTireMassMat
     use TireRoutinesModule          , only : addInTireStiffMat
     use TireRoutinesModule          , only : addInTireDamperMat
-    use IdTypeModule                , only : getId
     use profilerModule              , only : startTimer, stopTimer, asm_p
-    use reportErrorModule           , only : warning_p, debugFileOnly_p
-    use reportErrorModule           , only : reportError
+    use reportErrorModule           , only : reportError, debugFileOnly_p
 #ifdef FT_DEBUG
     use dbgUnitsModule        , only : dbgSolve
     use SysMatrixTypeModule   , only : writeObject
@@ -96,7 +147,6 @@ contains
     real(dp), save      :: oldScaleM = 0.0_dp
     real(dp), save      :: oldScaleK = 0.0_dp
     real(dp), save      :: oldScaleC = 0.0_dp
-    logical , save      :: firstMsg = .true.
 
 #ifdef FT_DEBUG
     integer :: iprint
@@ -217,24 +267,20 @@ contains
 #endif
 
     do i = 1, size(mech%axialSprings)
-       scaleD = scaleC*(mech%axialSprings(i)%alpha2 + alpha2)
-       if (newTanStiff .and. abs(scaleD) > 1.0e-16_dp) then
+       scaleD = mech%axialSprings(i)%alpha2 + alpha2
+       if (newTanStiff .and. scaleD > 0.0_dp) then
           call addInSpringStiffMat (.true., scaleK, Nmat, &
                &                    mech%axialSprings(i), sam, ierr, Rhs)
           if (ierr < 0) goto 900
-          if (.not.associated(mech%axialSprings(i)%spr(1)%p%length0Engine)) then
+          if (.not.hasL0Change(mech%axialSprings(i))) then
+             scaleD = scaleC*scaleD
              call addInSpringStiffMat (.false., scaleD, Nmat, &
                   &                    mech%axialSprings(i), sam, ierr, Rhs)
              if (ierr < 0) goto 900
-          else if (firstMsg) then
-             call reportError (warning_p,'Stiffness-proportional damping '//&
-                  'for Axial spring'//trim(getId(mech%axialSprings(i)%id)), &
-                  'is deactivated due to stress-free length change.', &
-                  'Use Axial an damper instead.')
-             firstMsg = .false.
           end if
        else
-          call addInSpringStiffMat (newTanStiff, scaleK+scaleD, Nmat, &
+          scaleD = scaleK + scaleC*max(scaleD,0.0_dp)
+          call addInSpringStiffMat (newTanStiff, scaleD, Nmat, &
                &                    mech%axialSprings(i), sam, ierr, Rhs)
           if (ierr < 0) goto 900
        end if
@@ -321,6 +367,8 @@ contains
   !> @param[in] sam Data for managing system matrix assembly
   !> @param[out] ierr Error flag
   !>
+  !> @callgraph @callergraph
+  !>
   !> @author Karl Erik Thoresen                                   @date Aug 1999
   !> @author Knut Morten Okstad                                   @date Jul 2002
 
@@ -392,6 +440,8 @@ contains
   !> @param[in] mech Mechanism components of the model
   !> @param[in] sam Data for managing system matrix assembly
   !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
   !>
   !> @author Knut Morten Okstad                                   @date Jul 2002
 
@@ -490,6 +540,8 @@ contains
   !>
   !> @details If @a Rhs is provided, contributions due to prescribed motions,
   !> if any, will be added.
+  !>
+  !> @callgraph @callergraph
   !>
   !> @author Karl Erik Thoresen                                   @date Aug 1999
   !> @author Knut Morten Okstad                                   @date Jul 2002
@@ -620,6 +672,8 @@ contains
   !> @details this subroutine puts forces from all mechanism components
   !> into the associated system force vectors.
   !>
+  !> @callgraph @callergraph
+  !>
   !> @author Ole Ivar Sivertsen                                @date 19 Jan 1989
   !> @author Karl Erik Thoresen                                @date 1999
   !> @author Bjorn Haugen                                      @date 2001
@@ -662,8 +716,9 @@ contains
     integer            , intent(out)   :: ierr
 
     !! Local variables
-    integer :: i
-    logical :: haveSprings
+    integer  :: i
+    logical  :: haveSprings
+    real(dp) :: scaleD
 
 #ifdef FT_DEBUG
     integer :: iprint
@@ -721,9 +776,10 @@ contains
     haveSprings = size(mech%axialSprings) > 0
     do i = 1, size(mech%axialSprings)
        call addInSpringForces (FSk, RFk, mech%axialSprings(i), sam, ierr)
-       if (.not. associated(mech%axialSprings(i)%spr(1)%p%length0Engine)) then
+       scaleD = mech%axialSprings(i)%alpha2 + alpha2
+       if (scaleD > 0.0_dp .and. .not.hasL0Change(mech%axialSprings(i))) then
           call addInSpringForces (FDk, RFk, mech%axialSprings(i), sam, &
-               &                  mech%axialSprings(i)%alpha2 + alpha2, ierr)
+               &                  scaleD, ierr)
        end if
     end do
     do i = 1, size(mech%joints)
@@ -854,6 +910,8 @@ contains
   !>
   !> @details this subroutine puts static forces from all mechanism components
   !> into the associated system force vectors.
+  !>
+  !> @callgraph @callergraph
   !>
   !> @author Knut Morten Okstad                                   @date Jun 2002
 

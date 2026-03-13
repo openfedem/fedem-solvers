@@ -10,6 +10,7 @@
 
 !!==============================================================================
 !> @brief Initialization of superelements from the solver input file.
+
 module initiateSupElTypeModule
 
   implicit none

@@ -5,6 +5,15 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file supElLoadTypeModule.f90
+!> @brief Superelement load object data container.
+
+!!==============================================================================
+!> @brief Module with data types representing superelement load objects.
+!>
+!> @details The module also contains subroutines for accessing or manipulating
+!> the superelement load data.
+
 module SupElLoadTypeModule
 
   use SupElTypeModule   , only : SupElType, IdType
@@ -14,26 +23,30 @@ module SupElLoadTypeModule
 
   private
 
+  !> @brief Data type representing a superelement load object.
   type SupElLoadType
 
-     type(IdType) :: id  ! General identification data
+     type(IdType) :: id !< General identification data
 
-     integer :: loadCase ! Index into the supElType%S vector
+     integer :: loadCase !< Index to the external load vectors sup%S
 
      type(EngineType), pointer :: engine ! Engine giving the current amplitude
-     real(dp)                  :: f0, f1 ! F = f0 + f1*engineVal
-     real(dp)                  :: delay  ! Engine argument delay
+     real(dp) :: f0    !< Constant load value
+     real(dp) :: f1    !< Scalable load value
+     real(dp) :: delay !< Engine argument delay
 
-     type(SupElType) , pointer :: sup    ! the superelement this load acts on
+     type(SupElType), pointer :: sup !< The superelement this load acts on
 
-     real(dp) :: F, Fprev   ! Current and previous load amplitude value
-     real(dp) :: eInp       ! Accumulated input energy from this load
+     real(dp) :: F     !< Current load amplitude value, F = f0 + f1*engineVal
+     real(dp) :: Fprev !< Previous load amplitude value
+     real(dp) :: eInp  !< Accumulated input energy from this load
 
-     logical  :: saveVar(3) ! Flags indicating which variables should be saved
+     logical  :: saveVar(3) !< Flags indicating which variables should be saved
 
   end type SupElLoadType
 
 
+  !> @brief Standard routine for writing an object to file.
   interface WriteObject
      module procedure WriteLoadType
   end interface
@@ -43,13 +56,22 @@ module SupElLoadTypeModule
 
 contains
 
-  subroutine InitiateLoads (infp,sups,engines,loads,err)
+  !!============================================================================
+  !> @brief Initializes superelement loads with data from the solver input file
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[in] sups Array of all superelements in the model
+  !> @param[in] engines Array of all engines in the model
+  !> @param[out] loads Array of all loads in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Apr 2008
 
-    !!==========================================================================
-    !! Initiates the superelement load type with data from the solver input file
-    !!
-    !! Programmer : Knut Morten Okstad                 date/rev : 9 Apr 2008/1.0
-    !!==========================================================================
+  subroutine InitiateLoads (infp,sups,engines,loads,err)
 
     use inputUtilities        , only : iuGetNumberOfEntries, iuSetPosAtNextEntry
     use progressModule        , only : lterm
@@ -166,13 +188,18 @@ contains
   end subroutine InitiateLoads
 
 
-  subroutine WriteLoadType (load,io,complexity)
+  !!============================================================================
+  !> @brief Standard routine for writing an object to file.
+  !>
+  !> @param[in] load The supelloadtypemodule::supelloadtype object to write
+  !> @param[in] io File unit number to write to
+  !> @param[in] complexity If present, the value indicates the amount of print
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Apr 2008
 
-    !!==========================================================================
-    !! Standard routine for writing an object to io.
-    !!
-    !! Programmer : Knut Morten Okstad                 date/rev : 9 Apr 2008/1.0
-    !!==========================================================================
+  subroutine WriteLoadType (load,io,complexity)
 
     use IdTypeModule, only : writeId
 
@@ -208,13 +235,18 @@ contains
   end subroutine WriteLoadType
 
 
-  subroutine NullifyLoad (load)
+  !!============================================================================
+  !> @brief Initializes a superelement load object.
+  !>
+  !> @param load The supelloadtypemodule::supelloadtype object to initialize
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Apr 2008
 
-    !!==========================================================================
-    !! Initialize the SupElLoadType object.
-    !!
-    !! Programmer : Knut Morten Okstad                 date/rev : 9 Apr 2008/1.0
-    !!==========================================================================
+  subroutine NullifyLoad (load)
 
     use IdTypeModule, only : nullifyId
 
@@ -241,13 +273,18 @@ contains
   end subroutine NullifyLoad
 
 
-  subroutine DeallocateLoads (loads)
+  !!============================================================================
+  !> @brief Deallocates an array of superelement load objects.
+  !>
+  !> @param loads The supelloadtypemodule::supelloadtype objects to deallocate
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> date 23 Jan 2017
 
-    !!==========================================================================
-    !! Deallocate all SupElLoadType objects.
-    !!
-    !! Programmer : Knut Morten Okstad                date/rev : 23 Jan 2017/1.0
-    !!==========================================================================
+  subroutine DeallocateLoads (loads)
 
     use IdTypeModule, only : deallocateId
 

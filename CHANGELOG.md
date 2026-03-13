@@ -8,7 +8,19 @@
 
 # FEDEM solvers Changelog
 
-## [fedem-8.1.3] (2026-02-14)
+## [fedem-8.1.5] (2026-03-15)
+
+### :rocket: Added
+
+- The dynamic ramp-up of loads may now also be solved quasi-statically.
+- Print solution norms in the progress log for fedem_stress
+
+### :bug: Fixed
+
+- Disabling of dynamic ramp-up for specific functions does not work.
+- Spring-to-ground without stiffness in X-direction causes the dynamics solver to crash.
+
+## [fedem-8.1.4] (2026-02-14)
 
 ### :rocket: Added
 

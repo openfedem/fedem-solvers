@@ -246,7 +246,7 @@ DLLexport(int) solverInit (int argc, char** argv, const char* cfsi,
   ADDOPTION ("alpha1",0.0,"Global mass-proportional damping factor");
   ADDOPTION ("alpha2",0.0,"Global stiffness-proportional damping factor");
   ADDOPTION ("stopGlbDmp",-1.0,"Stop time for structural damping factors");
-  ADDOPTION ("quasiStatic",0.0,"Do a quasi-static simulation to this time");
+  ADDOPTION ("quasiStatic",-1.0e99,"Do a quasi-static simulation to this time");
   ADDOPTION ("NewmarkFlag",0,"Newmark time integration option (= cba)"
              "\na > 0: Compute inertia force from residual of previous"
              "\n       increment in the right-hand-side calculation"

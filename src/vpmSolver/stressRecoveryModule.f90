@@ -298,7 +298,7 @@ contains
 
 
   !!============================================================================
-  !> @brief Initiates all strain rosettes with recovery data from superelements.
+  !> @brief Initializes the strain rosettes with superelement recovery data.
   !>
   !> @param[in] ipsw Print switch for debug output
   !> @param[in] lpu File unit number for res-file output
@@ -421,7 +421,7 @@ contains
 
 
   !!============================================================================
-  !> @brief Initiates all strain rosettes that are on parts marked for recovery.
+  !> @brief Initializes strain rosettes that are on parts marked for recovery.
   !>
   !> @param[out] ierr Error flag
   !>

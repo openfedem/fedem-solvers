@@ -997,4 +997,72 @@ contains
 
   end subroutine invertEqPartition
 
+
+  !!============================================================================
+  !> @brief Returns some norm of a nodal solution vector.
+  !>
+  !> @param[in] vec The solution vector to calculate the norm for
+  !> @param[in] sam Assembly management data associated with the solution vector
+  !> @param[in] itype The type of norm to return (see below)
+  !> @return The calculated norm value
+  !>
+  !> @details The following norm types can be calculated,
+  !> controlled by the value of @a itype parameter:
+  !> - @a itype = 0 : Infinity norm of translations
+  !> - @a itype = 1 : L1-norm of translations
+  !> - @a itype = 2 : L2-norm of translations
+  !> - @a itype = 3 : Infinity norm of rotations
+  !> - @a itype = 4 : L1-norm of rotations
+  !> - @a itype = 5 : L2-norm of rotations
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 28 Feb 2026
+
+  function norm (vec, sam, itype)
+
+    real(dp)     , intent(in) :: vec(:)
+    type(SamType), intent(in) :: sam
+    integer      , intent(in) :: itype
+
+    !! Local variables
+    integer  :: i, i1, inod, dof1, dof2
+    real(dp) :: nnrm, norm
+
+    !! --- Logic section ---
+
+    norm = 0.0_dp
+    if (itype > 3) then
+       i1 = 3
+    else
+       i1 = 0
+    end if
+    do inod = 1, sam%nnod
+       dof1 = sam%madof(inod)+i1
+       dof2 = min(dof1+2,sam%madof(inod+1)-1)
+       nnrm = 0.0_dp
+       do i = dof1, dof2
+          nnrm = nnrm + vec(i)*vec(i)
+       end do
+       nnrm = sqrt(nnrm)
+       select case (mod(itype,3))
+       case (0) ! Linf-norm
+          if (nnrm > norm) norm = nnrm
+       case (1) ! L1-norm
+          norm = norm + nnrm
+       case (2) ! L2-norm
+          norm = norm + nnrm*nnrm
+       end select
+    end do
+    select case (mod(itype,3))
+    case (1) ! L1-norm
+       norm = norm / real(sam%nnod,dp)
+    case (2) ! L2-norm
+       norm = sqrt(norm / real(sam%nnod,dp))
+    end select
+
+  end function norm
+
 end module SamModule

@@ -5,20 +5,32 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file initiateTriadTypeModule.f90
+!> @brief Initialization of triads from the solver input file.
+
+!!==============================================================================
+!> @brief Initialization of triads from the solver input file.
+
 module initiateTriadTypeModule
 
   implicit none
 
 contains
 
-  subroutine ReadTriads (infp,triads,err)
+  !!============================================================================
+  !> @brief Initializes triads with data from the input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[out] triads Array of all triads in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 21 Jul 2000
 
-    !!==========================================================================
-    !! Initiates the triad type with data from the solver input file.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 21 Jul 2000/1.0
-    !!==========================================================================
+  subroutine ReadTriads (infp,triads,err)
 
     use TriadTypeModule       , only : TriadType, NullifyTriad, DeallocateTriads
     use IdTypeModule          , only : initId, ReportInputError
@@ -173,21 +185,27 @@ contains
   end subroutine ReadTriads
 
 
-  subroutine initiateTriads2 (sam,triads,err)
+  !!============================================================================
+  !> @brief Initializes more triad arrays after system initialization.
+  !>
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param triads All triads in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 21 Jul 2000
 
-    !!==========================================================================
-    !! Initiates some more triad arrays after system initialization.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 21 Jul 2000/1.0
-    !!==========================================================================
+  subroutine initiateTriads2 (sam,triads,err)
 
     use SamModule      , only : SamType
     use TriadTypeModule, only : TriadType, transSysToGlob
 
-    type(SamType)   , intent(in)    :: sam
-    type(TriadType) , intent(inout) :: triads(:)
-    integer         , intent(out)   :: err
+    type(SamType)  , intent(in)    :: sam
+    type(TriadType), intent(inout) :: triads(:)
+    integer        , intent(out)   :: err
 
     !! Local variables
     integer :: idIn, iNod, nTriads, nDOF, firstDOF, lastDOF

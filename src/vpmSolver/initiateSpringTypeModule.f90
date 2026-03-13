@@ -5,21 +5,32 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file initiateSpringTypeModule.f90
+!> @brief Initialization of spring objects from the solver input file.
+
+!!==============================================================================
+!> @brief Initialization of spring objects from the solver input file.
+
 module InitiateSpringTypeModule
 
   implicit none
 
-  private :: ConnectFunctions
-
 contains
 
-  subroutine InitiateSpringFailures (infp,springFailures,err)
+  !!============================================================================
+  !> @brief Initializes spring failure objects with data from the input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[out] springFailures Array of all spring failure objects in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Apr 2005
 
-    !!==========================================================================
-    !! Initiates the spring failure type with data from the solver input file.
-    !!
-    !! Programmer : Bjorn Haugen                    date/rev : Spring 2005 / 1.0
-    !!==========================================================================
+  subroutine InitiateSpringFailures (infp,springFailures,err)
 
     use kindModule       , only : hugeVal_p, dp
     use IdTypeModule     , only : ldesc_p, initId, ReportInputError
@@ -115,13 +126,21 @@ contains
   end subroutine InitiateSpringFailures
 
 
-  subroutine InitiateSpringYields (infp,engines,springYields,err)
+  !!============================================================================
+  !> @brief Initializes spring yield objects with data from the input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[in] engines Array of all engines in the model
+  !> @param[out] springYields Array of all spring yield objects in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Apr 2005
 
-    !!==========================================================================
-    !! Initiates the spring yield type with data from the solver input file.
-    !!
-    !! Programmer : Bjorn Haugen                    date/rev : Spring 2005 / 1.0
-    !!==========================================================================
+  subroutine InitiateSpringYields (infp,engines,springYields,err)
 
     use kindModule        , only : hugeVal_p, dp
     use IdTypeModule      , only : ldesc_p, initId, StrId, ReportInputError
@@ -189,7 +208,8 @@ contains
        if (yieldForceMaxEngine > 0) then
           springYields(idIn)%pos%active = .true.
           springYields(idIn)%pos%ysf(2) = 1.0_dp
-          springYields(idIn)%pos%engine => GetPtrToId(engines,yieldForceMaxEngine)
+          springYields(idIn)%pos%engine => GetPtrToId(engines, &
+               &                                      yieldForceMaxEngine)
           if (.not. associated(springYields(idIn)%pos%engine)) then
              err = err - 1
              call ReportInputError ('SPRING_YIELD',idIn,springYields(idIn)%id, &
@@ -203,7 +223,8 @@ contains
        if (yieldForceMinEngine > 0) then
           springYields(idIn)%neg%active = .true.
           springYields(idIn)%neg%ysf(2) = 1.0_dp
-          springYields(idIn)%neg%engine => GetPtrToId(engines,yieldForceMinEngine)
+          springYields(idIn)%neg%engine => GetPtrToId(engines, &
+               &                                      yieldForceMinEngine)
           if (.not. associated(springYields(idIn)%neg%engine)) then
              err = err - 1
              call ReportInputError ('SPRING_YIELD',idIn,springYields(idIn)%id, &
@@ -233,14 +254,24 @@ contains
   end subroutine InitiateSpringYields
 
 
-  subroutine InitiateSprings (infp,triads,baseSprings,springs,err)
+  !!============================================================================
+  !> @brief Initializes spring elements with data from the solver input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[in] triads Array of all triads in the model
+  !> @param[in] baseSprings Array of all spring base objects in the model
+  !> @param[out] springs Array of all spring elements in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Karl Erik Thoresen and Bjorn Haugen
+  !> @date Nov 1998
+  !>
+  !> @author Knut Morten Okstad
+  !> @date Jul 2002
 
-    !!==========================================================================
-    !! Initiates the spring type with data from the solver input file.
-    !!
-    !! Programmer : Karl Erik Thoresen & Bjorn Haugen  date/rev : Nov 1998 / 1.0
-    !!              Knut Morten Okstad                          1 Jul 2002 / 2.0
-    !!==========================================================================
+  subroutine InitiateSprings (infp,triads,baseSprings,springs,err)
 
     use IdTypeModule      , only : ldesc_p
     use IdTypeModule      , only : initId, getId, StrId, ReportInputError
@@ -479,15 +510,27 @@ contains
   end subroutine InitiateSprings
 
 
+  !!============================================================================
+  !> @brief Initializes spring base objects with data from the input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[in] engines Array of all engines in the model
+  !> @param[in] functions Array of all functions in the model
+  !> @param[in] springFailures Array of all spring failure objects in the model
+  !> @param[in] springYields Array of all spring yield objects in the model
+  !> @param[out] springs Array of all spring base objects in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !> @date Apr 2002
+  !>
+  !> @author Knut Morten Okstad
+  !> @date 1 Jul 2002
+
   subroutine InitiateBaseSprings (infp,engines,functions,springFailures, &
        &                          springYields,springs,err)
-
-    !!==========================================================================
-    !! Initiates the spring base type with data from the solver input file.
-    !!
-    !! Programmer : Bjorn Haugen                    date/rev : Spring 2002 / 1.0
-    !!              Knut Morten Okstad                          1 Jul 2002 / 2.0
-    !!==========================================================================
 
     use IdTypeModule          , only : ldesc_p
     use IdTypeModule          , only : initId, getId, StrId, ReportInputError
@@ -517,13 +560,14 @@ contains
 
     !! Define the SPRING_BASE namelist
     character(ldesc_p) :: extDescr
-    integer  :: id, extId(10), lengthEngineId, stiffFuncId, forceFuncId
+    integer  :: id, extId(10), lengthEngineId, forceFuncId
+    integer  :: stiffFuncId, stiffScaleEngineId
     integer  :: stiffScaleEnginePosId, stiffScaleEngineNegId, saveVar(5)
     integer  :: springFailureId, springYieldId, unLoadType
     real(dp) :: l0, l1, s0, s1
     namelist /SPRING_BASE/ id, extId, extDescr, &
          &                 lengthEngineId, stiffFuncId, forceFuncId, &
-         &                 l0, l1, s0, s1, &
+         &                 l0, l1, s0, s1, stiffScaleEngineId, &
          &                 stiffScaleEnginePosId, stiffScaleEngineNegId, &
          &                 springFailureId, springYieldId, unLoadType, saveVar
 
@@ -560,7 +604,7 @@ contains
        !! Default values
        id=0; extId=0; extDescr=''
        lengthEngineId=0; stiffFuncId=0; forceFuncId=0
-       stiffScaleEnginePosId=0; stiffScaleEngineNegId=0
+       stiffScaleEngineId=0; stiffScaleEnginePosId=0; stiffScaleEngineNegId=0
        springFailureId=0; springYieldId=0; unLoadType=0
        l0=0.0_dp; l1=0.0_dp; s0=0.0_dp; s1=0.0_dp; saveVar=0
 
@@ -577,10 +621,13 @@ contains
        springs(idIn)%s0 = s0
        springs(idIn)%s1 = s1
 
+       if (stiffScaleEnginePosId < 1) stiffScaleEnginePosId = stiffScaleEngineId
+       if (stiffScaleEngineNegId < 1) stiffScaleEngineNegId = stiffScaleEngineId
+
        !! Connect the specified engines and functions to this spring
        call ConnectFunctions (lengthEngineId,stiffFuncId,forceFuncId, &
             &                 stiffScaleEnginePosId,stiffScaleEngineNegId, &
-            &                 engines,functions,springs(idIn),stat)
+            &                 springs(idIn),stat)
        if (stat < 0) then
           err = err - 1
           call ReportInputError ('SPRING_BASE',idIn,springs(idIn)%id)
@@ -637,76 +684,73 @@ contains
 
     if (err < 0) call reportError (debugFileOnly_p,'InitiateBaseSprings')
 
+  contains
+
+    !> @brief Connects functions and engines to the given spring base object.
+    subroutine ConnectFunctions (lengthId,stiffId,forceId, &
+         &                       posScaleId,negScaleId,spr,err)
+
+      use FunctionTypeModule, only : GetPtrToId
+
+      integer             , intent(in)  :: lengthId, stiffId, forceId
+      integer             , intent(in)  :: posScaleId, negScaleId
+      type(SpringBaseType), intent(out) :: spr
+      integer             , intent(out) :: err
+
+      err = 0
+
+      if (lengthId > 0) then
+         !! Connect the length engine
+         spr%length0Engine => GetPtrToId(engines,lengthId)
+         if (.not. associated(spr%length0Engine)) err = err - 1
+      end if
+
+      if (stiffId > 0) then
+         !! Connect the stiffness-deflection function
+         spr%stiffnessFunction => GetPtrToId(functions,stiffId)
+         if (.not. associated(spr%stiffnessFunction)) err = err - 1
+      else if (forceId > 0) then
+         !! Connect the force-deflection function
+         spr%forceFunction => GetPtrToId(functions,forceId)
+         if (.not. associated(spr%forceFunction)) err = err - 1
+      end if
+
+      if (posScaleId > 0) then
+         !! Connect the stiffness scale engine for tension
+         spr%stiffScaleEnginePos => GetPtrToId(engines,posScaleId)
+         if (.not. associated(spr%stiffScaleEnginePos)) err = err - 1
+      end if
+
+      if (negScaleId > 0) then
+         !! Connect the stiffness scale engine for compression
+         spr%stiffScaleEngineNeg => GetPtrToId(engines,negScaleId)
+         if (.not. associated(spr%stiffScaleEngineNeg)) err = err - 1
+      end if
+
+    end subroutine ConnectFunctions
+
   end subroutine InitiateBaseSprings
 
 
-  subroutine ConnectFunctions (lengthId,stiffId,forceId,posScaleId,negScaleId, &
-       &                       engines,functions,spr,err)
+  !!============================================================================
+  !> @brief Deactivates all base springs that are not referred, for consistency.
+  !>
+  !> @param springs Array of all spring base objects in the model
+  !> @param[out] stat Number of spring base objects that are deactivated
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 5 Jul 2004
 
-    !!==========================================================================
-    !! Connect functions and engines to the given SpringBaseType object.
-    !!
-    !! Programmer : Knut Morten Okstad                 date/rev : 1 Jun 2002/1.0
-    !!==========================================================================
-
-    use FunctionTypeModule, only : EngineType, FunctionType, GetPtrToId
-    use SpringTypeModule  , only : SpringBaseType
-
-    integer             , intent(in)  :: lengthId, stiffId, forceId
-    integer             , intent(in)  :: posScaleId, negScaleId
-    type(EngineType)    , intent(in)  :: engines(:)
-    type(FunctionType)  , intent(in)  :: functions(:)
-    type(SpringBaseType), intent(out) :: spr
-    integer             , intent(out) :: err
-
-    !! --- Logic section ---
-
-    err = 0
-
-    if (lengthId > 0) then
-       !! Connect the length engine
-       spr%length0Engine => GetPtrToId(engines,lengthId)
-       if (.not. associated(spr%length0Engine)) err = err - 1
-    end if
-
-    if (stiffId > 0) then
-       !! Connect the stiffness-deflection function
-       spr%stiffnessFunction => GetPtrToId(functions,stiffId)
-       if (.not. associated(spr%stiffnessFunction)) err = err - 1
-    else if (forceId > 0) then
-       !! Connect the force-deflection function
-       spr%forceFunction => GetPtrToId(functions,forceId)
-       if (.not. associated(spr%forceFunction)) err = err - 1
-    end if
-
-    if (posScaleId > 0) then
-       !! Connect the stiffness scale engine for tension
-       spr%stiffScaleEnginePos => GetPtrToId(engines,posScaleId)
-       if (.not. associated(spr%stiffScaleEnginePos)) err = err - 1
-    end if
-
-    if (negScaleId > 0) then
-       !! Connect the stiffness scale engine for compression
-       spr%stiffScaleEngineNeg => GetPtrToId(engines,negScaleId)
-       if (.not. associated(spr%stiffScaleEngineNeg)) err = err - 1
-    end if
-
-  end subroutine ConnectFunctions
-
-
-  subroutine CheckSpringConnections (baseSprings,stat)
-
-    !!==========================================================================
-    !! Consistency check: Deactivate all base springs that are not referred.
-    !!
-    !! Programmer : Knut Morten Okstad                 date/rev : 5 Jul 2004/1.0
-    !!==========================================================================
+  subroutine CheckSpringConnections (springs,stat)
 
     use IdTypeModule     , only : getId
     use SpringTypeModule , only : SpringBaseType
     use reportErrorModule, only : reportError, warning_p, warningFileOnly_p
 
-    type(SpringBaseType), intent(inout) :: baseSprings(:)
+    type(SpringBaseType), intent(inout) :: springs(:)
     integer             , intent(out)   :: stat
 
     !! Local variables
@@ -715,19 +759,19 @@ contains
     !! --- Logic section ---
 
     stat = 0
-    do i = 1, size(baseSprings)
-       if (baseSprings(i)%dof < 0) then
+    do i = 1, size(springs)
+       if (springs(i)%dof < 0) then
           stat = stat + 1
-          baseSprings(i)%isActive = .false.
+          springs(i)%isActive = .false.
           call reportError (warningFileOnly_p, &
-               'Base Spring'//trim(getId(baseSprings(i)%id))// &
+               'Base Spring'//trim(getId(springs(i)%id))// &
                ' is not referenced.')
        end if
     end do
 
     if (stat > 0) then
        call reportError (warning_p,'The mechanism may be inconsistent.', &
-            &            'Some base spring objects are not referenced', &
+            &            'Some spring objects are not referenced', &
             &            'and are ignored by the Dynamics Solver', &
             &            addString='CheckSpringConnections')
     end if

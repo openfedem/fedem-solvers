@@ -5,6 +5,14 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file massTypeModule.f90
+!> @brief Point mass object data containers.
+
+!!==============================================================================
+!> @brief Module with data types representing point mass objects.
+!>
+!> @details The module also contains subroutines for accessing the mass data.
+
 module MassTypeModule
 
   use TriadTypeModule   , only : TriadType, IdType, dp
@@ -12,30 +20,34 @@ module MassTypeModule
 
   implicit none
 
+  !> @brief Data type representing a point mass object.
   type MassType
 
-     type(IdType) :: id  !! General identification data
+     type(IdType) :: id !< General identification data
 
-     integer :: samElNum !! Element number for sam reference (mpmnpc)
-     logical :: addedMass ! if .true., this is an added mass (i.e., no gravity)
+     integer :: samElNum  !< Element number for sam reference (mpmnpc)
+     logical :: addedMass !< if .true., this is an added mass (i.e., no gravity)
 
-     type(TriadType) , pointer :: triad
-     type(EngineType), pointer :: massEngine
-     type(EngineType), pointer :: IIEngine
+     type(TriadType) , pointer :: triad      !< Triad associated with this mass
+     type(EngineType), pointer :: massEngine !< Scaling function for mass
+     type(EngineType), pointer :: IIEngine   !< Scaling function for intertia
 
-     real(dp) :: m0(3), m1(3)       !! Constant and scalable mass
-     real(dp) :: II0(3,3), II1(3,3) !! Constant and scalable inertia
+     real(dp) :: m0(3)    !< Constant mass values
+     real(dp) :: m1(3)    !< Scalable mass values
+     real(dp) :: II0(3,3) !< Constant inertia tensor
+     real(dp) :: II1(3,3) !< Scalable inertia tensor
 
-     real(dp) :: mass(3) !! Current mass    = m0 + m1*massEngine
-     real(dp) :: II(3,3) !! Current Inertia = II0 + II1*IIEngine
+     real(dp) :: mass(3) !< Current mass    = m0  + m1*massEngine
+     real(dp) :: II(3,3) !< Current Inertia = II0 + II1*IIEngine
 
-     real(dp) :: Epot0   !! Initial potential energy
-     real(dp) :: Epot    !! Potential energy relative to Epot0
-     real(dp) :: Ekin    !! Kinetic energy
+     real(dp) :: Epot0 !< Initial potential energy
+     real(dp) :: Epot  !< Potential energy relative to Epot0
+     real(dp) :: Ekin  !< Kinetic energy
 
   end type MassType
 
 
+  !> @brief Standard routine for writing an object to file.
   interface WriteObject
      module procedure WriteMassType
   end interface
@@ -45,14 +57,22 @@ module MassTypeModule
 
 contains
 
-  subroutine InitiateMasses (infp,masses,triads,engines,err)
+  !!============================================================================
+  !> @brief Initializes the mass objects with data from the solver input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[out] masses Array of all point mass objects in the model
+  !> @param[in] triads Array of all triads in the model
+  !> @param[in] engines Array of all engines in the model
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 25 Oct 1999
 
-    !!==========================================================================
-    !! Initiates the mass type with data from the solver input file.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 25 Oct 1999/1.0
-    !!==========================================================================
+  subroutine InitiateMasses (infp,masses,triads,engines,err)
 
     use IdTypeModule          , only : ldesc_p, initId, getId, ReportInputError
     use TriadTypeModule       , only : allocateNodeForce, GetPtrToId
@@ -191,14 +211,18 @@ contains
   end subroutine InitiateMasses
 
 
-  subroutine WriteMassType (mass,io,complexity)
+  !!============================================================================
+  !> @brief Standard routine for writing an object to file.
+  !>
+  !> @param[in] mass The masstypemodule::masstype object to write
+  !> @param[in] io File unit number to write to
+  !> @param[in] complexity If present, the value indicates the amount of print
+  !>
+  !> @author Karl Erik Thoresen
+  !>
+  !> @date 27 Sep 1998
 
-    !!==========================================================================
-    !! Standard routine for writing an object to io.
-    !!
-    !! Programmer : Karl Erik Thoresen
-    !! date/rev   : 27 Sep 1998/1.0
-    !!==========================================================================
+  subroutine WriteMassType (mass,io,complexity)
 
     use IdTypeModule, only : writeId
 
@@ -253,14 +277,18 @@ contains
   end subroutine WriteMassType
 
 
-  subroutine NullifyMass (mass)
+  !!============================================================================
+  !> @brief Initializes a point mass object.
+  !>
+  !> @param mass The masstypemodule::masstype object to initialize
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 May 2002
 
-    !!==========================================================================
-    !! Initialize the MassType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 30 May 2002/1.0
-    !!==========================================================================
+  subroutine NullifyMass (mass)
 
     use IdTypeModule, only : nullifyId
 
@@ -291,14 +319,18 @@ contains
   end subroutine NullifyMass
 
 
-  subroutine DeallocateMasses (masses)
+  !!============================================================================
+  !> @brief Deallocates the point mass objects.
+  !>
+  !> @param masses The masstypemodule::masstype objects to deallocate
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 23 Jan 2017
 
-    !!==========================================================================
-    !! Deallocate all MassType objects.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 23 Jan 2017/1.0
-    !!==========================================================================
+  subroutine DeallocateMasses (masses)
 
     use IdTypeModule, only : deallocateId
 
