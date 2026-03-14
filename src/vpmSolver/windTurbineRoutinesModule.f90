@@ -5,6 +5,13 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file windTurbineRoutinesModule.f90
+!>
+!> @brief Subroutines for wind turbine calculations.
+
+!!==============================================================================
+!> @brief Module with subroutines for wind turbine calculations.
+
 module windTurbineRoutinesModule
 
   implicit none
@@ -17,15 +24,26 @@ module windTurbineRoutinesModule
 
 contains
 
+  !!============================================================================
+  !> @brief Sets up the information needed for, and initializes AeroDyn.
+  !>
+  !> @param env Environmental data
+  !> @param turb Wind turbine configuration object
+  !> @param[in] ADfile Name of the AeroDyn input file
+  !> @param[in] NumBl Number of turbine blades
+  !> @param[in] CompAero If .true., Aerodynamic forces are computed
+  !> @param[in] CompNoise If .true., turbulent inflow noise is accounted for
+  !> @param[in] SumPrint If .true., the resultant aerodynamic forces are printed
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 11 Oct 2010 / 2.0
+
   subroutine AeroInput (env,turb,ADFile,NumBl, &
        &                CompAero,CompNoise,SumPrint,ierr)
-
-    !!==========================================================================
-    !! Sets up the information needed for, and initializes AeroDyn.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 11 Oct 2010 / 2.0
-    !!==========================================================================
 
     use EnvironmentTypeModule, only : EnvironmentType
     use WindTurbineTypeModule, only : TurbineConfig
@@ -129,16 +147,25 @@ contains
 
 
 #if FT_HAS_AERODYN > 12
-  subroutine Set_Fedem_Params (env,turbine,CompAero,CompNoise,ierr)
+  !!============================================================================
+  !> @brief Sets Fedem variables based on AeroDyn inputs.
+  !>
+  !> @param env Environmental data
+  !> @param turbine Wind turbine configuration object
+  !> @param[in] CompAero If .true., Aerodynamic forces are computed
+  !> @param[in] CompNoise If .true., turbulent inflow noise is accounted for
+  !> @param[out] ierr Error flag
+  !>
+  !> @details This subroutine is called at the start of the simulation to set up
+  !> simulation variables for Fedem based on the AeroDyn parameters.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 11 Oct 2010
 
-    !!==========================================================================
-    !! Sets Fedem variables based on AeroDyn inputs.
-    !! Called at the start of the simulation to set up simulation variables
-    !! for Fedem based on the AeroDyn parameters.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 11 Oct 2010 / 2.0
-    !!==========================================================================
+  subroutine Set_Fedem_Params (env,turbine,CompAero,CompNoise,ierr)
 
     use kindModule           , only : dp, pi_p
     use EnvironmentTypeModule, only : EnvironmentType
@@ -232,14 +259,20 @@ contains
   end subroutine Set_Fedem_Params
 
 
-  subroutine convertTurbineConfig (Fedem,AD,ierr)
+  !!============================================================================
+  !> @brief Converts a Fedem wind turbine configuration to AeroDyn's format.
+  !>
+  !> @param[in] Fedem Wind turbine configuration object, Fedem format
+  !> @param[out] AD Wind turbine configuration object, AeroDyn format
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 15 Oct 2010
 
-    !!==========================================================================
-    !! Conversion of the Fedem wind turbine configuration to AeroDyn's format.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 15 Oct 2010 / 1.0
-    !!==========================================================================
+  subroutine convertTurbineConfig (Fedem,AD,ierr)
 
     use WindTurbineTypeModule, only : TurbineConfig
     use AeroDyn              , only : AeroConfig, ReKi
@@ -285,16 +318,22 @@ contains
   end subroutine convertTurbineConfig
 
 
-  subroutine updateTurbineConfig (Fedem,AD)
+  !!============================================================================
+  !> @brief Updates the AeroDyn wind turbine configuration.
+  !>
+  !> @param[in] Fedem Wind turbine configuration object, Fedem format
+  !> @param[out] AD Wind turbine configuration object, AeroDyn format
+  !>
+  !> @note AeroDyn requires the inverse orientation matrix compared to Fedem
+  !> (global-to-local vs. local-to-global). Therefore the transpose().
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 15 Oct 2010
 
-    !!==========================================================================
-    !! Updates the AeroDyn wind turbine configuration.
-    !! Note that AeroDyn requires the inverse orientation matrix compared to
-    !! Fedem (global-to-local vs. local-to-global). Therefore the transpose().
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 15 Oct 2010 / 1.0
-    !!==========================================================================
+  subroutine updateTurbineConfig (Fedem,AD)
 
     use WindTurbineTypeModule, only : TurbineConfig
     use AeroDyn              , only : AeroConfig, ReKi
@@ -339,16 +378,24 @@ contains
   end subroutine updateTurbineConfig
 
 
-  subroutine updateADMarker (ADmarker,triad,sup,offset)
+  !!============================================================================
+  !> @brief Updates an AeroDyn marker based on the corresponding Fedem triad.
+  !>
+  !> @param ADmarker A marker associated with the AeroDyn turbine configuration
+  !> @param[in] triad Triad corresponding to the specified marker
+  !> @param[in] sup Beam element defining the position/orientation of the marker
+  !> @param[in] offset Eccentricity of the AeroDyn marker w.r.t the pitch axis
+  !>
+  !> @note AeroDyn requires the inverse orientation matrix compared to Fedem
+  !> (global-to-local vs. local-to-global). Therefore the transpose().
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 15 Oct 2010
 
-    !!==========================================================================
-    !! Updates an AeroDyn marker based on the corresponding Fedem triad.
-    !! Note that AeroDyn requires the inverse orientation matrix compared to
-    !! Fedem (global-to-local vs. local-to-global). Therefore the transpose().
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 15 Oct 2010 / 1.0
-    !!==========================================================================
+  subroutine updateADMarker (ADmarker,triad,sup,offset)
 
     use AeroDyn        , only : Marker, ReKi
     use TriadTypeModule, only : TriadType, dp
@@ -410,14 +457,20 @@ contains
 
 #endif
 
-  subroutine updateAeroForces (time,turb,ierr)
+  !!============================================================================
+  !> @brief Gets the aerodynamic forces at given time on the given wind turbine.
+  !>
+  !> @param[in] time Current physical time
+  !> @param turb Wind turbine configuration object
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 1 Dec 2009
 
-    !!==========================================================================
-    !! Gets the aerodynamic forces at given time on the given wind turbine.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 1 Dec 2009 / 1.0
-    !!==========================================================================
+  subroutine updateAeroForces (time,turb,ierr)
 
     use WindTurbineTypeModule, only : TurbineConfig, dp
 #if FT_HAS_AERODYN > 12
@@ -506,12 +559,14 @@ contains
 #if FT_HAS_AERODYN > 12
   contains
 
+    !> @brief Scales a real vector by given scalar.
     subroutine scale (vec,a)
       real(ReKi), intent(inout) :: vec(:)
       real(dp)  , intent(in)    :: a
       vec = vec*real(a,ReKi)
     end subroutine scale
 
+    !> @brief Extracts the normal- and tangent loads and the pitch moment.
     subroutine getADforces (bl,nd,ADload,force)
       use AeroDyn , only : Marker, Load
       type(Marker), intent(in)  :: bl, nd
@@ -535,15 +590,22 @@ contains
   end subroutine updateAeroForces
 
 
-  subroutine addInAeroForces (Q,RF,turbine,sam,ierr)
+  !!============================================================================
+  !> @brief Calculates system force vector contributions from a wind turbine.
+  !>
+  !> @param Q External force vector
+  !> @param RF Reaction forces
+  !> @param[in] turbine Wind turbine configuration object
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 1 Dec 2009
 
-    !!==========================================================================
-    !! Calculates the contributions to the system force vector from a wind
-    !! turbine and adds them into the system vectors Q and RF.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 1 Dec 2009 / 1.0
-    !!==========================================================================
+  subroutine addInAeroForces (Q,RF,turbine,sam,ierr)
 
     use SamModule            , only : SamType, dp
     use WindTurbineTypeModule, only : TurbineConfig
@@ -588,14 +650,22 @@ contains
   end subroutine addInAeroForces
 
 
-  subroutine getHubWindSpeed (time,turbine,dws,uws,ierr)
+  !!============================================================================
+  !> @brief Evaluates the wind speed at the hub center.
+  !>
+  !> @param[in] time Current physical time
+  !> @param[in] turbine Wind turbine configuration object
+  !> @param[out] dws Hub wind speed including disturbance
+  !> @param[out] uws Undisturbed hub wind speed
+  !> @param[out] ierr Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Feb 2011
 
-    !!==========================================================================
-    !! Evaluates the wind at the hub center.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 9 Feb 2011 / 1.0
-    !!==========================================================================
+  subroutine getHubWindSpeed (time,turbine,dws,uws,ierr)
 
     use WindTurbineTypeModule, only : TurbineConfig, dp
 #if FT_HAS_AERODYN > 12
@@ -627,14 +697,23 @@ contains
   end subroutine getHubWindSpeed
 
 
-  subroutine getTipWindSpeed (iBlade,time,turbine,dws,uws,ierr)
+  !!============================================================================
+  !> @brief Evaluates the wind speed at the tip of the given blade.
+  !>
+  !> @param[in] iBlade Index of the blade to evaluate the wind for
+  !> @param[in] time Current physical time
+  !> @param[in] turbine Wind turbine configuration object
+  !> @param[out] dws Blade tip wind speed including disturbance
+  !> @param[out] uws Undisturbed blade tip wind speed
+  !> @param[out] ierr Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Feb 2011
 
-    !!==========================================================================
-    !! Evaluates the wind at the tip of the given blade.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 9 Feb 2011 / 1.0
-    !!==========================================================================
+  subroutine getTipWindSpeed (iBlade,time,turbine,dws,uws,ierr)
 
     use WindTurbineTypeModule, only : TurbineConfig, dp
 
@@ -660,14 +739,22 @@ contains
   end subroutine getTipWindSpeed
 
 
-  subroutine getWindSpeed (pos,time,dws,uws,ierr)
+  !!============================================================================
+  !> @brief Evaluates the wind speed at a given location center.
+  !>
+  !> @param[in] pos Spatial point to evaluate the wind at
+  !> @param[in] time Current physical time
+  !> @param[out] dws Wind speed including disturbance
+  !> @param[out] uws Undisturbed wind speed
+  !> @param[out] ierr Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 5 Nov 2013
 
-    !!==========================================================================
-    !! Evaluates the wind at a given location center.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 5 Nov 2013 / 1.0
-    !!==========================================================================
+  subroutine getWindSpeed (pos,time,dws,uws,ierr)
 
     use kindModule, only : dp
 #if FT_HAS_AERODYN > 12
@@ -702,14 +789,20 @@ contains
   end subroutine getWindSpeed
 
 
-  subroutine getBladeDeflections (turbine)
+  !!============================================================================
+  !> @brief Evaluates the deflection along the blades.
+  !>
+  !> @param turbine Wind turbine configuration object
+  !>
+  !> @details The deflections are calculated relative to the blade root.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Feb 2011
 
-    !!==========================================================================
-    !! Evaluates the deflection along the blades with respect to the blade root.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 9 Feb 2011 / 1.0
-    !!==========================================================================
+  subroutine getBladeDeflections (turbine)
 
     use WindTurbineTypeModule, only : TurbineConfig
 
@@ -734,6 +827,7 @@ contains
 
   contains
 
+    !> @brief Evaluates the blade deflection at a given triad.
     subroutine calcBladeDeflection (triad,blade,hub,R)
       use TriadTypeModule, only : TriadType, transGlobToTriad, dp
       use rotationModule , only : deltaRot
@@ -752,14 +846,18 @@ contains
   end subroutine getBladeDeflections
 
 
-  subroutine closeAeroDyn (ierr)
+  !!============================================================================
+  !> @brief Terminates the aerodynamics module.
+  !>
+  !> @param[out] ierr Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 9 Feb 2011
 
-    !!==========================================================================
-    !! Terminates the aerodynamics module.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 9 Feb 2011 / 1.0
-    !!==========================================================================
+  subroutine closeAeroDyn (ierr)
 
 #if FT_HAS_AERODYN > 12
     use AeroDyn, only : AD_Terminate

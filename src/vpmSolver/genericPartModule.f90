@@ -5,6 +5,19 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file genericPartModule.f90
+!>
+!> @brief Subroutines for generic part calculations.
+
+!!==============================================================================
+!> @brief Module with subroutines for generic part calculations.
+!>
+!> @details This module contains some subroutines for setting up the stiffness-
+!> and mass matrix for a superelement defined only by its hard-point connections
+!> and the center of gravity. The superelement is then represented by rigid arms
+!> from the CoG to the hard-points (triads), with some stiffness assigned at the
+!> hard-point locations. See Appendix A.16 in the theory guide for the details.
+
 module GenericPartModule
 
   implicit none
