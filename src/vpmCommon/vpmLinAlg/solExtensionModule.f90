@@ -45,10 +45,11 @@ contains
 
   subroutine reportSingularities (iopSing,diag,neq,nsing,meqnInErr,eqnInErr,err)
     use sprKindModule, only : ik
-    integer    , intent(in)  :: iopSing
-    real(dp)   , intent(in)  :: diag(:)
-    integer(ik), intent(in)  :: neq
-    integer(ik), intent(out) :: nsing, err
+    integer    , intent(in)    :: iopSing
+    real(dp)   , intent(in)    :: diag(:)
+    integer(ik), intent(in)    :: neq
+    integer(ik), intent(out)   :: nsing
+    integer(ik), intent(inout) :: err
     integer(ik), intent(out), optional :: meqnInErr(:), eqnInErr
     integer(ik) :: nrsing
     nsing = 0_ik
@@ -64,8 +65,6 @@ contains
        err = nsing ! Ignore all singularities
     else if (iopSing /= 0 .and. nsing == nrsing) then
        err = nsing ! All singularities are true ones, ignore them all
-    else
-       err = 0_ik
     end if
   end subroutine reportSingularities
   !> @endcond
@@ -75,7 +74,7 @@ contains
   !> @brief Solves the linear system of equations Ax = B.
   !> @details This version accepts the right-hand-side vectors @a rhs to be
   !> provided as a 2D neq&times;nrhs matrix instead of a 1D array.
-  !> @sa solextensionmodule::cssolveb for detailed parameter description
+  !> @sa solextensionmodule::cssolveb for detailed parameter description.
 
   subroutine csSolveA (iop,iopSing,sysMat,rhs,lpu,ierr, &
        &               eqnInErr,meqnInErr,tolFactorize,scaleOnSing,neq1)
@@ -96,7 +95,8 @@ contains
     call csSolveB (iop,iopSing,sysMat,rVec,nrhs,lpu,ierr, &
          &         eqnInErr,meqnInErr,tolFactorize,scaleOnSing,neq1)
   contains
-    !> @cond NO_DOCUMENTATION
+    !> @cond FULL_DOC
+    !> @brief Matrix-to-vector type casting.
     function castToVec (array,ndim)
       integer , intent(in)         :: ndim
       real(dp), intent(in), target :: array(ndim)
@@ -1020,6 +1020,8 @@ contains
 
   contains
 
+    !> @cond FULL_DOC
+    !> @brief Prints a warning when negative pivot elements are detected.
     subroutine warningOnNegativePivots (numneg)
       integer, intent(in) :: numneg
       character(len=32)   :: errMsg
@@ -1029,6 +1031,7 @@ contains
            'This can be caused by too many ill-shaped finite elements.', &
            'Using this FE part may lead to an instable dynamics simulation.')
     end subroutine warningOnNegativePivots
+    !> @endcond
 
   end subroutine csSolveSupEl
 
@@ -1341,7 +1344,7 @@ contains
   !> @details This subroutine expands and rearranges a system vector expressed
   !> in equation order, into a vector corresponding to nodal point order.
   !>
-  !> @callgraph
+  !> @callergraph
   !>
   !> @author Karl Erik Thoresen
   !> @date Sep 1999

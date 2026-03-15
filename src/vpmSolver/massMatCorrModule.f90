@@ -5,6 +5,16 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file massMatCorrModule.f90
+!>
+!> @brief Subroutines for mass matrix correction due to high-speed rotations.
+
+!!==============================================================================
+!> @brief Module with subroutines for superelement mass matrix correction.
+!>
+!> @details This module contains some subroutines for calculating mass matrix
+!> corrections for superelements what undergo high-speed rotations.
+
 module MassMatrixCorrectionModule
 
   implicit none
@@ -14,13 +24,18 @@ module MassMatrixCorrectionModule
 
 contains
 
-  subroutine mmcRigAccelVectors (supel,rotCenter,rigVdd)
+  !!============================================================================
+  !> @brief Generates the 6 rigid body acceleration vectors for a superelement.
+  !>
+  !> @param[in] supel The superelement to generate the acceleration vectors for
+  !> @param[in] rotCenter The rotation center of the superelement
+  !> @param[out] rigVdd Rigid body acceleration vectors of the superelement
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen                                         @date Oct 1999
 
-    !!==========================================================================
-    !! Establish the 6 rigid body acceleration vectors for a superelement.
-    !!
-    !! Programmer : Bjorn Haugen                        date/rev: Oct 1999 / 1.0
-    !!==========================================================================
+  subroutine mmcRigAccelVectors (supel,rotCenter,rigVdd)
 
     use SupElTypeModule, only : SupElType, dp
 
@@ -75,16 +90,20 @@ contains
   end subroutine mmcRigAccelVectors
 
 
-  subroutine mmcRigidMassProperties (supel,ierr)
+  !!============================================================================
+  !> @brief Calculates the rigid body mass properties for a superelement.
+  !>
+  !> @param supel The superelement to calculate mass properties for
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen                                      @date  1 Oct 1997
+  !> @author Karl Erik Thoresen                                @date  4 Jun 1998
+  !> @author Bjorn Haugen                                      @date 14 Oct 1999
+  !> @author Knut Morten Okstad                                @date 21 Jan 2004
 
-    !!==========================================================================
-    !! Calculate the rigid body mass properties for a superelement.
-    !!
-    !! Programmer : Bjorn Haugen                      date/rev: 1 Oct 1997 / 1.0
-    !!              Karl Erik Thoresen                          4 Jun 1998 / 1.1
-    !!              Bjorn Haugen                               14 Oct 1999 / 1.2
-    !!              Knut Morten Okstad                         21 Jan 2004 / 1.3
-    !!==========================================================================
+  subroutine mmcRigidMassProperties (supel,ierr)
 
     use KindModule        , only : dp, epsDiv0_p
     use SupElTypeModule   , only : SupElType
@@ -132,14 +151,18 @@ contains
   end subroutine mmcRigidMassProperties
 
 
-  subroutine mmcInitMassMatrixCorrection (supel,ierr)
+  !!============================================================================
+  !> @brief Initializes the matrix  (R^t*R)^-1*R^t  for mass matrix correction.
+  !>
+  !> @param supel The superelement to calculate the rtr_r matrix for
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Karl Erik Thoresen / Bjorn Haugen                 @date 1990s
+  !> @author Knut Morten Okstad                                @date 21 Jan 2004
 
-    !!==========================================================================
-    !! Initialize the matrix  (R^t*R)^-1*R^t  for mass matrix correction.
-    !!
-    !! Programmer : Karl Erik Thoresen / Bjorn Haugen      date/rev: 1990s / 1.0
-    !!              Knut Morten Okstad                         21 Jan 2004 / 1.1
-    !!==========================================================================
+  subroutine mmcInitMassMatrixCorrection (supel,ierr)
 
     use SupElTypeModule   , only : SupElType, dp
     use IdTypeModule      , only : getId
@@ -187,15 +210,24 @@ contains
   end subroutine mmcInitMassMatrixCorrection
 
 
+  !!============================================================================
+  !> @brief Calculates the error in the mass matrix.
+  !>
+  !> @param[in] supel The superelement to calculate the mass matrix error for
+  !> @param[in] elVd Superelement velocity vector in local axis directions
+  !> @param[out] momentError Torque error estimate for the superelement
+  !> @param[out] forceError Force error estimate for the superelement
+  !> @param[out] radiusVec Vector from axis of rotation to center of gravity
+  !> @param[out] ErrNorm Error norms
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Karl Erik Thoresen / Bjorn Haugen                 @date 1990s
+  !> @author Knut Morten Okstad                                @date 21 Jan 2004
+
   subroutine mmcMassMatrixCorrection (supel,elVd,momentError,forceError, &
        &                              radiusVec,ErrNorm,ierr)
-
-    !!==========================================================================
-    !! Calculate the error in the mass matrix.
-    !!
-    !! Programmer : Karl Erik Thoresen / Bjorn Haugen      date/rev: 1990s / 1.0
-    !!              Knut Morten Okstad                         21 Jan 2004 / 1.1
-    !!==========================================================================
 
     use SupElTypeModule   , only : SupElType, dp
     use manipMatrixModule , only : cross_product
@@ -206,7 +238,7 @@ contains
     type(SupElType)  , intent(in)  :: supel
     real(dp)         , intent(in)  :: elVd(:)
     real(dp)         , intent(out) :: momentError(3), forceError(3)
-    real(dp),optional, intent(out) :: radiusVec(3), ErrNorm(3)
+    real(dp),optional, intent(out) :: radiusVec(3), ErrNorm(2)
     integer ,optional, intent(out) :: ierr
 
     !! Local variables
@@ -307,14 +339,19 @@ contains
   end subroutine mmcMassMatrixCorrection
 
 
-  subroutine mmcMassMatrixWarning (supel,uld,ierr)
+  !!============================================================================
+  !> @brief Checks the error in the mass matrix and print warning if increasing.
+  !>
+  !> @param supel The superelement to check mass matrix error for
+  !> @param[in] uld Superelement velocity vector in local axis directions
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Karl Erik Thoresen / Bjorn Haugen                 @date 1990s
+  !> @author Knut Morten Okstad                                @date 21 Jan 2004
 
-    !!==========================================================================
-    !! Check the error in the mass matrix and print warning if it is increasing.
-    !!
-    !! Programmer : Karl Erik Thoresen / Bjorn Haugen      date/rev: 1990s / 1.0
-    !!              Knut Morten Okstad                         21 Jan 2004 / 1.1
-    !!==========================================================================
+  subroutine mmcMassMatrixWarning (supel,uld,ierr)
 
     use SupElTypeModule       , only : SupElType, dp
     use IdTypeModule          , only : getId
@@ -329,7 +366,7 @@ contains
 
     !! Local variables
     real(dp), parameter :: minRotError_p = 0.1_dp
-    real(dp)            :: MomentError(3), forceError(3), errNorm(3)
+    real(dp)            :: MomentError(3), forceError(3), errNorm(2)
 
     !! --- Logic section ---
 
@@ -380,14 +417,18 @@ contains
   end subroutine mmcMassMatrixWarning
 
 
-  function mmcGetMassTorqueCorrection (sup) result(Qk)
+  !!============================================================================
+  !> @brief
+  !> Returns a correction force vector that accounts for the mass matrix error.
+  !>
+  !> @param[in] sup The superelement to calculate for correction vector for
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Karl Erik Thoresen / Bjorn Haugen                 @date 1990s
+  !> @author Knut Morten Okstad                                @date 21 Jan 2004
 
-    !!==========================================================================
-    !! Return a correction force vector that accounts for the mass matrix error.
-    !!
-    !! Programmer : Karl Erik Thoresen / Bjorn Haugen      date/rev: 1990s / 1.0
-    !!              Knut Morten Okstad                         21 Jan 2004 / 1.1
-    !!==========================================================================
+  function mmcGetMassTorqueCorrection (sup) result(Qk)
 
     use SupElTypeModule  , only : SupElType, dp
     use manipMatrixModule, only : cross_product

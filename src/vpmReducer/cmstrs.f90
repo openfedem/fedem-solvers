@@ -612,6 +612,7 @@ contains
 
     call writeProgress('     Compute K22 = Kee + B`*Kie ,  B = -(Kii)^-1*Kie')
 
+    nullify(vec_neq)
     allocate(meqErr(ndof1),sk22(ndof2,ndof2),STAT=ierr)
     if (ierr /= 0) then
        ierr = AllocationError('CMSTRS: sk22')
@@ -722,8 +723,6 @@ contains
        else if (doLogMem) then
           call logAllocMem ('CMSTRS',0,size(vec_neq),nbd_p)
        end if
-    else
-       nullify(vec_neq)
     end if
 
     if (ngen > 0) then
