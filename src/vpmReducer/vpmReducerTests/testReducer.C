@@ -139,6 +139,7 @@ int main (int argc, char** argv)
   ADDOPTION ("tolFactorize",1.0e-12,"Equation solver singularity criterion");
   ADDOPTION ("tolEigval",1.0e-8,"Max acceptable relative error in eigenvalues");
   ADDOPTION ("factorMass",false,"Factorize mass matrix in eigenvalue solver");
+  ADDOPTION ("singularityHandler",1,"Option on how to treat singular matrices");
   ADDOPTION ("useANDESformulation",true,"Shell formulation option");
   ADDOPTION ("useRotCpl",true,"Use rotation coupling in WAVGM's");
   ADDOPTION ("useEccCpl",true,"Use eccentricity coupling in WAVGM's");
