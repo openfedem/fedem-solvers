@@ -120,7 +120,7 @@ module MasterSlaveJointTypeModule
      !> @brief Boundary condition codes for the joint DOFs.
      !> @details 0 is fixed, 1 is free and 2 is fixed during the initial static
      !> equilibrium iterations and eigenvalue calculations, and free otherwise
-     integer, pointer :: BC(:) 
+     integer, pointer :: BC(:)
 
      type(TriadType), pointer :: STriad !< The slave triad of the joint
      !> Slave triad position in joint system when all joint variables are zero
@@ -134,7 +134,7 @@ module MasterSlaveJointTypeModule
 
      !> If one of the master triads also is a slave,
      !> this points to the other joint where that triad is slave
-     type(MasterSlaveJointType), pointer :: chain !! 
+     type(MasterSlaveJointType), pointer :: chain
 
      type(SpringType), pointer :: springEl !< For interconnected springs
      type(SpringType), pointer :: sprFric  !< Friction spring element
@@ -162,7 +162,7 @@ module MasterSlaveJointTypeModule
 
      type(MasterSlaveJointType), pointer :: masterJoint !< Input joint
      type(MasterSlaveJointType), pointer :: slaveJoint  !< Output joint
-     
+
      integer :: masterJointDOF !< Input joint DOF
      integer :: slaveJointDOF  !< Output joint DOF
 

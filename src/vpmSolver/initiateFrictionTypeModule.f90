@@ -5,20 +5,32 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file initiateFrictionTypeModule.f90
+!> @brief Initialization of friction objects from the solver input file.
+
+!!==============================================================================
+!> @brief Initialization of friction objects from the solver input file.
+
 module InitiateFrictionTypeModule
 
   implicit none
 
 contains
 
-  subroutine InitiateFrictionData (infp,frictionData,err)
+  !!============================================================================
+  !> @brief Initializes friction parameter sets with data from the input file.
+  !>
+  !> @param[in] infp File unit number for the solver input file
+  !> @param[out] frictionData Array of all friction parameter objects
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Sep 1998
 
-    !!==========================================================================
-    !! Initiates the FrictionParameterType with data from the solver input file.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : Sep 1998 / 1.0
-    !!==========================================================================
+  subroutine InitiateFrictionData (infp,frictionData,err)
 
     use IdTypeModule      , only : ldesc_p, initId, nullifyId, ReportInputError
     use FrictionTypeModule, only : FrictionParameterType, fricType_p, dp
@@ -106,14 +118,21 @@ contains
   end subroutine InitiateFrictionData
 
 
-  subroutine InitFrictionPtrArray (joints,cElems,frictions,err)
+  !!============================================================================
+  !> @brief Creates an array of pointers to all frictions.
+  !>
+  !> @param[in] joints Array of all joints in the model
+  !> @param[in] cElems Array of all contact elements in the model
+  !> @param[out] frictions Array of pointers to all friction objects
+  !> @param[out] err Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Sep 2000
 
-    !!==========================================================================
-    !! Create an array of pointers to all frictions.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : Sep 2000 / 1.0
-    !!==========================================================================
+  subroutine InitFrictionPtrArray (joints,cElems,frictions,err)
 
     use MasterSlaveJointTypeModule, only : MasterSlaveJointType
     use ContactElementTypeModule  , only : ContactElementType

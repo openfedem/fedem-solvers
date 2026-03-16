@@ -5,6 +5,15 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file frictionTypeModule.f90
+!>
+!> @brief Friction object data containers.
+
+!!==============================================================================
+!> @brief Module with data types joint DOF friction objects.
+!>
+!> @details The module also contains subroutines for accessing the frictions.
+
 module FrictionTypeModule
 
   use KindModule        , only : dp
@@ -14,104 +23,116 @@ module FrictionTypeModule
 
   implicit none
 
-  !! Type strings
+  !> @brief Friction type names
   character(len=14),parameter :: fricType_p(6) = (/ 'ROT_FRICTION  ', &
        &                                            'TRANS_FRICTION', &
        &                                            'CAM_FRICTION  ', &
        &                                            'BALL_FRICTION ', &
        &                                            'BALL_FRICTION2', &
        &                                            'GENERIC_ENGINE' /)
-
-  !! Type enums
+  !> @cond NO_DOCUMENTATION
   integer, parameter ::                              ROT_FRICTION_p   = 1, &
        &                                             TRANS_FRICTION_p = 2, &
        &                                             CAM_FRICTION_p   = 3, &
        &                                             BALL_JNT_FRICTION_p = 4, &
        &                                             BALL_JNT_FRICTION2_p = 5, &
        &                                             GENERIC_ENGINE_p = 6
+  !> @endcond
 
-  real(dp), save :: fricForceTol = 0.0_dp !! Zero tolerance for friction forces
+  real(dp), save :: fricForceTol = 0.0_dp !< Zero tolerance for friction forces
 
 
+  !> @brief Data type representing a set of friction parameters.
   type FrictionParameterType
 
-     type(IdType) :: id  !! General identification data
+     type(IdType) :: id !< General identification data
 
-     integer  :: type             !! Type of friction parameter set
-     real(dp) :: typeDepParams(3) !! Joint type dependent parameters
-     real(dp) :: CoulombCoeff     !! Coulomb friction coefficient
-     real(dp) :: StribeckMagn     !! Magnitude of the Stribeck effect
-     real(dp) :: StribeckSpeed    !! Critical speed of the Stribeck effect
-     real(dp) :: ViscCoeff        !! Viscous coefficient
-     real(dp) :: PrestressLoad    !! Prestress load
-     real(dp) :: AsymMagn         !! Magnitude of asymmetries
-     real(dp) :: FricAmpl         !! Friction amplitude
-     real(dp) :: FricFreq         !! Frequency
-     real(dp) :: FricPhase        !! Phase
-     real(dp) :: stickStiffness   !! if > 0.0, use spring element
+     integer  :: type             !< Type of friction parameter set
+     real(dp) :: typeDepParams(3) !< Joint type dependent parameters
+     real(dp) :: CoulombCoeff     !< Coulomb friction coefficient
+     real(dp) :: StribeckMagn     !< Magnitude of the Stribeck effect
+     real(dp) :: StribeckSpeed    !< Critical speed of the Stribeck effect
+     real(dp) :: ViscCoeff        !< Viscous coefficient
+     real(dp) :: PrestressLoad    !< Prestress load
+     real(dp) :: AsymMagn         !< Magnitude of asymmetries
+     real(dp) :: FricAmpl         !< Friction amplitude
+     real(dp) :: FricFreq         !< Frequency
+     real(dp) :: FricPhase        !< Phase
+     real(dp) :: stickStiffness   !< if &gt; 0.0, use spring element
 
   end type FrictionParameterType
 
 
+  !> @brief Data type representing a joint DOF friction.
   type FrictionType
 
-     type(FrictionParameterType), pointer :: param !! Friction properties
-     type(EngineType)           , pointer :: eng   !! User-defined normal load
-     type(SpringBaseType)       , pointer :: spr   !! Spring with variable yield
-     !                                             !! to handle stick stiffness
+     type(FrictionParameterType), pointer :: param !< Friction properties
+     type(EngineType)           , pointer :: eng   !< User-defined normal load
+     !> Spring with variable yield to handle stick stiffness
+     type(SpringBaseType)       , pointer :: spr
 
-     logical  :: isActive   !! Turn friction on/off, used by cam joints
-     !                      !! and contact elements
-     integer  :: lInit      !! Initialization flag
-     !                      !! = 0: No initialization (within iteration loop)
-     !                      !! = 1: Initialize for a new time step
-     !                      !! = 2: Initialize for start of simulation
-     integer  :: lSlip(2)   !! Stick/Slip indicators
+     !> Turn friction on/off, used by cam joints and contact elements
+     logical :: isActive
 
-     real(dp) :: Fext       !! Force that should match friction force on stick
-     real(dp) :: Fequ       !! Equivalent normal force
-     real(dp) :: Fmax       !! Max friction force
+     !> @brief Friction initialization flag.
+     !> @details The value has the following interpretation:
+     !>   - = 0: No initialization (within iteration loop)
+     !>   - = 1: Initialize for a new time step
+     !>   - = 2: Initialize for start of simulation
+     integer :: lInit
+     integer :: lSlip(2) !< Stick/Slip indicators
 
-     real(dp) :: force      !! Current force
-     real(dp) :: forcePrevIt ! Force at previous iteration
-     real(dp) :: dF         !! Change in force between last two iterations
-     real(dp) :: stiff      !! Relative change in friction force wrt. velocity
+     real(dp) :: Fext  !< Force that should match friction force on stick
+     real(dp) :: Fequ  !< Equivalent normal force
+     real(dp) :: Fmax  !< Max friction force
 
-     real(dp) :: pos        !! Current position
-     real(dp) :: pos0       !! Position at start of timestep
-     real(dp) :: posPrevIt  !! Position at previous iteration
+     real(dp) :: force       !< Current force
+     real(dp) :: forcePrevIt !< Force at previous iteration
+     real(dp) :: dF          !< Change in force between last two iterations
+     real(dp) :: stiff       !< Relative change in friction force wrt. velocity
 
-     real(dp) :: vel        !! Current velocity
-     real(dp) :: vel0       !! Velocity at start of timestep
-     real(dp) :: velPrevIt  !! Velocity at previous iteration
+     real(dp) :: pos       !< Current position
+     real(dp) :: pos0      !< Position at start of time step
+     real(dp) :: posPrevIt !< Position at previous iteration
 
-     real(dp) :: forcePrev  !! Force at the end of last time step
-     real(dp) :: posPrev    !! Position at the end of last time step
-     real(dp) :: eDmp       !! Energy loss (always positive)
+     real(dp) :: vel       !< Current velocity
+     real(dp) :: vel0      !< Velocity at start of timestep
+     real(dp) :: velPrevIt !< Velocity at previous iteration
 
-     logical  :: saveVar(3) !! Flags indicating which variables should be saved
+     real(dp) :: forcePrev !< Force at the end of last time step
+     real(dp) :: posPrev   !< Position at the end of last time step
+     real(dp) :: eDmp      !< Energy loss (always positive)
+
+     logical  :: saveVar(3) !< Flags indicating which variables should be saved
 
   end type FrictionType
 
 
+  !> @brief Data type representing a friction object pointer.
+  !> @details This data type is used to construct arrays of frictions where each
+  !> element is a pointer to a friction object, and not the objects themselves.
   type FrictionPtrType
      type(FrictionType), pointer :: p
   end type FrictionPtrType
 
 
+  !> @brief Returns pointer to object with specified ID.
   interface GetPtrToId
      module procedure GetPtrToIdFrictionParameterType
   end interface
 
+  !> @brief Standard routine for writing an object to file.
   interface WriteObject
      module procedure WriteFrictionType
      module procedure WriteFrictionParameterType
   end interface
 
+  !> @brief Updates the state variables pertaining to previous time step.
   interface UpdateAtConvergence
      module procedure UpdateFrictionAtConvergence
   end interface
 
+  !> @brief Restores the state variables from the last converged time step.
   interface RestoreFromLastStep
      module procedure RestoreFrictionFromLastStep
   end interface
@@ -119,18 +140,24 @@ module FrictionTypeModule
 
 contains
 
+  !!============================================================================
+  !> @brief Returns pointer to friction parameters object with specified id.
+  !>
+  !> @param[in] array Array of frictiontypemodule::frictionparametertype objects
+  !>                  to search within
+  !> @param[in] id Base ID of the object to search for
+  !>
+  !> @details If the friction parameters object is not found, NULL is returned.
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 1 Nov 1999
+
   function GetPtrToIdFrictionParameterType (array,id) result(ptr)
-    type(FrictionParameterType), pointer :: ptr
 
-    !!==========================================================================
-    !! Return pointer to (first) element with specified id or NULL if not found.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 1st Nov. 1999
-    !!==========================================================================
-
-    integer                    , intent(in)        :: id
-    type(FrictionParameterType), intent(in),target :: array(:)
+    integer                    , intent(in)         :: id
+    type(FrictionParameterType), intent(in), target :: array(:)
+    type(FrictionParameterType), pointer            :: ptr
 
     !! Local variables
     integer :: i
@@ -150,14 +177,18 @@ contains
   end function GetPtrToIdFrictionParameterType
 
 
-  subroutine WriteFrictionType (friction,io,complexity)
+  !!============================================================================
+  !> @brief Standard routine for writing an object to io.
+  !>
+  !> @param[in] friction The frictiontypemodule::frictiontype object to write
+  !> @param[in] io File unit number to write to
+  !> @param[in] complexity If present, the value indicates the amount of print
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Sep 1999
 
-    !!==========================================================================
-    !! Standard routine for writing an object to io.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : Sep 1999/1.0
-    !!==========================================================================
+  subroutine WriteFrictionType (friction,io,complexity)
 
     type(FrictionType), intent(in) :: friction
     integer           , intent(in) :: io
@@ -184,14 +215,18 @@ contains
   end subroutine WriteFrictionType
 
 
-  subroutine WriteFrictionParameterType (fricData,io)
+  !!============================================================================
+  !> @brief Standard routine for writing an object to io.
+  !>
+  !> @param[in] fricData The frictiontypemodule::frictionparametertype
+  !>                     object to write
+  !> @param[in] io File unit number to write to
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Sep 1999
 
-    !!==========================================================================
-    !! Standard routine for writing an object to io.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : Sep 1999/1.0
-    !!==========================================================================
+  subroutine WriteFrictionParameterType (fricData,io)
 
     use IdTypeModule, only : writeId
 
@@ -219,14 +254,17 @@ contains
   end subroutine WriteFrictionParameterType
 
 
-  subroutine NullifyFriction (friction)
+  !!============================================================================
+  !> @brief Initializes a friction object.
+  !>
+  !> @param[out] friction The frictiontypemodule::frictionttype
+  !>                      object to initialize
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 16 Jun 2006
 
-    !!==========================================================================
-    !! Initialize the FrictionType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 16 Jun 2006/1.0
-    !!==========================================================================
+  subroutine NullifyFriction (friction)
 
     type(FrictionType), intent(out) :: friction
 
@@ -260,14 +298,17 @@ contains
   end subroutine NullifyFriction
 
 
-  subroutine DeallocateFrictionPrms (frictions)
+  !!============================================================================
+  !> @brief Deallocates an array of friction parameters objects.
+  !>
+  !> @param frictions The frictiontypemodule::frictionparametertype
+  !>                  objects to deallocate
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 23 Jan 2017
 
-    !!==========================================================================
-    !! Deallocate all FrictionParameter objects.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 23 Jan 2017/1.0
-    !!==========================================================================
+  subroutine DeallocateFrictionPrms (frictions)
 
     use IdTypeModule, only : deallocateId
 
@@ -287,14 +328,23 @@ contains
   end subroutine DeallocateFrictionPrms
 
 
-  subroutine InitializeFriction (friction,frictionSets,frictionId,saveVar,err)
+  !!============================================================================
+  !> @brief Allocates and initializes a friction object.
+  !>
+  !> @param[out] friction The frictiontypemodule::frictionparameterttype
+  !>                      object to allocate/initialize
+  !> @param[in] frictionSets All friction parameters objects in the model
+  !> @param[in] frictionId Base id of the friction parameters object to use
+  !> @param[in] saveVar Flags indicating which variables should be saved
+  !> @param[out] err Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 28 Aug 2002
 
-    !!==========================================================================
-    !! Allocate and initialize the FrictionType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 28 Aug 2002/2.0
-    !!==========================================================================
+  subroutine InitializeFriction (friction,frictionSets,frictionId,saveVar,err)
 
     use reportErrorModule     , only : AllocationError
     use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getbool
@@ -333,14 +383,18 @@ contains
   end subroutine InitializeFriction
 
 
-  subroutine UpdateFrictionAtStart (friction)
+  !!============================================================================
+  !> @brief Initializes internal friction variables at the start of simulation.
+  !>
+  !> @param friction The friction object to initialize internal variables for
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 24 Oct 2005
 
-    !!==========================================================================
-    !! Initialise some internal friction variables at the start of simulation.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 24 Oct 2005/1.0
-    !!==========================================================================
+  subroutine UpdateFrictionAtStart (friction)
 
     type(FrictionType), intent(inout) :: friction
 
@@ -355,14 +409,16 @@ contains
   end subroutine UpdateFrictionAtStart
 
 
-  subroutine UpdateFrictionAtConvergence (friction)
+  !!============================================================================
+  !> @brief Updates a friction object after convergence has been achieved.
+  !>
+  !> @param friction The friction object to update
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 3 Oct 2005
 
-    !!==========================================================================
-    !! Updates the FrictionType object after convergence has been achieved.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 3 Oct 2005/1.0
-    !!==========================================================================
+  subroutine UpdateFrictionAtConvergence (friction)
 
     use SpringTypeModule, only : setYieldLimit
 
@@ -385,14 +441,16 @@ contains
   end subroutine UpdateFrictionAtConvergence
 
 
-  subroutine RestoreFrictionFromLastStep (friction)
+  !!============================================================================
+  !> @brief Restores a friction object from the last converged step.
+  !>
+  !> @param friction The friction object to restore
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 2 Nov 2008
 
-    !!==========================================================================
-    !! Restores the FrictionType object from the last converged step.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 2 Nov 2008/1.0
-    !!==========================================================================
+  subroutine RestoreFrictionFromLastStep (friction)
 
     type(FrictionType), intent(inout) :: friction
 
