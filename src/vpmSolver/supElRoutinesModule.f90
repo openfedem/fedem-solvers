@@ -13,8 +13,8 @@
 !> @brief Module with subroutines for superelement calculations.
 !>
 !> @details This module contains a set of subroutines for performing various
-!> computation tasks on the supeltypemodule::supeltype objects in the model
-!> during the dynamic or quasi-static simulation.
+!> computational tasks on the supeltypemodule::supeltype objects in the model
+!> during the dynamics or quasi-static simulation.
 
 module SupElRoutinesModule
 
@@ -38,7 +38,7 @@ contains
   !> (@a uld and @a uldd, respectively) from the given global velocity and
   !> acceleration vectors for all superelements.
   !>
-  !> @callergraph
+  !> @callgraph @callergraph
   !>
   !> @author Bjorn Haugen
   !>
@@ -245,7 +245,7 @@ contains
     use manipMatrixModule         , only : writeObject
     use dbgUnitsModule            , only : dbgSolve
 #endif
-    use dbgUnitsModule            , only : dbgShadowPos
+    use dbgUnitsModule            , only : dbgCorot
     use reportErrorModule         , only : reportError, debugFileOnly_p
     use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getint
 
@@ -288,7 +288,7 @@ contains
           stat = 0
 
           !! Update the co-rotated superelement coordinate system
-          call UpdateSupElCorot (sups(i),dbgShadowPos,stat)
+          call UpdateSupElCorot (sups(i),dbgCorot,stat)
           ierr = ierr + stat
           if (stat < 0) cycle
 
@@ -490,7 +490,7 @@ contains
     use manipMatrixModule    , only : writeObject
     use dbgUnitsModule       , only : dbgSolve
 #endif
-    use dbgUnitsModule       , only : dbgShadowPos
+    use dbgUnitsModule       , only : dbgCorot
     use reportErrorModule    , only : reportError, debugFileOnly_p
 
     type(SupElType)      , intent(inout) :: sups(:)
@@ -530,7 +530,7 @@ contains
 
        if (useCorotUpd) then
           stat = 0 ! Update the co-rotated superelement coordinate system
-          call UpdateSupElCorot (sups(i),dbgShadowPos,stat)
+          call UpdateSupElCorot (sups(i),dbgCorot,stat)
           ierr = ierr + stat
           if (stat < 0) cycle
        end if
@@ -634,7 +634,7 @@ contains
   !> @brief Adds the superelement loads to the system external load vector.
   !>
   !> @param Q System external load vector
-  !> @param S Normalized superelement load vectors
+  !> @param[in] S Normalized superelement load vectors
   !> @param supLoad The superelement load object to assemble
   !> @param ierr Error flag
   !>

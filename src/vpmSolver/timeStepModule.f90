@@ -5,6 +5,18 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file timeStepModule.f90
+!>
+!> @brief Subroutines/functions for automatic time stepping.
+
+!!==============================================================================
+!> @brief Module with subroutines/functions for automatic time stepping.
+!>
+!> @details The auto-time stepping is based in local trunction errors
+!> calculated from the last three acceleration states. This is not much in use
+!> any longer and is only kept for historical reasons. The module also handles
+!> prescribed time step size defined by a general function (time step engine).
+
 module TimeStepModule
 
   use KindModule, only : dp
@@ -13,8 +25,10 @@ module TimeStepModule
 
   private
 
-  real(dp), pointer    , save :: a1(:), a2(:), a3(:) ! Acceleration stack
-  real(dp), allocatable, save :: err(:)              ! Internal work array
+  real(dp), pointer    , save :: a1(:)  !< Bottom of acceleration stack
+  real(dp), pointer    , save :: a2(:)  !< Middle of acceleration stack
+  real(dp), pointer    , save :: a3(:)  !< Top of acceleration stack
+  real(dp), allocatable, save :: err(:) !< Internal work array
 
   public :: pushAccelStack, getInitialTimeStepSize, getTimeStepSize
   public :: deallocateTimeStep
@@ -22,14 +36,20 @@ module TimeStepModule
 
 contains
 
-  subroutine pushAccelStack (sam,acc,ierr)
+  !!============================================================================
+  !> @brief Pushes the given vector onto the acceleration stack.
+  !>
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] acc Acceleration vector to be pushed
+  !> @param[out] ierr Error flag
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 17 Jul 2000
 
-    !!==========================================================================
-    !! Push the given vector onto the acceleration stack.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 17 Jul 2000/1.0
-    !!==========================================================================
+  subroutine pushAccelStack (sam,acc,ierr)
 
     use SamModule        , only : SamType
     use reportErrorModule, only : allocationError
@@ -66,18 +86,27 @@ contains
   end subroutine pushAccelStack
 
 
-  subroutine getAutoStep (sam,sys,errlim,HP,H,HX,istat)
+  !!============================================================================
+  !> @brief Calculates the next time step based on local truncation errors.
+  !>
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] sys System level model data
+  !> @param[in] errlim Truncation error limit
+  !> @param[in] HP Previous time step size
+  !> @param[in] H Current time step size
+  !> @param[out] HX Next time step size
+  !> @param[out] istat Status flag:
+  !>   - = 0 : The time step in unchanged
+  !>   - > 0 : The time step is increased or decreased
+  !>   - < 0 : Error
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 17 Jul 2000
 
-    !!==========================================================================
-    !! Calculate the next time step based on local truncation errors.
-    !!
-    !!  istat = 0 : The time step in unchanged
-    !!  istat > 0 : The time step in increased/decreased
-    !!  istat < 0 : Error
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 17 Jul 2000/1.0
-    !!==========================================================================
+ subroutine getAutoStep (sam,sys,errlim,HP,H,HX,istat)
 
     use SamModule         , only : SamType
     use SystemTypeModule  , only : SystemType
@@ -86,9 +115,8 @@ contains
 
     type(SamType)   , intent(in)  :: sam
     type(SystemType), intent(in)  :: sys
-    real(dp)        , intent(in)  :: errlim
-    real(dp)        , intent(in)  :: HP, H  ! Previous and current time steps
-    real(dp)        , intent(out) :: HX     ! Next time step
+    real(dp)        , intent(in)  :: errlim, HP, H
+    real(dp)        , intent(out) :: HX
     integer         , intent(out) :: istat
 
     !! Local variables
@@ -164,14 +192,19 @@ contains
   end subroutine getAutoStep
 
 
-  function getInitialTimeStepSize (sys,ierr) result(H0)
+  !!============================================================================
+  !> @brief Returns the length of the initial time step.
+  !>
+  !> @param sys System level model data
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 21 Aug 2007
 
-    !!==========================================================================
-    !! Return the length of the initial time step.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 21 Aug 2007/1.0
-    !!==========================================================================
+  function getInitialTimeStepSize (sys,ierr) result(H0)
 
     use SystemTypeModule    , only : SystemType
     use EngineRoutinesModule, only : EngineValue
@@ -206,14 +239,22 @@ contains
   end function getInitialTimeStepSize
 
 
-  function getTimeStepSize (sys,sam,ctrl,errlim,ierr) result(HX)
+  !!============================================================================
+  !> @brief Returns the length of the next time step.
+  !>
+  !> @param sys System level model data
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] ctrl Control system data
+  !> @param[in] errlim Truncation error limit
+  !> @param ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 26 Feb 2002
 
-    !!==========================================================================
-    !! Return the length of the next time step.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 26 Feb 2002/1.0
-    !!==========================================================================
+  function getTimeStepSize (sys,sam,ctrl,errlim,ierr) result(HX)
 
     use KindModule          , only : i8
     use SystemTypeModule    , only : SystemType
@@ -277,14 +318,14 @@ contains
   end function getTimeStepSize
 
 
-  subroutine deallocateTimeStep ()
+  !!============================================================================
+  !> @brief Deallocates the internal buffers for automatic time stepping.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 23 Jan 2017
 
-    !!==========================================================================
-    !! Deallocates the internal buffers for automatic time stepping.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 23 Jan 2017/1.0
-    !!==========================================================================
+  subroutine deallocateTimeStep ()
 
     !! --- Logic section ---
 

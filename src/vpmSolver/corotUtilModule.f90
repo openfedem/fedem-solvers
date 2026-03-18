@@ -5,6 +5,13 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file corotUtilModule.f90
+!>
+!> @brief Utilities for co-rotational superelement formulations
+
+!!==============================================================================
+!> @brief Module with subroutines for co-rotational superelement formulations.
+
 module CorotUtilModule
 
   implicit none
@@ -16,25 +23,21 @@ module CorotUtilModule
 
 contains
 
-  subroutine addKgrToKm (supEl,ktan,km,fint,ierr)
+  !!============================================================================
+  !> @brief Calculates the rotational geometric stiffness for a superelement.
+  !>
+  !> @param[in] supEl The superelement to calculation geometric stiffness for
+  !> @param[out] ktan Tangential stiffness matrix (material + geometric stiff.)
+  !> @param[in] km Material stiffness matrix
+  !> @param[in] fint Internal force vector
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Dag Rune Christensen                              @date 23 Oct 1997
+  !> @author Bjorn Haugen (significant upgrade)                @date 29 Oct 2003
 
-    !---------------------------------------------------------------------------
-    ! Purpose:
-    !     Calculate rot. geometric stiffness for the superelement based on the
-    !     variation of its 3 reference nodes and add it to material stiffness.
-    !
-    ! Input:
-    !     supEl : superelement data structure
-    !     km    : material stiffness
-    !     fint  : superelement force vector
-    !
-    ! Output:
-    !     ktan  : tangential stiffness (material + rot. geometric stiffness)
-    !     ierr  : error flag
-    !---------------------------------------------------------------------------
-    ! Programmer: Dag R Chr                                       date: 23/10/97
-    !             Bjorn Haugen (significant upgrade)                    29/10/03
-    !---------------------------------------------------------------------------
+  subroutine addKgrToKm (supEl,ktan,km,fint,ierr)
 
     use SupElTypeModule   , only : SupElType, dp
     use scratchArrayModule, only : getRealScratchMatrix
@@ -97,23 +100,22 @@ contains
   end subroutine addKgrToKm
 
 
-  subroutine gmat3nod (gmat,x,y,z,ierr)
+  !!============================================================================
+  !> @brief Computes the rotation gradient matrix for a 3-noded element.
+  !>
+  !> @param[out] gmat The rotation gradients in local system
+  !> @param[in] x X-coordinates for the 3 nodes in global coordinate system
+  !> @param[in] y Y-coordinates for the 3 nodes in global coordinate system
+  !> @param[in] z Z-coordinates for the 3 nodes in global coordinate system
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 22 Oct 1997
 
-    !---------------------------------------------------------------------------
-    ! Purpose:
-    !     Compute the rotation gradient matrix for a 3 node element.
-    !
-    ! Input:
-    !     x,y,z : coordinates of the 3 nodes in global coordinate system
-    !
-    ! Output:
-    !     gmat  : rotation gradients of rot_x,rot_y,rot_z in local system
-    !             with respect to the local coordinate nodal degrees of freedom
-    !             The nodal dof ordering for each node is: tx ty tz
-    !     ierr  : error flag
-    !---------------------------------------------------------------------------
-    ! Programmer: Bjorn Haugen                                    date: 22/10/97
-    !---------------------------------------------------------------------------
+  subroutine gmat3nod (gmat,x,y,z,ierr)
 
     use kindModule       , only : dp
     use manipMatrixModule, only : invert34, trans3P
@@ -161,23 +163,26 @@ contains
   end subroutine gmat3nod
 
 
-  subroutine gmat3nodLocal (gmat,x,y)
+  !!============================================================================
+  !> @brief Computes the rotation gradient matrix for a 3-noded element.
+  !>
+  !> @param[out] gmat The rotation gradients in local system
+  !> @param[in] x X-coordinates for the 3 nodes in local coordinate system
+  !> @param[in] y Y-coordinates for the 3 nodes in local coordinate system
+  !>
+  !> @details The element assumed in the xy-plane.
+  !> The x-axis is not neccesarily along the side 1-2.
+  !> The computed rotation gradient matrix @a gmat consists of rot_x,rot_y,rot_z
+  !> in local system with respect to the local nodal degrees of freedom.
+  !> The nodal DOF ordering for each node is assumed to be tx,ty,tz.
+  !>
+  !> @callergraph
+  !>
+  !> @author Dag Rune Christensen
+  !>
+  !> @date 22 Oct 1997
 
-    !---------------------------------------------------------------------------
-    ! Purpose:
-    !     Compute the rotation gradient matrix for a 3 node element.
-    !     Element assumed in xy-plane, x-axis not neccesarily along side 1-2.
-    !
-    ! Input:
-    !     x,y   : coordinates for the 3 nodes in local element coordinate system
-    !
-    ! Output:
-    !     gmat  : rotation gradients of rot_x,rot_y,rot_z in local system
-    !             with respect to the local coordinate nodal degrees of freedom
-    !             The nodal dof ordering for each node is: tx ty tz
-    !---------------------------------------------------------------------------
-    ! Programmer: Dag R Chr                                       date: 22/10/97
-    !---------------------------------------------------------------------------
+  subroutine gmat3nodLocal (gmat,x,y)
 
     use kindModule, only : dp
 
@@ -211,21 +216,19 @@ contains
   end subroutine gmat3nodLocal
 
 
-  subroutine mmat3nod (mmat,emat)
+  !!============================================================================
+  !> @brief Sets up an eccentricity transformation matrix for a 3-noded element.
+  !>
+  !> @param[out] mmat The eccentricity transformation matrix (translations only)
+  !> @param[in] emat Nodal eccentricities in local coordinates
+  !>
+  !> @callergraph
+  !>
+  !> @author Dag Rune Christensen
+  !>
+  !> @date 23 Oct 1997
 
-    !---------------------------------------------------------------------------
-    ! Purpose:
-    !     Calcutate the m-matrix in vref = m * vsup in local coordinates
-    !     vref(9,1) - trans dofs only
-    !
-    ! Input:
-    !     emat  : eccentricity matrix in local coordinates
-    !
-    ! Output:
-    !     mmat  : m-matrix
-    !---------------------------------------------------------------------------
-    ! Programmer: Dag R Chr                                       date: 23/10/97
-    !---------------------------------------------------------------------------
+  subroutine mmat3nod (mmat,emat)
 
     use kindModule, only : dp
 
@@ -259,24 +262,26 @@ contains
   end subroutine mmat3nod
 
 
-  subroutine formfnm (triads,fint,fnm)
+  !!============================================================================
+  !> @brief Forms the @a Fn matrix based on the internal force vector.
+  !>
+  !> @param[in] triads External nodes in the superelement
+  !> @param[in] fint Internal force vector of the superelement
+  !> @param[out] fnm Then @a Fn matrix (see below)
+  !>
+  !> @details The @a Fn matrix consists of the spin of the nodal force vectors
+  !> with both axial and moment contributions, i.e.,
+  !> @code
+  !>    | Spin(n) |
+  !>    | Spin(m) |
+  !> @endcode
+  !> for each node ordered as columns.
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
 
-    !***************************************************************************
-    !*
-    !*  Purpose:
-    !*     Form the Fn-matrix based on the internal force vector,
-    !*     i.e., Fspin with both axial and moment contributions.
-    !*
-    !*  Input:
-    !*     triads   : external nodes in superelement
-    !*     fint     : internal force vector
-    !*
-    !*  Output:
-    !*     fnm      : matrix of | Spin(n) | for each node ordered as columns
-    !*                          | Spin(m) |
-    !*
-    !*  Coded by: Bjorn Haugen
-    !***************************************************************************
+  subroutine formfnm (triads,fint,fnm)
 
     use TriadTypeModule, only : TriadPtrType, dp
 
@@ -312,13 +317,20 @@ contains
   end subroutine formfnm
 
 
-  subroutine formShadowPosGrad (supEl,dbgShadowPos,ierr)
+  !!============================================================================
+  !> @brief Forms the gradient matrix used in the shadow position calculations.
+  !>
+  !> @param supEl The superelement to calculate the gradient matrix for
+  !> @param[in] dbgCorot File unit number of debug pring
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Nov 2003
 
-    !!==========================================================================
-    !! Forms a 6xNDOF gradient matrix used in the shadow position calculations.
-    !!
-    !! Programmer : Bjorn Haugen                           date/rev Nov 2003/1.0
-    !!==========================================================================
+  subroutine formShadowPosGrad (supEl,dbgCorot,ierr)
 
     use kindModule                , only : dp, epsDiv0_p
     use SupElTypeModule           , only : SupElType
@@ -332,7 +344,7 @@ contains
     use reportErrorModule         , only : reportError, AllocationError
 
     type(SupElType), intent(inout) :: supEl
-    integer        , intent(in)    :: dbgShadowPos
+    integer        , intent(in)    :: dbgCorot
     integer        , intent(out)   :: ierr
 
     !! Local variables
@@ -350,9 +362,9 @@ contains
        return
     end if
 
-    if (dbgShadowPos > 0 .and. supEl%shadowPosAlg > 1) then
-       write(dbgShadowPos,*)
-       call WriteObject (supEl%Mmat,dbgShadowPos, &
+    if (dbgCorot > 0 .and. supEl%shadowPosAlg > 1) then
+       write(dbgCorot,*)
+       call WriteObject (supEl%Mmat,dbgCorot, &
             &            'Mass matrix for Part'//getId(supEl%id))
     end if
 
@@ -386,9 +398,9 @@ contains
 
        call mmat3nod (mmat,emat)
 
-       if (dbgShadowPos > 0) then
-          call WriteObject (gmat,dbgShadowPos,'gmat')
-          call WriteObject (mmat,dbgShadowPos,'mmat')
+       if (dbgCorot > 0) then
+          call WriteObject (gmat,dbgCorot,'gmat')
+          call WriteObject (mmat,dbgCorot,'mmat')
        end if
 
        do iRef = 1, 3
@@ -450,10 +462,10 @@ contains
        call mmcRigAccelVectors (supEl,supEl%posMassCenter,rigDisp)
        Kmat = matmul(supEl%shadowPosGrad,rigDisp)
 
-       if (dbgShadowPos > 0) then
-          call WriteObject (rigdisp,dbgShadowPos,'Rigdisp')
-          call WriteObject (supEl%shadowPosGrad,dbgShadowPos,'shadowPosGrad')
-          call WriteObject (Kmat,dbgShadowPos,'Kmat for shadowPos, alg = 2')
+       if (dbgCorot > 0) then
+          call WriteObject (rigdisp,dbgCorot,'Rigdisp')
+          call WriteObject (supEl%shadowPosGrad,dbgCorot,'shadowPosGrad')
+          call WriteObject (Kmat,dbgCorot,'Kmat for shadowPos, alg = 2')
        end if
 
        call solveAxB (Kmat,supEl%shadowPosGrad,ierr)
@@ -471,10 +483,10 @@ contains
        supEl%shadowPosGrad = matmul(supEl%Mmat,rigdisp)
        Kmat = matmul(supEl%shadowPosGrad,rigDisp)
 
-       if (dbgShadowPos > 0) then
-          call WriteObject (rigdisp,dbgShadowPos,'Rigdisp')
-          call WriteObject (supEl%shadowPosGrad,dbgShadowPos,'shadowPosGrad')
-          call WriteObject (Kmat,dbgShadowPos,'Kmat for shadowPos, alg = 3')
+       if (dbgCorot > 0) then
+          call WriteObject (rigdisp,dbgCorot,'Rigdisp')
+          call WriteObject (supEl%shadowPosGrad,dbgCorot,'shadowPosGrad')
+          call WriteObject (Kmat,dbgCorot,'Kmat for shadowPos, alg = 3')
        end if
 
        call solveAxB (Kmat,supEl%shadowPosGrad,ierr)
@@ -482,8 +494,8 @@ contains
 
     end select
 
-    if (dbgShadowPos > 0) then
-       call WriteObject (supEl%shadowPosGrad,dbgShadowPos, &
+    if (dbgCorot > 0) then
+       call WriteObject (supEl%shadowPosGrad,dbgCorot, &
             &            'shadowPosGrad for Part'//getId(supEl%id))
     end if
 
