@@ -5,6 +5,17 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file saveReducerModule.f90
+!>
+!> @brief Save of FE model reduction data to result database files.
+
+!!==============================================================================
+!> @brief Module with subroutines for saving of FE model reduction results.
+!>
+!> @details This module contains a collection of subroutines for writing results
+!> data from the FE model reduction process or direct linear solve
+!> to the results database.
+
 module saveReducerModule
 
   implicit none
@@ -19,14 +30,23 @@ module saveReducerModule
 
 contains
 
-  subroutine writeModes (chname,sam,partId,modeType,nMode,ev,sv,ierr)
+  !!============================================================================
+  !> @brief Administers writing of results database for fedem_reducer.
+  !>
+  !> @param[in] chname Name of frs-file receiving the results data
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] partId Base ID of the FE part
+  !> @param[in] modeType Name of eigenmode item group
+  !> @param[in] nMode Number of eigenmodes
+  !> @param[in] ev Eigenvalues
+  !> @param[in] sv Eigenvectors
+  !> @param[out] ierr Error flag
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 4 Oct 2002
 
-    !!==========================================================================
-    !! Administer writing of results database for fedem_reducer.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 4 Oct 2002/1.0
-    !!==========================================================================
+  subroutine writeModes (chname,sam,partId,modeType,nMode,ev,sv,ierr)
 
     use KindModule            , only : dp, i8, lfnam_p
     use RDBModule             , only : RDBType, idatd, openRDBfile, closeRDBfile
@@ -102,14 +122,23 @@ contains
   end subroutine writeModes
 
 
-  subroutine writeDeformation (chname,sam,partId,nlc,mlc,sv,lpu,ierr)
+  !!============================================================================
+  !> @brief Administers writing of results database for fedem_partsol.
+  !>
+  !> @param[in] chname Name of frs-file receiving the results data
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] partId Base ID of the FE part
+  !> @param[in] nlc Number of load cases
+  !> @param[in] mlc Load case identifiers
+  !> @param[in] sv Displacement vector in equation order
+  !> @param[in] lpu File unit number for res-file output
+  !> @param[out] ierr Error flag
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 19 Mar 2018
 
-    !!==========================================================================
-    !! Administer writing of results database for fedem_reducer.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 19 Mar 2018/1.0
-    !!==========================================================================
+  subroutine writeDeformation (chname,sam,partId,nlc,mlc,sv,lpu,ierr)
 
     use KindModule            , only : dp, lfnam_p
     use SamModule             , only : SamType
@@ -178,14 +207,20 @@ contains
   end subroutine writeDeformation
 
 
-  subroutine writeModesHeader (rdb,nMode,nbit)
+  !!============================================================================
+  !> @brief Writes modal result definitions to the temporary header files.
+  !>
+  !> @param rdb Results database file for modes output
+  !> @param[in] nMode Number of mode shapes
+  !> @param[in] nbit Number of bits per real word
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @callergraph
+  !>
+  !> @date 4 Oct 2002
 
-    !!==========================================================================
-    !! Write modal result definitions to the temporary header files.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 4 Oct 2002/1.0
-    !!==========================================================================
+  subroutine writeModesHeader (rdb,nMode,nbit)
 
     use RDBModule, only : rDBType, idatd, ivard
 
