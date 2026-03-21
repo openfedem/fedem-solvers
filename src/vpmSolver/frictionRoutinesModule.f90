@@ -5,6 +5,13 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file frictionRoutinesModule.f90
+!>
+!> @brief Subroutines for friction calculations.
+
+!!==============================================================================
+!> @brief Module with subroutines for friction calculations.
+
 module FrictionRoutinesModule
 
   implicit none
@@ -13,6 +20,7 @@ module FrictionRoutinesModule
 
   public :: updateFrictions, addInFrictionForces, findForceInFriction
 
+  !> @brief Computes the total applied force in a joint dof with friction.
   interface findForceInFriction
      module procedure findJointForceInFriction
      module procedure findContactElmForceInFriction
@@ -21,13 +29,23 @@ module FrictionRoutinesModule
 
 contains
 
-  subroutine updateFrictions (joints, cElems, dt, iter, useRealVel, ierr)
+  !!============================================================================
+  !> @brief Updates the friction forces in all joints and contact elements.
+  !>
+  !> @param joints Array of all joints in the model
+  !> @param cElems Array of all contact elements in the model
+  !> @param[in] dt Time increment size
+  !> @param[in] iter Iteration counter
+  !> @param[in] useRealVel If .true., the actual velocity is used
+  !> @param ierr Error Flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 May 2008
 
-    !!==========================================================================
-    !! Updates the friction forces in all joints and contact elements.
-    !!
-    !! Programmer : Knut Morten Okstad               date/rev: 30 May 2008 / 1.0
-    !!==========================================================================
+  subroutine updateFrictions (joints, cElems, dt, iter, useRealVel, ierr)
 
     use kindModule                , only : dp
     use MasterSlaveJointTypeModule, only : MasterSlaveJointType
@@ -89,15 +107,24 @@ contains
   end subroutine updateFrictions
 
 
-  subroutine updateFriction (ierr, dt, deltaT, friction, jDof, joint, cElem)
+  !!============================================================================
+  !> @brief Updates friction forces in the given joint or contact element.
+  !>
+  !> @param ierr Error Flag
+  !> @param[in] dt Time increment size
+  !> @param[in] deltaT Time increment for finite difference velocity calculation
+  !> @param friction The friction object to update forces for
+  !> @param[in] jDof Local joint DOF of the @a friction
+  !> @param[in] joint The joint owning this @a friction
+  !> @param[in] cElem The contact element owning this @a friction
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Hans Petter Hildre                                @date 20 Dec 1990
+  !> @author Karl E. Thoresen / Bjorn Haugen (to F90)          @date around 2000
+  !> @author Knut Morten Okstad (completely rewritten)         @date 28 Aug 2002
 
-    !!==========================================================================
-    !! Updates friction forces in the given joint or contact element.
-    !!
-    !! Programmer : Hans Petter Hildre                         date: 20 Dec 1990
-    !! Revised    : Karl E. Thoresen / Bjorn Haugen (to F90)   date: around 2000
-    !! Revised    : Knut Morten Okstad (completely rewritten)  date: 28 Aug 2002
-    !!==========================================================================
+  subroutine updateFriction (ierr, dt, deltaT, friction, jDof, joint, cElem)
 
     use MasterSlaveJointTypeModule, only : MasterSlaveJointType
     use MasterSlaveJointTypeModule, only : transVSlaveToJoint
@@ -314,13 +341,22 @@ contains
   end subroutine updateFriction
 
 
-  subroutine updateMultiDofFriction (ierr, dt, deltaT, friction, joint)
+  !!============================================================================
+  !> @brief Updates multidof friction forces in the given joint.
+  !>
+  !> @param ierr Error Flag
+  !> @param[in] dt Time increment size
+  !> @param[in] deltaT Time increment for finite difference velocity calculation
+  !> @param friction The friction object to update forces for
+  !> @param[in] joint The joint owning this @a friction
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 25 Apr 2003
 
-    !!==========================================================================
-    !! Updates multidof friction forces in the given joint.
-    !!
-    !! Programmer : Bjorn Haugen                               date: 25 Apr 2003
-    !!==========================================================================
+  subroutine updateMultiDofFriction (ierr, dt, deltaT, friction, joint)
 
     use kindModule                , only : dp, epsDiv0_p
     use FrictionTypeModule        , only : FrictionType, BALL_JNT_FRICTION_p
@@ -466,16 +502,27 @@ contains
   end subroutine updateMultiDofFriction
 
 
+  !!============================================================================
+  !> @brief Calculates the maximum friction force.
+  !>
+  !> @param[out] Fmax The maximum friction force
+  !> @param[in] Fequ Equivalent normal force that creates the friction
+  !> @param[in] Fext Force that should match friction force on stick
+  !> @param[in] Vel Current velocity in the friction DOF
+  !> @param[in] StickSlip Stick/slip indicator
+  !> @param[in] F0 Prestress load
+  !> @param[in] Coulomb Coulomb friction coefficient
+  !> @param[in] Stribeck Magnitude of the Stribeck effect
+  !> @param[in] Vc Critical speed of the Stribeck effect
+  !>
+  !> @callergraph
+  !>
+  !> @author Karl Erik Thoresen                                @date 11 Mar 1998
+  !> @author Knut Morten Okstad (F90 version)                  @date 09 Jan 2001
+  !> @author Knut Morten Okstad (completely rewritten)         @date 22 Aug 2002
+
   subroutine FindMaxFrictionForce (Fmax, Fequ, Fext, Vel, StickSlip, &
        &                           F0, Coulomb, Stribeck, Vc)
-
-    !!==========================================================================
-    !! Calculates the maximum friction force.
-    !!
-    !! Programmer: Karl Erik Thoresen                          date: 11 Mar 1998
-    !! Revised:    Knut Morten Okstad (F90 version)            date: 09 Jan 2001
-    !! Revised:    Knut Morten Okstad (completely rewritten)   date: 22 Aug 2002
-    !!==========================================================================
 
     use kindModule            , only : dp, epsDiv0_p
     use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getint
@@ -529,16 +576,36 @@ contains
   end subroutine FindMaxFrictionForce
 
 
+  !!============================================================================
+  !> @brief Calculates the actual friction force.
+  !>
+  !> @param[out] Ffric Current friction force
+  !> @param Kfric Relative change in friction force wrt. velocity
+  !> @param Xn_1 Position at previous iteration
+  !> @param Vn_1 Velocity at previous iteration
+  !> @param Fold Friction force at previous iteration
+  !> @param dF Friction force change between last two iterations
+  !> @param lStick Stick indicator
+  !> @param lInit Initialization flag
+  !> @param[in] dT Time increment size
+  !> @param[in] Fmax The maximum friction force
+  !> @param[in] Fext Force that should match friction force on stick
+  !> @param[in] Ftol Zero tolerance for friction forces
+  !> @param[in] X0 Position at start of current time step
+  !> @param[in] Xn Current position
+  !> @param[in] Vn Current velocity
+  !>
+  !> @details See frictiontypemodule::frictiontype::linit for the interpretation
+  !> of the initialization flag @a lInit.
+  !>
+  !> @callergraph
+  !>
+  !> @author Karl Erik Thoresen                                @date 11 Mar 1998
+  !> @author Knut Morten Okstad (F90 version)                  @date 09 Jan 2001
+  !> @author Knut Morten Okstad (completely rewritten)         @date 22 Aug 2002
+
   subroutine FindFrictionForce (Ffric, Kfric, Xn_1, Vn_1, Fold, dF, &
        &                        lStick, lInit, dT, Fmax, Fext, Ftol, X0, Xn, Vn)
-
-    !!==========================================================================
-    !! Calculates the actual friction force.
-    !!
-    !! Programmer : Karl Erik Thoresen                         date: 11 Mar 1998
-    !! Revised    : Knut Morten Okstad (F90 version)           date: 09 Jan 2001
-    !! Revised    : Knut Morten Okstad (completely rewritten)  date: 22 Aug 2002
-    !!==========================================================================
 
     use kindModule            , only : dp, epsDiv0_p
 #ifdef FT_DEBUG
@@ -650,14 +717,21 @@ contains
   end subroutine FindFrictionForce
 
 
-  subroutine addInFrictionForces (joint, sam, SysForce, SysReac, ierr)
+  !!============================================================================
+  !> @brief Adds friction forces for a joint into the given system vectors.
+  !>
+  !> @param[in] joint The joint owning this friction force
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param SysForce System load vector to receive the force contribution
+  !> @param SysReac Reaction force container
+  !> @param ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen                                         @date Nov 2001
+  !> @author Knut Morten Okstad                                @date 25 Jun 2002
 
-    !!==========================================================================
-    !! Adds friction forces for the given joint into the given system vectors.
-    !!
-    !! Programmer : Bjorn Haugen                     date/rev:    Nov 2001 / 1.0
-    !! Revised    : Knut Morten Okstad               date/rev: 25 Jun 2002 / 2.0
-    !!==========================================================================
+  subroutine addInFrictionForces (joint, sam, SysForce, SysReac, ierr)
 
     use MasterSlaveJointTypeModule, only : MasterSlaveJointType
     use SamModule                 , only : SamType
@@ -720,15 +794,25 @@ contains
   end subroutine addInFrictionForces
 
 
-  subroutine findJointForceInFriction (joint, sam, RF, Q, Fs, Fd, Fi)
+  !!============================================================================
+  !> @brief Computes the total applied force in a joint DOF with friction.
+  !>
+  !> @param joint The joint to check for friction forces.
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] RF Reaction force container
+  !> @param[in] Q External force system vector
+  !> @param[in] Fs Stiffness force system vector
+  !> @param[in] Fd Damping force system vector
+  !> @param[in] Fi Inertia force system vector
+  !>
+  !> @details The total applies force is equal to the sum of all force
+  !> contributions to the friction DOF, except for the friction force itself.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 17 Sep 2007
 
-    !!==========================================================================
-    !! Computes the total applied force in a joint dof with friction.
-    !! This is equal to the sum of all force contributions to that dof,
-    !! except for the friction force itself.
-    !!
-    !! Programmer : Knut Morten Okstad               date/rev: 17 Sep 2007 / 1.0
-    !!==========================================================================
+  subroutine findJointForceInFriction (joint, sam, RF, Q, Fs, Fd, Fi)
 
     use MasterSlaveJointTypeModule, only : MasterSlaveJointType
     use SamModule                 , only : SamType
@@ -768,15 +852,26 @@ contains
   end subroutine findJointForceInFriction
 
 
-  subroutine findContactElmForceInFriction (cElem, sam, RF, Q, Fs, Fd, Fi)
+  !!============================================================================
+  !> @brief Computes total applied force in a contact element DOF with friction.
+  !>
+  !> @param cElem The contact element to check for friction forces.
+  !> @param[in] sam Data for managing system matrix assembly
+  !> @param[in] RF Reaction force container
+  !> @param[in] Q External force system vector
+  !> @param[in] Fs Stiffness force system vector
+  !> @param[in] Fd Damping force system vector
+  !> @param[in] Fi Inertia force system vector
+  !>
+  !> @details The total applies force is equal to the sum of all force
+  !> contributions to the friction DOF, except for the friction force itself.
+  !> @todo This subroutine is not implemented yet. Currently does nothing.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 17 Sep 2007
 
-    !!==========================================================================
-    !! Computes the total applied force in a contact element dof with friction.
-    !! This is equal to the sum of all force contributions to that dof,
-    !! except for the friction force itself.
-    !!
-    !! Programmer : Knut Morten Okstad               date/rev: 17 Sep 2007 / 1.0
-    !!==========================================================================
+  subroutine findContactElmForceInFriction (cElem, sam, RF, Q, Fs, Fd, Fi)
 
     use ContactElementTypeModule, only : ContactElementType
     use SamModule               , only : SamType
@@ -787,7 +882,6 @@ contains
     real(dp)                , intent(in)    :: RF(:), Q(:), Fs(:)
     real(dp), optional      , intent(in)    :: Fd(:), Fi(:)
 
-    !! TODO...
     print *,' ** findContactElmForceInFriction not yet implemented! ', &
          cElem%id%userId,sam%nel,size(RF),size(Q),size(Fs), &
          present(Fd),present(Fi)

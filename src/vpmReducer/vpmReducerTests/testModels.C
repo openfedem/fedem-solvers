@@ -11,8 +11,8 @@
   \brief Hard-coded basic FE models for testing of FE part reduction.
 
   \details This file contains a set of classes, each one representing a simple
-  FE model which is suitable for testing of the FE part reduction procedures
-  without the need of reading an input file. The FE models are created by the
+  FE model which is suitable for testing the FE part reduction procedures
+  without the need for reading an input file. The FE models are created by the
   respective constructors of the FFlLinkHandler sub-classes.
 
   \author Knut Morten Okstad
@@ -43,6 +43,108 @@
 #ifdef FF_NAMESPACE
 using namespace FF_NAMESPACE;
 #endif
+
+
+namespace
+{
+  /*!
+    \brief Helper function generating a quadrilateral element in a regular mesh.
+  */
+
+  FFlElementBase* newQuadElement (int e, int i, int j, int n1, bool parab)
+  {
+    FFlElementBase* elm = NULL;
+    if (parab)
+    {
+      elm = new FFlQUAD8(e);
+      elm->setNode(1,n1*(i+0)+j+1);
+      elm->setNode(2,n1*(i+0)+j+2);
+      elm->setNode(3,n1*(i+0)+j+3);
+      elm->setNode(4,n1*(i+1)+j+3);
+      elm->setNode(5,n1*(i+2)+j+3);
+      elm->setNode(6,n1*(i+2)+j+2);
+      elm->setNode(7,n1*(i+2)+j+1);
+      elm->setNode(8,n1*(i+1)+j+1);
+    }
+    else
+    {
+      elm = new FFlQUAD4(e);
+      elm->setNode(1,n1*(i+0)+j+1);
+      elm->setNode(2,n1*(i+0)+j+2);
+      elm->setNode(3,n1*(i+1)+j+2);
+      elm->setNode(4,n1*(i+1)+j+1);
+    }
+
+    return elm;
+  }
+
+
+  /*!
+    \brief Helper function generating a triangular element in a regular mesh.
+  */
+
+  FFlElementBase* newTriaElement (int e, int i, int j, int n1, bool parab)
+  {
+    FFlElementBase* elm = NULL;
+    if (parab)
+    {
+      elm = new FFlTRI6(e);
+      if (e%2 == 0)
+      {
+        elm->setNode(1,n1*(i+2)+j+3);
+        elm->setNode(2,n1*(i+2)+j+2);
+        elm->setNode(3,n1*(i+2)+j+1);
+        elm->setNode(4,n1*(i+1)+j+2);
+        elm->setNode(5,n1*(i+0)+j+3);
+        elm->setNode(6,n1*(i+1)+j+3);
+      }
+      else
+      {
+        elm->setNode(1,n1*(i+0)+j+1);
+        elm->setNode(2,n1*(i+0)+j+2);
+        elm->setNode(3,n1*(i+0)+j+3);
+        elm->setNode(4,n1*(i+1)+j+2);
+        elm->setNode(5,n1*(i+2)+j+1);
+        elm->setNode(6,n1*(i+1)+j+1);
+      }
+    }
+    else
+    {
+      elm = new FFlTRI3(e);
+      if (e%2 == 0)
+      {
+        elm->setNode(1,n1*(i+1)+j+2);
+        elm->setNode(2,n1*(i+1)+j+1);
+        elm->setNode(3,n1*(i+0)+j+2);
+      }
+      else
+      {
+        elm->setNode(1,n1*(i+0)+j+1);
+        elm->setNode(2,n1*(i+0)+j+2);
+        elm->setNode(3,n1*(i+1)+j+1);
+      }
+    }
+
+    return elm;
+  }
+
+
+  /*!
+    \brief Helper calculating a status code from boundary condition flags.
+  */
+
+  int BC (const std::array<int,6>& flags)
+  {
+    int c = 0, d = 1;
+    for (int f : flags)
+    {
+      c += f*d;
+      d *= 2;
+    }
+
+    return -c;
+  }
+}
 
 
 /*!
@@ -133,6 +235,8 @@ public:
       this->addElement(elm);
       n1 = n2;
     }
+    if (nel > 2)
+      n1->setExternal();
   }
 };
 
@@ -263,88 +367,6 @@ public:
     this->resolve();
   }
 };
-
-
-/*!
-  \brief Static helper generating a quadrilateral element in a regular mesh.
-*/
-
-static FFlElementBase* newQuadElement (int e, int i, int j, int n1, bool parab)
-{
-  FFlElementBase* elm = NULL;
-  if (parab)
-  {
-    elm = new FFlQUAD8(e);
-    elm->setNode(1,n1*(i+0)+j+1);
-    elm->setNode(2,n1*(i+0)+j+2);
-    elm->setNode(3,n1*(i+0)+j+3);
-    elm->setNode(4,n1*(i+1)+j+3);
-    elm->setNode(5,n1*(i+2)+j+3);
-    elm->setNode(6,n1*(i+2)+j+2);
-    elm->setNode(7,n1*(i+2)+j+1);
-    elm->setNode(8,n1*(i+1)+j+1);
-  }
-  else
-  {
-    elm = new FFlQUAD4(e);
-    elm->setNode(1,n1*(i+0)+j+1);
-    elm->setNode(2,n1*(i+0)+j+2);
-    elm->setNode(3,n1*(i+1)+j+2);
-    elm->setNode(4,n1*(i+1)+j+1);
-  }
-
-  return elm;
-}
-
-
-/*!
-  \brief Static helper generating a triangular element in a regular mesh.
-*/
-
-static FFlElementBase* newTriaElement (int e, int i, int j, int n1, bool parab)
-{
-  FFlElementBase* elm = NULL;
-  if (parab)
-  {
-    elm = new FFlTRI6(e);
-    if (e%2 == 0)
-    {
-      elm->setNode(1,n1*(i+2)+j+3);
-      elm->setNode(2,n1*(i+2)+j+2);
-      elm->setNode(3,n1*(i+2)+j+1);
-      elm->setNode(4,n1*(i+1)+j+2);
-      elm->setNode(5,n1*(i+0)+j+3);
-      elm->setNode(6,n1*(i+1)+j+3);
-    }
-    else
-    {
-      elm->setNode(1,n1*(i+0)+j+1);
-      elm->setNode(2,n1*(i+0)+j+2);
-      elm->setNode(3,n1*(i+0)+j+3);
-      elm->setNode(4,n1*(i+1)+j+2);
-      elm->setNode(5,n1*(i+2)+j+1);
-      elm->setNode(6,n1*(i+1)+j+1);
-    }
-  }
-  else
-  {
-    elm = new FFlTRI3(e);
-    if (e%2 == 0)
-    {
-      elm->setNode(1,n1*(i+1)+j+2);
-      elm->setNode(2,n1*(i+1)+j+1);
-      elm->setNode(3,n1*(i+0)+j+2);
-    }
-    else
-    {
-      elm->setNode(1,n1*(i+0)+j+1);
-      elm->setNode(2,n1*(i+0)+j+2);
-      elm->setNode(3,n1*(i+1)+j+1);
-    }
-  }
-
-  return elm;
-}
 
 
 /*!
@@ -504,23 +526,6 @@ public:
     this->resolve();
   }
 };
-
-
-/*!
-  \brief Static helper calculating a status code from boundary condition flags.
-*/
-
-static int BC (const std::array<int,6>& flags)
-{
-  int c = 0, d = 1;
-  for (int f : flags)
-  {
-    c += f*d;
-    d *= 2;
-  }
-
-  return -c;
-}
 
 
 /*!
@@ -856,6 +861,11 @@ int createFEModel (int iPart, int nel, int nel2,
   FFlPTHICK::init();
   FFlPMAT::init();
   FFlCFORCE::init();
+
+  std::cout <<"\ncreateFEMmodel: iPart="<< iPart <<" nel="<< nel <<","<< nel2
+            <<" L="<< L <<" b="<< b <<" t="<< t
+            <<" twoD="<< std::boolalpha << twoD
+            <<" solve="<< std::boolalpha << solve << std::endl;
 
   switch (iPart) {
   case 0: ffl_setLink(new Cantilever(L,nel,13,twoD)); break;
