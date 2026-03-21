@@ -8,6 +8,17 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.1.5.2] (2026-03-22)
+
+### :bug: Fixed
+
+- Issue https://github.com/openfedem/fedem-solvers/issues/49 :
+  Component mode calculation does not work for FE parts
+  containing explicit MPC-couplings between solid elements.
+- Issue https://github.com/openfedem/fedem-solvers/issues/46 :
+  The linear equation solver does not always abort the simulation when
+  a singularity is detected, and may instead produce invalid results.
+
 ## [fedem-8.1.5] (2026-03-15)
 
 ### :rocket: Added
@@ -24,8 +35,9 @@
 
 ### :rocket: Added
 
-The two points defining the state-dependent direction of a point load may
-now be specified by triads in addition to points on a superelement.
+- Issue https://github.com/openfedem/fedem-gui/issues/128 :
+  The two points defining the state-dependent direction of a point load
+  may now be specified by triads in addition to points on a superelement.
 
 ## [fedem-8.1.3] (2026-01-20)
 
@@ -187,3 +199,6 @@ Only the version tags are updated to align with the FEDEM GUI.
 [fedem-8.0.9]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.8...fedem-8.0.9
 [fedem-8.1.0]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.0.9...fedem-8.1.0
 [fmu-8.1.2]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.1...fmu-8.1.2
+[fedem-8.1.3]: https://github.com/openfedem/fedem-solvers/compare/fmu-8.1.2...fedem-8.1.3
+[fedem-8.1.4]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.3...fedem-8.1.4
+[fedem-8.1.5]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.4...fedem-8.1.5
