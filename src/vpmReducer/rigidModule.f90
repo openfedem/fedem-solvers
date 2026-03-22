@@ -109,7 +109,7 @@ contains
     !! Local variables
     character(len=128)    :: errMsg
     integer               :: i, j, k, l, n, iel, xel, iam, iceq, ipcur, iwarn
-    integer               :: depDof, refC, ignoredC(3), indC(6), nenod, nW
+    integer               :: depDof, refC, ignoredC(3), indC(7), nenod, nW
     logical               :: refDofs(6)
     real(dp)              :: sumW, epsX, X0(3), tolX(3)
     integer , allocatable :: mDofs(:)
@@ -196,9 +196,19 @@ contains
           !! No properties defined - use default settings
           refC = 123456
           indC(1:3) = -1
-          indC(4:6) = 0
+          indC(4:7) = 0
        else if (ierr < 0) then
           goto 900
+       else if (refC < 0) then
+          !! Explicit constraints
+          ierr = ierr + 1 ! Index to past the end of the weight array
+          indC(7) = 0
+          do i = 7, 2, -1
+             if (indC(i-1) > 0) then
+                if (indC(i) == 0) indC(i) = ierr
+                ierr = indC(i-1)
+             end if
+          end do
        end if
 
        if (ffa_cmdlinearg_isTrue('useOldWAVGM')) then !TODO: Remove this later
@@ -238,11 +248,12 @@ contains
 
           if (refC >= 0) then
              !! Compute constraint coefficients from the WAVGM definitions
-             call wavgmConstrEqn (xel,i,nenod,indC,txc,tyc,tzc, &
+             call wavgmConstrEqn (xel,i,nenod,indC(1:6),txc,tyc,tzc, &
                   &               mmnpc(mpmnpc(iel):mpmnpc(iel+1)-1), &
                   &               epsX,tolX,deltaX,work,weight,omega,ipsw,lpu)
-          else ! Explicit constraints (assuming 6 DOFs per independent node)
-             call explConstrEqn (6*nenod,indC(i),weight,omega)
+          else ! Explicit constraints
+             nw = (indC(i+1) - indC(i)) / nenod
+             call explConstrEqn (nenod,indC(i),nw,weight,omega)
           end if
 
           !! Find global DOF numbers for the independent DOFs
@@ -337,14 +348,22 @@ contains
   !> @details Assuming here that all independent nodes have six DOFs.
   !> See also FFlSesamReader::readLinearDependencies(), where the
   !> weight matrix is populated from the SESAM BLDEP records.
-  subroutine explConstrEqn (nedof,indC,weight,omega)
-    integer , intent(in)  :: nedof, indC
+  subroutine explConstrEqn (nenod,i1,nndof,weight,omega)
+    integer , intent(in)  :: nenod, i1, nndof
     real(dp), intent(in)  :: weight(:)
-    real(dp), intent(out) :: omega(:)
-    if (indC > 0 .and. indC+nedof-1 <= size(weight)) then
-       call DCOPY (nedof,weight(indC),1,omega(1),1)
-    else ! Assume equal weight on all DOFs
-       call DCOPY (nedof,1.0_dp,0,omega(1),1)
+    real(dp), intent(out) :: omega(6,nenod)
+    if (i1 < 1) then
+       !! Assume equal weight on all DOFs
+       call DCOPY (6*nenod,1.0_dp,0,omega(1,1),1)
+    else if (nndof >= 6) then
+       call DCOPY (6*nenod,weight(i1),1,omega(1,1),1)
+    else
+       k = i1
+       do j = 1, nenod
+          omega(1:nndof  ,j) = weight(k:k+nndof-1)
+          omega(1+nndof:6,j) = 0.0_dp
+          k = k + nndof
+       end do
     end if
   end subroutine explConstrEqn
 

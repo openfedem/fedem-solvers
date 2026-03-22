@@ -23,7 +23,7 @@ module initiateSupElTypeModule
 contains
 
   !!============================================================================
-  !> @brief Initializes superelements with data from the input file.
+  !> @brief Initializes superelements with data from the solver input file.
   !>
   !> @param[in] infp File unit number for the solver input file
   !> @param[in] env Environmental data
@@ -59,7 +59,7 @@ contains
     use inputUtilities         , only : iuSetPosAtNextEntry
     use progressModule         , only : lterm
     use fileUtilitiesModule    , only : getDBGfile
-    use dbgUnitsModule         , only : dbgShadowPos
+    use dbgUnitsModule         , only : dbgCorot
     use reportErrorModule      , only : debugFileOnly_p, note_p, warning_p
     use reportErrorModule      , only : reportError, getErrorFile
     use reportErrorModule      , only : allocationError, internalError
@@ -140,7 +140,7 @@ contains
     call ffa_cmdlinearg_getint ('FNV',forceFNV)
     call ffa_cmdlinearg_getint ('stiffDampFiltering',stiffDampFiltering)
     call ffa_cmdlinearg_getint ('shadowPosAlg',defaultShadowPosAlg)
-    if (defaultShadowPosAlg < 0) dbgShadowPos = getDBGfile(14,'shadowPos.dbg')
+    if (defaultShadowPosAlg < 0) dbgCorot = getDBGfile(14,'shadowPos.dbg')
 
     massGrowth = 0.0_dp
     massIntFluid = 0.0_dp
@@ -369,7 +369,7 @@ contains
           call TransformOffset (sups(idIn),offset2,2)
           call TransformOffset (sups(idIn),offset3,3)
           stat = 1 ! Initiate the co-rotated superelement coordinate system
-          call updateSupElCorot (sups(idIn),dbgShadowPos,stat)
+          call updateSupElCorot (sups(idIn),dbgCorot,stat)
           if (stat < 0) err = err - 1
        end if
 
@@ -740,7 +740,7 @@ contains
 
   contains
 
-    !> @brief Subroutine for debug print of a superelement matrix.
+    !> @cond NO_DOCUMENTAION
     subroutine writeSupMatrix (label,sup,A)
       use manipMatrixModule, only : writeObject
 
@@ -752,6 +752,7 @@ contains
       write(lpuDbg,"()")
 
     end subroutine writeSupMatrix
+    !> @endcond
 
     !> @brief Computes structural damping matrix assuming Rayleigh damping.
     subroutine computeStructDamping (C,M,K,alpha1,alpha2)
@@ -853,7 +854,7 @@ contains
     use MassMatrixCorrectionModule, only : mmcRigidMassProperties
     use MassMatrixCorrectionModule, only : mmcInitMassMatrixCorrection
     use CorotUtilModule           , only : formShadowPosGrad
-    use dbgUnitsModule            , only : dbgShadowPos
+    use dbgUnitsModule            , only : dbgCorot
     use reportErrorModule         , only : reportError, debugFileOnly_p
 
     type(SamType)   , intent(in)    :: sam
@@ -899,7 +900,7 @@ contains
        if ( any(sups(idIn)%stressStiffFlag > 0) .or. &
             sups(idIn)%shadowPosAlg > 1 ) then
           !! Establish gradients of shadow element position
-          call formShadowPosGrad (sups(idIn),dbgShadowPos,err)
+          call formShadowPosGrad (sups(idIn),dbgCorot,err)
           if (err < 0) exit
           if (err > 0) lerr = lerr + 1
        end if
@@ -985,8 +986,8 @@ contains
     use SupElTypeModule  , only : SupElType
     use reportErrorModule, only : reportError, error_p, note_p, debugFileOnly_p
 
-    type(SupElType) , intent(inout) :: sup
     character(len=*), intent(in)    :: fileNames(4)
+    type(SupElType) , intent(inout) :: sup
     integer         , intent(out)   :: ierr
 
     !! Local variables
@@ -1074,8 +1075,8 @@ contains
     use reportErrorModule, only : allocationError, reportError
     use reportErrorModule, only : error_p, note_p, debugFileOnly_p
 
-    type(SupElType) , intent(inout) :: sup
     character(len=*), intent(in)    :: fileNames(5)
+    type(SupElType) , intent(inout) :: sup
     integer         , intent(in)    :: numData
     integer         , intent(out)   :: ierr
 
@@ -1212,7 +1213,7 @@ contains
   !!============================================================================
   !> @brief Writes a Fortran90 subroutine with hard-coded superelement matrices.
   !>
-  !> @param sups All superelements in the model
+  !> @param[in] sups All superelements in the model
   !> @param[out] ierr Error flag
   !>
   !> @callergraph

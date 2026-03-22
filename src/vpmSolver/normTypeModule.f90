@@ -5,43 +5,51 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
+!> @file normTypeModule.f90
+!>
+!> @brief Convergence norm data containers.
+
+!!==============================================================================
+!> @brief Module with data types representing convergence norm objects.
+!>
+!> @details The module also contains subroutines for accessing the norm data.
+
 module NormTypeModule
 
   use kindModule, only : dp
 
   implicit none
 
-  integer, parameter :: oneOf_p = 1, &
-       &                allOf_p = 2
-
-  integer, parameter :: nNormTypes_p = 4
-  integer, parameter :: iVecNorm_p = 1, &
-       &                iInfTra_p  = 2, &
-       &                iInfRot_p  = 3, &
-       &                iInfGen_p  = 4
+  integer, parameter :: nNormTypes_p = 4  !< Total number of norm types
+  integer, parameter :: iVecNorm_p = 1, & !< Index for L_2 displacement norm
+       &                iInfTra_p  = 2, & !< Index for L_inf translation norm
+       &                iInfRot_p  = 3, & !< Index for L_inf rotation norm
+       &                iInfGen_p  = 4   !< Index for L_inf generalized DOF norm
 
 
+  !> @brief Data type representing a convergence check definition.
   type TestItemType
-     character(len=12) :: title ! Name to be used in res-file headings
-     integer  :: code      ! ON/OFF switch for this norm (0, oneOf_p, allOf_p)
-     integer  :: nIterIncr ! Number of iterations with increasing norm value
-     real(dp) :: value     ! The current value of this convergence norm
-     real(dp) :: tolerance ! The actual convergence tolerance for this norm
-     real(dp) :: absTol    ! Absolute convergence tolerance for this norm
-     real(dp) :: relTol    ! Velocity proportional tolerance for this norm
+     character(len=12) :: title !< Name to be used in res-file headings
+     integer  :: code      !< ON/OFF switch for this norm
+     integer  :: nIterIncr !< Number of iterations with increasing norm value
+     real(dp) :: value     !< The current value of this convergence norm
+     real(dp) :: tolerance !< The actual convergence tolerance for this norm
+     real(dp) :: absTol    !< Absolute convergence tolerance for this norm
+     real(dp) :: relTol    !< Velocity proportional tolerance for this norm
   end type TestItemType
 
+  !> @brief Data type representing a set of convergence checks.
   type TestSetType
-     logical            :: doingWell
-     logical            :: isActive(3)
-     integer            :: startMonitor
-     integer , pointer  :: worstDOFs(:,:)
-     real(dp), pointer  :: worstEnerg(:)
-     type(TestItemType) :: disNorms(nNormTypes_p)
-     type(TestItemType) :: velNorms(nNormTypes_p)
-     type(TestItemType) :: accNorms(nNormTypes_p)
-     type(TestItemType) :: resNorms(nNormTypes_p)
-     type(TestItemType) :: energyNorms(2)
+     logical :: doingWell    !< If .true., the convergence is good
+     logical :: isActive(3)  !< Activation flags (dis/vel/acc, force, energy)
+     integer :: startMonitor !< Search for worst DOFs id iter &gt; startMonitor
+     integer , pointer  :: worstDOFs(:,:) !< Worst DOFs when convergence is slow
+     real(dp), pointer  :: worstEnerg(:)  !< Worst energy when slow convergence
+     type(TestItemType) :: disNorms(nNormTypes_p) !< Displacement norms
+     type(TestItemType) :: velNorms(nNormTypes_p) !< Velocity norms
+     type(TestItemType) :: accNorms(nNormTypes_p) !< Acceleration norms
+     type(TestItemType) :: resNorms(nNormTypes_p) !< Force residual norms
+     type(TestItemType) :: energyNorms(2)         !< Energy norms
   end type TestSetType
 
   private :: InitTolerance
@@ -49,13 +57,16 @@ module NormTypeModule
 
 contains
 
-  subroutine NullifyConvSet (convSet)
+  !!============================================================================
+  !> @brief Initializes a set of convergence checks object.
+  !>
+  !> @param[out] convSet The normtypemodule::testsettype object to initialize
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 Jun 2004
 
-    !!==========================================================================
-    !! Initialize the TestSetType object.
-    !!
-    !! Programmer : Knut Morten Okstad                           30 Jun 2004/1.0
-    !!==========================================================================
+  subroutine NullifyConvSet (convSet)
 
     type(TestSetType), intent(out) :: convSet
 
@@ -70,13 +81,16 @@ contains
   end subroutine NullifyConvSet
 
 
-  subroutine DeallocateConvSet (convSet)
+  !!============================================================================
+  !> @brief Deallocates a set of convergence checks object.
+  !>
+  !> @param convSet The normtypemodule::testsettype object to deallocate
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 23 Jan 2017
 
-    !!==========================================================================
-    !! Deallocate the TestSetType object.
-    !!
-    !! Programmer : Knut Morten Okstad                           23 Jan 2017/1.0
-    !!==========================================================================
+  subroutine DeallocateConvSet (convSet)
 
     type(TestSetType), intent(inout) :: convSet
 
@@ -90,13 +104,23 @@ contains
   end subroutine DeallocateConvSet
 
 
-  subroutine InitConvChecks (convSet,maxIt,monWorst,monIter,relTol,err)
+  !!============================================================================
+  !> @brief Initialize the convergence checks from command-line options.
+  !>
+  !> @param convSet Set of convergence checks
+  !> @param[in] maxIt Maximum number of iterations per time step
+  !> @param[in] monWorst Number of DOFs to monitor on poor convergence
+  !> @param[in] monIter Number of iterations to monitor before @a maxit
+  !> @param[in] relTol Velocity proportional tolerance on velocity corrections
+  !> @param[out] err Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 30 Jun 2004
 
-    !!==========================================================================
-    !! Initialize the TestSetType object with tolerance data from command-line.
-    !!
-    !! Programmer : Knut Morten Okstad                           30 Jun 2004/1.0
-    !!==========================================================================
+  subroutine InitConvChecks (convSet,maxIt,monWorst,monIter,relTol,err)
 
     use reportErrorModule, only : allocationError, reportError, note_p,warning_p
 
@@ -154,14 +178,20 @@ contains
   end subroutine InitConvChecks
 
 
-  subroutine InitTolerance (tolType,normName,testItem)
+  !!============================================================================
+  !> @brief Initializes a convergence check with data from command-line.
+  !>
+  !> @param[in] tolType Command-line option to get convergence tolerance from
+  !> @param[in] normName Name of solution norm defining the convergence check
+  !> @param testItem The convergence check object to initialize
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 29 Apr 2003
 
-    !!==========================================================================
-    !! Initialize the TestItemType object with tolerance data from command-line.
-    !!
-    !! Programmer : Bjorn Haugen                      date/rev : 28 Mar 2003/1.0
-    !!              Knut Morten Okstad                           29 Apr 2003/2.0
-    !!==========================================================================
+  subroutine InitTolerance (tolType,normName,testItem)
 
     use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getdouble
 
@@ -184,22 +214,28 @@ contains
     call ffa_cmdlinearg_getdouble (tolType,value)
     if (value > 0.0_dp) then
        testItem%absTol = value
-       testItem%code   = allOf_p
+       testItem%code   = 2 ! allOf
     else if (value < 0.0_dp) then
        testItem%absTol = -value
-       testItem%code   = oneOf_p
+       testItem%code   = 1 ! oneOf
     end if
 
   end subroutine InitTolerance
 
 
-  function HasConverged (convSet,factor_opt)
+  !!============================================================================
+  !> @brief Checks if the state of the convergence checks set is converged.
+  !>
+  !> @param convSet Set of convergence checks
+  !> @param[in] factor_opt Optional tolerance scaling factor
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 28 Mar 2003
 
-    !!==========================================================================
-    !! Check if the state of the convSet is a converged set.
-    !!
-    !! Programmer : Bjorn Haugen                      date/rev : 28 Mar 2003/1.0
-    !!==========================================================================
+  function HasConverged (convSet,factor_opt)
 
     type(TestSetType) , intent(in) :: convSet
     real(dp), optional, intent(in) :: factor_opt
@@ -208,6 +244,8 @@ contains
     !! Local variables
     logical :: testsExist(2), oneOfTest, allOfTest
     integer :: iNorm
+    integer, parameter :: oneOf_p = 1, allOf_p = 2
+
 
     !! --- Logic section ---
 
@@ -230,6 +268,7 @@ contains
 
   contains
 
+    !> @brief Evaluates the state of a convergence check.
     subroutine TestItem (item)
       type(TestItemType), intent(in) :: item
       real(dp) :: tol
@@ -249,15 +288,20 @@ contains
   end function HasConverged
 
 
-  subroutine checkDivergence (testItem,value,mayDiverge)
+  !!============================================================================
+  !> @brief Check if a given norm is showing sign of possible divergence.
+  !>
+  !> @param testItem The convergence check object to check for dovergence
+  !> @param[in] value Current norm value
+  !> @param mayDiverge If .true., a possible divergence is detected
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 19 Mar 2004
 
-    !!==========================================================================
-    !! Check if a given norm is showing sign of possible divergence.
-    !! If the norm value is increasing in maxIterIncrBeforeWarning_p sequential
-    !! iterations within a time step, a possible divergence is flagged.
-    !!
-    !! Programmer : Knut Morten Okstad                date/rev : 19 Mar 2004/1.0
-    !!==========================================================================
+  subroutine checkDivergence (testItem,value,mayDiverge)
 
     type(TestItemType), intent(inout) :: testItem
     real(dp)          , intent(in)    :: value

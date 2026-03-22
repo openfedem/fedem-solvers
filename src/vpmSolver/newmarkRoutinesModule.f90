@@ -579,7 +579,7 @@ contains
     use addInSysModule           , only : BuildNewtonMat, GetForceVectors
     use profilerModule           , only : startTimer, stopTimer, sol_p, upd_p
     use progressModule           , only : lterm
-    use dbgUnitsModule           , only : dbgSolve, dbgShadowPos
+    use dbgUnitsModule           , only : dbgSolve, dbgCorot
     use explicitFunctionsModule  , only : dbgFunc
     use reportErrorModule        , only : reportError, debugFileOnly_p, error_p
     use reportErrorModule        , only : note_p, warning_p, warningFileOnly_p
@@ -724,8 +724,8 @@ contains
 
           isPredictorStep = iopAlg > 0 .or. mod(NewmarkFlag,10) == 2
 
-          if (dbgShadowPos > 0) then
-             write(dbgShadowPos,"('====== Time = ',1p,E12.3)") sys%time
+          if (dbgCorot > 0) then
+             write(dbgCorot,"('====== Time = ',1p,E12.3)") sys%time
           end if
 
           !! Update mechanism (including frictions) based on predicted
@@ -770,8 +770,8 @@ contains
 
           isPredictorStep = .false.
 
-          if (dbgShadowPos > 0) then
-             write(dbgShadowPos,"('------ Iter = ',I3)") sys%nIterThisStep
+          if (dbgCorot > 0) then
+             write(dbgCorot,"('------ Iter = ',I3)") sys%nIterThisStep
           end if
 
           !! Update mechanism to transfer the control output onto the mechanism
