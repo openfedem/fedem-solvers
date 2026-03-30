@@ -52,13 +52,14 @@ module SensorTypeModule
   integer, parameter :: NUM_ITERATIONS_p = 13 !< Iterations sensor enum value
 
   !> Sensor entity strings, i.e., which result quantity the sensor is measuring
-  character(len=7), parameter :: sensorEntity_p(13)= (/ 'POS    ', &
+  character(len=7), parameter :: sensorEntity_p(14)= (/ 'POS    ', &
        &                                                'VEL    ', &
        &                                                'ACC    ', &
        &                                                'DEFL   ', &
        &                                                'FORCE  ', &
        &                                                'LENGTH ', &
        &                                                'REL_POS', &
+       &                                                'ANGLE  ', &
        &                                                'W_SPEED', &
        &                                                'F_VEL  ', &
        &                                                'F_ACC  ', &
@@ -73,12 +74,13 @@ module SensorTypeModule
   integer, parameter :: FORCE_p   = 5 !< Force sensor enum value
   integer, parameter :: LENGTH_p  = 6 !< Length sensor enum value
   integer, parameter :: REL_POS_p = 7 !< Relative position sensor enum value
-  integer, parameter :: W_SPEED_p = 8 !< Wind speed sensor enum value
-  integer, parameter :: F_VEL_p   = 9 !< Fluid velocity sensor enum value
-  integer, parameter :: F_ACC_p  = 10 !< Fluid acceleration sensor enum value
-  integer, parameter :: DYN_P_p  = 11 !< Dynamic pressure sensor enum value
-  integer, parameter :: STRAIN_p = 12 !< Strain sensor enum value
-  integer, parameter :: STRESS_p = 13 !< Stress sensor enum value
+  integer, parameter :: ANGLE_p   = 8 !< Relative angle sensor enum value
+  integer, parameter :: W_SPEED_p = 9 !< Wind speed sensor enum value
+  integer, parameter :: F_VEL_p  = 10 !< Fluid velocity sensor enum value
+  integer, parameter :: F_ACC_p  = 11 !< Fluid acceleration sensor enum value
+  integer, parameter :: DYN_P_p  = 12 !< Dynamic pressure sensor enum value
+  integer, parameter :: STRAIN_p = 13 !< Strain sensor enum value
+  integer, parameter :: STRESS_p = 14 !< Stress sensor enum value
 
   !> Coordinate system type strings
   character(len=6), parameter :: sensorSystem_p(2) = (/ 'GLOBAL', &
@@ -95,8 +97,7 @@ module SensorTypeModule
      integer      :: entity !< Result quantity type to be measured
      integer      :: system !< Global/local flag for measured quantity
      integer      :: dof    !< Local dof index of measured quantity
-     integer      :: index  !< Index to the measured object
-     integer      :: index2 !< Index to 2nd measured object for relative sensors
+     integer , pointer :: index(:) !< Indices to the measured object(s)
      real(dp), pointer :: value !< Pointer to current sensor value
      logical      :: allocValue !< If .true., the @a value is allocated
   end type SensorType
@@ -182,7 +183,10 @@ contains
     integer         , intent(in) :: lpu
     integer,optional, intent(in) :: complexity
 
-    !! Logic section
+    !! Local variables
+    integer :: i, idx
+
+    !! --- Logic section ---
 
     write(lpu,'(A)') 'Sensor','{'
     call writeId (sensor%id,lpu)
@@ -202,31 +206,42 @@ contains
        write(lpu,*) 'dof         =', sensor%dof
     end if
 
-    select case (sensor%type)
+    if (associated(sensor%index)) then
+       if (size(sensor%index) > 0) then
+          idx = sensor%index(1)
+       else
+          idx = 0
+       end if
+       select case (sensor%type)
 
-    case (TRIAD_p, RELATIVE_TRIAD_p)
-       if (sensor%index  > 0) write(lpu,*) 'triad1 #    =', sensor%index
-       if (sensor%index2 > 0) write(lpu,*) 'triad2 #    =', sensor%index2
+       case (TRIAD_p, RELATIVE_TRIAD_p)
+          do i = 1, size(sensor%index)
+             if (sensor%index(i) > 0) then
+                write(lpu,*) ' triad'//char(ichar('0')+i)//' #    =', &
+                     &       sensor%index(i)
+             end if
+          end do
 
-    case (JOINT_VARIABLE_p)
-       if (sensor%index  > 0) write(lpu,*) 'joint #     =', sensor%index
+       case (JOINT_VARIABLE_p)
+          if (idx  > 0) write(lpu,*) 'joint #     =', idx
 
-    case (SPRING_AXIAL_p, SPRING_JOINT_p)
-       if (sensor%index  > 0) write(lpu,*) 'spring #    =', sensor%index
+       case (SPRING_AXIAL_p, SPRING_JOINT_p)
+          if (idx  > 0) write(lpu,*) 'spring #    =', idx
 
-    case (DAMPER_AXIAL_p, DAMPER_JOINT_p)
-       if (sensor%index  > 0) write(lpu,*) 'damper #    =', sensor%index
+       case (DAMPER_AXIAL_p, DAMPER_JOINT_p)
+          if (idx  > 0) write(lpu,*) 'damper #    =', idx
 
-    case (MATLAB_WS_p)
-       if (sensor%index  > 0) write(lpu,*) 'extCtrlSys # =', sensor%index
+       case (MATLAB_WS_p)
+          if (idx  > 0) write(lpu,*) 'extCtrlSys # =', idx
 
-    case (ENGINE_p)
-       if (sensor%index  > 0) write(lpu,*) 'engine #    =', sensor%index
+       case (ENGINE_p)
+          if (idx  > 0) write(lpu,*) 'engine #    =', idx
 
-    case (STRAIN_GAGE_p)
-       if (sensor%index  > 0) write(lpu,*) 'strainGage # =', sensor%index
+       case (STRAIN_GAGE_p)
+          if (idx  > 0) write(lpu,*) 'strainGage # =', idx
 
-    end select
+       end select
+    end if
 
     if (present(complexity)) then
        if (complexity >= 2 .and. associated(sensor%value)) then
@@ -264,8 +279,7 @@ contains
     sensor%entity = 0
     sensor%system = 0
     sensor%dof    = 0
-    sensor%index  = 0
-    sensor%index2 = 0
+    nullify(sensor%index)
     nullify(sensor%value)
     sensor%allocValue = .false.
 
@@ -293,6 +307,7 @@ contains
 
     call deallocateId (sensor%id)
 
+    if (associated(sensor%index)) deallocate(sensor%index)
     if (sensor%allocValue) deallocate(sensor%value)
 
     call nullifySensor (sensor)

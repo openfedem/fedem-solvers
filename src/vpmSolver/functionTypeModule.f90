@@ -900,8 +900,8 @@ contains
             case (CONTROL_p, MATLAB_WS_p)
                return
             case (ENGINE_p)
-               if (engine%args(j)%p%index > 0) then
-                  if (haveCtrlSysArg(engines(engine%args(j)%p%index))) return
+               if (engine%args(j)%p%index(1) > 0) then
+                  if (haveCtrlSysArg(engines(engine%args(j)%p%index(1)))) return
                end if
             end select
          end if
