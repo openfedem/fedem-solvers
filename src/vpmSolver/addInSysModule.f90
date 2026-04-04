@@ -20,7 +20,7 @@ module AddInSysModule
 
   implicit none
 
-  private ::  hasL0Change
+  private :: hasL0Change
 
 
 contains
@@ -272,7 +272,7 @@ contains
           call addInSpringStiffMat (.true., scaleK, Nmat, &
                &                    mech%axialSprings(i), sam, ierr, Rhs)
           if (ierr < 0) goto 900
-          if (.not.hasL0Change(mech%axialSprings(i))) then
+          if (.not. hasL0Change(mech%axialSprings(i))) then
              scaleD = scaleC*scaleD
              call addInSpringStiffMat (.false., scaleD, Nmat, &
                   &                    mech%axialSprings(i), sam, ierr, Rhs)
@@ -777,9 +777,11 @@ contains
     do i = 1, size(mech%axialSprings)
        call addInSpringForces (FSk, RFk, mech%axialSprings(i), sam, ierr)
        scaleD = mech%axialSprings(i)%alpha2 + alpha2
-       if (scaleD > 0.0_dp .and. .not.hasL0Change(mech%axialSprings(i))) then
-          call addInSpringForces (FDk, RFk, mech%axialSprings(i), sam, &
-               &                  scaleD, ierr)
+       if (scaleD > 0.0_dp) then
+          if (.not. hasL0Change(mech%axialSprings(i))) then
+             call addInSpringForces (FDk, RFk, mech%axialSprings(i), sam, &
+                  &                  scaleD, ierr)
+          end if
        end if
     end do
     do i = 1, size(mech%joints)
