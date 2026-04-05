@@ -343,10 +343,20 @@ class FedemModeler(FedemModel):
             c_int,
             c_int,
             c_int,
+            c_int,
+            c_int,
         ]
 
         self._fmlib.FmSetFunctionArg.restype = c_bool
-        self._fmlib.FmSetFunctionArg.argtypes = [c_int, c_int, c_int, c_int, c_int]
+        self._fmlib.FmSetFunctionArg.argtypes = [
+            c_int,
+            c_int,
+            c_int,
+            c_int,
+            c_int,
+            c_int,
+            c_int,
+        ]
 
         self._fmlib.FmLoadPart.restype = c_int
         self._fmlib.FmLoadPart.argtypes = [c_char_p, c_char_p]
@@ -1131,9 +1141,17 @@ class FedemModeler(FedemModel):
         if isinstance(obj, tuple):
             obj1_ = self._convert_id(obj[0])
             obj2_ = self._convert_id(obj[1])
+            if len(obj) > 3:
+                obj3_ = self._convert_id(obj[2])
+                obj4_ = self._convert_id(obj[3])
+            else:
+                obj3_ = c_int(0)
+                obj4_ = c_int(0)
         else:
             obj1_ = self._convert_id(obj)
             obj2_ = c_int(0)
+            obj3_ = c_int(0)
+            obj4_ = c_int(0)
 
         return self._fmlib.FmCreateSensor(
             _convert_char(name),
@@ -1142,6 +1160,8 @@ class FedemModeler(FedemModel):
             _convert_int(dof),
             obj1_,
             obj2_,
+            obj3_,
+            obj4_,
         )
 
     def make_fe_part(self, file, name=None, tag=None):
@@ -1199,8 +1219,8 @@ class FedemModeler(FedemModel):
 
         n_ = c_int(n_triads)
         t_ = (c_int * n_triads)()
-        tr_[:] = [self._convert_id(t, FmType.TRIAD) for t in triads]
-        base_id = self._fmlib.FmCreatePart(_convert_char(name), n_, tr_)
+        t_[:] = [self._convert_id(t, FmType.TRIAD) for t in triads]
+        base_id = self._fmlib.FmCreatePart(_convert_char(name), n_, t_)
         if base_id < 1:
             return base_id
 
@@ -1712,9 +1732,17 @@ class FedemModeler(FedemModel):
         if isinstance(obj, tuple):
             obj1_ = self._convert_id(obj[0])
             obj2_ = self._convert_id(obj[1])
+            if len(obj) > 3:
+                obj3_ = self._convert_id(obj[2])
+                obj4_ = self._convert_id(obj[3])
+            else:
+                obj3_ = c_int(0)
+                obj4_ = c_int(0)
         else:
             obj1_ = self._convert_id(obj)
             obj2_ = c_int(0)
+            obj3_ = c_int(0)
+            obj4_ = c_int(0)
 
         retval = self._fmlib.FmSetFunctionArg(
             _convert_int(func_id),
@@ -1722,6 +1750,8 @@ class FedemModeler(FedemModel):
             _convert_int(dof),
             obj1_,
             obj2_,
+            obj3_,
+            obj4_,
         )
 
         if not retval:
