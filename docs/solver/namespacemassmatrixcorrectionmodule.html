@@ -69,23 +69,35 @@ $(function() {
 <div class="title">massmatrixcorrectionmodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with subroutines for superelement mass matrix correction.  
+<a href="namespacemassmatrixcorrectionmodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ac87a6535b0ec6104d2fd45b994bd5f86"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86">mmcrigaccelvectors</a> (supel, rotCenter, rigVdd)</td></tr>
+<tr class="memdesc:ac87a6535b0ec6104d2fd45b994bd5f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the 6 rigid body acceleration vectors for a superelement.  <a href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86">More...</a><br /></td></tr>
 <tr class="separator:ac87a6535b0ec6104d2fd45b994bd5f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac271aeecaedd7132bc21b3325a45fd9b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b">mmcrigidmassproperties</a> (supel, ierr)</td></tr>
+<tr class="memdesc:ac271aeecaedd7132bc21b3325a45fd9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the rigid body mass properties for a superelement.  <a href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b">More...</a><br /></td></tr>
 <tr class="separator:ac271aeecaedd7132bc21b3325a45fd9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc02e4d6417589bfb423a7184405b722"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722">mmcinitmassmatrixcorrection</a> (supel, ierr)</td></tr>
+<tr class="memdesc:afc02e4d6417589bfb423a7184405b722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the matrix (R^t*R)^-1*R^t for mass matrix correction.  <a href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722">More...</a><br /></td></tr>
 <tr class="separator:afc02e4d6417589bfb423a7184405b722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd6a6c9f9429cf03eb17c018f047e595"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595">mmcmassmatrixcorrection</a> (supel, elVd, momentError, forceError, radiusVec, ErrNorm, ierr)</td></tr>
+<tr class="memdesc:acd6a6c9f9429cf03eb17c018f047e595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the error in the mass matrix.  <a href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595">More...</a><br /></td></tr>
 <tr class="separator:acd6a6c9f9429cf03eb17c018f047e595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a904925e4f8c79e1a648da018b24a4936"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936">mmcmassmatrixwarning</a> (supel, uld, ierr)</td></tr>
+<tr class="memdesc:a904925e4f8c79e1a648da018b24a4936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the error in the mass matrix and print warning if increasing.  <a href="namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936">More...</a><br /></td></tr>
 <tr class="separator:a904925e4f8c79e1a648da018b24a4936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a994e2c29b91549c87add6aa68229b1"><td class="memItemLeft" align="right" valign="top">real(dp) function, dimension(sup%ntotdofs)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#a4a994e2c29b91549c87add6aa68229b1">mmcgetmasstorquecorrection</a> (sup)</td></tr>
+<tr class="memdesc:a4a994e2c29b91549c87add6aa68229b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a correction force vector that accounts for the mass matrix error.  <a href="namespacemassmatrixcorrectionmodule.html#a4a994e2c29b91549c87add6aa68229b1">More...</a><br /></td></tr>
 <tr class="separator:a4a994e2c29b91549c87add6aa68229b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with subroutines for superelement mass matrix correction. </p>
+<p>This module contains some subroutines for calculating mass matrix corrections for superelements what undergo high-speed rotations. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a4a994e2c29b91549c87add6aa68229b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a994e2c29b91549c87add6aa68229b1">&#9670;&nbsp;</a></span>mmcgetmasstorquecorrection()</h2>
 
@@ -101,6 +113,56 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns a correction force vector that accounts for the mass matrix error. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sup</td><td>The superelement to calculate for correction vector for</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Karl Erik Thoresen / Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1990s </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_cgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_cgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_cgraph" id="anamespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_cgraph">
+<area shape="rect" title="Returns a correction force vector that accounts for the mass matrix error." alt="" coords="5,27,232,69"/>
+<area shape="rect" href="FNVwaveForceModule_8f90.html#a9a0048950edd691805aa86cc576d4b18" title=" " alt="" coords="594,5,706,32"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595" title="Calculates the error in the mass matrix." alt="" coords="280,57,495,98"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="567,57,733,98"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="543,122,757,163"/>
+<area shape="rect" href="namespacerotationmodule.html#a18d3012bd1d5a24b64ed6600aac58da8" title="Computes the spin (skew&#45;symmetric) tensor from the rotation vector." alt="" coords="571,188,729,215"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_icgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_icgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_icgraph" id="anamespacemassmatrixcorrectionmodule_a4a994e2c29b91549c87add6aa68229b1_icgraph">
+<area shape="rect" title="Returns a correction force vector that accounts for the mass matrix error." alt="" coords="1527,179,1753,221"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a4fa23a365d753487fee11a133a8c43af" title="Updates all superelements in the model based on the computed state." alt="" coords="1320,179,1479,221"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#ae099843d3bb1498026518a0f5d321b37" title="Updates the configuration after initial static equilibrium." alt="" coords="1089,131,1270,173"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a66a6b6c2901da72d85633d6374e189c2" title="Updates all mechanism objects." alt="" coords="1087,211,1272,253"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="855,103,1037,145"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,109,800,136"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,5,519,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,56,519,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,107,519,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,157,519,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,208,519,235"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="853,182,1039,223"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,247,805,289"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="853,299,1039,341"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,259,572,285"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,259,83,285"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,259,341,285"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,309,338,336"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -129,6 +191,46 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes the matrix (R^t*R)^-1*R^t for mass matrix correction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">supel</td><td>The superelement to calculate the rtr_r matrix for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Karl Erik Thoresen / Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1990s </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_cgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_cgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_cgraph" id="anamespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_cgraph">
+<area shape="rect" title="Initializes the matrix (R^t*R)^&#45;1*R^t for mass matrix correction." alt="" coords="5,71,232,112"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="304,5,471,47"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="280,71,495,112"/>
+<area shape="rect" href="namespacedensematrixmodule.html#a15392a4ff9de4934977af94f5fa8b527" title="Solves the linear equation system A*x = B." alt="" coords="307,136,468,177"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_icgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_icgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_icgraph" id="anamespacemassmatrixcorrectionmodule_afc02e4d6417589bfb423a7184405b722_icgraph">
+<area shape="rect" title="Initializes the matrix (R^t*R)^&#45;1*R^t for mass matrix correction." alt="" coords="896,99,1123,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="667,99,848,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -174,7 +276,7 @@ Functions/Subroutines</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(dp), dimension(3), intent(out), optional&#160;</td>
+          <td class="paramtype">real(dp), dimension(2), intent(out), optional&#160;</td>
           <td class="paramname"><em>ErrNorm</em>, </td>
         </tr>
         <tr>
@@ -195,6 +297,66 @@ Functions/Subroutines</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Calculates the error in the mass matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">supel</td><td>The superelement to calculate the mass matrix error for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">elVd</td><td>Superelement velocity vector in local axis directions </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">momentError</td><td>Torque error estimate for the superelement </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">forceError</td><td>Force error estimate for the superelement </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">radiusVec</td><td>Vector from axis of rotation to center of gravity </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ErrNorm</td><td>Error norms </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Karl Erik Thoresen / Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1990s </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_cgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_cgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_cgraph" id="anamespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_cgraph">
+<area shape="rect" title="Calculates the error in the mass matrix." alt="" coords="5,90,220,131"/>
+<area shape="rect" href="FNVwaveForceModule_8f90.html#a9a0048950edd691805aa86cc576d4b18" title=" " alt="" coords="319,5,431,32"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="292,57,459,98"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="268,122,483,163"/>
+<area shape="rect" href="namespacerotationmodule.html#a18d3012bd1d5a24b64ed6600aac58da8" title="Computes the spin (skew&#45;symmetric) tensor from the rotation vector." alt="" coords="297,188,454,215"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_icgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_icgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_icgraph" id="anamespacemassmatrixcorrectionmodule_acd6a6c9f9429cf03eb17c018f047e595_icgraph">
+<area shape="rect" title="Calculates the error in the mass matrix." alt="" coords="1832,205,2047,246"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#a4a994e2c29b91549c87add6aa68229b1" title="Returns a correction force vector that accounts for the mass matrix error." alt="" coords="1557,171,1784,213"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936" title="Checks the error in the mass matrix and print warning if increasing." alt="" coords="1563,237,1778,278"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a4fa23a365d753487fee11a133a8c43af" title="Updates all superelements in the model based on the computed state." alt="" coords="1337,171,1495,213"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#ae099843d3bb1498026518a0f5d321b37" title="Updates the configuration after initial static equilibrium." alt="" coords="1091,47,1272,89"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a66a6b6c2901da72d85633d6374e189c2" title="Updates all mechanism objects." alt="" coords="1089,171,1274,213"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="856,18,1037,59"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,107,800,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,5,519,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,56,519,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,107,519,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,157,519,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,208,519,235"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="854,201,1039,242"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,233,805,274"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="854,266,1039,307"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,277,572,304"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,252,83,279"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,328,341,355"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,227,338,253"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a3fa4d249fc98cfd0f2b194b2c7ef1bd5" title="Calculates the system energy contributions from a superelement." alt="" coords="1323,237,1509,278"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="1088,237,1275,278"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#ab0df93c47539f0ca4c44728c4cbb87c7" title="Initializes the energy integration variables." alt="" coords="853,135,1040,177"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -230,6 +392,55 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks the error in the mass matrix and print warning if increasing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">supel</td><td>The superelement to check mass matrix error for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uld</td><td>Superelement velocity vector in local axis directions </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Karl Erik Thoresen / Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1990s </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_cgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_cgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_cgraph" id="anamespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_cgraph">
+<area shape="rect" title="Checks the error in the mass matrix and print warning if increasing." alt="" coords="5,58,220,99"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a5762b6bd35e833d000e6db4bcda3df60" title="Returns the value of an integer command&#45;line option id." alt="" coords="282,25,469,66"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595" title="Calculates the error in the mass matrix." alt="" coords="268,90,483,131"/>
+<area shape="rect" href="FNVwaveForceModule_8f90.html#a9a0048950edd691805aa86cc576d4b18" title=" " alt="" coords="582,5,694,32"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="555,57,721,98"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="531,122,745,163"/>
+<area shape="rect" href="namespacerotationmodule.html#a18d3012bd1d5a24b64ed6600aac58da8" title="Computes the spin (skew&#45;symmetric) tensor from the rotation vector." alt="" coords="559,188,717,215"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_icgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_icgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_icgraph" id="anamespacemassmatrixcorrectionmodule_a904925e4f8c79e1a648da018b24a4936_icgraph">
+<area shape="rect" title="Checks the error in the mass matrix and print warning if increasing." alt="" coords="1093,150,1308,191"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a3fa4d249fc98cfd0f2b194b2c7ef1bd5" title="Calculates the system energy contributions from a superelement." alt="" coords="859,150,1045,191"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="624,150,811,191"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#ab0df93c47539f0ca4c44728c4cbb87c7" title="Initializes the energy integration variables." alt="" coords="389,110,576,151"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,187,574,213"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="149,107,323,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,259,83,285"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,208,341,235"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,259,338,285"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="ac87a6535b0ec6104d2fd45b994bd5f86"></a>
@@ -264,6 +475,58 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Generates the 6 rigid body acceleration vectors for a superelement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">supel</td><td>The superelement to generate the acceleration vectors for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rotCenter</td><td>The rotation center of the superelement </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">rigVdd</td><td>Rigid body acceleration vectors of the superelement</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Oct 1999 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_ac87a6535b0ec6104d2fd45b994bd5f86_icgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_ac87a6535b0ec6104d2fd45b994bd5f86_icgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_ac87a6535b0ec6104d2fd45b994bd5f86_icgraph" id="anamespacemassmatrixcorrectionmodule_ac87a6535b0ec6104d2fd45b994bd5f86_icgraph">
+<area shape="rect" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="2225,221,2440,262"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="1911,287,2177,313"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722" title="Initializes the matrix (R^t*R)^&#45;1*R^t for mass matrix correction." alt="" coords="1931,155,2157,197"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595" title="Calculates the error in the mass matrix." alt="" coords="1937,90,2151,131"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b" title="Calculates the rigid body mass properties for a superelement." alt="" coords="1937,221,2151,262"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="1960,353,2128,394"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="1659,221,1840,262"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="1323,217,1588,244"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,107,800,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,157,519,184"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,208,519,235"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,5,519,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,56,519,83"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,107,519,133"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#a4a994e2c29b91549c87add6aa68229b1" title="Returns a correction force vector that accounts for the mass matrix error." alt="" coords="1636,147,1863,189"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936" title="Checks the error in the mass matrix and print warning if increasing." alt="" coords="1642,82,1857,123"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a4fa23a365d753487fee11a133a8c43af" title="Updates all superelements in the model based on the computed state." alt="" coords="1376,147,1535,189"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#ae099843d3bb1498026518a0f5d321b37" title="Updates the configuration after initial static equilibrium." alt="" coords="1091,147,1272,189"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a66a6b6c2901da72d85633d6374e189c2" title="Updates all mechanism objects." alt="" coords="1089,293,1274,334"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="856,99,1037,141"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="854,318,1039,359"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,318,805,359"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="854,383,1039,425"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,325,572,352"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,300,83,327"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,376,341,403"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,325,338,352"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a3fa4d249fc98cfd0f2b194b2c7ef1bd5" title="Calculates the system energy contributions from a superelement." alt="" coords="1362,82,1549,123"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="1088,82,1275,123"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#ab0df93c47539f0ca4c44728c4cbb87c7" title="Initializes the energy integration variables." alt="" coords="853,34,1040,75"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="1665,382,1833,423"/>
+<area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="1356,389,1555,416"/>
+<area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="1135,389,1227,416"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="ac271aeecaedd7132bc21b3325a45fd9b"></a>
@@ -292,12 +555,55 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Calculates the rigid body mass properties for a superelement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">supel</td><td>The superelement to calculate mass properties for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Oct 1997 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Karl Erik Thoresen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>4 Jun 1998 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>14 Oct 1999 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jan 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_cgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_cgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_cgraph" id="anamespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_cgraph">
+<area shape="rect" title="Calculates the rigid body mass properties for a superelement." alt="" coords="5,39,220,80"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="292,5,459,47"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="268,71,483,112"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_icgraph.png" border="0" usemap="#anamespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_icgraph" alt=""/></div>
+<map name="anamespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_icgraph" id="anamespacemassmatrixcorrectionmodule_ac271aeecaedd7132bc21b3325a45fd9b_icgraph">
+<area shape="rect" title="Calculates the rigid body mass properties for a superelement." alt="" coords="896,99,1111,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="667,99,848,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

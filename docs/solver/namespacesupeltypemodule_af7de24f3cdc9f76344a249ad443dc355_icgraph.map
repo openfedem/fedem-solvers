@@ -1,7 +1,7 @@
 <map id="supeltypemodule::isbeam" name="supeltypemodule::isbeam">
 <area shape="rect" id="node1" title="Returns whether a superelement is a beam element or not." alt="" coords="1675,475,1865,502"/>
 <area shape="rect" id="node2" href="$namespacefiniteelementmodule.html#afa7067f78ff941890e63688fa6e7c2c3" title="Calculates the element matrices for a basic finite element." alt="" coords="1438,403,1605,444"/>
-<area shape="rect" id="node3" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="1162,247,1343,288"/>
+<area shape="rect" id="node3" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="1162,247,1343,288"/>
 <area shape="rect" id="node11" href="$namespacefiniteelementmodule.html#a14905ed31c92aafc8f043a2175446568" title="Calculates the max/min beam sectional forces and positions." alt="" coords="634,853,793,895"/>
 <area shape="rect" id="node16" href="$namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="1169,685,1337,727"/>
 <area shape="rect" id="node19" href="$namespacefiniteelementmodule.html#ad988f80ef2ecbf1afbdcabdcd20a94e6" title="Detects all beam joints in the model." alt="" coords="1442,220,1601,261"/>

@@ -75,40 +75,55 @@ $(function() {
 <div class="title">timeStepModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Subroutines/functions for automatic time stepping.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacetimestepmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html">timestepmodule</a></td></tr>
+<tr class="memdesc:namespacetimestepmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module with subroutines/functions for automatic time stepping. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aeef6fe463ac0290ac10f160651333a74"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#aeef6fe463ac0290ac10f160651333a74">timestepmodule::pushaccelstack</a> (sam, acc, ierr)</td></tr>
+<tr class="memdesc:aeef6fe463ac0290ac10f160651333a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes the given vector onto the acceleration stack.  <a href="namespacetimestepmodule.html#aeef6fe463ac0290ac10f160651333a74">More...</a><br /></td></tr>
 <tr class="separator:aeef6fe463ac0290ac10f160651333a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af787e6f92eeb200e9c4f125a827e8758"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#af787e6f92eeb200e9c4f125a827e8758">timestepmodule::getautostep</a> (sam, sys, errlim, HP, H, HX, istat)</td></tr>
+<tr class="memdesc:af787e6f92eeb200e9c4f125a827e8758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the next time step based on local truncation errors.  <a href="namespacetimestepmodule.html#af787e6f92eeb200e9c4f125a827e8758">More...</a><br /></td></tr>
 <tr class="separator:af787e6f92eeb200e9c4f125a827e8758"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a686f6e26076d07ee000d5b6abb5543ae"><td class="memItemLeft" align="right" valign="top">real(dp) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae">timestepmodule::getinitialtimestepsize</a> (sys, ierr)</td></tr>
+<tr class="memdesc:a686f6e26076d07ee000d5b6abb5543ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of the initial time step.  <a href="namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae">More...</a><br /></td></tr>
 <tr class="separator:a686f6e26076d07ee000d5b6abb5543ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b51ef5b9aedaa5d2aa8f61c6110de67"><td class="memItemLeft" align="right" valign="top">real(dp) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67">timestepmodule::gettimestepsize</a> (sys, sam, ctrl, errlim, ierr)</td></tr>
+<tr class="memdesc:a0b51ef5b9aedaa5d2aa8f61c6110de67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of the next time step.  <a href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67">More...</a><br /></td></tr>
 <tr class="separator:a0b51ef5b9aedaa5d2aa8f61c6110de67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65821e217ba2148b0a64365a80e5f35f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f">timestepmodule::deallocatetimestep</a> ()</td></tr>
+<tr class="memdesc:a65821e217ba2148b0a64365a80e5f35f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates the internal buffers for automatic time stepping.  <a href="namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f">More...</a><br /></td></tr>
 <tr class="separator:a65821e217ba2148b0a64365a80e5f35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a36049c5189861de4ce2abe8ede7b21b0"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), pointer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#a36049c5189861de4ce2abe8ede7b21b0">timestepmodule::a1</a></td></tr>
+<tr class="memdesc:a36049c5189861de4ce2abe8ede7b21b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bottom of acceleration stack.  <a href="namespacetimestepmodule.html#a36049c5189861de4ce2abe8ede7b21b0">More...</a><br /></td></tr>
 <tr class="separator:a36049c5189861de4ce2abe8ede7b21b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3b36e6a594c2abbde1bb3f5391b0282"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), pointer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#ad3b36e6a594c2abbde1bb3f5391b0282">timestepmodule::a2</a></td></tr>
+<tr class="memdesc:ad3b36e6a594c2abbde1bb3f5391b0282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Middle of acceleration stack.  <a href="namespacetimestepmodule.html#ad3b36e6a594c2abbde1bb3f5391b0282">More...</a><br /></td></tr>
 <tr class="separator:ad3b36e6a594c2abbde1bb3f5391b0282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb6f955c489832a8b27eaedbbe08facd"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), pointer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#abb6f955c489832a8b27eaedbbe08facd">timestepmodule::a3</a></td></tr>
+<tr class="memdesc:abb6f955c489832a8b27eaedbbe08facd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top of acceleration stack.  <a href="namespacetimestepmodule.html#abb6f955c489832a8b27eaedbbe08facd">More...</a><br /></td></tr>
 <tr class="separator:abb6f955c489832a8b27eaedbbe08facd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a6233ca2c63f244055fb65aaa7523bc"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), allocatable, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetimestepmodule.html#a0a6233ca2c63f244055fb65aaa7523bc">timestepmodule::err</a></td></tr>
+<tr class="memdesc:a0a6233ca2c63f244055fb65aaa7523bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal work array.  <a href="namespacetimestepmodule.html#a0a6233ca2c63f244055fb65aaa7523bc">More...</a><br /></td></tr>
 <tr class="separator:a0a6233ca2c63f244055fb65aaa7523bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Subroutines/functions for automatic time stepping. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

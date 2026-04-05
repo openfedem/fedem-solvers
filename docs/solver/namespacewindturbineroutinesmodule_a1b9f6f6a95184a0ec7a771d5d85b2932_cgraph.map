@@ -1,0 +1,5 @@
+<map id="windturbineroutinesmodule::convertturbineconfig" name="windturbineroutinesmodule::convertturbineconfig">
+<area shape="rect" id="node1" title="Converts a Fedem wind turbine configuration to AeroDyn&#39;s format." alt="" coords="5,5,207,47"/>
+<area shape="rect" id="node2" href="$namespacewindturbineroutinesmodule.html#a69b6aee029206dab8c2197c8ee45ab4c" title="Updates an AeroDyn marker based on the corresponding Fedem triad." alt="" coords="504,5,705,47"/>
+<area shape="rect" id="node3" href="$namespacewindturbineroutinesmodule.html#a6eb6606b04fc1acca16b2d92770a42cd" title="Updates the AeroDyn wind turbine configuration." alt="" coords="255,35,456,76"/>
+</map>

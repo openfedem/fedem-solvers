@@ -5,8 +5,8 @@
 <area shape="rect" id="node13" href="$namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="992,850,1200,877"/>
 <area shape="rect" id="node24" href="$namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="717,89,889,131"/>
 <area shape="rect" id="node26" href="$namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="379,1499,613,1526"/>
-<area shape="rect" id="node4" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title=" " alt="" coords="702,311,903,352"/>
-<area shape="rect" id="node5" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title=" " alt="" coords="690,501,915,527"/>
+<area shape="rect" id="node4" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="702,311,903,352"/>
+<area shape="rect" id="node5" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="690,501,915,527"/>
 <area shape="rect" id="node6" href="$namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="717,435,888,476"/>
 <area shape="rect" id="node8" href="$namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="719,552,886,593"/>
 <area shape="rect" id="node14" href="$namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="721,733,885,775"/>

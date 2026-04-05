@@ -1,0 +1,4 @@
+<map id="masterslavejointtypemodule::haszerovelacc" name="masterslavejointtypemodule::haszerovelacc">
+<area shape="rect" id="node1" title="Checks if all joint DOFs have zero velocities and accelerations." alt="" coords="288,5,499,47"/>
+<area shape="rect" id="node2" href="$namespacemasterslavejointroutinesmodule.html#ab75fa908234cef0fa464ebee9e49f33b" title="Initializes the joint variables (velocities and accelerations)." alt="" coords="5,5,240,47"/>
+</map>

@@ -28,7 +28,7 @@
 <area shape="rect" id="node47" href="$namespacesamreducermodule.html#a34a8690bef6a35e78d72fb3d522d7337" title="Writes arrays of the SAM data structure to binary file." alt="" coords="165,1890,380,1917"/>
 <area shape="rect" id="node48" href="$namespacesysmatrixtypemodule.html#ac49bf5a5ffd372675992098f163fe9fd" title="Saves the given system matrix to temporary file." alt="" coords="190,1941,355,1983"/>
 <area shape="rect" id="node49" href="$namespacesparsematrixmodule.html#a48e36aa33a87d959883a141c12918a7c" title=" " alt="" coords="194,2007,351,2048"/>
-<area shape="rect" id="node50" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="193,2072,352,2113"/>
+<area shape="rect" id="node50" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title="Administers writing of results database for fedem_reducer." alt="" coords="193,2072,352,2113"/>
 <area shape="rect" id="node5" href="$namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="520,683,675,724"/>
 <area shape="rect" id="node6" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="483,398,711,425"/>
 <area shape="rect" id="node7" href="$namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428" title=" " alt="" coords="474,749,721,775"/>

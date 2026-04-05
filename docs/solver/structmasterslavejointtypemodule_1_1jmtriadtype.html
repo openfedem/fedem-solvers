@@ -74,12 +74,15 @@ $(function() {
 <div class="title">masterslavejointtypemodule::jmtriadtype Type Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data type representing a master triad in a joint.  
+ <a href="structmasterslavejointtypemodule_1_1jmtriadtype.html#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for masterslavejointtypemodule::jmtriadtype:</div>
 <div class="dyncontent">
 <div class="center"><img src="structmasterslavejointtypemodule_1_1jmtriadtype__coll__graph.png" border="0" usemap="#amasterslavejointtypemodule_1_1jmtriadtype_coll__map" alt="Collaboration graph"/></div>
 <map name="amasterslavejointtypemodule_1_1jmtriadtype_coll__map" id="amasterslavejointtypemodule_1_1jmtriadtype_coll__map">
-<area shape="rect" title=" " alt="" coords="5,184,216,225"/>
+<area shape="rect" title="Data type representing a master triad in a joint." alt="" coords="5,184,216,225"/>
 <area shape="rect" href="structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="12,95,209,121"/>
 <area shape="rect" href="structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="30,5,191,32"/>
 </map>
@@ -88,17 +91,24 @@ Collaboration diagram for masterslavejointtypemodule::jmtriadtype:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a04846d9649d3ebc9b12aacffa8c12652"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a04846d9649d3ebc9b12aacffa8c12652">triad</a></td></tr>
+<tr class="memdesc:a04846d9649d3ebc9b12aacffa8c12652"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the master triad.  <a href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a04846d9649d3ebc9b12aacffa8c12652">More...</a><br /></td></tr>
 <tr class="separator:a04846d9649d3ebc9b12aacffa8c12652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eafb93c9da96c4d205fde680772bd0a"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:,:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a1eafb93c9da96c4d205fde680772bd0a">jposint</a></td></tr>
+<tr class="memdesc:a1eafb93c9da96c4d205fde680772bd0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative joint position.  <a href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a1eafb93c9da96c4d205fde680772bd0a">More...</a><br /></td></tr>
 <tr class="separator:a1eafb93c9da96c4d205fde680772bd0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2670ea55b53d9df865c765a101d2cf20"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a2670ea55b53d9df865c765a101d2cf20">ndofs</a></td></tr>
+<tr class="memdesc:a2670ea55b53d9df865c765a101d2cf20"><td class="mdescLeft">&#160;</td><td class="mdescRight">&le; 3 for AXIAL_p, else &le; 6  <a href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a2670ea55b53d9df865c765a101d2cf20">More...</a><br /></td></tr>
 <tr class="separator:a2670ea55b53d9df865c765a101d2cf20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2253cc6bff972942876d9fb05f2a1bee"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a2253cc6bff972942876d9fb05f2a1bee">ipmceq</a></td></tr>
+<tr class="memdesc:a2253cc6bff972942876d9fb05f2a1bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index in mceq for master.  <a href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a2253cc6bff972942876d9fb05f2a1bee">More...</a><br /></td></tr>
 <tr class="separator:a2253cc6bff972942876d9fb05f2a1bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d58839dfd9c2df7fd998137d1c13000"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(3, 3)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a8d58839dfd9c2df7fd998137d1c13000">tr</a></td></tr>
+<tr class="memdesc:a8d58839dfd9c2df7fd998137d1c13000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translation-Rotation coupling.  <a href="structmasterslavejointtypemodule_1_1jmtriadtype.html#a8d58839dfd9c2df7fd998137d1c13000">More...</a><br /></td></tr>
 <tr class="separator:a8d58839dfd9c2df7fd998137d1c13000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data type representing a master triad in a joint. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a2253cc6bff972942876d9fb05f2a1bee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2253cc6bff972942876d9fb05f2a1bee">&#9670;&nbsp;</a></span>ipmceq</h2>
 
@@ -110,6 +120,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Index in mceq for master. </p>
 
 </div>
 </div>
@@ -125,6 +137,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Relative joint position. </p>
+
 </div>
 </div>
 <a id="a2670ea55b53d9df865c765a101d2cf20"></a>
@@ -138,6 +152,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>&le; 3 for AXIAL_p, else &le; 6 </p>
 
 </div>
 </div>
@@ -153,6 +169,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Translation-Rotation coupling. </p>
+
 </div>
 </div>
 <a id="a04846d9649d3ebc9b12aacffa8c12652"></a>
@@ -167,6 +185,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This is the master triad. </p>
+
 </div>
 </div>
 <hr/>The documentation for this type was generated from the following file:<ul>
@@ -175,7 +195,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

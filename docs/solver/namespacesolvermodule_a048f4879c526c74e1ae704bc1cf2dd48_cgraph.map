@@ -10,7 +10,7 @@
 <area shape="rect" id="node32" href="$namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="275,1692,442,1733"/>
 <area shape="rect" id="node33" href="$namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="256,1758,461,1785"/>
 <area shape="rect" id="node34" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="275,1809,442,1851"/>
-<area shape="rect" id="node35" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title=" " alt="" coords="237,1875,480,1902"/>
+<area shape="rect" id="node35" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="237,1875,480,1902"/>
 <area shape="rect" id="node36" href="$namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="239,1926,478,1953"/>
 <area shape="rect" id="node37" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="266,1379,451,1420"/>
 <area shape="rect" id="node38" href="$namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="575,1379,739,1420"/>
@@ -27,8 +27,8 @@
 <area shape="rect" id="node49" href="$namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="865,161,1037,203"/>
 <area shape="rect" id="node50" href="$namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="833,85,1068,111"/>
 <area shape="rect" id="node3" href="$namespacenormroutinesmodule.html#a6155a1f7ea95c1fcbbfad47f1e294a8e" title="Defines the convergence tolerance to use for a given test item." alt="" coords="578,5,737,47"/>
-<area shape="rect" id="node5" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title=" " alt="" coords="557,509,758,551"/>
-<area shape="rect" id="node6" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title=" " alt="" coords="545,575,770,602"/>
+<area shape="rect" id="node5" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="557,509,758,551"/>
+<area shape="rect" id="node6" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="545,575,770,602"/>
 <area shape="rect" id="node7" href="$namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="572,224,743,265"/>
 <area shape="rect" id="node8" href="$namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="867,371,1034,412"/>
 <area shape="rect" id="node11" href="$namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="575,341,739,383"/>

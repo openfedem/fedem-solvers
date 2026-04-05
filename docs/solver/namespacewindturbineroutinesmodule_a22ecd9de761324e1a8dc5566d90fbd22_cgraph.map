@@ -1,0 +1,7 @@
+<map id="windturbineroutinesmodule::aeroinput" name="windturbineroutinesmodule::aeroinput">
+<area shape="rect" id="node1" title="Sets up the information needed for, and initializes AeroDyn." alt="" coords="5,39,207,80"/>
+<area shape="rect" id="node2" href="$namespacewindturbineroutinesmodule.html#a1b9f6f6a95184a0ec7a771d5d85b2932" title="Converts a Fedem wind turbine configuration to AeroDyn&#39;s format." alt="" coords="255,5,456,47"/>
+<area shape="rect" id="node5" href="$namespacewindturbineroutinesmodule.html#a45f0515bc0a760d758c74b31917a6bcf" title="Sets Fedem variables based on AeroDyn inputs." alt="" coords="255,71,456,112"/>
+<area shape="rect" id="node3" href="$namespacewindturbineroutinesmodule.html#a69b6aee029206dab8c2197c8ee45ab4c" title="Updates an AeroDyn marker based on the corresponding Fedem triad." alt="" coords="753,5,955,47"/>
+<area shape="rect" id="node4" href="$namespacewindturbineroutinesmodule.html#a6eb6606b04fc1acca16b2d92770a42cd" title="Updates the AeroDyn wind turbine configuration." alt="" coords="504,35,705,76"/>
+</map>

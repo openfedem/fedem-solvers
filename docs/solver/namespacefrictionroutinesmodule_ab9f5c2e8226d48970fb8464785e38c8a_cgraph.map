@@ -1,0 +1,6 @@
+<map id="frictionroutinesmodule::updatemultidoffriction" name="frictionroutinesmodule::updatemultidoffriction">
+<area shape="rect" id="node1" title="Updates multidof friction forces in the given joint." alt="" coords="5,71,180,112"/>
+<area shape="rect" id="node2" href="$namespacefrictionroutinesmodule.html#ae71415c5b7ae0c8d76727816810c7fd6" title="Calculates the actual friction force." alt="" coords="228,5,399,47"/>
+<area shape="rect" id="node3" href="$namespacefrictionroutinesmodule.html#a58568a9eed2b7b6db36c0746c8559d91" title="Calculates the maximum friction force." alt="" coords="228,71,399,112"/>
+<area shape="rect" id="node4" href="$namespacefrictiontypemodule.html#a9c3d82b3fede83c08d0eb7d3d0980331" title="Initializes internal friction variables at the start of simulation." alt="" coords="231,136,395,177"/>
+</map>

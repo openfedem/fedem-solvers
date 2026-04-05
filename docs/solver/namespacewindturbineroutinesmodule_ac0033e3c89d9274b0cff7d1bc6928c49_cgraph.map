@@ -1,0 +1,7 @@
+<map id="windturbineroutinesmodule::updateaeroforces" name="windturbineroutinesmodule::updateaeroforces">
+<area shape="rect" id="node1" title="Gets the aerodynamic forces at given time on the given wind turbine." alt="" coords="5,74,207,115"/>
+<area shape="rect" id="node2" href="$windTurbineRoutinesModule_8f90.html#a4e9c39c8b67fdda67de7e568fa9fa25b" title="Extracts the normal&#45; and tangent loads and the pitch moment." alt="" coords="306,5,405,32"/>
+<area shape="rect" id="node3" href="$windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="327,56,383,83"/>
+<area shape="rect" id="node4" href="$namespacewindturbineroutinesmodule.html#a69b6aee029206dab8c2197c8ee45ab4c" title="Updates an AeroDyn marker based on the corresponding Fedem triad." alt="" coords="504,129,705,170"/>
+<area shape="rect" id="node5" href="$namespacewindturbineroutinesmodule.html#a6eb6606b04fc1acca16b2d92770a42cd" title="Updates the AeroDyn wind turbine configuration." alt="" coords="255,158,456,199"/>
+</map>

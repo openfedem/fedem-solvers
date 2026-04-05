@@ -6,7 +6,7 @@
 <area shape="rect" id="node23" href="$namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="571,1547,739,1588"/>
 <area shape="rect" id="node25" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="275,1649,445,1691"/>
 <area shape="rect" id="node26" href="$namespaceaddinsysmodule.html#a4dedbdb8ba7983d8fc40b7e44a566fe5" title="Builds the system force vectors." alt="" coords="241,1077,479,1103"/>
-<area shape="rect" id="node33" href="$namespacenormtypemodule.html#a7954cd791ccc57c409ddd77f511c4966" title=" " alt="" coords="243,1715,477,1742"/>
+<area shape="rect" id="node33" href="$namespacenormtypemodule.html#a7954cd791ccc57c409ddd77f511c4966" title="Checks if the state of the convergence checks set is converged." alt="" coords="243,1715,477,1742"/>
 <area shape="rect" id="node34" href="$namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="267,1868,453,1909"/>
 <area shape="rect" id="node35" href="$namespacenewmarkroutinesmodule.html#a66a6b6c2901da72d85633d6374e189c2" title="Updates all mechanism objects." alt="" coords="563,1843,748,1884"/>
 <area shape="rect" id="node36" href="$namespaceforceroutinesmodule.html#aea7dc0b90d471d0e5e84e0ea501c767f" title="Updates the external forces (point loads)." alt="" coords="829,1788,999,1829"/>
@@ -20,7 +20,7 @@
 <area shape="rect" id="node44" href="$namespacesolverroutinesmodule.html#a07c6727b5bc6cfb5d5614996cd11f5eb" title="Prints convergence information to the res&#45;file." alt="" coords="278,2312,442,2353"/>
 <area shape="rect" id="node45" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="278,2377,442,2419"/>
 <area shape="rect" id="node46" href="$namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="278,2443,442,2484"/>
-<area shape="rect" id="node47" href="$namespacewindturbineroutinesmodule.html#ac0033e3c89d9274b0cff7d1bc6928c49" title=" " alt="" coords="259,2508,461,2549"/>
+<area shape="rect" id="node47" href="$namespacewindturbineroutinesmodule.html#ac0033e3c89d9274b0cff7d1bc6928c49" title="Gets the aerodynamic forces at given time on the given wind turbine." alt="" coords="259,2508,461,2549"/>
 <area shape="rect" id="node48" href="$namespacetireroutinesmodule.html#a634b2bd2d688ea91d6475d0c3f1bc411" title=" " alt="" coords="257,2573,463,2615"/>
 <area shape="rect" id="node49" href="$namespaceenvironmenttypemodule.html#a4fdd173d57a50202acfdd76387f47b72" title="Updates the scaled gravitation vector in case of dynamic up&#45;ramping." alt="" coords="269,2639,451,2680"/>
 <area shape="rect" id="node50" href="$namespacesupelroutinesmodule.html#af70c740e83eede0ffdab4f1d97f6094d" title="Updates the superelement damping matrices." alt="" coords="277,1584,443,1625"/>
@@ -38,12 +38,12 @@
 <area shape="rect" id="node14" href="$namespacesupelroutinesmodule.html#a06def57483cf21985f6fff330089ab98" title="Computes the superelement Newton matrix." alt="" coords="576,724,735,765"/>
 <area shape="rect" id="node15" href="$namespaceuserdefelroutinesmodule.html#a2f7d988ddacce6dd93f175706c57c4f4" title="Computes the user&#45;defined element Newton matrix." alt="" coords="563,789,748,831"/>
 <area shape="rect" id="node16" href="$namespaceaddinsysmodule.html#a7d5959984bad10ab6680b45948a26566" title="Returns .true. if spring has a stress&#45;free length change." alt="" coords="546,855,765,882"/>
-<area shape="rect" id="node18" href="$namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7" title=" " alt="" coords="529,1299,781,1326"/>
+<area shape="rect" id="node18" href="$namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7" title="Check if a given norm is showing sign of possible divergence." alt="" coords="529,1299,781,1326"/>
 <area shape="rect" id="node19" href="$namespacenormroutinesmodule.html#a852dd09321a1ed6858c4e74538cd6cd5" title="Calculates energy norms for given force and displacement vectors." alt="" coords="576,1351,735,1392"/>
 <area shape="rect" id="node20" href="$namespacenormroutinesmodule.html#a2b350dab276ba8af3f77a0f71cd7fff3" title="Calculates infinity norms of the given vector." alt="" coords="576,1416,735,1457"/>
 <area shape="rect" id="node21" href="$namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="576,1481,735,1523"/>
 <area shape="rect" id="node24" href="$namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="830,1547,998,1588"/>
-<area shape="rect" id="node27" href="$namespacewindturbineroutinesmodule.html#a00c46c17d2ac5809616a83538e392563" title=" " alt="" coords="555,907,756,948"/>
+<area shape="rect" id="node27" href="$namespacewindturbineroutinesmodule.html#a00c46c17d2ac5809616a83538e392563" title="Calculates system force vector contributions from a wind turbine." alt="" coords="555,907,756,948"/>
 <area shape="rect" id="node28" href="$namespacebushingelementroutinesmodule.html#a62fd825a6d1fae1bb69f2ec7e040ebba" title=" " alt="" coords="541,972,770,1013"/>
 <area shape="rect" id="node29" href="$namespacecontactelementroutinesmodule.html#a7844a98c0f1cdd486e6f593abffbe0c9" title="Calculates system force vector terms from a contact element." alt="" coords="542,1037,769,1079"/>
 <area shape="rect" id="node30" href="$namespacedamperroutinesmodule.html#a864ea66bfa9b77d3146625be72c2a90f" title="Assembles system force vector contributions from a damper element." alt="" coords="568,1103,743,1144"/>

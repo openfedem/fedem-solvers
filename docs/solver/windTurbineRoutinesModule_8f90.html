@@ -74,46 +74,67 @@ $(function() {
 <div class="title">windTurbineRoutinesModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Subroutines for wind turbine calculations.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacewindturbineroutinesmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html">windturbineroutinesmodule</a></td></tr>
+<tr class="memdesc:namespacewindturbineroutinesmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module with subroutines for wind turbine calculations. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a22ecd9de761324e1a8dc5566d90fbd22"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a22ecd9de761324e1a8dc5566d90fbd22">windturbineroutinesmodule::aeroinput</a> (env, turb, ADFile, NumBl, CompAero, CompNoise, SumPrint, ierr)</td></tr>
+<tr class="memdesc:a22ecd9de761324e1a8dc5566d90fbd22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the information needed for, and initializes AeroDyn.  <a href="namespacewindturbineroutinesmodule.html#a22ecd9de761324e1a8dc5566d90fbd22">More...</a><br /></td></tr>
 <tr class="separator:a22ecd9de761324e1a8dc5566d90fbd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45f0515bc0a760d758c74b31917a6bcf"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a45f0515bc0a760d758c74b31917a6bcf">windturbineroutinesmodule::set_fedem_params</a> (env, turbine, CompAero, CompNoise, ierr)</td></tr>
+<tr class="memdesc:a45f0515bc0a760d758c74b31917a6bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets Fedem variables based on AeroDyn inputs.  <a href="namespacewindturbineroutinesmodule.html#a45f0515bc0a760d758c74b31917a6bcf">More...</a><br /></td></tr>
 <tr class="separator:a45f0515bc0a760d758c74b31917a6bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b9f6f6a95184a0ec7a771d5d85b2932"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a1b9f6f6a95184a0ec7a771d5d85b2932">windturbineroutinesmodule::convertturbineconfig</a> (Fedem, AD, ierr)</td></tr>
+<tr class="memdesc:a1b9f6f6a95184a0ec7a771d5d85b2932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a Fedem wind turbine configuration to AeroDyn's format.  <a href="namespacewindturbineroutinesmodule.html#a1b9f6f6a95184a0ec7a771d5d85b2932">More...</a><br /></td></tr>
 <tr class="separator:a1b9f6f6a95184a0ec7a771d5d85b2932"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eb6606b04fc1acca16b2d92770a42cd"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a6eb6606b04fc1acca16b2d92770a42cd">windturbineroutinesmodule::updateturbineconfig</a> (Fedem, AD)</td></tr>
+<tr class="memdesc:a6eb6606b04fc1acca16b2d92770a42cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the AeroDyn wind turbine configuration.  <a href="namespacewindturbineroutinesmodule.html#a6eb6606b04fc1acca16b2d92770a42cd">More...</a><br /></td></tr>
 <tr class="separator:a6eb6606b04fc1acca16b2d92770a42cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69b6aee029206dab8c2197c8ee45ab4c"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a69b6aee029206dab8c2197c8ee45ab4c">windturbineroutinesmodule::updateadmarker</a> (ADmarker, triad, sup, offset)</td></tr>
+<tr class="memdesc:a69b6aee029206dab8c2197c8ee45ab4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an AeroDyn marker based on the corresponding Fedem triad.  <a href="namespacewindturbineroutinesmodule.html#a69b6aee029206dab8c2197c8ee45ab4c">More...</a><br /></td></tr>
 <tr class="separator:a69b6aee029206dab8c2197c8ee45ab4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0033e3c89d9274b0cff7d1bc6928c49"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#ac0033e3c89d9274b0cff7d1bc6928c49">windturbineroutinesmodule::updateaeroforces</a> (time, turb, ierr)</td></tr>
+<tr class="memdesc:ac0033e3c89d9274b0cff7d1bc6928c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the aerodynamic forces at given time on the given wind turbine.  <a href="namespacewindturbineroutinesmodule.html#ac0033e3c89d9274b0cff7d1bc6928c49">More...</a><br /></td></tr>
 <tr class="separator:ac0033e3c89d9274b0cff7d1bc6928c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9054197eeb3116310ba964898ccae39b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b">scale</a> (vec, a)</td></tr>
+<tr class="memdesc:a9054197eeb3116310ba964898ccae39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scales a real vector by given scalar.  <a href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b">More...</a><br /></td></tr>
 <tr class="separator:a9054197eeb3116310ba964898ccae39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e9c39c8b67fdda67de7e568fa9fa25b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="windTurbineRoutinesModule_8f90.html#a4e9c39c8b67fdda67de7e568fa9fa25b">getadforces</a> (bl, nd, ADload, force)</td></tr>
+<tr class="memdesc:a4e9c39c8b67fdda67de7e568fa9fa25b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the normal- and tangent loads and the pitch moment.  <a href="windTurbineRoutinesModule_8f90.html#a4e9c39c8b67fdda67de7e568fa9fa25b">More...</a><br /></td></tr>
 <tr class="separator:a4e9c39c8b67fdda67de7e568fa9fa25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00c46c17d2ac5809616a83538e392563"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a00c46c17d2ac5809616a83538e392563">windturbineroutinesmodule::addinaeroforces</a> (Q, RF, turbine, sam, ierr)</td></tr>
+<tr class="memdesc:a00c46c17d2ac5809616a83538e392563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates system force vector contributions from a wind turbine.  <a href="namespacewindturbineroutinesmodule.html#a00c46c17d2ac5809616a83538e392563">More...</a><br /></td></tr>
 <tr class="separator:a00c46c17d2ac5809616a83538e392563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b07a429cb5103736c02e8730a66f680"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a1b07a429cb5103736c02e8730a66f680">windturbineroutinesmodule::gethubwindspeed</a> (time, turbine, dws, uws, ierr)</td></tr>
+<tr class="memdesc:a1b07a429cb5103736c02e8730a66f680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the wind speed at the hub center.  <a href="namespacewindturbineroutinesmodule.html#a1b07a429cb5103736c02e8730a66f680">More...</a><br /></td></tr>
 <tr class="separator:a1b07a429cb5103736c02e8730a66f680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0739b31df558e955ec597b5a76d13065"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a0739b31df558e955ec597b5a76d13065">windturbineroutinesmodule::gettipwindspeed</a> (iBlade, time, turbine, dws, uws, ierr)</td></tr>
+<tr class="memdesc:a0739b31df558e955ec597b5a76d13065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the wind speed at the tip of the given blade.  <a href="namespacewindturbineroutinesmodule.html#a0739b31df558e955ec597b5a76d13065">More...</a><br /></td></tr>
 <tr class="separator:a0739b31df558e955ec597b5a76d13065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a738953d247d8f8b668a38100c94b743a"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a">windturbineroutinesmodule::getwindspeed</a> (pos, time, dws, uws, ierr)</td></tr>
+<tr class="memdesc:a738953d247d8f8b668a38100c94b743a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the wind speed at a given location center.  <a href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a">More...</a><br /></td></tr>
 <tr class="separator:a738953d247d8f8b668a38100c94b743a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a8c29c3774d0bc146ba20cf1ad803b1"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a1a8c29c3774d0bc146ba20cf1ad803b1">windturbineroutinesmodule::getbladedeflections</a> (turbine)</td></tr>
+<tr class="memdesc:a1a8c29c3774d0bc146ba20cf1ad803b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the deflection along the blades.  <a href="namespacewindturbineroutinesmodule.html#a1a8c29c3774d0bc146ba20cf1ad803b1">More...</a><br /></td></tr>
 <tr class="separator:a1a8c29c3774d0bc146ba20cf1ad803b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64c4e2de894be0416637506e5ca3b206"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="windTurbineRoutinesModule_8f90.html#a64c4e2de894be0416637506e5ca3b206">calcbladedeflection</a> (triad, blade, hub, R)</td></tr>
+<tr class="memdesc:a64c4e2de894be0416637506e5ca3b206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the blade deflection at a given triad.  <a href="windTurbineRoutinesModule_8f90.html#a64c4e2de894be0416637506e5ca3b206">More...</a><br /></td></tr>
 <tr class="separator:a64c4e2de894be0416637506e5ca3b206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20fb074a31e5839e450779025c44bb7e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e">windturbineroutinesmodule::closeaerodyn</a> (ierr)</td></tr>
+<tr class="memdesc:a20fb074a31e5839e450779025c44bb7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminates the aerodynamics module.  <a href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e">More...</a><br /></td></tr>
 <tr class="separator:a20fb074a31e5839e450779025c44bb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Subroutines for wind turbine calculations. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a64c4e2de894be0416637506e5ca3b206"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64c4e2de894be0416637506e5ca3b206">&#9670;&nbsp;</a></span>calcbladedeflection()</h2>
 
@@ -151,6 +172,8 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluates the blade deflection at a given triad. </p>
 
 </div>
 </div>
@@ -200,6 +223,8 @@ Functions/Subroutines</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Extracts the normal- and tangent loads and the pitch moment. </p>
+
 </div>
 </div>
 <a id="a9054197eeb3116310ba964898ccae39b"></a>
@@ -228,12 +253,14 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Scales a real vector by given scalar. </p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

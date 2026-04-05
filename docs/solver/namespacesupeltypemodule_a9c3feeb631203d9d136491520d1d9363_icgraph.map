@@ -9,7 +9,7 @@
 <area shape="rect" id="node35" href="$namespacemodesroutinesmodule.html#a3f9a5dea9c3ed46751fff16abe6676ec" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="1367,386,1535,427"/>
 <area shape="rect" id="node5" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="1357,42,1544,83"/>
 <area shape="rect" id="node6" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="1357,107,1544,149"/>
-<area shape="rect" id="node8" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="1360,173,1541,214"/>
+<area shape="rect" id="node8" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="1360,173,1541,214"/>
 <area shape="rect" id="node9" href="$namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="853,77,1076,104"/>
 <area shape="rect" id="node10" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,107,800,133"/>
 <area shape="rect" id="node11" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,56,519,83"/>

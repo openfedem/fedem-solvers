@@ -76,7 +76,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a45575fa8d6cc685731574d475978375a"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a">readsupels</a> (infp, env, triads, sups, err)</td></tr>
-<tr class="memdesc:a45575fa8d6cc685731574d475978375a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes superelements with data from the input file.  <a href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a">More...</a><br /></td></tr>
+<tr class="memdesc:a45575fa8d6cc685731574d475978375a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes superelements with data from the solver input file.  <a href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a">More...</a><br /></td></tr>
 <tr class="separator:a45575fa8d6cc685731574d475978375a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4956d9d55b0a3174606472ae0c3602c"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c">initiatesupels2</a> (sam, sys, sups, masses, engines, err)</td></tr>
 <tr class="memdesc:ae4956d9d55b0a3174606472ae0c3602c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes more superelement arrays after system initialization.  <a href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c">More...</a><br /></td></tr>
@@ -166,11 +166,20 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespaceinitiatesupeltypemodule_ae4956d9d55b0a3174606472ae0c3602c_cgraph.png" border="0" usemap="#anamespaceinitiatesupeltypemodule_ae4956d9d55b0a3174606472ae0c3602c_cgraph" alt=""/></div>
 <map name="anamespaceinitiatesupeltypemodule_ae4956d9d55b0a3174606472ae0c3602c_cgraph" id="anamespaceinitiatesupeltypemodule_ae4956d9d55b0a3174606472ae0c3602c_cgraph">
-<area shape="rect" title="Initializes more superelement arrays after system initialization." alt="" coords="5,78,187,119"/>
-<area shape="rect" href="namespacecorotutilmodule.html#a856fb738c65ae2c4bcc1a3a38a6469e0" title=" " alt="" coords="235,5,501,32"/>
-<area shape="rect" href="initiateSupElTypeModule_8f90.html#a896f2e0251260b4670d7ecb1d77cf40e" title="Checks if a superelement has additional masses on triads." alt="" coords="308,56,428,83"/>
-<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722" title=" " alt="" coords="255,107,481,149"/>
-<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b" title=" " alt="" coords="261,173,475,214"/>
+<area shape="rect" title="Initializes more superelement arrays after system initialization." alt="" coords="5,136,187,177"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="235,173,501,199"/>
+<area shape="rect" href="initiateSupElTypeModule_8f90.html#a896f2e0251260b4670d7ecb1d77cf40e" title="Checks if a superelement has additional masses on triads." alt="" coords="308,223,428,250"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722" title="Initializes the matrix (R^t*R)^&#45;1*R^t for mass matrix correction." alt="" coords="255,107,481,148"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b" title="Calculates the rigid body mass properties for a superelement." alt="" coords="261,41,475,83"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="573,71,740,112"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="557,253,756,279"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="846,303,1009,344"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a5f07f8f780f52107d738794f4656d38a" title="Sets up an eccentricity transformation matrix for a 3&#45;noded element." alt="" coords="555,354,759,381"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="549,5,764,47"/>
+<area shape="rect" href="namespacedensematrixmodule.html#a15392a4ff9de4934977af94f5fa8b527" title="Solves the linear equation system A*x = B." alt="" coords="576,136,737,177"/>
+<area shape="rect" href="namespacerotationmodule.html#a18d3012bd1d5a24b64ed6600aac58da8" title="Computes the spin (skew&#45;symmetric) tensor from the rotation vector." alt="" coords="578,202,735,229"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="812,186,1043,213"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="846,237,1009,279"/>
 </map>
 </div>
 <div class="dynheader">
@@ -272,7 +281,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Reads a matrix from a binary file into core." alt="" coords="1092,99,1273,141"/>
 <area shape="rect" href="namespaceinitiatesupeltypemodule.html#a3db18639309a56545019273ef904cb18" title="Reads into core the reduced nonlinear superelement matrices." alt="" coords="853,66,1044,107"/>
 <area shape="rect" href="namespaceinitiatesupeltypemodule.html#a540b85dd98970f4404172f1a16e87d6e" title="Reads into core the reduced superelement matrices from file." alt="" coords="858,131,1039,173"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -351,7 +360,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespaceinitiatesupeltypemodule_a3db18639309a56545019273ef904cb18_icgraph.png" border="0" usemap="#anamespaceinitiatesupeltypemodule_a3db18639309a56545019273ef904cb18_icgraph" alt=""/></div>
 <map name="anamespaceinitiatesupeltypemodule_a3db18639309a56545019273ef904cb18_icgraph" id="anamespaceinitiatesupeltypemodule_a3db18639309a56545019273ef904cb18_icgraph">
 <area shape="rect" title="Reads into core the reduced nonlinear superelement matrices." alt="" coords="853,99,1044,141"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -431,7 +440,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespaceinitiatesupeltypemodule_a540b85dd98970f4404172f1a16e87d6e_icgraph.png" border="0" usemap="#anamespaceinitiatesupeltypemodule_a540b85dd98970f4404172f1a16e87d6e_icgraph" alt=""/></div>
 <map name="anamespaceinitiatesupeltypemodule_a540b85dd98970f4404172f1a16e87d6e_icgraph" id="anamespaceinitiatesupeltypemodule_a540b85dd98970f4404172f1a16e87d6e_icgraph">
 <area shape="rect" title="Reads into core the reduced superelement matrices from file." alt="" coords="853,99,1035,141"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -488,7 +497,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes superelements with data from the input file. </p>
+<p>Initializes superelements with data from the solver input file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">infp</td><td>File unit number for the solver input file </td></tr>
@@ -506,7 +515,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_cgraph.png" border="0" usemap="#anamespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_cgraph" alt=""/></div>
 <map name="anamespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_cgraph" id="anamespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_cgraph">
-<area shape="rect" title="Initializes superelements with data from the input file." alt="" coords="5,721,187,762"/>
+<area shape="rect" title="Initializes superelements with data from the solver input file." alt="" coords="5,721,187,762"/>
 <area shape="rect" href="namespacetriadtypemodule.html#a6399b28142368fcf39b827702132b704" title="Allocates force vectors for frs&#45;output of superelement forces." alt="" coords="235,120,495,147"/>
 <area shape="rect" href="namespacefiniteelementmodule.html#afa7067f78ff941890e63688fa6e7c2c3" title="Calculates the element matrices for a basic finite element." alt="" coords="281,171,448,213"/>
 <area shape="rect" href="namespacesupeltypemodule.html#a398ad15066fbddaf2f98068d48193b08" title="Initiates the hydrodynamics quantities for a superelement." alt="" coords="844,291,1073,317"/>
@@ -553,7 +562,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_icgraph.png" border="0" usemap="#anamespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_icgraph" alt=""/></div>
 <map name="anamespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_icgraph" id="anamespaceinitiatesupeltypemodule_a45575fa8d6cc685731574d475978375a_icgraph">
-<area shape="rect" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -595,7 +604,7 @@ Here is the caller graph for this function:</div>
 <p>Writes a Fortran90 subroutine with hard-coded superelement matrices. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">sups</td><td>All superelements in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sups</td><td>All superelements in the model </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
@@ -622,7 +631,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

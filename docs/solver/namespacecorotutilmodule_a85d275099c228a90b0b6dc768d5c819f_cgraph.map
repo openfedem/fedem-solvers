@@ -1,0 +1,5 @@
+<map id="corotutilmodule::addkgrtokm" name="corotutilmodule::addkgrtokm">
+<area shape="rect" id="node1" title="Calculates the rotational geometric stiffness for a superelement." alt="" coords="5,35,217,61"/>
+<area shape="rect" id="node2" href="$namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41" title="Forms the Fn matrix based on the internal force vector." alt="" coords="265,5,456,32"/>
+<area shape="rect" id="node3" href="$namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="277,57,444,98"/>
+</map>

@@ -1,7 +1,7 @@
 <map id="supeltypemodule::nullifysupel" name="supeltypemodule::nullifysupel">
 <area shape="rect" id="node1" title="Initializes a superelement object." alt="" coords="1971,241,2189,268"/>
 <area shape="rect" id="node2" href="$namespacesupeltypemodule.html#ae5f1adb2fb2a4b48caed3a6ce30506f1" title="Deallocates a superelement object." alt="" coords="1676,216,1923,243"/>
-<area shape="rect" id="node22" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="1145,259,1327,301"/>
+<area shape="rect" id="node22" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="1145,259,1327,301"/>
 <area shape="rect" id="node3" href="$namespacesupeltypemodule.html#aa1746d5bee40c6d07a83864e4224199e" title="Deallocates an array of superelement objects." alt="" coords="1375,216,1628,243"/>
 <area shape="rect" id="node4" href="$namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="1148,171,1324,213"/>
 <area shape="rect" id="node5" href="$namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="895,168,1097,195"/>

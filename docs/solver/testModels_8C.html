@@ -159,15 +159,6 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad7d0e6d9b495a233187598475cc9a937"><td class="memItemLeft" align="right" valign="top">static FFlElementBase *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testModels_8C.html#ad7d0e6d9b495a233187598475cc9a937">newQuadElement</a> (int e, int i, int j, int n1, bool parab)</td></tr>
-<tr class="memdesc:ad7d0e6d9b495a233187598475cc9a937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static helper generating a quadrilateral element in a regular mesh.  <a href="testModels_8C.html#ad7d0e6d9b495a233187598475cc9a937">More...</a><br /></td></tr>
-<tr class="separator:ad7d0e6d9b495a233187598475cc9a937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37fa67352baae06fa564684312f3da2e"><td class="memItemLeft" align="right" valign="top">static FFlElementBase *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testModels_8C.html#a37fa67352baae06fa564684312f3da2e">newTriaElement</a> (int e, int i, int j, int n1, bool parab)</td></tr>
-<tr class="memdesc:a37fa67352baae06fa564684312f3da2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static helper generating a triangular element in a regular mesh.  <a href="testModels_8C.html#a37fa67352baae06fa564684312f3da2e">More...</a><br /></td></tr>
-<tr class="separator:a37fa67352baae06fa564684312f3da2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac56b7af39bb8c0476ada310d9befc7e1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testModels_8C.html#ac56b7af39bb8c0476ada310d9befc7e1">BC</a> (const std::array&lt; int, 6 &gt; &amp;flags)</td></tr>
-<tr class="memdesc:ac56b7af39bb8c0476ada310d9befc7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static helper calculating a status code from boundary condition flags.  <a href="testModels_8C.html#ac56b7af39bb8c0476ada310d9befc7e1">More...</a><br /></td></tr>
-<tr class="separator:ac56b7af39bb8c0476ada310d9befc7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3346f38f12959da9882443c49b9a2f56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testModels_8C.html#a3346f38f12959da9882443c49b9a2f56">ffl_setLink</a> (FFlLinkHandler *link)</td></tr>
 <tr class="separator:a3346f38f12959da9882443c49b9a2f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab490306965cb48310f8923151c7ed660"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testModels_8C.html#ab490306965cb48310f8923151c7ed660">createFEModel</a> (int iPart, int nel, int nel2, double L, double b, double t, bool twoD, bool solve)</td></tr>
@@ -179,38 +170,10 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Hard-coded basic FE models for testing of FE part reduction. </p>
-<p>This file contains a set of classes, each one representing a simple FE model which is suitable for testing of the FE part reduction procedures without the need of reading an input file. The FE models are created by the respective constructors of the FFlLinkHandler sub-classes.</p>
+<p>This file contains a set of classes, each one representing a simple FE model which is suitable for testing the FE part reduction procedures without the need for reading an input file. The FE models are created by the respective constructors of the FFlLinkHandler sub-classes.</p>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>21 Apr 2020 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ac56b7af39bb8c0476ada310d9befc7e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac56b7af39bb8c0476ada310d9befc7e1">&#9670;&nbsp;</a></span>BC()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static int BC </td>
-          <td>(</td>
-          <td class="paramtype">const std::array&lt; int, 6 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>flags</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Static helper calculating a status code from boundary condition flags. </p>
-
-</div>
-</div>
 <a id="a58e15d783ffa4c18560e387a250fa39f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58e15d783ffa4c18560e387a250fa39f">&#9670;&nbsp;</a></span>clearFEModel()</h2>
 
@@ -314,122 +277,10 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad7d0e6d9b495a233187598475cc9a937"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7d0e6d9b495a233187598475cc9a937">&#9670;&nbsp;</a></span>newQuadElement()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static FFlElementBase* newQuadElement </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>j</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>parab</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Static helper generating a quadrilateral element in a regular mesh. </p>
-
-</div>
-</div>
-<a id="a37fa67352baae06fa564684312f3da2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37fa67352baae06fa564684312f3da2e">&#9670;&nbsp;</a></span>newTriaElement()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static FFlElementBase* newTriaElement </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>j</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>parab</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Static helper generating a triangular element in a regular mesh. </p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

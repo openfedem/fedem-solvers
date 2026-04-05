@@ -1,0 +1,24 @@
+<map id="windturbineroutinesmodule::updateadmarker" name="windturbineroutinesmodule::updateadmarker">
+<area shape="rect" id="node1" title="Updates an AeroDyn marker based on the corresponding Fedem triad." alt="" coords="1635,129,1836,170"/>
+<area shape="rect" id="node2" href="$namespacewindturbineroutinesmodule.html#a1b9f6f6a95184a0ec7a771d5d85b2932" title="Converts a Fedem wind turbine configuration to AeroDyn&#39;s format." alt="" coords="1136,70,1337,111"/>
+<area shape="rect" id="node12" href="$namespacewindturbineroutinesmodule.html#ac0033e3c89d9274b0cff7d1bc6928c49" title="Gets the aerodynamic forces at given time on the given wind turbine." alt="" coords="1136,187,1337,229"/>
+<area shape="rect" id="node22" href="$namespacewindturbineroutinesmodule.html#a6eb6606b04fc1acca16b2d92770a42cd" title="Updates the AeroDyn wind turbine configuration." alt="" coords="1385,129,1587,170"/>
+<area shape="rect" id="node3" href="$namespacewindturbineroutinesmodule.html#a22ecd9de761324e1a8dc5566d90fbd22" title="Sets up the information needed for, and initializes AeroDyn." alt="" coords="877,70,1078,111"/>
+<area shape="rect" id="node4" href="$namespaceinitiatewindturbinemodule.html#a9e76d6ae0786ac0927a888216d136884" title="Initializes the wind turbine with data from the solver input file." alt="" coords="624,70,819,111"/>
+<area shape="rect" id="node5" href="$namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,77,576,104"/>
+<area shape="rect" id="node6" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" id="node7" href="$solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" id="node8" href="$solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" id="node9" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" id="node10" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" id="node11" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+<area shape="rect" id="node13" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="885,187,1070,229"/>
+<area shape="rect" id="node18" href="$namespacerestartmodule.html#a3cc4a3b3f2214de1013479ff69317376" title="Initializes the mechanism configuration for restart." alt="" coords="867,253,1088,280"/>
+<area shape="rect" id="node21" href="$namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="374,129,555,170"/>
+<area shape="rect" id="node14" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="630,195,813,221"/>
+<area shape="rect" id="node15" href="$solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="179,220,257,247"/>
+<area shape="rect" id="node16" href="$namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="359,296,570,323"/>
+<area shape="rect" id="node17" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="363,195,567,221"/>
+<area shape="rect" id="node19" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="628,246,815,287"/>
+<area shape="rect" id="node20" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="628,311,815,353"/>
+</map>

@@ -9,7 +9,7 @@
 <area shape="rect" id="node19" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="595,691,766,732"/>
 <area shape="rect" id="node20" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="277,1139,444,1180"/>
 <area shape="rect" id="node23" href="$namespaceaddinsysmodule.html#a4dedbdb8ba7983d8fc40b7e44a566fe5" title="Builds the system force vectors." alt="" coords="241,891,480,918"/>
-<area shape="rect" id="node29" href="$namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title=" " alt="" coords="541,1397,820,1423"/>
+<area shape="rect" id="node29" href="$namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title="Returns the length of the initial time step." alt="" coords="541,1397,820,1423"/>
 <area shape="rect" id="node30" href="$namespacestressrecoverymodule.html#a8a92d21d270bc47338c919f868d6ee40" title="Saves/restores the initial gage strains to/from an in&#45;core array." alt="" coords="277,1321,444,1363"/>
 <area shape="rect" id="node31" href="$namespacesavemodule.html#aa50e29317831724dd64995825e895ade" title="Initializes the solver result database file." alt="" coords="243,1387,479,1414"/>
 <area shape="rect" id="node32" href="$namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="277,163,444,204"/>
@@ -32,8 +32,8 @@
 <area shape="rect" id="node49" href="$namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="243,2087,478,2114"/>
 <area shape="rect" id="node50" href="$namespaceinitiatesupeltypemodule.html#a2642a4223894a9a32bc86d6a860db278" title="Writes a Fortran90 subroutine with hard&#45;coded superelement matrices." alt="" coords="270,2139,451,2180"/>
 <area shape="rect" id="node3" href="$namespacenormroutinesmodule.html#a6155a1f7ea95c1fcbbfad47f1e294a8e" title="Defines the convergence tolerance to use for a given test item." alt="" coords="601,5,760,47"/>
-<area shape="rect" id="node5" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title=" " alt="" coords="580,188,781,229"/>
-<area shape="rect" id="node6" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title=" " alt="" coords="568,319,793,346"/>
+<area shape="rect" id="node5" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="580,188,781,229"/>
+<area shape="rect" id="node6" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="568,319,793,346"/>
 <area shape="rect" id="node7" href="$namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="595,371,766,412"/>
 <area shape="rect" id="node8" href="$namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="597,71,764,112"/>
 <area shape="rect" id="node9" href="$namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="868,349,1076,375"/>
@@ -44,7 +44,7 @@
 <area shape="rect" id="node17" href="$namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="587,1213,774,1255"/>
 <area shape="rect" id="node21" href="$stressRecoveryModule_8f90.html#af487591f1d0bdfe737fbde850cbe0b3b" title="Convenience wrapper for some strainrosettemodule subroutines." alt="" coords="619,1279,743,1306"/>
 <area shape="rect" id="node22" href="$namespacescratcharraymodule.html#abbf8c49accdc068e3b12b85662b1598d" title="Returns a pointer to a real(sp) scratch array." alt="" coords="595,1331,766,1372"/>
-<area shape="rect" id="node24" href="$namespacewindturbineroutinesmodule.html#a00c46c17d2ac5809616a83538e392563" title=" " alt="" coords="580,821,781,863"/>
+<area shape="rect" id="node24" href="$namespacewindturbineroutinesmodule.html#a00c46c17d2ac5809616a83538e392563" title="Calculates system force vector contributions from a wind turbine." alt="" coords="580,821,781,863"/>
 <area shape="rect" id="node25" href="$namespacebushingelementroutinesmodule.html#a62fd825a6d1fae1bb69f2ec7e040ebba" title=" " alt="" coords="566,1083,795,1124"/>
 <area shape="rect" id="node26" href="$namespacecontactelementroutinesmodule.html#a7844a98c0f1cdd486e6f593abffbe0c9" title="Calculates system force vector terms from a contact element." alt="" coords="567,887,794,928"/>
 <area shape="rect" id="node27" href="$namespacedamperroutinesmodule.html#a864ea66bfa9b77d3146625be72c2a90f" title="Assembles system force vector contributions from a damper element." alt="" coords="593,952,768,993"/>

@@ -1,5 +1,5 @@
 <map id="initiatesupeltypemodule::readsupels" name="initiatesupeltypemodule::readsupels">
-<area shape="rect" id="node1" title="Initializes superelements with data from the input file." alt="" coords="5,721,187,762"/>
+<area shape="rect" id="node1" title="Initializes superelements with data from the solver input file." alt="" coords="5,721,187,762"/>
 <area shape="rect" id="node2" href="$namespacetriadtypemodule.html#a6399b28142368fcf39b827702132b704" title="Allocates force vectors for frs&#45;output of superelement forces." alt="" coords="235,120,495,147"/>
 <area shape="rect" id="node3" href="$namespacefiniteelementmodule.html#afa7067f78ff941890e63688fa6e7c2c3" title="Calculates the element matrices for a basic finite element." alt="" coords="281,171,448,213"/>
 <area shape="rect" id="node9" href="$namespacesupeltypemodule.html#a398ad15066fbddaf2f98068d48193b08" title="Initiates the hydrodynamics quantities for a superelement." alt="" coords="844,291,1073,317"/>

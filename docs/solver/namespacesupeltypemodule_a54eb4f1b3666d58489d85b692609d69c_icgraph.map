@@ -1,6 +1,6 @@
 <map id="supeltypemodule::updatesupelcorot" name="supeltypemodule::updatesupelcorot">
 <area shape="rect" id="node1" title="Updates the co&#45;rotated system for a superelement." alt="" coords="1587,236,1843,263"/>
-<area shape="rect" id="node2" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="1357,50,1539,91"/>
+<area shape="rect" id="node2" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="1357,50,1539,91"/>
 <area shape="rect" id="node10" href="$namespacesupelroutinesmodule.html#a4fa23a365d753487fee11a133a8c43af" title="Updates all superelements in the model based on the computed state." alt="" coords="1369,290,1527,331"/>
 <area shape="rect" id="node21" href="$namespacesupelroutinesmodule.html#a31e9f3faf29bf864b624805c99318516" title="Updates all superelements in the model based on the computed state." alt="" coords="1369,166,1527,207"/>
 <area shape="rect" id="node29" href="$namespacemodesroutinesmodule.html#a3f9a5dea9c3ed46751fff16abe6676ec" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="1364,417,1532,458"/>

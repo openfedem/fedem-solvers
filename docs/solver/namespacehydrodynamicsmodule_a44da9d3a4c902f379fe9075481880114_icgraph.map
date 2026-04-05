@@ -26,8 +26,8 @@
 <area shape="rect" id="node23" href="$namespaceengineroutinesmodule.html#a828b78f0573ddb417f2a719b5f4eb786" title="Evaluates a general function with optional scaling and offset." alt="" coords="1246,329,1414,371"/>
 <area shape="rect" id="node33" href="$namespaceroadroutinesmodule.html#adce1f6877a917395e0b6a9b05c7b7dfb" title=" " alt="" coords="1253,761,1407,803"/>
 <area shape="rect" id="node34" href="$namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="1238,827,1422,854"/>
-<area shape="rect" id="node35" href="$namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title=" " alt="" coords="1191,878,1469,905"/>
-<area shape="rect" id="node36" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title=" " alt="" coords="1209,929,1451,955"/>
+<area shape="rect" id="node35" href="$namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title="Returns the length of the initial time step." alt="" coords="1191,878,1469,905"/>
+<area shape="rect" id="node36" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="1209,929,1451,955"/>
 <area shape="rect" id="node37" href="$namespaceextctrlsysroutinesmodule.html#acf10320ad1970aee28f832ca4a4b4d64" title=" " alt="" coords="1236,980,1424,1021"/>
 <area shape="rect" id="node38" href="$namespaceextctrlsysroutinesmodule.html#a13843260096752db9bba9f983623fece" title=" " alt="" coords="1236,1045,1424,1087"/>
 <area shape="rect" id="node39" href="$namespaceengineroutinesmodule.html#ade0a362e5df9b5cbcb66b398664bffb0" title="Pre&#45;evaluation of general functions." alt="" coords="957,629,1125,671"/>
@@ -35,7 +35,7 @@
 <area shape="rect" id="node42" href="$namespaceenergyintegrationmodule.html#a123cd24a376e0362e51db466ffb1a9db" title="Computes strain energy, input energy and energy loss for a spring." alt="" coords="1237,1176,1423,1217"/>
 <area shape="rect" id="node43" href="$namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1246,1503,1414,1544"/>
 <area shape="rect" id="node44" href="$namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all engines and store the values for saving." alt="" coords="1243,1241,1417,1283"/>
-<area shape="rect" id="node45" href="$namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e" title=" " alt="" coords="955,1207,1126,1248"/>
+<area shape="rect" id="node45" href="$namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e" title="Updates friction forces in the given joint or contact element." alt="" coords="955,1207,1126,1248"/>
 <area shape="rect" id="node46" href="$namespacemassroutinesmodule.html#a0be79f09e605f50e080cab9208a73c90" title="Updates a mass element." alt="" coords="1251,1307,1409,1348"/>
 <area shape="rect" id="node47" href="$namespacesupelroutinesmodule.html#ac61e91049f50447aaccdff86e9f51b3c" title="Updates the current sea state." alt="" coords="707,181,889,223"/>
 <area shape="rect" id="node48" href="$namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1246,1568,1414,1609"/>

@@ -74,15 +74,22 @@ $(function() {
 <div class="title">frictionroutinesmodule::findforceinfriction Interface Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Computes the total applied force in a joint dof with friction.  
+ <a href="interfacefrictionroutinesmodule_1_1findforceinfriction.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a6ff1d97474216dcf2ece7e04ca8fb3b2"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictionroutinesmodule_1_1findforceinfriction.html#a6ff1d97474216dcf2ece7e04ca8fb3b2">findjointforceinfriction</a> (joint, sam, RF, Q, Fs, Fd, Fi)</td></tr>
+<tr class="memdesc:a6ff1d97474216dcf2ece7e04ca8fb3b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the total applied force in a joint DOF with friction.  <a href="interfacefrictionroutinesmodule_1_1findforceinfriction.html#a6ff1d97474216dcf2ece7e04ca8fb3b2">More...</a><br /></td></tr>
 <tr class="separator:a6ff1d97474216dcf2ece7e04ca8fb3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a628919760a7e39c7747c6428c397817f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictionroutinesmodule_1_1findforceinfriction.html#a628919760a7e39c7747c6428c397817f">findcontactelmforceinfriction</a> (cElem, sam, RF, Q, Fs, Fd, Fi)</td></tr>
+<tr class="memdesc:a628919760a7e39c7747c6428c397817f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes total applied force in a contact element DOF with friction.  <a href="interfacefrictionroutinesmodule_1_1findforceinfriction.html#a628919760a7e39c7747c6428c397817f">More...</a><br /></td></tr>
 <tr class="separator:a628919760a7e39c7747c6428c397817f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Computes the total applied force in a joint dof with friction. </p>
+</div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a id="a628919760a7e39c7747c6428c397817f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a628919760a7e39c7747c6428c397817f">&#9670;&nbsp;</a></span>findcontactelmforceinfriction()</h2>
 
@@ -146,6 +153,23 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Computes total applied force in a contact element DOF with friction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">cElem</td><td>The contact element to check for friction forces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RF</td><td>Reaction force container </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Q</td><td>External force system vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Fs</td><td>Stiffness force system vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Fd</td><td>Damping force system vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="namespaceFi.html">Fi</a></td><td>Inertia force system vector</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The total applies force is equal to the sum of all force contributions to the friction DOF, except for the friction force itself. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>This subroutine is not implemented yet. Currently does nothing.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17 Sep 2007 </dd></dl>
 
 </div>
 </div>
@@ -213,6 +237,23 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Computes the total applied force in a joint DOF with friction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">joint</td><td>The joint to check for friction forces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RF</td><td>Reaction force container </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Q</td><td>External force system vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Fs</td><td>Stiffness force system vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Fd</td><td>Damping force system vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="namespaceFi.html">Fi</a></td><td>Inertia force system vector</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The total applies force is equal to the sum of all force contributions to the friction DOF, except for the friction force itself.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17 Sep 2007 </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
@@ -221,7 +262,7 @@ Private Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

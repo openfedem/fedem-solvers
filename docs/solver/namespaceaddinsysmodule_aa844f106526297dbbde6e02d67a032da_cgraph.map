@@ -3,10 +3,10 @@
 <area shape="rect" id="node2" href="$namespacebushingelementroutinesmodule.html#a62fd825a6d1fae1bb69f2ec7e040ebba" title=" " alt="" coords="328,53,557,94"/>
 <area shape="rect" id="node3" href="$namespacecontactelementroutinesmodule.html#a7844a98c0f1cdd486e6f593abffbe0c9" title="Calculates system force vector terms from a contact element." alt="" coords="329,118,556,159"/>
 <area shape="rect" id="node9" href="$namespaceforceroutinesmodule.html#aa8d86d22f9ad4acfc562b2d7baa85ce5" title="Assembles system force vector contributions from the external loads." alt="" coords="363,379,523,421"/>
-<area shape="rect" id="node12" href="$namespacefrictionroutinesmodule.html#ab51683455ce65145d06315fb23261a88" title=" " alt="" coords="357,445,528,486"/>
+<area shape="rect" id="node12" href="$namespacefrictionroutinesmodule.html#ab51683455ce65145d06315fb23261a88" title="Adds friction forces for a joint into the given system vectors." alt="" coords="357,445,528,486"/>
 <area shape="rect" id="node13" href="$namespacemassroutinesmodule.html#a223574af54de1865659c14bd19dd550f" title="Calculates the gravitation forces for a mass element." alt="" coords="354,314,531,355"/>
-<area shape="rect" id="node16" href="$namespacesupelroutinesmodule.html#a027c99baed4090e70cfbd73f46088ef2" title="Adds superelement forces into corresponding system force vectors." alt="" coords="360,183,525,225"/>
-<area shape="rect" id="node17" href="$namespaceuserdefelroutinesmodule.html#a6718b079a767b3544319ade450bcd3a5" title="Adds static element forces into corresponding system force vectors." alt="" coords="350,249,535,290"/>
+<area shape="rect" id="node16" href="$namespacesupelroutinesmodule.html#a027c99baed4090e70cfbd73f46088ef2" title="Adds superelement forces into corresponding system force vectors." alt="" coords="360,249,525,290"/>
+<area shape="rect" id="node17" href="$namespaceuserdefelroutinesmodule.html#a6718b079a767b3544319ade450bcd3a5" title="Adds static element forces into corresponding system force vectors." alt="" coords="350,183,535,225"/>
 <area shape="rect" id="node18" href="$namespacetireroutinesmodule.html#ac346e64faeb53f5f7ff1b4872edb7b82" title=" " alt="" coords="369,510,516,551"/>
 <area shape="rect" id="node19" href="$namespaceffacmdlinearginterface.html#a5762b6bd35e833d000e6db4bcda3df60" title="Returns the value of an integer command&#45;line option id." alt="" coords="349,575,536,617"/>
 <area shape="rect" id="node4" href="$FNVwaveForceModule_8f90.html#a9a0048950edd691805aa86cc576d4b18" title=" " alt="" coords="663,5,775,32"/>

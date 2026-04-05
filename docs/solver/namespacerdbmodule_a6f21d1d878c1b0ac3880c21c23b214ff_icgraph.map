@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$stressRecoveryModule_8f90.html#aff750b6cb425374b9513b7b7be3201af" title="Recovers internal displacements and stresses, and saves to file." alt="" coords="1168,279,1295,305"/>
 <area shape="rect" id="node8" href="$namespacecontroltypemodule.html#a23fa66555119dbc779a93733c49420cb" title="Writes control system data to the results database." alt="" coords="1155,213,1308,254"/>
 <area shape="rect" id="node19" href="$namespacesavereducermodule.html#aa864dfebb60bbb91ccba3bad3e120e33" title="Writes nodal displacements to the results database file." alt="" coords="1152,330,1311,371"/>
-<area shape="rect" id="node21" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="917,381,1076,422"/>
+<area shape="rect" id="node21" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title="Administers writing of results database for fedem_reducer." alt="" coords="917,381,1076,422"/>
 <area shape="rect" id="node22" href="$namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="620,431,865,457"/>
 <area shape="rect" id="node23" href="$namespacesavemodule.html#a8d6caebb54a58318d38ebc0019f40250" title="Administers writing of primary response results to database file." alt="" coords="1128,111,1335,137"/>
 <area shape="rect" id="node24" href="$namespacesavemodule.html#ad712350ee862e5a2fb3ec295f3afd965" title="Administers writing of secondary response results to database file." alt="" coords="1128,161,1335,188"/>
@@ -23,7 +23,7 @@
 <area shape="rect" id="node13" href="$solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,56,275,83"/>
 <area shape="rect" id="node14" href="$solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,107,274,133"/>
 <area shape="rect" id="node15" href="$solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,157,275,184"/>
-<area shape="rect" id="node20" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="917,315,1076,357"/>
+<area shape="rect" id="node20" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title="Administers writing of results database for fedem_partsol." alt="" coords="917,315,1076,357"/>
 <area shape="rect" id="node26" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="919,498,1075,539"/>
 <area shape="rect" id="node27" href="$namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="403,475,559,517"/>
 </map>

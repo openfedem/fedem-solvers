@@ -74,40 +74,55 @@ $(function() {
 <div class="title">normtypemodule::testsettype Type Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data type representing a set of convergence checks.  
+ <a href="structnormtypemodule_1_1testsettype.html#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for normtypemodule::testsettype:</div>
 <div class="dyncontent">
 <div class="center"><img src="structnormtypemodule_1_1testsettype__coll__graph.png" border="0" usemap="#anormtypemodule_1_1testsettype_coll__map" alt="Collaboration graph"/></div>
 <map name="anormtypemodule_1_1testsettype_coll__map" id="anormtypemodule_1_1testsettype_coll__map">
-<area shape="rect" title=" " alt="" coords="11,153,227,180"/>
-<area shape="rect" href="structnormtypemodule_1_1testitemtype.html" title=" " alt="" coords="5,5,232,32"/>
+<area shape="rect" title="Data type representing a set of convergence checks." alt="" coords="11,153,227,180"/>
+<area shape="rect" href="structnormtypemodule_1_1testitemtype.html" title="Data type representing a convergence check definition." alt="" coords="5,5,232,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:af04bb2f6ec0311a5a50417220b4957f9"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#af04bb2f6ec0311a5a50417220b4957f9">doingwell</a></td></tr>
+<tr class="memdesc:af04bb2f6ec0311a5a50417220b4957f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">If .true., the convergence is good.  <a href="structnormtypemodule_1_1testsettype.html#af04bb2f6ec0311a5a50417220b4957f9">More...</a><br /></td></tr>
 <tr class="separator:af04bb2f6ec0311a5a50417220b4957f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebc8696b6aa8a02d494fbb24c6437a81"><td class="memItemLeft" align="right" valign="top">logical, dimension(3)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#aebc8696b6aa8a02d494fbb24c6437a81">isactive</a></td></tr>
+<tr class="memdesc:aebc8696b6aa8a02d494fbb24c6437a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activation flags (dis/vel/acc, force, energy)  <a href="structnormtypemodule_1_1testsettype.html#aebc8696b6aa8a02d494fbb24c6437a81">More...</a><br /></td></tr>
 <tr class="separator:aebc8696b6aa8a02d494fbb24c6437a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4acc16e99931764a0bcfb47df12335"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#a5e4acc16e99931764a0bcfb47df12335">startmonitor</a></td></tr>
+<tr class="memdesc:a5e4acc16e99931764a0bcfb47df12335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for worst DOFs id iter &gt; startMonitor.  <a href="structnormtypemodule_1_1testsettype.html#a5e4acc16e99931764a0bcfb47df12335">More...</a><br /></td></tr>
 <tr class="separator:a5e4acc16e99931764a0bcfb47df12335"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebf15b7e72f8e1ef0dd6a4a9086e8801"><td class="memItemLeft" align="right" valign="top">integer, dimension(:,:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#aebf15b7e72f8e1ef0dd6a4a9086e8801">worstdofs</a></td></tr>
+<tr class="memdesc:aebf15b7e72f8e1ef0dd6a4a9086e8801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Worst DOFs when convergence is slow.  <a href="structnormtypemodule_1_1testsettype.html#aebf15b7e72f8e1ef0dd6a4a9086e8801">More...</a><br /></td></tr>
 <tr class="separator:aebf15b7e72f8e1ef0dd6a4a9086e8801"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46bd9b3558adc50ac24b7ecf21eca25b"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#a46bd9b3558adc50ac24b7ecf21eca25b">worstenerg</a></td></tr>
+<tr class="memdesc:a46bd9b3558adc50ac24b7ecf21eca25b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Worst energy when slow convergence.  <a href="structnormtypemodule_1_1testsettype.html#a46bd9b3558adc50ac24b7ecf21eca25b">More...</a><br /></td></tr>
 <tr class="separator:a46bd9b3558adc50ac24b7ecf21eca25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67600e62ebe89aef23e39b91f5416d20"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structnormtypemodule_1_1testitemtype.html">testitemtype</a>), dimension(<a class="el" href="namespacenormtypemodule.html#a747010d41d87e75b09dfebe523664de6">nnormtypes_p</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#a67600e62ebe89aef23e39b91f5416d20">disnorms</a></td></tr>
+<tr class="memdesc:a67600e62ebe89aef23e39b91f5416d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displacement norms.  <a href="structnormtypemodule_1_1testsettype.html#a67600e62ebe89aef23e39b91f5416d20">More...</a><br /></td></tr>
 <tr class="separator:a67600e62ebe89aef23e39b91f5416d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaa62f89b3e6d0ed257457fbcfab44e6"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structnormtypemodule_1_1testitemtype.html">testitemtype</a>), dimension(<a class="el" href="namespacenormtypemodule.html#a747010d41d87e75b09dfebe523664de6">nnormtypes_p</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#acaa62f89b3e6d0ed257457fbcfab44e6">velnorms</a></td></tr>
+<tr class="memdesc:acaa62f89b3e6d0ed257457fbcfab44e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity norms.  <a href="structnormtypemodule_1_1testsettype.html#acaa62f89b3e6d0ed257457fbcfab44e6">More...</a><br /></td></tr>
 <tr class="separator:acaa62f89b3e6d0ed257457fbcfab44e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a340464b8cedb0d6ab872acbcb32f1c83"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structnormtypemodule_1_1testitemtype.html">testitemtype</a>), dimension(<a class="el" href="namespacenormtypemodule.html#a747010d41d87e75b09dfebe523664de6">nnormtypes_p</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#a340464b8cedb0d6ab872acbcb32f1c83">accnorms</a></td></tr>
+<tr class="memdesc:a340464b8cedb0d6ab872acbcb32f1c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acceleration norms.  <a href="structnormtypemodule_1_1testsettype.html#a340464b8cedb0d6ab872acbcb32f1c83">More...</a><br /></td></tr>
 <tr class="separator:a340464b8cedb0d6ab872acbcb32f1c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d6cae9bdf06fabe275efb1b79e67bc7"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structnormtypemodule_1_1testitemtype.html">testitemtype</a>), dimension(<a class="el" href="namespacenormtypemodule.html#a747010d41d87e75b09dfebe523664de6">nnormtypes_p</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#a1d6cae9bdf06fabe275efb1b79e67bc7">resnorms</a></td></tr>
+<tr class="memdesc:a1d6cae9bdf06fabe275efb1b79e67bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force residual norms.  <a href="structnormtypemodule_1_1testsettype.html#a1d6cae9bdf06fabe275efb1b79e67bc7">More...</a><br /></td></tr>
 <tr class="separator:a1d6cae9bdf06fabe275efb1b79e67bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc8e6a25bf14375143c483ecc766fa52"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structnormtypemodule_1_1testitemtype.html">testitemtype</a>), dimension(2)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html#abc8e6a25bf14375143c483ecc766fa52">energynorms</a></td></tr>
+<tr class="memdesc:abc8e6a25bf14375143c483ecc766fa52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Energy norms.  <a href="structnormtypemodule_1_1testsettype.html#abc8e6a25bf14375143c483ecc766fa52">More...</a><br /></td></tr>
 <tr class="separator:abc8e6a25bf14375143c483ecc766fa52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data type representing a set of convergence checks. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a340464b8cedb0d6ab872acbcb32f1c83"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a340464b8cedb0d6ab872acbcb32f1c83">&#9670;&nbsp;</a></span>accnorms</h2>
 
@@ -119,6 +134,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Acceleration norms. </p>
 
 </div>
 </div>
@@ -134,6 +151,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Displacement norms. </p>
+
 </div>
 </div>
 <a id="af04bb2f6ec0311a5a50417220b4957f9"></a>
@@ -147,6 +166,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>If .true., the convergence is good. </p>
 
 </div>
 </div>
@@ -162,6 +183,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Energy norms. </p>
+
 </div>
 </div>
 <a id="aebc8696b6aa8a02d494fbb24c6437a81"></a>
@@ -175,6 +198,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Activation flags (dis/vel/acc, force, energy) </p>
 
 </div>
 </div>
@@ -190,6 +215,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Force residual norms. </p>
+
 </div>
 </div>
 <a id="a5e4acc16e99931764a0bcfb47df12335"></a>
@@ -203,6 +230,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Search for worst DOFs id iter &gt; startMonitor. </p>
 
 </div>
 </div>
@@ -218,6 +247,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Velocity norms. </p>
+
 </div>
 </div>
 <a id="aebf15b7e72f8e1ef0dd6a4a9086e8801"></a>
@@ -231,6 +262,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Worst DOFs when convergence is slow. </p>
 
 </div>
 </div>
@@ -246,6 +279,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Worst energy when slow convergence. </p>
+
 </div>
 </div>
 <hr/>The documentation for this type was generated from the following file:<ul>
@@ -254,7 +289,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

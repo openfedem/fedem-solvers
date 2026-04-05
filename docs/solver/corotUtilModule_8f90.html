@@ -74,31 +74,43 @@ $(function() {
 <div class="title">corotUtilModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Utilities for co-rotational superelement formulations.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacecorotutilmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html">corotutilmodule</a></td></tr>
+<tr class="memdesc:namespacecorotutilmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module with subroutines for co-rotational superelement formulations. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a85d275099c228a90b0b6dc768d5c819f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f">corotutilmodule::addkgrtokm</a> (supEl, ktan, km, fint, ierr)</td></tr>
+<tr class="memdesc:a85d275099c228a90b0b6dc768d5c819f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the rotational geometric stiffness for a superelement.  <a href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f">More...</a><br /></td></tr>
 <tr class="separator:a85d275099c228a90b0b6dc768d5c819f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac646d57215d537384ec646a4f92503c7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7">corotutilmodule::gmat3nod</a> (gmat, x, y, z, ierr)</td></tr>
+<tr class="memdesc:ac646d57215d537384ec646a4f92503c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the rotation gradient matrix for a 3-noded element.  <a href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7">More...</a><br /></td></tr>
 <tr class="separator:ac646d57215d537384ec646a4f92503c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ea211cf52e14f30115f207d31565092"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092">corotutilmodule::gmat3nodlocal</a> (gmat, x, y)</td></tr>
+<tr class="memdesc:a8ea211cf52e14f30115f207d31565092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the rotation gradient matrix for a 3-noded element.  <a href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092">More...</a><br /></td></tr>
 <tr class="separator:a8ea211cf52e14f30115f207d31565092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f07f8f780f52107d738794f4656d38a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a5f07f8f780f52107d738794f4656d38a">corotutilmodule::mmat3nod</a> (mmat, emat)</td></tr>
+<tr class="memdesc:a5f07f8f780f52107d738794f4656d38a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up an eccentricity transformation matrix for a 3-noded element.  <a href="namespacecorotutilmodule.html#a5f07f8f780f52107d738794f4656d38a">More...</a><br /></td></tr>
 <tr class="separator:a5f07f8f780f52107d738794f4656d38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeddbb3a37ce7e9d8d4978a2118c4f41"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41">corotutilmodule::formfnm</a> (triads, fint, fnm)</td></tr>
+<tr class="memdesc:abeddbb3a37ce7e9d8d4978a2118c4f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms the <em>Fn</em> matrix based on the internal force vector.  <a href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41">More...</a><br /></td></tr>
 <tr class="separator:abeddbb3a37ce7e9d8d4978a2118c4f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a856fb738c65ae2c4bcc1a3a38a6469e0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a856fb738c65ae2c4bcc1a3a38a6469e0">corotutilmodule::formshadowposgrad</a> (supEl, dbgShadowPos, ierr)</td></tr>
-<tr class="separator:a856fb738c65ae2c4bcc1a3a38a6469e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae48acfb11b5b52e7945b4a348c70c16b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b">corotutilmodule::formshadowposgrad</a> (supEl, dbgCorot, ierr)</td></tr>
+<tr class="memdesc:ae48acfb11b5b52e7945b4a348c70c16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms the gradient matrix used in the shadow position calculations.  <a href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b">More...</a><br /></td></tr>
+<tr class="separator:ae48acfb11b5b52e7945b4a348c70c16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Utilities for co-rotational superelement formulations. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

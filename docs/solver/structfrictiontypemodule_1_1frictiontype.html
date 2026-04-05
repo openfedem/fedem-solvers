@@ -74,12 +74,15 @@ $(function() {
 <div class="title">frictiontypemodule::frictiontype Type Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data type representing a joint DOF friction.  
+ <a href="structfrictiontypemodule_1_1frictiontype.html#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for frictiontypemodule::frictiontype:</div>
 <div class="dyncontent">
 <div class="center"><img src="structfrictiontypemodule_1_1frictiontype__coll__graph.png" border="0" usemap="#africtiontypemodule_1_1frictiontype_coll__map" alt="Collaboration graph"/></div>
 <map name="africtiontypemodule_1_1frictiontype_coll__map" id="africtiontypemodule_1_1frictiontype_coll__map">
-<area shape="rect" title=" " alt="" coords="2545,290,2692,331"/>
+<area shape="rect" title="Data type representing a joint DOF friction." alt="" coords="2545,290,2692,331"/>
 <area shape="rect" href="structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1224,218,1377,259"/>
 <area shape="rect" href="structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2224,161,2472,188"/>
 <area shape="rect" href="structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1475,244,1713,270"/>
@@ -88,7 +91,7 @@ Collaboration diagram for frictiontypemodule::frictiontype:</div>
 <area shape="rect" href="structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,220,455,246"/>
 <area shape="rect" href="structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="479,14,737,41"/>
 <area shape="rect" href="structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1889,245,2139,272"/>
-<area shape="rect" href="structfrictiontypemodule_1_1frictionparametertype.html" title=" " alt="" coords="1027,390,1200,431"/>
+<area shape="rect" href="structfrictiontypemodule_1_1frictionparametertype.html" title="Data type representing a set of friction parameters." alt="" coords="1027,390,1200,431"/>
 <area shape="rect" href="structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="761,220,1003,246"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -96,53 +99,78 @@ Collaboration diagram for frictiontypemodule::frictiontype:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a054490abda08f3a9ad0a7c10b1ef16cd"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structfrictiontypemodule_1_1frictionparametertype.html">frictionparametertype</a>), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a054490abda08f3a9ad0a7c10b1ef16cd">param</a></td></tr>
+<tr class="memdesc:a054490abda08f3a9ad0a7c10b1ef16cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Friction properties.  <a href="structfrictiontypemodule_1_1frictiontype.html#a054490abda08f3a9ad0a7c10b1ef16cd">More...</a><br /></td></tr>
 <tr class="separator:a054490abda08f3a9ad0a7c10b1ef16cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a271daa7f166bf46a431b5a315dcef92a"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structfunctiontypemodule_1_1enginetype.html">enginetype</a>), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a271daa7f166bf46a431b5a315dcef92a">eng</a></td></tr>
+<tr class="memdesc:a271daa7f166bf46a431b5a315dcef92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">User-defined normal load.  <a href="structfrictiontypemodule_1_1frictiontype.html#a271daa7f166bf46a431b5a315dcef92a">More...</a><br /></td></tr>
 <tr class="separator:a271daa7f166bf46a431b5a315dcef92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab67472df7c92c0751242f5653bdb6b66"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structspringtypemodule_1_1springbasetype.html">springbasetype</a>), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#ab67472df7c92c0751242f5653bdb6b66">spr</a></td></tr>
+<tr class="memdesc:ab67472df7c92c0751242f5653bdb6b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spring with variable yield to handle stick stiffness.  <a href="structfrictiontypemodule_1_1frictiontype.html#ab67472df7c92c0751242f5653bdb6b66">More...</a><br /></td></tr>
 <tr class="separator:ab67472df7c92c0751242f5653bdb6b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04e7d7bfe57ad82656a23e42baea333a"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a04e7d7bfe57ad82656a23e42baea333a">isactive</a></td></tr>
+<tr class="memdesc:a04e7d7bfe57ad82656a23e42baea333a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn friction on/off, used by cam joints and contact elements.  <a href="structfrictiontypemodule_1_1frictiontype.html#a04e7d7bfe57ad82656a23e42baea333a">More...</a><br /></td></tr>
 <tr class="separator:a04e7d7bfe57ad82656a23e42baea333a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ef43a3b665294b1f40e50757997e939"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a9ef43a3b665294b1f40e50757997e939">linit</a></td></tr>
+<tr class="memdesc:a9ef43a3b665294b1f40e50757997e939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Friction initialization flag.  <a href="structfrictiontypemodule_1_1frictiontype.html#a9ef43a3b665294b1f40e50757997e939">More...</a><br /></td></tr>
 <tr class="separator:a9ef43a3b665294b1f40e50757997e939"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a688b9781ac66c6f521faf6274257d993"><td class="memItemLeft" align="right" valign="top">integer, dimension(2)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a688b9781ac66c6f521faf6274257d993">lslip</a></td></tr>
+<tr class="memdesc:a688b9781ac66c6f521faf6274257d993"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stick/Slip indicators.  <a href="structfrictiontypemodule_1_1frictiontype.html#a688b9781ac66c6f521faf6274257d993">More...</a><br /></td></tr>
 <tr class="separator:a688b9781ac66c6f521faf6274257d993"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9d144efcc6e928bdb4f85d77a4279b4"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#aa9d144efcc6e928bdb4f85d77a4279b4">fext</a></td></tr>
+<tr class="memdesc:aa9d144efcc6e928bdb4f85d77a4279b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force that should match friction force on stick.  <a href="structfrictiontypemodule_1_1frictiontype.html#aa9d144efcc6e928bdb4f85d77a4279b4">More...</a><br /></td></tr>
 <tr class="separator:aa9d144efcc6e928bdb4f85d77a4279b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10350094c5e48a29e3e81f799edd7265"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a10350094c5e48a29e3e81f799edd7265">fequ</a></td></tr>
+<tr class="memdesc:a10350094c5e48a29e3e81f799edd7265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equivalent normal force.  <a href="structfrictiontypemodule_1_1frictiontype.html#a10350094c5e48a29e3e81f799edd7265">More...</a><br /></td></tr>
 <tr class="separator:a10350094c5e48a29e3e81f799edd7265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a376e088c1f4cb8e590443418d2c1146d"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a376e088c1f4cb8e590443418d2c1146d">fmax</a></td></tr>
+<tr class="memdesc:a376e088c1f4cb8e590443418d2c1146d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max friction force.  <a href="structfrictiontypemodule_1_1frictiontype.html#a376e088c1f4cb8e590443418d2c1146d">More...</a><br /></td></tr>
 <tr class="separator:a376e088c1f4cb8e590443418d2c1146d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ab29ab1f178b806ebfb6f8250dfa3ef"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a5ab29ab1f178b806ebfb6f8250dfa3ef">force</a></td></tr>
+<tr class="memdesc:a5ab29ab1f178b806ebfb6f8250dfa3ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current force.  <a href="structfrictiontypemodule_1_1frictiontype.html#a5ab29ab1f178b806ebfb6f8250dfa3ef">More...</a><br /></td></tr>
 <tr class="separator:a5ab29ab1f178b806ebfb6f8250dfa3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0996ecdfddc6b0bf05eae3df82238ce"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#ae0996ecdfddc6b0bf05eae3df82238ce">forceprevit</a></td></tr>
+<tr class="memdesc:ae0996ecdfddc6b0bf05eae3df82238ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force at previous iteration.  <a href="structfrictiontypemodule_1_1frictiontype.html#ae0996ecdfddc6b0bf05eae3df82238ce">More...</a><br /></td></tr>
 <tr class="separator:ae0996ecdfddc6b0bf05eae3df82238ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa26ae4e53eedda40ec59f56f8b32f591"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#aa26ae4e53eedda40ec59f56f8b32f591">df</a></td></tr>
+<tr class="memdesc:aa26ae4e53eedda40ec59f56f8b32f591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change in force between last two iterations.  <a href="structfrictiontypemodule_1_1frictiontype.html#aa26ae4e53eedda40ec59f56f8b32f591">More...</a><br /></td></tr>
 <tr class="separator:aa26ae4e53eedda40ec59f56f8b32f591"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3455fff5c7934fd94e3ad6636c0b7e0b"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a3455fff5c7934fd94e3ad6636c0b7e0b">stiff</a></td></tr>
+<tr class="memdesc:a3455fff5c7934fd94e3ad6636c0b7e0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative change in friction force wrt. velocity.  <a href="structfrictiontypemodule_1_1frictiontype.html#a3455fff5c7934fd94e3ad6636c0b7e0b">More...</a><br /></td></tr>
 <tr class="separator:a3455fff5c7934fd94e3ad6636c0b7e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a959ba3cbce08df6cd1c436c88858737a"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a959ba3cbce08df6cd1c436c88858737a">pos</a></td></tr>
+<tr class="memdesc:a959ba3cbce08df6cd1c436c88858737a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current position.  <a href="structfrictiontypemodule_1_1frictiontype.html#a959ba3cbce08df6cd1c436c88858737a">More...</a><br /></td></tr>
 <tr class="separator:a959ba3cbce08df6cd1c436c88858737a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58ee70d533bba3801b0da543750a725c"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a58ee70d533bba3801b0da543750a725c">pos0</a></td></tr>
+<tr class="memdesc:a58ee70d533bba3801b0da543750a725c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position at start of time step.  <a href="structfrictiontypemodule_1_1frictiontype.html#a58ee70d533bba3801b0da543750a725c">More...</a><br /></td></tr>
 <tr class="separator:a58ee70d533bba3801b0da543750a725c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03dc1ecdf49f12bd4767ffc5c806f9ea"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a03dc1ecdf49f12bd4767ffc5c806f9ea">posprevit</a></td></tr>
+<tr class="memdesc:a03dc1ecdf49f12bd4767ffc5c806f9ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position at previous iteration.  <a href="structfrictiontypemodule_1_1frictiontype.html#a03dc1ecdf49f12bd4767ffc5c806f9ea">More...</a><br /></td></tr>
 <tr class="separator:a03dc1ecdf49f12bd4767ffc5c806f9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8db611264664f2501e6042ac5cb22810"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a8db611264664f2501e6042ac5cb22810">vel</a></td></tr>
+<tr class="memdesc:a8db611264664f2501e6042ac5cb22810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current velocity.  <a href="structfrictiontypemodule_1_1frictiontype.html#a8db611264664f2501e6042ac5cb22810">More...</a><br /></td></tr>
 <tr class="separator:a8db611264664f2501e6042ac5cb22810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3225984a835b5cd102c58fce60728777"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a3225984a835b5cd102c58fce60728777">vel0</a></td></tr>
+<tr class="memdesc:a3225984a835b5cd102c58fce60728777"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity at start of timestep.  <a href="structfrictiontypemodule_1_1frictiontype.html#a3225984a835b5cd102c58fce60728777">More...</a><br /></td></tr>
 <tr class="separator:a3225984a835b5cd102c58fce60728777"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3da902498a0fcb69c3be70fbab0ff80c"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a3da902498a0fcb69c3be70fbab0ff80c">velprevit</a></td></tr>
+<tr class="memdesc:a3da902498a0fcb69c3be70fbab0ff80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity at previous iteration.  <a href="structfrictiontypemodule_1_1frictiontype.html#a3da902498a0fcb69c3be70fbab0ff80c">More...</a><br /></td></tr>
 <tr class="separator:a3da902498a0fcb69c3be70fbab0ff80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcfa627e978076b20397885029c3fc71"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#afcfa627e978076b20397885029c3fc71">forceprev</a></td></tr>
+<tr class="memdesc:afcfa627e978076b20397885029c3fc71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force at the end of last time step.  <a href="structfrictiontypemodule_1_1frictiontype.html#afcfa627e978076b20397885029c3fc71">More...</a><br /></td></tr>
 <tr class="separator:afcfa627e978076b20397885029c3fc71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70d6eddb541495834e3a3216f0a42183"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a70d6eddb541495834e3a3216f0a42183">posprev</a></td></tr>
+<tr class="memdesc:a70d6eddb541495834e3a3216f0a42183"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position at the end of last time step.  <a href="structfrictiontypemodule_1_1frictiontype.html#a70d6eddb541495834e3a3216f0a42183">More...</a><br /></td></tr>
 <tr class="separator:a70d6eddb541495834e3a3216f0a42183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a821d550f186a73cdad402b91c22d8d08"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a821d550f186a73cdad402b91c22d8d08">edmp</a></td></tr>
+<tr class="memdesc:a821d550f186a73cdad402b91c22d8d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Energy loss (always positive)  <a href="structfrictiontypemodule_1_1frictiontype.html#a821d550f186a73cdad402b91c22d8d08">More...</a><br /></td></tr>
 <tr class="separator:a821d550f186a73cdad402b91c22d8d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0779e9611b2e400d64272933585ff389"><td class="memItemLeft" align="right" valign="top">logical, dimension(3)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html#a0779e9611b2e400d64272933585ff389">savevar</a></td></tr>
+<tr class="memdesc:a0779e9611b2e400d64272933585ff389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags indicating which variables should be saved.  <a href="structfrictiontypemodule_1_1frictiontype.html#a0779e9611b2e400d64272933585ff389">More...</a><br /></td></tr>
 <tr class="separator:a0779e9611b2e400d64272933585ff389"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data type representing a joint DOF friction. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="aa26ae4e53eedda40ec59f56f8b32f591"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa26ae4e53eedda40ec59f56f8b32f591">&#9670;&nbsp;</a></span>df</h2>
 
@@ -154,6 +182,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Change in force between last two iterations. </p>
 
 </div>
 </div>
@@ -169,6 +199,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Energy loss (always positive) </p>
+
 </div>
 </div>
 <a id="a271daa7f166bf46a431b5a315dcef92a"></a>
@@ -182,6 +214,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>User-defined normal load. </p>
 
 </div>
 </div>
@@ -197,6 +231,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Equivalent normal force. </p>
+
 </div>
 </div>
 <a id="aa9d144efcc6e928bdb4f85d77a4279b4"></a>
@@ -210,6 +246,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Force that should match friction force on stick. </p>
 
 </div>
 </div>
@@ -225,6 +263,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Max friction force. </p>
+
 </div>
 </div>
 <a id="a5ab29ab1f178b806ebfb6f8250dfa3ef"></a>
@@ -238,6 +278,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Current force. </p>
 
 </div>
 </div>
@@ -253,6 +295,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Force at the end of last time step. </p>
+
 </div>
 </div>
 <a id="ae0996ecdfddc6b0bf05eae3df82238ce"></a>
@@ -266,6 +310,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Force at previous iteration. </p>
 
 </div>
 </div>
@@ -281,6 +327,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Turn friction on/off, used by cam joints and contact elements. </p>
+
 </div>
 </div>
 <a id="a9ef43a3b665294b1f40e50757997e939"></a>
@@ -294,6 +342,13 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Friction initialization flag. </p>
+<p>The value has the following interpretation:</p><ul>
+<li>= 0: No initialization (within iteration loop)</li>
+<li>= 1: Initialize for a new time step</li>
+<li>= 2: Initialize for start of simulation </li>
+</ul>
 
 </div>
 </div>
@@ -309,6 +364,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Stick/Slip indicators. </p>
+
 </div>
 </div>
 <a id="a054490abda08f3a9ad0a7c10b1ef16cd"></a>
@@ -322,6 +379,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Friction properties. </p>
 
 </div>
 </div>
@@ -337,6 +396,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Current position. </p>
+
 </div>
 </div>
 <a id="a58ee70d533bba3801b0da543750a725c"></a>
@@ -350,6 +411,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Position at start of time step. </p>
 
 </div>
 </div>
@@ -365,6 +428,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Position at the end of last time step. </p>
+
 </div>
 </div>
 <a id="a03dc1ecdf49f12bd4767ffc5c806f9ea"></a>
@@ -378,6 +443,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Position at previous iteration. </p>
 
 </div>
 </div>
@@ -393,6 +460,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Flags indicating which variables should be saved. </p>
+
 </div>
 </div>
 <a id="ab67472df7c92c0751242f5653bdb6b66"></a>
@@ -406,6 +475,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Spring with variable yield to handle stick stiffness. </p>
 
 </div>
 </div>
@@ -421,6 +492,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Relative change in friction force wrt. velocity. </p>
+
 </div>
 </div>
 <a id="a8db611264664f2501e6042ac5cb22810"></a>
@@ -434,6 +507,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Current velocity. </p>
 
 </div>
 </div>
@@ -449,6 +524,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Velocity at start of timestep. </p>
+
 </div>
 </div>
 <a id="a3da902498a0fcb69c3be70fbab0ff80c"></a>
@@ -463,6 +540,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Velocity at previous iteration. </p>
+
 </div>
 </div>
 <hr/>The documentation for this type was generated from the following file:<ul>
@@ -471,7 +550,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

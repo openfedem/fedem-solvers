@@ -69,23 +69,34 @@ $(function() {
 <div class="title">corotutilmodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with subroutines for co-rotational superelement formulations.  
+<a href="namespacecorotutilmodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a85d275099c228a90b0b6dc768d5c819f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f">addkgrtokm</a> (supEl, ktan, km, fint, ierr)</td></tr>
+<tr class="memdesc:a85d275099c228a90b0b6dc768d5c819f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the rotational geometric stiffness for a superelement.  <a href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f">More...</a><br /></td></tr>
 <tr class="separator:a85d275099c228a90b0b6dc768d5c819f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac646d57215d537384ec646a4f92503c7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7">gmat3nod</a> (gmat, x, y, z, ierr)</td></tr>
+<tr class="memdesc:ac646d57215d537384ec646a4f92503c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the rotation gradient matrix for a 3-noded element.  <a href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7">More...</a><br /></td></tr>
 <tr class="separator:ac646d57215d537384ec646a4f92503c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ea211cf52e14f30115f207d31565092"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092">gmat3nodlocal</a> (gmat, x, y)</td></tr>
+<tr class="memdesc:a8ea211cf52e14f30115f207d31565092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the rotation gradient matrix for a 3-noded element.  <a href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092">More...</a><br /></td></tr>
 <tr class="separator:a8ea211cf52e14f30115f207d31565092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f07f8f780f52107d738794f4656d38a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a5f07f8f780f52107d738794f4656d38a">mmat3nod</a> (mmat, emat)</td></tr>
+<tr class="memdesc:a5f07f8f780f52107d738794f4656d38a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up an eccentricity transformation matrix for a 3-noded element.  <a href="namespacecorotutilmodule.html#a5f07f8f780f52107d738794f4656d38a">More...</a><br /></td></tr>
 <tr class="separator:a5f07f8f780f52107d738794f4656d38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeddbb3a37ce7e9d8d4978a2118c4f41"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41">formfnm</a> (triads, fint, fnm)</td></tr>
+<tr class="memdesc:abeddbb3a37ce7e9d8d4978a2118c4f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms the <em>Fn</em> matrix based on the internal force vector.  <a href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41">More...</a><br /></td></tr>
 <tr class="separator:abeddbb3a37ce7e9d8d4978a2118c4f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a856fb738c65ae2c4bcc1a3a38a6469e0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#a856fb738c65ae2c4bcc1a3a38a6469e0">formshadowposgrad</a> (supEl, dbgShadowPos, ierr)</td></tr>
-<tr class="separator:a856fb738c65ae2c4bcc1a3a38a6469e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae48acfb11b5b52e7945b4a348c70c16b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b">formshadowposgrad</a> (supEl, dbgCorot, ierr)</td></tr>
+<tr class="memdesc:ae48acfb11b5b52e7945b4a348c70c16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms the gradient matrix used in the shadow position calculations.  <a href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b">More...</a><br /></td></tr>
+<tr class="separator:ae48acfb11b5b52e7945b4a348c70c16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with subroutines for co-rotational superelement formulations. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a85d275099c228a90b0b6dc768d5c819f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85d275099c228a90b0b6dc768d5c819f">&#9670;&nbsp;</a></span>addkgrtokm()</h2>
 
@@ -130,6 +141,68 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Calculates the rotational geometric stiffness for a superelement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">supEl</td><td>The superelement to calculation geometric stiffness for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ktan</td><td>Tangential stiffness matrix (material + geometric stiff.) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">km</td><td>Material stiffness matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fint</td><td>Internal force vector </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Dag Rune Christensen </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23 Oct 1997 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen (significant upgrade) </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>29 Oct 2003 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_cgraph.png" border="0" usemap="#anamespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_cgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_cgraph" id="anamespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_cgraph">
+<area shape="rect" title="Calculates the rotational geometric stiffness for a superelement." alt="" coords="5,35,217,61"/>
+<area shape="rect" href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41" title="Forms the Fn matrix based on the internal force vector." alt="" coords="265,5,456,32"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="277,57,444,98"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_icgraph.png" border="0" usemap="#anamespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_icgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_icgraph" id="anamespacecorotutilmodule_a85d275099c228a90b0b6dc768d5c819f_icgraph">
+<area shape="rect" title="Calculates the rotational geometric stiffness for a superelement." alt="" coords="1660,599,1872,625"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a7de00964a81d8cf58aecae33fffd4267" title="Computes the tangential superelement stiffness matrix." alt="" coords="1453,591,1612,633"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="1185,537,1405,564"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a06def57483cf21985f6fff330089ab98" title="Computes the superelement Newton matrix." alt="" coords="1216,621,1375,662"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="932,530,1100,571"/>
+<area shape="rect" href="namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="901,397,1131,424"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="925,201,1107,242"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="925,613,1107,654"/>
+<area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="634,528,833,555"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,604,572,631"/>
+<area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="435,528,527,555"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,528,83,555"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,579,341,605"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,528,338,555"/>
+<area shape="rect" href="namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="620,477,847,504"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="655,295,811,337"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="655,361,811,402"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="655,230,811,271"/>
+<area shape="rect" href="solverDriver_8f90.html#ae6e1f5b931c2ce470c9bb64e87c362a8" title="Returns a system matrix in full format." alt="" coords="682,427,785,453"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="158,331,314,373"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="403,361,559,402"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="646,132,821,159"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,5,519,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,56,519,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,107,519,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,157,519,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,208,519,235"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="895,679,1137,705"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="641,681,826,722"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="abeddbb3a37ce7e9d8d4978a2118c4f41"></a>
@@ -164,10 +237,61 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Forms the <em>Fn</em> matrix based on the internal force vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">triads</td><td>External nodes in the superelement </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fint</td><td>Internal force vector of the superelement </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fnm</td><td>Then <em>Fn</em> matrix (see below)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <em>Fn</em> matrix consists of the spin of the nodal force vectors with both axial and moment contributions, i.e., </p><div class="fragment"><div class="line">| spin(n) |</div>
+<div class="line">| spin(m) |</div>
+</div><!-- fragment --><p> for each node ordered as columns.</p>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_abeddbb3a37ce7e9d8d4978a2118c4f41_icgraph.png" border="0" usemap="#anamespacecorotutilmodule_abeddbb3a37ce7e9d8d4978a2118c4f41_icgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_abeddbb3a37ce7e9d8d4978a2118c4f41_icgraph" id="anamespacecorotutilmodule_abeddbb3a37ce7e9d8d4978a2118c4f41_icgraph">
+<area shape="rect" title="Forms the Fn matrix based on the internal force vector." alt="" coords="1920,599,2111,625"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f" title="Calculates the rotational geometric stiffness for a superelement." alt="" coords="1660,599,1872,625"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a7de00964a81d8cf58aecae33fffd4267" title="Computes the tangential superelement stiffness matrix." alt="" coords="1453,591,1612,633"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="1185,537,1405,564"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a06def57483cf21985f6fff330089ab98" title="Computes the superelement Newton matrix." alt="" coords="1216,621,1375,662"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="932,530,1100,571"/>
+<area shape="rect" href="namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="901,397,1131,424"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="925,201,1107,242"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="925,613,1107,654"/>
+<area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="634,528,833,555"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,604,572,631"/>
+<area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="435,528,527,555"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,528,83,555"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,579,341,605"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,528,338,555"/>
+<area shape="rect" href="namespaceinversemodule.html#a403d0ba8c93412bc19a800cf50d162ef" title=" " alt="" coords="620,477,847,504"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="655,295,811,337"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ae970999ba43e4dd3b14100bf435f768b" title="Handles the data segments including modal or direct solution." alt="" coords="655,361,811,402"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="655,230,811,271"/>
+<area shape="rect" href="solverDriver_8f90.html#ae6e1f5b931c2ce470c9bb64e87c362a8" title="Returns a system matrix in full format." alt="" coords="682,427,785,453"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="158,331,314,373"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="403,361,559,402"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="646,132,821,159"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,5,519,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,56,519,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,107,519,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,157,519,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,208,519,235"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="895,679,1137,705"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="641,681,826,722"/>
+</map>
+</div>
+
 </div>
 </div>
-<a id="a856fb738c65ae2c4bcc1a3a38a6469e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a856fb738c65ae2c4bcc1a3a38a6469e0">&#9670;&nbsp;</a></span>formshadowposgrad()</h2>
+<a id="ae48acfb11b5b52e7945b4a348c70c16b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae48acfb11b5b52e7945b4a348c70c16b">&#9670;&nbsp;</a></span>formshadowposgrad()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +306,7 @@ Functions/Subroutines</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>dbgShadowPos</em>, </td>
+          <td class="paramname"><em>dbgCorot</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -197,6 +321,51 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Forms the gradient matrix used in the shadow position calculations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">supEl</td><td>The superelement to calculate the gradient matrix for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dbgCorot</td><td>File unit number of debug pring </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Nov 2003 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_cgraph.png" border="0" usemap="#anamespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_cgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_cgraph" id="anamespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_cgraph">
+<area shape="rect" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="5,173,272,199"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="344,5,511,47"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="328,71,527,98"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="617,123,779,164"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a5f07f8f780f52107d738794f4656d38a" title="Sets up an eccentricity transformation matrix for a 3&#45;noded element." alt="" coords="325,173,529,199"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="320,224,535,265"/>
+<area shape="rect" href="namespacedensematrixmodule.html#a15392a4ff9de4934977af94f5fa8b527" title="Solves the linear equation system A*x = B." alt="" coords="347,289,508,331"/>
+<area shape="rect" href="namespacerotationmodule.html#a18d3012bd1d5a24b64ed6600aac58da8" title="Computes the spin (skew&#45;symmetric) tensor from the rotation vector." alt="" coords="349,355,506,382"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="583,6,813,33"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="617,57,779,99"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_icgraph.png" border="0" usemap="#anamespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_icgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_icgraph" id="anamespacecorotutilmodule_ae48acfb11b5b52e7945b4a348c70c16b_icgraph">
+<area shape="rect" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="896,107,1163,133"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="667,99,848,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -244,6 +413,48 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Computes the rotation gradient matrix for a 3-noded element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">gmat</td><td>The rotation gradients in local system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>X-coordinates for the 3 nodes in global coordinate system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Y-coordinates for the 3 nodes in global coordinate system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>Z-coordinates for the 3 nodes in global coordinate system </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>22 Oct 1997 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_cgraph.png" border="0" usemap="#anamespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_cgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_cgraph" id="anamespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_cgraph">
+<area shape="rect" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="5,64,204,91"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="252,5,483,32"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="286,57,449,98"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="286,122,449,163"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_icgraph.png" border="0" usemap="#anamespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_icgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_icgraph" id="anamespacecorotutilmodule_ac646d57215d537384ec646a4f92503c7_icgraph">
+<area shape="rect" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="1211,107,1409,133"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="896,107,1163,133"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="667,99,848,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a8ea211cf52e14f30115f207d31565092"></a>
@@ -278,6 +489,37 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Computes the rotation gradient matrix for a 3-noded element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">gmat</td><td>The rotation gradients in local system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>X-coordinates for the 3 nodes in local coordinate system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Y-coordinates for the 3 nodes in local coordinate system</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The element assumed in the xy-plane. The x-axis is not neccesarily along the side 1-2. The computed rotation gradient matrix <em>gmat</em> consists of rot_x,rot_y,rot_z in local system with respect to the local nodal degrees of freedom. The nodal DOF ordering for each node is assumed to be tx,ty,tz.</p>
+<dl class="section author"><dt>Author</dt><dd>Dag Rune Christensen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>22 Oct 1997 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_a8ea211cf52e14f30115f207d31565092_icgraph.png" border="0" usemap="#anamespacecorotutilmodule_a8ea211cf52e14f30115f207d31565092_icgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_a8ea211cf52e14f30115f207d31565092_icgraph" id="anamespacecorotutilmodule_a8ea211cf52e14f30115f207d31565092_icgraph">
+<area shape="rect" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="1457,107,1688,133"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ac646d57215d537384ec646a4f92503c7" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="1211,107,1409,133"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="896,107,1163,133"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="667,99,848,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a5f07f8f780f52107d738794f4656d38a"></a>
@@ -306,12 +548,40 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sets up an eccentricity transformation matrix for a 3-noded element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">mmat</td><td>The eccentricity transformation matrix (translations only) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">emat</td><td>Nodal eccentricities in local coordinates</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Dag Rune Christensen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23 Oct 1997 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacecorotutilmodule_a5f07f8f780f52107d738794f4656d38a_icgraph.png" border="0" usemap="#anamespacecorotutilmodule_a5f07f8f780f52107d738794f4656d38a_icgraph" alt=""/></div>
+<map name="anamespacecorotutilmodule_a5f07f8f780f52107d738794f4656d38a_icgraph" id="anamespacecorotutilmodule_a5f07f8f780f52107d738794f4656d38a_icgraph">
+<area shape="rect" title="Sets up an eccentricity transformation matrix for a 3&#45;noded element." alt="" coords="1211,107,1415,133"/>
+<area shape="rect" href="namespacecorotutilmodule.html#ae48acfb11b5b52e7945b4a348c70c16b" title="Forms the gradient matrix used in the shadow position calculations." alt="" coords="896,107,1163,133"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#ae4956d9d55b0a3174606472ae0c3602c" title="Initializes more superelement arrays after system initialization." alt="" coords="667,99,848,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

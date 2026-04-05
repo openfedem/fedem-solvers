@@ -123,6 +123,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a1eb3c4dd66eeec5c9fb54c0facc49b23"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23">getrelative</a> (triad1, triad2, dof, entity, oldValue)</td></tr>
 <tr class="memdesc:a1eb3c4dd66eeec5c9fb54c0facc49b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates a relative quantity between given two triads.  <a href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23">More...</a><br /></td></tr>
 <tr class="separator:a1eb3c4dd66eeec5c9fb54c0facc49b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55d70144866378795ead8b81659ea2d2"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2">getangle2</a> (P10, P11, P20, P21, dof)</td></tr>
+<tr class="memdesc:a55d70144866378795ead8b81659ea2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the angle between two lines.  <a href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2">More...</a><br /></td></tr>
+<tr class="separator:a55d70144866378795ead8b81659ea2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec312be90b47bc22894598dbf7fcd244"><td class="memItemLeft" align="right" valign="top">recursive subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244">engineroutinesmodule::updatespringbase</a> (spr, ierr)</td></tr>
 <tr class="memdesc:aec312be90b47bc22894598dbf7fcd244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the spring variables.  <a href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244">More...</a><br /></td></tr>
 <tr class="separator:aec312be90b47bc22894598dbf7fcd244"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,6 +190,54 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Evaluates a global rotation angle for given triad. </p>
+
+</div>
+</div>
+<a id="a55d70144866378795ead8b81659ea2d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55d70144866378795ead8b81659ea2d2">&#9670;&nbsp;</a></span>getangle2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function updatesensor::getangle2 </td>
+          <td>(</td>
+          <td class="paramtype">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>P10</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>P11</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>P20</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>P21</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>dof</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluates the angle between two lines. </p>
 
 </div>
 </div>
@@ -307,7 +358,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

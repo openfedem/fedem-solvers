@@ -70,14 +70,20 @@ $(function() {
 <div class="title">savereducermodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with subroutines for saving of FE model reduction results.  
+<a href="namespacesavereducermodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a73ff6681f86169857eba69a786a2abaa"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa">writemodes</a> (chname, sam, partId, modeType, nMode, ev, sv, ierr)</td></tr>
+<tr class="memdesc:a73ff6681f86169857eba69a786a2abaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Administers writing of results database for fedem_reducer.  <a href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa">More...</a><br /></td></tr>
 <tr class="separator:a73ff6681f86169857eba69a786a2abaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53d7f736db162683c59528e4008ec181"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181">writedeformation</a> (chname, sam, partId, nlc, mlc, sv, lpu, ierr)</td></tr>
+<tr class="memdesc:a53d7f736db162683c59528e4008ec181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Administers writing of results database for fedem_partsol.  <a href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181">More...</a><br /></td></tr>
 <tr class="separator:a53d7f736db162683c59528e4008ec181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba720c5f59fc242975972b8a615b366d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesavereducermodule.html#aba720c5f59fc242975972b8a615b366d">writemodesheader</a> (rdb, nMode, nbit)</td></tr>
+<tr class="memdesc:aba720c5f59fc242975972b8a615b366d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes modal result definitions to the temporary header files.  <a href="namespacesavereducermodule.html#aba720c5f59fc242975972b8a615b366d">More...</a><br /></td></tr>
 <tr class="separator:aba720c5f59fc242975972b8a615b366d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1914f53894d73dcc0db9614d3fbbb719"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesavereducermodule.html#a1914f53894d73dcc0db9614d3fbbb719">writevectorheader</a> (rdb, sam, nMode, nbit, ierr)</td></tr>
 <tr class="memdesc:a1914f53894d73dcc0db9614d3fbbb719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes displacement vector definitions to temporary header files.  <a href="namespacesavereducermodule.html#a1914f53894d73dcc0db9614d3fbbb719">More...</a><br /></td></tr>
@@ -100,7 +106,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a3a605be63066bf975f7c22c5aa89f406"><td class="memItemLeft" align="right" valign="top">integer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesavereducermodule.html#a3a605be63066bf975f7c22c5aa89f406">id3dof</a></td></tr>
 <tr class="separator:a3a605be63066bf975f7c22c5aa89f406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with subroutines for saving of FE model reduction results. </p>
+<p>This module contains a collection of subroutines for writing results data from the FE model reduction process or direct linear solve to the results database. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a53d7f736db162683c59528e4008ec181"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53d7f736db162683c59528e4008ec181">&#9670;&nbsp;</a></span>writedeformation()</h2>
 
@@ -162,6 +171,23 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Administers writing of results database for fedem_partsol. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">chname</td><td>Name of frs-file receiving the results data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">partId</td><td>Base ID of the FE part </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nlc</td><td>Number of load cases </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mlc</td><td>Load case identifiers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sv</td><td>Displacement vector in equation order </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lpu</td><td>File unit number for res-file output </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19 Mar 2018 </dd></dl>
 
 </div>
 </div>
@@ -253,8 +279,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesavereducermodule_aa864dfebb60bbb91ccba3bad3e120e33_icgraph.png" border="0" usemap="#anamespacesavereducermodule_aa864dfebb60bbb91ccba3bad3e120e33_icgraph" alt=""/></div>
 <map name="anamespacesavereducermodule_aa864dfebb60bbb91ccba3bad3e120e33_icgraph" id="anamespacesavereducermodule_aa864dfebb60bbb91ccba3bad3e120e33_icgraph">
 <area shape="rect" title="Writes nodal displacements to the results database file." alt="" coords="212,39,371,80"/>
-<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="5,5,164,47"/>
-<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="5,71,164,112"/>
+<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title="Administers writing of results database for fedem_partsol." alt="" coords="5,5,164,47"/>
+<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title="Administers writing of results database for fedem_reducer." alt="" coords="5,71,164,112"/>
 </map>
 </div>
 
@@ -322,6 +348,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Administers writing of results database for fedem_reducer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">chname</td><td>Name of frs-file receiving the results data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">partId</td><td>Base ID of the FE part </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">modeType</td><td>Name of eigenmode item group </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nMode</td><td>Number of eigenmodes </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ev</td><td>Eigenvalues </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sv</td><td>Eigenvectors </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>4 Oct 2002 </dd></dl>
+
 </div>
 </div>
 <a id="aba720c5f59fc242975972b8a615b366d"></a>
@@ -355,6 +398,27 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Writes modal result definitions to the temporary header files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">rdb</td><td>Results database file for modes output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nMode</td><td>Number of mode shapes </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nbit</td><td>Number of bits per real word</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>4 Oct 2002 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesavereducermodule_aba720c5f59fc242975972b8a615b366d_icgraph.png" border="0" usemap="#anamespacesavereducermodule_aba720c5f59fc242975972b8a615b366d_icgraph" alt=""/></div>
+<map name="anamespacesavereducermodule_aba720c5f59fc242975972b8a615b366d_icgraph" id="anamespacesavereducermodule_aba720c5f59fc242975972b8a615b366d_icgraph">
+<area shape="rect" title="Writes modal result definitions to the temporary header files." alt="" coords="212,5,371,47"/>
+<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title="Administers writing of results database for fedem_reducer." alt="" coords="5,5,164,47"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -407,7 +471,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesavereducermodule_a9f7264968fff9a68ffa5b0536c9ed543_icgraph.png" border="0" usemap="#anamespacesavereducermodule_a9f7264968fff9a68ffa5b0536c9ed543_icgraph" alt=""/></div>
 <map name="anamespacesavereducermodule_a9f7264968fff9a68ffa5b0536c9ed543_icgraph" id="anamespacesavereducermodule_a9f7264968fff9a68ffa5b0536c9ed543_icgraph">
 <area shape="rect" title="Writes nodal translation definitions to the temporary header files." alt="" coords="212,5,371,47"/>
-<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="5,5,164,47"/>
+<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title="Administers writing of results database for fedem_partsol." alt="" coords="5,5,164,47"/>
 </map>
 </div>
 
@@ -477,8 +541,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesavereducermodule_a1914f53894d73dcc0db9614d3fbbb719_icgraph.png" border="0" usemap="#anamespacesavereducermodule_a1914f53894d73dcc0db9614d3fbbb719_icgraph" alt=""/></div>
 <map name="anamespacesavereducermodule_a1914f53894d73dcc0db9614d3fbbb719_icgraph" id="anamespacesavereducermodule_a1914f53894d73dcc0db9614d3fbbb719_icgraph">
 <area shape="rect" title="Writes displacement vector definitions to temporary header files." alt="" coords="212,39,371,80"/>
-<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="5,5,164,47"/>
-<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="5,71,164,112"/>
+<area shape="rect" href="namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title="Administers writing of results database for fedem_partsol." alt="" coords="5,5,164,47"/>
+<area shape="rect" href="namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title="Administers writing of results database for fedem_reducer." alt="" coords="5,71,164,112"/>
 </map>
 </div>
 
@@ -576,7 +640,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

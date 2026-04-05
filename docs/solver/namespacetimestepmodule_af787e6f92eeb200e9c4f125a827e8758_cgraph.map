@@ -1,0 +1,7 @@
+<map id="timestepmodule::getautostep" name="timestepmodule::getautostep">
+<area shape="rect" id="node1" title="Calculates the next time step based on local truncation errors." alt="" coords="5,46,220,73"/>
+<area shape="rect" id="node2" href="$namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="268,39,427,80"/>
+<area shape="rect" id="node3" href="$namespacenormroutinesmodule.html#ac496980953eb98dc898429cd5741382c" title="Returns a pointer to the expanded solution vector." alt="" coords="475,39,633,80"/>
+<area shape="rect" id="node4" href="$namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="683,5,837,47"/>
+<area shape="rect" id="node5" href="$namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="681,71,839,112"/>
+</map>

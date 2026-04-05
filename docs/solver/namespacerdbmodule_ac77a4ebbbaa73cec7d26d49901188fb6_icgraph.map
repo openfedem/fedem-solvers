@@ -36,6 +36,6 @@
 <area shape="rect" id="node15" href="$namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,512,338,539"/>
 <area shape="rect" id="node19" href="$namespacesavemodule.html#a48c37b2845cd97fd88acf11b4bdf660a" title="Writes results database file header for an axial damper." alt="" coords="913,436,1183,463"/>
 <area shape="rect" id="node29" href="$namespacesavemodule.html#a86377c1cf53398663e5c36adc9193a16" title="Writes results database file header for an axial spring." alt="" coords="907,588,1189,615"/>
-<area shape="rect" id="node33" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title=" " alt="" coords="969,807,1127,849"/>
-<area shape="rect" id="node34" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title=" " alt="" coords="969,873,1127,914"/>
+<area shape="rect" id="node33" href="$namespacesavereducermodule.html#a53d7f736db162683c59528e4008ec181" title="Administers writing of results database for fedem_partsol." alt="" coords="969,807,1127,849"/>
+<area shape="rect" id="node34" href="$namespacesavereducermodule.html#a73ff6681f86169857eba69a786a2abaa" title="Administers writing of results database for fedem_reducer." alt="" coords="969,873,1127,914"/>
 </map>

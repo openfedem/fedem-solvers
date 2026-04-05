@@ -74,31 +74,43 @@ $(function() {
 <div class="title">massMatCorrModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Subroutines for mass matrix correction due to high-speed rotations.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacemassmatrixcorrectionmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html">massmatrixcorrectionmodule</a></td></tr>
+<tr class="memdesc:namespacemassmatrixcorrectionmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module with subroutines for superelement mass matrix correction. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ac87a6535b0ec6104d2fd45b994bd5f86"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86">massmatrixcorrectionmodule::mmcrigaccelvectors</a> (supel, rotCenter, rigVdd)</td></tr>
+<tr class="memdesc:ac87a6535b0ec6104d2fd45b994bd5f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the 6 rigid body acceleration vectors for a superelement.  <a href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86">More...</a><br /></td></tr>
 <tr class="separator:ac87a6535b0ec6104d2fd45b994bd5f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac271aeecaedd7132bc21b3325a45fd9b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b">massmatrixcorrectionmodule::mmcrigidmassproperties</a> (supel, ierr)</td></tr>
+<tr class="memdesc:ac271aeecaedd7132bc21b3325a45fd9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the rigid body mass properties for a superelement.  <a href="namespacemassmatrixcorrectionmodule.html#ac271aeecaedd7132bc21b3325a45fd9b">More...</a><br /></td></tr>
 <tr class="separator:ac271aeecaedd7132bc21b3325a45fd9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc02e4d6417589bfb423a7184405b722"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722">massmatrixcorrectionmodule::mmcinitmassmatrixcorrection</a> (supel, ierr)</td></tr>
+<tr class="memdesc:afc02e4d6417589bfb423a7184405b722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the matrix (R^t*R)^-1*R^t for mass matrix correction.  <a href="namespacemassmatrixcorrectionmodule.html#afc02e4d6417589bfb423a7184405b722">More...</a><br /></td></tr>
 <tr class="separator:afc02e4d6417589bfb423a7184405b722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd6a6c9f9429cf03eb17c018f047e595"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595">massmatrixcorrectionmodule::mmcmassmatrixcorrection</a> (supel, elVd, momentError, forceError, radiusVec, ErrNorm, ierr)</td></tr>
+<tr class="memdesc:acd6a6c9f9429cf03eb17c018f047e595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the error in the mass matrix.  <a href="namespacemassmatrixcorrectionmodule.html#acd6a6c9f9429cf03eb17c018f047e595">More...</a><br /></td></tr>
 <tr class="separator:acd6a6c9f9429cf03eb17c018f047e595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a904925e4f8c79e1a648da018b24a4936"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936">massmatrixcorrectionmodule::mmcmassmatrixwarning</a> (supel, uld, ierr)</td></tr>
+<tr class="memdesc:a904925e4f8c79e1a648da018b24a4936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the error in the mass matrix and print warning if increasing.  <a href="namespacemassmatrixcorrectionmodule.html#a904925e4f8c79e1a648da018b24a4936">More...</a><br /></td></tr>
 <tr class="separator:a904925e4f8c79e1a648da018b24a4936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a994e2c29b91549c87add6aa68229b1"><td class="memItemLeft" align="right" valign="top">real(dp) function, dimension(sup%ntotdofs)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemassmatrixcorrectionmodule.html#a4a994e2c29b91549c87add6aa68229b1">massmatrixcorrectionmodule::mmcgetmasstorquecorrection</a> (sup)</td></tr>
+<tr class="memdesc:a4a994e2c29b91549c87add6aa68229b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a correction force vector that accounts for the mass matrix error.  <a href="namespacemassmatrixcorrectionmodule.html#a4a994e2c29b91549c87add6aa68229b1">More...</a><br /></td></tr>
 <tr class="separator:a4a994e2c29b91549c87add6aa68229b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Subroutines for mass matrix correction due to high-speed rotations. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

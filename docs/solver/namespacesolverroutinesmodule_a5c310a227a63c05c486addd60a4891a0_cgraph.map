@@ -1,6 +1,6 @@
 <map id="solverroutinesmodule::calculateiterationnorms" name="solverroutinesmodule::calculateiterationnorms">
 <area shape="rect" id="node1" title="Calculates all iteration norms defined in the system." alt="" coords="5,90,191,131"/>
-<area shape="rect" id="node2" href="$namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7" title=" " alt="" coords="239,5,491,32"/>
+<area shape="rect" id="node2" href="$namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7" title="Check if a given norm is showing sign of possible divergence." alt="" coords="239,5,491,32"/>
 <area shape="rect" id="node3" href="$namespacenormroutinesmodule.html#a852dd09321a1ed6858c4e74538cd6cd5" title="Calculates energy norms for given force and displacement vectors." alt="" coords="285,122,444,163"/>
 <area shape="rect" id="node8" href="$namespacenormroutinesmodule.html#a2b350dab276ba8af3f77a0f71cd7fff3" title="Calculates infinity norms of the given vector." alt="" coords="285,187,444,229"/>
 <area shape="rect" id="node9" href="$namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="285,57,444,98"/>

@@ -1,0 +1,5 @@
+<map id="massmatrixcorrectionmodule::mmcrigidmassproperties" name="massmatrixcorrectionmodule::mmcrigidmassproperties">
+<area shape="rect" id="node1" title="Calculates the rigid body mass properties for a superelement." alt="" coords="5,39,220,80"/>
+<area shape="rect" id="node2" href="$namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="292,5,459,47"/>
+<area shape="rect" id="node3" href="$namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="268,71,483,112"/>
+</map>

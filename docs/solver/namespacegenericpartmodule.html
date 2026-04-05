@@ -69,6 +69,9 @@ $(function() {
 <div class="title">genericpartmodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with subroutines for generic part calculations.  
+<a href="namespacegenericpartmodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
@@ -88,7 +91,10 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a3c74411453d5115290dae857791b9c93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes more generic part data after system initialization.  <a href="namespacegenericpartmodule.html#a3c74411453d5115290dae857791b9c93">More...</a><br /></td></tr>
 <tr class="separator:a3c74411453d5115290dae857791b9c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with subroutines for generic part calculations. </p>
+<p>This module contains some subroutines for setting up the stiffness- and mass matrix for a superelement defined only by its hard-point connections and the center of gravity. The superelement is then represented by rigid arms from the CoG to the hard-points (triads), with some stiffness assigned at the hard-point locations. See Appendix A.16 in the theory guide for the details. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="ac0778fdb8a379cc3ee1cc86a3c1e6073"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac0778fdb8a379cc3ee1cc86a3c1e6073">&#9670;&nbsp;</a></span>assemblemass()</h2>
 
@@ -140,7 +146,7 @@ Here is the caller graph for this function:</div>
 <map name="anamespacegenericpartmodule_ac0778fdb8a379cc3ee1cc86a3c1e6073_icgraph" id="anamespacegenericpartmodule_ac0778fdb8a379cc3ee1cc86a3c1e6073_icgraph">
 <area shape="rect" title="Assembles the mass matrix for a generic part." alt="" coords="1055,99,1208,141"/>
 <area shape="rect" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -222,7 +228,7 @@ Here is the caller graph for this function:</div>
 <map name="anamespacegenericpartmodule_a1d1bcba0bf3c714f6cc9fe0f8a3c73fd_icgraph" id="anamespacegenericpartmodule_a1d1bcba0bf3c714f6cc9fe0f8a3c73fd_icgraph">
 <area shape="rect" title="Assembles the stiffness matrix for a generic part." alt="" coords="1055,99,1208,141"/>
 <area shape="rect" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -300,7 +306,7 @@ Here is the caller graph for this function:</div>
 <map name="anamespacegenericpartmodule_ac9ba83acde789af06ca5a62e36a392af_icgraph" id="anamespacegenericpartmodule_ac9ba83acde789af06ca5a62e36a392af_icgraph">
 <area shape="rect" title="Calculates semi&#45;rigid stiffness coefficients for a generic part." alt="" coords="1055,99,1219,141"/>
 <area shape="rect" href="namespacegenericpartmodule.html#a560687df31d496021d03da59eae75af4" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -404,7 +410,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph.png" border="0" usemap="#anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph" alt=""/></div>
 <map name="anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph" id="anamespacegenericpartmodule_a560687df31d496021d03da59eae75af4_icgraph">
 <area shape="rect" title="Reads generic part properties from the solver input file." alt="" coords="853,99,1007,141"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="624,99,805,141"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="624,99,805,141"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -420,7 +426,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

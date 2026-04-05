@@ -1,7 +1,7 @@
 <map id="supeltypemodule::deallocatesupels" name="supeltypemodule::deallocatesupels">
 <area shape="rect" id="node1" title="Deallocates an array of superelement objects." alt="" coords="1375,241,1628,268"/>
 <area shape="rect" id="node2" href="$namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="1148,177,1324,218"/>
-<area shape="rect" id="node20" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="1145,266,1327,307"/>
+<area shape="rect" id="node20" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="1145,266,1327,307"/>
 <area shape="rect" id="node3" href="$namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="895,168,1097,195"/>
 <area shape="rect" id="node4" href="$namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="651,168,820,195"/>
 <area shape="rect" id="node5" href="$namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="399,67,566,93"/>

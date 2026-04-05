@@ -71,65 +71,77 @@ $(function() {
 <div class="title">frictiontypemodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with data types joint DOF friction objects.  
+<a href="namespacefrictiontypemodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictionparametertype.html">frictionparametertype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a set of friction parameters.  <a href="structfrictiontypemodule_1_1frictionparametertype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictiontype.html">frictiontype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a joint DOF friction.  <a href="structfrictiontypemodule_1_1frictiontype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrictiontypemodule_1_1frictionptrtype.html">frictionptrtype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a friction object pointer.  <a href="structfrictiontypemodule_1_1frictionptrtype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictiontypemodule_1_1getptrtoid.html">getptrtoid</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to object with specified ID.  <a href="interfacefrictiontypemodule_1_1getptrtoid.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictiontypemodule_1_1writeobject.html">writeobject</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to file.  <a href="interfacefrictiontypemodule_1_1writeobject.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictiontypemodule_1_1updateatconvergence.html">updateatconvergence</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the state variables pertaining to previous time step.  <a href="interfacefrictiontypemodule_1_1updateatconvergence.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictiontypemodule_1_1restorefromlaststep.html">restorefromlaststep</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores the state variables from the last converged time step.  <a href="interfacefrictiontypemodule_1_1restorefromlaststep.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a328f1c33a751a18ce1757cad11cee105"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structfrictiontypemodule_1_1frictionparametertype.html">frictionparametertype</a>) function, pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a328f1c33a751a18ce1757cad11cee105">getptrtoidfrictionparametertype</a> (array, id)</td></tr>
+<tr class="memdesc:a328f1c33a751a18ce1757cad11cee105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to friction parameters object with specified id.  <a href="namespacefrictiontypemodule.html#a328f1c33a751a18ce1757cad11cee105">More...</a><br /></td></tr>
 <tr class="separator:a328f1c33a751a18ce1757cad11cee105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82672320f41c518a56994af9672b2ab4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a82672320f41c518a56994af9672b2ab4">writefrictiontype</a> (friction, io, complexity)</td></tr>
+<tr class="memdesc:a82672320f41c518a56994af9672b2ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to io.  <a href="namespacefrictiontypemodule.html#a82672320f41c518a56994af9672b2ab4">More...</a><br /></td></tr>
 <tr class="separator:a82672320f41c518a56994af9672b2ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa54564b8e76b1ccc354052856088372"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#afa54564b8e76b1ccc354052856088372">writefrictionparametertype</a> (fricData, io)</td></tr>
+<tr class="memdesc:afa54564b8e76b1ccc354052856088372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to io.  <a href="namespacefrictiontypemodule.html#afa54564b8e76b1ccc354052856088372">More...</a><br /></td></tr>
 <tr class="separator:afa54564b8e76b1ccc354052856088372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5ea5ca859a68cdca4879ed432e96461"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#af5ea5ca859a68cdca4879ed432e96461">nullifyfriction</a> (friction)</td></tr>
+<tr class="memdesc:af5ea5ca859a68cdca4879ed432e96461"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a friction object.  <a href="namespacefrictiontypemodule.html#af5ea5ca859a68cdca4879ed432e96461">More...</a><br /></td></tr>
 <tr class="separator:af5ea5ca859a68cdca4879ed432e96461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d7a332517a311c1ec0e611a4b56b12d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a0d7a332517a311c1ec0e611a4b56b12d">deallocatefrictionprms</a> (frictions)</td></tr>
+<tr class="memdesc:a0d7a332517a311c1ec0e611a4b56b12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates an array of friction parameters objects.  <a href="namespacefrictiontypemodule.html#a0d7a332517a311c1ec0e611a4b56b12d">More...</a><br /></td></tr>
 <tr class="separator:a0d7a332517a311c1ec0e611a4b56b12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40abf2e1f01a6a808bbc9eb0eefc7dcc"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a40abf2e1f01a6a808bbc9eb0eefc7dcc">initializefriction</a> (friction, frictionSets, frictionId, saveVar, err)</td></tr>
+<tr class="memdesc:a40abf2e1f01a6a808bbc9eb0eefc7dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates and initializes a friction object.  <a href="namespacefrictiontypemodule.html#a40abf2e1f01a6a808bbc9eb0eefc7dcc">More...</a><br /></td></tr>
 <tr class="separator:a40abf2e1f01a6a808bbc9eb0eefc7dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c3d82b3fede83c08d0eb7d3d0980331"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a9c3d82b3fede83c08d0eb7d3d0980331">updatefrictionatstart</a> (friction)</td></tr>
+<tr class="memdesc:a9c3d82b3fede83c08d0eb7d3d0980331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes internal friction variables at the start of simulation.  <a href="namespacefrictiontypemodule.html#a9c3d82b3fede83c08d0eb7d3d0980331">More...</a><br /></td></tr>
 <tr class="separator:a9c3d82b3fede83c08d0eb7d3d0980331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaed6dea5628ebf7fbe906d401924ecd5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#aaed6dea5628ebf7fbe906d401924ecd5">updatefrictionatconvergence</a> (friction)</td></tr>
+<tr class="memdesc:aaed6dea5628ebf7fbe906d401924ecd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a friction object after convergence has been achieved.  <a href="namespacefrictiontypemodule.html#aaed6dea5628ebf7fbe906d401924ecd5">More...</a><br /></td></tr>
 <tr class="separator:aaed6dea5628ebf7fbe906d401924ecd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad32040e1ad59b375c6e20bcfba0ba239"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#ad32040e1ad59b375c6e20bcfba0ba239">restorefrictionfromlaststep</a> (friction)</td></tr>
+<tr class="memdesc:ad32040e1ad59b375c6e20bcfba0ba239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores a friction object from the last converged step.  <a href="namespacefrictiontypemodule.html#ad32040e1ad59b375c6e20bcfba0ba239">More...</a><br /></td></tr>
 <tr class="separator:ad32040e1ad59b375c6e20bcfba0ba239"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a715d3602f0f92a8f16da173afa2006d2"><td class="memItemLeft" align="right" valign="top">character(len=14), dimension(6), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a715d3602f0f92a8f16da173afa2006d2">frictype_p</a> = (/ 'ROT_FRICTION ', 'TRANS_FRICTION', 'CAM_FRICTION ', 'BALL_FRICTION ', 'BALL_FRICTION2', 'GENERIC_ENGINE' /)</td></tr>
+<tr class="memdesc:a715d3602f0f92a8f16da173afa2006d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Friction type names.  <a href="namespacefrictiontypemodule.html#a715d3602f0f92a8f16da173afa2006d2">More...</a><br /></td></tr>
 <tr class="separator:a715d3602f0f92a8f16da173afa2006d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6932f0ada179294a4ee91983263dc931"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a6932f0ada179294a4ee91983263dc931">rot_friction_p</a> = 1</td></tr>
-<tr class="separator:a6932f0ada179294a4ee91983263dc931"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a404b263d1ac7d28ac32eec099ef5145f"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a404b263d1ac7d28ac32eec099ef5145f">trans_friction_p</a> = 2</td></tr>
-<tr class="separator:a404b263d1ac7d28ac32eec099ef5145f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73bbc8a2918f26ef1cb15db875db8a08"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a73bbc8a2918f26ef1cb15db875db8a08">cam_friction_p</a> = 3</td></tr>
-<tr class="separator:a73bbc8a2918f26ef1cb15db875db8a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa157bf06e42ebca6ac46ee9e6f61ac5d"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#aa157bf06e42ebca6ac46ee9e6f61ac5d">ball_jnt_friction_p</a> = 4</td></tr>
-<tr class="separator:aa157bf06e42ebca6ac46ee9e6f61ac5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af70f24dcdbaf4f5e3ab31ed3f96ced81"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#af70f24dcdbaf4f5e3ab31ed3f96ced81">ball_jnt_friction2_p</a> = 5</td></tr>
-<tr class="separator:af70f24dcdbaf4f5e3ab31ed3f96ced81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af33c4e174f149eae9733ca92774433f8"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#af33c4e174f149eae9733ca92774433f8">generic_engine_p</a> = 6</td></tr>
-<tr class="separator:af33c4e174f149eae9733ca92774433f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a266e4a4aa3082660a4ddfa1854358192"><td class="memItemLeft" align="right" valign="top">real(dp), save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictiontypemodule.html#a266e4a4aa3082660a4ddfa1854358192">fricforcetol</a> = 0.0_dp</td></tr>
+<tr class="memdesc:a266e4a4aa3082660a4ddfa1854358192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zero tolerance for friction forces.  <a href="namespacefrictiontypemodule.html#a266e4a4aa3082660a4ddfa1854358192">More...</a><br /></td></tr>
 <tr class="separator:a266e4a4aa3082660a4ddfa1854358192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with data types joint DOF friction objects. </p>
+<p>The module also contains subroutines for accessing the frictions. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a0d7a332517a311c1ec0e611a4b56b12d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d7a332517a311c1ec0e611a4b56b12d">&#9670;&nbsp;</a></span>deallocatefrictionprms()</h2>
 
@@ -145,6 +157,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Deallocates an array of friction parameters objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frictions</td><td>The <a class="el" href="structfrictiontypemodule_1_1frictionparametertype.html" title="Data type representing a set of friction parameters.">frictiontypemodule::frictionparametertype</a> objects to deallocate</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23 Jan 2017 </dd></dl>
 
 </div>
 </div>
@@ -173,6 +195,18 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns pointer to friction parameters object with specified id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">array</td><td>Array of <a class="el" href="structfrictiontypemodule_1_1frictionparametertype.html" title="Data type representing a set of friction parameters.">frictiontypemodule::frictionparametertype</a> objects to search within </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>Base ID of the object to search for</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If the friction parameters object is not found, NULL is returned.</p>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Nov 1999 </dd></dl>
 
 </div>
 </div>
@@ -220,6 +254,37 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Allocates and initializes a friction object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">friction</td><td>The frictiontypemodule::frictionparameterttype object to allocate/initialize </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frictionSets</td><td>All friction parameters objects in the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frictionId</td><td>Base id of the friction parameters object to use </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">saveVar</td><td>Flags indicating which variables should be saved </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 Aug 2002 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacefrictiontypemodule_a40abf2e1f01a6a808bbc9eb0eefc7dcc_icgraph.png" border="0" usemap="#anamespacefrictiontypemodule_a40abf2e1f01a6a808bbc9eb0eefc7dcc_icgraph" alt=""/></div>
+<map name="anamespacefrictiontypemodule_a40abf2e1f01a6a808bbc9eb0eefc7dcc_icgraph" id="anamespacefrictiontypemodule_a40abf2e1f01a6a808bbc9eb0eefc7dcc_icgraph">
+<area shape="rect" title="Allocates and initializes a friction object." alt="" coords="891,70,1037,111"/>
+<area shape="rect" href="initiateJointTypeModule_8f90.html#a93b46f7b1cc49a764c68062ca60619ec" title="Initializes a joint DOF." alt="" coords="687,48,780,75"/>
+<area shape="rect" href="namespaceinitiatecontactelmtypemodule.html#a1d29e9306c26f12a827d24a76a60d9ef" title="Initializes contact elements with data from the solver input file." alt="" coords="624,99,843,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="353,107,576,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="af5ea5ca859a68cdca4879ed432e96461"></a>
@@ -237,6 +302,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a friction object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">friction</td><td>The frictiontypemodule::frictionttype object to initialize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16 Jun 2006 </dd></dl>
 
 </div>
 </div>
@@ -256,6 +331,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Restores a friction object from the last converged step. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">friction</td><td>The friction object to restore</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2 Nov 2008 </dd></dl>
+
 </div>
 </div>
 <a id="aaed6dea5628ebf7fbe906d401924ecd5"></a>
@@ -274,6 +359,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Updates a friction object after convergence has been achieved. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">friction</td><td>The friction object to update</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3 Oct 2005 </dd></dl>
+
 </div>
 </div>
 <a id="a9c3d82b3fede83c08d0eb7d3d0980331"></a>
@@ -291,6 +386,44 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes internal friction variables at the start of simulation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">friction</td><td>The friction object to initialize internal variables for</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>24 Oct 2005 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacefrictiontypemodule_a9c3d82b3fede83c08d0eb7d3d0980331_icgraph.png" border="0" usemap="#anamespacefrictiontypemodule_a9c3d82b3fede83c08d0eb7d3d0980331_icgraph" alt=""/></div>
+<map name="anamespacefrictiontypemodule_a9c3d82b3fede83c08d0eb7d3d0980331_icgraph" id="anamespacefrictiontypemodule_a9c3d82b3fede83c08d0eb7d3d0980331_icgraph">
+<area shape="rect" title="Initializes internal friction variables at the start of simulation." alt="" coords="1761,217,1925,258"/>
+<area shape="rect" href="namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e" title="Updates friction forces in the given joint or contact element." alt="" coords="1541,183,1711,225"/>
+<area shape="rect" href="namespacefrictionroutinesmodule.html#ab9f5c2e8226d48970fb8464785e38c8a" title="Updates multidof friction forces in the given joint." alt="" coords="1539,249,1713,290"/>
+<area shape="rect" href="namespacefrictionroutinesmodule.html#ad92b95057a2182ced8ccc1018565badc" title="Updates the friction forces in all joints and contact elements." alt="" coords="1320,217,1491,258"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0380191594754df25b729586dcfad47e" title="Increments all position variables and updates the configuration." alt="" coords="1089,158,1270,199"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a66a6b6c2901da72d85633d6374e189c2" title="Updates all mechanism objects." alt="" coords="1087,249,1272,290"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="855,99,1037,141"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="622,183,803,225"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="625,107,800,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="442,5,519,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="442,56,519,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="442,107,519,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="443,157,519,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="442,208,519,235"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,271,572,297"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,271,83,297"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,271,341,297"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,321,338,348"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a43053b7765777d08a16950850b29e253" title="Updates mechanism based on corrected velocity and acceleration." alt="" coords="853,217,1039,258"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,270,805,311"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a09b11fd1e3cd9b90a698a06bc94a81ea" title="Updates mechanism based on predicted velocity and acceleration." alt="" coords="853,334,1039,375"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -319,6 +452,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Standard routine for writing an object to io. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fricData</td><td>The <a class="el" href="structfrictiontypemodule_1_1frictionparametertype.html" title="Data type representing a set of friction parameters.">frictiontypemodule::frictionparametertype</a> object to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">io</td><td>File unit number to write to</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 1999 </dd></dl>
 
 </div>
 </div>
@@ -354,51 +498,21 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Standard routine for writing an object to io. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">friction</td><td>The <a class="el" href="structfrictiontypemodule_1_1frictiontype.html" title="Data type representing a joint DOF friction.">frictiontypemodule::frictiontype</a> object to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">io</td><td>File unit number to write to </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">complexity</td><td>If present, the value indicates the amount of print</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Sep 1999 </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="af70f24dcdbaf4f5e3ab31ed3f96ced81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af70f24dcdbaf4f5e3ab31ed3f96ced81">&#9670;&nbsp;</a></span>ball_jnt_friction2_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter frictiontypemodule::ball_jnt_friction2_p = 5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa157bf06e42ebca6ac46ee9e6f61ac5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa157bf06e42ebca6ac46ee9e6f61ac5d">&#9670;&nbsp;</a></span>ball_jnt_friction_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter frictiontypemodule::ball_jnt_friction_p = 4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a73bbc8a2918f26ef1cb15db875db8a08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73bbc8a2918f26ef1cb15db875db8a08">&#9670;&nbsp;</a></span>cam_friction_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter frictiontypemodule::cam_friction_p = 3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a266e4a4aa3082660a4ddfa1854358192"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a266e4a4aa3082660a4ddfa1854358192">&#9670;&nbsp;</a></span>fricforcetol</h2>
 
@@ -410,6 +524,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Zero tolerance for friction forces. </p>
 
 </div>
 </div>
@@ -425,54 +541,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="af33c4e174f149eae9733ca92774433f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af33c4e174f149eae9733ca92774433f8">&#9670;&nbsp;</a></span>generic_engine_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter frictiontypemodule::generic_engine_p = 6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6932f0ada179294a4ee91983263dc931"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6932f0ada179294a4ee91983263dc931">&#9670;&nbsp;</a></span>rot_friction_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter frictiontypemodule::rot_friction_p = 1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a404b263d1ac7d28ac32eec099ef5145f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a404b263d1ac7d28ac32eec099ef5145f">&#9670;&nbsp;</a></span>trans_friction_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter frictiontypemodule::trans_friction_p = 2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Friction type names. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

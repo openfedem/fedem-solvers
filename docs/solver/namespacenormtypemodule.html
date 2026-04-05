@@ -71,47 +71,62 @@ $(function() {
 <div class="title">normtypemodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module with data types representing convergence norm objects.  
+<a href="namespacenormtypemodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testitemtype.html">testitemtype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a convergence check definition.  <a href="structnormtypemodule_1_1testitemtype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnormtypemodule_1_1testsettype.html">testsettype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a set of convergence checks.  <a href="structnormtypemodule_1_1testsettype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:afbc7f74af7e45321b98797b244dc0452"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#afbc7f74af7e45321b98797b244dc0452">nullifyconvset</a> (convSet)</td></tr>
+<tr class="memdesc:afbc7f74af7e45321b98797b244dc0452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a set of convergence checks object.  <a href="namespacenormtypemodule.html#afbc7f74af7e45321b98797b244dc0452">More...</a><br /></td></tr>
 <tr class="separator:afbc7f74af7e45321b98797b244dc0452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d92d82878b3fb0a930a26cd156f2fc6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a1d92d82878b3fb0a930a26cd156f2fc6">deallocateconvset</a> (convSet)</td></tr>
+<tr class="memdesc:a1d92d82878b3fb0a930a26cd156f2fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates a set of convergence checks object.  <a href="namespacenormtypemodule.html#a1d92d82878b3fb0a930a26cd156f2fc6">More...</a><br /></td></tr>
 <tr class="separator:a1d92d82878b3fb0a930a26cd156f2fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a015533137c8e33954aba0c24db5cbff6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a015533137c8e33954aba0c24db5cbff6">initconvchecks</a> (convSet, maxIt, monWorst, monIter, relTol, err)</td></tr>
+<tr class="memdesc:a015533137c8e33954aba0c24db5cbff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the convergence checks from command-line options.  <a href="namespacenormtypemodule.html#a015533137c8e33954aba0c24db5cbff6">More...</a><br /></td></tr>
 <tr class="separator:a015533137c8e33954aba0c24db5cbff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d699442bdefdc5dbe36de4178225ab9"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a9d699442bdefdc5dbe36de4178225ab9">inittolerance</a> (tolType, normName, testItem)</td></tr>
+<tr class="memdesc:a9d699442bdefdc5dbe36de4178225ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a convergence check with data from command-line.  <a href="namespacenormtypemodule.html#a9d699442bdefdc5dbe36de4178225ab9">More...</a><br /></td></tr>
 <tr class="separator:a9d699442bdefdc5dbe36de4178225ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7954cd791ccc57c409ddd77f511c4966"><td class="memItemLeft" align="right" valign="top">logical function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a7954cd791ccc57c409ddd77f511c4966">hasconverged</a> (convSet, factor_opt)</td></tr>
+<tr class="memdesc:a7954cd791ccc57c409ddd77f511c4966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the state of the convergence checks set is converged.  <a href="namespacenormtypemodule.html#a7954cd791ccc57c409ddd77f511c4966">More...</a><br /></td></tr>
 <tr class="separator:a7954cd791ccc57c409ddd77f511c4966"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac122a41c8ab74681406822e2215475d7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7">checkdivergence</a> (testItem, value, mayDiverge)</td></tr>
+<tr class="memdesc:ac122a41c8ab74681406822e2215475d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given norm is showing sign of possible divergence.  <a href="namespacenormtypemodule.html#ac122a41c8ab74681406822e2215475d7">More...</a><br /></td></tr>
 <tr class="separator:ac122a41c8ab74681406822e2215475d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:af3d14c08c5674b6efd02931de22ff314"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#af3d14c08c5674b6efd02931de22ff314">oneof_p</a> = 1</td></tr>
-<tr class="separator:af3d14c08c5674b6efd02931de22ff314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c27c7d5e7c32d6c61c66c0abeab255"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a44c27c7d5e7c32d6c61c66c0abeab255">allof_p</a> = 2</td></tr>
-<tr class="separator:a44c27c7d5e7c32d6c61c66c0abeab255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a747010d41d87e75b09dfebe523664de6"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a747010d41d87e75b09dfebe523664de6">nnormtypes_p</a> = 4</td></tr>
+<tr class="memdesc:a747010d41d87e75b09dfebe523664de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of norm types.  <a href="namespacenormtypemodule.html#a747010d41d87e75b09dfebe523664de6">More...</a><br /></td></tr>
 <tr class="separator:a747010d41d87e75b09dfebe523664de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b2a4c1682cf69a1dac80a945b637b4a"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a0b2a4c1682cf69a1dac80a945b637b4a">ivecnorm_p</a> = 1</td></tr>
+<tr class="memdesc:a0b2a4c1682cf69a1dac80a945b637b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index for L_2 displacement norm.  <a href="namespacenormtypemodule.html#a0b2a4c1682cf69a1dac80a945b637b4a">More...</a><br /></td></tr>
 <tr class="separator:a0b2a4c1682cf69a1dac80a945b637b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fc3b0bb3fbae7fcc99f860284aa5c4e"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a9fc3b0bb3fbae7fcc99f860284aa5c4e">iinftra_p</a> = 2</td></tr>
+<tr class="memdesc:a9fc3b0bb3fbae7fcc99f860284aa5c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index for L_inf translation norm.  <a href="namespacenormtypemodule.html#a9fc3b0bb3fbae7fcc99f860284aa5c4e">More...</a><br /></td></tr>
 <tr class="separator:a9fc3b0bb3fbae7fcc99f860284aa5c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb62df12a56143c8d58264723dd14093"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#adb62df12a56143c8d58264723dd14093">iinfrot_p</a> = 3</td></tr>
+<tr class="memdesc:adb62df12a56143c8d58264723dd14093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index for L_inf rotation norm.  <a href="namespacenormtypemodule.html#adb62df12a56143c8d58264723dd14093">More...</a><br /></td></tr>
 <tr class="separator:adb62df12a56143c8d58264723dd14093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a149764e8a40825e1188ccfe87c091c88"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenormtypemodule.html#a149764e8a40825e1188ccfe87c091c88">iinfgen_p</a> = 4</td></tr>
+<tr class="memdesc:a149764e8a40825e1188ccfe87c091c88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index for L_inf generalized DOF norm.  <a href="namespacenormtypemodule.html#a149764e8a40825e1188ccfe87c091c88">More...</a><br /></td></tr>
 <tr class="separator:a149764e8a40825e1188ccfe87c091c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module with data types representing convergence norm objects. </p>
+<p>The module also contains subroutines for accessing the norm data. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="ac122a41c8ab74681406822e2215475d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac122a41c8ab74681406822e2215475d7">&#9670;&nbsp;</a></span>checkdivergence()</h2>
 
@@ -144,6 +159,33 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Check if a given norm is showing sign of possible divergence. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">testItem</td><td>The convergence check object to check for dovergence </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>Current norm value </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">mayDiverge</td><td>If .true., a possible divergence is detected</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19 Mar 2004 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacenormtypemodule_ac122a41c8ab74681406822e2215475d7_icgraph.png" border="0" usemap="#anamespacenormtypemodule_ac122a41c8ab74681406822e2215475d7_icgraph" alt=""/></div>
+<map name="anamespacenormtypemodule_ac122a41c8ab74681406822e2215475d7_icgraph" id="anamespacenormtypemodule_ac122a41c8ab74681406822e2215475d7_icgraph">
+<area shape="rect" title="Check if a given norm is showing sign of possible divergence." alt="" coords="1087,46,1339,73"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a5c310a227a63c05c486addd60a4891a0" title="Calculates all iteration norms defined in the system." alt="" coords="853,39,1039,80"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,5,805,47"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="622,71,803,112"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,46,572,73"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,46,83,73"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,46,341,73"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,97,338,123"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a1d92d82878b3fb0a930a26cd156f2fc6"></a>
@@ -161,6 +203,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Deallocates a set of convergence checks object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">convSet</td><td>The <a class="el" href="structnormtypemodule_1_1testsettype.html" title="Data type representing a set of convergence checks.">normtypemodule::testsettype</a> object to deallocate</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23 Jan 2017 </dd></dl>
 
 </div>
 </div>
@@ -189,6 +241,31 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks if the state of the convergence checks set is converged. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">convSet</td><td>Set of convergence checks </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factor_opt</td><td>Optional tolerance scaling factor</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>28 Mar 2003 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacenormtypemodule_a7954cd791ccc57c409ddd77f511c4966_icgraph.png" border="0" usemap="#anamespacenormtypemodule_a7954cd791ccc57c409ddd77f511c4966_icgraph" alt=""/></div>
+<map name="anamespacenormtypemodule_a7954cd791ccc57c409ddd77f511c4966_icgraph" id="anamespacenormtypemodule_a7954cd791ccc57c409ddd77f511c4966_icgraph">
+<area shape="rect" title="Checks if the state of the convergence checks set is converged." alt="" coords="853,46,1087,73"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="620,5,805,47"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="622,71,803,112"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,46,572,73"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,46,83,73"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,46,341,73"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,97,338,123"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -242,6 +319,46 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize the convergence checks from command-line options. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">convSet</td><td>Set of convergence checks </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxIt</td><td>Maximum number of iterations per time step </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">monWorst</td><td>Number of DOFs to monitor on poor convergence </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">monIter</td><td>Number of iterations to monitor before <em>maxit</em> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">relTol</td><td>Velocity proportional tolerance on velocity corrections </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>30 Jun 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_cgraph.png" border="0" usemap="#anamespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_cgraph" alt=""/></div>
+<map name="anamespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_cgraph" id="anamespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_cgraph">
+<area shape="rect" title="Initialize the convergence checks from command&#45;line options." alt="" coords="5,5,244,32"/>
+<area shape="rect" href="namespacenormtypemodule.html#a9d699442bdefdc5dbe36de4178225ab9" title="Initializes a convergence check with data from command&#45;line." alt="" coords="292,5,516,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_icgraph.png" border="0" usemap="#anamespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_icgraph" alt=""/></div>
+<map name="anamespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_icgraph" id="anamespacenormtypemodule_a015533137c8e33954aba0c24db5cbff6_icgraph">
+<area shape="rect" title="Initialize the convergence checks from command&#45;line options." alt="" coords="909,107,1148,133"/>
+<area shape="rect" href="namespaceinitiatesystemtypemodule.html#af9c4acbed83f902656a49d8c198d94e1" title="Allocates the system vectors and Newton matrix." alt="" coords="667,99,861,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a9d699442bdefdc5dbe36de4178225ab9"></a>
@@ -284,6 +401,35 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initializes a convergence check with data from command-line. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tolType</td><td>Command-line option to get convergence tolerance from </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">normName</td><td>Name of solution norm defining the convergence check </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">testItem</td><td>The convergence check object to initialize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>29 Apr 2003 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacenormtypemodule_a9d699442bdefdc5dbe36de4178225ab9_icgraph.png" border="0" usemap="#anamespacenormtypemodule_a9d699442bdefdc5dbe36de4178225ab9_icgraph" alt=""/></div>
+<map name="anamespacenormtypemodule_a9d699442bdefdc5dbe36de4178225ab9_icgraph" id="anamespacenormtypemodule_a9d699442bdefdc5dbe36de4178225ab9_icgraph">
+<area shape="rect" title="Initializes a convergence check with data from command&#45;line." alt="" coords="1196,107,1420,133"/>
+<area shape="rect" href="namespacenormtypemodule.html#a015533137c8e33954aba0c24db5cbff6" title="Initialize the convergence checks from command&#45;line options." alt="" coords="909,107,1148,133"/>
+<area shape="rect" href="namespaceinitiatesystemtypemodule.html#af9c4acbed83f902656a49d8c198d94e1" title="Allocates the system vectors and Newton matrix." alt="" coords="667,99,861,141"/>
+<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="afbc7f74af7e45321b98797b244dc0452"></a>
@@ -302,23 +448,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a set of convergence checks object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">convSet</td><td>The <a class="el" href="structnormtypemodule_1_1testsettype.html" title="Data type representing a set of convergence checks.">normtypemodule::testsettype</a> object to initialize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>30 Jun 2004 </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a44c27c7d5e7c32d6c61c66c0abeab255"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44c27c7d5e7c32d6c61c66c0abeab255">&#9670;&nbsp;</a></span>allof_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter normtypemodule::allof_p = 2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a149764e8a40825e1188ccfe87c091c88"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a149764e8a40825e1188ccfe87c091c88">&#9670;&nbsp;</a></span>iinfgen_p</h2>
 
@@ -330,6 +472,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Index for L_inf generalized DOF norm. </p>
 
 </div>
 </div>
@@ -345,6 +489,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Index for L_inf rotation norm. </p>
+
 </div>
 </div>
 <a id="a9fc3b0bb3fbae7fcc99f860284aa5c4e"></a>
@@ -358,6 +504,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Index for L_inf translation norm. </p>
 
 </div>
 </div>
@@ -373,6 +521,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Index for L_2 displacement norm. </p>
+
 </div>
 </div>
 <a id="a747010d41d87e75b09dfebe523664de6"></a>
@@ -387,26 +537,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="af3d14c08c5674b6efd02931de22ff314"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3d14c08c5674b6efd02931de22ff314">&#9670;&nbsp;</a></span>oneof_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter normtypemodule::oneof_p = 1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Total number of norm types. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

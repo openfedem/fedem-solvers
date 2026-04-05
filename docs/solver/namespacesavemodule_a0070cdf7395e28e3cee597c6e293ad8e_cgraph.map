@@ -1,6 +1,6 @@
 <map id="savemodule::writejointheader" name="savemodule::writejointheader">
 <area shape="rect" id="node1" title="Writes results database file header for a joint." alt="" coords="5,147,223,174"/>
-<area shape="rect" id="node2" href="$namespacemasterslavejointtypemodule.html#a09d91099faff137a09d42f9d1b585701" title=" " alt="" coords="285,5,495,47"/>
+<area shape="rect" id="node2" href="$namespacemasterslavejointtypemodule.html#a09d91099faff137a09d42f9d1b585701" title="Returns the full id (type name, user id and description) of a joint." alt="" coords="285,5,495,47"/>
 <area shape="rect" id="node3" href="$namespacesavemodule.html#abfa2bff0469d29a8ecab078c072329ce" title="Writes results database file header for a damper." alt="" coords="271,71,509,98"/>
 <area shape="rect" id="node7" href="$namespacerdbmodule.html#ac77a4ebbbaa73cec7d26d49901188fb6" title="Writes a variable definition." alt="" coords="564,173,739,199"/>
 <area shape="rect" id="node8" href="$namespacesavemodule.html#a2e6ee1a6aca16c3bf40c4df010544723" title="Writes results database file header for a friction." alt="" coords="273,122,507,149"/>

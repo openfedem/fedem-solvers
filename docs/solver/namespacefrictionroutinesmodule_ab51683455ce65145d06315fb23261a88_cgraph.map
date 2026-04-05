@@ -1,0 +1,4 @@
+<map id="frictionroutinesmodule::addinfrictionforces" name="frictionroutinesmodule::addinfrictionforces">
+<area shape="rect" id="node1" title="Adds friction forces for a joint into the given system vectors." alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node2" href="$namespaceasmextensionmodule.html#a82a8ae0bdaba0a7b06a6a2d4be32fa64" title="Adds a nodal vector into a system vector." alt="" coords="224,5,387,47"/>
+</map>

@@ -74,15 +74,22 @@ $(function() {
 <div class="title">masterslavejointtypemodule::getptrtoowner Interface Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Returns pointer to owner of specified object.  
+ <a href="interfacemasterslavejointtypemodule_1_1getptrtoowner.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c7573ce846938f320d3c330bab2bf44"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structmasterslavejointtypemodule_1_1masterslavejointtype.html">masterslavejointtype</a>) function, pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacemasterslavejointtypemodule_1_1getptrtoowner.html#a7c7573ce846938f320d3c330bab2bf44">getptrtojointwithspring</a> (array, spring)</td></tr>
+<tr class="memdesc:a7c7573ce846938f320d3c330bab2bf44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to joint connected to given spring.  <a href="interfacemasterslavejointtypemodule_1_1getptrtoowner.html#a7c7573ce846938f320d3c330bab2bf44">More...</a><br /></td></tr>
 <tr class="separator:a7c7573ce846938f320d3c330bab2bf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadc3b455e88603e34018ffc18324ee07"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structmasterslavejointtypemodule_1_1masterslavejointtype.html">masterslavejointtype</a>) function, pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacemasterslavejointtypemodule_1_1getptrtoowner.html#aadc3b455e88603e34018ffc18324ee07">getptrtojointwithdamper</a> (array, damper)</td></tr>
+<tr class="memdesc:aadc3b455e88603e34018ffc18324ee07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to joint connected to given damper.  <a href="interfacemasterslavejointtypemodule_1_1getptrtoowner.html#aadc3b455e88603e34018ffc18324ee07">More...</a><br /></td></tr>
 <tr class="separator:aadc3b455e88603e34018ffc18324ee07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Returns pointer to owner of specified object. </p>
+</div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a id="aadc3b455e88603e34018ffc18324ee07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aadc3b455e88603e34018ffc18324ee07">&#9670;&nbsp;</a></span>getptrtojointwithdamper()</h2>
 
@@ -108,6 +115,18 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return pointer to joint connected to given damper. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">array</td><td>Array of <a class="el" href="structmasterslavejointtypemodule_1_1masterslavejointtype.html" title="Data type representing a master-slave-based joint.">masterslavejointtypemodule::masterslavejointtype</a> objects to search within </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">damper</td><td>The damper base object to search for within the joints</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If no joint has the given damper, NULL is returned.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Jul 2002 </dd></dl>
 
 </div>
 </div>
@@ -137,6 +156,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns pointer to joint connected to given spring. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">array</td><td>Array of <a class="el" href="structmasterslavejointtypemodule_1_1masterslavejointtype.html" title="Data type representing a master-slave-based joint.">masterslavejointtypemodule::masterslavejointtype</a> objects to search within </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">spring</td><td>The spring base object to search for within the joints</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If no joint has the given spring, NULL is returned.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Jul 2002 </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
@@ -145,7 +176,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <map id="supeltypemodule::getsupelid" name="supeltypemodule::getsupelid">
 <area shape="rect" id="node1" title="Returns the full ID of a superelement." alt="" coords="1185,208,1396,235"/>
-<area shape="rect" id="node2" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the input file." alt="" coords="931,171,1113,213"/>
+<area shape="rect" id="node2" href="$namespaceinitiatesupeltypemodule.html#a45575fa8d6cc685731574d475978375a" title="Initializes superelements with data from the solver input file." alt="" coords="931,171,1113,213"/>
 <area shape="rect" id="node10" href="$namespacesavemodule.html#a3f626e2447dbe65dee5f0cf52639fd7e" title="Writes primary results database file header for a superelement." alt="" coords="907,288,1137,315"/>
 <area shape="rect" id="node18" href="$namespacesavemodule.html#aebc96c354e38ff61b6b9a76a1af4f598" title="Writes secondary results database file header for a superelement." alt="" coords="907,237,1137,264"/>
 <area shape="rect" id="node19" href="$namespaceinitiatesupeltypemodule.html#a2642a4223894a9a32bc86d6a860db278" title="Writes a Fortran90 subroutine with hard&#45;coded superelement matrices." alt="" coords="651,113,832,154"/>

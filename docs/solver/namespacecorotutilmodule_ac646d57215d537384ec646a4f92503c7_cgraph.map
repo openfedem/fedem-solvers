@@ -1,0 +1,6 @@
+<map id="corotutilmodule::gmat3nod" name="corotutilmodule::gmat3nod">
+<area shape="rect" id="node1" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="5,64,204,91"/>
+<area shape="rect" id="node2" href="$namespacecorotutilmodule.html#a8ea211cf52e14f30115f207d31565092" title="Computes the rotation gradient matrix for a 3&#45;noded element." alt="" coords="252,5,483,32"/>
+<area shape="rect" id="node3" href="$namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="286,57,449,98"/>
+<area shape="rect" id="node4" href="$namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="286,122,449,163"/>
+</map>

@@ -8,8 +8,8 @@
 <area shape="rect" id="node47" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="217,1331,373,1372"/>
 <area shape="rect" id="node49" href="$namespacefreqresponsemodule.html#a1927a358b89ae817bcbae5d34621cb07" title="Reads input specifications for the frequency domain analysis." alt="" coords="217,1552,373,1593"/>
 <area shape="rect" id="node50" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="213,1617,377,1659"/>
-<area shape="rect" id="node3" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title=" " alt="" coords="440,653,641,695"/>
-<area shape="rect" id="node4" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title=" " alt="" coords="428,719,653,746"/>
+<area shape="rect" id="node3" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="440,653,641,695"/>
+<area shape="rect" id="node4" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="428,719,653,746"/>
 <area shape="rect" id="node5" href="$namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="455,821,626,863"/>
 <area shape="rect" id="node7" href="$namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="457,887,624,928"/>
 <area shape="rect" id="node12" href="$namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="729,1187,937,1214"/>
@@ -32,7 +32,7 @@
 <area shape="rect" id="node23" href="$namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title=" " alt="" coords="744,5,923,47"/>
 <area shape="rect" id="node24" href="$namespacesystemtypemodule.html#a935fe4ac037cf2666adc7adcee35c6db" title="Deallocates the SystemType object." alt="" coords="710,71,957,98"/>
 <area shape="rect" id="node25" href="$namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="751,123,916,164"/>
-<area shape="rect" id="node26" href="$namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title=" " alt="" coords="702,189,965,215"/>
+<area shape="rect" id="node26" href="$namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title="Deallocates the internal buffers for automatic time stepping." alt="" coords="702,189,965,215"/>
 <area shape="rect" id="node28" href="$stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="783,669,883,695"/>
 <area shape="rect" id="node29" href="$namespaceprofilermodule.html#aba3890845238dfacf1394b47e474de03" title="Prints out solver profiling information in a nicely formatted table." alt="" coords="730,770,937,797"/>
 <area shape="rect" id="node30" href="$solverModule_8f90.html#acb9478740ad1afdfe4fef1dfad434481" title="Writes a file name with description to the console file unit." alt="" coords="777,618,889,645"/>

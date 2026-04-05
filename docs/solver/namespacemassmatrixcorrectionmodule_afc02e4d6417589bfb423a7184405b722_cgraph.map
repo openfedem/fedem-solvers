@@ -1,0 +1,6 @@
+<map id="massmatrixcorrectionmodule::mmcinitmassmatrixcorrection" name="massmatrixcorrectionmodule::mmcinitmassmatrixcorrection">
+<area shape="rect" id="node1" title="Initializes the matrix (R^t*R)^&#45;1*R^t for mass matrix correction." alt="" coords="5,71,232,112"/>
+<area shape="rect" id="node2" href="$namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="304,5,471,47"/>
+<area shape="rect" id="node3" href="$namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="280,71,495,112"/>
+<area shape="rect" id="node4" href="$namespacedensematrixmodule.html#a15392a4ff9de4934977af94f5fa8b527" title="Solves the linear equation system A*x = B." alt="" coords="307,136,468,177"/>
+</map>

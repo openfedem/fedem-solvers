@@ -75,40 +75,55 @@ $(function() {
 <div class="title">frictionRoutinesModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Subroutines for friction calculations.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefrictionroutinesmodule_1_1findforceinfriction.html">frictionroutinesmodule::findforceinfriction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the total applied force in a joint dof with friction.  <a href="interfacefrictionroutinesmodule_1_1findforceinfriction.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacefrictionroutinesmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html">frictionroutinesmodule</a></td></tr>
+<tr class="memdesc:namespacefrictionroutinesmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module with subroutines for friction calculations. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ad92b95057a2182ced8ccc1018565badc"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#ad92b95057a2182ced8ccc1018565badc">frictionroutinesmodule::updatefrictions</a> (joints, cElems, dt, iter, useRealVel, ierr)</td></tr>
+<tr class="memdesc:ad92b95057a2182ced8ccc1018565badc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the friction forces in all joints and contact elements.  <a href="namespacefrictionroutinesmodule.html#ad92b95057a2182ced8ccc1018565badc">More...</a><br /></td></tr>
 <tr class="separator:ad92b95057a2182ced8ccc1018565badc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a363dc5c09a9bb55bfc34f6dd24f8161e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e">frictionroutinesmodule::updatefriction</a> (ierr, dt, deltaT, friction, jDof, joint, cElem)</td></tr>
+<tr class="memdesc:a363dc5c09a9bb55bfc34f6dd24f8161e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates friction forces in the given joint or contact element.  <a href="namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e">More...</a><br /></td></tr>
 <tr class="separator:a363dc5c09a9bb55bfc34f6dd24f8161e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9f5c2e8226d48970fb8464785e38c8a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#ab9f5c2e8226d48970fb8464785e38c8a">frictionroutinesmodule::updatemultidoffriction</a> (ierr, dt, deltaT, friction, joint)</td></tr>
+<tr class="memdesc:ab9f5c2e8226d48970fb8464785e38c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates multidof friction forces in the given joint.  <a href="namespacefrictionroutinesmodule.html#ab9f5c2e8226d48970fb8464785e38c8a">More...</a><br /></td></tr>
 <tr class="separator:ab9f5c2e8226d48970fb8464785e38c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58568a9eed2b7b6db36c0746c8559d91"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#a58568a9eed2b7b6db36c0746c8559d91">frictionroutinesmodule::findmaxfrictionforce</a> (Fmax, Fequ, Fext, Vel, StickSlip, F0, Coulomb, Stribeck, Vc)</td></tr>
+<tr class="memdesc:a58568a9eed2b7b6db36c0746c8559d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the maximum friction force.  <a href="namespacefrictionroutinesmodule.html#a58568a9eed2b7b6db36c0746c8559d91">More...</a><br /></td></tr>
 <tr class="separator:a58568a9eed2b7b6db36c0746c8559d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae71415c5b7ae0c8d76727816810c7fd6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#ae71415c5b7ae0c8d76727816810c7fd6">frictionroutinesmodule::findfrictionforce</a> (Ffric, Kfric, Xn_1, Vn_1, Fold, dF, lStick, lInit, dT, Fmax, Fext, Ftol, X0, Xn, Vn)</td></tr>
+<tr class="memdesc:ae71415c5b7ae0c8d76727816810c7fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the actual friction force.  <a href="namespacefrictionroutinesmodule.html#ae71415c5b7ae0c8d76727816810c7fd6">More...</a><br /></td></tr>
 <tr class="separator:ae71415c5b7ae0c8d76727816810c7fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab51683455ce65145d06315fb23261a88"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#ab51683455ce65145d06315fb23261a88">frictionroutinesmodule::addinfrictionforces</a> (joint, sam, SysForce, SysReac, ierr)</td></tr>
+<tr class="memdesc:ab51683455ce65145d06315fb23261a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds friction forces for a joint into the given system vectors.  <a href="namespacefrictionroutinesmodule.html#ab51683455ce65145d06315fb23261a88">More...</a><br /></td></tr>
 <tr class="separator:ab51683455ce65145d06315fb23261a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae968a98796ffc94e3a997730d257d6b9"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#ae968a98796ffc94e3a997730d257d6b9">frictionroutinesmodule::findjointforceinfriction</a> (joint, sam, RF, Q, Fs, Fd, Fi)</td></tr>
+<tr class="memdesc:ae968a98796ffc94e3a997730d257d6b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the total applied force in a joint DOF with friction.  <a href="namespacefrictionroutinesmodule.html#ae968a98796ffc94e3a997730d257d6b9">More...</a><br /></td></tr>
 <tr class="separator:ae968a98796ffc94e3a997730d257d6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a563c5e901bd0421309b6a559c8c5f632"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrictionroutinesmodule.html#a563c5e901bd0421309b6a559c8c5f632">frictionroutinesmodule::findcontactelmforceinfriction</a> (cElem, sam, RF, Q, Fs, Fd, Fi)</td></tr>
+<tr class="memdesc:a563c5e901bd0421309b6a559c8c5f632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes total applied force in a contact element DOF with friction.  <a href="namespacefrictionroutinesmodule.html#a563c5e901bd0421309b6a559c8c5f632">More...</a><br /></td></tr>
 <tr class="separator:a563c5e901bd0421309b6a559c8c5f632"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Subroutines for friction calculations. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

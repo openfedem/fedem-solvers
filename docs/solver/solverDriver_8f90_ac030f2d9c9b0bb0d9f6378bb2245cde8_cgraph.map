@@ -11,8 +11,8 @@
 <area shape="rect" id="node22" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="658,171,814,212"/>
 <area shape="rect" id="node23" href="$namespacefreqresponsemodule.html#a1927a358b89ae817bcbae5d34621cb07" title="Reads input specifications for the frequency domain analysis." alt="" coords="658,463,814,504"/>
 <area shape="rect" id="node24" href="$namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="937,1672,1101,1713"/>
-<area shape="rect" id="node4" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title=" " alt="" coords="919,683,1120,724"/>
-<area shape="rect" id="node5" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title=" " alt="" coords="907,749,1132,775"/>
+<area shape="rect" id="node4" href="$namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="919,683,1120,724"/>
+<area shape="rect" id="node5" href="$namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="907,749,1132,775"/>
 <area shape="rect" id="node6" href="$namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="934,800,1105,841"/>
 <area shape="rect" id="node7" href="$namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="936,449,1103,491"/>
 <area shape="rect" id="node8" href="$namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="1191,866,1399,893"/>
@@ -33,7 +33,7 @@
 <area shape="rect" id="node32" href="$namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="653,1387,819,1428"/>
 <area shape="rect" id="node33" href="$namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="633,1453,839,1479"/>
 <area shape="rect" id="node34" href="$namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="653,1504,819,1545"/>
-<area shape="rect" id="node35" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title=" " alt="" coords="615,1570,857,1597"/>
+<area shape="rect" id="node35" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="615,1570,857,1597"/>
 <area shape="rect" id="node36" href="$namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="617,1621,855,1647"/>
 <area shape="rect" id="node37" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="643,1737,829,1779"/>
 <area shape="rect" id="node38" href="$namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="937,1832,1101,1873"/>

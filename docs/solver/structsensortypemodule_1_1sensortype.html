@@ -104,12 +104,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:abdd5aabc1007568ae51d77440b16f1b5"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html#abdd5aabc1007568ae51d77440b16f1b5">dof</a></td></tr>
 <tr class="memdesc:abdd5aabc1007568ae51d77440b16f1b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local dof index of measured quantity.  <a href="structsensortypemodule_1_1sensortype.html#abdd5aabc1007568ae51d77440b16f1b5">More...</a><br /></td></tr>
 <tr class="separator:abdd5aabc1007568ae51d77440b16f1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7996f70e8197e318b6de9384e18873a0"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html#a7996f70e8197e318b6de9384e18873a0">index</a></td></tr>
-<tr class="memdesc:a7996f70e8197e318b6de9384e18873a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index to the measured object.  <a href="structsensortypemodule_1_1sensortype.html#a7996f70e8197e318b6de9384e18873a0">More...</a><br /></td></tr>
-<tr class="separator:a7996f70e8197e318b6de9384e18873a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86fdafe29cde9016db4fa71cdeeb1c18"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html#a86fdafe29cde9016db4fa71cdeeb1c18">index2</a></td></tr>
-<tr class="memdesc:a86fdafe29cde9016db4fa71cdeeb1c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index to 2nd measured object for relative sensors.  <a href="structsensortypemodule_1_1sensortype.html#a86fdafe29cde9016db4fa71cdeeb1c18">More...</a><br /></td></tr>
-<tr class="separator:a86fdafe29cde9016db4fa71cdeeb1c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8bbd7de2ea9229e359226868cde34f"><td class="memItemLeft" align="right" valign="top">integer, dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html#a0e8bbd7de2ea9229e359226868cde34f">index</a></td></tr>
+<tr class="memdesc:a0e8bbd7de2ea9229e359226868cde34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indices to the measured object(s)  <a href="structsensortypemodule_1_1sensortype.html#a0e8bbd7de2ea9229e359226868cde34f">More...</a><br /></td></tr>
+<tr class="separator:a0e8bbd7de2ea9229e359226868cde34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a629792a0f5ebf2945f2fabf4dcef392a"><td class="memItemLeft" align="right" valign="top">real(dp), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html#a629792a0f5ebf2945f2fabf4dcef392a">value</a></td></tr>
 <tr class="memdesc:a629792a0f5ebf2945f2fabf4dcef392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to current sensor value.  <a href="structsensortypemodule_1_1sensortype.html#a629792a0f5ebf2945f2fabf4dcef392a">More...</a><br /></td></tr>
 <tr class="separator:a629792a0f5ebf2945f2fabf4dcef392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,35 +181,19 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7996f70e8197e318b6de9384e18873a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7996f70e8197e318b6de9384e18873a0">&#9670;&nbsp;</a></span>index</h2>
+<a id="a0e8bbd7de2ea9229e359226868cde34f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e8bbd7de2ea9229e359226868cde34f">&#9670;&nbsp;</a></span>index</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">integer sensortypemodule::sensortype::index</td>
+          <td class="memname">integer, dimension(:), pointer sensortypemodule::sensortype::index</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Index to the measured object. </p>
-
-</div>
-</div>
-<a id="a86fdafe29cde9016db4fa71cdeeb1c18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86fdafe29cde9016db4fa71cdeeb1c18">&#9670;&nbsp;</a></span>index2</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer sensortypemodule::sensortype::index2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Index to 2nd measured object for relative sensors. </p>
+<p>Indices to the measured object(s) </p>
 
 </div>
 </div>
@@ -270,7 +251,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 13 2026 19:45:08 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
