@@ -409,7 +409,7 @@ contains
        rVal = 0.0_dp
 
     case (ENGINE_p)
-       rVal = EngineRate(engines(sensor%index),ierr)
+       rVal = EngineRate(engines(sensor%index(1)),ierr)
 
     case default
        rVal = 0.0_dp
@@ -533,7 +533,7 @@ contains
     use SensorTypeModule , only : DAMPER_AXIAL_p, DAMPER_JOINT_p
     use SensorTypeModule , only : STRAIN_GAGE_p, NUM_ITERATIONS_p
     use SensorTypeModule , only : LENGTH_p, VEL_p, ACC_p, LOCAL_p
-    use SensorTypeModule , only : POS_p, REL_POS_p, FORCE_p
+    use SensorTypeModule , only : POS_p, REL_POS_p, ANGLE_p, FORCE_p
     use SensorTypeModule , only : W_SPEED_p, F_VEL_p, F_ACC_p, DYN_P_p
     use WindTurbineRoutinesModule, only : getWindSpeed
     use HydrodynamicsModule, only : getSeaState
@@ -559,7 +559,7 @@ contains
 
     case (ENGINE_p)
 
-       sensor%value = EngineValue(engines(sensor%index),ierr)
+       sensor%value = EngineValue(engines(sensor%index(1)),ierr)
 
     case (SPRING_AXIAL_p, SPRING_JOINT_p)
 
@@ -568,7 +568,7 @@ contains
           !! Do nothing, the spring length should already be up-to-date
        case default
           !! Update the variables of the associated spring
-          call updateSpringBase (springs(sensor%index),ierr)
+          call updateSpringBase (springs(sensor%index(1)),ierr)
        end select
 
     case (DAMPER_AXIAL_p, DAMPER_JOINT_p)
@@ -578,7 +578,7 @@ contains
           !! Do nothing, the damper length/velocity should already be up-to-date
        case default
           !! Update the variables of the associated damper
-          call updateDamperBase (dampers(sensor%index),ierr)
+          call updateDamperBase (dampers(sensor%index(1)),ierr)
        end select
 
     case (TRIAD_p)
@@ -586,30 +586,31 @@ contains
        select case (sensor%system)
        case (LOCAL_p)
           !! Evaluate local velocity/acceleration/force component of the triad
-          sensor%value = GetLocal(triads(sensor%index),sensor%dof,sensor%entity)
+          sensor%value = GetLocal(triads(sensor%index(1)), &
+               &                  sensor%dof,sensor%entity)
        case default
           !! Do nothing, global position, velocity and acceleration are all
           !! handled through pointers into the associated triad object.
           !! Except for the following quantities:
           select case (sensor%entity)
           case (POS_p)
-             if (sensor%dof >= 4 .and. sensor%dof <= 9) then
+             if (sensor%dof > 3) then
                 !! Evaluate global angular orientation variables
-                sensor%value = GetAngle(triads(sensor%index),sensor%dof-3)
+                sensor%value = GetAngle(triads(sensor%index(1)),sensor%dof)
              end if
           case (FORCE_p)
              !! Evaluate global force component of the triad
-             sensor%value = GetGlobalForce(triads(sensor%index),sensor%dof)
+             sensor%value = GetGlobalForce(triads(sensor%index(1)),sensor%dof)
           case (W_SPEED_p)
              !! Evaluate the wind speed at the triad location
-             call getWindSpeed (triads(sensor%index)%ur(:,4),ourTime%value, &
-                  &             work(1:3),work(4:6),ierr)
+             call getWindSpeed (triads(sensor%index(1))%ur(:,4), &
+                  &             ourTime%value,work(1:3),work(4:6),ierr)
              if (ierr < 0) ierr = lerr + ierr
              sensor%value = work(sensor%dof)
           case (F_VEL_p:DYN_P_p)
              !! Evaluate the fluid particle velocity/acceleration/pressure
              call getSeaState (ourEnvir,ourTime%value, &
-                  &            triads(sensor%index)%ur(:,4),work,ierr)
+                  &            triads(sensor%index(1))%ur(:,4),work,ierr)
              if (ierr < 0) ierr = lerr + ierr
              if (sensor%entity == F_VEL_p) then
                 sensor%value = work(sensor%dof)
@@ -623,9 +624,18 @@ contains
 
     case (RELATIVE_TRIAD_p)
 
-       !! Evaluate relative position/velocity/acceleration between two triads
-       sensor%value = GetRelative(triads(sensor%index),triads(sensor%index2), &
-            &                     sensor%dof,sensor%entity,sensor%value)
+       if (sensor%entity == ANGLE_p) then
+          !! Evaluate angle between two lines defined by the four triads
+          sensor%value = GetAngle2(triads(sensor%index(1)), &
+               &                   triads(sensor%index(3)), &
+               &                   triads(sensor%index(2)), &
+               &                   triads(sensor%index(4)), sensor%dof)
+       else
+          !! Evaluate relative position/velocity/acceleration between two triads
+          sensor%value = GetRelative(triads(sensor%index(1)), &
+               &                     triads(sensor%index(2)), &
+               &                     sensor%dof,sensor%entity,sensor%value)
+       end if
 
     case default
        ierr = ierr + internalError('UpdateSensor: Invalid sensor type')
@@ -731,15 +741,20 @@ contains
 
       real(dp) :: GetAngle, vec(3)
 
-      if (dof > 0 .and. dof <= 3) then
+      select case (dof)
+      case (4:6)
          !! X, Y or Z-rotation (Euler ZYX)
          call FFa_glbEulerZYX (triad%ur(:,1:3),vec)
-         GetAngle = vec(dof)
-      else if (dof > 3 .and. dof <= 6) then
+         GetAngle = vec(dof-3)
+      case (7:9)
          !! X, Y or Z-rotation (Rodrigues parametrization)
          call mat_to_vec (triad%ur(:,1:3),vec)
-         GetAngle = vec(dof-3)
-      end if
+         GetAngle = vec(dof-6)
+      case default
+         ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+         GetAngle = 0.0_dp
+         return
+      end select
 
     end function GetAngle
 
@@ -832,6 +847,37 @@ contains
       end select
 
     end function GetRelative
+
+    !!==========================================================================
+    !> @brief Evaluates the angle between two lines.
+    function GetAngle2 (P10,P11,P20,P21,dof)
+
+      use kindModule       , only : epsDiv0_p
+      use manipMatrixModule, only : cross_product
+
+      type(TriadType), intent(in) :: P10, P11, P20, P21
+      integer        , intent(in) :: dof
+
+      real(dp) :: GetAngle2, dlen, vec1(3), vec2(3), vec3(3)
+
+      vec1 = P11%ur(:,4) - P10%ur(:,4)
+      vec2 = P21%ur(:,4) - P20%ur(:,4)
+      vec3 = cross_product(vec1,vec2)
+      dlen = dot_product(vec3,vec3)
+      if (dlen > epsDiv0_p) then
+         select case (dof)
+         case (11:13) ! signed angle in either of the global YZ, ZX or XY planes
+            GetAngle2 = atan2(vec3(dof-10),dot_product(vec1,vec2))
+         case (10)    ! unsigned angle
+            GetAngle2 = atan2(sqrt(dlen),dot_product(vec1,vec2))
+         case default
+            ierr = ierr + internalError('UpdateSensor: Invalid sensor DOF')
+            GetAngle2 = 0.0_dp
+         end select
+      else
+         GetAngle2 = 0.0_dp
+      end if
+    end function GetAngle2
 
   end subroutine UpdateSensor
 

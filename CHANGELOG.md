@@ -8,7 +8,12 @@
 
 # FEDEM solvers Changelog
 
-## [fedem-8.1.5.2] (2026-03-22)
+## [fedem-8.1.6] (2026-04-07)
+
+### :rocket: Added
+
+- Issue https://github.com/openfedem/fedem-solvers/issues/52
+  Calculation of angles between lines by relative sensors.
 
 ### :bug: Fixed
 

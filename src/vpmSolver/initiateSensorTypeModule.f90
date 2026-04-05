@@ -111,8 +111,8 @@ contains
     integer                    , intent(out) :: err
 
     !! Local variables
-    integer :: ii, ldof, nSensors, stat
-    logical :: needT
+    integer :: i, ii, ldof, nSensors, stat
+    logical :: needT, nullifyOnError
 
     type(TriadType)           , pointer :: triad
     type(EngineType)          , pointer :: engine
@@ -123,10 +123,10 @@ contains
 
     character(len=30)  :: type, dofEntity, dofSystem
     character(ldesc_p) :: extDescr, match
-    integer            :: id, extId(10), triad1Id, triad2Id, dof, engineId, &
+    integer            :: id, extId(10), triadId(4), dof, engineId, &
          &                ctrlVarId, damperId, springId, jointId, extCtrlSysId
 
-    namelist /SENSOR/ id, extId, extDescr, triad1Id, triad2Id, dof, &
+    namelist /SENSOR/ id, extId, extDescr, triadId, dof, &
          &            engineId, ctrlVarId, damperId, springId, &
          &            type, dofEntity, dofSystem, jointId, extCtrlSysId, match
 
@@ -148,6 +148,7 @@ contains
     needT = .false.
     do ii = 1, nSensors
 
+       nullifyOnError = .false.
        call NullifySensor (sensors(ii))
        if (.not. iuSetPosAtNextEntry(infp,'&SENSOR')) then
           err = err - 1
@@ -156,7 +157,7 @@ contains
        end if
 
        !! Initialize to default
-       id = 0; extId = 0; extDescr = ''; triad1Id = 0; triad2Id = 0; dof = 0
+       id = 0; extId = 0; extDescr = ''; triadId = 0; dof = 0
        engineId = 0; ctrlVarId = 0; damperId = 0; springId = 0
        type = ''; dofEntity = ''; dofSystem = ''; extCtrlSysId = 0; match = ''
 
@@ -178,11 +179,12 @@ contains
 
        case (TRIAD_p)
 
-          triad => GetPtrToId(mech%triads,triad1Id,sensors(ii)%index)
+          call allocIndex (sensors(ii)%index,1)
+          triad => GetPtrToId(mech%triads,triadId(1),sensors(ii)%index(1))
           if (.not. associated(triad)) then
              err = err - 1
              call ReportSensorError (sensors(ii), &
-                  'Non-existing triad, baseId =',triad1Id)
+                  'Non-existing triad, baseId =',triadId(1))
           end if
 
           if (sensors(ii)%entity <= DYN_P_p) then
@@ -195,23 +197,25 @@ contains
 
        case (RELATIVE_TRIAD_p)
 
-          triad => GetPtrToId(mech%triads,triad1Id,sensors(ii)%index)
-          if (.not. associated(triad)) then
-             err = err - 1
-             call ReportSensorError (sensors(ii), &
-                  'Non-existing triad, baseId =',triad1Id)
+          if (triadId(4) > 0) then
+             call allocIndex (sensors(ii)%index,4)
+          else if (triadId(2) > 0) then
+             call allocIndex (sensors(ii)%index,2)
+          else
+             call allocIndex (sensors(ii)%index,0)
           end if
-
-          triad => GetPtrToId(mech%triads,triad2Id,sensors(ii)%index2)
-          if (.not. associated(triad)) then
-             err = err - 1
-             call ReportSensorError (sensors(ii), &
-                  'Non-existing triad, baseId =',triad2Id)
-          end if
+          do i = 1, size(sensors(ii)%index)
+             triad => GetPtrToId(mech%triads,triadId(i),sensors(ii)%index(i))
+             if (.not. associated(triad)) then
+                err = err - 1
+                call ReportSensorError (sensors(ii), &
+                     'Non-existing triad, baseId =',triadId(i))
+             end if
+          end do
 
           select case (sensors(ii)%dof)
 
-          case (0:9) ! 0 is relative, 1-6 are usual dofs
+          case (0:13) ! 0 is relative, 1-6 are the usual DOFs
 
           case default
              err = err - 1
@@ -222,7 +226,8 @@ contains
 
        case (JOINT_VARIABLE_p)
 
-          joint => GetPtrToId(mech%joints,jointId,sensors(ii)%index)
+          call allocIndex (sensors(ii)%index,1)
+          joint => GetPtrToId(mech%joints,jointId,sensors(ii)%index(1))
           if (associated(joint)) then
              if (associated(joint%slider) .and. sensors(ii)%dof == 3) then
                 ldof = 7 ! Slider dof
@@ -259,7 +264,8 @@ contains
 
           else
 
-             cElem => GetPtrToId(mech%cElems,jointId,sensors(ii)%index)
+             call allocIndex (sensors(ii)%index,1)
+             cElem => GetPtrToId(mech%cElems,jointId,sensors(ii)%index(1))
              if (associated(celem)) then
                 ldof = sensors(ii)%dof
 
@@ -284,6 +290,7 @@ contains
                 err = err - 1
                 call ReportSensorError (sensors(ii), &
                      'Non-existing joint, baseId =',jointId)
+                if (nullifyOnError) nullify(sensors(ii)%index)
                 cycle
              end if
 
@@ -309,7 +316,9 @@ contains
 
        case (ENGINE_p)
 
-          engine => GetPtrToId(mech%engines,engineId,.false.,sensors(ii)%index)
+          call allocIndex (sensors(ii)%index,1)
+          engine => GetPtrToId(mech%engines,engineId,.false., &
+               &               sensors(ii)%index(1))
           if (.not. associated(engine)) then
              err = err - 1
              call ReportSensorError (sensors(ii), &
@@ -328,7 +337,8 @@ contains
 #ifdef FT_HAS_EXTCTRL
        case (MATLAB_WS_p)
 
-          sensors(ii)%index = extCtrlSysId
+          call allocIndex (sensors(ii)%index,1)
+          sensors(ii)%index(1) = extCtrlSysId
           sensors(ii)%id%descr = match
 
           !! The rest to be initialized in InitiateSensors2
@@ -338,7 +348,8 @@ contains
 #ifdef FT_HAS_RECOVERY
        case (STRAIN_GAGE_p)
 
-          sensors(ii)%index = engineId
+          call allocIndex (sensors(ii)%index,1)
+          sensors(ii)%index(1) = engineId
 
           !! The rest to be initialized in InitiateSensors2
 #endif
@@ -346,7 +357,8 @@ contains
 
        case (SPRING_AXIAL_p, SPRING_JOINT_p)
 
-          spring => GetPtrToId(mech%baseSprings,springId,sensors(ii)%index)
+          call allocIndex (sensors(ii)%index,1)
+          spring => GetPtrToId(mech%baseSprings,springId,sensors(ii)%index(1))
           if (.not. associated(spring)) then
              err = err - 1
              call ReportSensorError (sensors(ii), &
@@ -371,7 +383,8 @@ contains
 
        case (DAMPER_AXIAL_p, DAMPER_JOINT_p)
 
-          damper => GetPtrToId(mech%baseDampers,damperId,sensors(ii)%index)
+          call allocIndex (sensors(ii)%index,1)
+          damper => GetPtrToId(mech%baseDampers,damperId,sensors(ii)%index(1))
           if (.not. associated(damper)) then
              err = err - 1
              call ReportSensorError (sensors(ii), &
@@ -400,6 +413,8 @@ contains
                'Invalid sensor type:',sensors(ii)%type)
        end select
 
+       if (nullifyOnError) nullify(sensors(ii)%index)
+
     end do
 
     if (err == 0 .and. needT) then
@@ -407,6 +422,28 @@ contains
     end if
 
 900 if (err /= 0) call reportError (debugFileOnly_p,'InitiateSensors')
+
+  contains
+
+    !> @cond NO_DOCUMENTAION
+    subroutine allocIndex (indices,nInd)
+      integer, pointer    :: indices(:)
+      integer, intent(in) :: nInd
+      integer, save, target :: dummy(1)
+      allocate(indices(nInd),STAT=stat)
+      if (stat == 0) then
+         if (nInd > 0) indices = 0
+      else
+         err = err + AllocationError('InitiateSensors')
+         if (nInd == 1) then
+            indices => dummy
+            nullifyOnError = .true.
+         else
+            nullify(indices)
+         end if
+      end if
+    end subroutine allocIndex
+    !> @endcond
 
   end subroutine InitiateSensors
 
@@ -478,7 +515,7 @@ contains
 #ifdef FT_HAS_EXTCTRL
        case (MATLAB_WS_p)
 
-          dof = sensors(ii)%index
+          dof = sensors(ii)%index(1)
           if (.not. associated(GetPtrToId(ctrl%extCtrlSys,dof))) then
              err = err - 1
              call ReportSensorError (sensors(ii), &
@@ -499,7 +536,7 @@ contains
                 select case (dof)
 
                 case (1:3)
-                   sensors(ii)%value => triads(sensors(ii)%index)%ur(dof,4)
+                   sensors(ii)%value => triads(sensors(ii)%index(1))%ur(dof,4)
 
                 case (4:9)
                    continue
@@ -525,7 +562,7 @@ contains
                 select case (sensors(ii)%system)
 
                 case (GLOBAL_p)
-                   sensors(ii)%value => triads(sensors(ii)%index)%urd(dof)
+                   sensors(ii)%value => triads(sensors(ii)%index(1))%urd(dof)
 
                 case (LOCAL_p)
                    continue
@@ -552,7 +589,7 @@ contains
                 select case (sensors(ii)%system)
 
                 case (GLOBAL_p)
-                   sensors(ii)%value => triads(sensors(ii)%index)%urdd(dof)
+                   sensors(ii)%value => triads(sensors(ii)%index(1))%urdd(dof)
 
                 case (LOCAL_p)
                    continue
@@ -576,7 +613,7 @@ contains
           case (FORCE_p)
 
              !! Ensure the force array is allocated (in case it is not plotted)
-             triad => triads(sensors(ii)%index)
+             triad => triads(sensors(ii)%index(1))
              if (triad%isFEnode .or. triad%isSEnode) then
                 if (.not. associated(triad%supForce)) then
                    allocate(triad%supForce(triad%nDOFs),STAT=err)
@@ -602,7 +639,7 @@ contains
 
           if (sensors(ii)%entity == FORCE_p) then
 
-             joint => joints(sensors(ii)%index)
+             joint => joints(sensors(ii)%index(1))
              if (associated(joint%slider) .and. dof == 3) dof = 7 ! Slider dof
 
              do ldof = 1, size(joint%jointDofs)
@@ -619,11 +656,11 @@ contains
 #ifdef FT_HAS_RECOVERY
        case (STRAIN_GAGE_p)
 
-          strGage => getStrainRosette(sensors(ii)%index)
+          strGage => getStrainRosette(sensors(ii)%index(1))
           if (.not. associated(strGage)) then
              err = err - 1
              call ReportSensorError (sensors(ii), &
-                  'Invalid strain rosette ID:',sensors(ii)%index)
+                  'Invalid strain rosette ID:',sensors(ii)%index(1))
              cycle
           else if (dof < 1 .or. dof > 4+size(strGage%gages)) then
              err = err - 1
