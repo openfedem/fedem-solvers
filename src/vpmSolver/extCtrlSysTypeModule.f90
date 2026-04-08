@@ -219,7 +219,7 @@ contains
        sensorOutID = 0
        numOutputs = 0
        do i = 1, size(sensors)
-          if (sensors(i)%type == MATLAB_WS_p .and. sensors(i)%index == id) then
+          if (sensors(i)%type == MATLAB_WS_p .and. sensors(i)%index(1) == id) then
              numOutputs = numOutputs + 1
              sensorOutID(numOutputs) = sensors(i)%id%baseId
           end if
