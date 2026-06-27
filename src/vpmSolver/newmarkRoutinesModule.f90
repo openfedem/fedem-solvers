@@ -559,9 +559,6 @@ contains
     use NormTypeModule           , only : iVecNorm_p, HasConverged
     use IdTypeModule             , only : StrId
     use ControlRoutinesModule    , only : IterateControlSystem
-#ifdef FT_HAS_EXTCTRL
-    use ExtCtrlSysRoutinesModule , only : IterateExtCtrlSys
-#endif
     use SolverRoutinesModule     , only : reportEquationError, meqErr
     use SolverRoutinesModule     , only : reportNegativePivots
     use SolverRoutinesModule     , only : CalculateIterationNorms
@@ -920,14 +917,6 @@ contains
        !! This also update frictions (the other updateMechanism calls do not)
        call IncAndUpdate (sam,sys,mech,sys%del,useTotalInc,ierr)
        if (ierr < 0) goto 915
-
-#ifdef FT_HAS_EXTCTRL
-       if (associated(ctrl%extCtrlSys)) then
-          call IterateExtCtrlSys (ctrlSysMode,sys%time-sys%timeStep,sys%time, &
-               &                  ctrl%extCtrlSys,ierr)
-          if (ierr < 0) goto 915
-       end if
-#endif
 
        !! Calculate tolerances and present iteration norms
        call CalculateIterationNorms (sam,sys,sys%nIterThisStep,ierr)

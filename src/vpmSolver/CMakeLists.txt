@@ -148,11 +148,6 @@ set ( F90_FILE_LIST  addInSysModule
                      FNVmodule FNVwaveForceModule
     )
 
-if ( USE_EXT_CTRLSYS )
-  string ( APPEND CMAKE_Fortran_FLAGS " -DFT_HAS_EXTCTRL" )
-  list ( APPEND F90_FILE_LIST extCtrlSysRoutinesModule extCtrlSysTypeModule )
-endif ( USE_EXT_CTRLSYS )
-
 if ( USE_JDTYRE )
   list ( APPEND F90_FILE_LIST JDTire/JD_tireRoutines JDTire/JD_tireRoutinesModule )
 else ( USE_JDTYRE )

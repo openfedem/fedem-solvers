@@ -122,13 +122,13 @@ contains
     type(ContactElementType)  , pointer, save :: cElem
 
     character(len=30)  :: type, dofEntity, dofSystem
-    character(ldesc_p) :: extDescr, match
+    character(ldesc_p) :: extDescr
     integer            :: id, extId(10), triadId(4), dof, engineId, &
-         &                ctrlVarId, damperId, springId, jointId, extCtrlSysId
+         &                ctrlVarId, damperId, springId, jointId
 
     namelist /SENSOR/ id, extId, extDescr, triadId, dof, &
          &            engineId, ctrlVarId, damperId, springId, &
-         &            type, dofEntity, dofSystem, jointId, extCtrlSysId, match
+         &            type, dofEntity, dofSystem, jointId
 
     !! --- Logic section ---
 
@@ -159,7 +159,7 @@ contains
        !! Initialize to default
        id = 0; extId = 0; extDescr = ''; triadId = 0; dof = 0
        engineId = 0; ctrlVarId = 0; damperId = 0; springId = 0
-       type = ''; dofEntity = ''; dofSystem = ''; extCtrlSysId = 0; match = ''
+       type = ''; dofEntity = ''; dofSystem = ''
 
        !! Read values
        read(infp,nml=SENSOR,iostat=stat)
@@ -334,17 +334,6 @@ contains
           !! The rest to be initialized in InitiateSensors2
 
 
-#ifdef FT_HAS_EXTCTRL
-       case (MATLAB_WS_p)
-
-          call allocIndex (sensors(ii)%index,1)
-          sensors(ii)%index(1) = extCtrlSysId
-          sensors(ii)%id%descr = match
-
-          !! The rest to be initialized in InitiateSensors2
-#endif
-
-
 #ifdef FT_HAS_RECOVERY
        case (STRAIN_GAGE_p)
 
@@ -469,9 +458,6 @@ contains
     use TriadTypeModule           , only : TriadType
     use MasterSlaveJointTypeModule, only : MasterSlaveJointType
     use ControlTypeModule         , only : ControlType
-#ifdef FT_HAS_EXTCTRL
-    use ExtCtrlSysTypeModule      , only : GetPtrToId
-#endif
 #ifdef FT_HAS_RECOVERY
     use StrainRosetteModule       , only : StrainRosetteType
     use StressRecoveryModule      , only : getStrainRosette
@@ -511,17 +497,6 @@ contains
           else
              sensors(ii)%value => ctrl%vreg(dof)
           end if
-
-#ifdef FT_HAS_EXTCTRL
-       case (MATLAB_WS_p)
-
-          dof = sensors(ii)%index(1)
-          if (.not. associated(GetPtrToId(ctrl%extCtrlSys,dof))) then
-             err = err - 1
-             call ReportSensorError (sensors(ii), &
-                  'Non-existing external control system, baseId =',dof)
-          end if
-#endif
 
        case (TRIAD_p)
 

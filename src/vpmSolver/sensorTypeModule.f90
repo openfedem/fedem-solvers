@@ -23,7 +23,7 @@ module SensorTypeModule
   implicit none
 
   !> Sensor type strings, i.e., what type of object the sensor is measuring
-  character(len=14), parameter:: sensorType_p(13) =(/ 'TIME          ', &
+  character(len=14), parameter:: sensorType_p(12) =(/ 'TIME          ', &
        &                                              'ENGINE        ', &
        &                                              'CONTROL       ', &
        &                                              'TRIAD         ', &
@@ -33,7 +33,6 @@ module SensorTypeModule
        &                                              'SPRING_JOINT  ', &
        &                                              'DAMPER_JOINT  ', &
        &                                              'RELATIVE_TRIAD', &
-       &                                              'MATLAB_WS     ', &
        &                                              'STRAIN_GAGE   ', &
        &                                              'NUM_ITERATIONS' /)
 
@@ -47,9 +46,8 @@ module SensorTypeModule
   integer, parameter :: SPRING_JOINT_p   =  8 !< Joint spring sensor enum value
   integer, parameter :: DAMPER_JOINT_p   =  9 !< Joint damper sensor enum value
   integer, parameter :: RELATIVE_TRIAD_p = 10 !< Relative sensor enum value
-  integer, parameter :: MATLAB_WS_p      = 11 !< Matlab sensor enum value
-  integer, parameter :: STRAIN_GAGE_p    = 12 !< Strain gage sensor enum value
-  integer, parameter :: NUM_ITERATIONS_p = 13 !< Iterations sensor enum value
+  integer, parameter :: STRAIN_GAGE_p    = 11 !< Strain gage sensor enum value
+  integer, parameter :: NUM_ITERATIONS_p = 12 !< Iterations sensor enum value
 
   !> Sensor entity strings, i.e., which result quantity the sensor is measuring
   character(len=7), parameter :: sensorEntity_p(14)= (/ 'POS    ', &
@@ -230,9 +228,6 @@ contains
 
        case (DAMPER_AXIAL_p, DAMPER_JOINT_p)
           if (idx  > 0) write(lpu,*) 'damper #    =', idx
-
-       case (MATLAB_WS_p)
-          if (idx  > 0) write(lpu,*) 'extCtrlSys # =', idx
 
        case (ENGINE_p)
           if (idx  > 0) write(lpu,*) 'engine #    =', idx

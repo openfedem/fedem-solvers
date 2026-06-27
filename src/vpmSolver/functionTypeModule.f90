@@ -868,7 +868,7 @@ contains
 
   function isCtrlSysUsed (engines)
 
-    use SensorTypeModule, only : ENGINE_p, CONTROL_p, MATLAB_WS_p
+    use SensorTypeModule, only : ENGINE_p, CONTROL_p
 
     type(EngineType), intent(in) :: engines(:)
     logical                      :: isCtrlSysUsed
@@ -897,7 +897,7 @@ contains
       do j = 1, size(engine%args)
          if (associated(engine%args(j)%p)) then
             select case (engine%args(j)%p%type)
-            case (CONTROL_p, MATLAB_WS_p)
+            case (CONTROL_p)
                return
             case (ENGINE_p)
                if (engine%args(j)%p%index(1) > 0) then

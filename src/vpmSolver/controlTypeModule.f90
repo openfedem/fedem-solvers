@@ -17,13 +17,10 @@
 
 module ControlTypeModule
 
-  use KindModule          , only : dp
-  use IdTypeModule        , only : IdType
-  use FunctionTypeModule  , only : EngineType
-  use SensorTypeModule    , only : SensorType
-#ifdef FT_HAS_EXTCTRL
-  use ExtCtrlSysTypeModule, only : ExtCtrlSysType
-#endif
+  use KindModule        , only : dp
+  use IdTypeModule      , only : IdType
+  use FunctionTypeModule, only : EngineType
+  use SensorTypeModule  , only : SensorType
 
   implicit none
 
@@ -50,10 +47,6 @@ module ControlTypeModule
      integer , pointer :: ireg(:)    !< Integer buffer for control system
      real(dp), pointer :: rreg(:)    !< Real buffer for control system
      real(dp), pointer :: delay(:)   !< Buffer for delay elements
-
-#ifdef FT_HAS_EXTCTRL
-     type(ExtCtrlSysType), pointer :: extCtrlSys(:) !< External control systems
-#endif
 
   end type ControlType
 
@@ -106,9 +99,6 @@ contains
     nullify(ctrl%ireg)
     nullify(ctrl%rreg)
     nullify(ctrl%delay)
-#ifdef FT_HAS_EXTCTRL
-    nullify(ctrl%extCtrlSys)
-#endif
 
   end subroutine nullifyCtrl
 
@@ -126,11 +116,8 @@ contains
 
   subroutine deallocateCtrl (ctrl)
 
-    use IdTypeModule        , only : deallocateId
-    use AllocationModule    , only : reAllocate
-#ifdef FT_HAS_EXTCTRL
-    use ExtCtrlSysTypeModule, only : deallocateExtCtrlSys
-#endif
+    use IdTypeModule    , only : deallocateId
+    use AllocationModule, only : reAllocate
 
     type(ControlType), intent(inout) :: ctrl
 
@@ -151,16 +138,6 @@ contains
     if (associated(ctrl%ireg))  deallocate(ctrl%ireg)
     if (associated(ctrl%rreg))  deallocate(ctrl%rreg)
     call reAllocate ('deallocateCtrl',ctrl%delay)
-
-#ifdef FT_HAS_EXTCTRL
-    if (associated(ctrl%extCtrlSys)) then
-       do i = 1, size(ctrl%extCtrlSys)
-          call deallocateExtCtrlSys (ctrl%extCtrlSys(i))
-       end do
-       deallocate(ctrl%extCtrlSys)
-    end if
-#endif
-
     call nullifyCtrl (ctrl,.true.)
 
   end subroutine deallocateCtrl
@@ -186,9 +163,6 @@ contains
     use inputUtilities        , only : iuGetNumberOfEntries
     use allocationModule      , only : reAllocate
     use IdTypeModule          , only : nullifyId
-#ifdef FT_HAS_EXTCTRL
-    use ExtCtrlSysTypeModule  , only : ReadExtCtrlSysInfo
-#endif
     use progressModule        , only : lterm
     use reportErrorModule     , only : reportError, debugFileOnly_p
     use reportErrorModule     , only : AllocationError, GetErrorFile
@@ -222,7 +196,7 @@ contains
     if (ierr /= 0) goto 999
     write(lterm,*) 'Number of &CONTROL_ELEMENT =',nCEl
 
-    if (nCVar+nCIn+nCEl < 1) goto 900 ! No control system at all
+    if (nCVar+nCIn+nCEl < 1) return ! No control system at all
 
     !! Initialize pointer arrays
     ctrl%mpireg(1) = 1                      ! 1: Control integer parameters
@@ -314,15 +288,9 @@ contains
        nDelay = 1 ! Still allocate one element, such that ctrl%delay(1) works
     end if
     call reAllocate ('ReadControlSystem',ctrl%delay,nDelay,ierr)
-    if (ierr < 0) return
-    ctrl%delay = 0.0_dp
-900 continue
-#ifdef FT_HAS_EXTCTRL
-    call ReadExtCtrlSysInfo (infp, engines, sensors, ctrl%extCtrlSys, ierr)
-    if (ierr == 0) return
-#else
+    if (ierr == 0) ctrl%delay = 0.0_dp
+
     return
-#endif
 
 999 call reportError (debugFileOnly_p,'ReadControlSystem')
 
@@ -761,11 +729,6 @@ contains
           if (associated(ctrl%delay)) then
              write(io,*) 'size(delay)  =', size(ctrl%delay)
           end if
-#ifdef FT_HAS_EXTCTRL
-          if (associated(ctrl%extCtrlSys)) then
-             write(io,*) 'size(extCtrlSys) =', size(ctrl%extCtrlSys)
-          end if
-#endif
        end if
        if (complexity >= 2) then
           write(io,'(A,15I6)') ' mpireg =', ctrl%mpireg

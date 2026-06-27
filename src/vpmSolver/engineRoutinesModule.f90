@@ -527,7 +527,7 @@ contains
 
     use kindModule       , only : dp
     use SensorTypeModule , only : SensorType, ourTime
-    use SensorTypeModule , only : TIME_p, ENGINE_p, CONTROL_p, MATLAB_WS_p
+    use SensorTypeModule , only : TIME_p, ENGINE_p, CONTROL_p
     use SensorTypeModule , only : JOINT_VARIABLE_p, RELATIVE_TRIAD_p, TRIAD_p
     use SensorTypeModule , only : SPRING_AXIAL_p, SPRING_JOINT_p
     use SensorTypeModule , only : DAMPER_AXIAL_p, DAMPER_JOINT_p
@@ -553,7 +553,7 @@ contains
     lerr = ierr
     select case (sensor%type)
 
-    case ( TIME_p, CONTROL_p, MATLAB_WS_p, JOINT_VARIABLE_p, &
+    case ( TIME_p, CONTROL_p, JOINT_VARIABLE_p, &
          & STRAIN_GAGE_p, NUM_ITERATIONS_p )
        !! Do nothing, all handled through pointers to the appropriate values
 

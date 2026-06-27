@@ -22,7 +22,6 @@ set ( F90_FILE_LIST  response_pos
                      ../curvePointTypeModule
                      ../damperTypeModule
                      ../environmentTypeModule
-                     ../extCtrlSysTypeModule
                      ../forceTypeModule
                      ../frictionTypeModule
                      ../functionTypeModule

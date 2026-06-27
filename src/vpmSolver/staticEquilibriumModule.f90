@@ -60,9 +60,6 @@ contains
     use SolverRoutinesModule    , only : reportNegativePivots
     use SolverRoutinesModule    , only : printSysSolveProcess, saveStep
     use ControlRoutinesModule   , only : IterateControlSystem
-#ifdef FT_HAS_EXTCTRL
-    use ExtCtrlSysRoutinesModule, only : InitExtCtrlSys
-#endif
     use WindTurbineRoutinesModule,only : updateAeroForces, addInAeroForces
     use NormRoutinesModule      , only : ScaledNorm
     use solExtensionModule      , only : csSolve
@@ -112,14 +109,6 @@ contains
     ctrlSysMode = 1 ! Initiate the control system
     call IterateControlSystem (sys,ctrl,ctrlSysMode,sam%mpar,ierr)
     if (ierr < 0) goto 915
-
-#ifdef FT_HAS_EXTCTRL
-    if (associated(ctrl%extCtrlSys)) then
-       !! Initiate the external control systems
-       call InitExtCtrlSys (sys%tStart,sys%timeStep,ctrl%extCtrlSys,ierr)
-       if (ierr < 0) goto 915
-    end if
-#endif
 
     !! Check whether we actually want to do the equilibrium iterations
     if (sys%equLim > 0.0_dp .and. sam%neq > 0) then
