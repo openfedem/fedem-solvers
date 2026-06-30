@@ -384,8 +384,8 @@ contains
     do i = 1, size(supLoads)
        call updateSupElLoad (supLoads(i)%sup%Q,supLoads(i)%sup%S, &
             &                supLoads(i),ierr)
-       if (ierr < lerr) goto 900
     end do
+    if (ierr < lerr) goto 900
 
 #ifdef FT_DEBUG
     do i = 1, size(sups)
@@ -569,8 +569,8 @@ contains
     do i = 1, size(supLoads)
        call updateSupElLoad (supLoads(i)%sup%Q,supLoads(i)%sup%S, &
             &                supLoads(i),ierr)
-       if (ierr < lerr) goto 900
     end do
+    if (ierr < lerr) goto 900
 
 #ifdef FT_DEBUG
     do i = 1, size(sups)
@@ -652,7 +652,7 @@ contains
     use kindModule          , only : dp
     use SupElLoadTypeModule , only : SupElLoadType
     use IdTypeModule        , only : getId
-    use EngineRoutinesModule, only : Evaluate, UpdateSensor
+    use EngineRoutinesModule, only : Evaluate
     use reportErrorModule   , only : reportError, error_p
 
     real(dp)           , intent(inout) :: Q(:)
@@ -661,23 +661,16 @@ contains
     integer            , intent(inout) :: ierr
 
     !! Local variables
-    integer  :: lerr
-    real(dp) :: xArg
+    integer :: lerr
 
     !! --- Logic section ---
 
     lerr = ierr
-    if (.not. associated(supLoad%Engine)) then
-       xArg = 0.0_dp
-    else if (.not. associated(supLoad%Engine%args(1)%p)) then
-       xArg = -supLoad%delay
-    else
-       call UpdateSensor (supLoad%Engine%args(1)%p,ierr)
-       xArg = supLoad%Engine%args(1)%p%value - supLoad%delay
-    end if
 
     !! Get the engine value for this load in current state
-    supLoad%F = Evaluate(supLoad%Engine,supLoad%f1,supLoad%f0,ierr,xArg)
+    supLoad%F = Evaluate( supLoad%Engine,supLoad%f1,supLoad%f0,ierr, &
+         &               -supLoad%delay)
+
     if (ierr < lerr) then
        call reportError (error_p,'Failed to evaluate engine '// &
             &                    'for superelement load'//getId(supLoad%id), &

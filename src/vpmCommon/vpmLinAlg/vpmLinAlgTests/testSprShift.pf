@@ -55,14 +55,14 @@ subroutine testSprShift
      do i = ndim+1, size(sysM%value)
         sysM%value(i) = real(i-ndim,dp)
      end do
-     call writeObject (sysK,sam%mpar,lpu,'System stiffness matrix',complexity=5)
-     call writeObject (sysM,sam%mpar,lpu,'System mass matrix',complexity=5)
+     call writeObject (sysK,lpu,'System stiffness matrix',complexity=5)
+     call writeObject (sysM,lpu,'System mass matrix',complexity=5)
 
      !! Perform the shift operation A = A - shift*B
      call SPRAXPY (sysK%sparse,sysM%sparse,sysK%value,sysM%value,1.0_dp,ierr)
      @assertEqual(ierr,0)
 
-     call writeObject (sysK,sam%mpar,lpu,'The shifted matrix',complexity=5)
+     call writeObject (sysK,lpu,'The shifted matrix',complexity=5)
 
      nred = 0
      kval = 0.0_dp

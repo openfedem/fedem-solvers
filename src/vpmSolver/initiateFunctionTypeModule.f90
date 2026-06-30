@@ -70,16 +70,10 @@ module initiateFunctionTypeModule
 
   private
 
-  !> @cond NO_DOCUMENTATION
+  !> @brief Temporary storage of sensor Ids of the function arguments.
   integer, allocatable, save :: argSensor(:)
-  integer,              save :: maxChannel = 0
 
-  type IntVec
-     integer, pointer :: values(:)
-  end type IntVec
-
-  type(IntVec), allocatable, save :: argSensors(:)
-  !> @endcond
+  integer, save :: maxChannel = 0 !< Max. number of external function channels
 
   !> @brief Data type for temporary linked list of RAO data.
   type RAOType
@@ -745,7 +739,7 @@ contains
     integer           , intent(out) :: err
 
     !! Local variables
-    integer :: i, j, nEng, stat
+    integer :: i, iArg, nEng, stat
 
     !! Define the ENGINE namelist
     character(ldesc_p) :: extDescr, tag
@@ -759,17 +753,15 @@ contains
     write(lterm,*) 'Number of &ENGINE =', nEng
 
     call DeallocateEngines (engines)
-    allocate(engines(nEng),argSensor(nEng),argSensors(nEng),STAT=stat)
+    allocate(engines(nEng),argSensor(nEng),STAT=stat)
     if (stat /= 0) then
        err = AllocationError('InitateEngines')
        return
     end if
 
-    argSensor = 0
-
+    iArg = 1
     do i = 1, nEng
 
-       nullify(argSensors(i)%values)
        call NullifyEngine (engines(i))
        if (.not. iuSetPosAtNextEntry(infp,'&ENGINE')) then
           err = err - 1
@@ -809,18 +801,26 @@ contains
        !! Temporarily handle the sensor arguments.
        !! Actually connecting the pointers is done in InitiateEngines2
        !! after all engines have been read and initialized.
-       if (nArg > 1) then
-          allocate(argSensors(i)%values(nArg),STAT=stat)
+       if (nArg > 1) nArg = nArg + 1
+       if (iArg+max(nArg,1) > size(argSensor)) then
+          !! Enlarge the argSensor array by (at least) 10
+          call reAllocate (max(iArg+max(nArg,1),size(argSensor)+10),stat)
           if (stat /= 0) then
              err = AllocationError('InitateEngines1')
              return
           end if
-          do j = 1, nArg
-             argSensors(i)%values(j) = argSensorId(j)
-          end do
-       else if (nArg == 1) then
-          argSensor(i) = argSensorId(1)
        end if
+       if (nArg == 1) then
+          argSensor(iArg) = argSensorId(1)
+       else if (nArg > 1) then
+          nArg = nArg - 1
+          argSensor(iArg) = -nArg
+          argSensor(iArg+1:iArg+nArg) = argSensorId(1:nArg)
+          iArg = iArg + nArg
+       else
+          argSensor(iArg) = 0
+       end if
+       iArg = iArg + 1
 
        if (ffa_cmdlinearg_isTrue('allEngineVars')) then
           engines(i)%saveVar = 2 ! Evaluate this engine at each saved time step
@@ -841,6 +841,21 @@ contains
 
     if (err < 0) call reportError (debugFileOnly_p,'InitiateEngines1')
 
+  contains
+
+    !> @brief Reallocates the @ref initiatefunctiontypemodule::argsensor array
+    !> while preserving its content.
+    subroutine reAllocate (newSize,ierr)
+      integer, intent(in)  :: newSize
+      integer, intent(out) :: ierr
+      integer, allocatable :: tmp(:)
+      allocate(tmp(newSize),STAT=ierr)
+      if (ierr == 0) then
+         tmp(1:size(argSensor)) = argSensor
+         call move_alloc (tmp,argSensor)
+      end if
+    end subroutine reAllocate
+
   end subroutine InitiateEngines1
 
 
@@ -859,8 +874,8 @@ contains
 
   subroutine InitiateEngines2 (engines,sensors,err)
 
-    use FunctionTypeModule       , only : EngineType, GetPtrToId
-    use SensorTypeModule         , only : SensorType, GetPtrToId
+    use FunctionTypeModule       , only : EngineType
+    use SensorTypeModule         , only : SensorType, GetPtrToId, ENGINE_p
     use IdTypeModule             , only : ReportInputError
     use explicitFunctionsModule  , only : DEVICE_FUNCTION_p
     use progressModule           , only : lterm
@@ -870,13 +885,12 @@ contains
     use FFaFilePathInterface     , only : ffa_checkPath
     use FFaCmdLineArgInterface   , only : ffa_cmdlinearg_getstring
 
-    type(EngineType), intent(inout) :: engines(:)
-    type(SensorType), intent(in)    :: sensors(:)
-    integer         , intent(out)   :: err
+    type(EngineType), intent(inout), target :: engines(:)
+    type(SensorType), intent(in)            :: sensors(:)
+    integer         , intent(out)           :: err
 
     !! Local variables
-    integer :: i, j, stat, sensorId, extFunc(maxChannel)
-    logical :: multiArg
+    integer :: i, j, iArg, nArg, stat, sensorId, extFunc(maxChannel)
     character(len=lfnam_p) :: fileName
     character(len=1024)    :: labels
 
@@ -884,33 +898,43 @@ contains
 
     err = 0
 
+    iArg = 0
     do i = 1, size(engines)
 
-       multiArg = .false.
-       sensorId = argSensor(i)
-       if (associated(argSensors(i)%values)) then
-          multiArg = .true.
-          allocate(engines(i)%args(size(argSensors(i)%values)),STAT=stat)
-       else if (sensorId /= 0) then
-          allocate(engines(i)%args(1),STAT=stat)
+       !! Get number of function arguments
+       iArg = iArg + 1
+       sensorId = argSensor(iArg)
+       if (sensorId < 0) then
+          nArg = -sensorId
+       else if (sensorId > 0) then
+          nArg = 1
        else
-          allocate(engines(i)%args(0),STAT=stat)
+          nArg = 0
        end if
+
+       allocate(engines(i)%args(nArg),STAT=stat)
        if (stat /= 0) then
           err = allocationError('InitiateEngines2')
           return
        end if
 
        stat = err
-       do j = 1, size(engines(i)%args)
-          if (multiArg) sensorId = argSensors(i)%values(j)
-          if (sensorId == 0) then
-             nullify(engines(i)%args(j)%p) ! Assume zero-valued argument
-          else
+       do j = 1, nArg
+          nullify(engines(i)%args(j)%p)
+          nullify(engines(i)%args(j)%q)
+          if (nArg > 1) then
+             iArg = iArg + 1
+             sensorId = argSensor(iArg)
+          end if
+          if (sensorId > 0) then
+             !! Connect function argument to sensor object
              engines(i)%args(j)%p => GetPtrToId(sensors,sensorId)
              if (.not. associated(engines(i)%args(j)%p)) then
                 err = err - 1
                 call ReportInputError ('ENGINE',i,engines(i)%id)
+             else if (engines(i)%args(j)%p%type == ENGINE_p) then
+                !! Connect function argument to the measured engine object
+                engines(i)%args(j)%q => engines(engines(i)%args(j)%p%index(1))
              end if
           end if
        end do
@@ -919,9 +943,7 @@ contains
           nullify(engines(i)%args)
        end if
 
-       if (multiArg) deallocate(argSensors(i)%values)
-
-       if (sensorId == 0 .and. associated(engines(i)%func)) then
+       if (nArg == 0 .and. associated(engines(i)%func)) then
           if (engines(i)%func%type == DEVICE_FUNCTION_p) then
              extFunc(engines(i)%func%intParameters(4)) = i
           end if
@@ -929,7 +951,7 @@ contains
 
     end do
 
-    deallocate(argSensor,argSensors)
+    deallocate(argSensor)
 
     call ffa_cmdlinearg_getstring ('externalfuncfile',fileName)
     if (fileName /= '' .and. maxChannel > 0 .and. err == 0) then

@@ -20,7 +20,6 @@ module ControlTypeModule
   use KindModule        , only : dp
   use IdTypeModule      , only : IdType
   use FunctionTypeModule, only : EngineType
-  use SensorTypeModule  , only : SensorType
 
   implicit none
 
@@ -29,8 +28,7 @@ module ControlTypeModule
   !> @brief Data type representing a control input parameter.
   type CtrlPrm
      integer                   :: var    !< Variable index of the input
-     type(EngineType), pointer :: engine !< Function processing the input
-     type(SensorType), pointer :: sensor !< Sensor meansuring the input
+     type(EngineType), pointer :: engine !< Function returning the input value
   end type CtrlPrm
 
   !> @brief Data type representing the control system of a model.
@@ -56,17 +54,17 @@ module ControlTypeModule
      module procedure WriteControlType
   end interface
 
-  public :: ControlType, nullifyCtrl, deallocateCtrl
-  public :: ReadControlSystem, InitiateControl, hasControlElements
+  public :: CtrlPrm, ControlType, nullifyCtrl, deallocateCtrl, copyCtrl
+  public :: ReadControlSystem, InitiateControl, hasControlElements, getSensor
   public :: WriteObject, writeCtrlSysHeader, writeCtrlSysDB
 
 
 contains
 
   !!============================================================================
-  !> @brief Initializes the ControlType object.
+  !> @brief Initializes a control system object.
   !>
-  !> @param[out] ctrl Control system data
+  !> @param[out] ctrl The controltypemodule::controltype object to initialize
   !> @param[in] deallocating If .true., the pointers are nullified
   !>
   !> @callergraph
@@ -104,9 +102,10 @@ contains
 
 
   !!============================================================================
-  !> @brief Deallocates the ControlType object.
+  !> @brief Deallocates a control system object.
   !>
-  !> @param ctrl Control system data
+  !> @param ctrl The controltypemodule::controltype object to deallocate
+  !> @param[in] staticData If .true., also deallocate the static data members
   !>
   !> @callergraph
   !>
@@ -114,29 +113,41 @@ contains
   !>
   !> @date 23 Jan 2017
 
-  subroutine deallocateCtrl (ctrl)
+  subroutine deallocateCtrl (ctrl,staticData)
 
     use IdTypeModule    , only : deallocateId
     use AllocationModule, only : reAllocate
 
     type(ControlType), intent(inout) :: ctrl
+    logical, optional, intent(in)    :: staticData
 
     !! Local variables
     integer :: i
+    logical :: deallocAll
 
     !! --- Logic section ---
 
-    if (associated(ctrl%input)) deallocate(ctrl%input)
-    if (associated(ctrl%vreg))  deallocate(ctrl%vreg)
-    if (associated(ctrl%vregId)) then
-       do i = 1, size(ctrl%vregId)
-          call deallocateId (ctrl%vregId(i))
-       end do
-       deallocate(ctrl%vregId)
+    if (present(staticData)) then
+       deallocAll = staticData
+    else
+       deallocAll = .true.
     end if
+
     if (associated(ctrl%ivar))  deallocate(ctrl%ivar)
     if (associated(ctrl%ireg))  deallocate(ctrl%ireg)
     if (associated(ctrl%rreg))  deallocate(ctrl%rreg)
+    if (associated(ctrl%vreg))  deallocate(ctrl%vreg)
+
+    if (deallocAll) then
+       if (associated(ctrl%input)) deallocate(ctrl%input)
+       if (associated(ctrl%vregId)) then
+          do i = 1, size(ctrl%vregId)
+             call deallocateId (ctrl%vregId(i))
+          end do
+          deallocate(ctrl%vregId)
+       end if
+    end if
+
     call reAllocate ('deallocateCtrl',ctrl%delay)
     call nullifyCtrl (ctrl,.true.)
 
@@ -144,11 +155,76 @@ contains
 
 
   !!============================================================================
+  !> @brief Makes a copy of a control system object.
+  !>
+  !> @param[in] ctrlIn The controltypemodule::controltype object to copy from
+  !> @param ctrlCopy Pointer to the copied controltypemodule::controltype object
+  !> @param[out] ierr Error flag
+  !>
+  !> @details If the @a ctrlCopy pointer is NULL on input, the object is
+  !> allocated to match the dimension of the @a ctrlIn object.
+  !> Otherwise, it is assumed that the data members have the correct sizes.
+  !> Only the dynamic data members are copied physically. The static members,
+  !> which not are supposed to change after data input, are shared.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 18 Jan 2024
+
+  subroutine CopyCtrl (ctrlIn,ctrlCopy,ierr)
+
+    use allocationModule , only : reAllocate
+    use reportErrorModule, only : AllocationError
+
+    type(ControlType), intent(in)  :: ctrlIn
+    type(ControlType), pointer     :: ctrlCopy
+    integer, optional, intent(out) :: ierr
+
+    !! --- Logic section
+
+    if (.not. associated(ctrlCopy) .and. present(ierr)) then
+       allocate(ctrlCopy,STAT=ierr)
+       if (ierr == 0) then
+          allocate(ctrlCopy%ireg(size(ctrlIn%ireg)), &
+               &   ctrlCopy%rreg(size(ctrlIn%rreg)), &
+               &   ctrlCopy%vreg(size(ctrlIn%vreg)), STAT=ierr)
+       end if
+       if (ierr /= 0) then
+          ierr = AllocationError('CopyCtrl')
+          return
+       end if
+
+       !! Using the reAllocate subroutine for delay to match deallocateCtrl()
+       nullify(ctrlCopy%delay)
+       call reAllocate ('CopyCtrl',ctrlCopy%delay,size(ctrlIn%delay),ierr)
+       if (ierr < 0) return
+    end if
+
+    ctrlCopy%input   => ctrlIn%input
+    ctrlCopy%vregId  => ctrlIn%vregId
+    ctrlCopy%vreg    =  ctrlIn%vreg
+    ctrlCopy%saveVar =  ctrlIn%saveVar
+
+    ctrlCopy%mpireg  = ctrlIn%mpireg
+    ctrlCopy%mprreg  = ctrlIn%mprreg
+    ctrlCopy%ireg    = ctrlIn%ireg
+    ctrlCopy%rreg    = ctrlIn%rreg
+    ctrlCopy%delay   = ctrlIn%delay
+
+#ifdef FT_HAS_EXTCTRL
+    ctrlCopy%extCtrlSys => ctrlIn%extCtrlSys
+#endif
+
+  end subroutine CopyCtrl
+
+
+  !!============================================================================
   !> @brief Initializes the ControlType object with data from the input file.
   !>
   !> @param[in] infp File unit number for the solver input file
   !> @param[in] engines All general functions in the model
-  !> @param[in] sensors All sensors (function argument objects) in the model
   !> @param[out] ctrl Control system data of the model
   !> @param[out] ierr Error flag
   !>
@@ -158,7 +234,7 @@ contains
   !>
   !> @date Jul 2000
 
-  subroutine ReadControlSystem (infp,engines,sensors,ctrl,ierr)
+  subroutine ReadControlSystem (infp,engines,ctrl,ierr)
 
     use inputUtilities        , only : iuGetNumberOfEntries
     use allocationModule      , only : reAllocate
@@ -172,7 +248,6 @@ contains
 
     integer          , intent(in)  :: infp
     type(EngineType) , intent(in)  :: engines(:)
-    type(SensorType) , intent(in)  :: sensors(:)
     type(ControlType), intent(out) :: ctrl
     integer          , intent(out) :: ierr
 
@@ -264,7 +339,7 @@ contains
 
     !! Read and initialize CONTROL_INPUTs
     if (nCIn > 0) then
-       call ReadControlInput (infp, engines, sensors, ctrl%input, &
+       call ReadControlInput (infp, engines, ctrl%input, &
             ctrl%ireg(ctrl%mpireg(2):ctrl%mpireg(3)-1), ierr)
        if (ierr < 0) goto 999
     end if
@@ -339,7 +414,6 @@ contains
   !>
   !> @param[in] infp File unit number for the solver input file
   !> @param[in] engines All general functions in the model
-  !> @param[in] sensors All sensors (function argument objects) in the model
   !> @param[out] input Control input parameters
   !> @param[out] mstat Status flags for the control variables
   !> @param[out] ierr Error flag
@@ -350,28 +424,26 @@ contains
   !>
   !> @date Aug 2000
 
-  subroutine ReadControlInput (infp,engines,sensors,input,mstat,ierr)
+  subroutine ReadControlInput (infp,engines,input,mstat,ierr)
 
     use IdTypeModule      , only : ldesc_p, initId, ReportInputError
     use FunctionTypeModule, only : GetPtrToId
-    use SensorTypeModule  , only : GetPtrToId
     use inputUtilities    , only : iuSetPosAtNextEntry
     use reportErrorModule , only : reportError, debugFileOnly_p
 
-    integer         , intent(in)  :: infp
-    type(EngineType), intent(in)  :: engines(:)
-    type(SensorType), intent(in)  :: sensors(:)
-    type(CtrlPrm)   , intent(out) :: input(:)
-    integer         , intent(out) :: mstat(:)
-    integer         , intent(out) :: ierr
+    integer         , intent(in)         :: infp
+    type(EngineType), intent(in), target :: engines(:)
+    type(CtrlPrm)   , intent(out)        :: input(:)
+    integer         , intent(out)        :: mstat(:)
+    integer         , intent(out)        :: ierr
 
     !! Local variables
     integer      :: idIn, stat
     type(IdType) :: cid
 
     character(len=ldesc_p) :: extDescr
-    integer                :: id, extId(10), iVar, inEngineID, inSensorId
-    namelist /CONTROL_INPUT/ id, extId, extDescr, iVar, inEngineID, inSensorId
+    integer                :: id, extId(10), iVar, inEngineID
+    namelist /CONTROL_INPUT/ id, extId, extDescr, iVar, inEngineID
 
     !! --- Logic section ---
 
@@ -381,7 +453,6 @@ contains
     do idIn = 1, size(input)
        input(idIn)%var = 0
        nullify(input(idIn)%engine)
-       nullify(input(idIn)%sensor)
        if (.not. iuSetPosAtNextEntry(infp,'&CONTROL_INPUT')) then
           ierr = ierr - 1
           call ReportInputError ('CONTROL_INPUT',idIn)
@@ -390,7 +461,7 @@ contains
 
        !! Default values
        id=0; extId=0; extDescr=''
-       iVar=0; inEngineID=0; inSensorId=0
+       iVar=0; inEngineID=0
 
        read(infp,nml=CONTROL_INPUT,iostat=stat)
        if (stat /= 0) then
@@ -399,29 +470,23 @@ contains
           cycle
        end if
 
-       call initId (cid,id,extId,extDescr,stat)
-
        !! Set the input variable number
+       stat = ierr
        if (iVar > 0 .and. iVar <= size(mstat)) then
           input(idIn)%var = iVar
           mstat(iVar) = 1 ! Signals input variable
        else
           ierr = ierr - 1
+       end if
+
+       !! Set the input function
+       input(idIn)%engine => GetPtrToId(engines,inEngineId,.false.)
+       if (.not.associated(input(idIn)%engine)) ierr = ierr - 1
+
+       if (ierr < stat) then
+          call initId (cid,id,extId,extDescr,stat)
           call ReportInputError ('CONTROL_INPUT',idIn,cid)
-          cycle
        end if
-
-       !! Set the type of input: engine or sensor
-       if (inEngineId > 0) then
-          input(idIn)%engine => GetPtrToId(engines,inEngineId,.false.)
-          if (associated(input(idIn)%engine)) cycle
-       else if (inSensorId > 0) then
-          input(idIn)%sensor => GetPtrToId(sensors,inSensorId)
-          if (associated(input(idIn)%sensor)) cycle
-       end if
-
-       ierr = ierr - 1
-       call ReportInputError ('CONTROL_INPUT',idIn,cid)
 
     end do
 
@@ -709,9 +774,6 @@ contains
        if (associated(ctrl%input(i)%engine)) then
           write(io,*) 'input var', ctrl%input(i)%var, &
                ': engineId =', trim(getId(ctrl%input(i)%engine%id))
-       else if (associated(ctrl%input(i)%sensor)) then
-          write(io,*) 'input var', ctrl%input(i)%var, &
-               ': sensorId =', trim(getId(ctrl%input(i)%sensor%id))
        end if
     end do
 
@@ -794,6 +856,63 @@ contains
     logical :: hasControlElements
     hasControlElements = size(ctrl%input) > 0
   end function hasControlElements
+
+
+  !!============================================================================
+  !> @brief Returns sensor measuring structural response for an input element.
+  !>
+  !> @param[in] input The controltypemodule::ctrlprm object to get sensor for
+  !>
+  !> @details If the sensor is measuring an engine, the argument sensor
+  !> of that engine is returned instead. If the engine has multiple arguments,
+  !> the first argument which neither is of type engine nor time is returned.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 19 Jan 2024
+
+  function getSensor (input)
+
+    use SensorTypeModule, only : SensorType, ENGINE_p, TIME_p
+
+    type(CtrlPrm), intent(in) :: input
+    type(SensorType), pointer :: getSensor
+
+    !! Local variables
+    integer                   :: i, j
+    type(EngineType), pointer :: engine
+
+    !! --- Logic section ---
+
+    nullify(getSensor)
+    if (associated(input%engine)) then
+       do i = 1, size(input%engine%args)
+          getSensor => input%engine%args(i)%p
+          if (getSensor%type == ENGINE_p) then
+             engine => input%engine%args(i)%q
+             do while (getSensor%type == ENGINE_p)
+                do j = 1, size(engine%args)
+                   getSensor => engine%args(j)%p
+                   engine => engine%args(j)%q
+                   if (getSensor%type == TIME_p) then
+                      nullify(getSensor) ! Ignore time sensors
+                   else
+                      exit ! We got the structural sensor
+                   end if
+                end do
+                if (.not. associated(getSensor)) exit
+             end do
+          else if (getSensor%type == TIME_p) then
+             nullify(getSensor) ! Ignore time sensors
+          else
+             exit ! We got the structural sensor
+          end if
+       end do
+    end if
+
+  end function getSensor
 
 
   !!============================================================================

@@ -100,14 +100,6 @@ module SensorTypeModule
      logical      :: allocValue !< If .true., the @a value is allocated
   end type SensorType
 
-  !> @brief Data type representing a sensor pointer.
-  !> @details This data type is used to construct arrays of sensor objects
-  !> where each array element is a pointer to a sensor object,
-  !> and not the sensors themselves.
-  type SensorPtrType
-     type(SensorType), pointer :: p !< Pointer to a sensor
-  end type SensorPtrType
-
   !> Pointer to the one and only time sensor of the model
   type(SensorType), pointer, save :: ourTime => null()
 
@@ -247,6 +239,44 @@ contains
     write(lpu,'(A)') '}'
 
   end subroutine WriteSensorType
+
+
+  !!============================================================================
+  !> @brief Returns the id of a sensor object, including its type.
+  !>
+  !> @param[in] sensor The sensortypemodule::sensortype object to get id for
+  !> @param[in] typeAsPrefix If .true., use the sensor type as prefix
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 8 Feb 2024
+
+  function getSensorId (sensor,typeAsPrefix) result(text)
+
+    use IdTypeModule, only : lId_p, getId
+
+    type(SensorType) , intent(in) :: sensor
+    logical, optional, intent(in) :: typeAsPrefix
+
+    !! Local variables
+    character(len=lId_p) :: text
+
+    !! --- Logic section ---
+
+    text = getId(sensor%id)
+    if (sensor%type < 1 .or. sensor%type > size(sensorType_p)) then
+       text = 'Sensor'//text(1:lId_p-6)
+    else if (.not. present(typeAsPrefix)) then
+       text = 'Sensor'//text(1:lId_p-6)
+    else if (typeAsPrefix) then
+       text = trim(sensorType_p(sensor%type))//text
+    else
+       text = 'Sensor'//trim(text)//' of type '//sensorType_p(sensor%type)
+    end if
+
+  end function getSensorId
 
 
   !!============================================================================
