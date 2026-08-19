@@ -16,6 +16,7 @@
 !> to extract the detailed documentation of the symbols in this module.
 !>
 !> @author Knut Morten Okstad
+!>
 !> @date 9 Feb 2001
 
 module ProgressModule
@@ -28,6 +29,7 @@ module ProgressModule
   integer , save          :: lterm   !< File unit number for terminal output
   real(sp), save, private :: last(2) !< Used to log incremental time consumption
 
+  !> @brief Writes progress information to the terminal.
   interface writeProgress
      module procedure writeMessage
      module procedure writeProsent
@@ -48,6 +50,7 @@ contains
   !> @param[in] hundreds If present, also return times smaller that 0.01s
   !>
   !> @author Knut Morten Okstad
+  !>
   !> @date 11 Sep 2006
 
   function getTimeUsage (time,hundreds) result(changed)
@@ -118,6 +121,18 @@ contains
           lastWrite   = 0.0_sp
           lastProsent = 1.0_sp
        end if
+    else if (lastProsent <= 1.0_sp .and. loopEnd > 200000) then
+       if (loopVar == 100) then
+          write(lterm,"(18X,A1)",advance='NO') '.'
+       else if (loopVar == 2000) then
+          write(lterm,"(A1,I6)",advance='YES') '.',loopEnd/100
+       else if (loopVar > 100 .and. loopVar < 2000 .and. &
+            &   mod(loopVar,100) == 0) then
+          write(lterm,"(A1)",advance='NO') '.'
+       else
+          return
+       end if
+       call flush (lterm)
     end if
 
 600 format(I20,'% completed  =>',F8.2,I4,'% CPU time')
@@ -175,7 +190,6 @@ contains
 
   !!============================================================================
   !> @brief Write a progress message with optional memory usage to the terminal.
-  !>
 
   subroutine writeMessage (msg,reportMemoryUsage,newLine)
 
