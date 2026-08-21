@@ -504,4 +504,101 @@ contains
 
   end subroutine DeallocateForces
 
+
+  !!============================================================================
+  !> @brief Fix control system DOFs in eigenvalue calculation.
+  !>
+  !> @param forces Array of all external point loads in the model
+  !> @param[out] ierr Error flag
+  !>
+  !> @details This subroutine constrains structural DOFs which have loads whose
+  !> magnitude is the output from the control system to zero during eigenvalue
+  !> calculation, and else kept as free during time integration.
+  !> This is done by assigning BC code 2 for these DOFs.
+  !>
+  !> @callergraph
+  !>
+  !> @author Magne Bratland
+  !>
+  !> @date 19 Feb 2009
+
+  subroutine fixControlDOFsOnEigValCalc (forces,ierr)
+
+    use IdTypeModule     , only : getId
+    use SensorTypeModule , only : CONTROL_p
+    use ReportErrorModule, only : reportError, note_p, error_p
+
+    implicit none
+
+    type(ForceType), intent(inout) :: forces(:)
+    integer        , intent(out)   :: ierr
+
+    !! Local variables
+    integer :: i, j
+
+    !! --- Logic section ---
+
+    ierr = 0
+    call reportError (note_p,'Setting fixed BC for control output DOFs')
+
+    !! Loop over all forces and find those whose source is a control output
+
+    do i = 1, size(forces)
+       if (associated(forces(i)%engine)) then
+          do j = 1, size(forces(i)%engine%args)
+             if (associated(forces(i)%engine%args(j)%p)) then
+                if (forces(i)%engine%args(j)%p%type == CONTROL_p) then
+                   if (associated(forces(i)%triad)) then
+                      call fixTriadDOFsEigVal (forces(i)%triad,forces(i)%dof)
+                   else if (associated(forces(i)%joint)) then
+                      call fixJointDOFsEigVal (forces(i)%joint,forces(i)%dof)
+                   else
+                      ierr = ierr - 1 ! Error
+                   end if
+                   exit
+                end if
+             end if
+          end do
+       end if
+    end do
+
+    if (ierr < 0) call reportError (error_p,'Invalid loads detected',ierr=ierr)
+
+  contains
+
+    !> @brief Sets BC code 2 for triad DOFs.
+    subroutine fixTriadDOFsEigVal (triad,dof)
+      type(TriadType), intent(inout) :: triad
+      integer        , intent(in)    :: dof
+      select case (dof)
+      case (-2) ! The force is a multi-dimensional moment
+         triad%BC(4:6) = 2
+         call reportError (note_p,'Fixing all rotational DOFs in Triad'// &
+              trim(getId(triad%id))//' in eigenvalue analysis')
+      case (-1) ! The force is a multi-dimensional force
+         triad%BC(1:3) = 2
+         call reportError (note_p,'Fixing all translational DOFs in Triad'// &
+              trim(getId(triad%id))//' in eigenvalue analysis')
+      case (1:6) ! The force is a pure one-dimensional force
+         triad%BC(forces(i)%dof) = 2
+         call reportError (note_p,'Fixing local DOF '//char(ichar('0')+dof)// &
+              ' for Triad'//trim(getId(triad%id))//' in eigenvalue analysis')
+      end select
+    end subroutine fixTriadDOFsEigVal
+
+    !> @brief Sets BC code 2 for joint DOFs.
+    subroutine fixJointDOFsEigVal (joint,dof)
+      use MasterSlaveJointTypeModule, only : getJointId
+      type(MasterSlaveJointType), intent(inout) :: joint
+      integer                   , intent(in)    :: dof
+      select case (dof)
+      case (1:6) ! The force is a pure one-dimensional force
+         joint%BC(forces(i)%dof) = 2
+         call reportError (note_p,'Fixing local DOF '//char(ichar('0')+dof)// &
+              ' for '//trim(getJointId(joint))//' in eigenvalue analysis')
+      end select
+    end subroutine fixJointDOFsEigVal
+
+  end subroutine fixControlDOFsOnEigValCalc
+
 end module ForceTypeModule

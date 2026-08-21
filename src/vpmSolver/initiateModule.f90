@@ -339,6 +339,7 @@ contains
   !> @param[in]  ctrl Control system data
   !> @param[out] modes Data for eigenmodes
   !> @param      mech Mechanism components of the model
+  !> @param      ctrlStruct Data for coupled control system modal analysis
   !> @param[in]  ipsw Print switch; the higher value the more print is produced
   !> @param[out] err Error flag
   !>
@@ -351,12 +352,13 @@ contains
   !>
   !> @date 28 May 2002
 
-  subroutine preprocessSolverData (sam,sys,ctrl,modes,mech,ipsw,err)
+  subroutine preprocessSolverData (sam,sys,ctrl,modes,mech,ctrlStruct,ipsw,err)
 
     use SamModule          , only : SamType, WriteObject
     use ModesTypeModule    , only : ModesType
     use SystemTypeModule   , only : SystemType, WriteObject
     use ControlTypeModule  , only : ControlType, InitiateControl, WriteObject
+    use ControlStructModule, only : ControlStructType
     use MechanismTypeModule, only : MechanismType, WriteObject
     use MotionTypeModule   , only : InitiateMotions2
 
@@ -372,18 +374,22 @@ contains
     use initiateFunctionTypeModule, only : InitiateEngines2
     use initiateSensorTypeModule  , only : InitiateSensors2
     use initiateUserdefElTypeModule,only : InitiateUserdefEls
-    use genericPartModule         , only : InitiateGenericParts
+    use GenericPartModule         , only : InitiateGenericParts
     use EngineRoutinesModule      , only : SetPointersForSensors
+    use ForceTypeModule           , only : FixControlDOFsOnEigValCalc
     use FNVwaveForceModule        , only : InitiateWaveSpectrumFNV
     use FNVwaveForceModule        , only : InitiateFNVkinematics, calcFNVforces
+    use ControlStructModule       , only : InitiateControlStruct
     use FileUtilitiesModule       , only : findUnitNumber
     use ReportErrorModule         , only : reportError, error_p, debugFileOnly_p
+    use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_isTrue
 
     type(SamType)      , intent(out)   :: sam
     type(ModesType)    , intent(out)   :: modes
     type(SystemType)   , intent(inout) :: sys
     type(ControlType)  , intent(in)    :: ctrl
     type(MechanismType), intent(inout) :: mech
+    type(ControlStructType), pointer   :: ctrlStruct
     integer            , intent(in)    :: ipsw
     integer            , intent(out)   :: err
 
@@ -427,6 +433,12 @@ contains
     call InitiateEngines2 (mech%engines,mech%sensors,err)
     if (err /= 0) goto 900
 
+    if (ffa_cmdlinearg_isTrue('fixControlDOFsEig')) then
+       !! Fix DOFs in eigenvalue calculation for control output forces
+       call FixControlDOFsOnEigValCalc (mech%forces,err)
+       if (err /= 0) goto 900
+    end if
+
     !! Establish the SAM arrays MADOF and MSC (nodal DOF data)
     call initSAM_dofStatus (mech%triads, mech%sups, mech%joints, &
          &                  sam%mpar, sam%madof, sam%msc, sam%dofType, err)
@@ -438,11 +450,24 @@ contains
        goto 980
     end if
 
+    !! Initialize the control-structure modal analysis, if requested
+    if (associated(ctrlStruct)) then
+       call InitiateControlStruct (ctrlStruct, ctrl%input, &
+            &                      mech%triads, mech%joints, mech%forces, &
+            &                      size(ctrl%vreg), sam%nnod, err)
+       if (err < 0) goto 980
+
+       if (.not. associated(ctrlStruct%structSensors)) then
+          deallocate(ctrlStruct)
+          nullify(ctrlStruct)
+       end if
+    end if
+
     !! Establish the SAM arrays MPMNPC and MMNPC (element topology)
     call initSAM_topology (mech%sups, mech%axialSprings, mech%dampers, &
          &                 mech%joints, mech%bElems, mech%cElems, mech%elms, &
-         &                 mech%masses, mech%tires, sam%mpar, &
-         &                 sam%mmnpc, sam%mpmnpc, err)
+         &                 mech%masses, mech%tires, ctrlStruct, &
+         &                 sam%mpar, sam%mmnpc, sam%mpmnpc, err)
     if (err /= 0) goto 980
 
     if (sam%nel < 1) then
