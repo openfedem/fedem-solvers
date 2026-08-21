@@ -485,16 +485,17 @@ contains
        call reAllocate ('initiateSAM',sam%ttcc  ,sam%nmmceq,ierr)
        if (ierr < 0) return
 
-       sam%mpmceq = iscr(ipceq:ipceq+sam%nceq)
-       sam%mmceq  = iscr(imceq:imceq+sam%nmmceq-1)
-       sam%ttcc   = rscr(itceq:itceq+sam%nmmceq-1)
-       sam%nspdof = sam%nspdof + sam%nceq
-       sam%nddof  = sam%nceq
+       call ICOPY (sam%nceq+1,iscr(ipceq),1,sam%mpmceq(1),1)
+       call ICOPY (sam%nmmceq,iscr(imceq),1,sam%mmceq(1),1)
+       call DCOPY (sam%nmmceq,rscr(itceq),1,sam%ttcc(1),1)
        if (doLogMem) then
           call logAllocMem ('initiateSAM',size(iscr),0,4)
           call logAllocMem ('initiateSAM',size(rscr),0,8)
        end if
        deallocate(iscr,rscr)
+
+       sam%nspdof = sam%nspdof + sam%nceq
+       sam%nddof  = sam%nceq
 
     else
 

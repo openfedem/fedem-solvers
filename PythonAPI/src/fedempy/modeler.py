@@ -1116,7 +1116,7 @@ class FedemModeler(FedemModel):
         # By default (if kwargs is empty), create an external function
         return self._fmlib.FmCreateExternalFunc(name_, tag_, bid_)
 
-    def make_sensor(self, name, obj, var, dof=None, tag=None):
+    def make_sensor(self, name, obj, var=None, dof=None, tag=None):
         """
         Creates a sensor object.
 
@@ -1126,7 +1126,7 @@ class FedemModeler(FedemModel):
             Description of the new sensor
         obj : int or str or (int, int) or (str, str)
             Base Id or tag of object(s) to measure
-        var : FmVar
+        var : FmVar, default=None
             The variable to measure
         dof : FmDof, default=None
             Local DOF to measure if `var` is a multi-DOF quantity
@@ -1718,9 +1718,9 @@ class FedemModeler(FedemModel):
             User Id (or base Id, if negative) of the function to modify
         obj : int or str or (int, int) or (str, str)
             Base Id or tag of object(s) producing the response quantity to use
-        var : FmVar, default=None=0
+        var : FmVar, default=None
             Response quantity to use as function argument
-        dof : FmDof, default=None=0
+        dof : FmDof, default=None
             Which component of `var` to be used if a multi-DOF quantity
 
         Returns

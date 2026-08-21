@@ -12,7 +12,7 @@ Used for convenience in order to hide native type convertions.
 from ctypes import byref, c_bool, c_char_p, c_double, c_int, cdll
 from os import path
 
-from numpy import empty, float64, int32, int64, ndarray, ascontiguousarray
+from numpy import ascontiguousarray, empty, float64, int32, int64, ndarray
 from progress.bar import Bar
 
 

@@ -100,3 +100,14 @@ if ( TARGET SPR_I8 )
 else ( TARGET SPR_I8 )
   target_link_libraries ( ${LIB_ID} SPR )
 endif ( TARGET SPR_I8 )
+
+if ( GSF_LIBRARY )
+  if ( FTENV_VERBOSE )
+    message ( STATUS "Installing ${GSF_LIBRARY} and ${GSF_CB} to ${CMAKE_INSTALL_PREFIX}" )
+  endif ( FTENV_VERBOSE )
+  install ( FILES ${GSF_LIBRARY}
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" )
+  install ( TARGETS ${GSF_CB}
+            RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+            LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" )
+endif ( GSF_LIBRARY )

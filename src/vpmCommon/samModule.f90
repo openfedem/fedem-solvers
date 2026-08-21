@@ -826,9 +826,6 @@ contains
     type(SamType), pointer     :: newSam
     integer      , intent(out) :: ierr
 
-    !! Local variables
-    integer :: i
-
     !! --- Logic section ---
 
     allocate(newSam,stat=ierr)
@@ -866,7 +863,8 @@ contains
     call reAllocate ('LumpedSAM',newSam%madof,newSam%nnod+1,ierr)
     if (ierr < 0) return
 
-    newSam%madof = (/ (i,i=1,newSam%nnod+1) /)
+    !! MADOF = ( 1, 2, 3, ..., NNOD+1 )
+    call IOTA (newSam%nnod+1,newSam%madof(1),1,1)
 
     newSam%minex  => newSam%madof
     newSam%mpmnpc => newSam%madof
@@ -977,23 +975,6 @@ contains
        end do
 
     end if
-
-#if defined(__GNUC__) && (__GNUC__ < 9)
-    !! The findloc intrinsic is a Fortran 2008 feature.
-    !! Not available in older gfortran implementations.
-    !! Remove this when migrating to gfortran 9.0
-  contains
-    !> @cond NO_DOCUMENTATION
-    function findloc (array,val,dim) result(i)
-      integer, intent(in) :: array(:), val, dim
-      integer :: i
-      do i = dim, size(array)
-         if (array(i) == val) return
-      end do
-      i = 0
-    end function findloc
-    !> @endcond
-#endif
 
   end subroutine invertEqPartition
 
