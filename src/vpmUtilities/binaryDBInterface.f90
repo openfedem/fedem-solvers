@@ -50,8 +50,17 @@ module binaryDBInterface
      !> @brief Opens a binary direct access file for read or write.
      !> @param[in] fileName Name of file to open
      !> @param[in] fileType Type of file to open
+     !> -  0 : Temporary file with no name, automatically deleted when closed
+     !> -  1 : Existing file, opened for read-only
+     !> -  2 : New file, opened for write
+     !> -  3 : Existing file, opened for append
+     !> -  4 : New file, opened for read and write
+     !> -  5 : Existing file, opened for read and write
      !> @param[out] fileNum Assigned file handle (non-negative number)
      !> @param[out] status Exit status (negative on error)
+     !> -  0 : Everything is OK
+     !> - -1 : Could not open the specified file
+     !> - -2 : Too many simultaneously opened files
      subroutine openBinaryDB (fileName, fileType, fileNum, status)
        character, intent(in)  :: filename*(*)
        integer  , intent(in)  :: fileType
@@ -264,10 +273,15 @@ module binaryDBInterface
 
      !> @brief Writes a character string at a specified file location.
      !> @param[in] fileNum File handle for the file to write to
-     !> @param[in] afterTag Tag identifien the file position to write to
+     !> @param[in] afterTag Tag identifying the file position to write to
      !> @param[in] data The character string to write
      !> @param[out] status Exit status
      !> (negative on error, otherwise number of bytes written)
+     !>
+     !> @details The actual location is identified by the string @a afterTag.
+     !> Any existing data at the specified location will be overwritten such
+     !> that the total file size will not change, unless at the end of the file.
+     !> If the @a afterTag is not found, the file is not touched.
      subroutine putCharDB (fileNum, afterTag, data, status)
        integer  , intent(in)  :: fileNum
        character, intent(in)  :: afterTag*(*), data*(*)

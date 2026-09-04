@@ -6,9 +6,39 @@
  */
 /*!
   \file binaryDB.c
-  \brief Global functions binary file IO.
-  \details This file contains some Fortran-callable global functions for
-  performing binary file IO based on low-level fwrite/fread calls.
+  \brief Global C-functions for binary file IO.
+
+  \details This file contains the C-implementation of the following
+  Fortran-callable global functions for performing binary file IO,
+  based on low-level fwrite/fread calls.
+
+  - binarydbinterface::openBinaryDB
+  - binarydbinterface::closeBinary_DB
+  - binarydbinterface::deleteDB
+  - binarydbinterface::setBufDB
+  - binarydbinterface::flushBinaryDB
+  - binarydbinterface::writeIntDB
+  - binarydbinterface::writeFloatDB
+  - binarydbinterface::writeDoubleD4
+  - binarydbinterface::writeDoubleD8
+  - binarydbinterface::writeCharDB
+  - binarydbinterface::writeTagDB
+  - binarydbinterface::readIntDB
+  - binarydbinterface::readFloatDB
+  - binarydbinterface::readDoubleD4
+  - binarydbinterface::readDoubleD8
+  - binarydbinterface::readCharDB
+  - binarydbinterface::readTagDB
+  - binarydbinterface::setPositionDB
+  - binarydbinterface::getPositionDB
+  - binarydbinterface::putCharDB
+  - binarydbinterface::copyBinaryDB
+
+  No further documentation of the above functions is provided here.
+  They are documented in the binaryDBInterface.f90 file.
+
+  This file also contains some static data containers managing the binary files,
+  and some private functions serving as utilities for the global functions.
 */
 
 #include <stdio.h>
@@ -41,23 +71,6 @@ static short doSwap[_MAX_DBFIL]; /*!< Byte-swapping flags for each file */
 static const float Version = 1.0f; /*!< Internal file version tag */
 
 
-/*!
-  \brief Opens a binary direct access file for read or write.
-
-  \arg filnam Name of file to open
-  \arg filtyp Type of file to open
-         -  0 : Temporary file with no name, automatically deleted when closed
-         -  1 : Existing file, opened for read-only
-         -  2 : New file, opened for write
-         -  3 : Existing file, opened for append
-         -  4 : New file, opened for read and write
-         -  5 : Existing file, opened for read and write
-  \arg ifile Assigned file number in range [0,_MAX_DBFIL>
-  \arg status Exit status
-         -  0 : Everything is OK
-         - -1 : Could not open the specified file
-         - -2 : Too many simultaneously opened files
-*/
 SUBROUTINE(openbinarydb,OPENBINARYDB) (const char* filnam,
 #ifdef _NCHAR_AFTER_CHARARG
                                        const int nchar,
@@ -140,9 +153,6 @@ SUBROUTINE(openbinarydb,OPENBINARYDB) (const char* filnam,
 }
 
 
-/*!
-  \brief Allocates an in-core buffer for the specified file.
-*/
 SUBROUTINE(setbufdb,SETBUFDB) (const f90_int* ifile, const f90_int* nbytes,
                                f90_int* status)
 {
@@ -204,9 +214,6 @@ static int flushBinaryDB (int file, int doFlush)
 }
 
 
-/*!
-  \brief Flushes the in-core buffer of the specified file to disk.
-*/
 SUBROUTINE(flushbinarydb,FLUSHBINARYDB) (const f90_int* ifile, f90_int* status)
 {
   *status = -1;
@@ -219,9 +226,6 @@ SUBROUTINE(flushbinarydb,FLUSHBINARYDB) (const f90_int* ifile, f90_int* status)
 }
 
 
-/*!
-  \brief Closes the specified file.
-*/
 SUBROUTINE(closebinary_db,CLOSEBINARY_DB) (const f90_int* ifile,
                                            const f90_int* forceDelete,
                                            f90_int* status)
@@ -255,9 +259,6 @@ SUBROUTINE(closebinary_db,CLOSEBINARY_DB) (const f90_int* ifile,
 }
 
 
-/*!
-  \brief Deletes the named file.
-*/
 SUBROUTINE(deletedb,DELETEDB) (const char* filnam, const int nchar)
 {
   int n;
@@ -305,13 +306,13 @@ void closeAllBinaryDB ()
 /*!
   \brief Internal generic function to actually write binary data to file.
 
-  \param[in] ifile File number in range [0,_MAX_DBFIL>
+  \param[in] ifile File number in range [0,_MAX_DBFIL-1]
   \param[in] p     Pointer to the data to write
   \param[in] nSize Size of each data item
   \param[in] nData Number of data items to write
-  \return 0 : Nothing is done (nData is zero)
-  \return 1 : The number of bytes written is larger than INT_MAX
-  \return &gt; 1 : Number of bytes written (less than or equal to INT_MAX)
+  \return 0 : Nothing is done (\a nData is zero)
+  \return 1 : Number of bytes written &gt; \a INT_MAX
+  \return &gt; 1 : Number of bytes written (&le; \a INT_MAX )
   \return -1 : Illegal file number or file not opened
   \return -2 : Error during write
 */
@@ -359,10 +360,11 @@ static int writeBinaryDB (int ifile, const void* p, size_t nSize, size_t nData)
   return -1;
 }
 
+
 /*!
   \brief Internal function to write double precision data to file.
 
-  \param[in] ifile File number in range [0,_MAX_DBFIL>
+  \param[in] ifile File number in range [0,_MAX_DBFIL-1]
   \param[in] data Pointer to the data to write
   \param[in] ndat Number of doubles to write
 
@@ -370,7 +372,6 @@ static int writeBinaryDB (int ifile, const void* p, size_t nSize, size_t nData)
   large double arrays. The data is written in 2GB chunks on Windows
   to avoid run-time failure.
 */
-
 static int writeDoubleDB (int ifile, const double* data, size_t ndat)
 {
 #if defined(win64)
@@ -408,27 +409,20 @@ static int writeDoubleDB (int ifile, const double* data, size_t ndat)
 }
 
 
-/*!
-  \brief Writes an integer array to the specified file.
-*/
 SUBROUTINE(writeintdb,WRITEINTDB) (const f90_int* ifile, const f90_int* data,
                                    const f90_int* ndat, f90_int* status)
 {
   *status = writeBinaryDB (*ifile,(void*)data,sizeof(f90_int),(size_t)*ndat);
 }
 
-/*!
-  \brief Writes a single precision array to the specified file.
-*/
+
 SUBROUTINE(writefloatdb,WRITEFLOATDB) (const f90_int* ifile, const float* data,
                                        const f90_int* ndat, f90_int* status)
 {
   *status = writeBinaryDB (*ifile,(void*)data,sizeof(float),(size_t)*ndat);
 }
 
-/*!
-  \brief Writes a double precision array to the specified file.
-*/
+
 SUBROUTINE(writedoubled4,WRITEDOUBLED4) (const f90_int* ifile,
                                          const double* data,
                                          const f90_int* ndat, f90_int* status)
@@ -436,9 +430,7 @@ SUBROUTINE(writedoubled4,WRITEDOUBLED4) (const f90_int* ifile,
   *status = writeDoubleDB (*ifile,data,(size_t)*ndat);
 }
 
-/*!
-  \brief Writes a double precision array to the specified file.
-*/
+
 SUBROUTINE(writedoubled8,WRITEDOUBLED8) (const f90_int* ifile,
                                          const double* data,
                                          const f90_int8* ndat, f90_int* status)
@@ -446,9 +438,7 @@ SUBROUTINE(writedoubled8,WRITEDOUBLED8) (const f90_int* ifile,
   *status = writeDoubleDB (*ifile,data,(size_t)*ndat);
 }
 
-/*!
-  \brief Writes a character string to the specified file.
-*/
+
 SUBROUTINE(writechardb,WRITECHARDB) (const f90_int* ifile, char* data,
 #ifdef _NCHAR_AFTER_CHARARG
                                      const int nchar, f90_int* status
@@ -528,12 +518,12 @@ static int swapBytes (char* p, size_t m, size_t n)
 /*!
   \brief Internal generic function to actually read binary data from file.
 
-  \param[in] ifile File number in range <-_MAX_DBFIL,_MAX_DBFIL>
-             &lt; 0 : rewind the file before reading it
+  \param[in] ifile File number in range &lt;-_MAX_DBFIL,_MAX_DBFIL&gt;. \n
+                   If &lt; 0, rewind the file before reading it.
   \param[out] p    Pointer to memory segment in which to store the data read
   \param[in] nSize Size of each data item
   \param[in] nData Number of data items to read
-  \param[in] silence If > 0 suppress error message on read failure
+  \param[in] silence If &gt; 0, suppress error message on read failure
   \return 0 : Nothing is done (\a nData is zero)
   \return &gt; 0 : Number of bytes read
   \return -1 : Illegal file number or file not opened
@@ -580,9 +570,6 @@ static int readBinaryDB (int ifile, void* p, size_t nSize,
 }
 
 
-/*!
-  \brief Reads an integer array from the specified file.
-*/
 SUBROUTINE(readintdb,READINTDB) (const f90_int* ifile, f90_int* data,
                                  const f90_int* ndat, f90_int* status)
 {
@@ -592,36 +579,27 @@ SUBROUTINE(readintdb,READINTDB) (const f90_int* ifile, f90_int* data,
     *status = readBinaryDB (*ifile,(void*)data,sizeof(f90_int),(size_t)*ndat,0);
 }
 
-/*!
-  \brief Reads a single precision array from the specified file.
-*/
+
 SUBROUTINE(readfloatdb,READFLOATDB) (const f90_int* ifile, float* data,
                                      const f90_int* ndat, f90_int* status)
 {
   *status = readBinaryDB (*ifile,(void*)data,sizeof(float),(size_t)*ndat,0);
 }
 
-/*!
-  \brief Reads a double precision array from the specified file.
-*/
+
 SUBROUTINE(readdoubled4,READDOUBLED4) (const f90_int* ifile, double* data,
                                        const f90_int* ndat, f90_int* status)
 {
   *status = readBinaryDB (*ifile,(void*)data,sizeof(double),(size_t)*ndat,0);
 }
 
-/*!
-  \brief Reads a double precision array from the specified file.
-*/
 SUBROUTINE(readdoubled8,READDOUBLED8) (const f90_int* ifile, double* data,
                                        const f90_int8* ndat, f90_int* status)
 {
   *status = readBinaryDB (*ifile,(void*)data,sizeof(double),(size_t)*ndat,0);
 }
 
-/*!
-  \brief Reads a character string from the specified file.
-*/
+
 SUBROUTINE(readchardb,READCHARDB) (const f90_int* ifile, char* data,
 #ifdef _NCHAR_AFTER_CHARARG
                                    const int nchar, const f90_int* ndat,
@@ -637,9 +615,6 @@ SUBROUTINE(readchardb,READCHARDB) (const f90_int* ifile, char* data,
 }
 
 
-/*!
-  \brief Writes the file tag and checksum to the specified file.
-*/
 SUBROUTINE(writetagdb,WRITETAGDB) (const f90_int* ifile, const char* tag,
 #ifdef _NCHAR_AFTER_CHARARG
                                    const int nchar, const f90_int* cs,
@@ -670,9 +645,6 @@ SUBROUTINE(writetagdb,WRITETAGDB) (const f90_int* ifile, const char* tag,
 }
 
 
-/*!
-  \brief Reads the file tag and checksum from the specified file.
-*/
 SUBROUTINE(readtagdb,READTAGDB) (const f90_int* ifile, char* tag,
 #ifdef _NCHAR_AFTER_CHARARG
                                  const int nchar, f90_int* cs, f90_int* status
@@ -733,9 +705,6 @@ SUBROUTINE(readtagdb,READTAGDB) (const f90_int* ifile, char* tag,
 }
 
 
-/*!
-  \brief Sets the file pointer for next read operation for the specified file.
-*/
 SUBROUTINE(setpositiondb,SETPOSITIONDB) (const f90_int* ifile,
                                          const f90_int8* pos, f90_int* status)
 {
@@ -751,9 +720,6 @@ SUBROUTINE(setpositiondb,SETPOSITIONDB) (const f90_int* ifile,
 }
 
 
-/*!
-  \brief Returns the current file pointer for the specified file.
-*/
 SUBROUTINE(getpositiondb,GETPOSITIONDB) (const f90_int* ifile, f90_int8* pos)
 {
   FT_int newPos;
@@ -777,13 +743,6 @@ SUBROUTINE(getpositiondb,GETPOSITIONDB) (const f90_int* ifile, f90_int8* pos)
 }
 
 
-/*!
-  \brief Writes a character string at specified location in the specified file.
-  \details The actual location is identified by the character string \a tag.
-  Any existing data at the specified location will be overwritten such
-  that the total file size will not change (unless at the end of the file).
-  If the \a tag is not found, the file is not touched.
-*/
 SUBROUTINE(putchardb,PUTCHARDB) (const f90_int* ifile, const char* tag,
 #ifdef _NCHAR_AFTER_CHARARG
                                  const int ncharT, const char* data,
@@ -842,9 +801,6 @@ SUBROUTINE(putchardb,PUTCHARDB) (const f90_int* ifile, const char* tag,
 }
 
 
-/*!
-  \brief Copies data from one binary file to another.
-*/
 SUBROUTINE(copybinarydb,COPYBINARYDB) (const f90_int* tofile,
                                        const f90_int* fromfile,
                                        const f90_int* nBytes,
