@@ -5,30 +5,37 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
-module SparseMatrixModule
+!> @file sparseMatrixModule.f90
+!> @brief General sparse matrix representation.
 
-  !!============================================================================
-  !! This module contains a data type and associated utility routines for
-  !! representing a general sparse matrix stored on classic coordinate form.
-  !! Note that all data members of the SparseMatrixType are private and can
-  !! thus be accessed only through the subroutines contained in this module.
-  !!============================================================================
+!!==============================================================================
+!> @brief Module for management of general sparse matrices.
+!> @details This module contains a data type and associated utility routines
+!> for representing a general sparse matrix stored on classic coordinate form.
+!> @note All data members of sparsematrixmodule::sparsematrixtype are private
+!> and can therefore be accessed only through the subroutines/functions
+!> contained in this module.
+
+module SparseMatrixModule
 
   use KindModule, only : dp
 
   implicit none
 
+  !> Initial allocated size for a new sparse matrix.
   integer , parameter, private :: initSize_p   = 10000
+  !> Relative size increment when the matrix is too small
   real(dp), parameter, private :: growFactor_p = 1.5_dp
-  real(dp), parameter, private :: epsValue_p   = 1.0e-30_dp
 
+  !> @brief Data type representing a rectangular sparse matrix.
   type SparseMatrixType
      private
-     integer           :: nNonZero     ! Number of non-zero elements
-     integer           :: nRows, nCols ! Number of rows and columns
-     real(dp), pointer :: vala(:)      ! Values of non-zero elements
-     integer , pointer :: iRow(:)      ! Row indices of the non-zero entries
-     integer , pointer :: jCol(:)      ! Column indices of the non-zero entries
+     integer           :: nNonZero !< Number of non-zero elements
+     integer           :: nRows    !< Number of matrix rows
+     integer           :: nCols    !< Number of matrix columns
+     real(dp), pointer :: vala(:)  !< Values of non-zero elements
+     integer , pointer :: iRow(:)  !< Row indices of the non-zero entries
+     integer , pointer :: jCol(:)  !< Column indices of the non-zero entries
   end type SparseMatrixType
 
   private :: smGrow
@@ -36,13 +43,19 @@ module SparseMatrixModule
 
 contains
 
-  subroutine smNullify (this)
+  !!============================================================================
+  !> @brief Initializes a sparse matrix object.
+  !>
+  !> @param[out] this The sparsematrixmodule::sparsematrixtype object
+  !>                  to be initialized
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date Mar 2003
 
-    !!==========================================================================
-    !! Initialize the SparseMatrixType object.
-    !!
-    !! Programmer : Knut Morten Okstad                   date/rev : Mar 2003/1.0
-    !!==========================================================================
+  subroutine smNullify (this)
 
     type(SparseMatrixType), intent(out) :: this
 
@@ -59,14 +72,24 @@ contains
   end subroutine smNullify
 
 
-  subroutine smAllocate (this,nRows,nCols,useInitSize,err)
+  !!============================================================================
+  !> @brief Allocates a sparse matrix object.
+  !>
+  !> @param[out] this The sparsematrixmodule::sparsematrixtype object
+  !>                  to be allocated
+  !> @param[in] nRows Number of matrix rows
+  !> @param[in] nCols Number of matrix columns
+  !> @param[in] useInitSize If .true., perform initial allocation using the
+  !>            sparsematrixmodule::initsize_p value as number of non-zeroes
+  !> @param[out] err Error indicator
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date Jan 2003
 
-    !!==========================================================================
-    !! Allocate a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!              Knut Morten Okstad                              Jan 2003/2.0
-    !!==========================================================================
+  subroutine smAllocate (this,nRows,nCols,useInitSize,err)
 
     use allocationModule, only : reAllocate
 
@@ -92,18 +115,28 @@ contains
   end subroutine smAllocate
 
 
-  subroutine smSetMatrix (this,mRow,mCol,values,err)
+  !!============================================================================
+  !> @brief Initializes a sparse matrix with the given data.
+  !>
+  !> @param this The sparsematrixmodule::sparsematrixtype object to initialize
+  !> @param[in] mRow Row indices of the non-zero entries
+  !> @param[in] mCol Column indices of the non-zero entries
+  !> @param[in] values All non-zero entries of the matrix
+  !> @param[out] err Error indicator
+  !>
+  !> @note The input arrays are referenced directly by the
+  !> sparsematrixmodule::sparsematrixtype object (pointer-associated)
+  !> and not copied. They must therefore not be accessed from outside the object
+  !> after its destruction (by calling sparsematrixmodule::smdeallocate),
+  !> as these arrays then would be deallocated as well.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 16 Sep 2004
 
-    !!==========================================================================
-    !! Initiate the SparseMatrixType object with the given data.
-    !! Note: The input arrays are referenced directly by the SparseMatrixType
-    !! object (pointer-associated) and not copied. They must therefore not be
-    !! accessed from outside the SparsMatrixType object after the object has
-    !! been destroyed (by calling smDeallocate), as these arrays then will be
-    !! deallocated as well.
-    !!
-    !! Programmer : Knut Morten Okstad                date/rev : 16 Sep 2004/1.0
-    !!==========================================================================
+  subroutine smSetMatrix (this,mRow,mCol,values,err)
 
     use KindModule      , only : nbi_p, nbd_p
     use allocationModule, only : doLogMem, logAllocMem, reAllocate
@@ -141,13 +174,23 @@ contains
   end subroutine smSetMatrix
 
 
-  function smSize (this,iDim)
+  !!============================================================================
+  !> @brief Returns the dimension of a sparse matrix.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object to return
+  !>                 the dimension of
+  !> @param[in] iDim Which dimension to return the size for:
+  !>            1. Number of rows
+  !>            2. Number of columns
+  !>            3. Number of non-zeroes
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Return the dimension of a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  function smSize (this,iDim)
 
     type(SparseMatrixType), intent(in) :: this
     integer, optional     , intent(in) :: iDim
@@ -168,14 +211,18 @@ contains
   end function smSize
 
 
-  subroutine smDeallocate (this)
+  !!============================================================================
+  !> @brief Deallocates a sparse matrix.
+  !>
+  !> @param this The sparsematrixmodule::sparsematrixtype object to deallocate
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date Jan 2003
 
-    !!==========================================================================
-    !! Deallocate a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!              Knut Morten Okstad                              Jan 2003/2.0
-    !!==========================================================================
+  subroutine smDeallocate (this)
 
     use allocationModule, only : reAllocate
 
@@ -191,13 +238,18 @@ contains
   end subroutine smDeallocate
 
 
-  subroutine smTranspose (this)
+  !!============================================================================
+  !> @brief Transposes a sparse matrix.
+  !>
+  !> @param this The sparsematrixmodule::sparsematrixtype object to transpose
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Transpose a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  subroutine smTranspose (this)
 
     type(SparseMatrixType), intent(inout) :: this
 
@@ -219,13 +271,24 @@ contains
   end subroutine smTranspose
 
 
-  subroutine smSetValue (this,value,rInd,cInd,err,lpu)
+  !!============================================================================
+  !> @brief Assigns a matrix element.
+  !>
+  !> @param this The sparsematrixmodule::sparsematrixtype object
+  !>             to receive the new matrix element
+  !> @param[in] value The new matrix element value
+  !> @param[in] rInd Row index of the new matrix element
+  !> @param[in] cInd Column index of the new matrix element
+  !> @param[out] err Error indicator
+  !> @param[in] lpu Optional file unit number for error- and other messages
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Assign a value to the (i,j)-element of a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  subroutine smSetValue (this,value,rInd,cInd,err,lpu)
 
     type(SparseMatrixType), intent(inout) :: this
     real(dp)              , intent(in)    :: value
@@ -235,6 +298,8 @@ contains
 
     !! Local variables
     integer :: i
+
+    real(dp), parameter :: epsValue_p = 1.0e-30_dp
 
     !! --- Logic section ---
 
@@ -264,13 +329,21 @@ contains
   end subroutine smSetValue
 
 
-  function smGetValue (this,rInd,cInd)
+  !!============================================================================
+  !> @brief Returns a matrix element.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object
+  !>                 to return the element for
+  !> @param[in] rInd Row index of the matrix element to return
+  !> @param[in] cInd Column index of the matrix element to return
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Return the (i,j)-element of a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  function smGetValue (this,rInd,cInd)
 
     type(SparseMatrixType), intent(in) :: this
     integer               , intent(in) :: rInd, cInd
@@ -294,13 +367,20 @@ contains
   end function smGetValue
 
 
-  function smGetCol (this,cInd)
+  !!============================================================================
+  !> @brief Returns a matrix column.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object
+  !>                 to return the column for
+  !> @param[in] cInd Index of the matrix column to return
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Return the specified column of a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  function smGetCol (this,cInd)
 
     type(SparseMatrixType), intent(in) :: this
     integer               , intent(in) :: cInd
@@ -321,13 +401,20 @@ contains
   end function smGetCol
 
 
-  function smGetRow (this,rInd)
+  !!============================================================================
+  !> @brief Returns a matrix row.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object
+  !>                 to return the row for
+  !> @param[in] rInd Index of the matrix row to return
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Return the specified row of a SparseMatrixType object.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  function smGetRow (this,rInd)
 
     type(SparseMatrixType), intent(in) :: this
     integer               , intent(in) :: rInd
@@ -348,13 +435,24 @@ contains
   end function smGetRow
 
 
-  subroutine smMatTimesVec (this,xVec,yVec,err)
+  !!============================================================================
+  !> @brief Multiplies a sparse matrix with a vector.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object (@b A)
+  !>                 being the left-hand-size of the multiplication operation
+  !> @param[in] xVec The right-hand-side vector (@b x) of the multiplication
+  !> @param[out] yVec The resulting vector (@b y)
+  !> @param[out] err Error indicator
+  !>
+  !> @details Performs the operation @b y = @b A * @b x .
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Multiply a sparse matrix with a given vector, y = A*x.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  subroutine smMatTimesVec (this,xVec,yVec,err)
 
     use reportErrorModule, only : internalError
 
@@ -387,13 +485,24 @@ contains
   end subroutine smMatTimesVec
 
 
-  subroutine smMatTransTimesVec (this,xVec,yVec,err)
+  !!============================================================================
+  !> @brief Multiplies the transpose of a sparse matrix with a vector.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object (@b A)
+  !>                 being the left-hand-size of the multiplication operation
+  !> @param[in] xVec The right-hand-side vector (@b x) of the multiplication
+  !> @param[out] yVec The resulting vector (@b y)
+  !> @param[out] err Error indicator
+  !>
+  !> @details Performs the operation @b y = <b>A</b><sup>t</sup> * @b x .
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date Jan 1999
 
-    !!==========================================================================
-    !! Multiply the transpose of a sparse matrix with a given vector, y = A^t*x.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!==========================================================================
+  subroutine smMatTransTimesVec (this,xVec,yVec,err)
 
     use reportErrorModule, only : internalError
 
@@ -426,14 +535,19 @@ contains
   end subroutine smMatTransTimesVec
 
 
-  subroutine smShrinkToFit (this,err)
+  !!============================================================================
+  !> @brief Reallocates a sparse matrix to exactly fit its dimensions.
+  !>
+  !> @param this The sparsematrixmodule::sparsematrixtype object to reallocate
+  !> @param[out] err Error indicator
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date Jan 2003
 
-    !!==========================================================================
-    !! Reallocate a SparseMatrixType object to exactly fit its dimensions.
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!              Knut Morten Okstad                              Jan 2003/2.0
-    !!==========================================================================
+  subroutine smShrinkToFit (this,err)
 
     use allocationModule, only : reAllocate
 
@@ -456,14 +570,22 @@ contains
   end subroutine smShrinkToFit
 
 
-  subroutine smWrite (this,name,lpu,writeMatrixElms)
+  !!============================================================================
+  !> @brief Writes out the size parameters for a sparse matrix.
+  !>
+  !> @param[in] this The sparsematrixmodule::sparsematrixtype object
+  !>                  to write size parameters for
+  !> @param[in] name Matrix identifier
+  !> @param[in] lpu File unit number to write to
+  !> @param[in] writeMatrixElms If .true., write out the matrix elements as well
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date Mar 2003
 
-    !!==========================================================================
-    !! Write out size parameters for the SparseMatrixType object.
-    !! The matrix elements themselves may optionally be written out as well.
-    !!
-    !! Programmer : Knut Morten Okstad                   date/rev : Mar 2003/1.0
-    !!==========================================================================
+  subroutine smWrite (this,name,lpu,writeMatrixElms)
 
     use KindModule         , only : nbd_p, nbi_p, i8
     use AllocationModule   , only : StrBytes
@@ -547,20 +669,25 @@ contains
   end subroutine smWrite
 
 
-  subroutine smGrow (this,err,lpu)
+  !!============================================================================
+  !> @brief Expands the allocated space for a sparse matrix by a fixed amount.
+  !>
+  !> @param this The sparsematrixmodule::sparsematrixtype object to expand
+  !> @param[out] err Error indicator
+  !> @param[in] lpu Optional file unit number logging the rellocation
+  !>
+  !> @details The number of times @a n to call this subroutine to grow a matrix
+  !> to size @a x with a given @a growfactor is:
+  !>
+  !>     n = log(x) / log(growfactor)
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date Jan 2003
 
-    !!==========================================================================
-    !! Increase the allocated space for a SparseMatrixType object
-    !! with a fixed amount.
-    !!
-    !! Comments by KET:
-    !!    Number of times to call this routine to grow a matrix to size x;
-    !!
-    !!       n = log(x) / log(growfactor)
-    !!
-    !! Programmer : Bjorn Haugen                         date/rev : Jan 1999/1.0
-    !!              Knut Morten Okstad                              Jan 2003/2.0
-    !!==========================================================================
+  subroutine smGrow (this,err,lpu)
 
     use allocationModule, only : reAllocate
 
