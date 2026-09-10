@@ -24,7 +24,6 @@ subroutine reducer (ierr)
   use KindModule                , only : dp, sp, i8, nbs_p, nbd_p, lfnam_p
   use KindModule                , only : epsDiv0_p, pi_p
   use SamModule                 , only : SamType, deallocateSAM
-  use SamModule                 , only : NodeNumFromEqNum
   use SamReducerModule          , only : saveSAM
   use SaveReducerModule         , only : writeModes
   use SysMatrixTypeModule       , only : SysMatrixType, outOfCore_p
@@ -34,7 +33,6 @@ subroutine reducer (ierr)
   use SparseMatrixModule        , only : SparseMatrixType, smDeallocate
   use DiskMatrixModule          , only : DiskMatrixType, dmSize, dmGetSwapSize
   use DiskMatrixModule          , only : dmNullify, dmOpen, dmClose
-  use DiskMatrixModule          , only : dmFindMinConnections
   use AsmExtensionModule        , only : csBeginAssembly, csEndAssembly
   use AsmExtensionModule        , only : csRepermute, castToInt8
   use InputReducerModule        , only : readReducerData
@@ -65,14 +63,12 @@ subroutine reducer (ierr)
   integer , intent(out)  :: ierr
   logical                :: dataChk, noGrav, noRedMass, diagMass, lumpedMass
   logical                :: factorMass, calcGdisp, twoLoops
-  integer                :: i, imass, istiff, iopSing, lpu, iprint
+  integer                :: i, imass, istiff, iopSing, lpu, iprint, Bprec
   integer                :: cs, ndim, nenod, neval, ngen, nevred, nrhs, mlc(100)
-  integer                :: iNod, lDof, lowBconn, Bprec
   integer(i8)            :: nMass, nStiff
   real(dp), parameter    :: tolMass_p = 1.0e-6_dp
   real(sp)               :: autoBramRatio
   real(dp)               :: sMass, rMass, tolEigval, tolFactorize, eigenShift
-  real(dp)               :: minAval(100)
   real(dp), allocatable  :: smee(:,:), skee(:,:), rhs(:,:), vgi(:,:)
   real(dp), allocatable  :: rval(:), rvec(:,:), gravec(:,:), sm(:,:), sk(:,:)
   real(sp), allocatable  :: work(:)
@@ -502,16 +498,10 @@ subroutine reducer (ierr)
   end if
   call ffa_printMemStatus (lterm)
 
-  call ffa_cmdlinearg_getint ('printLowBmatConnections',lowBconn)
-  if (lowBconn > 0) then
-     call dmFindMinConnections (BmatDisk,mlc(1:lowBconn),minAval,ierr)
+  call ffa_cmdlinearg_getint ('printLowBmatConnections',Bprec)
+  if (Bprec > 0) then
+     call printMinConnections (Bprec,ierr)
      if (ierr < 0) goto 900
-     write(lpu,6300)
-     do i = 1, lowBconn
-        lDof = mlc(i)
-        iNod = NodeNumFromEqNum(sam,lDof,.true.)
-        write(lpu,6310) iNod,lDof,minAval(mlc(i))
-     end do
   end if
 
   if (nStiff /= 0_i8) then
@@ -740,9 +730,49 @@ subroutine reducer (ierr)
           & //4X,'MODE  FREQUENCY [Hz]'/ 1P,(I7,E17.8))
 6100 format(/11X,'An error is detected. Error messages are written to ',A)
 6200 format(/ 4X,'Model reduction ',A)
-6300 format(//1X,62('-') &
-          & /' --- Internal node DOFs with lowest connection to external DOFs' &
-          & /1X,62('-'))
-6310 format(' Node',I7,' DOF',I3,' Max connection value ',1PE12.5)
+
+contains
+
+  !> @brief Prints the @a nvals lowest connections in @a BmatDisk.
+  subroutine printMinConnections (nvals,ierr)
+
+    use kindModule        , only : hugeVal_p
+    use DiskMatrixModule  , only : dmFindAbsMaxRowValues
+    use SamModule         , only : NodeNumFromEqNum
+    use ScratchArrayModule, only : getRealScratchArray
+
+    integer, intent(in)  :: nvals
+    integer, intent(out) :: ierr
+
+    integer           :: minIdx(nvals) ! stack allocation
+    real(dp)          :: minVal(nvals) ! stack allocation
+    real(dp), pointer :: absMaxRowValues(:)
+    integer           :: i, lDof, iNod
+
+    absMaxRowValues => getRealScratchArray(sam%ndof1,ierr)
+    if (ierr < 0) return
+
+    call dmFindAbsMaxRowValues (BmatDisk,absMaxRowValues,ierr)
+    if (ierr < 0) return
+
+    do i = 1, nvals
+       minIdx(i) = minloc(absMaxRowValues,1)
+       minVal(i) = absMaxRowValues(minIdx(i))
+       absMaxRowValues(minIdx(i)) = hugeVal_p
+    end do
+
+    write(lpu,600)
+    do i = 1, nvals
+       lDof = minIdx(i)
+       iNod = NodeNumFromEqNum(sam,lDof,.true.)
+       write(lpu,610) iNod,lDof,minVal(minIdx(i))
+    end do
+
+600 format(//1X,62('-') &
+         & /' --- Internal node DOFs with lowest connection to external DOFs' &
+         & /1X,62('-'))
+610 format(' Node',I7,' DOF',I3,' Max connection value ',1PE12.5)
+
+  end subroutine printMinConnections
 
 end subroutine reducer

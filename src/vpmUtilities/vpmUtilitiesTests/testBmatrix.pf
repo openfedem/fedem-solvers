@@ -17,7 +17,7 @@ subroutine testBmatrix
   use DiskMatrixModule  , only : DiskMatrixType, dp, dmNdp_p
   use DiskMatrixModule  , only : dmNullify, dmOpen, dmClose, dmSetValue
   use DiskMatrixModule  , only : dmMatTimesVec, dmMatTransTimesVec
-  use DiskMatrixModule  , only : dmFindAbsMaxRowValues, dmFindMinConnections
+  use DiskMatrixModule  , only : dmFindAbsMaxRowValues
   use scratchArrayModule, only : releaseScratchArrays
   use reportErrorModule , only : setErrorFile
 #if FT_PFUNIT > 3
@@ -40,7 +40,7 @@ subroutine testBmatrix
 
   real(dp)             :: vec(nRow), vecc(nCol)
   real(dp), parameter  :: tol_p = 1.0e-8_dp
-  integer              :: minIdx(2), i, j, k, ierr
+  integer              :: i, j, k, ierr
   type(DiskMatrixType) :: Bmat
 
   k = 0
@@ -82,13 +82,6 @@ subroutine testBmatrix
   @assertEqual(0.2_dp,vec(2),tol_p)
   @assertEqual(0.0_dp,vec(3),tol_p)
   @assertEqual(3.1_dp,vec(4),tol_p*10.0_dp)
-
-  call dmFindMinConnections (Bmat,minIdx,vec,ierr)
-  @assertEqual(0,ierr)
-  @assertEqual(3,minIdx(1))
-  @assertEqual(2,minIdx(2))
-  @assertEqual(0.0_dp,vec(1),tol_p)
-  @assertEqual(0.2_dp,vec(2),tol_p)
 
   call dmClose (Bmat,ierr)
   @assertEqual(0,ierr)

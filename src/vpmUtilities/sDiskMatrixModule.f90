@@ -5,41 +5,39 @@
 !! This file is part of FEDEM - https://openfedem.org
 !!==============================================================================
 
-module sDiskMatrixModule
+!> @file sDiskMatrixModule.f90
+!> @brief General rectangular matrix with disk storage.
 
-  !!============================================================================
-  !! This module contains a data type and associated utility routines for
-  !! representing a general rectangular matrix stored on a disk file.
-  !! The matrix is stored column-wise on disk and it is therefore adviced to
-  !! access the matrix in a column-wise fashion to obtain optimal speed.
-  !! Note that all data members of the DiskMatrixType are private and can thus
-  !! be accessed only through the subroutines/functions defined in this module.
-  !!
-  !! This is a single-precision limited version of DiskMatrixModule.
-  !! It supports read-only matrices only.
-  !!============================================================================
+!!==============================================================================
+!> @brief Module for general rectangular matrices with disk storage,
+!> @details This module contains a data type and associated utility routines
+!> for representing a general rectangular matrix stored on a disk file.
+!> This module is single-precision limited version of @ref diskmatrixmodule.
+!> It supports ReadOnly matrices only.
+
+module sDiskMatrixModule
 
   use KindModule, only : sp, dp, i8
 
   implicit none
 
-  character(len=30), private, parameter :: dmTag_p = '#FEDEM disk matrix'
-
+  !> @brief Data type representing a rectangular matrix with disk storage.
   type DiskMatrixType
-     integer             :: nRows      !! Number of rows in the entire matrix
-     integer             :: nCols      !! Number of columns in the entire matrix
-     integer             :: nColSwap   !! Number of columns in one swap section
-     integer, private    :: nElSwap    !! Number of elements in one swap section
-     integer, private    :: nElastSwap !! Number of elements in the last section
-     integer, private    :: nSwap      !! Number of swap sections
-     integer, private    :: curSwap    !! Current swap section in core
-     integer, private    :: swapFile   !! Swap file number
-     integer, private    :: swapCnt(2) !! Number of swap operations performed
-     integer(i8),pointer :: fileKey(:) !! File address for all swap sections
-     real(sp)   ,pointer :: vala(:,:)  !! Matrix elements for one swap section
-     real(dp)   ,pointer :: vald(:)    !! Double precision buffer
+     integer             :: nRows      !< Number of rows in the entire matrix
+     integer             :: nCols      !< Number of columns in the entire matrix
+     integer             :: nColSwap   !< Number of columns in one swap section
+     integer, private    :: nElSwap    !< Number of elements in one swap section
+     integer, private    :: nElastSwap !< Number of elements in the last section
+     integer, private    :: nSwap      !< Number of swap sections
+     integer, private    :: curSwap    !< Current swap section in core
+     integer, private    :: swapFile   !< Swap file number
+     integer, private    :: swapCnt(2) !< Number of swap operations performed
+     integer(i8),pointer :: fileKey(:) !< File address for all swap sections
+     real(sp)   ,pointer :: vala(:,:)  !< Matrix elements for one swap section
+     real(dp)   ,pointer :: vald(:)    !< Double precision buffer
   end type DiskMatrixType
 
+  !> @brief Multiplies a disk matrix with a given vector.
   interface dmMatTimesVec
      module procedure dmMatTimesVec_SP
      module procedure dmMatTimesVec_DP
@@ -51,14 +49,16 @@ module sDiskMatrixModule
 
 contains
 
-  function dmGetSwapSize () result(nw)
+  !!============================================================================
+  !> @brief Returns requested size of one swap section from command-line option.
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 31 Jan 2002
 
-    !!==========================================================================
-    !! Returns the requested size of one swap section from command-line option.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 31 Jan 2002/1.0
-    !!==========================================================================
+  function dmGetSwapSize () result(nw)
 
     use FFaCmdLineArgInterface, only : ffa_cmdlinearg_getint
 
@@ -81,14 +81,19 @@ contains
   end function dmGetSwapSize
 
 
-  subroutine dmNullify (this)
+  !!============================================================================
+  !> @brief Initializes a disk matrix object.
+  !>
+  !> @param[out] this The sdiskmatrixmodule::diskmatrixtype object
+  !>                  to be initialized
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 14 Feb 2002
 
-    !!==========================================================================
-    !! Initializes the DiskMatrixType object.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 14 Feb 2002/1.0
-    !!==========================================================================
+  subroutine dmNullify (this)
 
     type(DiskMatrixType), intent(out) :: this
 
@@ -111,14 +116,20 @@ contains
   end subroutine dmNullify
 
 
-  subroutine dmWrite (this,lpu,name)
+  !!============================================================================
+  !> @brief Writes out the content of a disk matrix.
+  !>
+  !> @param[in] this The sdiskmatrixmodule::diskmatrixtype object to write out
+  !> @param[in] lpu File unit number to write to
+  !> @param[in] name Matrix identifier
+  !>
+  !> @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 18 Mar 2003
 
-    !!==========================================================================
-    !! Writes out the DiskMatrixType object to unit lpu.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 18 Mar 2003/1.0
-    !!==========================================================================
+  subroutine dmWrite (this,lpu,name)
 
     use manipMatrixModule, only : writeObject
 
@@ -160,15 +171,28 @@ contains
   end subroutine dmWrite
 
 
+  !!============================================================================
+  !> @brief Opens a disk matrix file for ReadOnly operations.
+  !>
+  !> @param[out] this The sdiskmatrixmodule::diskmatrixtype object to open
+  !> @param[in] fileName Name of file to read/write matrix content from/to
+  !> @param fileChkSum Check-sum value of the FE part associated with @a this
+  !> @param[in] nRows Number of matrix rows
+  !> @param[in] nCols Number of matrix columns
+  !> @param[in] status File opening mode, must be diskmatrixmodule::dmold_p
+  !> @param[out] err Error indicator
+  !> @param[in] nColSwap Optional number of matrix columns per swap section
+  !> @param[in] swapSize Optional size of swap section in double precision words
+  !> @param[in] wantTag Expected file tag for ReadOnly matrices
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 1 Jun 2001
+
   subroutine dmOpen (this,fileName,fileChkSum,nRows,nCols,status,err, &
        &             nColSwap,swapSize,wantTag)
-
-    !!==========================================================================
-    !! Opens a disk matrix file for ReadOnly operations.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 1 Jun 2001/1.0
-    !!==========================================================================
 
     use kindModule       , only : nbd_p, nbs_p, nbi_p, maxInt_p
     use allocationModule , only : reAllocate, StrBytes
@@ -182,8 +206,8 @@ contains
     integer             , intent(inout) :: fileChkSum
     integer             , intent(in)    :: nRows, nCols, status
     integer             , intent(out)   :: err
-    integer, optional   , intent(in)    :: nColSwap ! Columns per swap section
-    integer, optional   , intent(in)    :: swapSize ! Swap section size (words)
+    integer, optional   , intent(in)    :: nColSwap
+    integer, optional   , intent(in)    :: swapSize
     character(len=*), optional, intent(in) :: wantTag
 
     !! Local variables
@@ -193,6 +217,8 @@ contains
     integer(i8)       :: nBytes
     character(len=32) :: fileTag
     character(len=64) :: errMsg
+
+    character(len=18), parameter :: dmTag_p = '#FEDEM disk matrix'
 
     !! --- Logic section ---
 
@@ -363,14 +389,18 @@ contains
 
   contains
 
+    !!==========================================================================
+    !> @brief Adjusts the number of matrix columns in a swap section.
+    !> @param[in] nTot Total number of matrix columns
+    !> @param[in] nSwap Number of swap sections
+    !> @return Number of columns in all swap sections, except for the last one
+    !> @details The number of columns is set such that the total number of
+    !> columns in the matrix is nearly divisable by the number of swap columns,
+    !> and such that the last swap section is as close in size as possisble
+    !> to the other sections.
     function adjustSwapSize (nTot,nSwap) result(n)
       integer, intent(in) :: nTot,nSwap
       integer :: n
-      !!========================================================================
-      !! Adjust the number of columns such that the total number of columns is
-      !! "nearly" divisable by the number of swap columns, such that the last
-      !! swap section is as close in size to the other ones as possible.
-      !!========================================================================
       if (nSwap >= nTot) then
          n = nTot
       else if (nSwap <= 1) then
@@ -387,15 +417,23 @@ contains
   end subroutine dmOpen
 
 
-  function dmSize (this,iDim)
+  !!============================================================================
+  !> @brief Returns the size of the given disk matrix.
+  !>
+  !> @param[in] this The sdiskmatrixmodule::diskmatrixtype object to address
+  !> @param[in] iDim Which size parameter to return:
+  !> - if not present, return the total size (@a nrows&times;ncols)
+  !> - 1: number of matrix rows (@a nrows)
+  !> - 2: number of matrix columns (@a ncols)
+  !> - for any other value: return the number of columns in swap array
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 29 Jan 1999
 
-    !!==========================================================================
-    !! Returns the size of the given disk matrix, either the total size, in the
-    !! the given matrix dimension, or the number of columns in the swap array.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 29 Jan 1999/1.0
-    !!==========================================================================
+  function dmSize (this,iDim)
 
     type(DiskMatrixType), intent(in) :: this
     integer, optional   , intent(in) :: iDim
@@ -416,14 +454,19 @@ contains
   end function dmSize
 
 
-  subroutine dmClose (this,err)
+  !!============================================================================
+  !> @brief Closes the disk matrix file and releases the associated swap array.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to close
+  !> @param[out] err Error indicator
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 1 Dec 2000
 
-    !!==========================================================================
-    !! Closes the disk matrix file and releases the associated swap array.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 1 Dec 2000/2.0
-    !!==========================================================================
+  subroutine dmClose (this,err)
 
     use allocationModule , only : reAllocate
     use reportErrorModule, only : getErrorFile, reportError, debugFileOnly_p
@@ -466,15 +509,23 @@ contains
   end subroutine dmClose
 
 
-  subroutine dmGetAddress (this,rInd,cInd,section,index,err)
+  !!============================================================================
+  !> @brief Gets swap section number and local array index for matrix element.
+  !>
+  !> @param[in] this The sdiskmatrixmodule::diskmatrixtype object to address
+  !> @param[in] rInd Row index of matrix element to get address of
+  !> @param[in] cInd Column index of matrix element to get address of
+  !> @param[out] section Index of swap section containing the matrix element
+  !> @param[out] index Array index within that swap section for matrix element
+  !> @param[out] err Error indicator
+  !>
+  !> @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Gets the swap section number and the array index within that swap section
-    !! corresponding to the given matrix indices (rInd,cInd).
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  subroutine dmGetAddress (this,rInd,cInd,section,index,err)
 
     use reportErrorModule, only : internalError
 
@@ -484,7 +535,7 @@ contains
 
     !! --- Logic section ---
 
-     if ( rInd <= 0 .or. rInd > this%nRows .or. &
+    if ( rInd <= 0 .or. rInd > this%nRows .or. &
          cInd <= 0 .or. cInd > this%nCols ) then
        section = 0
        index = 0
@@ -498,14 +549,20 @@ contains
   end subroutine dmGetAddress
 
 
-  subroutine dmSwap (this,newSection,err)
+  !!============================================================================
+  !> @brief Writes current section to disk and reads a new one into core.
+  !>
+  !> @param[in] this The sdiskmatrixmodule::diskmatrixtype object to swap for
+  !> @param[in] newSection Index of the swap section to read into core
+  !> @param[out] err Error indicator
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 1 Dec 2000
 
-    !!==========================================================================
-    !! Writes current section to disk and reads section newSection into core.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 1 Dec 2000/2.0
-    !!==========================================================================
+  subroutine dmSwap (this,newSection,err)
 
     use reportErrorModule   , only : internalError, reportError, error_p
     use binaryDBInterface   , only : setPositionDB, readFloatDB, readDoubleDB
@@ -570,15 +627,23 @@ contains
   end subroutine dmSwap
 
 
-  subroutine dmSingleCast (this,ielSwap,nelSwap)
+  !!============================================================================
+  !> @brief Casts the in-core matrix elements from double to single precision.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to cast for
+  !> @param[in] ielSwap Index to first element in swap section
+  !> @param[in] nelSwap Number of elements in swap section to cast for
+  !>
+  !> @callergraph
+  !>
+  !> @details It is assumed that the double-precision buffer array
+  !> sdiskmatrixmodule::diskmatrixtype::vald is not larger than one column.
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 19 May 2005
 
-    !!==========================================================================
-    !! Casts the in-core matrix elements from double to single precision.
-    !! It is assumed that the dp buffer array is not larger than one column.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 19 May 2005/1.0
-    !!==========================================================================
+  subroutine dmSingleCast (this,ielSwap,nelSwap)
 
     type(DiskMatrixType), intent(inout) :: this
     integer             , intent(in)    :: ielSwap, nelSwap
@@ -612,14 +677,21 @@ contains
   end subroutine dmSingleCast
 
 
-  function dmGetValue (this,rInd,cInd,err)
+  !!============================================================================
+  !> @brief Returns the value of a matrix element.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to return for
+  !> @param[in] rInd Row index of matrix element to return
+  !> @param[in] cInd Column index of matrix element to return
+  !> @param[out] err Error indicator
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Returns the value of matrix element (rInd,cInd).
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  function dmGetValue (this,rInd,cInd,err)
 
     use reportErrorModule, only : reportError, debugFileOnly_p
 
@@ -648,16 +720,24 @@ contains
   end function dmGetValue
 
 
-  function dmGetSwapSecPtr (this,cInd,err)
+  !!============================================================================
+  !> @brief Returns a pointer to a matrix containing a swap section.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to return for
+  !> @param[in] cInd Column index for start of swap section to return for
+  !> @param[out] err Error indicator
+  !>
+  !> @details The pointer to the entire swap section starting at column @a cInd
+  !> of the given disk matrix. The function can be used for speedy random access
+  !> of the matrix elements.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Knut Morten Okstad
+  !>
+  !> @date 13 Sep 2004
 
-    !!==========================================================================
-    !! Returns a pointer to a matrix containing the entire swap section
-    !! starting at column cInd of the given disk matrix.
-    !! The function can be used for speedy random access of the matrix elements.
-    !!
-    !! Programmer : Knut Morten Okstad
-    !! date/rev   : 13 Sep 2004/1.0
-    !!==========================================================================
+  function dmGetSwapSecPtr (this,cInd,err)
 
     use reportErrorModule, only : reportError, debugFileOnly_p
 
@@ -686,19 +766,25 @@ contains
   end function dmGetSwapSecPtr
 
 
-  function dmGetColPtr (this,cInd,err)
+  !!============================================================================
+  !> @brief Returns a pointer to column @a cInd of the given disk matrix.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to return for
+  !> @param[in] cInd Column index to return pointer for
+  !> @param[out] err Error indicator
+  !>
+  !> @note This function circumvents all protection and should be used with
+  !> extreme caution and only for ReadOnly purposes when speed is essential.
+  !> Calls to other dm... routines can also change the contents of the memory
+  !> being pointed to.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen and Karl Erik Thoresen
+  !>
+  !> @date 5 May 1999
 
-    !!==========================================================================
-    !! Returns a pointer to column cInd of the given disk matrix.
-    !!
-    !! Caution: This function circumvents all protection and should be used with
-    !! extreme caution and only for read-only purposes when speed is essential.
-    !! Other calls to dm... routines can also change the contents of the memory
-    !! being pointed to.
-    !!
-    !! Programmer : Bjorn Haugen and Karl Erik Thoresen
-    !! date/rev   : 5 May 1999/1.0
-    !!==========================================================================
+  function dmGetColPtr (this,cInd,err)
 
     use reportErrorModule, only : reportError, debugFileOnly_p
 
@@ -727,14 +813,21 @@ contains
   end function dmGetColPtr
 
 
-  subroutine dmGetCol (this,cInd,col,err)
+  !!============================================================================
+  !> @brief Gets a column of the given disk matrix.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to return for
+  !> @param[in] cInd Column index to return for
+  !> @param[out] col Content of the matrix column
+  !> @param[out] err Error indicator
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Gets column cInd of the given disk matrix.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  subroutine dmGetCol (this,cInd,col,err)
 
     use reportErrorModule, only : internalError, reportError, debugFileOnly_p
 
@@ -759,7 +852,7 @@ contains
     call dmSwap (this,section,err)
     if (err < 0) goto 100
 
-    col = this%vala(:,index)
+    call SCOPY (this%nRows,this%vala(1,index),1,col(1),1)
     return
 
 100 call reportError (debugFileOnly_p,'dmGetCol')
@@ -767,14 +860,21 @@ contains
   end subroutine dmGetCol
 
 
-  subroutine dmGetRow (this,rInd,row,err)
+  !!============================================================================
+  !> @brief Gets a row of the given disk matrix.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to return for
+  !> @param[in] rInd Row index to return for
+  !> @param[out] row Content of the matrix row
+  !> @param[out] err Error indicator
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Gets row rInd of the given disk matrix.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  subroutine dmGetRow (this,rInd,row,err)
 
     use reportErrorModule, only : internalError, reportError, debugFileOnly_p
 
@@ -815,14 +915,28 @@ contains
   end subroutine dmGetRow
 
 
-  subroutine dmMatTimesVec_SP (this,xVec,yVec,err,doInitialize)
+  !!============================================================================
+  !> @brief Multiplies a disk matrix with a given single precision vector.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object (@b A) to multiply
+  !> @param[in] xVec The vector (@b x) to multiply matrix @b A with
+  !> @param yVec The resulting vector (@b y)
+  !> @param[out] err Error indicator
+  !> @param[in] doInitialize If not present or .true., the existing content
+  !>            of @a yVec is discarded
+  !>
+  !> @details One of of the following operations are performed
+  !>     y = A*x
+  !>     y = y + A*x
+  !> depending on the value of @a doInitialize.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Multiplies a disk matrix with a given vector, y = A*x  or  y = y + A*x.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  subroutine dmMatTimesVec_SP (this,xVec,yVec,err,doInitialize)
 
     use reportErrorModule, only : internalError, reportError, debugFileOnly_p
 
@@ -848,9 +962,9 @@ contains
     end if
 
     if (.not. present(doInitialize)) then
-       yVec = 0.0_sp
+       call SCOPY (nRows,0.0_sp,0,yVec(1),1)
     else if (doInitialize) then
-       yVec = 0.0_sp
+       call SCOPY (nRows,0.0_sp,0,yVec(1),1)
     end if
 
     !! Perform the multiplication using SAXPY in order to finish the columns
@@ -870,14 +984,28 @@ contains
   end subroutine dmMatTimesVec_SP
 
 
-  subroutine dmMatTimesVec_DP (this,xVec,yVec,err,doInitialize)
+  !!============================================================================
+  !> @brief Multiplies a disk matrix with a given double precision vector.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object (@b A) to multiply
+  !> @param[in] xVec The vector (@b x) to multiply matrix @b A with
+  !> @param yVec The resulting vector (@b y)
+  !> @param[out] err Error indicator
+  !> @param[in] doInitialize If not present or .true., the existing content
+  !>            of @a yVec is discarded
+  !>
+  !> @details One of of the following operations are performed
+  !>     y = A*x
+  !>     y = y + A*x
+  !> depending on the value of @a doInitialize.
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Multiplies a disk matrix with a given vector, y = A*x  or  y = y + A*x.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  subroutine dmMatTimesVec_DP (this,xVec,yVec,err,doInitialize)
 
     use reportErrorModule, only : internalError, reportError, debugFileOnly_p
 
@@ -903,9 +1031,9 @@ contains
     end if
 
     if (.not. present(doInitialize)) then
-       yVec = 0.0_sp
+       call SCOPY (nRows,0.0_sp,0,yVec(1),1)
     else if (doInitialize) then
-       yVec = 0.0_sp
+       call SCOPY (nRows,0.0_sp,0,yVec(1),1)
     end if
 
     !! Perform the multiplication using SAXPY in order to finish the columns
@@ -925,14 +1053,24 @@ contains
   end subroutine dmMatTimesVec_DP
 
 
-  subroutine dmMatTransTimesVec (this,xVec,yVec,err)
+  !!============================================================================
+  !> @brief Multiplies the transpose of a disk matrix with a given vector.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object (@b A) to multiply
+  !> @param[in] xVec The vector (@b x) to multiply matrix @b A with
+  !> @param yVec The resulting vector (@b y)
+  !> @param[out] err Error indicator
+  !>
+  !> @details The following operation is performed
+  !>     y = A^t*x
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 10 Feb 1999
 
-    !!==========================================================================
-    !! Multiplies the transpose of a disk matrix with a given vector, y = A^t*x.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 10 Feb 1999/1.0
-    !!==========================================================================
+  subroutine dmMatTransTimesVec (this,xVec,yVec,err)
 
     use reportErrorModule, only : internalError, reportError, debugFileOnly_p
 
@@ -943,6 +1081,8 @@ contains
 
     !! Local variables
     integer :: i, nRows, section, index
+
+    real(sp), external :: SDOT
 
     !! --- Logic section ---
 
@@ -966,7 +1106,7 @@ contains
        call dmSwap (this,section,err)
        if (err < 0) exit
 
-       yVec(i) = dot_product(this%vala(:,index),xVec)
+       yVec(i) = SDOT(nRows,this%vala(1,index),1,xVec(1),1)
     end do
 
     if (err < 0) call reportError (debugFileOnly_p,'dmMatTransTimesVec')
@@ -974,14 +1114,20 @@ contains
   end subroutine dmMatTransTimesVec
 
 
-  subroutine dmFindAbsMaxRowValues (this,maxRowVal,err)
+  !!============================================================================
+  !> @brief Finds the absolute maximum value for each row in a disk matrix.
+  !>
+  !> @param this The sdiskmatrixmodule::diskmatrixtype object to address
+  !> @param[out] maxRowVal Absolute maximum row values
+  !> @param[out] err Error indicator
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 25 Mar 2003
 
-    !!==========================================================================
-    !! Finds the absolute maximum value for each row in the given disk matrix.
-    !!
-    !! Programmer : Bjorn Haugen
-    !! date/rev   : 25 Mar 2003/1.0
-    !!==========================================================================
+  subroutine dmFindAbsMaxRowValues (this,maxRowVal,err)
 
     use reportErrorModule, only : internalError, reportError, debugFileOnly_p
 
