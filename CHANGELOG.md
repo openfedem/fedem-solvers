@@ -8,6 +8,14 @@
 
 # FEDEM solvers Changelog
 
+## [fedem-8.2.0] (2026-09-15)
+
+### :rocket: Initial release of FEDEM R8.2
+
+Eigenvalue analysis accounting for the control system is now available
+in the dynamics solver through some additional solver options.
+See the merged Pull request https://github.com/openfedem/fedem-solvers/pull/56.
+
 ## [fedem-8.1.6] (2026-04-07)
 
 ### :rocket: Added
@@ -207,3 +215,4 @@ Only the version tags are updated to align with the FEDEM GUI.
 [fedem-8.1.3]: https://github.com/openfedem/fedem-solvers/compare/fmu-8.1.2...fedem-8.1.3
 [fedem-8.1.4]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.3...fedem-8.1.4
 [fedem-8.1.5]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.4...fedem-8.1.5
+[fedem-8.2.0]: https://github.com/openfedem/fedem-solvers/compare/fedem-8.1.5...fedem-8.2.0
