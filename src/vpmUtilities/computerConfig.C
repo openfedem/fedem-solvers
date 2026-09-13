@@ -7,6 +7,14 @@
 /*!
   \file computerConfig.C
   \brief Global functions for extracting information on the running computer.
+  \details This file contains the implementation of the following functions
+  that can be invoked from Fortran programs:
+
+  - computerconfiginterface::getComputerConfig
+  - computerconfiginterface::getUserName
+
+  No further documentation is provided here.
+  The methods are documented in the computerConfigInterface.f90 file.
 */
 
 #include "FFaLib/FFaOS/FFaFortran.H"
@@ -22,21 +30,16 @@
 #include <stdio.h>
 
 
-/*!
-  \brief Static helper to append a string to a fixed-size character buffer.
-*/
-
-static void appends (char* dest, const char* src, const int nchar)
+namespace
 {
-  int mchar = nchar - strlen(dest) - 2;
-  if (mchar > 0)
-    strncat(strcat(dest," "),src,mchar);
+  // \brief Helper to append a string to a fixed-size character buffer.
+  void appends (char* dest, const char* src, const int nchar)
+  {
+    if (int mchar = nchar - strlen(dest) - 2; mchar > 0)
+      strncat(strcat(dest," "),src,mchar);
+  }
 }
 
-
-/*!
-  \brief Returns a text string identifying the computer the program is run on.
-*/
 
 SUBROUTINE(getcomputerconfig,GETCOMPUTERCONFIG) (char* cid, const int nchar)
 {
@@ -65,10 +68,6 @@ SUBROUTINE(getcomputerconfig,GETCOMPUTERCONFIG) (char* cid, const int nchar)
   if ((int)l < nchar) memset(cid+l,' ',nchar-l);
 }
 
-
-/*!
-  \brief Returns the user name that runs the program.
-*/
 
 SUBROUTINE(getusername,GETUSERNAME) (char* cuser, const int nchar)
 {

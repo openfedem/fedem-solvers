@@ -7,6 +7,9 @@
 
 !> @file computerConfigInterface.f90
 !> @brief Fortran interface for functions for extracting computer configuration.
+!> @details This file contains a module with Fortran interface definitions for
+!> global functions for extraction of the computer configuration and user name.
+!> See the file computerConfig.C for the actual implementation.
 
 !!==============================================================================
 !> @brief Fortran interface for functions for extracting computer configuration.
