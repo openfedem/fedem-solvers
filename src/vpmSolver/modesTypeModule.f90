@@ -27,7 +27,6 @@ module ModesTypeModule
 
      integer  :: solver !< Which eigensolver to use
      integer  :: nModes !< Number of eigenmodes to calculate
-     integer  :: maxLan !< Maximum number of Lanczos steps
      real(dp) :: shift  !< Shift value
      real(dp) :: tol(3) !< Tolerances for factorization and eigenvalues/vectors
      logical  :: addBC  !< .true. if the additional BCs should be applied
@@ -37,6 +36,7 @@ module ModesTypeModule
      type(SysMatrixType) :: Kmat !< System stiffness matrix
      type(SysMatrixType) :: Cmat !< System damping matrix
      type(SysMatrixType) :: Mmat !< System mass matrix
+     type(SysMatrixType) :: Qmat !< System steady-state error elimination matrix
 
      real(dp), pointer :: ReVal(:)   !< Real part of computed eigenvalues
      real(dp), pointer :: ImVal(:)   !< Imaginary part of computed eigenvalues
@@ -73,7 +73,6 @@ contains
 
     modes%solver = 0
     modes%nModes = 0
-    modes%maxLan = 0
     modes%shift  = 0.0_dp
     modes%tol    = 0.0_dp
     modes%addBC  = .false.
@@ -91,6 +90,7 @@ contains
     call nullifySysMatrix (modes%Kmat)
     call nullifySysMatrix (modes%Cmat)
     call nullifySysMatrix (modes%Mmat)
+    call nullifySysMatrix (modes%Qmat)
 
   end subroutine nullifyModes
 
@@ -167,15 +167,19 @@ contains
     !! Local variables
     integer :: i, j, idReEVal, idImEVal, idEVal, idFreq, idDamp
     integer :: idTra, idRot, id3dof, id6dof
+    logical :: complexModes
+
 
     !! --- Logic section ---
+
+    complexModes = modes%solver == 4 .or. modes%solver == 6
 
     if (present(ierr)) then
        ! Check that the variable- and item group reference numbers will not be
        ! more than a one-digit number. If they will, we get a format overflow.
        i = rdb%nVar
        j = rdb%nIG
-       if (j > 8 .or. i > 5 .or. (modes%solver == 4 .and. i > 4)) then
+       if (j > 8 .or. i > 5 .or. (complexModes .and. i > 4)) then
           ierr = ierr + internalError('writeModesHeader: format overflow')
           return
        end if
@@ -185,7 +189,7 @@ contains
     idEVal  = rdb%nIG
     write(iitem,602) idEVal,'Eigenvalues'
 
-    if (modes%solver == 4) then
+    if (complexModes) then
 
        ! Write headers for complex eigenvalues
        rdb%nVar = rdb%nVar + 1
@@ -251,7 +255,7 @@ contains
           call writeIdHeader ('Triad',triads(i)%id,idatd)
           write(idatd,606) id3dof
 
-          if (modes%solver == 4) then
+          if (complexModes) then
              rdb%nBytes = rdb%nBytes + size(modes%ReVal)*6*nBits/8
           else
              rdb%nBytes = rdb%nBytes + size(modes%ReVal)*3*nBits/8
@@ -264,7 +268,7 @@ contains
           call writeIdHeader ('Triad',triads(i)%id,idatd)
           write(idatd,606) id6dof
 
-          if (modes%solver == 4) then
+          if (complexModes) then
              rdb%nBytes = rdb%nBytes + size(modes%ReVal)*12*nBits/8
           else
              rdb%nBytes = rdb%nBytes + size(modes%ReVal)*6*nBits/8
@@ -281,7 +285,7 @@ contains
           call writeIdHeader ('Part',sups(i)%id,idatd)
           write(idatd,"(a)") '[;"Eigenvectors";'
           do j = 1, size(modes%ReVal)
-             if (modes%solver == 4) then
+             if (complexModes) then
                 write(idatd,605) j,nBits,sups(i)%genDOFs%nDOFs, &
                      &             nBits,sups(i)%genDOFs%nDOFs
              else
@@ -290,7 +294,7 @@ contains
           end do
           write(idatd,"(']}')")
 
-          if (modes%solver == 4) then
+          if (complexModes) then
              rdb%nBytes = rdb%nBytes + size(modes%ReVal) &
                   &                  * sups(i)%genDOFs%nDOFs*2*nBits/8
           else
@@ -328,7 +332,7 @@ contains
       id3dof  = rdb%nIG
       write(iitem,602) id3dof,'Eigenvectors'
       do j = 1, size(modes%ReVal)
-         if (modes%solver == 4) then
+         if (complexModes) then
             write(iitem,603) j,'[;"Re";<',idTra,'>][;"Im";<',idTra,'>]'
          else
             write(iitem,603) j,'<',idTra,'>]'
@@ -346,13 +350,13 @@ contains
       integer,optional,intent(inout) :: ierr
 
       if (present(ierr)) then
-         if (rdb%nIG > 8 .or. (modes%solver == 4 .and. rdb%nIG > 6)) then
+         if (rdb%nIG > 8 .or. (complexModes .and. rdb%nIG > 6)) then
             ierr = ierr + internalError('writeModesHeader: format overflow')
             return
          end if
       end if
 
-      if (modes%solver == 4) then
+      if (complexModes) then
          rdb%nIG = rdb%nIG + 1
          write(iitem,602) rdb%nIG,'Re','<',idTra,'><',idRot,'>]'
          rdb%nIG = rdb%nIG + 1
@@ -362,7 +366,7 @@ contains
       id6dof  = rdb%nIG
       write(iitem,602) id6dof,'Eigenvectors'
       do j = 1, size(modes%ReVal)
-         if (modes%solver == 4) then
+         if (complexModes) then
             write(iitem,603) j,'[',id6dof-2,'][',id6dof-1,']]'
          else
             write(iitem,603) j,'<',idTra,'><',idRot,'>]'
@@ -417,10 +421,13 @@ contains
 
     !! Local variables
     integer           :: i, j, k, m, nModes, nTriad, nSupel, nBytesPerStep = 0
+    logical           :: complexModes
     real(dp)          :: freq
     character(len=64) :: errMsg
 
     !! --- Logic section ---
+
+    complexModes = modes%solver == 4 .or. modes%solver == 6
 
     if (nBytesPerStep == 0) nBytesPerStep = -int(rdb%nBytes)
 
@@ -447,7 +454,7 @@ contains
     !! Write the eigenvalues to database file
     do i = 1, nModes
        call writeRDB (rdb,modes%ReVal(i),ierr,writeAsDouble)
-       if (modes%solver == 4) then
+       if (complexModes) then
           call writeRDB (rdb,modes%ImVal(i),ierr,writeAsDouble)
           freq = modes%ImVal(i) * 0.5_dp/pi_p
        else
@@ -467,7 +474,7 @@ contains
           k = triads(i)%nDOFs + j-1
           do m = 1, nModes
              call writeRDB (rdb,modes%ReVec(j:k,m),ierr,writeAsDouble)
-             if (modes%solver == 4) then
+             if (complexModes) then
                 call writeRDB (rdb,modes%ImVec(j:k,m),ierr,writeAsDouble)
              end if
              if (ierr < 0) goto 500
@@ -483,7 +490,7 @@ contains
           k = sups(i)%genDOFs%nDOFs + j-1
           do m = 1, nModes
              call writeRDB (rdb,modes%ReVec(j:k,m),ierr,writeAsDouble)
-             if (modes%solver == 4) then
+             if (complexModes) then
                 call writeRDB (rdb,modes%ImVec(j:k,m),ierr,writeAsDouble)
              end if
              if (ierr < 0) goto 500

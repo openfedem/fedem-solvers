@@ -22,7 +22,7 @@ module ForceRoutinesModule
 
   private
 
-  public :: updateExternalForces, addInExternalForces
+  public :: updateExternalForces, addInExternalForces, calcExtForceGradient
 
 
 contains
@@ -256,7 +256,8 @@ contains
        eV(4:6) = force%F * force%forceDir
        call transGlobToSys (force%triad,eV(4:6))
 
-    case (1:6) ! The force is acting directly on a nodal dof
+    case (1:6)
+       !! The force is acting directly on a nodal DOF
        eV(force%dof) = force%F
        if (force%updateFlag > 9) then
           !! Apply the load in local triad axes.
@@ -270,5 +271,72 @@ contains
     end select
 
   end subroutine calcExtTriadForce
+
+
+  !!============================================================================
+  !> @brief Calculates the system force gradient vector from an external force.
+  !>
+  !> @param[in] force The external point load object to calculate gradient for
+  !> @param[out] eV Nodal force vector
+  !> @param[out] ierr Error flag
+  !>
+  !> @callgraph @callergraph
+  !>
+  !> @author Bjorn Haugen
+  !>
+  !> @date 24 Jun 2009
+
+  subroutine calcExtForceGradient (force,eV,ierr)
+
+    use ForceTypeModule     , only : ForceType, forceVec_p, momentVec_p, dp
+    use EngineRoutinesModule, only : EngineRate
+    use TriadTypeModule     , only : transGlobToSys, transTriadToSys
+    use reportErrorModule   , only : internalError
+
+    type(ForceType), intent(in)  :: force
+    real(dp)       , intent(out) :: eV(6)
+    integer        , intent(out) :: ierr
+
+    !! Local variables
+    real(dp) :: eGrad
+
+    !! --- Logic section ---
+
+    ierr = 0
+    eV = 0.0_dp
+    if (associated(force%engine)) then
+       eGrad = force%f1 * EngineRate(force%engine,ierr)
+    else
+       return ! No gradient for constant forces
+    end if
+
+    if (associated(force%triad)) then
+       select case (force%dof)
+
+       case (forceVec_p)
+          eV(1:3) = eGrad * force%forceDir
+          call transGlobToSys (force%triad,eV(1:3))
+
+       case (momentVec_p)
+          eV(4:6) = eGrad * force%forceDir
+          call transGlobToSys (force%triad,eV(4:6))
+
+       case (1:6)
+          !! The force is acting directly on a nodal DOF
+          eV(force%dof) = eGrad
+          call transTriadToSys (force%triad,eV(1:force%triad%nDOFs))
+
+       case default
+          ierr = internalError('calcExtForceEngineGradient')
+
+       end select
+    else if (associated(force%joint)) then
+
+       !! The force is acting directly on a joint DOF
+       eV(force%dof) = eGrad
+
+    end if
+
+  end subroutine calcExtForceGradient
 
 end module ForceRoutinesModule

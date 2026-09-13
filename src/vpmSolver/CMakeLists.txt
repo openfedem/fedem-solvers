@@ -111,7 +111,8 @@ set ( F90_FILE_LIST  addInSysModule
                      bushingElementRoutinesModule bushingElementTypeModule
                      contactElementRoutinesModule contactElementTypeModule
                      contactSurfaceModule controlRoutinesModule controlTypeModule
-                     corotUtilModule curvePointTypeModule curveTypeModule
+                     controlStructModule corotUtilModule
+                     curvePointTypeModule curveTypeModule
                      damperRoutinesModule damperTypeModule
                      dbgUnitsModule diffractionModule
                      energyInt engineRoutinesModule environmentTypeModule

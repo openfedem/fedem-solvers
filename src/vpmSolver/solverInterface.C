@@ -352,6 +352,15 @@ DLLexport(int) solverInit (int argc, char** argv, const char* cfsi,
   ADDOPTION ("tolEigvector",1.0e-8,"Orthogonality limit for the eigenvectors");
   ADDOPTION ("effModalMass",false,"Compute the effective mass for each mode");
   ADDOPTION ("yamlFile","","YAML file prefix for system mode shape export");
+  ADDOPTION ("fixControlDOFsEig",false,"Fix DOFs with control system input"
+             " when doing eigenvalue calculation");
+  ADDOPTION ("ctrlSysEigFlag",0,"Structural properties of control system flag"
+             "\n=0: Ignore"
+             "\n>0: Use stiffness, value gives perturbation algorithm");
+  ADDOPTION ("2nStSp",false,"Solve the generalized eigenproblem"
+             " in 2n state-space form using LAPACK (same as -damped)");
+  ADDOPTION ("3nStSp",false,"Solve the generalized eigenproblem"
+             " in 3n state-space form using LAPACK");
 
   // Frequency domain analysis parameters
   ADDOPTION ("frequency_domain",false,"Switch for frequency domain solution");

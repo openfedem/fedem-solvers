@@ -31,6 +31,7 @@ module solverModule
   use SystemTypeModule   , only : SystemType, SysMatrixType
   use ControlTypeModule  , only : ControlType
   use MechanismTypeModule, only : MechanismType
+  use ControlStructModule, only : ControlStructType
 
   implicit none
 
@@ -43,6 +44,9 @@ module solverModule
   type(ControlType)  , save :: ctrl  !< Control system data
   type(MechanismType), save :: mech  !< Mechanism objects of the model
   type(SysMatrixType), save :: Amat  !< System matrix for external communication
+
+  !> @brief Data for coupled control system and structure modal analysis.
+  type(ControlStructType), save, pointer :: ctrlStructEl => null()
 
   !> @brief Externally set load vector.
   !> @details Assumed constant during Newton iterations.
@@ -184,6 +188,18 @@ contains
     call initiateSaveModule ()
     call nullifySysMatrix (Amat)
 
+    call ffa_cmdlinearg_getint ('ctrlSysEigFlag',nchar)
+    if (nchar > 0) then
+       allocate(ctrlStructEl,stat=ierr)
+       if (ierr /= 0) then
+          ierr = allocationError('solver::ctrlStructEl')
+          return
+       end if
+       ctrlStructEl%ctrlSysEigFlag = nchar
+    else
+       nullify(ctrlStructEl)
+    end if
+
     !! Read model data from the solver input file
     call writeProgress (' --> READ SOLVER INPUT')
     call readSolverData (chfsi,sys,ctrl,mech,chmodel,lEnergyInt,ierr)
@@ -221,7 +237,7 @@ contains
        printInc = -1.0_dp ! Suppress additional res-file print
     end if
 
-    call preprocessSolverData (sam,sys,ctrl,modes,mech,iprint,ierr)
+    call preprocessSolverData (sam,sys,ctrl,modes,mech,ctrlStructEl,iprint,ierr)
     if (ierr /= 0) goto 915
 
     if (isQuasiStatic(sys)) then
@@ -738,7 +754,7 @@ contains
     if (eigInc >= 0.0_dp .and. hasReached(lastEig+eigInc)) then
        call writeProgress (' --> EIGENVALUE CALCULATIONS')
 
-       call eigenModes (sam,modes,sys,mech,iprint,ierr)
+       call eigenModes (sam,modes,sys,mech,ctrl,ctrlStructEl,iprint,ierr)
        if (ierr < -1) then
           if (ierr < -10) then
              meqErr(1) = -ierr/10
@@ -1051,7 +1067,8 @@ contains
     if (ierr < 0) goto 915
 
     call writeProgress (' --> EIGENVALUE CALCULATIONS')
-    call eigenModes (sam,modes,sys,mech,iprint,ierr)
+
+    call eigenModes (sam,modes,sys,mech,ctrl,ctrlStructEl,iprint,ierr)
     if (ierr < -1) then
        if (ierr < -10) then
           meqErr(1) = -ierr/10
