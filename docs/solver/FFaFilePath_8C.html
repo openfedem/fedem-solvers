@@ -68,8 +68,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">FFaFilePath.C File Reference</div>  </div>
 </div><!--header-->
@@ -106,18 +105,15 @@ Macros</h2></td></tr>
 <tr class="memitem:aa8984c9881cf866de4b500cbb19bc84b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaFilePath_8C.html#aa8984c9881cf866de4b500cbb19bc84b">RIGHT_SLASH</a>&#160;&#160;&#160;'/'</td></tr>
 <tr class="memdesc:aa8984c9881cf866de4b500cbb19bc84b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Right file separator on UNIX.  <a href="FFaFilePath_8C.html#aa8984c9881cf866de4b500cbb19bc84b">More...</a><br /></td></tr>
 <tr class="separator:aa8984c9881cf866de4b500cbb19bc84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a31763c0d92b307373d161cdd923645db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaFilePath_8C.html#a31763c0d92b307373d161cdd923645db">SUBROUTINE</a> (ffa_checkpath, FFA_CHECKPATH)</td></tr>
-<tr class="memdesc:a31763c0d92b307373d161cdd923645db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fortran wrapper for <a class="el" href="namespaceFFaFilePath.html#aff8e09bb36217d9a60d15e3cb733a664" title="Converts file pathnames from UNIX to Windows syntax and vice versa.">FFaFilePath::checkName(char*,size_t)</a>.  <a href="FFaFilePath_8C.html#a31763c0d92b307373d161cdd923645db">More...</a><br /></td></tr>
-<tr class="separator:a31763c0d92b307373d161cdd923645db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a241107d06247bfa449634f5bea25ac0f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaFilePath_8C.html#a241107d06247bfa449634f5bea25ac0f">SUBROUTINE</a> (ffa_getbasename, FFA_GETBASENAME) const</td></tr>
-<tr class="memdesc:a241107d06247bfa449634f5bea25ac0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fortran wrapper for <a class="el" href="namespaceFFaFilePath.html#a25d3727ab775ac5249f26d465d70e5aa" title="Returns the file name without extension.">FFaFilePath::getBaseName(const std::string&amp;,bool)</a>.  <a href="FFaFilePath_8C.html#a241107d06247bfa449634f5bea25ac0f">More...</a><br /></td></tr>
-<tr class="separator:a241107d06247bfa449634f5bea25ac0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utilities for file path handling. </p>
+<p>In addition to the <a class="el" href="namespaceFFaFilePath.html" title="Utilities for file path handling.">FFaFilePath</a> methods, this file also constains the implementation of the following Fortran wrappers:</p>
+<ul>
+<li>ffafilepath::ffa_checkpath</li>
+<li>ffafilepath::ffa_getbasename</li>
+</ul>
+<p>These wrappers are documented in the <a class="el" href="FFaFilePathInterface_8f90.html" title="Fortran interface for some FFaFilePath methods.">FFaFilePathInterface.f90</a> file. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aa8984c9881cf866de4b500cbb19bc84b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8984c9881cf866de4b500cbb19bc84b">&#9670;&nbsp;</a></span>RIGHT_SLASH</h2>
@@ -151,71 +147,10 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a31763c0d92b307373d161cdd923645db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31763c0d92b307373d161cdd923645db">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">ffa_checkpath&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFA_CHECKPATH&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Fortran wrapper for <a class="el" href="namespaceFFaFilePath.html#aff8e09bb36217d9a60d15e3cb733a664" title="Converts file pathnames from UNIX to Windows syntax and vice versa.">FFaFilePath::checkName(char*,size_t)</a>. </p>
-
-</div>
-</div>
-<a id="a241107d06247bfa449634f5bea25ac0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a241107d06247bfa449634f5bea25ac0f">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">ffa_getbasename&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFA_GETBASENAME&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Fortran wrapper for <a class="el" href="namespaceFFaFilePath.html#a25d3727ab775ac5249f26d465d70e5aa" title="Returns the file name without extension.">FFaFilePath::getBaseName(const std::string&amp;,bool)</a>. </p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

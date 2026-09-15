@@ -87,12 +87,13 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Opens a device function file for read access. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of device function file </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">fileId</td><td>On input; integration order. On output; file handle. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of device function file to open </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">fileId</td><td>Unique index (handle) for the opened file </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
   </table>
   </dd>
 </dl>
+<p>The extension of <em>fileName</em> is used to try to determine the file type. If this does not succeed, ASCII is assumed. </p><dl class="section note"><dt>Note</dt><dd>On input, the <em>fileId</em> argument contains the channel index. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5a117c4368f69492aa8fcc0b79fb8f0d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a117c4368f69492aa8fcc0b79fb8f0d">&#9670;&nbsp;</a></span>fidf_open()</h2>
@@ -134,7 +135,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

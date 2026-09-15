@@ -1,6 +1,6 @@
 <map id="fedem&#45;foundation/src/FFpLib/FFpExport/FFpBatchExport.H" name="fedem&#45;foundation/src/FFpLib/FFpExport/FFpBatchExport.H">
-<area shape="rect" id="node1" title=" " alt="" coords="294,5,554,47"/>
-<area shape="rect" id="node2" href="$FFpBatchExport_8C.html" title=" " alt="" coords="5,95,264,136"/>
-<area shape="rect" id="node3" href="$FFpBatchExport__F_8C.html" title=" " alt="" coords="288,95,560,136"/>
-<area shape="rect" id="node4" href="$FFpRPC3Data_8C.html" title=" " alt="" coords="584,95,829,136"/>
+<area shape="rect" id="node1" title="Auto&#45;export of curve data for batch executions." alt="" coords="294,5,554,47"/>
+<area shape="rect" id="node2" href="$FFpBatchExport_8C.html" title="Auto&#45;export of curve data for batch executions." alt="" coords="5,95,264,136"/>
+<area shape="rect" id="node3" href="$FFpBatchExport__F_8C.html" title="Fortran wrapper for the FFpBatchExport methods." alt="" coords="288,95,560,136"/>
+<area shape="rect" id="node4" href="$FFpRPC3Data_8C.html" title="Method for parsing some meta data from a RPC3&#45;file." alt="" coords="584,95,829,136"/>
 </map>

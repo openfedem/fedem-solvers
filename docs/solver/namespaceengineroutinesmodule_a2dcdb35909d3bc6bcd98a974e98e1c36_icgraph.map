@@ -1,4 +1,7 @@
 <map id="engineroutinesmodule::sensorrate" name="engineroutinesmodule::sensorrate">
-<area shape="rect" id="node1" title="Evaluates the time&#45;derivative of a sensor value." alt="" coords="221,5,389,47"/>
-<area shape="rect" id="node2" href="$namespaceengineroutinesmodule.html#a4bc95e5aa1d4f7be389fb8e1ba1680d7" title="Evaluates the time&#45;derivative of a general function." alt="" coords="5,5,173,47"/>
+<area shape="rect" id="node1" title="Evaluates the derivative of a sensor value." alt="" coords="668,39,836,80"/>
+<area shape="rect" id="node2" href="$namespaceengineroutinesmodule.html#a89e1310ce2444094c90d9526b06edc6d" title="Evaluates the derivative of a general function." alt="" coords="452,39,620,80"/>
+<area shape="rect" id="node3" href="$namespaceforceroutinesmodule.html#a1db586df58a732b0e3de8cb8bd8c68cb" title="Calculates the system force gradient vector from an external force." alt="" coords="238,5,402,47"/>
+<area shape="rect" id="node5" href="$namespaceengineroutinesmodule.html#a7c9ee4ad6b6610a3243e0b09c326a5a1" title="Calculates gradient of a control input w.r.t. displacement DOFs." alt="" coords="236,71,404,112"/>
+<area shape="rect" id="node4" href="$namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="5,39,188,80"/>
 </map>

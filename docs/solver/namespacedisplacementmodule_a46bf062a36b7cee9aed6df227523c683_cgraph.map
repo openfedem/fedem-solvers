@@ -1,9 +1,15 @@
 <map id="displacementmodule::getgroupbmat" name="displacementmodule::getgroupbmat">
-<area shape="rect" id="node1" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="5,145,164,186"/>
-<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title=" " alt="" coords="212,5,477,32"/>
-<area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#ace0f4417d7d811325ad451a1ece19d38" title=" " alt="" coords="267,57,423,98"/>
-<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title=" " alt="" coords="247,123,443,149"/>
-<area shape="rect" id="node5" href="$namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538" title=" " alt="" coords="267,174,423,215"/>
-<area shape="rect" id="node6" href="$displacementModule_8f90.html#a53f6c76df3d79227725ebbf111b04df0" title="Convenience function with error handling for row&#45;index extraction." alt="" coords="276,240,413,267"/>
-<area shape="rect" id="node7" href="$namespacesammodule.html#a6fdab47d630a2d888453176403a65059" title="Returns internal node number and local dof&#45;number for a global dof." alt="" coords="220,291,469,317"/>
+<area shape="rect" id="node1" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="5,195,164,237"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title="Returns a pointer to a matrix containing a swap section." alt="" coords="212,56,477,83"/>
+<area shape="rect" id="node6" href="$namespacesdiskmatrixmodule.html#ace0f4417d7d811325ad451a1ece19d38" title="Returns a pointer to a matrix containing a swap section." alt="" coords="267,107,423,149"/>
+<area shape="rect" id="node10" href="$namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title="Returns the size of the given disk matrix." alt="" coords="247,173,443,200"/>
+<area shape="rect" id="node11" href="$namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538" title="Returns the size of the given disk matrix." alt="" coords="267,225,423,266"/>
+<area shape="rect" id="node12" href="$displacementModule_8f90.html#a53f6c76df3d79227725ebbf111b04df0" title="Convenience function with error handling for row&#45;index extraction." alt="" coords="276,291,413,317"/>
+<area shape="rect" id="node13" href="$namespacesammodule.html#a6fdab47d630a2d888453176403a65059" title="Returns internal node number and local dof&#45;number for a global dof." alt="" coords="220,341,469,368"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="525,5,768,32"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="545,56,749,83"/>
+<area shape="rect" id="node5" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="816,56,1096,83"/>
+<area shape="rect" id="node7" href="$namespacesdiskmatrixmodule.html#a843f0cf302bb5ba8e6a3da164ad20cd5" title="Gets swap section number and local array index for matrix element." alt="" coords="569,107,725,149"/>
+<area shape="rect" id="node8" href="$namespacesdiskmatrixmodule.html#a6d0d8801571f3a248b37eb4a34a87483" title="Writes current section to disk and reads a new one into core." alt="" coords="569,173,725,214"/>
+<area shape="rect" id="node9" href="$namespacesdiskmatrixmodule.html#aa48c50df064255b9cdf83f3c45228d6f" title="Casts the in&#45;core matrix elements from double to single precision." alt="" coords="878,173,1034,214"/>
 </map>

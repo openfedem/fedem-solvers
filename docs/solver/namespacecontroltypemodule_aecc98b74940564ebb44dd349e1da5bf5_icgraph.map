@@ -1,0 +1,5 @@
+<map id="controltypemodule::getsensor" name="controltypemodule::getsensor">
+<area shape="rect" id="node1" title="Returns sensor measuring structural response for an input element." alt="" coords="212,27,365,69"/>
+<area shape="rect" id="node2" href="$controlStructModule_8f90.html#ae1927c7ba77130d3ac3b467c9584caee" title="Checks if a control parameter is coupled to a structural DOF." alt="" coords="22,5,147,32"/>
+<area shape="rect" id="node3" href="$namespacecontrolstructmodule.html#a82a34abb9838eafc025fc76dfe19848a" title="Initializes the control struct data type." alt="" coords="5,57,164,98"/>
+</map>

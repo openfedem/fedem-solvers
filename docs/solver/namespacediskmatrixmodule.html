@@ -71,67 +71,92 @@ $(function() {
 <div class="title">diskmatrixmodule Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Module for general rectangular matrices with disk storage,.  
+<a href="namespacediskmatrixmodule.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html">diskmatrixtype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a rectangular matrix with disk storage.  <a href="structdiskmatrixmodule_1_1diskmatrixtype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a07dca70d14fe2f177b4f6add61538f3a"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a07dca70d14fe2f177b4f6add61538f3a">dmgetswapsize</a> (n1, n2, autoRamSizeRatio)</td></tr>
+<tr class="memdesc:a07dca70d14fe2f177b4f6add61538f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns requested size of one swap section from command-line option.  <a href="namespacediskmatrixmodule.html#a07dca70d14fe2f177b4f6add61538f3a">More...</a><br /></td></tr>
 <tr class="separator:a07dca70d14fe2f177b4f6add61538f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b025a4e58a255027fe15f5f26a9a702"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702">dmnullify</a> (this)</td></tr>
+<tr class="memdesc:a3b025a4e58a255027fe15f5f26a9a702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a disk matrix object.  <a href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702">More...</a><br /></td></tr>
 <tr class="separator:a3b025a4e58a255027fe15f5f26a9a702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3844fb33265af48b26c1e7e17561fea8"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8">dmwrite</a> (this, lpu, name)</td></tr>
+<tr class="memdesc:a3844fb33265af48b26c1e7e17561fea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes out the content of a disk matrix.  <a href="namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8">More...</a><br /></td></tr>
 <tr class="separator:a3844fb33265af48b26c1e7e17561fea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8ffa6bb38763528f4b48eb2dc9c0e85"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85">dmopen</a> (this, fileName, fileChkSum, nRows, nCols, status, err, nColSwap, swapSize, wantTag)</td></tr>
+<tr class="memdesc:ac8ffa6bb38763528f4b48eb2dc9c0e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a disk matrix file for Read/Write or ReadOnly operations.  <a href="namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85">More...</a><br /></td></tr>
 <tr class="separator:ac8ffa6bb38763528f4b48eb2dc9c0e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43e58dd9348e2e4b74c9b6636bae7428"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428">dmsetreadonly</a> (this, err, isReadOnly)</td></tr>
+<tr class="memdesc:a43e58dd9348e2e4b74c9b6636bae7428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles between Read/Write and ReadOnly.  <a href="namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428">More...</a><br /></td></tr>
 <tr class="separator:a43e58dd9348e2e4b74c9b6636bae7428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d7fb08d204f1bf2bffa3a31a99a0712"><td class="memItemLeft" align="right" valign="top">integer(i8) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712">dmsize</a> (this, iDim)</td></tr>
+<tr class="memdesc:a5d7fb08d204f1bf2bffa3a31a99a0712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size of the given disk matrix.  <a href="namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712">More...</a><br /></td></tr>
 <tr class="separator:a5d7fb08d204f1bf2bffa3a31a99a0712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fef84f2f1125228340f49223f3f4c76"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76">dmclose</a> (this, err)</td></tr>
+<tr class="memdesc:a9fef84f2f1125228340f49223f3f4c76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the disk matrix file and releases the associated swap array.  <a href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76">More...</a><br /></td></tr>
 <tr class="separator:a9fef84f2f1125228340f49223f3f4c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b9bf6f6fa36409a1d8f0d5ee86f432a"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a">dmgetaddress</a> (this, rInd, cInd, section, index, err)</td></tr>
+<tr class="memdesc:a2b9bf6f6fa36409a1d8f0d5ee86f432a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets swap section number and local array index for matrix element.  <a href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a">More...</a><br /></td></tr>
 <tr class="separator:a2b9bf6f6fa36409a1d8f0d5ee86f432a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef496ea1a4943efd1522eab24ff90faf"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf">dmswap</a> (this, newSection, err)</td></tr>
+<tr class="memdesc:aef496ea1a4943efd1522eab24ff90faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes current section to disk and reads a new one into core.  <a href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf">More...</a><br /></td></tr>
 <tr class="separator:aef496ea1a4943efd1522eab24ff90faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1ce7a35cf1655b464712e31ecfca59a"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a">dmsingledoublecast</a> (this, ielSwap, nelSwap, toSingle)</td></tr>
+<tr class="memdesc:ac1ce7a35cf1655b464712e31ecfca59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts the in-core matrix elements to/from single precision.  <a href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a">More...</a><br /></td></tr>
 <tr class="separator:ac1ce7a35cf1655b464712e31ecfca59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb149fd05e211a2a42bf6b7380f92e80"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#afb149fd05e211a2a42bf6b7380f92e80">dmsetvalue</a> (this, value, rInd, cInd, err)</td></tr>
+<tr class="memdesc:afb149fd05e211a2a42bf6b7380f92e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a value to a matrix element.  <a href="namespacediskmatrixmodule.html#afb149fd05e211a2a42bf6b7380f92e80">More...</a><br /></td></tr>
 <tr class="separator:afb149fd05e211a2a42bf6b7380f92e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa92201e768b6d1d3768239be0a256aec"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#aa92201e768b6d1d3768239be0a256aec">dmgetvalue</a> (this, rInd, cInd, err)</td></tr>
+<tr class="memdesc:aa92201e768b6d1d3768239be0a256aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of a matrix element.  <a href="namespacediskmatrixmodule.html#aa92201e768b6d1d3768239be0a256aec">More...</a><br /></td></tr>
 <tr class="separator:aa92201e768b6d1d3768239be0a256aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaa9b49a9e298539c89d74b7ccd4f9e4"><td class="memItemLeft" align="right" valign="top">real(dp) function, dimension(:,:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4">dmgetswapsecptr</a> (this, cInd, err)</td></tr>
+<tr class="memdesc:aeaa9b49a9e298539c89d74b7ccd4f9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to a matrix containing a swap section.  <a href="namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4">More...</a><br /></td></tr>
 <tr class="separator:aeaa9b49a9e298539c89d74b7ccd4f9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a998493c94014a177624a824dae9dd8d4"><td class="memItemLeft" align="right" valign="top">real(dp) function, dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4">dmgetcolptr</a> (this, cInd, err)</td></tr>
+<tr class="memdesc:a998493c94014a177624a824dae9dd8d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to column <em>cInd</em> of the given disk matrix.  <a href="namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4">More...</a><br /></td></tr>
 <tr class="separator:a998493c94014a177624a824dae9dd8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a826da5f2102bb29fe806ffe2b364a458"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a826da5f2102bb29fe806ffe2b364a458">dmgetcol</a> (this, cInd, col, err)</td></tr>
+<tr class="memdesc:a826da5f2102bb29fe806ffe2b364a458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a column of the given disk matrix.  <a href="namespacediskmatrixmodule.html#a826da5f2102bb29fe806ffe2b364a458">More...</a><br /></td></tr>
 <tr class="separator:a826da5f2102bb29fe806ffe2b364a458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a385d13b072ee6b611e55255f29a5f913"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a385d13b072ee6b611e55255f29a5f913">dmgetrow</a> (this, rInd, row, err)</td></tr>
+<tr class="memdesc:a385d13b072ee6b611e55255f29a5f913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a row of the given disk matrix.  <a href="namespacediskmatrixmodule.html#a385d13b072ee6b611e55255f29a5f913">More...</a><br /></td></tr>
 <tr class="separator:a385d13b072ee6b611e55255f29a5f913"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3f4c22de4fd7f92e79973b882c9c2ef"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef">dmmattimesvec</a> (this, xVec, yVec, err, doInitialize)</td></tr>
+<tr class="memdesc:ab3f4c22de4fd7f92e79973b882c9c2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a disk matrix with a given vector.  <a href="namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef">More...</a><br /></td></tr>
 <tr class="separator:ab3f4c22de4fd7f92e79973b882c9c2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56023478e82bec9b1ed8bc4fb42cef3f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a56023478e82bec9b1ed8bc4fb42cef3f">dmmattranstimesvec</a> (this, xVec, yVec, err)</td></tr>
+<tr class="memdesc:a56023478e82bec9b1ed8bc4fb42cef3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies the transpose of a disk matrix with a given vector.  <a href="namespacediskmatrixmodule.html#a56023478e82bec9b1ed8bc4fb42cef3f">More...</a><br /></td></tr>
 <tr class="separator:a56023478e82bec9b1ed8bc4fb42cef3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5b9d70c3ea20afb91a2599d1dbbe2a4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#ac5b9d70c3ea20afb91a2599d1dbbe2a4">dmfindabsmaxrowvalues</a> (this, maxRowVal, err)</td></tr>
+<tr class="memdesc:ac5b9d70c3ea20afb91a2599d1dbbe2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the absolute maximum value for each row in a disk matrix.  <a href="namespacediskmatrixmodule.html#ac5b9d70c3ea20afb91a2599d1dbbe2a4">More...</a><br /></td></tr>
 <tr class="separator:ac5b9d70c3ea20afb91a2599d1dbbe2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa06e02705ac753582ecf46aef1af9dfe"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#aa06e02705ac753582ecf46aef1af9dfe">dmfindminconnections</a> (this, minIdx, minVal, err)</td></tr>
-<tr class="separator:aa06e02705ac753582ecf46aef1af9dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a73b7e014d49e575cf8cbdfa3a9696ba7"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a73b7e014d49e575cf8cbdfa3a9696ba7">dmold_p</a> = 0</td></tr>
+<tr class="memdesc:a73b7e014d49e575cf8cbdfa3a9696ba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ReadOnly matrix.  <a href="namespacediskmatrixmodule.html#a73b7e014d49e575cf8cbdfa3a9696ba7">More...</a><br /></td></tr>
 <tr class="separator:a73b7e014d49e575cf8cbdfa3a9696ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b66655ca09e668a0820462b8072929c"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a9b66655ca09e668a0820462b8072929c">dmnsp_p</a> = 1</td></tr>
+<tr class="memdesc:a9b66655ca09e668a0820462b8072929c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write matrix in single precision.  <a href="namespacediskmatrixmodule.html#a9b66655ca09e668a0820462b8072929c">More...</a><br /></td></tr>
 <tr class="separator:a9b66655ca09e668a0820462b8072929c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc5ca2adbe337b3c161da50ac81c2485"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#adc5ca2adbe337b3c161da50ac81c2485">dmndp_p</a> = 2</td></tr>
+<tr class="memdesc:adc5ca2adbe337b3c161da50ac81c2485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write matrix in double precision.  <a href="namespacediskmatrixmodule.html#adc5ca2adbe337b3c161da50ac81c2485">More...</a><br /></td></tr>
 <tr class="separator:adc5ca2adbe337b3c161da50ac81c2485"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a919378ab1caf8aed9f8510928dc8ced7"><td class="memItemLeft" align="right" valign="top">character(len=30), parameter, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacediskmatrixmodule.html#a919378ab1caf8aed9f8510928dc8ced7">dmtag_p</a> = '#FEDEM disk matrix'</td></tr>
-<tr class="separator:a919378ab1caf8aed9f8510928dc8ced7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module for general rectangular matrices with disk storage,. </p>
+<p>This module contains a data type and associated utility routines for representing a general rectangular matrix stored on a disk file. The matrix is stored column-wise on disk and it is therefore adviced to access the matrix in a column-wise fashion to obtain optimal speed. </p><dl class="section note"><dt>Note</dt><dd>All data members of <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> are private and can therefore be accessed only through the subroutines/functions contained in this module. </dd></dl>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a9fef84f2f1125228340f49223f3f4c76"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9fef84f2f1125228340f49223f3f4c76">&#9670;&nbsp;</a></span>dmclose()</h2>
 
@@ -157,6 +182,57 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Closes the disk matrix file and releases the associated swap array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to close </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Dec 2000 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_cgraph" id="anamespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_cgraph">
+<area shape="rect" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="5,31,209,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title="Initializes a disk matrix object." alt="" coords="257,5,468,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="261,56,465,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="516,56,796,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_icgraph" id="anamespacediskmatrixmodule_a9fef84f2f1125228340f49223f3f4c76_icgraph">
+<area shape="rect" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="1265,315,1469,341"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="1056,246,1217,287"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a1f042f886f3d02ae72a2fd0b435e802f" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="845,309,1004,350"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="1101,365,1172,392"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="841,243,1008,285"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="624,237,793,264"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="625,309,792,350"/>
+<area shape="rect" href="namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="399,157,566,184"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="395,360,570,387"/>
+<area shape="rect" href="namespacesolvermodule.html#ad942a07a7186496388f9fd3a54918faf" title="Restarts a running simulation model from the provided state." alt="" coords="389,208,576,235"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="405,259,561,301"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,81,574,108"/>
+<area shape="rect" href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33" title="Terminates the running solver process by deallocating all memory, etc." alt="" coords="196,157,276,184"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,360,275,387"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,411,275,437"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,461,275,488"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,512,274,539"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,309,275,336"/>
+<area shape="rect" href="solverDriver_8f90.html#a53a8d5ea2434ae00f5bf28cf66196cc3" title="Restarts a running solver process from the provided state." alt="" coords="191,208,281,235"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,5,341,32"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,56,338,83"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -192,45 +268,37 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Finds the absolute maximum value for each row in a disk matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to address </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">maxRowVal</td><td>Absolute maximum row values </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>25 Mar 2003 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_cgraph" id="anamespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_cgraph">
+<area shape="rect" title="Finds the absolute maximum value for each row in a disk matrix." alt="" coords="5,31,319,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="367,5,609,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="386,56,590,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="657,56,937,83"/>
+</map>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_icgraph" id="anamespacediskmatrixmodule_ac5b9d70c3ea20afb91a2599d1dbbe2a4_icgraph">
+<area shape="rect" title="Finds the absolute maximum value for each row in a disk matrix." alt="" coords="208,5,521,32"/>
+<area shape="rect" href="reducer_8f90.html#abc1eda669eda5122f2ccbefcb1495918" title="Prints the nvals lowest connections in BmatDisk." alt="" coords="5,5,160,32"/>
+</map>
 </div>
-<a id="aa06e02705ac753582ecf46aef1af9dfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa06e02705ac753582ecf46aef1af9dfe">&#9670;&nbsp;</a></span>dmfindminconnections()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine diskmatrixmodule::dmfindminconnections </td>
-          <td>(</td>
-          <td class="paramtype">type(<a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html">diskmatrixtype</a>), intent(inout)&#160;</td>
-          <td class="paramname"><em>this</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, dimension(:), intent(out)&#160;</td>
-          <td class="paramname"><em>minIdx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(dp), dimension(:), intent(out)&#160;</td>
-          <td class="paramname"><em>minVal</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">integer, intent(out)&#160;</td>
-          <td class="paramname"><em>err</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -292,6 +360,57 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets swap section number and local array index for matrix element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to address </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rInd</td><td>Row index of matrix element to get address of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cInd</td><td>Column index of matrix element to get address of </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">section</td><td>Index of swap section containing the matrix element </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">index</td><td>Array index within that swap section for matrix element </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a2b9bf6f6fa36409a1d8f0d5ee86f432a_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a2b9bf6f6fa36409a1d8f0d5ee86f432a_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a2b9bf6f6fa36409a1d8f0d5ee86f432a_icgraph" id="anamespacediskmatrixmodule_a2b9bf6f6fa36409a1d8f0d5ee86f432a_icgraph">
+<area shape="rect" title="Gets swap section number and local array index for matrix element." alt="" coords="1399,332,1641,359"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac5b9d70c3ea20afb91a2599d1dbbe2a4" title="Finds the absolute maximum value for each row in a disk matrix." alt="" coords="1037,56,1351,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a826da5f2102bb29fe806ffe2b364a458" title="Gets a column of the given disk matrix." alt="" coords="1089,157,1299,184"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="1080,208,1308,235"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a385d13b072ee6b611e55255f29a5f913" title="Gets a row of the given disk matrix." alt="" coords="1087,433,1301,460"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title="Returns a pointer to a matrix containing a swap section." alt="" coords="1061,332,1327,359"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aa92201e768b6d1d3768239be0a256aec" title="Returns the value of a matrix element." alt="" coords="1081,484,1307,511"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title="Multiplies a disk matrix with a given vector." alt="" coords="1066,383,1322,409"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a56023478e82bec9b1ed8bc4fb42cef3f" title="Multiplies the transpose of a disk matrix with a given vector." alt="" coords="1049,535,1339,561"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#afb149fd05e211a2a42bf6b7380f92e80" title="Assigns a value to a matrix element." alt="" coords="1081,281,1307,308"/>
+<area shape="rect" href="reducer_8f90.html#abc1eda669eda5122f2ccbefcb1495918" title="Prints the nvals lowest connections in BmatDisk." alt="" coords="811,5,965,32"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="570,208,737,235"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8" title="Writes out the content of a disk matrix." alt="" coords="787,157,989,184"/>
+<area shape="rect" href="namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="807,259,969,301"/>
+<area shape="rect" href="cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c" title="Extracts a column from the B&#45;matrix expanded to length neq1." alt="" coords="839,107,937,133"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a2ddea9a18a507addd0325dbd601388f0" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="577,81,729,108"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="401,208,472,235"/>
+<area shape="rect" href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="597,157,709,184"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="570,259,737,301"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,319,520,361"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,327,305,353"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,225,83,252"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,276,83,303"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,327,83,353"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,377,82,404"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,428,83,455"/>
+<area shape="rect" href="namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="811,325,965,366"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a46bf062a36b7cee9aed6df227523c683" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="574,381,733,422"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a02b874a253406b24688b53f92b67b390" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="568,327,739,353"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a826da5f2102bb29fe806ffe2b364a458"></a>
@@ -332,6 +451,30 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets a column of the given disk matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to return for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cInd</td><td>Column index to return for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">col</td><td>Content of the matrix column </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a826da5f2102bb29fe806ffe2b364a458_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a826da5f2102bb29fe806ffe2b364a458_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a826da5f2102bb29fe806ffe2b364a458_cgraph" id="anamespacediskmatrixmodule_a826da5f2102bb29fe806ffe2b364a458_cgraph">
+<area shape="rect" title="Gets a column of the given disk matrix." alt="" coords="5,31,216,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="264,5,507,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="283,56,487,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="555,56,835,83"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a998493c94014a177624a824dae9dd8d4"></a>
@@ -365,6 +508,53 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns a pointer to column <em>cInd</em> of the given disk matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to return for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cInd</td><td>Column index to return pointer for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function circumvents all protection and should be used with extreme caution and only for ReadOnly purposes when speed is essential. Calls to other dm... routines can also change the contents of the memory being pointed to.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen and Karl Erik Thoresen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5 May 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_cgraph" id="anamespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_cgraph">
+<area shape="rect" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="5,31,233,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="281,5,524,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="301,56,505,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="572,56,852,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_icgraph" id="anamespacediskmatrixmodule_a998493c94014a177624a824dae9dd8d4_icgraph">
+<area shape="rect" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="1033,107,1261,133"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="568,5,735,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8" title="Writes out the content of a disk matrix." alt="" coords="783,56,985,83"/>
+<area shape="rect" href="namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="803,209,965,250"/>
+<area shape="rect" href="cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c" title="Extracts a column from the B&#45;matrix expanded to length neq1." alt="" coords="835,157,933,184"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a2ddea9a18a507addd0325dbd601388f0" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="575,107,727,133"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="401,56,472,83"/>
+<area shape="rect" href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="595,56,707,83"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="568,209,735,250"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,209,520,250"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,216,305,243"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,115,83,141"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,165,83,192"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,216,83,243"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,267,82,293"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,317,83,344"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -406,6 +596,30 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets a row of the given disk matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to return for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rInd</td><td>Row index to return for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">row</td><td>Content of the matrix row </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a385d13b072ee6b611e55255f29a5f913_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a385d13b072ee6b611e55255f29a5f913_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a385d13b072ee6b611e55255f29a5f913_cgraph" id="anamespacediskmatrixmodule_a385d13b072ee6b611e55255f29a5f913_cgraph">
+<area shape="rect" title="Gets a row of the given disk matrix." alt="" coords="5,31,220,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="268,5,511,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="287,56,491,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="559,56,839,83"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="aeaa9b49a9e298539c89d74b7ccd4f9e4"></a>
@@ -440,6 +654,49 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns a pointer to a matrix containing a swap section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to return for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cInd</td><td>Column index for start of swap section to return for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The pointer to the entire swap section starting at column <em>cInd</em> of the given disk matrix. The function can be used for speedy random access of the matrix elements.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>13 Sep 2004 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_cgraph" id="anamespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_cgraph">
+<area shape="rect" title="Returns a pointer to a matrix containing a swap section." alt="" coords="5,31,271,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="319,5,561,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="338,56,542,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="609,56,889,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_icgraph" id="anamespacediskmatrixmodule_aeaa9b49a9e298539c89d74b7ccd4f9e4_icgraph">
+<area shape="rect" title="Returns a pointer to a matrix containing a swap section." alt="" coords="775,75,1040,101"/>
+<area shape="rect" href="namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="570,34,725,75"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a46bf062a36b7cee9aed6df227523c683" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="568,99,727,141"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="353,41,520,68"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="183,41,253,68"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,99,520,141"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a07dca70d14fe2f177b4f6add61538f3a"></a>
@@ -473,6 +730,35 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns requested size of one swap section from command-line option. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n1</td><td>Optional number of matrix rows (for note message only) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n2</td><td>Optional number of matrix columns (for note message only) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">autoRamSizeRatio</td><td>If present and .true., compute max swap size based on currently available physical memory</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>31 Jan 2002 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a07dca70d14fe2f177b4f6add61538f3a_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a07dca70d14fe2f177b4f6add61538f3a_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a07dca70d14fe2f177b4f6add61538f3a_icgraph" id="anamespacediskmatrixmodule_a07dca70d14fe2f177b4f6add61538f3a_icgraph">
+<area shape="rect" title="Returns requested size of one swap section from command&#45;line option." alt="" coords="775,136,1025,163"/>
+<area shape="rect" href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="568,99,727,141"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="612,165,683,192"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,99,520,141"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -513,6 +799,30 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns the value of a matrix element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to return for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rInd</td><td>Row index of matrix element to return </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cInd</td><td>Column index of matrix element to return </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_aa92201e768b6d1d3768239be0a256aec_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_aa92201e768b6d1d3768239be0a256aec_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_aa92201e768b6d1d3768239be0a256aec_cgraph" id="anamespacediskmatrixmodule_aa92201e768b6d1d3768239be0a256aec_cgraph">
+<area shape="rect" title="Returns the value of a matrix element." alt="" coords="5,31,232,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="280,5,523,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="299,56,503,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="571,56,851,83"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -560,6 +870,42 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Multiplies a disk matrix with a given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object (<b>A</b>) to multiply </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xVec</td><td>The vector (<b>x</b>) to multiply matrix <b>A</b> with </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">yVec</td><td>The resulting vector (<b>y</b>) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">doInitialize</td><td>If not present or .true., the existing content of <em>yVec</em> is discarded</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>One of of the following operations are performed y = A*x y = y + A*x depending on the value of <em>doInitialize</em>.</p>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_cgraph" id="anamespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_cgraph">
+<area shape="rect" title="Multiplies a disk matrix with a given vector." alt="" coords="5,31,261,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="309,5,552,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="329,56,533,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="600,56,880,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_icgraph" id="anamespacediskmatrixmodule_ab3f4c22de4fd7f92e79973b882c9c2ef_icgraph">
+<area shape="rect" title="Multiplies a disk matrix with a given vector." alt="" coords="343,5,599,32"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a02b874a253406b24688b53f92b67b390" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="124,5,295,32"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,5,76,32"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a56023478e82bec9b1ed8bc4fb42cef3f"></a>
@@ -600,6 +946,31 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Multiplies the transpose of a disk matrix with a given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object (<b>A</b>) to multiply </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xVec</td><td>The vector (<b>x</b>) to multiply matrix <b>A</b> with </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">yVec</td><td>The resulting vector (<b>y</b>) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The following operation is performed y = A^t*x</p>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a56023478e82bec9b1ed8bc4fb42cef3f_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a56023478e82bec9b1ed8bc4fb42cef3f_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a56023478e82bec9b1ed8bc4fb42cef3f_cgraph" id="anamespacediskmatrixmodule_a56023478e82bec9b1ed8bc4fb42cef3f_cgraph">
+<area shape="rect" title="Multiplies the transpose of a disk matrix with a given vector." alt="" coords="5,31,295,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="343,5,585,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="362,56,566,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="633,56,913,83"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a3b025a4e58a255027fe15f5f26a9a702"></a>
@@ -617,6 +988,49 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a disk matrix object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to be initialized</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>14 Feb 2002 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a3b025a4e58a255027fe15f5f26a9a702_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a3b025a4e58a255027fe15f5f26a9a702_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a3b025a4e58a255027fe15f5f26a9a702_icgraph" id="anamespacediskmatrixmodule_a3b025a4e58a255027fe15f5f26a9a702_icgraph">
+<area shape="rect" title="Initializes a disk matrix object." alt="" coords="1529,272,1740,299"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a196b5251e74a5dcb0ec4ef7da1e3cf4e" title="Allocates the B&#45; and E&#45;matrix file objects." alt="" coords="841,130,1020,171"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a1f042f886f3d02ae72a2fd0b435e802f" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="1069,189,1228,230"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="1277,247,1481,273"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="1113,320,1184,347"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85" title="Opens a disk matrix file for Read/Write or ReadOnly operations." alt="" coords="1278,348,1481,375"/>
+<area shape="rect" href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="1069,371,1228,413"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="625,189,792,230"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="395,157,570,184"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,107,275,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,157,275,184"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,208,275,235"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,5,274,32"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,56,275,83"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="1068,254,1229,295"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="847,254,1014,295"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="624,299,793,325"/>
+<area shape="rect" href="namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="399,412,566,439"/>
+<area shape="rect" href="namespacesolvermodule.html#ad942a07a7186496388f9fd3a54918faf" title="Restarts a running simulation model from the provided state." alt="" coords="389,488,576,515"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="405,273,561,314"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,349,574,376"/>
+<area shape="rect" href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33" title="Terminates the running solver process by deallocating all memory, etc." alt="" coords="196,461,276,488"/>
+<area shape="rect" href="solverDriver_8f90.html#a53a8d5ea2434ae00f5bf28cf66196cc3" title="Restarts a running solver process from the provided state." alt="" coords="191,512,281,539"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,309,83,336"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,360,341,387"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,411,338,437"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -694,6 +1108,55 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Opens a disk matrix file for Read/Write or ReadOnly operations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to open </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of file to read/write matrix content from/to </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">fileChkSum</td><td>Check-sum value of the FE part associated with <em>this</em> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>Number of matrix rows </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nCols</td><td>Number of matrix columns </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">status</td><td>File opening mode, either <a class="el" href="namespacediskmatrixmodule.html#a73b7e014d49e575cf8cbdfa3a9696ba7" title="ReadOnly matrix.">diskmatrixmodule::dmold_p</a>, <a class="el" href="namespacediskmatrixmodule.html#a9b66655ca09e668a0820462b8072929c" title="Write matrix in single precision.">diskmatrixmodule::dmnsp_p</a> or <a class="el" href="namespacediskmatrixmodule.html#adc5ca2adbe337b3c161da50ac81c2485" title="Write matrix in double precision.">diskmatrixmodule::dmndp_p</a> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nColSwap</td><td>Optional number of matrix columns per swap section </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">swapSize</td><td>Optional size of swap section in double precision words </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wantTag</td><td>Expected file tag for ReadOnly matrices</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Jun 2001 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_cgraph" id="anamespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_cgraph">
+<area shape="rect" title="Opens a disk matrix file for Read/Write or ReadOnly operations." alt="" coords="5,107,208,133"/>
+<area shape="rect" href="diskMatrixModule_8f90.html#af572cf96792e6414bf6ed953ce4afb35" title="Adjusts the number of matrix columns in a swap section." alt="" coords="335,5,457,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title="Initializes a disk matrix object." alt="" coords="291,56,501,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="256,107,536,133"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a5d7fb08d204f1bf2bffa3a31a99a0712" title="Returns the size of the given disk matrix." alt="" coords="298,157,494,184"/>
+<area shape="rect" href="namespaceallocationmodule.html#a6cc43a5d48ba5f444f29acb94e8318a4" title="Converts a number of bytes to a user&#45;friendly string." alt="" coords="298,208,494,235"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_icgraph" id="anamespacediskmatrixmodule_ac8ffa6bb38763528f4b48eb2dc9c0e85_icgraph">
+<area shape="rect" title="Opens a disk matrix file for Read/Write or ReadOnly operations." alt="" coords="775,136,977,163"/>
+<area shape="rect" href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="568,99,727,141"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="612,165,683,192"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,99,520,141"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,157,82,184"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,208,83,235"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a43e58dd9348e2e4b74c9b6636bae7428"></a>
@@ -727,6 +1190,39 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Toggles between Read/Write and ReadOnly. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to toggle for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">isReadOnly</td><td>If present and .false., switch to ReadWrite, otherwise toggle to ReadOnly</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If switching to ReadOnly, the present in-core section is first written to file.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Dec 2000 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_cgraph" id="anamespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_cgraph">
+<area shape="rect" title="Toggles between Read/Write and ReadOnly." alt="" coords="5,5,252,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="300,5,504,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="552,5,832,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_icgraph" id="anamespacediskmatrixmodule_a43e58dd9348e2e4b74c9b6636bae7428_icgraph">
+<area shape="rect" title="Toggles between Read/Write and ReadOnly." alt="" coords="339,5,585,32"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="124,5,291,32"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,5,76,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -773,6 +1269,42 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Assigns a value to a matrix element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to assign </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The value to be assigned </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rInd</td><td>Row index of matrix element to assign </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cInd</td><td>Column index of matrix element to assign </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10 Feb 1999 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_cgraph" id="anamespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_cgraph">
+<area shape="rect" title="Assigns a value to a matrix element." alt="" coords="5,31,232,57"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="280,5,523,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="299,56,503,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="571,56,851,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_icgraph" id="anamespacediskmatrixmodule_afb149fd05e211a2a42bf6b7380f92e80_icgraph">
+<area shape="rect" title="Assigns a value to a matrix element." alt="" coords="541,13,768,39"/>
+<area shape="rect" href="namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="339,5,493,47"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="124,13,291,39"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,13,76,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -822,6 +1354,74 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Casts the in-core matrix elements to/from single precision. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to cast for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ielSwap</td><td>Index to first element in swap section </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nelSwap</td><td>Number of elements in swap section to cast for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">toSingle</td><td>If .true., cast from double to single precision, otherwise from single to double precision</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>It is assumed that the single-precision buffer array <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html#a350e4e7ed1db4298ae280d7fdfca34ac" title="Single precision buffer.">diskmatrixmodule::diskmatrixtype::vals</a> is not larger than one column.</p>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19 May 2005 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_ac1ce7a35cf1655b464712e31ecfca59a_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_ac1ce7a35cf1655b464712e31ecfca59a_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_ac1ce7a35cf1655b464712e31ecfca59a_icgraph" id="anamespacediskmatrixmodule_ac1ce7a35cf1655b464712e31ecfca59a_icgraph">
+<area shape="rect" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="1924,513,2204,540"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85" title="Opens a disk matrix file for Read/Write or ReadOnly operations." alt="" coords="1060,295,1263,321"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="1672,640,1876,667"/>
+<area shape="rect" href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="847,287,1006,329"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="673,747,744,773"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="625,350,792,391"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="395,363,570,389"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,312,275,339"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,363,275,389"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,413,275,440"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,464,274,491"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,515,275,541"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="1365,383,1569,409"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac5b9d70c3ea20afb91a2599d1dbbe2a4" title="Finds the absolute maximum value for each row in a disk matrix." alt="" coords="1311,463,1624,489"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a826da5f2102bb29fe806ffe2b364a458" title="Gets a column of the given disk matrix." alt="" coords="1362,564,1573,591"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="1353,817,1581,844"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a385d13b072ee6b611e55255f29a5f913" title="Gets a row of the given disk matrix." alt="" coords="1360,665,1575,692"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title="Returns a pointer to a matrix containing a swap section." alt="" coords="1335,513,1600,540"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aa92201e768b6d1d3768239be0a256aec" title="Returns the value of a matrix element." alt="" coords="1354,767,1581,793"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title="Multiplies a disk matrix with a given vector." alt="" coords="1339,933,1595,960"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a56023478e82bec9b1ed8bc4fb42cef3f" title="Multiplies the transpose of a disk matrix with a given vector." alt="" coords="1323,868,1612,895"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428" title="Toggles between Read/Write and ReadOnly." alt="" coords="1344,615,1591,641"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#afb149fd05e211a2a42bf6b7380f92e80" title="Assigns a value to a matrix element." alt="" coords="1354,716,1581,743"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="1081,225,1242,266"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a1f042f886f3d02ae72a2fd0b435e802f" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="1082,346,1241,387"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="843,222,1010,263"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="624,227,793,253"/>
+<area shape="rect" href="namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="399,215,566,241"/>
+<area shape="rect" href="namespacesolvermodule.html#ad942a07a7186496388f9fd3a54918faf" title="Restarts a running simulation model from the provided state." alt="" coords="389,265,576,292"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="405,149,561,190"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,76,574,103"/>
+<area shape="rect" href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33" title="Terminates the running solver process by deallocating all memory, etc." alt="" coords="196,211,276,237"/>
+<area shape="rect" href="solverDriver_8f90.html#a53a8d5ea2434ae00f5bf28cf66196cc3" title="Restarts a running solver process from the provided state." alt="" coords="191,261,281,288"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,107,83,133"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,5,341,32"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,107,338,133"/>
+<area shape="rect" href="reducer_8f90.html#abc1eda669eda5122f2ccbefcb1495918" title="Prints the nvals lowest connections in BmatDisk." alt="" coords="1084,463,1239,489"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="843,747,1010,773"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8" title="Writes out the content of a disk matrix." alt="" coords="1060,848,1263,875"/>
+<area shape="rect" href="namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="1080,630,1243,671"/>
+<area shape="rect" href="cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c" title="Extracts a column from the B&#45;matrix expanded to length neq1." alt="" coords="1112,747,1211,773"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a2ddea9a18a507addd0325dbd601388f0" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="851,899,1003,925"/>
+<area shape="rect" href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="871,848,983,875"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="843,470,1010,511"/>
+<area shape="rect" href="namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="1084,565,1239,606"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a46bf062a36b7cee9aed6df227523c683" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="847,405,1006,446"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a02b874a253406b24688b53f92b67b390" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="841,949,1012,976"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a5d7fb08d204f1bf2bffa3a31a99a0712"></a>
@@ -849,6 +1449,44 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns the size of the given disk matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to get size of </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iDim</td><td>Which size parameter to return:<ul>
+<li>if not present, return the total size (<em>nrows&times;ncols</em>)</li>
+<li>1: number of matrix rows (<em>nrows</em>)</li>
+<li>2: number of matrix columns (<em>ncols</em>)</li>
+<li>for any other value: return the number of columns in swap array</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>29 Jan 1999 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a5d7fb08d204f1bf2bffa3a31a99a0712_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a5d7fb08d204f1bf2bffa3a31a99a0712_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a5d7fb08d204f1bf2bffa3a31a99a0712_icgraph" id="anamespacediskmatrixmodule_a5d7fb08d204f1bf2bffa3a31a99a0712_icgraph">
+<area shape="rect" title="Returns the size of the given disk matrix." alt="" coords="1033,97,1229,123"/>
+<area shape="rect" href="namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="807,5,961,47"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="401,71,472,98"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac8ffa6bb38763528f4b48eb2dc9c0e85" title="Opens a disk matrix file for Read/Write or ReadOnly operations." alt="" coords="783,122,985,149"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a46bf062a36b7cee9aed6df227523c683" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="572,239,731,280"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="568,17,735,43"/>
+<area shape="rect" href="namespacedisplacementmodule.html#adf56a3d6145b2b52d8c05f67033ae572" title="Opens the B&#45; and E&#45;matrix files associated with a superelement." alt="" coords="572,173,731,215"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="353,205,520,247"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,213,305,239"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,111,83,138"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,162,83,189"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="5,213,83,239"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="6,263,82,290"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="5,314,83,341"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -892,6 +1530,78 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Writes current section to disk and reads a new one into core. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to swap for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">newSection</td><td>Index of the swap section to read into core </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1 Dec 2000 </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_cgraph.png" border="0" usemap="#anamespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_cgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_cgraph" id="anamespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_cgraph">
+<area shape="rect" title="Writes current section to disk and reads a new one into core." alt="" coords="5,5,209,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="257,5,537,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_icgraph" id="anamespacediskmatrixmodule_aef496ea1a4943efd1522eab24ff90faf_icgraph">
+<area shape="rect" title="Writes current section to disk and reads a new one into core." alt="" coords="1716,656,1920,682"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="1409,296,1613,322"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac5b9d70c3ea20afb91a2599d1dbbe2a4" title="Finds the absolute maximum value for each row in a disk matrix." alt="" coords="1355,706,1668,733"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a826da5f2102bb29fe806ffe2b364a458" title="Gets a column of the given disk matrix." alt="" coords="1406,757,1617,784"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="1397,605,1625,632"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a385d13b072ee6b611e55255f29a5f913" title="Gets a row of the given disk matrix." alt="" coords="1404,808,1619,834"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aeaa9b49a9e298539c89d74b7ccd4f9e4" title="Returns a pointer to a matrix containing a swap section." alt="" coords="1379,430,1644,457"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aa92201e768b6d1d3768239be0a256aec" title="Returns the value of a matrix element." alt="" coords="1398,858,1625,885"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title="Multiplies a disk matrix with a given vector." alt="" coords="1383,656,1639,682"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a56023478e82bec9b1ed8bc4fb42cef3f" title="Multiplies the transpose of a disk matrix with a given vector." alt="" coords="1367,909,1656,936"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a43e58dd9348e2e4b74c9b6636bae7428" title="Toggles between Read/Write and ReadOnly." alt="" coords="1060,554,1307,581"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#afb149fd05e211a2a42bf6b7380f92e80" title="Assigns a value to a matrix element." alt="" coords="1398,492,1625,518"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="1103,200,1264,242"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a1f042f886f3d02ae72a2fd0b435e802f" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="847,263,1006,304"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="673,661,744,688"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="843,198,1010,239"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="624,197,793,224"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="625,328,792,370"/>
+<area shape="rect" href="namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="399,193,566,220"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="395,342,570,369"/>
+<area shape="rect" href="namespacesolvermodule.html#ad942a07a7186496388f9fd3a54918faf" title="Restarts a running simulation model from the provided state." alt="" coords="389,244,576,270"/>
+<area shape="rect" href="namespacefreqresponsemodule.html#ab724a650574c61985d742a7f0d21279c" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="405,127,561,168"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="391,54,574,81"/>
+<area shape="rect" href="solverDriver_8f90.html#a688267739853d43d34189be1365d3e33" title="Terminates the running solver process by deallocating all memory, etc." alt="" coords="196,190,276,217"/>
+<area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="197,342,275,369"/>
+<area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="197,393,275,420"/>
+<area shape="rect" href="solverDriver_8f90.html#a43ba8eaac9f6ae5dd0a945584c31bf82" title="Initializes a new simulation process." alt="" coords="197,444,275,470"/>
+<area shape="rect" href="solverDriver_8f90.html#a8e14233207067f1085bb7931cc1f7277" title="Initializes a new simulation process and restarts from provided state." alt="" coords="198,494,274,521"/>
+<area shape="rect" href="solverDriver_8f90.html#abc8381a16b5750477e6f6c5e5f79acde" title="Initializes a new simulation process and restarts from provided state." alt="" coords="197,292,275,318"/>
+<area shape="rect" href="solverDriver_8f90.html#a53a8d5ea2434ae00f5bf28cf66196cc3" title="Restarts a running solver process from the provided state." alt="" coords="191,241,281,268"/>
+<area shape="rect" href="solverDriver_8f90.html#ac030f2d9c9b0bb0d9f6378bb2245cde8" title="Solves the next time increment by Newton&#45;Raphson iterations." alt="" coords="5,85,83,112"/>
+<area shape="rect" href="namespaceinversemodule.html#a9502b109b6230e372fe609566135d17e" title=" " alt="" coords="131,34,341,61"/>
+<area shape="rect" href="namespacesolvermodule.html#a1b92706b06bc176f7c61a0e3d4a427f1" title="Solves the ramp&#45;up stage, if any." alt="" coords="134,85,338,112"/>
+<area shape="rect" href="reducer_8f90.html#abc1eda669eda5122f2ccbefcb1495918" title="Prints the nvals lowest connections in BmatDisk." alt="" coords="1106,858,1261,885"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="843,605,1010,632"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3844fb33265af48b26c1e7e17561fea8" title="Writes out the content of a disk matrix." alt="" coords="1082,656,1285,682"/>
+<area shape="rect" href="namespacedisplacementmodule.html#aa5ea0fc0ac524f29dfda19acee943833" title="Calculates superelement&#45;to&#45;element displacement extraction matrices." alt="" coords="1102,488,1265,530"/>
+<area shape="rect" href="cmstrs_8f90.html#aad2dfdf6aedce2299450e9249f8bbd8c" title="Extracts a column from the B&#45;matrix expanded to length neq1." alt="" coords="1134,706,1233,733"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a2ddea9a18a507addd0325dbd601388f0" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="851,718,1003,745"/>
+<area shape="rect" href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="871,656,983,682"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#aa095be59bf5a4e5a69d10c23ba641517" title="Initializes the strain rosettes with superelement recovery data." alt="" coords="843,467,1010,508"/>
+<area shape="rect" href="namespacesolextensionmodule.html#aeb2749f487aa51fb5750123b7bb786d3" title="Performs the superelement reduction for the equation system." alt="" coords="1106,423,1261,464"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a46bf062a36b7cee9aed6df227523c683" title="Extracts a sub&#45;matrix from the B&#45;matrix associated with node groups." alt="" coords="847,328,1006,370"/>
+<area shape="rect" href="namespacecmstrsmodule.html#a02b874a253406b24688b53f92b67b390" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="841,794,1012,821"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a3844fb33265af48b26c1e7e17561fea8"></a>
@@ -926,6 +1636,29 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Writes out the content of a disk matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">this</td><td>The <a class="el" href="structdiskmatrixmodule_1_1diskmatrixtype.html" title="Data type representing a rectangular matrix with disk storage.">diskmatrixmodule::diskmatrixtype</a> object to write out </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lpu</td><td>File unit number to write to </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Matrix identifier</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>18 Mar 2003 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacediskmatrixmodule_a3844fb33265af48b26c1e7e17561fea8_icgraph.png" border="0" usemap="#anamespacediskmatrixmodule_a3844fb33265af48b26c1e7e17561fea8_icgraph" alt=""/></div>
+<map name="anamespacediskmatrixmodule_a3844fb33265af48b26c1e7e17561fea8_icgraph" id="anamespacediskmatrixmodule_a3844fb33265af48b26c1e7e17561fea8_icgraph">
+<area shape="rect" title="Writes out the content of a disk matrix." alt="" coords="339,31,541,57"/>
+<area shape="rect" href="namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="124,5,291,32"/>
+<area shape="rect" href="cmstrs_8f90.html#aa99e05a7d5eabf26533ee23d3e42b996" title="Debug print of some matrices used in the CMS&#45;reduction." alt="" coords="151,56,263,83"/>
+<area shape="rect" href="reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="5,5,76,32"/>
+</map>
+</div>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -941,6 +1674,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Write matrix in double precision. </p>
+
 </div>
 </div>
 <a id="a9b66655ca09e668a0820462b8072929c"></a>
@@ -954,6 +1689,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write matrix in single precision. </p>
 
 </div>
 </div>
@@ -969,34 +1706,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a919378ab1caf8aed9f8510928dc8ced7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a919378ab1caf8aed9f8510928dc8ced7">&#9670;&nbsp;</a></span>dmtag_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">character(len=30), parameter, private diskmatrixmodule::dmtag_p = '#FEDEM disk matrix'</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>ReadOnly matrix. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

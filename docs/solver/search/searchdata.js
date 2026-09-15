@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "adefilprstv",
   8: "_abcdefghijlmnoprstuvwxy",
   9: "fo",
-  10: "_acdefilmprstw",
+  10: "_acdeflmprstw",
   11: "t"
 };
 

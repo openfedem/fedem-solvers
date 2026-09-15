@@ -1,0 +1,6 @@
+<map id="explicitfunctionsmodule::func4" name="explicitfunctionsmodule::func4">
+<area shape="rect" id="node1" title="Complex sinusoidal function composed of many sine waves." alt="" coords="459,51,637,92"/>
+<area shape="rect" id="node2" href="$namespaceexplicitfunctionsmodule.html#aeb0e00589f970ab5a27d49bc8f4deb57" title="Evaluates the embedded wave profile at point X and time T." alt="" coords="232,51,411,92"/>
+<area shape="rect" id="node3" href="$interfaceexplicitfunctionsmodule_1_1funcvalue.html#a79bfabe8104b56055e4cb9ac47f6378c" title="Evaluates an explicit function." alt="" coords="5,5,184,47"/>
+<area shape="rect" id="node4" href="$interfaceexplicitfunctionsmodule_1_1funcvalue.html#a8a6b13e9b359927d59b86b0bc46e406e" title="Evaluates an (possibly) multi&#45;argument explicit function." alt="" coords="5,84,184,125"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="explicitfunctionsmodule::funcintegral" name="explicitfunctionsmodule::funcintegral">
+<area shape="rect" id="node1" title="Integrates an explicit function from 0.0 to x." alt="" coords="5,71,184,112"/>
+<area shape="rect" id="node2" href="$namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="232,5,411,47"/>
+<area shape="rect" id="node3" href="$namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="232,71,411,112"/>
+<area shape="rect" id="node4" href="$namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="232,136,411,177"/>
+</map>

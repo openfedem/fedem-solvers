@@ -1,7 +1,7 @@
 <map id="fedem&#45;foundation/src/FFaFunctionLib/FFaFunctionManager.C" name="fedem&#45;foundation/src/FFaFunctionLib/FFaFunctionManager.C">
-<area shape="rect" id="node1" title=" " alt="" coords="407,5,609,61"/>
-<area shape="rect" id="node2" href="$FFaFunctionManager_8H.html" title=" " alt="" coords="209,109,378,136"/>
-<area shape="rect" id="node5" href="$FFaFunctionProperties_8H.html" title=" " alt="" coords="5,109,184,136"/>
+<area shape="rect" id="node1" title="Global functions direct evaluation of some explicit function types." alt="" coords="407,5,609,61"/>
+<area shape="rect" id="node2" href="$FFaFunctionManager_8H.html" title="Global functions direct evaluation of some explicit function types." alt="" coords="209,109,378,136"/>
+<area shape="rect" id="node5" href="$FFaFunctionProperties_8H.html" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="5,109,184,136"/>
 <area shape="rect" id="node6" href="$FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="403,109,613,136"/>
 <area shape="rect" id="node9" href="$FFaFortran_8H.html" title="Macros to aid cross&#45;language linkage between C/C++ and Fortran." alt="" coords="638,109,831,136"/>
 <area shape="rect" id="node10" title=" " alt="" coords="855,109,921,136"/>

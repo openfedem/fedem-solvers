@@ -105,9 +105,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a354500f21ab38eae114c10e015b2e1c7"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodestypemodule_1_1modestype.html#a354500f21ab38eae114c10e015b2e1c7">nmodes</a></td></tr>
 <tr class="memdesc:a354500f21ab38eae114c10e015b2e1c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of eigenmodes to calculate.  <a href="structmodestypemodule_1_1modestype.html#a354500f21ab38eae114c10e015b2e1c7">More...</a><br /></td></tr>
 <tr class="separator:a354500f21ab38eae114c10e015b2e1c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a609a57314729e01596ae32b1592ab1dd"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodestypemodule_1_1modestype.html#a609a57314729e01596ae32b1592ab1dd">maxlan</a></td></tr>
-<tr class="memdesc:a609a57314729e01596ae32b1592ab1dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of Lanczos steps.  <a href="structmodestypemodule_1_1modestype.html#a609a57314729e01596ae32b1592ab1dd">More...</a><br /></td></tr>
-<tr class="separator:a609a57314729e01596ae32b1592ab1dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb9527eaea59641dbf89568ebdb811a4"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodestypemodule_1_1modestype.html#aeb9527eaea59641dbf89568ebdb811a4">shift</a></td></tr>
 <tr class="memdesc:aeb9527eaea59641dbf89568ebdb811a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shift value.  <a href="structmodestypemodule_1_1modestype.html#aeb9527eaea59641dbf89568ebdb811a4">More...</a><br /></td></tr>
 <tr class="separator:aeb9527eaea59641dbf89568ebdb811a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,6 +129,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a3a6d6bec1490ab202a2b9aeccc3dd022"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structsysmatrixtypemodule_1_1sysmatrixtype.html">sysmatrixtype</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodestypemodule_1_1modestype.html#a3a6d6bec1490ab202a2b9aeccc3dd022">mmat</a></td></tr>
 <tr class="memdesc:a3a6d6bec1490ab202a2b9aeccc3dd022"><td class="mdescLeft">&#160;</td><td class="mdescRight">System mass matrix.  <a href="structmodestypemodule_1_1modestype.html#a3a6d6bec1490ab202a2b9aeccc3dd022">More...</a><br /></td></tr>
 <tr class="separator:a3a6d6bec1490ab202a2b9aeccc3dd022"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca1c284d168488304a3183c4526f9e35"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structsysmatrixtypemodule_1_1sysmatrixtype.html">sysmatrixtype</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodestypemodule_1_1modestype.html#aca1c284d168488304a3183c4526f9e35">qmat</a></td></tr>
+<tr class="memdesc:aca1c284d168488304a3183c4526f9e35"><td class="mdescLeft">&#160;</td><td class="mdescRight">System steady-state error elimination matrix.  <a href="structmodestypemodule_1_1modestype.html#aca1c284d168488304a3183c4526f9e35">More...</a><br /></td></tr>
+<tr class="separator:aca1c284d168488304a3183c4526f9e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06dffef54a981d971e6b65117d801fe1"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodestypemodule_1_1modestype.html#a06dffef54a981d971e6b65117d801fe1">reval</a></td></tr>
 <tr class="memdesc:a06dffef54a981d971e6b65117d801fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real part of computed eigenvalues.  <a href="structmodestypemodule_1_1modestype.html#a06dffef54a981d971e6b65117d801fe1">More...</a><br /></td></tr>
 <tr class="separator:a06dffef54a981d971e6b65117d801fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -301,22 +301,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a609a57314729e01596ae32b1592ab1dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a609a57314729e01596ae32b1592ab1dd">&#9670;&nbsp;</a></span>maxlan</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer modestypemodule::modestype::maxlan</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Maximum number of Lanczos steps. </p>
-
-</div>
-</div>
 <a id="a3a6d6bec1490ab202a2b9aeccc3dd022"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a6d6bec1490ab202a2b9aeccc3dd022">&#9670;&nbsp;</a></span>mmat</h2>
 
@@ -346,6 +330,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Number of eigenmodes to calculate. </p>
+
+</div>
+</div>
+<a id="aca1c284d168488304a3183c4526f9e35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca1c284d168488304a3183c4526f9e35">&#9670;&nbsp;</a></span>qmat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">type(<a class="el" href="structsysmatrixtypemodule_1_1sysmatrixtype.html">sysmatrixtype</a>) modestypemodule::modestype::qmat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>System steady-state error elimination matrix. </p>
 
 </div>
 </div>
@@ -451,7 +451,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

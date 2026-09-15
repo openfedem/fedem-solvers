@@ -1,0 +1,4 @@
+<map id="sdiskmatrixmodule::dmswap" name="sdiskmatrixmodule::dmswap">
+<area shape="rect" id="node1" title="Writes current section to disk and reads a new one into core." alt="" coords="5,5,161,47"/>
+<area shape="rect" id="node2" href="$namespacesdiskmatrixmodule.html#aa48c50df064255b9cdf83f3c45228d6f" title="Casts the in&#45;core matrix elements from double to single precision." alt="" coords="209,5,365,47"/>
+</map>

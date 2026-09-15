@@ -67,13 +67,13 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FFaUserFuncPlugin.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>User-defined functions plugin.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="FFaUserFuncPlugin_8H_source.html">FFaUserFuncPlugin.H</a>&quot;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
@@ -82,8 +82,8 @@ Include dependency graph for FFaUserFuncPlugin.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaUserFuncPlugin_8C__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaFunctionLib_2FFaUserFuncPlugin_8C" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaFunctionLib_2FFaUserFuncPlugin_8C" id="afedem-foundation_2src_2FFaFunctionLib_2FFaUserFuncPlugin_8C">
-<area shape="rect" title=" " alt="" coords="270,5,478,61"/>
-<area shape="rect" href="FFaUserFuncPlugin_8H.html" title=" " alt="" coords="151,109,309,136"/>
+<area shape="rect" title="User&#45;defined functions plugin." alt="" coords="270,5,478,61"/>
+<area shape="rect" href="FFaUserFuncPlugin_8H.html" title="User&#45;defined functions plugin." alt="" coords="151,109,309,136"/>
 <area shape="rect" title=" " alt="" coords="334,109,414,136"/>
 <area shape="rect" title=" " alt="" coords="438,109,499,136"/>
 <area shape="rect" href="FFaDynamicLibraryBase_8H.html" title="Management of dynamic loading of shared object libraries." alt="" coords="5,184,241,225"/>
@@ -93,81 +93,12 @@ Include dependency graph for FFaUserFuncPlugin.C:</div>
 <area shape="rect" title=" " alt="" coords="179,273,238,300"/>
 </map>
 </div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:adc29c2ff13d900c2f185ee95427fb06c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="FFaUserFuncPlugin_8C.html#adc29c2ff13d900c2f185ee95427fb06caa4a33c178b6b530be8d3037164bd0a5e">idGetValue</a> = 0
-, <a class="el" href="FFaUserFuncPlugin_8C.html#adc29c2ff13d900c2f185ee95427fb06ca6e7ef283dcbdf7d6994bb1f580c4889e">idGetDiff</a> = 1
-, <a class="el" href="FFaUserFuncPlugin_8C.html#adc29c2ff13d900c2f185ee95427fb06cae33430bad85e4d29c920c298da9d5727">idWave</a> = 2
- }</td></tr>
-<tr class="separator:adc29c2ff13d900c2f185ee95427fb06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a9432aa579c36f92cae475bf45258059a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin_8C.html#a9432aa579c36f92cae475bf45258059a">nullTerminate</a> (char *str, int nchar)</td></tr>
-<tr class="separator:a9432aa579c36f92cae475bf45258059a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="adc29c2ff13d900c2f185ee95427fb06c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc29c2ff13d900c2f185ee95427fb06c">&#9670;&nbsp;</a></span>anonymous enum</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">anonymous enum</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adc29c2ff13d900c2f185ee95427fb06caa4a33c178b6b530be8d3037164bd0a5e"></a>idGetValue&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adc29c2ff13d900c2f185ee95427fb06ca6e7ef283dcbdf7d6994bb1f580c4889e"></a>idGetDiff&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adc29c2ff13d900c2f185ee95427fb06cae33430bad85e4d29c920c298da9d5727"></a>idWave&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a9432aa579c36f92cae475bf45258059a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9432aa579c36f92cae475bf45258059a">&#9670;&nbsp;</a></span>nullTerminate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void nullTerminate </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nchar</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-</div><!-- contents -->
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>User-defined functions plugin. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

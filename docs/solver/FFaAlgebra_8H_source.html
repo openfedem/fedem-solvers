@@ -84,24 +84,22 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="classFaMat33.html">FaMat33</a>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classFFaAlgebra.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFFaAlgebra.html">FFaAlgebra</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="namespaceFFaAlgebra.html">   19</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceFFaAlgebra.html">FFaAlgebra</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classFFaAlgebra.html#a6b2af49b93505c01ce9b182ce0ca7d64">eccTransform6</a> (<span class="keywordtype">double</span> mat[6][6], <span class="keyword">const</span> <a class="code" href="classFaVec3.html">FaVec3</a>&amp; X);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classFFaAlgebra.html#aecd7477331fa758fdc7c26deaae2b74b">congruenceTransform</a> (<span class="keywordtype">double</span>** mat, <span class="keyword">const</span> <a class="code" href="classFaMat33.html">FaMat33</a>&amp; T,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                   <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> node = 0);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassFFaAlgebra_html"><div class="ttname"><a href="classFFaAlgebra.html">FFaAlgebra</a></div><div class="ttdoc">Class with static matrix-vector methods used by link file parsers, etc.</div><div class="ttdef"><b>Definition:</b> FFaAlgebra.H:20</div></div>
-<div class="ttc" id="aclassFFaAlgebra_html_a6b2af49b93505c01ce9b182ce0ca7d64"><div class="ttname"><a href="classFFaAlgebra.html#a6b2af49b93505c01ce9b182ce0ca7d64">FFaAlgebra::eccTransform6</a></div><div class="ttdeci">static void eccTransform6(double mat[6][6], const FaVec3 &amp;X)</div><div class="ttdef"><b>Definition:</b> FFaAlgebra.C:16</div></div>
-<div class="ttc" id="aclassFFaAlgebra_html_aecd7477331fa758fdc7c26deaae2b74b"><div class="ttname"><a href="classFFaAlgebra.html#aecd7477331fa758fdc7c26deaae2b74b">FFaAlgebra::congruenceTransform</a></div><div class="ttdeci">static bool congruenceTransform(double **mat, const FaMat33 &amp;T, int N, int node=0)</div><div class="ttdef"><b>Definition:</b> FFaAlgebra.C:49</div></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="namespaceFFaAlgebra.html#a6b2af49b93505c01ce9b182ce0ca7d64">eccTransform6</a>(<span class="keywordtype">double</span> mat[6][6], <span class="keyword">const</span> <a class="code" href="classFaVec3.html">FaVec3</a>&amp; X);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="namespaceFFaAlgebra.html#aecd7477331fa758fdc7c26deaae2b74b">congruenceTransform</a>(<span class="keywordtype">double</span>** mat, <span class="keyword">const</span> <a class="code" href="classFaMat33.html">FaMat33</a>&amp; T, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> node = 0);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassFaMat33_html"><div class="ttname"><a href="classFaMat33.html">FaMat33</a></div><div class="ttdef"><b>Definition:</b> FFaMat33.H:15</div></div>
 <div class="ttc" id="aclassFaVec3_html"><div class="ttname"><a href="classFaVec3.html">FaVec3</a></div><div class="ttdoc">Class for point vectors in 3D space.</div><div class="ttdef"><b>Definition:</b> FFaVec3.H:40</div></div>
+<div class="ttc" id="anamespaceFFaAlgebra_html"><div class="ttname"><a href="namespaceFFaAlgebra.html">FFaAlgebra</a></div><div class="ttdoc">Namespace with matrix-vector function used by FE file parsers, etc.</div><div class="ttdef"><b>Definition:</b> FFaAlgebra.H:20</div></div>
+<div class="ttc" id="anamespaceFFaAlgebra_html_a6b2af49b93505c01ce9b182ce0ca7d64"><div class="ttname"><a href="namespaceFFaAlgebra.html#a6b2af49b93505c01ce9b182ce0ca7d64">FFaAlgebra::eccTransform6</a></div><div class="ttdeci">void eccTransform6(double mat[6][6], const FaVec3 &amp;X)</div><div class="ttdef"><b>Definition:</b> FFaAlgebra.C:16</div></div>
+<div class="ttc" id="anamespaceFFaAlgebra_html_aecd7477331fa758fdc7c26deaae2b74b"><div class="ttname"><a href="namespaceFFaAlgebra.html#aecd7477331fa758fdc7c26deaae2b74b">FFaAlgebra::congruenceTransform</a></div><div class="ttdeci">bool congruenceTransform(double **mat, const FaMat33 &amp;T, int N, int node=0)</div><div class="ttdef"><b>Definition:</b> FFaAlgebra.C:49</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:13 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

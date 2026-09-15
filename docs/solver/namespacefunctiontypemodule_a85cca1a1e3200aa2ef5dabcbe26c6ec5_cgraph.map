@@ -1,4 +1,8 @@
 <map id="functiontypemodule::functionintegral" name="functiontypemodule::functionintegral">
-<area shape="rect" id="node1" title="Integrates a function shape over specified domain." alt="" coords="5,5,159,47"/>
-<area shape="rect" id="node2" href="$namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="207,5,385,47"/>
+<area shape="rect" id="node1" title="Integrates a function shape over specified domain." alt="" coords="5,104,159,145"/>
+<area shape="rect" id="node2" href="$namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title="Integrates an explicit function from 0.0 to x." alt="" coords="207,71,385,112"/>
+<area shape="rect" id="node6" href="$namespacefunctiontypemodule.html#a426a080def8bc084419465ae1bd77b37" title="Returns the id of a function object, including its type." alt="" coords="219,136,373,177"/>
+<area shape="rect" id="node3" href="$namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="433,5,612,47"/>
+<area shape="rect" id="node4" href="$namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="433,71,612,112"/>
+<area shape="rect" id="node5" href="$namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="433,136,612,177"/>
 </map>

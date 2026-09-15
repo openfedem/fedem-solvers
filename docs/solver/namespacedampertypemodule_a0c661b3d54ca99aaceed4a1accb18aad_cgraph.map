@@ -1,5 +1,9 @@
 <map id="dampertypemodule::damperforce" name="dampertypemodule::damperforce">
-<area shape="rect" id="node1" title="Evaluates the current force for a damper." alt="" coords="5,13,247,39"/>
-<area shape="rect" id="node2" href="$namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="295,5,448,47"/>
-<area shape="rect" id="node3" href="$namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="496,5,675,47"/>
+<area shape="rect" id="node1" title="Evaluates the current force for a damper." alt="" coords="5,111,247,138"/>
+<area shape="rect" id="node2" href="$namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="295,104,448,145"/>
+<area shape="rect" id="node3" href="$namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title="Integrates an explicit function from 0.0 to x." alt="" coords="496,71,675,112"/>
+<area shape="rect" id="node7" href="$namespacefunctiontypemodule.html#a426a080def8bc084419465ae1bd77b37" title="Returns the id of a function object, including its type." alt="" coords="509,136,662,177"/>
+<area shape="rect" id="node4" href="$namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="723,5,901,47"/>
+<area shape="rect" id="node5" href="$namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="723,71,901,112"/>
+<area shape="rect" id="node6" href="$namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="723,136,901,177"/>
 </map>

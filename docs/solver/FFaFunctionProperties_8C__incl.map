@@ -1,8 +1,8 @@
 <map id="fedem&#45;foundation/src/FFaFunctionLib/FFaFunctionProperties.C" name="fedem&#45;foundation/src/FFaFunctionLib/FFaFunctionProperties.C">
-<area shape="rect" id="node1" title=" " alt="" coords="553,5,756,61"/>
-<area shape="rect" id="node2" href="$FFaFunctionProperties_8H.html" title=" " alt="" coords="5,191,184,218"/>
-<area shape="rect" id="node5" href="$FFaFunctionManager_8H.html" title=" " alt="" coords="209,191,378,218"/>
-<area shape="rect" id="node6" href="$FFaUserFuncPlugin_8H.html" title=" " alt="" coords="517,109,675,136"/>
+<area shape="rect" id="node1" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="553,5,756,61"/>
+<area shape="rect" id="node2" href="$FFaFunctionProperties_8H.html" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="5,191,184,218"/>
+<area shape="rect" id="node5" href="$FFaFunctionManager_8H.html" title="Global functions direct evaluation of some explicit function types." alt="" coords="209,191,378,218"/>
+<area shape="rect" id="node6" href="$FFaUserFuncPlugin_8H.html" title="User&#45;defined functions plugin." alt="" coords="517,109,675,136"/>
 <area shape="rect" id="node10" href="$FFaMathExprFactory_8H.html" title=" " alt="" coords="663,191,916,218"/>
 <area shape="rect" id="node11" href="$FiDeviceFunctionFactory_8H.html" title="External device function factory (functions from file)." alt="" coords="940,184,1140,225"/>
 <area shape="rect" id="node14" title=" " alt="" coords="802,109,865,136"/>

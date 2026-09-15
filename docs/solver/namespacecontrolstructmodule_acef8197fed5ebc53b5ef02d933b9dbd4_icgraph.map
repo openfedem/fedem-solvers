@@ -1,0 +1,9 @@
+<map id="controlstructmodule::deallocatectrlcopy" name="controlstructmodule::deallocatectrlcopy">
+<area shape="rect" id="node1" title="Deallocates a control system copy." alt="" coords="524,136,677,177"/>
+<area shape="rect" id="node2" href="$namespacecontrolstructmodule.html#a5d513deafa31cb2ce861c44162dc5bb9" title="Estimates the controller gradient properties by perturbation." alt="" coords="240,5,472,47"/>
+<area shape="rect" id="node4" href="$namespacecontrolstructmodule.html#ad82fee198e0e53f8eb100b8600514114" title=" " alt="" coords="240,71,472,112"/>
+<area shape="rect" id="node5" href="$namespacecontrolstructmodule.html#a89f08c7aa479ca6c6c2ef4e1f42adc18" title=" " alt="" coords="240,136,472,177"/>
+<area shape="rect" id="node6" href="$namespacecontrolstructmodule.html#a6cf9f9837b724f8cb666efdf2daaed2d" title=" " alt="" coords="240,201,472,243"/>
+<area shape="rect" id="node7" href="$namespacecontrolstructmodule.html#a717c2d7fc1a0b2a540ea225605a222f9" title="Perturbation method without initial perturbation." alt="" coords="236,267,476,308"/>
+<area shape="rect" id="node3" href="$namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="5,5,188,47"/>
+</map>

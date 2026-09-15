@@ -2,20 +2,20 @@
 <area shape="rect" id="node1" title="Calculates Morison force contributions for a two&#45;noded beam element." alt="" coords="5,173,176,214"/>
 <area shape="rect" id="node2" href="$namespacehydrodynamicsmodule.html#ac1220ccaf89e6927867c56bf1c48e7da" title="Evaluates the sea state at the given point and time." alt="" coords="224,107,395,149"/>
 <area shape="rect" id="node5" href="$FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="706,56,783,83"/>
-<area shape="rect" id="node17" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="224,173,395,214"/>
+<area shape="rect" id="node17" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="224,173,395,214"/>
 <area shape="rect" id="node18" href="$namespacehydrodynamicsmodule.html#a89c6ae8da9405064482ab133361c06c0" title="Computes the buoyancy length and center for a two&#45;noded beam." alt="" coords="224,238,395,279"/>
 <area shape="rect" id="node19" href="$namespacehydrodynamicsmodule.html#a2ea2177d016f5ca3e78cc96d8f103f1d" title="Returns the water surface normal vector in local coordinate system." alt="" coords="224,303,395,345"/>
 <area shape="rect" id="node3" href="$namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="443,49,613,90"/>
-<area shape="rect" id="node6" href="$namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="443,303,613,345"/>
+<area shape="rect" id="node6" href="$namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="443,289,613,330"/>
 <area shape="rect" id="node16" href="$namespacefnvwaveforcemodule.html#aea8f4badc75f2f94ee7c0553f27a7903" title=" " alt="" coords="448,166,608,207"/>
 <area shape="rect" id="node4" href="$hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="713,5,777,32"/>
-<area shape="rect" id="node7" href="$namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="661,434,828,475"/>
-<area shape="rect" id="node8" href="$namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="661,499,828,541"/>
-<area shape="rect" id="node9" href="$namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="661,565,828,606"/>
-<area shape="rect" id="node10" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="661,630,828,671"/>
-<area shape="rect" id="node11" href="$namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="661,107,828,149"/>
-<area shape="rect" id="node12" href="$namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="661,173,828,214"/>
-<area shape="rect" id="node13" href="$namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="661,238,828,279"/>
-<area shape="rect" id="node14" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="661,303,828,345"/>
-<area shape="rect" id="node15" href="$namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="661,369,828,410"/>
+<area shape="rect" id="node7" href="$namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="661,419,828,461"/>
+<area shape="rect" id="node8" href="$namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="661,485,828,526"/>
+<area shape="rect" id="node9" href="$namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="661,550,828,591"/>
+<area shape="rect" id="node10" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="876,579,1043,621"/>
+<area shape="rect" id="node11" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="876,307,1043,349"/>
+<area shape="rect" id="node12" href="$namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="661,158,828,199"/>
+<area shape="rect" id="node13" href="$namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="661,223,828,265"/>
+<area shape="rect" id="node14" href="$namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="661,289,828,330"/>
+<area shape="rect" id="node15" href="$namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="661,354,828,395"/>
 </map>

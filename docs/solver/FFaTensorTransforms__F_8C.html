@@ -67,12 +67,13 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FFaTensorTransforms_F.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Fortran wrapper for the <a class="el" href="namespaceFFaTensorTransforms.html" title="Various tensor transformation utilities.">FFaTensorTransforms</a> methods.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="FFaTensorTransforms_8H_source.html">FFaLib/FFaAlgebra/FFaTensorTransforms.H</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFaTensor3_8H_source.html">FFaLib/FFaAlgebra/FFaTensor3.H</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFaVec3_8H_source.html">FFaLib/FFaAlgebra/FFaVec3.H</a>&quot;</code><br />
@@ -82,7 +83,7 @@ Include dependency graph for FFaTensorTransforms_F.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaTensorTransforms__F_8C__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaLib_2FFaAlgebra_2FFaTensorTransforms__F_8C" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaLib_2FFaAlgebra_2FFaTensorTransforms__F_8C" id="afedem-foundation_2src_2FFaLib_2FFaAlgebra_2FFaTensorTransforms__F_8C">
-<area shape="rect" title=" " alt="" coords="367,5,578,61"/>
+<area shape="rect" title="Fortran wrapper for the FFaTensorTransforms methods." alt="" coords="367,5,578,61"/>
 <area shape="rect" href="FFaTensorTransforms_8H.html" title="Tensor transformation utilities." alt="" coords="5,109,212,151"/>
 <area shape="rect" href="FFaTensor3_8H.html" title=" " alt="" coords="237,117,466,143"/>
 <area shape="rect" href="FFaVec3_8H.html" title="Point vectors in 3D space." alt="" coords="490,117,701,143"/>
@@ -92,201 +93,22 @@ Include dependency graph for FFaTensorTransforms_F.C:</div>
 <area shape="rect" title=" " alt="" coords="564,199,627,225"/>
 </map>
 </div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a8fd33f36285230383761eda72db76faf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaTensorTransforms__F_8C.html#a8fd33f36285230383761eda72db76faf">DOUBLE_FUNCTION</a> (vonmises, VONMISES) const</td></tr>
-<tr class="separator:a8fd33f36285230383761eda72db76faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abde8b84ca9bbc66b5c0069a41a1bcda8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaTensorTransforms__F_8C.html#abde8b84ca9bbc66b5c0069a41a1bcda8">SUBROUTINE</a> (princval, PRINCVAL) const</td></tr>
-<tr class="separator:abde8b84ca9bbc66b5c0069a41a1bcda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a575b61fdbd3218200f208ef843892ac5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaTensorTransforms__F_8C.html#a575b61fdbd3218200f208ef843892ac5">SUBROUTINE</a> (maxshearvalue, MAXSHEARVALUE) const</td></tr>
-<tr class="separator:a575b61fdbd3218200f208ef843892ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca4353eb8a752b3b7f5d1852e57b7b16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaTensorTransforms__F_8C.html#aca4353eb8a752b3b7f5d1852e57b7b16">SUBROUTINE</a> (maxshear, MAXSHEAR) const</td></tr>
-<tr class="separator:aca4353eb8a752b3b7f5d1852e57b7b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9451e7164769e2915b7a858bff239326"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaTensorTransforms__F_8C.html#a9451e7164769e2915b7a858bff239326">SUBROUTINE</a> (tratensor, TRATENSOR) const</td></tr>
-<tr class="separator:a9451e7164769e2915b7a858bff239326"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc0f34fd3ef0e7a4920b79ad764b30dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaTensorTransforms__F_8C.html#abc0f34fd3ef0e7a4920b79ad764b30dc">SUBROUTINE</a> (trainertia, TRAINERTIA) const</td></tr>
-<tr class="separator:abc0f34fd3ef0e7a4920b79ad764b30dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a8fd33f36285230383761eda72db76faf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fd33f36285230383761eda72db76faf">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">vonmises&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VONMISES&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>von Mises calculation for stress and strain tensors. </p>
-
-</div>
-</div>
-<a id="aca4353eb8a752b3b7f5d1852e57b7b16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca4353eb8a752b3b7f5d1852e57b7b16">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[1/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">maxshear&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">MAXSHEAR&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Maximum shear value and associated direction. </p>
-
-</div>
-</div>
-<a id="a575b61fdbd3218200f208ef843892ac5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a575b61fdbd3218200f208ef843892ac5">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[2/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">maxshearvalue&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">MAXSHEARVALUE&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Maximum shear value calculation. </p>
-
-</div>
-</div>
-<a id="abde8b84ca9bbc66b5c0069a41a1bcda8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abde8b84ca9bbc66b5c0069a41a1bcda8">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[3/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">princval&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">PRINCVAL&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Principal values calculation. </p>
-
-</div>
-</div>
-<a id="abc0f34fd3ef0e7a4920b79ad764b30dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc0f34fd3ef0e7a4920b79ad764b30dc">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[4/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">trainertia&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TRAINERTIA&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Inertia tensor transformation based on the parallel-axis theorem. </p>
-
-</div>
-</div>
-<a id="a9451e7164769e2915b7a858bff239326"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9451e7164769e2915b7a858bff239326">&#9670;&nbsp;</a></span>SUBROUTINE() <span class="overload">[5/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">tratensor&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TRATENSOR&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Congruence transformation of 2D and 3D symmetric tensors. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Fortran wrapper for the <a class="el" href="namespaceFFaTensorTransforms.html" title="Various tensor transformation utilities.">FFaTensorTransforms</a> methods. </p>
+<p>This file contains the implementation of the following Fortran wrappers of the <a class="el" href="namespaceFFaTensorTransforms.html" title="Various tensor transformation utilities.">FFaTensorTransforms</a> module:</p>
+<ul>
+<li><a class="el" href="interfaceffatensortransformsinterface_1_1vonmises.html" title="Returns the von Mises of given stress/strain tensor.">ffatensortransformsinterface::vonmises</a></li>
+<li><a class="el" href="interfaceffatensortransformsinterface_1_1princval.html" title="Calculates the principal values of given stress/strain tensor.">ffatensortransformsinterface::princval</a></li>
+<li><a class="el" href="interfaceffatensortransformsinterface_1_1maxshearvalue.html" title="Calculates the maximum shear value of given stress/strain tensor.">ffatensortransformsinterface::maxshearvalue</a></li>
+<li><a class="el" href="interfaceffatensortransformsinterface_1_1maxshear.html" title="Calculates the maximum shear of given stress/strain tensor.">ffatensortransformsinterface::maxshear</a></li>
+<li><a class="el" href="interfaceffatensortransformsinterface_1_1tratensor.html" title="Congruence transformation of 2D and 3D symmetric tensors.">ffatensortransformsinterface::tratensor</a></li>
+<li><a class="el" href="interfaceffatensortransformsinterface_1_1trainertia.html" title="Inertia tensor transformation based on the parallel-axis theorem.">ffatensortransformsinterface::trainertia</a></li>
+</ul>
+<p>No further documentation is provided here. The wrappers are documented in the <a class="el" href="FFaTensorTransformsInterface_8f90.html" title="Fortran interface for FFaTensorTransforms methods.">FFaTensorTransformsInterface.f90</a> file. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

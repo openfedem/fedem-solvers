@@ -87,13 +87,14 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Opens a device function file for write access. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of device function file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of device function file to open </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fileType</td><td>Type of device function file </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">fileId</td><td>File handle </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fileId</td><td>Unique index (handle) for the opened file </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag</td></tr>
   </table>
   </dd>
 </dl>
+<p>The extension of <em>fileName</em> is used to try to determine the file type if <em>fileType</em> is zero (unknown type). If this does not succeed, a simple text file will be opened. </p><dl class="section note"><dt>Note</dt><dd>If the specified file already exists, it will be replaced. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aee7c6b0daa39887b5a932bee8e063cef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aee7c6b0daa39887b5a932bee8e063cef">&#9670;&nbsp;</a></span>fidf_openwrite()</h2>
@@ -141,7 +142,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

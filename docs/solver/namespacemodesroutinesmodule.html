@@ -75,12 +75,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb">alloceigenmatrices</a> (modes, neq, ierr)</td></tr>
-<tr class="memdesc:aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates internal work arrays used by the eigenvalue solver.  <a href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb">More...</a><br /></td></tr>
-<tr class="separator:aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39533fa8e5762a7534046da54e71344c"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c">filleigensystem</a> (modes, neq, M, C, K, ierr)</td></tr>
-<tr class="memdesc:a39533fa8e5762a7534046da54e71344c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds the full matrices of the generalized eigenvalue problem.  <a href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c">More...</a><br /></td></tr>
-<tr class="separator:a39533fa8e5762a7534046da54e71344c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5780859dc33847c322f3350781023f18"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18">alloceigenmatrices</a> (modes, neq, neqEig, ierr)</td></tr>
+<tr class="memdesc:a5780859dc33847c322f3350781023f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates internal work arrays used by the eigenvalue solver.  <a href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18">More...</a><br /></td></tr>
+<tr class="separator:a5780859dc33847c322f3350781023f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecdca9cb6f13b5637b8481696b14cf8a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a">filleigensystem</a> (modes, neq, M, C, K, Q, ierr)</td></tr>
+<tr class="memdesc:aecdca9cb6f13b5637b8481696b14cf8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds the full matrices of the generalized eigenvalue problem.  <a href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a">More...</a><br /></td></tr>
+<tr class="separator:aecdca9cb6f13b5637b8481696b14cf8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06f7e4f86ff3d0003b5eea9b6e9fa26a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a">bubbelsort</a> (V, ind)</td></tr>
 <tr class="memdesc:a06f7e4f86ff3d0003b5eea9b6e9fa26a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts a real array in ascending order.  <a href="namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a">More...</a><br /></td></tr>
 <tr class="separator:a06f7e4f86ff3d0003b5eea9b6e9fa26a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -93,35 +93,35 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aab9d5cd7588c6ccdaf017659ff18c337"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337">printmodes</a> (sam, modes, time, iprint, io)</td></tr>
 <tr class="memdesc:aab9d5cd7588c6ccdaf017659ff18c337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the eigenvalues and eigenvectors to unit IO.  <a href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337">More...</a><br /></td></tr>
 <tr class="separator:aab9d5cd7588c6ccdaf017659ff18c337"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a427a3c801ab9d700747fc7d40c7a4e0c"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c">eigenmodes</a> (sam, modes, sys, mech, iprint, ierr)</td></tr>
-<tr class="memdesc:a427a3c801ab9d700747fc7d40c7a4e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate damped or undamped eigenvalues and eigenvectors.  <a href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c">More...</a><br /></td></tr>
-<tr class="separator:a427a3c801ab9d700747fc7d40c7a4e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1277c287c0d89e025e0352c57099aa"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa">eigenmodes</a> (sam, modes, sys, mech, ctrl, pCS, iprint, ierr)</td></tr>
+<tr class="memdesc:a0b1277c287c0d89e025e0352c57099aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates damped or undamped eigenvalues and eigenvectors.  <a href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa">More...</a><br /></td></tr>
+<tr class="separator:a0b1277c287c0d89e025e0352c57099aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9103940cba6421dfdbf089e1040771f9"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9">modalmasses</a> (sups, modes, sam, eigVectors, normFactors, modeOrder, ierr)</td></tr>
 <tr class="memdesc:a9103940cba6421dfdbf089e1040771f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates effective modal masses for the eigenmodes.  <a href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9">More...</a><br /></td></tr>
 <tr class="separator:a9103940cba6421dfdbf089e1040771f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8e9fddcfe2ea567d8e3433ce3ad90df"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#aa8e9fddcfe2ea567d8e3433ce3ad90df">addunitdisplvector</a> (samData, iel, eV, sysV, ierr)</td></tr>
-<tr class="memdesc:aa8e9fddcfe2ea567d8e3433ce3ad90df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an element unit displacement vector into the system vector.  <a href="namespacemodesroutinesmodule.html#aa8e9fddcfe2ea567d8e3433ce3ad90df">More...</a><br /></td></tr>
-<tr class="separator:aa8e9fddcfe2ea567d8e3433ce3ad90df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b0f5d4c167460dc2168e8615583c977"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977">exportmodes</a> (yamlFile, modelFile, modes, triads, sups, istep, time, ierr)</td></tr>
-<tr class="memdesc:a1b0f5d4c167460dc2168e8615583c977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports mode shapes with associated beam section forces to YAML.  <a href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977">More...</a><br /></td></tr>
-<tr class="separator:a1b0f5d4c167460dc2168e8615583c977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af69bc4349ef2b92680d92fead084cba6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#af69bc4349ef2b92680d92fead084cba6">addunitdisplvector</a> (samData, sup, ttcc_0, sysV, ierr)</td></tr>
+<tr class="memdesc:af69bc4349ef2b92680d92fead084cba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a superelement unit displacement vector into the system vector.  <a href="namespacemodesroutinesmodule.html#af69bc4349ef2b92680d92fead084cba6">More...</a><br /></td></tr>
+<tr class="separator:af69bc4349ef2b92680d92fead084cba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af35c7106432786600bb8d9209358dc11"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11">exportmodes</a> (yamlFile, modelFile, modes, triads, sups, iStep, time, ierr)</td></tr>
+<tr class="memdesc:af35c7106432786600bb8d9209358dc11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports mode shapes with associated beam section forces to YAML.  <a href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11">More...</a><br /></td></tr>
+<tr class="separator:af35c7106432786600bb8d9209358dc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9433463f64e5f22b47eccb8a211dc99d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a9433463f64e5f22b47eccb8a211dc99d">writeyamlheader</a> (iYaml, prog, modelFile, istep, time)</td></tr>
 <tr class="memdesc:a9433463f64e5f22b47eccb8a211dc99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the header of a YAML frequency response file.  <a href="namespacemodesroutinesmodule.html#a9433463f64e5f22b47eccb8a211dc99d">More...</a><br /></td></tr>
 <tr class="separator:a9433463f64e5f22b47eccb8a211dc99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441306c043857e9d3bd4fc8707099c84"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a441306c043857e9d3bd4fc8707099c84">writeyamldispl</a> (iYaml, triads, iMod, eigVal, eigVec)</td></tr>
 <tr class="memdesc:a441306c043857e9d3bd4fc8707099c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the mode shape eigenvector to a YAML frequency response file.  <a href="namespacemodesroutinesmodule.html#a441306c043857e9d3bd4fc8707099c84">More...</a><br /></td></tr>
 <tr class="separator:a441306c043857e9d3bd4fc8707099c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f9a5dea9c3ed46751fff16abe6676ec"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a3f9a5dea9c3ed46751fff16abe6676ec">writeyamlforces</a> (iYaml, sups, <a class="el" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b">scale</a>, iDbg, ierr)</td></tr>
-<tr class="memdesc:a3f9a5dea9c3ed46751fff16abe6676ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes beam sectional forces to a YAML frequency response file.  <a href="namespacemodesroutinesmodule.html#a3f9a5dea9c3ed46751fff16abe6676ec">More...</a><br /></td></tr>
-<tr class="separator:a3f9a5dea9c3ed46751fff16abe6676ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f3b23185bc8e904549bdacf9224dce4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodesroutinesmodule.html#a8f3b23185bc8e904549bdacf9224dce4">writeyamlforces</a> (iYaml, sups, eigScale, iDbg, ierr)</td></tr>
+<tr class="memdesc:a8f3b23185bc8e904549bdacf9224dce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes beam sectional forces to a YAML frequency response file.  <a href="namespacemodesroutinesmodule.html#a8f3b23185bc8e904549bdacf9224dce4">More...</a><br /></td></tr>
+<tr class="separator:a8f3b23185bc8e904549bdacf9224dce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Module with subroutines for the system-level eigenvalue analysis. </p>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>23 Mar 2000 </dd></dl>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="aa8e9fddcfe2ea567d8e3433ce3ad90df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8e9fddcfe2ea567d8e3433ce3ad90df">&#9670;&nbsp;</a></span>addunitdisplvector()</h2>
+<a id="af69bc4349ef2b92680d92fead084cba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af69bc4349ef2b92680d92fead084cba6">&#9670;&nbsp;</a></span>addunitdisplvector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -135,14 +135,14 @@ Functions/Subroutines</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">integer, intent(in)&#160;</td>
-          <td class="paramname"><em>iel</em>, </td>
+          <td class="paramtype">type(<a class="el" href="structsupeltypemodule_1_1supeltype.html">supeltype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>sup</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(dp), dimension(:,:), intent(in)&#160;</td>
-          <td class="paramname"><em>eV</em>, </td>
+          <td class="paramtype">real(dp), dimension(:), intent(in)&#160;</td>
+          <td class="paramname"><em>ttcc_0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -164,12 +164,12 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Adds an element unit displacement vector into the system vector. </p>
+<p>Adds a superelement unit displacement vector into the system vector. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">samData</td><td>Data for managing system matrix assembly </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iel</td><td>Element index </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">eV</td><td>Element displacement vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sup</td><td>The superelement to add unit displacement vector for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ttcc_0</td><td>Modified table of constraint equation coefficients </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">sysV</td><td>System displacement vector </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
@@ -178,13 +178,22 @@ Functions/Subroutines</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Leif Ivar Myklebust</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2 Jul 2003 </dd></dl>
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_cgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_cgraph" id="anamespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_cgraph">
+<area shape="rect" title="Adds a superelement unit displacement vector into the system vector." alt="" coords="5,5,173,47"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="221,5,436,47"/>
+</map>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_aa8e9fddcfe2ea567d8e3433ce3ad90df_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_aa8e9fddcfe2ea567d8e3433ce3ad90df_icgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_aa8e9fddcfe2ea567d8e3433ce3ad90df_icgraph" id="anamespacemodesroutinesmodule_aa8e9fddcfe2ea567d8e3433ce3ad90df_icgraph">
-<area shape="rect" title="Adds an element unit displacement vector into the system vector." alt="" coords="1068,49,1236,90"/>
+<div class="center"><img src="namespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_icgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_icgraph" id="anamespacemodesroutinesmodule_af69bc4349ef2b92680d92fead084cba6_icgraph">
+<area shape="rect" title="Adds a superelement unit displacement vector into the system vector." alt="" coords="1068,49,1236,90"/>
 <area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -196,8 +205,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb">&#9670;&nbsp;</a></span>alloceigenmatrices()</h2>
+<a id="a5780859dc33847c322f3350781023f18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5780859dc33847c322f3350781023f18">&#9670;&nbsp;</a></span>alloceigenmatrices()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,6 +222,12 @@ Here is the caller graph for this function:</div>
           <td></td>
           <td class="paramtype">integer, intent(in), optional&#160;</td>
           <td class="paramname"><em>neq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in), optional&#160;</td>
+          <td class="paramname"><em>neqEig</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -233,6 +248,7 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">modes</td><td>Eigenmode data container </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>Number of equations, i.e., dimension of system matrices </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neqEig</td><td>Number of active equation during the eigenvalue analysis </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
   </table>
   </dd>
@@ -240,12 +256,12 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb_icgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb_icgraph" id="anamespacemodesroutinesmodule_aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb_icgraph">
+<div class="center"><img src="namespacemodesroutinesmodule_a5780859dc33847c322f3350781023f18_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a5780859dc33847c322f3350781023f18_icgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_a5780859dc33847c322f3350781023f18_icgraph" id="anamespacemodesroutinesmodule_a5780859dc33847c322f3350781023f18_icgraph">
 <area shape="rect" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="1104,374,1272,415"/>
 <area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="853,301,1056,328"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="637,433,805,474"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="871,433,1039,474"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="637,433,805,474"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="871,433,1039,474"/>
 <area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="636,301,805,328"/>
 <area shape="rect" href="namespacesolvermodule.html#a6e3fefff7a29d4f24d7b52a11cba43bd" title="Terminates the simulation and close the result database." alt="" coords="405,157,572,184"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="401,208,576,235"/>
@@ -311,7 +327,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title="Sorts a real array in ascending order." alt="" coords="1068,49,1236,90"/>
 <area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="852,15,1020,57"/>
 <area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="852,81,1020,122"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -323,8 +339,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a427a3c801ab9d700747fc7d40c7a4e0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a427a3c801ab9d700747fc7d40c7a4e0c">&#9670;&nbsp;</a></span>eigenmodes()</h2>
+<a id="a0b1277c287c0d89e025e0352c57099aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b1277c287c0d89e025e0352c57099aa">&#9670;&nbsp;</a></span>eigenmodes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -356,6 +372,18 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">type(<a class="el" href="structcontroltypemodule_1_1controltype.html">controltype</a>), intent(inout)&#160;</td>
+          <td class="paramname"><em>ctrl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(<a class="el" href="structcontrolstructmodule_1_1controlstructtype.html">controlstructtype</a>), pointer&#160;</td>
+          <td class="paramname"><em>pCS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">integer, intent(in)&#160;</td>
           <td class="paramname"><em>iprint</em>, </td>
         </tr>
@@ -373,13 +401,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Calculate damped or undamped eigenvalues and eigenvectors. </p>
+<p>Calculates damped or undamped eigenvalues and eigenvectors. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">modes</td><td>Eigenmode data </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">sys</td><td>System level model data </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">mech</td><td>Mechanism components of the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ctrl</td><td>Control system data </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">pCS</td><td>Data for coupled control system and structure modal analysis </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">iprint</td><td>Print switch for additional output </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
@@ -390,63 +420,65 @@ Here is the caller graph for this function:</div>
 <li>1 : Use LANCZ1 (undamped systems only)</li>
 <li>2 : Use LANCZ2 (undamped systems only)</li>
 <li>3 : Use LAPACK::DGGEVX (undamped system)</li>
-<li>4 : Use LAPACK::DGGEVX (damped system)</li>
-<li>5 : Use LAPACK::DSYGVX (symmetric system) </li>
+<li>4 : Use LAPACK::DGGEVX (damped system, 2n state-space form)</li>
+<li>5 : Use LAPACK::DSYGVX (undamped, symmetric system)</li>
+<li>6 : Use LAPACK::DGGEVX (3n state-space form) </li>
 </ul>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_cgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_cgraph" id="anamespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_cgraph">
-<area shape="rect" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="5,848,173,889"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="563,841,731,883"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="227,294,472,321"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="234,401,465,427"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="239,585,459,611"/>
-<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="269,749,430,791"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="570,997,725,1039"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="267,880,431,921"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="265,815,433,856"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="265,1063,433,1104"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="265,997,433,1039"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="221,1129,477,1155"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="265,1180,433,1221"/>
-<area shape="rect" href="namespacebushingelementroutinesmodule.html#a92ee5a2bfa21215d2fe1c92b22849814" title=" " alt="" coords="533,515,762,556"/>
-<area shape="rect" href="namespacecontactelementroutinesmodule.html#a80824cb38e21c91f12e078f0bc627b46" title="Calculates the damping matrix for each contact damper." alt="" coords="525,71,769,112"/>
-<area shape="rect" href="namespacedamperroutinesmodule.html#aaf447a948e2456c63a102f35b8bd6f8f" title="Assembles system damping matrix contributions from a damper element." alt="" coords="560,384,735,425"/>
-<area shape="rect" href="namespacesupelroutinesmodule.html#ac2c60bfff413e3167651225234767668" title="Adds a superelement matrix into the equivalent system matrix." alt="" coords="568,253,727,295"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a6d53338014facb0e81f48f0663b983bc" title=" " alt="" coords="565,5,729,47"/>
-<area shape="rect" href="namespaceuserdefelroutinesmodule.html#a803075181ede4bb81e95c07ec3413f8b" title="Adds an element matrix into the equivalent system matrix." alt="" coords="555,319,740,360"/>
+<div class="center"><img src="namespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_cgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_cgraph" id="anamespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_cgraph">
+<area shape="rect" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="5,840,173,881"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="563,893,731,935"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="227,385,472,411"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="849,443,1012,484"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="234,231,465,258"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="239,639,459,666"/>
+<area shape="rect" href="namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="258,741,441,783"/>
+<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="269,807,430,848"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="570,1055,725,1096"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="267,937,431,979"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="265,872,433,913"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="265,1055,433,1096"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="265,1120,433,1161"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="221,1186,477,1213"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="265,1237,433,1279"/>
+<area shape="rect" href="namespacebushingelementroutinesmodule.html#a92ee5a2bfa21215d2fe1c92b22849814" title=" " alt="" coords="533,567,762,608"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#a80824cb38e21c91f12e078f0bc627b46" title="Calculates the damping matrix for each contact damper." alt="" coords="525,501,769,543"/>
+<area shape="rect" href="namespacedamperroutinesmodule.html#aaf447a948e2456c63a102f35b8bd6f8f" title="Assembles system damping matrix contributions from a damper element." alt="" coords="560,188,735,229"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#ac2c60bfff413e3167651225234767668" title="Adds a superelement matrix into the equivalent system matrix." alt="" coords="568,319,727,360"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a6d53338014facb0e81f48f0663b983bc" title=" " alt="" coords="565,253,729,295"/>
+<area shape="rect" href="namespaceuserdefelroutinesmodule.html#a803075181ede4bb81e95c07ec3413f8b" title="Adds an element matrix into the equivalent system matrix." alt="" coords="555,384,740,425"/>
 <area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="619,137,675,163"/>
-<area shape="rect" href="namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="849,247,1012,288"/>
-<area shape="rect" href="namespacecontactelementroutinesmodule.html#acfbc2afd2bc6545e5b8ac6649f6594ed" title=" " alt="" coords="817,129,1044,171"/>
-<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="1104,305,1271,347"/>
-<area shape="rect" href="diffractionModule_8f90.html#a537383c453e47092ed02cb5be7974394" title=" " alt="" coords="890,78,971,105"/>
-<area shape="rect" href="namespaceasmextensionmodule.html#a31b2c6b99dd86f8ae23a1923abced3c9" title="Adds an element matrix into the system matrix." alt="" coords="849,580,1012,621"/>
-<area shape="rect" href="namespacesupeltypemodule.html#adbdf5f04df719a0ba37ff40d70898c0a" title="Returns the transformation matrix to system directions for a triad." alt="" coords="817,363,1044,390"/>
-<area shape="rect" href="namespacemassroutinesmodule.html#ae8d96389b518f957ec01a38549d68c0c" title="Calculates the mass matrix for a mass element." alt="" coords="568,580,727,621"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a7edd4427d38361936be7128f46bf5afe" title=" " alt="" coords="573,449,722,491"/>
-<area shape="rect" href="namespacecontactelementroutinesmodule.html#a8926a15efeafd32a7cb03d30d764ff51" title="Calculates the stiffness matrix for each contact spring." alt="" coords="534,188,761,229"/>
-<area shape="rect" href="namespacespringroutinesmodule.html#ac05d1d43e81337683d3ae43a7e3c962d" title="Assembles system stiffness contributions from a spring element." alt="" coords="565,711,729,752"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a96a580dd209b33ef28ea2d513f2bda97" title=" " alt="" coords="574,645,721,687"/>
-<area shape="rect" href="namespacesupelroutinesmodule.html#a7de00964a81d8cf58aecae33fffd4267" title="Computes the tangential superelement stiffness matrix." alt="" coords="568,776,727,817"/>
-<area shape="rect" href="namespacespringroutinesmodule.html#ab33de58a0a2ea7e130d3910aa61cabd3" title="Calculates the stiffness matrix contributions from a spring element." alt="" coords="849,684,1013,725"/>
-<area shape="rect" href="namespacespringroutinesmodule.html#a4c58f209480870af2afdd94386ce92e4" title="Updates a spring element stiffness matrix due to explicit coupling." alt="" coords="1103,684,1271,725"/>
-<area shape="rect" href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f" title="Calculates the rotational geometric stiffness for a superelement." alt="" coords="825,750,1037,777"/>
-<area shape="rect" href="namespacesupelroutinesmodule.html#a585f5697d287857d37cdc6ecdef0ec67" title="Calculates the scaled matrix&#45;vector product Y = α*A*X." alt="" coords="851,801,1010,843"/>
-<area shape="rect" href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41" title="Forms the Fn matrix based on the internal force vector." alt="" coords="1092,750,1283,777"/>
-<area shape="rect" href="namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="565,907,730,948"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a" title="Sorts a real array in ascending order." alt="" coords="563,1063,731,1104"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aa8e9fddcfe2ea567d8e3433ce3ad90df" title="Adds an element unit displacement vector into the system vector." alt="" coords="563,1219,731,1260"/>
-<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="540,1153,755,1195"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#acfbc2afd2bc6545e5b8ac6649f6594ed" title=" " alt="" coords="817,560,1044,601"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="1104,501,1271,543"/>
+<area shape="rect" href="diffractionModule_8f90.html#a537383c453e47092ed02cb5be7974394" title=" " alt="" coords="890,626,971,653"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#a31b2c6b99dd86f8ae23a1923abced3c9" title="Adds an element matrix into the system matrix." alt="" coords="849,188,1012,229"/>
+<area shape="rect" href="namespacesupeltypemodule.html#adbdf5f04df719a0ba37ff40d70898c0a" title="Returns the transformation matrix to system directions for a triad." alt="" coords="817,290,1044,317"/>
+<area shape="rect" href="namespacemassroutinesmodule.html#ae8d96389b518f957ec01a38549d68c0c" title="Calculates the mass matrix for a mass element." alt="" coords="568,5,727,47"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a7edd4427d38361936be7128f46bf5afe" title=" " alt="" coords="573,71,722,112"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#a8926a15efeafd32a7cb03d30d764ff51" title="Calculates the stiffness matrix for each contact spring." alt="" coords="534,697,761,739"/>
+<area shape="rect" href="namespacespringroutinesmodule.html#ac05d1d43e81337683d3ae43a7e3c962d" title="Assembles system stiffness contributions from a spring element." alt="" coords="565,632,729,673"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a96a580dd209b33ef28ea2d513f2bda97" title=" " alt="" coords="574,763,721,804"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a7de00964a81d8cf58aecae33fffd4267" title="Computes the tangential superelement stiffness matrix." alt="" coords="568,828,727,869"/>
+<area shape="rect" href="namespacespringroutinesmodule.html#ab33de58a0a2ea7e130d3910aa61cabd3" title="Calculates the stiffness matrix contributions from a spring element." alt="" coords="849,677,1013,719"/>
+<area shape="rect" href="namespacespringroutinesmodule.html#a4c58f209480870af2afdd94386ce92e4" title="Updates a spring element stiffness matrix due to explicit coupling." alt="" coords="1103,677,1271,719"/>
+<area shape="rect" href="namespacecorotutilmodule.html#a85d275099c228a90b0b6dc768d5c819f" title="Calculates the rotational geometric stiffness for a superelement." alt="" coords="825,861,1037,887"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a585f5697d287857d37cdc6ecdef0ec67" title="Calculates the scaled matrix&#45;vector product Y = α*A*X." alt="" coords="851,795,1010,836"/>
+<area shape="rect" href="namespacecorotutilmodule.html#abeddbb3a37ce7e9d8d4978a2118c4f41" title="Forms the Fn matrix based on the internal force vector." alt="" coords="1092,861,1283,887"/>
+<area shape="rect" href="namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="565,959,730,1000"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a" title="Sorts a real array in ascending order." alt="" coords="563,1120,731,1161"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af69bc4349ef2b92680d92fead084cba6" title="Adds a superelement unit displacement vector into the system vector." alt="" coords="563,1237,731,1279"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="823,1237,1038,1279"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_icgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_icgraph" id="anamespacemodesroutinesmodule_a427a3c801ab9d700747fc7d40c7a4e0c_icgraph">
-<area shape="rect" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<div class="center"><img src="namespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_icgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_icgraph" id="anamespacemodesroutinesmodule_a0b1277c287c0d89e025e0352c57099aa_icgraph">
+<area shape="rect" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -458,8 +490,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a1b0f5d4c167460dc2168e8615583c977"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b0f5d4c167460dc2168e8615583c977">&#9670;&nbsp;</a></span>exportmodes()</h2>
+<a id="af35c7106432786600bb8d9209358dc11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af35c7106432786600bb8d9209358dc11">&#9670;&nbsp;</a></span>exportmodes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -498,7 +530,7 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">integer(i8), intent(in)&#160;</td>
-          <td class="paramname"><em>istep</em>, </td>
+          <td class="paramname"><em>iStep</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -539,29 +571,29 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_cgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_cgraph" id="anamespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_cgraph">
+<div class="center"><img src="namespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_cgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_cgraph" id="anamespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_cgraph">
 <area shape="rect" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="5,150,173,191"/>
 <area shape="rect" href="modesRoutinesModule_8f90.html#aa881f9e4066baf97b96b5791c0ea7a5c" title="Calculates scaling factor for an eigenvector." alt="" coords="291,5,369,32"/>
 <area shape="rect" href="namespacetriadtypemodule.html#a39da629df03d79e4630a9ee029ae954b" title="Updates the position matrices for all triads." alt="" coords="221,56,439,83"/>
-<area shape="rect" href="namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="519,145,710,172"/>
+<area shape="rect" href="namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="519,144,710,171"/>
 <area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="302,157,358,184"/>
 <area shape="rect" href="namespacemodesroutinesmodule.html#a441306c043857e9d3bd4fc8707099c84" title="Writes the mode shape eigenvector to a YAML frequency response file." alt="" coords="246,209,414,250"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a3f9a5dea9c3ed46751fff16abe6676ec" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="246,274,414,315"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a8f3b23185bc8e904549bdacf9224dce4" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="246,274,414,315"/>
 <area shape="rect" href="namespacemodesroutinesmodule.html#a9433463f64e5f22b47eccb8a211dc99d" title="Writes the header of a YAML frequency response file." alt="" coords="246,339,414,381"/>
 <area shape="rect" href="namespacesupeltypemodule.html#a9c3feeb631203d9d136491520d1d9363" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="791,231,991,257"/>
-<area shape="rect" href="namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="487,289,743,316"/>
+<area shape="rect" href="namespacesupeltypemodule.html#aa4153a12fc9dac40e11e40f3b68142a1" title="Returns the full ID of a superelement." alt="" coords="509,281,720,308"/>
+<area shape="rect" href="namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="487,332,743,359"/>
 <area shape="rect" href="namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="809,282,972,323"/>
 <area shape="rect" href="namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="809,347,972,389"/>
 <area shape="rect" href="namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="814,413,967,454"/>
-<area shape="rect" href="namespaceversionmodule.html#af1314db1e48ea02ac31a0d407028c9cd" title="Returns current date and time in the format &quot;dd Mmm yyyy hh:mm:ss&quot;." alt="" coords="503,347,726,373"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_icgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_icgraph" id="anamespacemodesroutinesmodule_a1b0f5d4c167460dc2168e8615583c977_icgraph">
+<div class="center"><img src="namespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_icgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_icgraph" id="anamespacemodesroutinesmodule_af35c7106432786600bb8d9209358dc11_icgraph">
 <area shape="rect" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
@@ -574,8 +606,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a39533fa8e5762a7534046da54e71344c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39533fa8e5762a7534046da54e71344c">&#9670;&nbsp;</a></span>filleigensystem()</h2>
+<a id="aecdca9cb6f13b5637b8481696b14cf8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecdca9cb6f13b5637b8481696b14cf8a">&#9670;&nbsp;</a></span>filleigensystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -613,6 +645,12 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">type(<a class="el" href="structsysmatrixtypemodule_1_1sysmatrixtype.html">sysmatrixtype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>Q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">integer, intent(out)&#160;</td>
           <td class="paramname"><em>ierr</em>&#160;</td>
         </tr>
@@ -632,31 +670,40 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir">[in]</td><td class="paramname">M</td><td>System mass matrix </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">C</td><td>System damping matrix </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">K</td><td>System stiffness matrix </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Q</td><td>System steady-state error elimination matrix </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
 </dl>
 <p>The generalized eigenvalue problem is on the form <b>A</b> <b>z</b> = &lambda; <b>B</b> <b>z</b> </p>
-<p>With damping: </p><pre class="fragment">     | K  0 |*{z} = lambda * | -C -M |*{z}
+<p>Without damping: </p><pre class="fragment">     [K]*{z} = lambda*[M]*{z}
+</pre><p> With damping (2n state-space form): </p><pre class="fragment">     | K  0 |*{z} = lambda * | -C -M |*{z}
      | 0 -M |                | -M  0 |
-</pre><p> Without damping: </p><pre class="fragment">     [K]*{z} = lambda*[M]*{z}
-</pre> <div class="dynheader">
+</pre><p> With damping and/or steady-state error elimination (3n state-space form): </p><pre class="fragment">     | Q  0  0 |*{z} = lambda * | -K -C -M |*{z}
+     | 0  K  0 |                |  K  0  0 |
+     | 0  0  M |                |  0  M  0 |
+</pre> <dl class="section note"><dt>Note</dt><dd>The 3n state-space method does not work quite yet. No eigenvalues are obtained for unknown reasons. However, the <b>A</b> and <b>B</b> matrices seems to be correct. The method has been proven valid in MATLAB. But the <b>A</b> and <b>B</b> matrices obtained through this code yield the same eigenvalue results in MATLAB. Can it be due to singular or very sparse matrices?</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>22 Mar 2000</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Magne Bratland </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>8 Oct 2010 </dd></dl>
+<div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_cgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_cgraph" id="anamespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_cgraph">
+<div class="center"><img src="namespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_cgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_cgraph" id="anamespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_cgraph">
 <area shape="rect" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="5,39,173,80"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="221,5,389,47"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="221,5,389,47"/>
 <area shape="rect" href="namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="223,71,388,112"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_icgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_icgraph" id="anamespacemodesroutinesmodule_a39533fa8e5762a7534046da54e71344c_icgraph">
+<div class="center"><img src="namespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_icgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_icgraph" id="anamespacemodesroutinesmodule_aecdca9cb6f13b5637b8481696b14cf8a_icgraph">
 <area shape="rect" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -739,7 +786,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacemodesroutinesmodule_a36c8183875f17b56a6838657cc57c657_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a36c8183875f17b56a6838657cc57c657_icgraph" alt=""/></div>
 <map name="anamespacemodesroutinesmodule_a36c8183875f17b56a6838657cc57c657_icgraph" id="anamespacemodesroutinesmodule_a36c8183875f17b56a6838657cc57c657_icgraph">
 <area shape="rect" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -844,7 +891,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacemodesroutinesmodule_a08f0f6aec7fe6e9843261e63f8405725_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a08f0f6aec7fe6e9843261e63f8405725_icgraph" alt=""/></div>
 <map name="anamespacemodesroutinesmodule_a08f0f6aec7fe6e9843261e63f8405725_icgraph" id="anamespacemodesroutinesmodule_a08f0f6aec7fe6e9843261e63f8405725_icgraph">
 <area shape="rect" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -929,7 +976,7 @@ Here is the caller graph for this function:</div>
 <p>The calculation is as follows:</p>
 <p>[temp] = [&Phi;]^t[M]*[R]</p>
 <p>M_eff(i,j) = temp(i,j)^2</p>
-<p>where the eigenvector matrix, [&Phi;], is transposed and assumed to be mass-normalized, [M] is the compact mass matrix, and [R] is the influence matrix representing a rigid body unit displacement of the mechanism. Finally, [M_eff] is a nModes&times;6 matrix of the effective modal masses. The results are stored in <a class="el" href="structmodestypemodule_1_1modestype.html#a0388bf085fe3dbb0523984e39181f6bd" title="Effective modal masses.">modestypemodule::modestype::effmass</a>.</p>
+<p>where the eigenvector matrix, [&Phi;], is transposed and assumed to be mass-normalized, [M] is the compact mass matrix, and [R] is the influence matrix representing a rigid body unit displacement of the mechanism. Finally, [M_eff] is a nModes&times;6 matrix of the effective modal masses. The results are stored in the array <a class="el" href="structmodestypemodule_1_1modestype.html#a0388bf085fe3dbb0523984e39181f6bd" title="Effective modal masses.">modestypemodule::modestype::effmass</a>.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>It works now for LANCZ2 and for the -undamped solvers (although I encountered something that looks like a bug in the -undamped calculation of the eigenvectors). Furthermore, local orientation of triads are not (yet) taken into account, but should normally not be critical as long as the local triad masses are the same in all coordinate directions (for inertias it will induce errors, however). Component modes seems to be treated correctly, but has not been tested too much. Some more elegance could also be put into the creation of unit displacement vectors, just to make sure that all kinds of joints and boundary conditions are treated correctly. In fact, there might be a better and easier solution to this than the approach I have used here.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Leif Ivar Myklebust</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2 Jul 2003 </dd></dl>
@@ -938,9 +985,9 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_cgraph" alt=""/></div>
 <map name="anamespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_cgraph" id="anamespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_cgraph">
-<area shape="rect" title="Calculates effective modal masses for the eigenmodes." alt="" coords="5,39,173,80"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aa8e9fddcfe2ea567d8e3433ce3ad90df" title="Adds an element unit displacement vector into the system vector." alt="" coords="245,5,413,47"/>
-<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="221,71,436,112"/>
+<area shape="rect" title="Calculates effective modal masses for the eigenmodes." alt="" coords="5,5,173,47"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af69bc4349ef2b92680d92fead084cba6" title="Adds a superelement unit displacement vector into the system vector." alt="" coords="221,5,389,47"/>
+<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="437,5,652,47"/>
 </map>
 </div>
 <div class="dynheader">
@@ -949,7 +996,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_icgraph" alt=""/></div>
 <map name="anamespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_icgraph" id="anamespacemodesroutinesmodule_a9103940cba6421dfdbf089e1040771f9_icgraph">
 <area shape="rect" title="Calculates effective modal masses for the eigenmodes." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -1096,7 +1143,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacemodesroutinesmodule_a441306c043857e9d3bd4fc8707099c84_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a441306c043857e9d3bd4fc8707099c84_icgraph" alt=""/></div>
 <map name="anamespacemodesroutinesmodule_a441306c043857e9d3bd4fc8707099c84_icgraph" id="anamespacemodesroutinesmodule_a441306c043857e9d3bd4fc8707099c84_icgraph">
 <area shape="rect" title="Writes the mode shape eigenvector to a YAML frequency response file." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -1108,8 +1155,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a3f9a5dea9c3ed46751fff16abe6676ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f9a5dea9c3ed46751fff16abe6676ec">&#9670;&nbsp;</a></span>writeyamlforces()</h2>
+<a id="a8f3b23185bc8e904549bdacf9224dce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f3b23185bc8e904549bdacf9224dce4">&#9670;&nbsp;</a></span>writeyamlforces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1130,7 +1177,7 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">real(dp), intent(in)&#160;</td>
-          <td class="paramname"><em>scale</em>, </td>
+          <td class="paramname"><em>eigScale</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1157,35 +1204,36 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">iYaml</td><td>File unit number of the YAML-file to write </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">sups</td><td>All superelements in the model </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>Scaling factor for the eigenvector </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iDbg</td><td>File unit number of debug output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">eigScale</td><td>Scaling factor for the eigenvector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iDbg</td><td>File unit number for debug output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>/rev 21 Jun 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21 Jun 2017 </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_cgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_cgraph" id="anamespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_cgraph">
-<area shape="rect" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="5,49,173,90"/>
+<div class="center"><img src="namespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_cgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_cgraph" id="anamespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_cgraph">
+<area shape="rect" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="5,61,173,102"/>
 <area shape="rect" href="namespacesupeltypemodule.html#a9c3feeb631203d9d136491520d1d9363" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="525,5,725,32"/>
-<area shape="rect" href="namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="254,56,445,83"/>
-<area shape="rect" href="namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="221,107,477,133"/>
-<area shape="rect" href="namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="544,57,707,98"/>
-<area shape="rect" href="namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="544,122,707,163"/>
-<area shape="rect" href="namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="549,187,702,229"/>
+<area shape="rect" href="namespacesupeltypemodule.html#aa4153a12fc9dac40e11e40f3b68142a1" title="Returns the full ID of a superelement." alt="" coords="244,43,455,69"/>
+<area shape="rect" href="namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="254,93,445,120"/>
+<area shape="rect" href="namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="221,144,477,171"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="544,71,707,113"/>
+<area shape="rect" href="namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="544,137,707,178"/>
+<area shape="rect" href="namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="549,202,702,243"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_icgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_icgraph" id="anamespacemodesroutinesmodule_a3f9a5dea9c3ed46751fff16abe6676ec_icgraph">
+<div class="center"><img src="namespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_icgraph" alt=""/></div>
+<map name="anamespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_icgraph" id="anamespacemodesroutinesmodule_a8f3b23185bc8e904549bdacf9224dce4_icgraph">
 <area shape="rect" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -1261,23 +1309,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>/rev 21 Jun 2017 </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_cgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_cgraph" alt=""/></div>
-<map name="anamespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_cgraph" id="anamespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_cgraph">
-<area shape="rect" title="Writes the header of a YAML frequency response file." alt="" coords="5,5,173,47"/>
-<area shape="rect" href="namespaceversionmodule.html#af1314db1e48ea02ac31a0d407028c9cd" title="Returns current date and time in the format &quot;dd Mmm yyyy hh:mm:ss&quot;." alt="" coords="221,13,444,39"/>
-</map>
-</div>
+<dl class="section date"><dt>Date</dt><dd>21 Jun 2017 </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_icgraph.png" border="0" usemap="#anamespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_icgraph" alt=""/></div>
 <map name="anamespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_icgraph" id="anamespacemodesroutinesmodule_a9433463f64e5f22b47eccb8a211dc99d_icgraph">
 <area shape="rect" title="Writes the header of a YAML frequency response file." alt="" coords="852,49,1020,90"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="636,49,804,90"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,19,588,45"/>
 <area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,81,580,108"/>
 <area shape="rect" href="solverDriver_8f90.html#af00fbe28520a8c7e4bd1c6f066f71739" title="Solves the eigenvalue system at current configuration." alt="" coords="190,5,282,32"/>
@@ -1292,7 +1331,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

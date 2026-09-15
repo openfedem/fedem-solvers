@@ -8,7 +8,7 @@
 <area shape="rect" id="node19" href="$namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="1181,892,1411,919"/>
 <area shape="rect" id="node20" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="1175,732,1417,759"/>
 <area shape="rect" id="node22" href="$namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="1186,842,1406,868"/>
-<area shape="rect" id="node4" href="$namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="926,877,1094,918"/>
+<area shape="rect" id="node4" href="$namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="926,877,1094,918"/>
 <area shape="rect" id="node11" href="$namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="895,943,1125,970"/>
 <area shape="rect" id="node5" href="$namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="634,826,833,852"/>
 <area shape="rect" id="node7" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="389,572,572,599"/>

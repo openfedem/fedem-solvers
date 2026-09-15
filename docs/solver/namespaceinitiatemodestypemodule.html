@@ -91,13 +91,13 @@ Functions/Subroutines</h2></td></tr>
         <tr>
           <td class="memname">subroutine initiatemodestypemodule::initiatemodes </td>
           <td>(</td>
-          <td class="paramtype">type(<a class="el" href="structsammodule_1_1samtype.html">samtype</a>), intent(inout)&#160;</td>
+          <td class="paramtype">type(<a class="el" href="structsammodule_1_1samtype.html">samtype</a>), intent(in)&#160;</td>
           <td class="paramname"><em>sam</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">type(<a class="el" href="structsystemtypemodule_1_1systemtype.html">systemtype</a>), intent(inout)&#160;</td>
+          <td class="paramtype">type(<a class="el" href="structsystemtypemodule_1_1systemtype.html">systemtype</a>), intent(in)&#160;</td>
           <td class="paramname"><em>sys</em>, </td>
         </tr>
         <tr>
@@ -135,8 +135,8 @@ Functions/Subroutines</h2></td></tr>
 <p>Initializes the eigenvalue solver. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">sys</td><td>System level model data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sam</td><td>Data for managing system matrix assembly </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sys</td><td>System level model data </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">modes</td><td>Data for eigenmodes </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">err</td><td>Error flag </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">nModes</td><td>Number of eigen modes to calculate </td></tr>
@@ -153,7 +153,7 @@ Here is the call graph for this function:</div>
 <map name="anamespaceinitiatemodestypemodule_a584da4b82a57902b6584aacc8e02fba3_cgraph" id="anamespaceinitiatemodestypemodule_a584da4b82a57902b6584aacc8e02fba3_cgraph">
 <area shape="rect" title="Initializes the eigenvalue solver." alt="" coords="5,100,196,141"/>
 <area shape="rect" href="namespacesysmatrixtypemodule.html#ada8e37503fcd8d03c4ea25fd8a1d448d" title="Allocates storage for a system matrix." alt="" coords="279,5,445,47"/>
-<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="277,71,447,112"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="277,71,447,112"/>
 <area shape="rect" href="namespacemodestypemodule.html#a43424880f2f896b318e263531738f866" title="Initializes the ModesType object." alt="" coords="244,137,480,163"/>
 <area shape="rect" href="namespacesysmatrixtypemodule.html#a69d39748d3fceedc24046aa1fcc27044" title="Lets one system matrix object share the data structure of another." alt="" coords="279,188,445,229"/>
 </map>
@@ -164,7 +164,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespaceinitiatemodestypemodule_a584da4b82a57902b6584aacc8e02fba3_icgraph.png" border="0" usemap="#anamespaceinitiatemodestypemodule_a584da4b82a57902b6584aacc8e02fba3_icgraph" alt=""/></div>
 <map name="anamespaceinitiatemodestypemodule_a584da4b82a57902b6584aacc8e02fba3_icgraph" id="anamespaceinitiatemodestypemodule_a584da4b82a57902b6584aacc8e02fba3_icgraph">
 <area shape="rect" title="Initializes the eigenvalue solver." alt="" coords="667,125,857,166"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
 <area shape="rect" href="namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="387,157,585,184"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
@@ -181,7 +181,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

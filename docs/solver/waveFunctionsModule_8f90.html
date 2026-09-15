@@ -76,70 +76,100 @@ $(function() {
 <div class="title">waveFunctionsModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Subroutines for sea wave evaluation.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacewavefunctionsmodule_1_1initfunc4.html">wavefunctionsmodule::initfunc4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes parameters of a sea wave function.  <a href="interfacewavefunctionsmodule_1_1initfunc4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacewavefunctionsmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html">wavefunctionsmodule</a></td></tr>
+<tr class="memdesc:namespacewavefunctionsmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module with subroutines for sea wave evaluation. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a062eeab502177a71809684dedfa35de0"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a062eeab502177a71809684dedfa35de0">wavefunctionsmodule::initfunc4fromfile</a> (FNAME, G, D, RFUNC, IERR, RSEED)</td></tr>
+<tr class="memdesc:a062eeab502177a71809684dedfa35de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes wave function parameters from the given file.  <a href="namespacewavefunctionsmodule.html#a062eeab502177a71809684dedfa35de0">More...</a><br /></td></tr>
 <tr class="separator:a062eeab502177a71809684dedfa35de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf40a12a0493325520b9e5fd6d68ca88"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#aaf40a12a0493325520b9e5fd6d68ca88">wavefunctionsmodule::initspectrumof</a> (IOP, H3, T1, Gamma, Omega0, dOmega, g, D, RFUNC, IERR, RSEED)</td></tr>
+<tr class="memdesc:aaf40a12a0493325520b9e5fd6d68ca88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a wave function based on statistical parameters.  <a href="namespacewavefunctionsmodule.html#aaf40a12a0493325520b9e5fd6d68ca88">More...</a><br /></td></tr>
 <tr class="separator:aaf40a12a0493325520b9e5fd6d68ca88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a470e64a61f7d9cd37e7a451b67402686"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a470e64a61f7d9cd37e7a451b67402686">wavefunctionsmodule::initspectrumdnv</a> (Hs, Tp, Gamma, Omega0, dOmega, g, D, RFUNC, IERR, RSEED, NWdir, SprExp)</td></tr>
+<tr class="memdesc:a470e64a61f7d9cd37e7a451b67402686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a wave function based on statistical parameters.  <a href="namespacewavefunctionsmodule.html#a470e64a61f7d9cd37e7a451b67402686">More...</a><br /></td></tr>
 <tr class="separator:a470e64a61f7d9cd37e7a451b67402686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f99f1d85937ea480362d1d43f78cfed"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="waveFunctionsModule_8f90.html#a1f99f1d85937ea480362d1d43f78cfed">piersonmoskowitz</a> (Hs, omega, omega_p)</td></tr>
+<tr class="memdesc:a1f99f1d85937ea480362d1d43f78cfed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a PiersonMoskowitz wave component amplitude.  <a href="waveFunctionsModule_8f90.html#a1f99f1d85937ea480362d1d43f78cfed">More...</a><br /></td></tr>
 <tr class="separator:a1f99f1d85937ea480362d1d43f78cfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad99cb24f706ada5f56d4427178273e69"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="waveFunctionsModule_8f90.html#ad99cb24f706ada5f56d4427178273e69">jonswap</a> (Hs, omega, omega_p, Gamma)</td></tr>
+<tr class="memdesc:ad99cb24f706ada5f56d4427178273e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a JONSWAP wave component amplitude.  <a href="waveFunctionsModule_8f90.html#ad99cb24f706ada5f56d4427178273e69">More...</a><br /></td></tr>
 <tr class="separator:ad99cb24f706ada5f56d4427178273e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa139de7c9a769811ac77da745ce1dbe0"><td class="memItemLeft" align="right" valign="top">real(dp) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#aa139de7c9a769811ac77da745ce1dbe0">wavefunctionsmodule::wavenumber</a> (omega, g, d)</td></tr>
+<tr class="memdesc:aa139de7c9a769811ac77da745ce1dbe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the wave number for finite depth waves.  <a href="namespacewavefunctionsmodule.html#aa139de7c9a769811ac77da745ce1dbe0">More...</a><br /></td></tr>
 <tr class="separator:aa139de7c9a769811ac77da745ce1dbe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a001024efbed391c40b03786ec0d967c9"><td class="memItemLeft" align="right" valign="top">logical function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a001024efbed391c40b03786ec0d967c9">wavefunctionsmodule::checkdepth</a> (d, k)</td></tr>
+<tr class="memdesc:a001024efbed391c40b03786ec0d967c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks that the finite water depth does not cause cause overflow.  <a href="namespacewavefunctionsmodule.html#a001024efbed391c40b03786ec0d967c9">More...</a><br /></td></tr>
 <tr class="separator:a001024efbed391c40b03786ec0d967c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acebfbf95e3a88840ff3fe41dda629647"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647">wavefunctionsmodule::deepwave</a> (RFUNC, g, x, z, t, atSurface, noWheelerStretching, h, u, w, du, dw, p)</td></tr>
+<tr class="memdesc:acebfbf95e3a88840ff3fe41dda629647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the deep water wave profile.  <a href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647">More...</a><br /></td></tr>
 <tr class="separator:acebfbf95e3a88840ff3fe41dda629647"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c430e214eb5b3ec493b6497e09f8998"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998">wavefunctionsmodule::deepwaves</a> (RFUNC, g, x, y, z, t, atSurface, noWheelerStretching, h, u, v, w, du, dv, dw, p)</td></tr>
+<tr class="memdesc:a3c430e214eb5b3ec493b6497e09f8998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the deep water wave profile.  <a href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998">More...</a><br /></td></tr>
 <tr class="separator:a3c430e214eb5b3ec493b6497e09f8998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a409b2f382d9232e850cd7e45ff20e112"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112">wavefunctionsmodule::finitedepthwave</a> (RFUNC, g, d, x, z, t, atSurface, noWheelerStretching, h, u, w, du, dw, p)</td></tr>
+<tr class="memdesc:a409b2f382d9232e850cd7e45ff20e112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the finite depth wave profile.  <a href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112">More...</a><br /></td></tr>
 <tr class="separator:a409b2f382d9232e850cd7e45ff20e112"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af083ce99d4b5b74b498641ac7a8831d7"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7">wavefunctionsmodule::finitedepthwaves</a> (RFUNC, g, d, x, y, z, t, atSurface, noWheelerStretching, h, u, v, w, du, dv, dw, p)</td></tr>
+<tr class="memdesc:af083ce99d4b5b74b498641ac7a8831d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the finite depth wave profile.  <a href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7">More...</a><br /></td></tr>
 <tr class="separator:af083ce99d4b5b74b498641ac7a8831d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dc8d3557051ab7af9072d329bcceb12"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12">wavefunctionsmodule::stokes2wave</a> (RFUNC, g, d, x, z, t, atSurface, noWheelerStretching, h, u, w, du, dw)</td></tr>
+<tr class="memdesc:a2dc8d3557051ab7af9072d329bcceb12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the wave profile according to 2nd order Stokes theory.  <a href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12">More...</a><br /></td></tr>
 <tr class="separator:a2dc8d3557051ab7af9072d329bcceb12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06c8bdd24c903d00c546d9f9534c69a4"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a06c8bdd24c903d00c546d9f9534c69a4">wavefunctionsmodule::initfunc7</a> (H, T, eps, g, D, RFUNC, ierr)</td></tr>
+<tr class="memdesc:a06c8bdd24c903d00c546d9f9534c69a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes coefficients for 5th order Stokes waves.  <a href="namespacewavefunctionsmodule.html#a06c8bdd24c903d00c546d9f9534c69a4">More...</a><br /></td></tr>
 <tr class="separator:a06c8bdd24c903d00c546d9f9534c69a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afabeafcb29815fdeac56558792aa3cc0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0">wavefunctionsmodule::stokes5wave</a> (RFUNC, d, x, z, t, atSurface, h, u, w, du, dw)</td></tr>
+<tr class="memdesc:afabeafcb29815fdeac56558792aa3cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the wave profile according to 5th order Stokes theory.  <a href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0">More...</a><br /></td></tr>
 <tr class="separator:afabeafcb29815fdeac56558792aa3cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b66f307c0d375822090491d4417f9e1"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a0b66f307c0d375822090491d4417f9e1">wavefunctionsmodule::initfunc8</a> (H, T, eps, g, D, RFUNC, iOrder)</td></tr>
+<tr class="memdesc:a0b66f307c0d375822090491d4417f9e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the streamline wave equation.  <a href="namespacewavefunctionsmodule.html#a0b66f307c0d375822090491d4417f9e1">More...</a><br /></td></tr>
 <tr class="separator:a0b66f307c0d375822090491d4417f9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a9eb4c44dbc482bccb8c3d96924cbfb"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb">wavefunctionsmodule::streamwave</a> (RFUNC, d, x, z, t, atSurface, h, u, w, du, dw)</td></tr>
+<tr class="memdesc:a5a9eb4c44dbc482bccb8c3d96924cbfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the nonlinear wave profile according to streamline theory.  <a href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb">More...</a><br /></td></tr>
 <tr class="separator:a5a9eb4c44dbc482bccb8c3d96924cbfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaae55e5d1230e413de13ceadc774560f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#aaae55e5d1230e413de13ceadc774560f">wavefunctionsmodule::initfunc9</a> (IOP, NR, NC, H3, T1, Gamma, Omega0, dOmega, g, D, ramp, embSLW, IFUNC, RFUNC, IERR, RSEED)</td></tr>
+<tr class="memdesc:aaae55e5d1230e413de13ceadc774560f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an irregular wave function with embedded streamlines.  <a href="namespacewavefunctionsmodule.html#aaae55e5d1230e413de13ceadc774560f">More...</a><br /></td></tr>
 <tr class="separator:aaae55e5d1230e413de13ceadc774560f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a361cf44d88020ee299d7e19cae174396"><td class="memItemLeft" align="right" valign="top">real(dp) function, dimension(:,:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="waveFunctionsModule_8f90.html#a361cf44d88020ee299d7e19cae174396">tomatrix</a> (array, nr, nc)</td></tr>
+<tr class="memdesc:a361cf44d88020ee299d7e19cae174396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a one-dimensional array to a two-dimensional matrix.  <a href="waveFunctionsModule_8f90.html#a361cf44d88020ee299d7e19cae174396">More...</a><br /></td></tr>
 <tr class="separator:a361cf44d88020ee299d7e19cae174396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6675f30431fbeb5ee575addef577573"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573">wavefunctionsmodule::embeddedwave</a> (IFUNC, RFUNC, g, d, x, z, t, atSurf, noWS, h, u, w, du, dw)</td></tr>
+<tr class="memdesc:ae6675f30431fbeb5ee575addef577573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates a wave function with embedded nonlinear components.  <a href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573">More...</a><br /></td></tr>
 <tr class="separator:ae6675f30431fbeb5ee575addef577573"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9536ea972bfe0f38fca26cf9d3776fa0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0">wavefunctionsmodule::userdefinedwave</a> (ikf, IFUNC, RFUNC, g, d, Xt, atSurf, h, u, du, ierr)</td></tr>
+<tr class="memdesc:a9536ea972bfe0f38fca26cf9d3776fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the user-defined wave profile.  <a href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0">More...</a><br /></td></tr>
 <tr class="separator:a9536ea972bfe0f38fca26cf9d3776fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a955cb70ed67277fb4d8a65dcb0706e5b"><td class="memItemLeft" align="right" valign="top">integer, parameter, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a955cb70ed67277fb4d8a65dcb0706e5b">wavefunctionsmodule::dp</a> = kind(1.0D0)</td></tr>
+<tr class="memdesc:a955cb70ed67277fb4d8a65dcb0706e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">8-byte real (double)  <a href="namespacewavefunctionsmodule.html#a955cb70ed67277fb4d8a65dcb0706e5b">More...</a><br /></td></tr>
 <tr class="separator:a955cb70ed67277fb4d8a65dcb0706e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0426d94f9f262b25fb9649d340d3b9e7"><td class="memItemLeft" align="right" valign="top">real(dp), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#a0426d94f9f262b25fb9649d340d3b9e7">wavefunctionsmodule::pi</a> = 3.141592653589793238_dp</td></tr>
+<tr class="memdesc:a0426d94f9f262b25fb9649d340d3b9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The value of &pi;.  <a href="namespacewavefunctionsmodule.html#a0426d94f9f262b25fb9649d340d3b9e7">More...</a><br /></td></tr>
 <tr class="separator:a0426d94f9f262b25fb9649d340d3b9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add3090ec6fddb595fac5ee76e9763286"><td class="memItemLeft" align="right" valign="top">real(dp), parameter, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewavefunctionsmodule.html#add3090ec6fddb595fac5ee76e9763286">wavefunctionsmodule::twopi</a> = pi+pi</td></tr>
+<tr class="memdesc:add3090ec6fddb595fac5ee76e9763286"><td class="mdescLeft">&#160;</td><td class="mdescRight">The value of 2&pi;.  <a href="namespacewavefunctionsmodule.html#add3090ec6fddb595fac5ee76e9763286">More...</a><br /></td></tr>
 <tr class="separator:add3090ec6fddb595fac5ee76e9763286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Subroutines for sea wave evaluation. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="ad99cb24f706ada5f56d4427178273e69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad99cb24f706ada5f56d4427178273e69">&#9670;&nbsp;</a></span>jonswap()</h2>
 
@@ -186,6 +216,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Returns a JONSWAP wave component amplitude. </p>
+
 </div>
 </div>
 <a id="a1f99f1d85937ea480362d1d43f78cfed"></a>
@@ -219,6 +251,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns a PiersonMoskowitz wave component amplitude. </p>
 
 </div>
 </div>
@@ -254,12 +288,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Converts a one-dimensional array to a two-dimensional matrix. </p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

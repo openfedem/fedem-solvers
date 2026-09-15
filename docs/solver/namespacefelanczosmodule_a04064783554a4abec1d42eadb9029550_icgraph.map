@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$namespacefelanczosmodule.html#a16d755206a68096b92814bef65bb12e5" title="Administers the matrix factorizations for the Lanczos eigensolver." alt="" coords="1351,121,1529,148"/>
 <area shape="rect" id="node3" href="$namespacefelanczosmodule.html#a4a64b51a5bc66dacc59450aa36b49c6c" title="Solves a generalized symmetric eigenvalue problem." alt="" coords="1064,121,1303,148"/>
 <area shape="rect" id="node4" href="$namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="852,114,1016,155"/>
-<area shape="rect" id="node5" href="$namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="636,85,804,126"/>
+<area shape="rect" id="node5" href="$namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="636,85,804,126"/>
 <area shape="rect" id="node12" href="$namespacecmstrsmodule.html#aabb37c12078bebda799a65a02816c11b" title="Solves the eigenvalue problem of the FE model." alt="" coords="639,151,801,177"/>
 <area shape="rect" id="node6" href="$namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="389,17,588,44"/>
 <area shape="rect" id="node8" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="397,93,580,120"/>

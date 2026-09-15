@@ -1,0 +1,7 @@
+<map id="sparsematrixmodule::smsize" name="sparsematrixmodule::smsize">
+<area shape="rect" id="node1" title="Returns the dimension of a sparse matrix." alt="" coords="497,27,655,69"/>
+<area shape="rect" id="node2" href="$namespacecmstrsmodule.html#ad97e980f913bdcfe24bdac4dc7602336" title="Performs CMS&#45;transformation on the system matrices." alt="" coords="283,5,449,32"/>
+<area shape="rect" id="node4" href="$namespacesprextensionmodule.html#addeebc448d47e0b2fde7fbdf7a7501af" title="Extracts an off&#45;diagonal sub&#45;matrix from a skyline system matrix." alt="" coords="289,57,443,98"/>
+<area shape="rect" id="node3" href="$reducer_8f90.html#a9051040d0a60653a66c1af2bad11dfad" title="Main driver for the FEDEM FE part reducer." alt="" coords="85,5,155,32"/>
+<area shape="rect" id="node5" href="$interfacematextensionmodule_1_1csgetsub12.html#aaf32cb8f166e28be8149eaf7019edd9c" title="Extracts the 12 sub&#45;matrix from a system matrix." alt="" coords="5,57,235,98"/>
+</map>

@@ -80,9 +80,6 @@ Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html">sensortype</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a sensor object.  <a href="structsensortypemodule_1_1sensortype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensorptrtype.html">sensorptrtype</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a sensor pointer.  <a href="structsensortypemodule_1_1sensorptrtype.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacesensortypemodule_1_1getptrtoid.html">getptrtoid</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to object with specified ID.  <a href="interfacesensortypemodule_1_1getptrtoid.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,6 +95,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a65a023b6198628a13dff5e866af12a47"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a65a023b6198628a13dff5e866af12a47">writesensortype</a> (sensor, lpu, complexity)</td></tr>
 <tr class="memdesc:a65a023b6198628a13dff5e866af12a47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to file.  <a href="namespacesensortypemodule.html#a65a023b6198628a13dff5e866af12a47">More...</a><br /></td></tr>
 <tr class="separator:a65a023b6198628a13dff5e866af12a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830a47fa4b46fba5a68ce928d31d90aa"><td class="memItemLeft" align="right" valign="top">character(len=lid_p) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa">getsensorid</a> (sensor, typeAsPrefix)</td></tr>
+<tr class="memdesc:a830a47fa4b46fba5a68ce928d31d90aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of a sensor object, including its type.  <a href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa">More...</a><br /></td></tr>
+<tr class="separator:a830a47fa4b46fba5a68ce928d31d90aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5033a68232b20aab10e6be8ff1067a6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aa5033a68232b20aab10e6be8ff1067a6">nullifysensor</a> (sensor)</td></tr>
 <tr class="memdesc:aa5033a68232b20aab10e6be8ff1067a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a sensor object.  <a href="namespacesensortypemodule.html#aa5033a68232b20aab10e6be8ff1067a6">More...</a><br /></td></tr>
 <tr class="separator:aa5033a68232b20aab10e6be8ff1067a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,9 +113,9 @@ Functions/Subroutines</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a781db82fa97a0b087797a8c87f393aef"><td class="memItemLeft" align="right" valign="top">character(len=14), dimension(13), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a781db82fa97a0b087797a8c87f393aef">sensortype_p</a> =(/ 'TIME ', 'ENGINE ', 'CONTROL ', 'TRIAD ', 'DAMPER_AXIAL ', 'SPRING_AXIAL ', 'JOINT_VARIABLE', 'SPRING_JOINT ', 'DAMPER_JOINT ', 'RELATIVE_TRIAD', 'MATLAB_WS ', 'STRAIN_GAGE ', 'NUM_ITERATIONS' /)</td></tr>
-<tr class="memdesc:a781db82fa97a0b087797a8c87f393aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sensor type strings, i.e., what type of object the sensor is measuring.  <a href="namespacesensortypemodule.html#a781db82fa97a0b087797a8c87f393aef">More...</a><br /></td></tr>
-<tr class="separator:a781db82fa97a0b087797a8c87f393aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a077b879cc9e784ec755cf176a6a4c"><td class="memItemLeft" align="right" valign="top">character(len=14), dimension(12), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#af5a077b879cc9e784ec755cf176a6a4c">sensortype_p</a> =(/ 'TIME ', 'ENGINE ', 'CONTROL ', 'TRIAD ', 'DAMPER_AXIAL ', 'SPRING_AXIAL ', 'JOINT_VARIABLE', 'SPRING_JOINT ', 'DAMPER_JOINT ', 'RELATIVE_TRIAD', 'STRAIN_GAGE ', 'NUM_ITERATIONS' /)</td></tr>
+<tr class="memdesc:af5a077b879cc9e784ec755cf176a6a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sensor type strings, i.e., what type of object the sensor is measuring.  <a href="namespacesensortypemodule.html#af5a077b879cc9e784ec755cf176a6a4c">More...</a><br /></td></tr>
+<tr class="separator:af5a077b879cc9e784ec755cf176a6a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a603e1ce3e4c22b65c9c7b1b88b94dc17"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a603e1ce3e4c22b65c9c7b1b88b94dc17">time_p</a> = 1</td></tr>
 <tr class="memdesc:a603e1ce3e4c22b65c9c7b1b88b94dc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time sensor enum value.  <a href="namespacesensortypemodule.html#a603e1ce3e4c22b65c9c7b1b88b94dc17">More...</a><br /></td></tr>
 <tr class="separator:a603e1ce3e4c22b65c9c7b1b88b94dc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,13 +146,10 @@ Variables</h2></td></tr>
 <tr class="memitem:aeff3ae1182a7ee0ab0d1cf58d18c3267"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aeff3ae1182a7ee0ab0d1cf58d18c3267">relative_triad_p</a> = 10</td></tr>
 <tr class="memdesc:aeff3ae1182a7ee0ab0d1cf58d18c3267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative sensor enum value.  <a href="namespacesensortypemodule.html#aeff3ae1182a7ee0ab0d1cf58d18c3267">More...</a><br /></td></tr>
 <tr class="separator:aeff3ae1182a7ee0ab0d1cf58d18c3267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a269f0fdac359e4d3e9a1aaf4f2a3e948"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a269f0fdac359e4d3e9a1aaf4f2a3e948">matlab_ws_p</a> = 11</td></tr>
-<tr class="memdesc:a269f0fdac359e4d3e9a1aaf4f2a3e948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matlab sensor enum value.  <a href="namespacesensortypemodule.html#a269f0fdac359e4d3e9a1aaf4f2a3e948">More...</a><br /></td></tr>
-<tr class="separator:a269f0fdac359e4d3e9a1aaf4f2a3e948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a0303c1e7b02461e8b3fbfb1d5f6f76e4">strain_gage_p</a> = 12</td></tr>
+<tr class="memitem:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a0303c1e7b02461e8b3fbfb1d5f6f76e4">strain_gage_p</a> = 11</td></tr>
 <tr class="memdesc:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strain gage sensor enum value.  <a href="namespacesensortypemodule.html#a0303c1e7b02461e8b3fbfb1d5f6f76e4">More...</a><br /></td></tr>
 <tr class="separator:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa54128b4f0678a5e5a335f058ebceb9a"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aa54128b4f0678a5e5a335f058ebceb9a">num_iterations_p</a> = 13</td></tr>
+<tr class="memitem:aa54128b4f0678a5e5a335f058ebceb9a"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aa54128b4f0678a5e5a335f058ebceb9a">num_iterations_p</a> = 12</td></tr>
 <tr class="memdesc:aa54128b4f0678a5e5a335f058ebceb9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterations sensor enum value.  <a href="namespacesensortypemodule.html#aa54128b4f0678a5e5a335f058ebceb9a">More...</a><br /></td></tr>
 <tr class="separator:aa54128b4f0678a5e5a335f058ebceb9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a412f8e3bd3e6bb9b11752221d677f1c6"><td class="memItemLeft" align="right" valign="top">character(len=7), dimension(14), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a412f8e3bd3e6bb9b11752221d677f1c6">sensorentity_p</a> = (/ 'POS ', 'VEL ', 'ACC ', 'DEFL ', 'FORCE ', 'LENGTH ', 'REL_POS', 'ANGLE ', 'W_SPEED', 'F_VEL ', 'F_ACC ', 'DYN_P ', 'STRAIN ', 'STRESS ' /)</td></tr>
@@ -386,6 +383,102 @@ Here is the caller graph for this function:</div>
 <p>If the sensor is not found, NULL is returned.</p>
 <dl class="section author"><dt>Author</dt><dd>Bjorn Haugen</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>1 Nov 1999 </dd></dl>
+
+</div>
+</div>
+<a id="a830a47fa4b46fba5a68ce928d31d90aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830a47fa4b46fba5a68ce928d31d90aa">&#9670;&nbsp;</a></span>getsensorid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">character(len=lid_p) function sensortypemodule::getsensorid </td>
+          <td>(</td>
+          <td class="paramtype">type(<a class="el" href="structsensortypemodule_1_1sensortype.html">sensortype</a>), intent(in)&#160;</td>
+          <td class="paramname"><em>sensor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical, intent(in), optional&#160;</td>
+          <td class="paramname"><em>typeAsPrefix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the id of a sensor object, including its type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sensor</td><td>The <a class="el" href="structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object.">sensortypemodule::sensortype</a> object to get id for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">typeAsPrefix</td><td>If .true., use the sensor type as prefix</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>8 Feb 2024 </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacesensortypemodule_a830a47fa4b46fba5a68ce928d31d90aa_icgraph.png" border="0" usemap="#anamespacesensortypemodule_a830a47fa4b46fba5a68ce928d31d90aa_icgraph" alt=""/></div>
+<map name="anamespacesensortypemodule_a830a47fa4b46fba5a68ce928d31d90aa_icgraph" id="anamespacesensortypemodule_a830a47fa4b46fba5a68ce928d31d90aa_icgraph">
+<area shape="rect" title="Returns the id of a sensor object, including its type." alt="" coords="1824,1230,2051,1257"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a2dcdb35909d3bc6bcd98a974e98e1c36" title="Evaluates the derivative of a sensor value." alt="" coords="1343,571,1511,612"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="1583,1223,1751,1264"/>
+<area shape="rect" href="interfacefunctiontypemodule_1_1writeobject.html#a6776cf12967ed5d13d937f7716ca0fb7" title="Standard routine for writing an object to file." alt="" coords="1559,1288,1776,1329"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a89e1310ce2444094c90d9526b06edc6d" title="Evaluates the derivative of a general function." alt="" coords="1127,571,1295,612"/>
+<area shape="rect" href="namespaceforceroutinesmodule.html#a1db586df58a732b0e3de8cb8bd8c68cb" title="Calculates the system force gradient vector from an external force." alt="" coords="857,5,1021,47"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a7c9ee4ad6b6610a3243e0b09c326a5a1" title="Calculates gradient of a control input w.r.t. displacement DOFs." alt="" coords="855,71,1023,112"/>
+<area shape="rect" href="namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="520,37,703,79"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="1343,1164,1511,1205"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="1127,1164,1295,1205"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ace3473ab4ee1d8ad31ad68fdb493db31" title="Evaluates a general function with optional scaling and offset." alt="" coords="855,457,1023,499"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="237,1091,422,1132"/>
+<area shape="rect" href="namespaceroadroutinesmodule.html#adce1f6877a917395e0b6a9b05c7b7dfb" title=" " alt="" coords="863,945,1016,987"/>
+<area shape="rect" href="namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="847,894,1031,921"/>
+<area shape="rect" href="namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title="Returns the length of the initial time step." alt="" coords="800,721,1079,747"/>
+<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="818,1259,1061,1286"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ade0a362e5df9b5cbcb66b398664bffb0" title="Pre&#45;evaluation of general functions." alt="" coords="855,1011,1023,1052"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="245,1301,413,1343"/>
+<area shape="rect" href="namespacecontrolroutinesmodule.html#a6fc09b1d7e9c490f5aa591f2b6a80b7c" title="Sets input values for control variables from engines and sensors." alt="" coords="855,1193,1024,1235"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a123cd24a376e0362e51db466ffb1a9db" title="Computes strain energy, input energy and energy loss for a spring." alt="" coords="846,1361,1033,1403"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="239,1432,420,1473"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="855,1727,1023,1768"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all general function objects and store the values for saving." alt="" coords="242,333,417,375"/>
+<area shape="rect" href="namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e" title="Updates friction forces in the given joint or contact element." alt="" coords="526,1596,697,1637"/>
+<area shape="rect" href="namespacemassroutinesmodule.html#a0be79f09e605f50e080cab9208a73c90" title="Updates a mass element." alt="" coords="860,1479,1019,1520"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#ac61e91049f50447aaccdff86e9f51b3c" title="Updates the current sea state." alt="" coords="849,1544,1030,1585"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="855,1661,1023,1703"/>
+<area shape="rect" href="namespacespringroutinesmodule.html#a670f62a12ce575e3e1a84ef460af6b55" title="Corrects spring force and stiffness according to interconnectivity." alt="" coords="851,327,1027,368"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#af70c740e83eede0ffdab4f1d97f6094d" title="Updates the superelement damping matrices." alt="" coords="856,1076,1023,1117"/>
+<area shape="rect" href="namespaceuserdefelroutinesmodule.html#a145a2c99105ad2c826fe6833f3dddc03" title="Updates a user&#45;defined element." alt="" coords="847,392,1032,433"/>
+<area shape="rect" href="namespaceforceroutinesmodule.html#aea7dc0b90d471d0e5e84e0ea501c767f" title="Updates the external forces (point loads)." alt="" coords="527,531,696,572"/>
+<area shape="rect" href="interfacemotionroutinesmodule_1_1updateprescribedmotions.html#aeda03fd691791addfda072c3447e1494" title="Updates the prescribed motions." alt="" coords="509,370,713,426"/>
+<area shape="rect" href="interfacemotionroutinesmodule_1_1updateprescribedmotions.html#a4d128e84551f5c9748c0cd2c42759a31" title="Updates the prescribed motions." alt="" coords="509,450,713,506"/>
+<area shape="rect" href="namespacespringroutinesmodule.html#a94dc72bf4f106119cc35ed5e3abc670f" title="Updates the spring yield variables." alt="" coords="529,188,693,229"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a61947935475782946c6c892ed8dc7b4b" title="Adds the superelement loads to the system external load vector." alt="" coords="532,253,691,295"/>
+<area shape="rect" href="springRoutinesModule_8f90.html#a6b76742afb1c9ddcbc8175e9ee20577a" title="Updates the yield limit by evaluating the yield limit engine." alt="" coords="547,319,676,346"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="5,1279,188,1306"/>
+<area shape="rect" href="namespacesolvermodule.html#a774ec4ba197d6aa05e99b34cdfa0d442" title="Computes relative distance between 2 triads for input displacements." alt="" coords="471,997,752,1023"/>
+<area shape="rect" href="namespacesolvermodule.html#a78a479ffd569dd6d0f66949a945ee112" title="Computes response variables for input displacements." alt="" coords="480,845,743,871"/>
+<area shape="rect" href="solverDriver_8f90.html#a95f8c8bb7c842d31b2e91aff9ce5ecdc" title="Evaluates the specified function." alt="" coords="563,895,660,922"/>
+<area shape="rect" href="solverDriver_8f90.html#ada384e4acef39d5e3ce6086b8cf15df5" title="Evaluates the (first) function identified by the given tag." alt="" coords="550,946,673,973"/>
+<area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="242,633,417,659"/>
+<area shape="rect" href="namespaceinitiatesystemtypemodule.html#a2b65789ec9056c08fe5d305ee2954092" title="Initializes the time stepping before starting integration loop." alt="" coords="514,596,709,637"/>
+<area shape="rect" href="interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="518,779,705,820"/>
+<area shape="rect" href="interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="518,713,705,755"/>
+<area shape="rect" href="namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5" title="Returns the physical time of a specified simulation state." alt="" coords="526,1199,697,1226"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="236,1367,423,1408"/>
+<area shape="rect" href="namespacebushingelementroutinesmodule.html#a7d7378e786803aeaa349f16c26dcccb8" title=" " alt="" coords="497,1661,726,1703"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#ad191d4622f976d77e77ba654bd52f568" title="Updates the contact springs and dampers." alt="" coords="498,1727,725,1768"/>
+<area shape="rect" href="namespacedamperroutinesmodule.html#a8eae0d7b4548aaa390e1054b5b6a01a3" title="Updates all axial&#45; and joint dampers in the model." alt="" coords="524,1792,699,1833"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -778,22 +871,6 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a269f0fdac359e4d3e9a1aaf4f2a3e948"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a269f0fdac359e4d3e9a1aaf4f2a3e948">&#9670;&nbsp;</a></span>matlab_ws_p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer, parameter sensortypemodule::matlab_ws_p = 11</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Matlab sensor enum value. </p>
-
-</div>
-</div>
 <a id="aa54128b4f0678a5e5a335f058ebceb9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa54128b4f0678a5e5a335f058ebceb9a">&#9670;&nbsp;</a></span>num_iterations_p</h2>
 
@@ -801,7 +878,7 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">integer, parameter sensortypemodule::num_iterations_p = 13</td>
+          <td class="memname">integer, parameter sensortypemodule::num_iterations_p = 12</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -906,14 +983,14 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a781db82fa97a0b087797a8c87f393aef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a781db82fa97a0b087797a8c87f393aef">&#9670;&nbsp;</a></span>sensortype_p</h2>
+<a id="af5a077b879cc9e784ec755cf176a6a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a077b879cc9e784ec755cf176a6a4c">&#9670;&nbsp;</a></span>sensortype_p</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">character(len=14), dimension(13), parameter sensortypemodule::sensortype_p =(/ 'TIME ', 'ENGINE ', 'CONTROL ', 'TRIAD ', 'DAMPER_AXIAL ', 'SPRING_AXIAL ', 'JOINT_VARIABLE', 'SPRING_JOINT ', 'DAMPER_JOINT ', 'RELATIVE_TRIAD', 'MATLAB_WS ', 'STRAIN_GAGE ', 'NUM_ITERATIONS' /)</td>
+          <td class="memname">character(len=14), dimension(12), parameter sensortypemodule::sensortype_p =(/ 'TIME ', 'ENGINE ', 'CONTROL ', 'TRIAD ', 'DAMPER_AXIAL ', 'SPRING_AXIAL ', 'JOINT_VARIABLE', 'SPRING_JOINT ', 'DAMPER_JOINT ', 'RELATIVE_TRIAD', 'STRAIN_GAGE ', 'NUM_ITERATIONS' /)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -961,7 +1038,7 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">integer, parameter sensortypemodule::strain_gage_p = 12</td>
+          <td class="memname">integer, parameter sensortypemodule::strain_gage_p = 11</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1069,7 +1146,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

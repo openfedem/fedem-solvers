@@ -8,7 +8,7 @@
 <area shape="rect" id="node13" href="$namespacesupeltypemodule.html#aa1746d5bee40c6d07a83864e4224199e" title="Deallocates an array of superelement objects." alt="" coords="238,389,491,416"/>
 <area shape="rect" id="node15" href="$namespacesupeltypemodule.html#ad2d18571d038482b61758cb0beb3548a" title="Initializes a superelement object." alt="" coords="849,415,1068,441"/>
 <area shape="rect" id="node16" href="$namespaceffacmdlinearginterface.html#a5762b6bd35e833d000e6db4bcda3df60" title="Returns the value of an integer command&#45;line option id." alt="" coords="271,491,458,533"/>
-<area shape="rect" id="node17" href="$namespaceffabodyhandlerinterface.html#a5cc4645ce3b0f0ecefaa965d63f07dd5" title=" " alt="" coords="275,557,454,598"/>
+<area shape="rect" id="node17" href="$namespaceffabodyhandlerinterface.html#a5cc4645ce3b0f0ecefaa965d63f07dd5" title="Creates a new body by reading the specified CAD&#45;file." alt="" coords="275,557,454,598"/>
 <area shape="rect" id="node18" href="$namespacefiniteelementmodule.html#ad988f80ef2ecbf1afbdcabdcd20a94e6" title="Detects all beam joints in the model." alt="" coords="285,622,444,663"/>
 <area shape="rect" id="node19" href="$namespacefiniteelementmodule.html#aebe17cad863228ff4e2b431049aded79" title="Detects all beams in the model, that is, chains of beam elements." alt="" coords="285,687,444,729"/>
 <area shape="rect" id="node20" href="$namespacefnvwaveforcemodule.html#ac070a346392360144c643027381064e9" title=" " alt="" coords="285,753,445,794"/>

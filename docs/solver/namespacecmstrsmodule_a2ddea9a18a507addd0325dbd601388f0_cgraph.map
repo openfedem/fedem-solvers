@@ -1,5 +1,8 @@
 <map id="cmstrsmodule::grav" name="cmstrsmodule::grav">
-<area shape="rect" id="node1" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="5,31,157,57"/>
-<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title=" " alt="" coords="205,5,433,32"/>
-<area shape="rect" id="node3" href="$namespacecmstrsmodule.html#a5223f5b91f57a2ddf104d2adcd33d5bc" title="Establishes the full gravitational force vectors." alt="" coords="233,56,406,83"/>
+<area shape="rect" id="node1" title="Computes the gravitation force vector for the superelement DOFs." alt="" coords="5,56,157,83"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a998493c94014a177624a824dae9dd8d4" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="205,31,433,57"/>
+<area shape="rect" id="node6" href="$namespacecmstrsmodule.html#a5223f5b91f57a2ddf104d2adcd33d5bc" title="Establishes the full gravitational force vectors." alt="" coords="233,81,406,108"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="481,5,724,32"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="501,56,705,83"/>
+<area shape="rect" id="node5" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="772,56,1052,83"/>
 </map>

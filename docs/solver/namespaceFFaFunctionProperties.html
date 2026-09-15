@@ -69,17 +69,25 @@ $(function() {
 <div class="title">FFaFunctionProperties Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Explicit function properties.  
+<a href="namespaceFFaFunctionProperties.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5cf115c82a199ed6dfade1bbd657f52d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html#a5cf115c82a199ed6dfade1bbd657f52d">getTypeID</a> (const std::string &amp;functionType)</td></tr>
+<tr class="memdesc:a5cf115c82a199ed6dfade1bbd657f52d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the function type ID for a given <em>functionType</em> name.  <a href="namespaceFFaFunctionProperties.html#a5cf115c82a199ed6dfade1bbd657f52d">More...</a><br /></td></tr>
 <tr class="separator:a5cf115c82a199ed6dfade1bbd657f52d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad334cb21033b446d53904ef8f78d4b24"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html#ad334cb21033b446d53904ef8f78d4b24">getSmartPoints</a> (int funcType, double start, double stop, int extrap, const std::vector&lt; double &gt; &amp;realVars, std::vector&lt; double &gt; &amp;x, std::vector&lt; double &gt; &amp;y)</td></tr>
+<tr class="memdesc:ad334cb21033b446d53904ef8f78d4b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the so-called smart points of an explicit function.  <a href="namespaceFFaFunctionProperties.html#ad334cb21033b446d53904ef8f78d4b24">More...</a><br /></td></tr>
 <tr class="separator:ad334cb21033b446d53904ef8f78d4b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b85bdbe510fdfce093f9eadef9d20e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html#a6b85bdbe510fdfce093f9eadef9d20e2">getValue</a> (int baseID, const std::vector&lt; int &gt; &amp;intVars, const std::vector&lt; double &gt; &amp;realVars, double x, double &amp;value)</td></tr>
+<tr class="memdesc:a6b85bdbe510fdfce093f9eadef9d20e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates an explicit function.  <a href="namespaceFFaFunctionProperties.html#a6b85bdbe510fdfce093f9eadef9d20e2">More...</a><br /></td></tr>
 <tr class="separator:a6b85bdbe510fdfce093f9eadef9d20e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Explicit function properties. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="ad334cb21033b446d53904ef8f78d4b24"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad334cb21033b446d53904ef8f78d4b24">&#9670;&nbsp;</a></span>getSmartPoints()</h2>
 
@@ -136,6 +144,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Finds the so-called smart points of an explicit function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">funcType</td><td>Function type identifier </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">start</td><td>Start argument value of the function domain to consider </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stop</td><td>Stop argument value of the function domain to consider </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">extrap</td><td>Extrapolation flag </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">realVars</td><td>Real function parameters </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">x</td><td>Function argument values of the smart points </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">y</td><td>Function values of the smart points </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a5cf115c82a199ed6dfade1bbd657f52d"></a>
@@ -153,6 +175,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns the function type ID for a given <em>functionType</em> name. </p>
 
 </div>
 </div>
@@ -200,12 +224,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Evaluates an explicit function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">baseID</td><td>base ID of the function to be evaluated </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intVars</td><td>Integer function parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">realVars</td><td>Real function parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Function argument </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>The function value </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

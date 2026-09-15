@@ -74,15 +74,22 @@ $(function() {
 <div class="title">explicitfunctionsmodule::funcvalue Interface Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Evaluates a function.  
+ <a href="interfaceexplicitfunctionsmodule_1_1funcvalue.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a79bfabe8104b56055e4cb9ac47f6378c"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceexplicitfunctionsmodule_1_1funcvalue.html#a79bfabe8104b56055e4cb9ac47f6378c">funcvalue1</a> (ikf, ifunc, rfunc, x, fn, ierr)</td></tr>
+<tr class="memdesc:a79bfabe8104b56055e4cb9ac47f6378c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates an explicit function.  <a href="interfaceexplicitfunctionsmodule_1_1funcvalue.html#a79bfabe8104b56055e4cb9ac47f6378c">More...</a><br /></td></tr>
 <tr class="separator:a79bfabe8104b56055e4cb9ac47f6378c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a6b13e9b359927d59b86b0bc46e406e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceexplicitfunctionsmodule_1_1funcvalue.html#a8a6b13e9b359927d59b86b0bc46e406e">funcvalue2</a> (ikf, ifunc, rfunc, x, fn, ierr)</td></tr>
+<tr class="memdesc:a8a6b13e9b359927d59b86b0bc46e406e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates an (possibly) multi-argument explicit function.  <a href="interfaceexplicitfunctionsmodule_1_1funcvalue.html#a8a6b13e9b359927d59b86b0bc46e406e">More...</a><br /></td></tr>
 <tr class="separator:a8a6b13e9b359927d59b86b0bc46e406e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Evaluates a function. </p>
+</div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a id="a79bfabe8104b56055e4cb9ac47f6378c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a79bfabe8104b56055e4cb9ac47f6378c">&#9670;&nbsp;</a></span>funcvalue1()</h2>
 
@@ -132,6 +139,21 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluates an explicit function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ikf</td><td>Function identification number </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifunc</td><td>Integer function input parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rfunc</td><td>Real function input parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Function argument </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fn</td><td>Value of function </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Ole Ivar Sivertsen SINTEF avd. for maskinkonstruksjon</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1989 </dd></dl>
 
 </div>
 </div>
@@ -185,6 +207,21 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Evaluates an (possibly) multi-argument explicit function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ikf</td><td>Function identification number </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifunc</td><td>Integer function input parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rfunc</td><td>Real function input parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Function arguments </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fn</td><td>Value of function </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>15 Oct 2009 </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
@@ -193,7 +230,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

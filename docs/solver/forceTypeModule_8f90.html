@@ -109,6 +109,15 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a73aca3477bd0a892eef3d38f9c212f83"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceforcetypemodule.html#a73aca3477bd0a892eef3d38f9c212f83">forcetypemodule::deallocateforces</a> (forces)</td></tr>
 <tr class="memdesc:a73aca3477bd0a892eef3d38f9c212f83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates the external point load objects.  <a href="namespaceforcetypemodule.html#a73aca3477bd0a892eef3d38f9c212f83">More...</a><br /></td></tr>
 <tr class="separator:a73aca3477bd0a892eef3d38f9c212f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a610549097b8d354c6ff32bb28e9a2436"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceforcetypemodule.html#a610549097b8d354c6ff32bb28e9a2436">forcetypemodule::fixcontroldofsoneigvalcalc</a> (forces, ierr)</td></tr>
+<tr class="memdesc:a610549097b8d354c6ff32bb28e9a2436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fix control system DOFs in eigenvalue calculation.  <a href="namespaceforcetypemodule.html#a610549097b8d354c6ff32bb28e9a2436">More...</a><br /></td></tr>
+<tr class="separator:a610549097b8d354c6ff32bb28e9a2436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47d43362af07c99c473b0f87a9473647"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="forceTypeModule_8f90.html#a47d43362af07c99c473b0f87a9473647">fixtriaddofseigval</a> (triad, dof)</td></tr>
+<tr class="memdesc:a47d43362af07c99c473b0f87a9473647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets BC code 2 for triad DOFs.  <a href="forceTypeModule_8f90.html#a47d43362af07c99c473b0f87a9473647">More...</a><br /></td></tr>
+<tr class="separator:a47d43362af07c99c473b0f87a9473647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b09a8962a01dae4c69c3f76b4825d3"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="forceTypeModule_8f90.html#a41b09a8962a01dae4c69c3f76b4825d3">fixjointdofseigval</a> (joint, dof)</td></tr>
+<tr class="memdesc:a41b09a8962a01dae4c69c3f76b4825d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets BC code 2 for joint DOFs.  <a href="forceTypeModule_8f90.html#a41b09a8962a01dae4c69c3f76b4825d3">More...</a><br /></td></tr>
+<tr class="separator:a41b09a8962a01dae4c69c3f76b4825d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -124,10 +133,71 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>External point load object data container. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a41b09a8962a01dae4c69c3f76b4825d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41b09a8962a01dae4c69c3f76b4825d3">&#9670;&nbsp;</a></span>fixjointdofseigval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine fixcontroldofsoneigvalcalc::fixjointdofseigval </td>
+          <td>(</td>
+          <td class="paramtype">type(masterslavejointtype), intent(inout)&#160;</td>
+          <td class="paramname"><em>joint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>dof</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets BC code 2 for joint DOFs. </p>
+
+</div>
+</div>
+<a id="a47d43362af07c99c473b0f87a9473647"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47d43362af07c99c473b0f87a9473647">&#9670;&nbsp;</a></span>fixtriaddofseigval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine fixcontroldofsoneigvalcalc::fixtriaddofseigval </td>
+          <td>(</td>
+          <td class="paramtype">type(<a class="el" href="structtriadtypemodule_1_1triadtype.html">triadtype</a>), intent(inout)&#160;</td>
+          <td class="paramname"><em>triad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>dof</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets BC code 2 for triad DOFs. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

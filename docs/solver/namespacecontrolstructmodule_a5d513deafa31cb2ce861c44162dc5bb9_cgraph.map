@@ -1,0 +1,8 @@
+<map id="controlstructmodule::estimatecontrollerproperties01" name="controlstructmodule::estimatecontrollerproperties01">
+<area shape="rect" id="node1" title="Estimates the controller gradient properties by perturbation." alt="" coords="5,104,237,145"/>
+<area shape="rect" id="node2" href="$namespacecontroltypemodule.html#a647cdc8d31c84d6f728bedb41c2fea53" title="Makes a copy of a control system object." alt="" coords="289,5,443,47"/>
+<area shape="rect" id="node3" href="$namespacecontrolstructmodule.html#acef8197fed5ebc53b5ef02d933b9dbd4" title="Deallocates a control system copy." alt="" coords="289,71,443,112"/>
+<area shape="rect" id="node4" href="$namespacecontrolstructmodule.html#ad594c8647b2b2f44f05247e839067031" title="Perturbs one of the inputs of the control system." alt="" coords="289,136,443,177"/>
+<area shape="rect" id="node6" href="$namespacedensematrixmodule.html#a15392a4ff9de4934977af94f5fa8b527" title="Solves the linear equation system A*x = B." alt="" coords="285,201,447,243"/>
+<area shape="rect" id="node5" href="$namespacecontrolroutinesmodule.html#a17855a9c33347230f09c0cf8d0edc263" title="Iterates the control module." alt="" coords="495,136,664,177"/>
+</map>

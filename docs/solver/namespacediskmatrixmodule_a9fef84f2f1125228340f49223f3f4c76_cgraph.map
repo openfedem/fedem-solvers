@@ -1,0 +1,6 @@
+<map id="diskmatrixmodule::dmclose" name="diskmatrixmodule::dmclose">
+<area shape="rect" id="node1" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="5,31,209,57"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title="Initializes a disk matrix object." alt="" coords="257,5,468,32"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="261,56,465,83"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="516,56,796,83"/>
+</map>

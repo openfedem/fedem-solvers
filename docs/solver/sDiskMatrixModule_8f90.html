@@ -70,72 +70,93 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Data Types</a> &#124;
 <a href="#namespaces">Modules</a> &#124;
-<a href="#func-members">Functions/Subroutines</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions/Subroutines</a>  </div>
   <div class="headertitle">
 <div class="title">sDiskMatrixModule.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>General rectangular matrix with disk storage.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsdiskmatrixmodule_1_1diskmatrixtype.html">sdiskmatrixmodule::diskmatrixtype</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a rectangular matrix with disk storage.  <a href="structsdiskmatrixmodule_1_1diskmatrixtype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacesdiskmatrixmodule_1_1dmmattimesvec.html">sdiskmatrixmodule::dmmattimesvec</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a disk matrix with a given vector.  <a href="interfacesdiskmatrixmodule_1_1dmmattimesvec.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:namespacesdiskmatrixmodule"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html">sdiskmatrixmodule</a></td></tr>
+<tr class="memdesc:namespacesdiskmatrixmodule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module for general rectangular matrices with disk storage,. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a073cda31fc3afe1f6e7823d0aed50de6"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a073cda31fc3afe1f6e7823d0aed50de6">sdiskmatrixmodule::dmgetswapsize</a> ()</td></tr>
+<tr class="memdesc:a073cda31fc3afe1f6e7823d0aed50de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns requested size of one swap section from command-line option.  <a href="namespacesdiskmatrixmodule.html#a073cda31fc3afe1f6e7823d0aed50de6">More...</a><br /></td></tr>
 <tr class="separator:a073cda31fc3afe1f6e7823d0aed50de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e9dc1ab2e03fc8606067ce6a7dada6e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e">sdiskmatrixmodule::dmnullify</a> (this)</td></tr>
+<tr class="memdesc:a1e9dc1ab2e03fc8606067ce6a7dada6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a disk matrix object.  <a href="namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e">More...</a><br /></td></tr>
 <tr class="separator:a1e9dc1ab2e03fc8606067ce6a7dada6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acabdab3f1c0741e089fca96ca42827ce"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#acabdab3f1c0741e089fca96ca42827ce">sdiskmatrixmodule::dmwrite</a> (this, lpu, name)</td></tr>
+<tr class="memdesc:acabdab3f1c0741e089fca96ca42827ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes out the content of a disk matrix.  <a href="namespacesdiskmatrixmodule.html#acabdab3f1c0741e089fca96ca42827ce">More...</a><br /></td></tr>
 <tr class="separator:acabdab3f1c0741e089fca96ca42827ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a412b6c593c2be060dce9a93f7a459a31"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a412b6c593c2be060dce9a93f7a459a31">sdiskmatrixmodule::dmopen</a> (this, fileName, fileChkSum, nRows, nCols, status, err, nColSwap, swapSize, wantTag)</td></tr>
+<tr class="memdesc:a412b6c593c2be060dce9a93f7a459a31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a disk matrix file for ReadOnly operations.  <a href="namespacesdiskmatrixmodule.html#a412b6c593c2be060dce9a93f7a459a31">More...</a><br /></td></tr>
 <tr class="separator:a412b6c593c2be060dce9a93f7a459a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af572cf96792e6414bf6ed953ce4afb35"><td class="memItemLeft" align="right" valign="top">integer function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sDiskMatrixModule_8f90.html#af572cf96792e6414bf6ed953ce4afb35">adjustswapsize</a> (nTot, nSwap)</td></tr>
+<tr class="memdesc:af572cf96792e6414bf6ed953ce4afb35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the number of matrix columns in a swap section.  <a href="sDiskMatrixModule_8f90.html#af572cf96792e6414bf6ed953ce4afb35">More...</a><br /></td></tr>
 <tr class="separator:af572cf96792e6414bf6ed953ce4afb35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae46a0716de7aff8f8b76d02ff079e538"><td class="memItemLeft" align="right" valign="top">integer(i8) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538">sdiskmatrixmodule::dmsize</a> (this, iDim)</td></tr>
+<tr class="memdesc:ae46a0716de7aff8f8b76d02ff079e538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size of the given disk matrix.  <a href="namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538">More...</a><br /></td></tr>
 <tr class="separator:ae46a0716de7aff8f8b76d02ff079e538"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa825ba121dfad845a9a69eb0473fda3f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f">sdiskmatrixmodule::dmclose</a> (this, err)</td></tr>
+<tr class="memdesc:aa825ba121dfad845a9a69eb0473fda3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the disk matrix file and releases the associated swap array.  <a href="namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f">More...</a><br /></td></tr>
 <tr class="separator:aa825ba121dfad845a9a69eb0473fda3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a843f0cf302bb5ba8e6a3da164ad20cd5"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a843f0cf302bb5ba8e6a3da164ad20cd5">sdiskmatrixmodule::dmgetaddress</a> (this, rInd, cInd, section, index, err)</td></tr>
+<tr class="memdesc:a843f0cf302bb5ba8e6a3da164ad20cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets swap section number and local array index for matrix element.  <a href="namespacesdiskmatrixmodule.html#a843f0cf302bb5ba8e6a3da164ad20cd5">More...</a><br /></td></tr>
 <tr class="separator:a843f0cf302bb5ba8e6a3da164ad20cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d0d8801571f3a248b37eb4a34a87483"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a6d0d8801571f3a248b37eb4a34a87483">sdiskmatrixmodule::dmswap</a> (this, newSection, err)</td></tr>
+<tr class="memdesc:a6d0d8801571f3a248b37eb4a34a87483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes current section to disk and reads a new one into core.  <a href="namespacesdiskmatrixmodule.html#a6d0d8801571f3a248b37eb4a34a87483">More...</a><br /></td></tr>
 <tr class="separator:a6d0d8801571f3a248b37eb4a34a87483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa48c50df064255b9cdf83f3c45228d6f"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#aa48c50df064255b9cdf83f3c45228d6f">sdiskmatrixmodule::dmsinglecast</a> (this, ielSwap, nelSwap)</td></tr>
+<tr class="memdesc:aa48c50df064255b9cdf83f3c45228d6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts the in-core matrix elements from double to single precision.  <a href="namespacesdiskmatrixmodule.html#aa48c50df064255b9cdf83f3c45228d6f">More...</a><br /></td></tr>
 <tr class="separator:aa48c50df064255b9cdf83f3c45228d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4139fc5ff88353a2bf01656c709567c6"><td class="memItemLeft" align="right" valign="top">real(sp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a4139fc5ff88353a2bf01656c709567c6">sdiskmatrixmodule::dmgetvalue</a> (this, rInd, cInd, err)</td></tr>
+<tr class="memdesc:a4139fc5ff88353a2bf01656c709567c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of a matrix element.  <a href="namespacesdiskmatrixmodule.html#a4139fc5ff88353a2bf01656c709567c6">More...</a><br /></td></tr>
 <tr class="separator:a4139fc5ff88353a2bf01656c709567c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace0f4417d7d811325ad451a1ece19d38"><td class="memItemLeft" align="right" valign="top">real(sp) function, dimension(:,:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#ace0f4417d7d811325ad451a1ece19d38">sdiskmatrixmodule::dmgetswapsecptr</a> (this, cInd, err)</td></tr>
+<tr class="memdesc:ace0f4417d7d811325ad451a1ece19d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to a matrix containing a swap section.  <a href="namespacesdiskmatrixmodule.html#ace0f4417d7d811325ad451a1ece19d38">More...</a><br /></td></tr>
 <tr class="separator:ace0f4417d7d811325ad451a1ece19d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49b2465bca0546e2724fe1075e280857"><td class="memItemLeft" align="right" valign="top">real(sp) function, dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a49b2465bca0546e2724fe1075e280857">sdiskmatrixmodule::dmgetcolptr</a> (this, cInd, err)</td></tr>
+<tr class="memdesc:a49b2465bca0546e2724fe1075e280857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to column <em>cInd</em> of the given disk matrix.  <a href="namespacesdiskmatrixmodule.html#a49b2465bca0546e2724fe1075e280857">More...</a><br /></td></tr>
 <tr class="separator:a49b2465bca0546e2724fe1075e280857"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2aa90632397dd9828254bad98bc034e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#ad2aa90632397dd9828254bad98bc034e">sdiskmatrixmodule::dmgetcol</a> (this, cInd, col, err)</td></tr>
+<tr class="memdesc:ad2aa90632397dd9828254bad98bc034e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a column of the given disk matrix.  <a href="namespacesdiskmatrixmodule.html#ad2aa90632397dd9828254bad98bc034e">More...</a><br /></td></tr>
 <tr class="separator:ad2aa90632397dd9828254bad98bc034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2ccd0acf975eb2ad1aedd1036675ea0"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#af2ccd0acf975eb2ad1aedd1036675ea0">sdiskmatrixmodule::dmgetrow</a> (this, rInd, row, err)</td></tr>
+<tr class="memdesc:af2ccd0acf975eb2ad1aedd1036675ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a row of the given disk matrix.  <a href="namespacesdiskmatrixmodule.html#af2ccd0acf975eb2ad1aedd1036675ea0">More...</a><br /></td></tr>
 <tr class="separator:af2ccd0acf975eb2ad1aedd1036675ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbd1d26a85a092a9aa332ea5655a3f51"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#adbd1d26a85a092a9aa332ea5655a3f51">sdiskmatrixmodule::dmmattimesvec_sp</a> (this, xVec, yVec, err, doInitialize)</td></tr>
+<tr class="memdesc:adbd1d26a85a092a9aa332ea5655a3f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a disk matrix with a given single precision vector.  <a href="namespacesdiskmatrixmodule.html#adbd1d26a85a092a9aa332ea5655a3f51">More...</a><br /></td></tr>
 <tr class="separator:adbd1d26a85a092a9aa332ea5655a3f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73c45d376788632de9f7ddf85d946e37"><td class="memItemLeft" align="right" valign="top">subroutine, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a73c45d376788632de9f7ddf85d946e37">sdiskmatrixmodule::dmmattimesvec_dp</a> (this, xVec, yVec, err, doInitialize)</td></tr>
+<tr class="memdesc:a73c45d376788632de9f7ddf85d946e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a disk matrix with a given double precision vector.  <a href="namespacesdiskmatrixmodule.html#a73c45d376788632de9f7ddf85d946e37">More...</a><br /></td></tr>
 <tr class="separator:a73c45d376788632de9f7ddf85d946e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2739aa5073bee4e40ef1810857596354"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a2739aa5073bee4e40ef1810857596354">sdiskmatrixmodule::dmmattranstimesvec</a> (this, xVec, yVec, err)</td></tr>
+<tr class="memdesc:a2739aa5073bee4e40ef1810857596354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies the transpose of a disk matrix with a given vector.  <a href="namespacesdiskmatrixmodule.html#a2739aa5073bee4e40ef1810857596354">More...</a><br /></td></tr>
 <tr class="separator:a2739aa5073bee4e40ef1810857596354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2ce29280ff3d808ae896dd95680231b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#ab2ce29280ff3d808ae896dd95680231b">sdiskmatrixmodule::dmfindabsmaxrowvalues</a> (this, maxRowVal, err)</td></tr>
+<tr class="memdesc:ab2ce29280ff3d808ae896dd95680231b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the absolute maximum value for each row in a disk matrix.  <a href="namespacesdiskmatrixmodule.html#ab2ce29280ff3d808ae896dd95680231b">More...</a><br /></td></tr>
 <tr class="separator:ab2ce29280ff3d808ae896dd95680231b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a11b782cb5f54605fea712dea55b6b668"><td class="memItemLeft" align="right" valign="top">character(len=30), parameter, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesdiskmatrixmodule.html#a11b782cb5f54605fea712dea55b6b668">sdiskmatrixmodule::dmtag_p</a> = '#FEDEM disk matrix'</td></tr>
-<tr class="separator:a11b782cb5f54605fea712dea55b6b668"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>General rectangular matrix with disk storage. </p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="af572cf96792e6414bf6ed953ce4afb35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af572cf96792e6414bf6ed953ce4afb35">&#9670;&nbsp;</a></span>adjustswapsize()</h2>
 
@@ -162,12 +183,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Adjusts the number of matrix columns in a swap section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nTot</td><td>Total number of matrix columns </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nSwap</td><td>Number of swap sections </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of columns in all swap sections, except for the last one</dd></dl>
+<p>The number of columns is set such that the total number of columns in the matrix is nearly divisable by the number of swap columns, and such that the last swap section is as close in size as possisble to the other sections. </p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

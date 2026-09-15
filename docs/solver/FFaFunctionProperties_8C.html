@@ -68,12 +68,14 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">FFaFunctionProperties.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Smart-point evaluation for some closed-form explicit functions.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="FFaFunctionProperties_8H_source.html">FFaFunctionProperties.H</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFaFunctionManager_8H_source.html">FFaFunctionManager.H</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFaUserFuncPlugin_8H_source.html">FFaUserFuncPlugin.H</a>&quot;</code><br />
@@ -85,10 +87,10 @@ Include dependency graph for FFaFunctionProperties.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaFunctionProperties_8C__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8C" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8C" id="afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8C">
-<area shape="rect" title=" " alt="" coords="553,5,756,61"/>
-<area shape="rect" href="FFaFunctionProperties_8H.html" title=" " alt="" coords="5,191,184,218"/>
-<area shape="rect" href="FFaFunctionManager_8H.html" title=" " alt="" coords="209,191,378,218"/>
-<area shape="rect" href="FFaUserFuncPlugin_8H.html" title=" " alt="" coords="517,109,675,136"/>
+<area shape="rect" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="553,5,756,61"/>
+<area shape="rect" href="FFaFunctionProperties_8H.html" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="5,191,184,218"/>
+<area shape="rect" href="FFaFunctionManager_8H.html" title="Global functions direct evaluation of some explicit function types." alt="" coords="209,191,378,218"/>
+<area shape="rect" href="FFaUserFuncPlugin_8H.html" title="User&#45;defined functions plugin." alt="" coords="517,109,675,136"/>
 <area shape="rect" href="FFaMathExprFactory_8H.html" title=" " alt="" coords="663,191,916,218"/>
 <area shape="rect" href="FiDeviceFunctionFactory_8H.html" title="External device function factory (functions from file)." alt="" coords="940,184,1140,225"/>
 <area shape="rect" title=" " alt="" coords="802,109,865,136"/>
@@ -106,15 +108,10 @@ Include dependency graph for FFaFunctionProperties.C:</div>
 Macros</h2></td></tr>
 <tr class="memitem:ae71449b1cc6e6250b91f539153a7a0d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaFunctionProperties_8C.html#ae71449b1cc6e6250b91f539153a7a0d3">M_PI</a>&#160;&#160;&#160;3.14159265358979323846</td></tr>
 <tr class="separator:ae71449b1cc6e6250b91f539153a7a0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a970e9fd5afda5f73a9e5f170f8e284a5"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaFunctionProperties_8C.html#a970e9fd5afda5f73a9e5f170f8e284a5">evalFunc</a> (int fType, double x, const std::vector&lt; double &gt; &amp;realVars, int extrap, int &amp;ierr)</td></tr>
-<tr class="separator:a970e9fd5afda5f73a9e5f170f8e284a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeee291fb8a5b6b8f389f6843b1c98f8a"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaFunctionProperties_8C.html#aeee291fb8a5b6b8f389f6843b1c98f8a">interpolate</a> (bool fromLeft, double x, double x0, double y0, double x1, double y1)</td></tr>
-<tr class="separator:aeee291fb8a5b6b8f389f6843b1c98f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Smart-point evaluation for some closed-form explicit functions. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ae71449b1cc6e6250b91f539153a7a0d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae71449b1cc6e6250b91f539153a7a0d3">&#9670;&nbsp;</a></span>M_PI</h2>
 
@@ -129,125 +126,10 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a970e9fd5afda5f73a9e5f170f8e284a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a970e9fd5afda5f73a9e5f170f8e284a5">&#9670;&nbsp;</a></span>evalFunc()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static double evalFunc </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>fType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>realVars</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>extrap</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>ierr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aeee291fb8a5b6b8f389f6843b1c98f8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeee291fb8a5b6b8f389f6843b1c98f8a">&#9670;&nbsp;</a></span>interpolate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static double interpolate </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>fromLeft</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>y0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>y1</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

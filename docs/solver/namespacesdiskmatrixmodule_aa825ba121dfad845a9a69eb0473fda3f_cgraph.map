@@ -1,0 +1,4 @@
+<map id="sdiskmatrixmodule::dmclose" name="sdiskmatrixmodule::dmclose">
+<area shape="rect" id="node1" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="5,5,161,47"/>
+<area shape="rect" id="node2" href="$namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title="Initializes a disk matrix object." alt="" coords="209,5,365,47"/>
+</map>

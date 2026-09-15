@@ -1,0 +1,6 @@
+<map id="initembeddedwave" name="initembeddedwave">
+<area shape="rect" id="node1" title="Initializes parameters for an embedded non&#45;linear wave function." alt="" coords="5,42,152,69"/>
+<area shape="rect" id="node2" href="$namespacewavefunctionsmodule.html#aaae55e5d1230e413de13ceadc774560f" title="Initializes an irregular wave function with embedded streamlines." alt="" coords="200,35,367,76"/>
+<area shape="rect" id="node3" href="$namespacewavefunctionsmodule.html#a0b66f307c0d375822090491d4417f9e1" title="Solves the streamline wave equation." alt="" coords="415,5,581,47"/>
+<area shape="rect" id="node4" href="$waveFunctionsModule_8f90.html#a361cf44d88020ee299d7e19cae174396" title="Converts a one&#45;dimensional array to a two&#45;dimensional matrix." alt="" coords="459,71,537,98"/>
+</map>

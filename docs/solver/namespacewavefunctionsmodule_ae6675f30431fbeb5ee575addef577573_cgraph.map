@@ -1,0 +1,5 @@
+<map id="wavefunctionsmodule::embeddedwave" name="wavefunctionsmodule::embeddedwave">
+<area shape="rect" id="node1" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="5,39,172,80"/>
+<area shape="rect" id="node2" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="220,5,387,47"/>
+<area shape="rect" id="node3" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="220,71,387,112"/>
+</map>

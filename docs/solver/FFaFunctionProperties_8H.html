@@ -75,6 +75,9 @@ $(function() {
 <div class="title">FFaFunctionProperties.H File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Smart-point evaluation for some closed-form explicit functions.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -82,7 +85,7 @@ Include dependency graph for FFaFunctionProperties.H:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaFunctionProperties_8H__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8H" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8H" id="afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8H">
-<area shape="rect" title=" " alt="" coords="5,5,208,61"/>
+<area shape="rect" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="5,5,208,61"/>
 <area shape="rect" title=" " alt="" coords="35,109,93,136"/>
 <area shape="rect" title=" " alt="" coords="118,109,181,136"/>
 </map>
@@ -92,9 +95,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaFunctionProperties_8H__dep__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8Hdep" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8Hdep" id="afedem-foundation_2src_2FFaFunctionLib_2FFaFunctionProperties_8Hdep">
-<area shape="rect" title=" " alt="" coords="119,5,321,61"/>
-<area shape="rect" href="FFaFunctionManager_8C.html" title=" " alt="" coords="5,109,208,165"/>
-<area shape="rect" href="FFaFunctionProperties_8C.html" title=" " alt="" coords="232,109,435,165"/>
+<area shape="rect" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="119,5,321,61"/>
+<area shape="rect" href="FFaFunctionManager_8C.html" title="Global functions direct evaluation of some explicit function types." alt="" coords="5,109,208,165"/>
+<area shape="rect" href="FFaFunctionProperties_8C.html" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="232,109,435,165"/>
 </map>
 </div>
 </div>
@@ -103,6 +106,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceFFaFunctionProperties"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html">FFaFunctionProperties</a></td></tr>
+<tr class="memdesc:namespaceFFaFunctionProperties"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit function properties. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -137,18 +141,24 @@ Enumerations</h2></td></tr>
 , <a class="el" href="FFaFunctionProperties_8H.html#a07d130b49720ddacfe4707961595ebf4ada7d9095e1e31b74abb177fd31b69e44">SMOOTH_TRAJ_p</a> = 22
 <br />
  }</td></tr>
+<tr class="memdesc:a07d130b49720ddacfe4707961595ebf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function type enum values.  <a href="FFaFunctionProperties_8H.html#a07d130b49720ddacfe4707961595ebf4">More...</a><br /></td></tr>
 <tr class="separator:a07d130b49720ddacfe4707961595ebf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5cf115c82a199ed6dfade1bbd657f52d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html#a5cf115c82a199ed6dfade1bbd657f52d">FFaFunctionProperties::getTypeID</a> (const std::string &amp;functionType)</td></tr>
+<tr class="memdesc:a5cf115c82a199ed6dfade1bbd657f52d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the function type ID for a given <em>functionType</em> name.  <a href="namespaceFFaFunctionProperties.html#a5cf115c82a199ed6dfade1bbd657f52d">More...</a><br /></td></tr>
 <tr class="separator:a5cf115c82a199ed6dfade1bbd657f52d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad334cb21033b446d53904ef8f78d4b24"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html#ad334cb21033b446d53904ef8f78d4b24">FFaFunctionProperties::getSmartPoints</a> (int funcType, double start, double stop, int extrap, const std::vector&lt; double &gt; &amp;realVars, std::vector&lt; double &gt; &amp;x, std::vector&lt; double &gt; &amp;y)</td></tr>
+<tr class="memdesc:ad334cb21033b446d53904ef8f78d4b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the so-called smart points of an explicit function.  <a href="namespaceFFaFunctionProperties.html#ad334cb21033b446d53904ef8f78d4b24">More...</a><br /></td></tr>
 <tr class="separator:ad334cb21033b446d53904ef8f78d4b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b85bdbe510fdfce093f9eadef9d20e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceFFaFunctionProperties.html#a6b85bdbe510fdfce093f9eadef9d20e2">FFaFunctionProperties::getValue</a> (int baseID, const std::vector&lt; int &gt; &amp;intVars, const std::vector&lt; double &gt; &amp;realVars, double x, double &amp;value)</td></tr>
+<tr class="memdesc:a6b85bdbe510fdfce093f9eadef9d20e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates an explicit function.  <a href="namespaceFFaFunctionProperties.html#a6b85bdbe510fdfce093f9eadef9d20e2">More...</a><br /></td></tr>
 <tr class="separator:a6b85bdbe510fdfce093f9eadef9d20e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Smart-point evaluation for some closed-form explicit functions. </p>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a07d130b49720ddacfe4707961595ebf4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07d130b49720ddacfe4707961595ebf4">&#9670;&nbsp;</a></span>FFaFunctionType</h2>
 
@@ -160,30 +170,54 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>These enum values must match exactly with the corresponding parameters defined in the Fortran file <a class="el" href="explicitFunctionsModule_8f90.html">explicitFunctionsModule.f90</a> </p>
+
+<p>Function type enum values. </p>
+<p>These values must match exactly with the corresponding parameters defined in the Fortran file <a class="el" href="explicitFunctionsModule_8f90.html" title="Collection of explicit math functions.">explicitFunctionsModule.f90</a> </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a2a6beff13996e371788df91b5a1d8cdf"></a>UNDEFINED_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a5dce3d7f946202c61ede7760c5f20cbe"></a>SINUSOIDAL_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a0e771d6760f1ae5de921b3ca9d6cb67a"></a>COMPL_SINUS_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a6589f77b9773024ebed5a0aa04ae5162"></a>DELAYED_COMPL_SINUS_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a8151b4d54c468a180a3451e35e27155a"></a>WAVE_SINUS_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a8ec55defad7002fb9394b40c4d57fca8"></a>LIN_VEL_VAR_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4ac55b02df0cc52759b7743553ff58ab4e"></a>SPLINE_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a6c0a6812c1614c0d4dec1b01ad0cac57"></a>WAVE_STOKES5_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a2c331138575e3f765a69579fb05d2c96"></a>WAVE_STREAMLINE_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a0e934c085d15907464818f3d3aac212a"></a>WAVE_EMBEDDED_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a7074f3c6c43f0ef65e14faf56e917703"></a>LIN_VAR_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a373297feaa06e10d17627f8f71663904"></a>RAMP_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a782e7f527f9c7bdaef3c3fda8f6eeb2f"></a>STEP_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a0f622ca255d1b90a7fcfb3a7d4986e06"></a>SQUARE_PULS_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4ac91ce2b5e2beb6ba583cdd0c29cb709c"></a>DIRAC_PULS_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4aaff07763ad9717006fba8e2e19e9fb6a"></a>CONSTANT_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a32e5d15110e47c343fdc79556d3db599"></a>LIM_RAMP_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4aad41278da6f922c2607803319b2cd6be"></a>SCALE_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4af5b06cfc967bc70c2937daa2f3e09b11"></a>DEVICE_FUNCTION_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a6bc151ae896bf7dded612bdd7df18938"></a>MATH_EXPRESSION_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a7896aa513fa8d5e5071e7014d2edd406"></a>USER_DEFINED_p&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4ada7d9095e1e31b74abb177fd31b69e44"></a>SMOOTH_TRAJ_p&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a2a6beff13996e371788df91b5a1d8cdf"></a>UNDEFINED_p&#160;</td><td class="fielddoc"><p>Unknown or undefined function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a5dce3d7f946202c61ede7760c5f20cbe"></a>SINUSOIDAL_p&#160;</td><td class="fielddoc"><p>Simple sine function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a0e771d6760f1ae5de921b3ca9d6cb67a"></a>COMPL_SINUS_p&#160;</td><td class="fielddoc"><p>Two-wave sine function with delay. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a6589f77b9773024ebed5a0aa04ae5162"></a>DELAYED_COMPL_SINUS_p&#160;</td><td class="fielddoc"><p>Two-wave sine function with delay. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a8151b4d54c468a180a3451e35e27155a"></a>WAVE_SINUS_p&#160;</td><td class="fielddoc"><p>Complex multi-component sine function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a8ec55defad7002fb9394b40c4d57fca8"></a>LIN_VEL_VAR_p&#160;</td><td class="fielddoc"><p>Servo simulator function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4ac55b02df0cc52759b7743553ff58ab4e"></a>SPLINE_p&#160;</td><td class="fielddoc"><p>Spline function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a6c0a6812c1614c0d4dec1b01ad0cac57"></a>WAVE_STOKES5_p&#160;</td><td class="fielddoc"><p>5th order Stokes wave function </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a2c331138575e3f765a69579fb05d2c96"></a>WAVE_STREAMLINE_p&#160;</td><td class="fielddoc"><p>Nonlinear streamline wave function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a0e934c085d15907464818f3d3aac212a"></a>WAVE_EMBEDDED_p&#160;</td><td class="fielddoc"><p>Irregular waves with embedded streamlines. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a7074f3c6c43f0ef65e14faf56e917703"></a>LIN_VAR_p&#160;</td><td class="fielddoc"><p>Piece-wise linear function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a373297feaa06e10d17627f8f71663904"></a>RAMP_p&#160;</td><td class="fielddoc"><p>Ramp function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a782e7f527f9c7bdaef3c3fda8f6eeb2f"></a>STEP_p&#160;</td><td class="fielddoc"><p>Step function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a0f622ca255d1b90a7fcfb3a7d4986e06"></a>SQUARE_PULS_p&#160;</td><td class="fielddoc"><p>Square pulse function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4ac91ce2b5e2beb6ba583cdd0c29cb709c"></a>DIRAC_PULS_p&#160;</td><td class="fielddoc"><p>Dirac pulse function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4aaff07763ad9717006fba8e2e19e9fb6a"></a>CONSTANT_p&#160;</td><td class="fielddoc"><p>Constant function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a32e5d15110e47c343fdc79556d3db599"></a>LIM_RAMP_p&#160;</td><td class="fielddoc"><p>Extended ramp function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4aad41278da6f922c2607803319b2cd6be"></a>SCALE_p&#160;</td><td class="fielddoc"><p>Linear scaling function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4af5b06cfc967bc70c2937daa2f3e09b11"></a>DEVICE_FUNCTION_p&#160;</td><td class="fielddoc"><p>External device function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a6bc151ae896bf7dded612bdd7df18938"></a>MATH_EXPRESSION_p&#160;</td><td class="fielddoc"><p>General match expression function. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4a7896aa513fa8d5e5071e7014d2edd406"></a>USER_DEFINED_p&#160;</td><td class="fielddoc"><p>User-defined function (from plug-in) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a07d130b49720ddacfe4707961595ebf4ada7d9095e1e31b74abb177fd31b69e44"></a>SMOOTH_TRAJ_p&#160;</td><td class="fielddoc"><p>Smooth trajectory function. </p>
+</td></tr>
 </table>
 
 </div>
@@ -191,7 +225,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

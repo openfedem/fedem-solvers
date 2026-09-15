@@ -1,0 +1,8 @@
+<map id="sdiskmatrixmodule::dmopen" name="sdiskmatrixmodule::dmopen">
+<area shape="rect" id="node1" title="Opens a disk matrix file for ReadOnly operations." alt="" coords="5,122,161,163"/>
+<area shape="rect" id="node2" href="$diskMatrixModule_8f90.html#af572cf96792e6414bf6ed953ce4afb35" title="Adjusts the number of matrix columns in a swap section." alt="" coords="246,5,369,32"/>
+<area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title="Initializes a disk matrix object." alt="" coords="229,57,385,98"/>
+<area shape="rect" id="node4" href="$namespacesdiskmatrixmodule.html#aa48c50df064255b9cdf83f3c45228d6f" title="Casts the in&#45;core matrix elements from double to single precision." alt="" coords="229,122,385,163"/>
+<area shape="rect" id="node5" href="$namespacesdiskmatrixmodule.html#ae46a0716de7aff8f8b76d02ff079e538" title="Returns the size of the given disk matrix." alt="" coords="229,187,385,229"/>
+<area shape="rect" id="node6" href="$namespaceallocationmodule.html#a6cc43a5d48ba5f444f29acb94e8318a4" title="Converts a number of bytes to a user&#45;friendly string." alt="" coords="209,253,405,280"/>
+</map>

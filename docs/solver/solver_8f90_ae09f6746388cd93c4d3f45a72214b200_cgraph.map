@@ -23,7 +23,7 @@
 <area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="413,449,575,491"/>
 <area shape="rect" id="node19" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="413,515,575,556"/>
 <area shape="rect" id="node20" href="$namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="413,580,575,621"/>
-<area shape="rect" id="node21" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="1041,588,1212,629"/>
+<area shape="rect" id="node21" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="1041,588,1212,629"/>
 <area shape="rect" id="node22" href="$namespacesamreducermodule.html#a066fea7aa9e0dbaf975387cbcbec4b94" title="Initializes the SAM data structure for fedem_reducer." alt="" coords="379,705,609,731"/>
 <area shape="rect" id="node35" href="$namespacesammodule.html#a3b485dc310e4344a9620649c62ddc644" title="Nullifies all pointers to enable safe testing after allocation." alt="" coords="713,1009,887,1035"/>
 <area shape="rect" id="node43" href="$namespacesysmatrixtypemodule.html#aa279b99d9db021dfedba04c9922ffe11" title="Initializes a system matrix object." alt="" coords="411,71,577,112"/>

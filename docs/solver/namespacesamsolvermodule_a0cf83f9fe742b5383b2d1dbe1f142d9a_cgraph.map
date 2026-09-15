@@ -5,5 +5,5 @@
 <area shape="rect" id="node4" href="$namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="253,123,416,164"/>
 <area shape="rect" id="node5" href="$namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="253,188,416,229"/>
 <area shape="rect" id="node6" href="$namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="253,253,416,295"/>
-<area shape="rect" id="node7" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="249,319,420,360"/>
+<area shape="rect" id="node7" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="249,319,420,360"/>
 </map>

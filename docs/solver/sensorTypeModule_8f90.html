@@ -85,9 +85,6 @@ Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensortype.html">sensortypemodule::sensortype</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a sensor object.  <a href="structsensortypemodule_1_1sensortype.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensortypemodule_1_1sensorptrtype.html">sensortypemodule::sensorptrtype</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type representing a sensor pointer.  <a href="structsensortypemodule_1_1sensorptrtype.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacesensortypemodule_1_1getptrtoid.html">sensortypemodule::getptrtoid</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to object with specified ID.  <a href="interfacesensortypemodule_1_1getptrtoid.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +106,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a65a023b6198628a13dff5e866af12a47"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a65a023b6198628a13dff5e866af12a47">sensortypemodule::writesensortype</a> (sensor, lpu, complexity)</td></tr>
 <tr class="memdesc:a65a023b6198628a13dff5e866af12a47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard routine for writing an object to file.  <a href="namespacesensortypemodule.html#a65a023b6198628a13dff5e866af12a47">More...</a><br /></td></tr>
 <tr class="separator:a65a023b6198628a13dff5e866af12a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830a47fa4b46fba5a68ce928d31d90aa"><td class="memItemLeft" align="right" valign="top">character(len=lid_p) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa">sensortypemodule::getsensorid</a> (sensor, typeAsPrefix)</td></tr>
+<tr class="memdesc:a830a47fa4b46fba5a68ce928d31d90aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of a sensor object, including its type.  <a href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa">More...</a><br /></td></tr>
+<tr class="separator:a830a47fa4b46fba5a68ce928d31d90aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5033a68232b20aab10e6be8ff1067a6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aa5033a68232b20aab10e6be8ff1067a6">sensortypemodule::nullifysensor</a> (sensor)</td></tr>
 <tr class="memdesc:aa5033a68232b20aab10e6be8ff1067a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a sensor object.  <a href="namespacesensortypemodule.html#aa5033a68232b20aab10e6be8ff1067a6">More...</a><br /></td></tr>
 <tr class="separator:aa5033a68232b20aab10e6be8ff1067a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,9 +124,9 @@ Functions/Subroutines</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a781db82fa97a0b087797a8c87f393aef"><td class="memItemLeft" align="right" valign="top">character(len=14), dimension(13), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a781db82fa97a0b087797a8c87f393aef">sensortypemodule::sensortype_p</a> =(/ 'TIME ', 'ENGINE ', 'CONTROL ', 'TRIAD ', 'DAMPER_AXIAL ', 'SPRING_AXIAL ', 'JOINT_VARIABLE', 'SPRING_JOINT ', 'DAMPER_JOINT ', 'RELATIVE_TRIAD', 'MATLAB_WS ', 'STRAIN_GAGE ', 'NUM_ITERATIONS' /)</td></tr>
-<tr class="memdesc:a781db82fa97a0b087797a8c87f393aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sensor type strings, i.e., what type of object the sensor is measuring.  <a href="namespacesensortypemodule.html#a781db82fa97a0b087797a8c87f393aef">More...</a><br /></td></tr>
-<tr class="separator:a781db82fa97a0b087797a8c87f393aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a077b879cc9e784ec755cf176a6a4c"><td class="memItemLeft" align="right" valign="top">character(len=14), dimension(12), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#af5a077b879cc9e784ec755cf176a6a4c">sensortypemodule::sensortype_p</a> =(/ 'TIME ', 'ENGINE ', 'CONTROL ', 'TRIAD ', 'DAMPER_AXIAL ', 'SPRING_AXIAL ', 'JOINT_VARIABLE', 'SPRING_JOINT ', 'DAMPER_JOINT ', 'RELATIVE_TRIAD', 'STRAIN_GAGE ', 'NUM_ITERATIONS' /)</td></tr>
+<tr class="memdesc:af5a077b879cc9e784ec755cf176a6a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sensor type strings, i.e., what type of object the sensor is measuring.  <a href="namespacesensortypemodule.html#af5a077b879cc9e784ec755cf176a6a4c">More...</a><br /></td></tr>
+<tr class="separator:af5a077b879cc9e784ec755cf176a6a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a603e1ce3e4c22b65c9c7b1b88b94dc17"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a603e1ce3e4c22b65c9c7b1b88b94dc17">sensortypemodule::time_p</a> = 1</td></tr>
 <tr class="memdesc:a603e1ce3e4c22b65c9c7b1b88b94dc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time sensor enum value.  <a href="namespacesensortypemodule.html#a603e1ce3e4c22b65c9c7b1b88b94dc17">More...</a><br /></td></tr>
 <tr class="separator:a603e1ce3e4c22b65c9c7b1b88b94dc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,13 +157,10 @@ Variables</h2></td></tr>
 <tr class="memitem:aeff3ae1182a7ee0ab0d1cf58d18c3267"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aeff3ae1182a7ee0ab0d1cf58d18c3267">sensortypemodule::relative_triad_p</a> = 10</td></tr>
 <tr class="memdesc:aeff3ae1182a7ee0ab0d1cf58d18c3267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative sensor enum value.  <a href="namespacesensortypemodule.html#aeff3ae1182a7ee0ab0d1cf58d18c3267">More...</a><br /></td></tr>
 <tr class="separator:aeff3ae1182a7ee0ab0d1cf58d18c3267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a269f0fdac359e4d3e9a1aaf4f2a3e948"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a269f0fdac359e4d3e9a1aaf4f2a3e948">sensortypemodule::matlab_ws_p</a> = 11</td></tr>
-<tr class="memdesc:a269f0fdac359e4d3e9a1aaf4f2a3e948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matlab sensor enum value.  <a href="namespacesensortypemodule.html#a269f0fdac359e4d3e9a1aaf4f2a3e948">More...</a><br /></td></tr>
-<tr class="separator:a269f0fdac359e4d3e9a1aaf4f2a3e948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a0303c1e7b02461e8b3fbfb1d5f6f76e4">sensortypemodule::strain_gage_p</a> = 12</td></tr>
+<tr class="memitem:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a0303c1e7b02461e8b3fbfb1d5f6f76e4">sensortypemodule::strain_gage_p</a> = 11</td></tr>
 <tr class="memdesc:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strain gage sensor enum value.  <a href="namespacesensortypemodule.html#a0303c1e7b02461e8b3fbfb1d5f6f76e4">More...</a><br /></td></tr>
 <tr class="separator:a0303c1e7b02461e8b3fbfb1d5f6f76e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa54128b4f0678a5e5a335f058ebceb9a"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aa54128b4f0678a5e5a335f058ebceb9a">sensortypemodule::num_iterations_p</a> = 13</td></tr>
+<tr class="memitem:aa54128b4f0678a5e5a335f058ebceb9a"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#aa54128b4f0678a5e5a335f058ebceb9a">sensortypemodule::num_iterations_p</a> = 12</td></tr>
 <tr class="memdesc:aa54128b4f0678a5e5a335f058ebceb9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterations sensor enum value.  <a href="namespacesensortypemodule.html#aa54128b4f0678a5e5a335f058ebceb9a">More...</a><br /></td></tr>
 <tr class="separator:aa54128b4f0678a5e5a335f058ebceb9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a412f8e3bd3e6bb9b11752221d677f1c6"><td class="memItemLeft" align="right" valign="top">character(len=7), dimension(14), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensortypemodule.html#a412f8e3bd3e6bb9b11752221d677f1c6">sensortypemodule::sensorentity_p</a> = (/ 'POS ', 'VEL ', 'ACC ', 'DEFL ', 'FORCE ', 'LENGTH ', 'REL_POS', 'ANGLE ', 'W_SPEED', 'F_VEL ', 'F_ACC ', 'DYN_P ', 'STRAIN ', 'STRESS ' /)</td></tr>
@@ -229,7 +226,7 @@ Variables</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

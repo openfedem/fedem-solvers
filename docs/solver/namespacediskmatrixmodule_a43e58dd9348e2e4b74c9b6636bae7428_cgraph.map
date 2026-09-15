@@ -1,0 +1,5 @@
+<map id="diskmatrixmodule::dmsetreadonly" name="diskmatrixmodule::dmsetreadonly">
+<area shape="rect" id="node1" title="Toggles between Read/Write and ReadOnly." alt="" coords="5,5,252,32"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="300,5,504,32"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="552,5,832,32"/>
+</map>

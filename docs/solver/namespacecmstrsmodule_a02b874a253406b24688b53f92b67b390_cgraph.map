@@ -1,4 +1,7 @@
 <map id="cmstrsmodule::eigcms" name="cmstrsmodule::eigcms">
-<area shape="rect" id="node1" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="5,5,176,32"/>
-<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title=" " alt="" coords="224,5,480,32"/>
+<area shape="rect" id="node1" title="Computes and prints the eigenvalues of the reduced system." alt="" coords="5,31,176,57"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#ab3f4c22de4fd7f92e79973b882c9c2ef" title="Multiplies a disk matrix with a given vector." alt="" coords="224,31,480,57"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="528,5,771,32"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="547,56,751,83"/>
+<area shape="rect" id="node5" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="819,56,1099,83"/>
 </map>

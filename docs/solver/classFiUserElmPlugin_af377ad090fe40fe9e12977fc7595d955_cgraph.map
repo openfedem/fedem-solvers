@@ -1,0 +1,7 @@
+<map id="FiUserElmPlugin::validate" name="FiUserElmPlugin::validate">
+<area shape="rect" id="node1" title="Checks if the named library can be loaded as a plugin." alt="" coords="5,101,195,127"/>
+<area shape="rect" id="node2" href="$classFFaDynamicLibraryBase.html#a125da94c46c8870616b45868bbfca9c2" title="Returns whether dynamics libraries have been loaded or not." alt="" coords="246,5,425,47"/>
+<area shape="rect" id="node3" href="$classFiUserElmPlugin.html#aa6f4b9c1f631e4e5ee7cb63fc2cdfad5" title="Returns the signature string of the loaded plugin." alt="" coords="243,71,428,98"/>
+<area shape="rect" id="node4" href="$classFFaDynamicLibraryBase.html#a1fac954c8ea3ef0711dda5f301eed4e6" title="Loads the library named libName." alt="" coords="246,123,425,164"/>
+<area shape="rect" id="node5" href="$classFFaDynamicLibraryBase.html#aae905aaf5544e2b09a9cb0f85deb6150" title="Unloads the library named libName." alt="" coords="246,188,425,229"/>
+</map>

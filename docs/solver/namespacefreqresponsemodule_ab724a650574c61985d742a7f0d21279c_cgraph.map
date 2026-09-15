@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="Interface to the frequency&#45;domain solver module in Fedem." alt="" coords="5,1299,161,1340"/>
 <area shape="rect" id="node2" href="$namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="210,829,379,855"/>
 <area shape="rect" id="node31" href="$namespacefreqresponsemodule.html#a62f0bb392e6d5f47cd01bf0ca2635319" title="Deallocates the dynamic structures of the frequency domain analysis." alt="" coords="217,1135,373,1176"/>
-<area shape="rect" id="node32" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="209,1200,380,1241"/>
+<area shape="rect" id="node32" href="$namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="209,1200,380,1241"/>
 <area shape="rect" id="node33" href="$namespacefreqresponsemodule.html#adc92c53fdaa9231292e465153fdaec3d" title="Calculates the eigenvalues and eigenvectors (optional)." alt="" coords="217,1265,373,1307"/>
 <area shape="rect" id="node38" href="$namespacefreqresponsemodule.html#a053ec18cb51b317c05bd323daae45f87" title="Main driver for the segmented frequency response analysis." alt="" coords="217,1487,373,1528"/>
 <area shape="rect" id="node47" href="$namespacefreqresponsemodule.html#a2ee2bc5739421aff21fc99b0e4c6a417" title="Runs a sweep analysis for detecting the eigenfrequencies (optional)." alt="" coords="217,1331,373,1372"/>
@@ -23,13 +23,13 @@
 <area shape="rect" id="node11" href="$namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="732,719,935,746"/>
 <area shape="rect" id="node14" href="$namespacetireroutinesmodule.html#a6fde006223d686f83af46a5bfc95856b" title=" " alt="" coords="760,1121,907,1163"/>
 <area shape="rect" id="node15" href="$namespacesavevtfmodule.html#a81d77243bbbd06f4e4e51f977513ad9a" title=" " alt="" coords="743,1070,923,1097"/>
-<area shape="rect" id="node17" href="$namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="749,240,917,281"/>
+<area shape="rect" id="node17" href="$namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="749,240,917,281"/>
 <area shape="rect" id="node18" href="$namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="752,305,915,347"/>
 <area shape="rect" id="node19" href="$namespacefiniteelementmodule.html#abbaced9003d8f6f16bd639a692eb028c" title="Deallocates the linked lists of beam elements." alt="" coords="754,371,913,412"/>
-<area shape="rect" id="node20" href="$namespacecontroltypemodule.html#aabb1918d67d6f1433abc016b097d1cad" title="Deallocates the ControlType object." alt="" coords="757,436,910,477"/>
+<area shape="rect" id="node20" href="$namespacecontroltypemodule.html#a342d26459ddb487a527fa8175c3bcc26" title="Deallocates a control system object." alt="" coords="757,436,910,477"/>
 <area shape="rect" id="node21" href="$namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="745,501,921,543"/>
 <area shape="rect" id="node22" href="$namespacemodestypemodule.html#a3fa8725132dbe04fc66f03bff91f38ad" title="Deallocates the ModesType object." alt="" coords="701,567,965,594"/>
-<area shape="rect" id="node23" href="$namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title=" " alt="" coords="744,5,923,47"/>
+<area shape="rect" id="node23" href="$namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title="Deallocates all spline function data." alt="" coords="744,5,923,47"/>
 <area shape="rect" id="node24" href="$namespacesystemtypemodule.html#a935fe4ac037cf2666adc7adcee35c6db" title="Deallocates the SystemType object." alt="" coords="710,71,957,98"/>
 <area shape="rect" id="node25" href="$namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="751,123,916,164"/>
 <area shape="rect" id="node26" href="$namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title="Deallocates the internal buffers for automatic time stepping." alt="" coords="702,189,965,215"/>

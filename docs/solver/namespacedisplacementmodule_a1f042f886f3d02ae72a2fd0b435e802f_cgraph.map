@@ -1,7 +1,9 @@
 <map id="displacementmodule::closebandematrix" name="displacementmodule::closebandematrix">
-<area shape="rect" id="node1" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="5,86,164,127"/>
-<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="215,5,419,32"/>
-<area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title=" " alt="" coords="239,57,395,98"/>
-<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title=" " alt="" coords="212,123,423,149"/>
-<area shape="rect" id="node5" href="$namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title=" " alt="" coords="239,174,395,215"/>
+<area shape="rect" id="node1" title="Closes the B&#45; and E&#45;matrix files for one particular superelement." alt="" coords="5,78,164,119"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="212,56,416,83"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title="Initializes a disk matrix object." alt="" coords="464,5,675,32"/>
+<area shape="rect" id="node6" href="$namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="236,107,392,149"/>
+<area shape="rect" id="node7" href="$namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title="Initializes a disk matrix object." alt="" coords="491,137,647,178"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="467,56,671,83"/>
+<area shape="rect" id="node5" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="723,56,1003,83"/>
 </map>

@@ -67,12 +67,13 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FFaMathExprFactory_F.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Fortran wrapper for the <a class="el" href="classFFaMathExprFactory.html">FFaMathExprFactory</a> methods.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="FFaMathExprFactory_8H_source.html">FFaMathExpr/FFaMathExprFactory.H</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFaFortran_8H_source.html">FFaLib/FFaOS/FFaFortran.H</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -80,7 +81,7 @@ Include dependency graph for FFaMathExprFactory_F.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaMathExprFactory__F_8C__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaMathExpr_2FFaMathExprFactory__F_8C" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaMathExpr_2FFaMathExprFactory__F_8C" id="afedem-foundation_2src_2FFaMathExpr_2FFaMathExprFactory__F_8C">
-<area shape="rect" title=" " alt="" coords="233,5,504,47"/>
+<area shape="rect" title="Fortran wrapper for the FFaMathExprFactory methods." alt="" coords="233,5,504,47"/>
 <area shape="rect" href="FFaMathExprFactory_8H.html" title=" " alt="" coords="118,95,371,121"/>
 <area shape="rect" href="FFaFortran_8H.html" title="Macros to aid cross&#45;language linkage between C/C++ and Fortran." alt="" coords="396,95,589,121"/>
 <area shape="rect" href="FFaSingelton_8H.html" title=" " alt="" coords="5,169,148,211"/>
@@ -89,207 +90,21 @@ Include dependency graph for FFaMathExprFactory_F.C:</div>
 <area shape="rect" title=" " alt="" coords="343,177,394,203"/>
 </map>
 </div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:aed656506ee46019a09a6164803456471"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaMathExprFactory__F_8C.html#aed656506ee46019a09a6164803456471">SUBROUTINE</a> (ffame_create, FFAME_CREATE) const</td></tr>
-<tr class="memdesc:aed656506ee46019a09a6164803456471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a math expression.  <a href="FFaMathExprFactory__F_8C.html#aed656506ee46019a09a6164803456471">More...</a><br /></td></tr>
-<tr class="separator:aed656506ee46019a09a6164803456471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a777d3d35b16ee3c722b268d953b5d378"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaMathExprFactory__F_8C.html#a777d3d35b16ee3c722b268d953b5d378">DOUBLE_FUNCTION</a> (ffame_getvalue, FFAME_GETVALUE) const</td></tr>
-<tr class="memdesc:a777d3d35b16ee3c722b268d953b5d378"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a value from the expression.  <a href="FFaMathExprFactory__F_8C.html#a777d3d35b16ee3c722b268d953b5d378">More...</a><br /></td></tr>
-<tr class="separator:a777d3d35b16ee3c722b268d953b5d378"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2d6ec14bf22778e68728fb3ed4595c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaMathExprFactory__F_8C.html#aa2d6ec14bf22778e68728fb3ed4595c2">DOUBLE_FUNCTION</a> (ffame_getvalue2, FFAME_GETVALUE2) const</td></tr>
-<tr class="memdesc:aa2d6ec14bf22778e68728fb3ed4595c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a value from the multi-variable expression.  <a href="FFaMathExprFactory__F_8C.html#aa2d6ec14bf22778e68728fb3ed4595c2">More...</a><br /></td></tr>
-<tr class="separator:aa2d6ec14bf22778e68728fb3ed4595c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6970aa95710e9ed2cc6f2a5f8e938eb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaMathExprFactory__F_8C.html#a6970aa95710e9ed2cc6f2a5f8e938eb0">DOUBLE_FUNCTION</a> (ffame_getdiff, FFAME_GETDIFF) const</td></tr>
-<tr class="memdesc:a6970aa95710e9ed2cc6f2a5f8e938eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a value from the differentiated expression.  <a href="FFaMathExprFactory__F_8C.html#a6970aa95710e9ed2cc6f2a5f8e938eb0">More...</a><br /></td></tr>
-<tr class="separator:a6970aa95710e9ed2cc6f2a5f8e938eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad335d6ee908e2ffa4ce3ec990b597a3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaMathExprFactory__F_8C.html#ad335d6ee908e2ffa4ce3ec990b597a3b">DOUBLE_FUNCTION</a> (ffame_getdiff2, FFAME_GETDIFF2) const</td></tr>
-<tr class="memdesc:ad335d6ee908e2ffa4ce3ec990b597a3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a value from the differentiated multi-variable expression.  <a href="FFaMathExprFactory__F_8C.html#ad335d6ee908e2ffa4ce3ec990b597a3b">More...</a><br /></td></tr>
-<tr class="separator:ad335d6ee908e2ffa4ce3ec990b597a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a6970aa95710e9ed2cc6f2a5f8e938eb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6970aa95710e9ed2cc6f2a5f8e938eb0">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffame_getdiff&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAME_GETDIFF&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a value from the differentiated expression. </p>
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Fortran wrapper for the <a class="el" href="classFFaMathExprFactory.html">FFaMathExprFactory</a> methods. </p>
+<p>This file contains the implementation of the following Fortran wrappers of the <a class="el" href="classFFaMathExprFactory.html">FFaMathExprFactory</a> module:</p>
 <ul>
-<li>exprId - Id of the expression to evaluate </li>
-<li>arg - Argument to the function expression <dl class="section return"><dt>Returns</dt><dd>Corresponding function derivative, i.e., f'(arg) </dd></dl>
-</li>
+<li><a class="el" href="interfaceffamathexprinterface_1_1ffame__create.html" title="Creates a new expression function.">ffamathexprinterface::ffame_create</a></li>
+<li><a class="el" href="interfaceffamathexprinterface_1_1ffame__getvalue.html" title="Evaluates a single-argument expression function.">ffamathexprinterface::ffame_getvalue</a></li>
+<li><a class="el" href="interfaceffamathexprinterface_1_1ffame__getvalue2.html" title="Evaluates a multi-argument expression function.">ffamathexprinterface::ffame_getvalue2</a></li>
+<li><a class="el" href="interfaceffamathexprinterface_1_1ffame__getdiff.html" title="Evaluates derivative of a single-argument expression function.">ffamathexprinterface::ffame_getdiff</a></li>
+<li><a class="el" href="interfaceffamathexprinterface_1_1ffame__getdiff2.html" title="Evaluates a derivative of a multi-argument expression function.">ffamathexprinterface::ffame_getdiff2</a></li>
 </ul>
-
-</div>
-</div>
-<a id="ad335d6ee908e2ffa4ce3ec990b597a3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad335d6ee908e2ffa4ce3ec990b597a3b">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffame_getdiff2&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAME_GETDIFF2&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a value from the differentiated multi-variable expression. </p>
-<ul>
-<li>exprId - Id of the expression to evaluate </li>
-<li>i - Argument index to differentiate the expression with respect to </li>
-<li>arg - Arguments to the function expression <dl class="section return"><dt>Returns</dt><dd>Corresponding function derivative, df/darg<a href="arg[0],arg[1],...">i</a> </dd></dl>
-</li>
-</ul>
-
-</div>
-</div>
-<a id="a777d3d35b16ee3c722b268d953b5d378"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a777d3d35b16ee3c722b268d953b5d378">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffame_getvalue&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAME_GETVALUE&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a value from the expression. </p>
-<ul>
-<li>exprId - Id of the expression to evaluate </li>
-<li>arg - Argument to the function expression <dl class="section return"><dt>Returns</dt><dd>Corresponding function value, f(arg) </dd></dl>
-</li>
-</ul>
-
-</div>
-</div>
-<a id="aa2d6ec14bf22778e68728fb3ed4595c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2d6ec14bf22778e68728fb3ed4595c2">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffame_getvalue2&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAME_GETVALUE2&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a value from the multi-variable expression. </p>
-<ul>
-<li>exprId - Id of the expression to evaluate </li>
-<li>arg - Arguments to the function expression <dl class="section return"><dt>Returns</dt><dd>Corresponding function value, f(arg[0],arg[1],...) </dd></dl>
-</li>
-</ul>
-
-</div>
-</div>
-<a id="aed656506ee46019a09a6164803456471"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed656506ee46019a09a6164803456471">&#9670;&nbsp;</a></span>SUBROUTINE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SUBROUTINE </td>
-          <td>(</td>
-          <td class="paramtype">ffame_create&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAME_CREATE&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a math expression. </p>
-<ul>
-<li>narg - Number of arguments </li>
-<li>expr - User-defined function expression </li>
-<li>expId - Associated expression id</li>
-</ul>
-<dl class="section note"><dt>Note</dt><dd>Existing expressions are replaced. </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>No further documentation is provided here. The wrappers are documented in the <a class="el" href="FFaMathExprInterface_8f90.html" title="Fortran interface for FFaMathExprFactory methods.">FFaMathExprInterface.f90</a> file. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

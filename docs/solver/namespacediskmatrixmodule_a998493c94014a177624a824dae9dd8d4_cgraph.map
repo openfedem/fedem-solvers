@@ -1,0 +1,6 @@
+<map id="diskmatrixmodule::dmgetcolptr" name="diskmatrixmodule::dmgetcolptr">
+<area shape="rect" id="node1" title="Returns a pointer to column cInd of the given disk matrix." alt="" coords="5,31,233,57"/>
+<area shape="rect" id="node2" href="$namespacediskmatrixmodule.html#a2b9bf6f6fa36409a1d8f0d5ee86f432a" title="Gets swap section number and local array index for matrix element." alt="" coords="281,5,524,32"/>
+<area shape="rect" id="node3" href="$namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="301,56,505,83"/>
+<area shape="rect" id="node4" href="$namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="572,56,852,83"/>
+</map>

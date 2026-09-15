@@ -1,52 +1,52 @@
 <map id="functiontypemodule::getrampvalue" name="functiontypemodule::getrampvalue">
-<area shape="rect" id="node1" title="Evaluates the smooth trajectory ramp function." alt="" coords="1559,409,1712,450"/>
-<area shape="rect" id="node2" href="$namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="1343,438,1511,479"/>
-<area shape="rect" id="node50" href="$namespaceenvironmenttypemodule.html#a4fdd173d57a50202acfdd76387f47b72" title="Updates the scaled gravitation vector in case of dynamic up&#45;ramping." alt="" coords="520,153,703,194"/>
-<area shape="rect" id="node3" href="$namespaceengineroutinesmodule.html#a4bc95e5aa1d4f7be389fb8e1ba1680d7" title="Evaluates the time&#45;derivative of a general function." alt="" coords="1127,74,1295,115"/>
-<area shape="rect" id="node5" href="$namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="1127,774,1295,815"/>
-<area shape="rect" id="node4" href="$namespaceengineroutinesmodule.html#a2dcdb35909d3bc6bcd98a974e98e1c36" title="Evaluates the time&#45;derivative of a sensor value." alt="" coords="855,74,1023,115"/>
-<area shape="rect" id="node6" href="$namespaceengineroutinesmodule.html#a828b78f0573ddb417f2a719b5f4eb786" title="Evaluates a general function with optional scaling and offset." alt="" coords="855,989,1023,1030"/>
-<area shape="rect" id="node8" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="237,442,422,483"/>
-<area shape="rect" id="node15" href="$namespaceroadroutinesmodule.html#adce1f6877a917395e0b6a9b05c7b7dfb" title=" " alt="" coords="863,1718,1016,1759"/>
-<area shape="rect" id="node16" href="$namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="847,336,1031,363"/>
-<area shape="rect" id="node21" href="$namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title="Returns the length of the initial time step." alt="" coords="800,1295,1079,1321"/>
-<area shape="rect" id="node26" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="818,752,1061,779"/>
-<area shape="rect" id="node28" href="$namespaceextctrlsysroutinesmodule.html#acf10320ad1970aee28f832ca4a4b4d64" title=" " alt="" coords="845,1835,1033,1877"/>
-<area shape="rect" id="node29" href="$namespaceextctrlsysroutinesmodule.html#a13843260096752db9bba9f983623fece" title=" " alt="" coords="845,270,1033,311"/>
-<area shape="rect" id="node30" href="$namespaceengineroutinesmodule.html#ade0a362e5df9b5cbcb66b398664bffb0" title="Pre&#45;evaluation of general functions." alt="" coords="855,205,1023,246"/>
-<area shape="rect" id="node31" href="$namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="245,858,413,899"/>
-<area shape="rect" id="node32" href="$namespacecontrolroutinesmodule.html#a6fc09b1d7e9c490f5aa591f2b6a80b7c" title="Sets input values for control variables from engines and sensors." alt="" coords="245,1603,414,1645"/>
-<area shape="rect" id="node33" href="$namespaceenergyintegrationmodule.html#a123cd24a376e0362e51db466ffb1a9db" title="Computes strain energy, input energy and energy loss for a spring." alt="" coords="846,139,1033,181"/>
-<area shape="rect" id="node35" href="$namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="239,507,420,549"/>
-<area shape="rect" id="node36" href="$namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="855,1535,1023,1577"/>
-<area shape="rect" id="node40" href="$namespaceengineroutinesmodule.html#adeae596463a829024cd36a41499bd94a" title="Updates a sensor value depending on the sensor type." alt="" coords="527,1731,695,1773"/>
-<area shape="rect" id="node41" href="$namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all engines and store the values for saving." alt="" coords="852,803,1027,845"/>
-<area shape="rect" id="node43" href="$namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e" title="Updates friction forces in the given joint or contact element." alt="" coords="526,1797,697,1838"/>
-<area shape="rect" id="node44" href="$namespacemassroutinesmodule.html#a0be79f09e605f50e080cab9208a73c90" title="Updates a mass element." alt="" coords="860,505,1019,546"/>
-<area shape="rect" id="node45" href="$namespacesupelroutinesmodule.html#ac61e91049f50447aaccdff86e9f51b3c" title="Updates the current sea state." alt="" coords="849,570,1030,611"/>
-<area shape="rect" id="node46" href="$namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="855,1601,1023,1642"/>
-<area shape="rect" id="node47" href="$namespacespringroutinesmodule.html#a670f62a12ce575e3e1a84ef460af6b55" title="Corrects spring force and stiffness according to interconnectivity." alt="" coords="851,635,1027,677"/>
-<area shape="rect" id="node48" href="$namespacesupelroutinesmodule.html#af70c740e83eede0ffdab4f1d97f6094d" title="Updates the superelement damping matrices." alt="" coords="856,387,1023,429"/>
-<area shape="rect" id="node49" href="$namespaceuserdefelroutinesmodule.html#a145a2c99105ad2c826fe6833f3dddc03" title="Updates a user&#45;defined element." alt="" coords="847,869,1032,910"/>
-<area shape="rect" id="node7" href="$namespaceforceroutinesmodule.html#aea7dc0b90d471d0e5e84e0ea501c767f" title="Updates the external forces (point loads)." alt="" coords="527,675,696,717"/>
-<area shape="rect" id="node10" href="$interfacemotionroutinesmodule_1_1updateprescribedmotions.html#aeda03fd691791addfda072c3447e1494" title="Updates the prescribed motions." alt="" coords="509,1055,713,1111"/>
-<area shape="rect" id="node11" href="$interfacemotionroutinesmodule_1_1updateprescribedmotions.html#a4d128e84551f5c9748c0cd2c42759a31" title="Updates the prescribed motions." alt="" coords="509,908,713,964"/>
-<area shape="rect" id="node12" href="$namespacespringroutinesmodule.html#a94dc72bf4f106119cc35ed5e3abc670f" title="Updates the spring yield variables." alt="" coords="529,989,693,1030"/>
-<area shape="rect" id="node13" href="$namespacesupelroutinesmodule.html#a61947935475782946c6c892ed8dc7b4b" title="Adds the superelement loads to the system external load vector." alt="" coords="250,1387,409,1429"/>
-<area shape="rect" id="node14" href="$springRoutinesModule_8f90.html#a6b76742afb1c9ddcbc8175e9ee20577a" title="Updates the yield limit by evaluating the yield limit engine." alt="" coords="547,1135,676,1161"/>
-<area shape="rect" id="node9" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="5,573,188,600"/>
-<area shape="rect" id="node17" href="$namespacesolvermodule.html#a774ec4ba197d6aa05e99b34cdfa0d442" title="Computes relative distance between 2 triads for input displacements." alt="" coords="471,219,752,245"/>
-<area shape="rect" id="node18" href="$namespacesolvermodule.html#a78a479ffd569dd6d0f66949a945ee112" title="Computes response variables for input displacements." alt="" coords="480,269,743,296"/>
-<area shape="rect" id="node19" href="$solverDriver_8f90.html#a95f8c8bb7c842d31b2e91aff9ce5ecdc" title="Evaluates the specified function." alt="" coords="563,320,660,347"/>
-<area shape="rect" id="node20" href="$solverDriver_8f90.html#ada384e4acef39d5e3ce6086b8cf15df5" title="Evaluates the (first) function identified by the given tag." alt="" coords="550,371,673,397"/>
-<area shape="rect" id="node22" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="242,1185,417,1212"/>
-<area shape="rect" id="node23" href="$namespaceinitiatesystemtypemodule.html#a2b65789ec9056c08fe5d305ee2954092" title="Initializes the time stepping before starting integration loop." alt="" coords="514,1287,709,1329"/>
-<area shape="rect" id="node24" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="518,1353,705,1394"/>
-<area shape="rect" id="node25" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="518,1418,705,1459"/>
-<area shape="rect" id="node27" href="$namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5" title="Returns the physical time of a specified simulation state." alt="" coords="526,624,697,651"/>
-<area shape="rect" id="node34" href="$namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="236,210,423,251"/>
-<area shape="rect" id="node37" href="$namespacebushingelementroutinesmodule.html#a7d7378e786803aeaa349f16c26dcccb8" title=" " alt="" coords="497,1666,726,1707"/>
-<area shape="rect" id="node38" href="$namespacecontactelementroutinesmodule.html#ad191d4622f976d77e77ba654bd52f568" title="Updates the contact springs and dampers." alt="" coords="498,1601,725,1642"/>
-<area shape="rect" id="node39" href="$namespacedamperroutinesmodule.html#a8eae0d7b4548aaa390e1054b5b6a01a3" title="Updates all axial&#45; and joint dampers in the model." alt="" coords="524,1535,699,1577"/>
-<area shape="rect" id="node42" href="$namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="529,741,693,782"/>
+<area shape="rect" id="node1" title="Evaluates the smooth trajectory ramp function." alt="" coords="1573,538,1727,579"/>
+<area shape="rect" id="node2" href="$namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="1357,567,1525,609"/>
+<area shape="rect" id="node50" href="$namespaceenvironmenttypemodule.html#a4fdd173d57a50202acfdd76387f47b72" title="Updates the scaled gravitation vector in case of dynamic up&#45;ramping." alt="" coords="1127,109,1309,150"/>
+<area shape="rect" id="node3" href="$namespaceengineroutinesmodule.html#a89e1310ce2444094c90d9526b06edc6d" title="Evaluates the derivative of a general function." alt="" coords="1134,174,1302,215"/>
+<area shape="rect" id="node8" href="$namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="1134,986,1302,1027"/>
+<area shape="rect" id="node4" href="$namespaceforceroutinesmodule.html#a1db586df58a732b0e3de8cb8bd8c68cb" title="Calculates the system force gradient vector from an external force." alt="" coords="857,239,1021,281"/>
+<area shape="rect" id="node6" href="$namespaceengineroutinesmodule.html#a7c9ee4ad6b6610a3243e0b09c326a5a1" title="Calculates gradient of a control input w.r.t. displacement DOFs." alt="" coords="855,174,1023,215"/>
+<area shape="rect" id="node7" href="$namespaceengineroutinesmodule.html#a2dcdb35909d3bc6bcd98a974e98e1c36" title="Evaluates the derivative of a sensor value." alt="" coords="855,43,1023,85"/>
+<area shape="rect" id="node5" href="$namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="520,206,703,247"/>
+<area shape="rect" id="node9" href="$namespaceengineroutinesmodule.html#ace3473ab4ee1d8ad31ad68fdb493db31" title="Evaluates a general function with optional scaling and offset." alt="" coords="855,793,1023,834"/>
+<area shape="rect" id="node11" href="$namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="237,429,422,470"/>
+<area shape="rect" id="node18" href="$namespaceroadroutinesmodule.html#adce1f6877a917395e0b6a9b05c7b7dfb" title=" " alt="" coords="863,1305,1016,1346"/>
+<area shape="rect" id="node19" href="$namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="847,1136,1031,1163"/>
+<area shape="rect" id="node24" href="$namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title="Returns the length of the initial time step." alt="" coords="800,1455,1079,1481"/>
+<area shape="rect" id="node29" href="$namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="818,968,1061,995"/>
+<area shape="rect" id="node31" href="$namespaceengineroutinesmodule.html#ade0a362e5df9b5cbcb66b398664bffb0" title="Pre&#45;evaluation of general functions." alt="" coords="855,597,1023,638"/>
+<area shape="rect" id="node32" href="$namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="245,1011,413,1053"/>
+<area shape="rect" id="node33" href="$namespacecontrolroutinesmodule.html#a6fc09b1d7e9c490f5aa591f2b6a80b7c" title="Sets input values for control variables from engines and sensors." alt="" coords="855,1603,1024,1645"/>
+<area shape="rect" id="node34" href="$namespaceenergyintegrationmodule.html#a123cd24a376e0362e51db466ffb1a9db" title="Computes strain energy, input energy and energy loss for a spring." alt="" coords="846,1070,1033,1111"/>
+<area shape="rect" id="node36" href="$namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="849,109,1030,150"/>
+<area shape="rect" id="node37" href="$namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="855,1702,1023,1743"/>
+<area shape="rect" id="node41" href="$namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="527,1833,695,1874"/>
+<area shape="rect" id="node42" href="$namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all general function objects and store the values for saving." alt="" coords="242,341,417,382"/>
+<area shape="rect" id="node43" href="$namespacefrictionroutinesmodule.html#a363dc5c09a9bb55bfc34f6dd24f8161e" title="Updates friction forces in the given joint or contact element." alt="" coords="526,1389,697,1430"/>
+<area shape="rect" id="node44" href="$namespacemassroutinesmodule.html#a0be79f09e605f50e080cab9208a73c90" title="Updates a mass element." alt="" coords="860,662,1019,703"/>
+<area shape="rect" id="node45" href="$namespacesupelroutinesmodule.html#ac61e91049f50447aaccdff86e9f51b3c" title="Updates the current sea state." alt="" coords="849,902,1030,943"/>
+<area shape="rect" id="node46" href="$namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="855,1538,1023,1579"/>
+<area shape="rect" id="node47" href="$namespacespringroutinesmodule.html#a670f62a12ce575e3e1a84ef460af6b55" title="Corrects spring force and stiffness according to interconnectivity." alt="" coords="851,1187,1027,1229"/>
+<area shape="rect" id="node48" href="$namespacesupelroutinesmodule.html#af70c740e83eede0ffdab4f1d97f6094d" title="Updates the superelement damping matrices." alt="" coords="856,727,1023,769"/>
+<area shape="rect" id="node49" href="$namespaceuserdefelroutinesmodule.html#a145a2c99105ad2c826fe6833f3dddc03" title="Updates a user&#45;defined element." alt="" coords="847,531,1032,573"/>
+<area shape="rect" id="node10" href="$namespaceforceroutinesmodule.html#aea7dc0b90d471d0e5e84e0ea501c767f" title="Updates the external forces (point loads)." alt="" coords="527,851,696,893"/>
+<area shape="rect" id="node13" href="$interfacemotionroutinesmodule_1_1updateprescribedmotions.html#aeda03fd691791addfda072c3447e1494" title="Updates the prescribed motions." alt="" coords="509,508,713,564"/>
+<area shape="rect" id="node14" href="$interfacemotionroutinesmodule_1_1updateprescribedmotions.html#a4d128e84551f5c9748c0cd2c42759a31" title="Updates the prescribed motions." alt="" coords="509,588,713,644"/>
+<area shape="rect" id="node15" href="$namespacespringroutinesmodule.html#a94dc72bf4f106119cc35ed5e3abc670f" title="Updates the spring yield variables." alt="" coords="529,669,693,710"/>
+<area shape="rect" id="node16" href="$namespacesupelroutinesmodule.html#a61947935475782946c6c892ed8dc7b4b" title="Adds the superelement loads to the system external load vector." alt="" coords="532,734,691,775"/>
+<area shape="rect" id="node17" href="$springRoutinesModule_8f90.html#a6b76742afb1c9ddcbc8175e9ee20577a" title="Updates the yield limit by evaluating the yield limit engine." alt="" coords="547,800,676,827"/>
+<area shape="rect" id="node12" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="5,709,188,736"/>
+<area shape="rect" id="node20" href="$namespacesolvermodule.html#a774ec4ba197d6aa05e99b34cdfa0d442" title="Computes relative distance between 2 triads for input displacements." alt="" coords="471,1171,752,1197"/>
+<area shape="rect" id="node21" href="$namespacesolvermodule.html#a78a479ffd569dd6d0f66949a945ee112" title="Computes response variables for input displacements." alt="" coords="480,1221,743,1248"/>
+<area shape="rect" id="node22" href="$solverDriver_8f90.html#a95f8c8bb7c842d31b2e91aff9ce5ecdc" title="Evaluates the specified function." alt="" coords="563,1272,660,1299"/>
+<area shape="rect" id="node23" href="$solverDriver_8f90.html#ada384e4acef39d5e3ce6086b8cf15df5" title="Evaluates the (first) function identified by the given tag." alt="" coords="550,1120,673,1147"/>
+<area shape="rect" id="node25" href="$namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="242,1484,417,1511"/>
+<area shape="rect" id="node26" href="$namespaceinitiatesystemtypemodule.html#a2b65789ec9056c08fe5d305ee2954092" title="Initializes the time stepping before starting integration loop." alt="" coords="514,1506,709,1547"/>
+<area shape="rect" id="node27" href="$interfacerestartmodule_1_1restartinit.html#a56f750656488e46fbc372f5f40e01e89" title="Initializes the mechanism configuration from provided state array." alt="" coords="518,1571,705,1613"/>
+<area shape="rect" id="node28" href="$interfacerestartmodule_1_1restartinit.html#a22a8fa07efb07ca2ff6c86723442ea72" title="Initializes the mechanism configuration from restart file." alt="" coords="518,1323,705,1365"/>
+<area shape="rect" id="node30" href="$namespacesolvermodule.html#aee11f240a987ec00b0339a031adc38b5" title="Returns the physical time of a specified simulation state." alt="" coords="526,917,697,944"/>
+<area shape="rect" id="node35" href="$namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="236,1077,423,1118"/>
+<area shape="rect" id="node38" href="$namespacebushingelementroutinesmodule.html#a7d7378e786803aeaa349f16c26dcccb8" title=" " alt="" coords="497,1637,726,1678"/>
+<area shape="rect" id="node39" href="$namespacecontactelementroutinesmodule.html#ad191d4622f976d77e77ba654bd52f568" title="Updates the contact springs and dampers." alt="" coords="498,1702,725,1743"/>
+<area shape="rect" id="node40" href="$namespacedamperroutinesmodule.html#a8eae0d7b4548aaa390e1054b5b6a01a3" title="Updates all axial&#45; and joint dampers in the model." alt="" coords="524,1767,699,1809"/>
 </map>

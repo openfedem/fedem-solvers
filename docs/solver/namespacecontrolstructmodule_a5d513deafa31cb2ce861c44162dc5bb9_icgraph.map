@@ -1,0 +1,4 @@
+<map id="controlstructmodule::estimatecontrollerproperties01" name="controlstructmodule::estimatecontrollerproperties01">
+<area shape="rect" id="node1" title="Estimates the controller gradient properties by perturbation." alt="" coords="236,5,468,47"/>
+<area shape="rect" id="node2" href="$namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="5,5,188,47"/>
+</map>

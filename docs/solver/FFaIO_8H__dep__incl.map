@@ -16,7 +16,7 @@
 <area shape="rect" id="node11" href="$createTestFnd_8C.html" title="This program is used to create a binary file for unit testing." alt="" coords="1481,206,1703,247"/>
 <area shape="rect" id="node12" href="$SolutionMapper_2main_8C.html" title="Solution field mapping utility for sub&#45;model analysis." alt="" coords="1728,206,1875,247"/>
 <area shape="rect" id="node13" href="$FFaTag_8C.html" title="Utilities for reading and writing of file tags." alt="" coords="1899,206,2071,247"/>
-<area shape="rect" id="node15" href="$binaryDB_8c.html" title="Global functions binary file IO." alt="" coords="2096,213,2296,240"/>
+<area shape="rect" id="node15" href="$binaryDB_8c.html" title="Global C&#45;functions for binary file IO." alt="" coords="2096,213,2296,240"/>
 <area shape="rect" id="node17" href="$FiASCFile_8H.html" title="External device function based on multi&#45;column ASCII file." alt="" coords="2831,206,3054,247"/>
 <area shape="rect" id="node22" href="$FiCurveASCFile_8H.html" title=" " alt="" coords="2319,206,2579,247"/>
 <area shape="rect" id="node24" href="$FiDACFile_8H.html" title=" " alt="" coords="3077,206,3301,247"/>
@@ -29,8 +29,8 @@
 <area shape="rect" id="node21" href="$FiDeviceFunctionFactory_8C.html" title="External device function factory (functions from file)." alt="" coords="3297,303,3501,359"/>
 <area shape="rect" id="node23" href="$FiCurveASCFile_8C.html" title=" " alt="" coords="2320,310,2579,351"/>
 <area shape="rect" id="node25" href="$FiDACFile_8C.html" title=" " alt="" coords="3525,310,3747,351"/>
-<area shape="rect" id="node29" href="$FFpRPC3Data_8C.html" title=" " alt="" coords="3772,310,4017,351"/>
+<area shape="rect" id="node29" href="$FFpRPC3Data_8C.html" title="Method for parsing some meta data from a RPC3&#45;file." alt="" coords="3772,310,4017,351"/>
 <area shape="rect" id="node30" href="$FiRPC3File_8C.html" title=" " alt="" coords="4221,310,4451,351"/>
 <area shape="rect" id="node32" href="$solverInterface_8C.html" title="This file contains the C++ wrappers of the FEDEM dynamics solver API." alt="" coords="3861,213,4091,240"/>
-<area shape="rect" id="node33" href="$FFaFunctionProperties_8C.html" title=" " alt="" coords="4167,199,4369,255"/>
+<area shape="rect" id="node33" href="$FFaFunctionProperties_8C.html" title="Smart&#45;point evaluation for some closed&#45;form explicit functions." alt="" coords="4167,199,4369,255"/>
 </map>

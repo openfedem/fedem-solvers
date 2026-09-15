@@ -112,6 +112,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a3aff1a02586568bc99e2706e07fe10bb"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatefunctiontypemodule.html#a3aff1a02586568bc99e2706e07fe10bb">initiatefunctiontypemodule::initiateengines1</a> (infp, engines, functions, err)</td></tr>
 <tr class="memdesc:a3aff1a02586568bc99e2706e07fe10bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the engine type with data from the solver input file.  <a href="namespaceinitiatefunctiontypemodule.html#a3aff1a02586568bc99e2706e07fe10bb">More...</a><br /></td></tr>
 <tr class="separator:a3aff1a02586568bc99e2706e07fe10bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5e4057579701958a49358da9125d1e7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="initiateFunctionTypeModule_8f90.html#aa5e4057579701958a49358da9125d1e7">reallocate</a> (newSize, ierr)</td></tr>
+<tr class="memdesc:aa5e4057579701958a49358da9125d1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocates the <a class="el" href="namespaceinitiatefunctiontypemodule.html#af167df51bcc3e62acf9cdc70feec869b">initiatefunctiontypemodule::argsensor</a> array while preserving its content.  <a href="initiateFunctionTypeModule_8f90.html#aa5e4057579701958a49358da9125d1e7">More...</a><br /></td></tr>
+<tr class="separator:aa5e4057579701958a49358da9125d1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac71d0ce7171b1c3d2316faede0f6103c"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatefunctiontypemodule.html#ac71d0ce7171b1c3d2316faede0f6103c">initiatefunctiontypemodule::initiateengines2</a> (engines, sensors, err)</td></tr>
 <tr class="memdesc:ac71d0ce7171b1c3d2316faede0f6103c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the engines to their argument sensors.  <a href="namespaceinitiatefunctiontypemodule.html#ac71d0ce7171b1c3d2316faede0f6103c">More...</a><br /></td></tr>
 <tr class="separator:ac71d0ce7171b1c3d2316faede0f6103c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +166,12 @@ Variables</h2></td></tr>
 <tr class="memitem:a5af114b742ebb2da7caa0e3e14e6913f"><td class="memItemLeft" align="right" valign="top">character(len=500)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefunctionnamelistmodule.html#a5af114b742ebb2da7caa0e3e14e6913f">functionnamelistmodule::expression</a></td></tr>
 <tr class="memdesc:a5af114b742ebb2da7caa0e3e14e6913f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit function expression.  <a href="namespacefunctionnamelistmodule.html#a5af114b742ebb2da7caa0e3e14e6913f">More...</a><br /></td></tr>
 <tr class="separator:a5af114b742ebb2da7caa0e3e14e6913f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af167df51bcc3e62acf9cdc70feec869b"><td class="memItemLeft" align="right" valign="top">integer, dimension(:), allocatable, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatefunctiontypemodule.html#af167df51bcc3e62acf9cdc70feec869b">initiatefunctiontypemodule::argsensor</a></td></tr>
+<tr class="memdesc:af167df51bcc3e62acf9cdc70feec869b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary storage of sensor Ids of the function arguments.  <a href="namespaceinitiatefunctiontypemodule.html#af167df51bcc3e62acf9cdc70feec869b">More...</a><br /></td></tr>
+<tr class="separator:af167df51bcc3e62acf9cdc70feec869b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b754ea1e69b59e7e3a2a2fd1d2661d"><td class="memItemLeft" align="right" valign="top">integer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinitiatefunctiontypemodule.html#ac4b754ea1e69b59e7e3a2a2fd1d2661d">initiatefunctiontypemodule::maxchannel</a> = 0</td></tr>
+<tr class="memdesc:ac4b754ea1e69b59e7e3a2a2fd1d2661d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. number of external function channels.  <a href="namespaceinitiatefunctiontypemodule.html#ac4b754ea1e69b59e7e3a2a2fd1d2661d">More...</a><br /></td></tr>
+<tr class="separator:ac4b754ea1e69b59e7e3a2a2fd1d2661d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Initialization of functions from the solver input file. </p>
@@ -223,6 +232,36 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aa5e4057579701958a49358da9125d1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5e4057579701958a49358da9125d1e7">&#9670;&nbsp;</a></span>reallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine initiateengines1::reallocate </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>newSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out)&#160;</td>
+          <td class="paramname"><em>ierr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reallocates the <a class="el" href="namespaceinitiatefunctiontypemodule.html#af167df51bcc3e62acf9cdc70feec869b">initiatefunctiontypemodule::argsensor</a> array while preserving its content. </p>
+
+</div>
+</div>
 <a id="ad51ab954b820913cb2a4a0da9509d81b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad51ab954b820913cb2a4a0da9509d81b">&#9670;&nbsp;</a></span>splineindex()</h2>
 
@@ -242,7 +281,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

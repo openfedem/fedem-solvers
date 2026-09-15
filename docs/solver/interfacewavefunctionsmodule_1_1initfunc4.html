@@ -74,17 +74,25 @@ $(function() {
 <div class="title">wavefunctionsmodule::initfunc4 Interface Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Initializes parameters of a sea wave function.  
+ <a href="interfacewavefunctionsmodule_1_1initfunc4.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:ab599bde3e477014b49003a31213cb8a3"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacewavefunctionsmodule_1_1initfunc4.html#ab599bde3e477014b49003a31213cb8a3">initfunc4fromfile</a> (FNAME, G, D, RFUNC, IERR, RSEED)</td></tr>
+<tr class="memdesc:ab599bde3e477014b49003a31213cb8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes wave function parameters from the given file.  <a href="interfacewavefunctionsmodule_1_1initfunc4.html#ab599bde3e477014b49003a31213cb8a3">More...</a><br /></td></tr>
 <tr class="separator:ab599bde3e477014b49003a31213cb8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afef1676161402f0a47f4be39e4a0b7f2"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacewavefunctionsmodule_1_1initfunc4.html#afef1676161402f0a47f4be39e4a0b7f2">initspectrumdnv</a> (Hs, Tp, Gamma, Omega0, dOmega, g, D, RFUNC, IERR, RSEED, NWdir, SprExp)</td></tr>
+<tr class="memdesc:afef1676161402f0a47f4be39e4a0b7f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a wave function based on statistical parameters.  <a href="interfacewavefunctionsmodule_1_1initfunc4.html#afef1676161402f0a47f4be39e4a0b7f2">More...</a><br /></td></tr>
 <tr class="separator:afef1676161402f0a47f4be39e4a0b7f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4aa0d97f46e1bf2953224407b5c3e571"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacewavefunctionsmodule_1_1initfunc4.html#a4aa0d97f46e1bf2953224407b5c3e571">initspectrumof</a> (IOP, H3, T1, Gamma, Omega0, dOmega, g, D, RFUNC, IERR, RSEED)</td></tr>
+<tr class="memdesc:a4aa0d97f46e1bf2953224407b5c3e571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a wave function based on statistical parameters.  <a href="interfacewavefunctionsmodule_1_1initfunc4.html#a4aa0d97f46e1bf2953224407b5c3e571">More...</a><br /></td></tr>
 <tr class="separator:a4aa0d97f46e1bf2953224407b5c3e571"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Initializes parameters of a sea wave function. </p>
+</div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a id="ab599bde3e477014b49003a31213cb8a3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab599bde3e477014b49003a31213cb8a3">&#9670;&nbsp;</a></span>initfunc4fromfile()</h2>
 
@@ -142,6 +150,25 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Initializes wave function parameters from the given file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">FNAME</td><td>Name of file to read wave parameters from. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">G</td><td>Gravity constant </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">D</td><td>Sea depth for finite depth waves </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">RFUNC</td><td>Real function parameters </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">IERR</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RSEED</td><td>Seed for random value generator</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The file may consist of either two, three or four columns of data. The number of columns may be specified on the first line as <code>#ncol &lt;ncol&gt;</code>. If the first line does not contain the keyword <code>#ncol</code>, a two-column file is assumed. The phase shift is then generated randomly. The wave number is calculated internally unless specified in the fourth column. </p><div class="fragment"><div class="line"><span class="comment">col #1 : Amplitude   [m]</span></div>
+<div class="line"><span class="comment">col #2 : Frequency   [Hz]</span></div>
+<div class="line"><span class="comment">col #3 : Phase shift [0,1]</span></div>
+<div class="line"><span class="comment">col #4 : Wave number [1/m]</span></div>
+</div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16 Jan 2007 </dd></dl>
 
 </div>
 </div>
@@ -239,6 +266,34 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initializes a wave function based on statistical parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">Hs</td><td>Significant wave height (mean of the one third highest waves) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Tp</td><td>The wave period corresponding to the peak frequency </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Gamma</td><td>Spectral peakedness (see below). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Omega0</td><td>Lowest frequency in wave spectrum (if &le; 0 use constant frequency intervals) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dOmega</td><td>Frequency increment between successive wave components </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">g</td><td>Gravity constant </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">D</td><td>Sea depth for finite depth waves </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">RFUNC</td><td>Real function parameters </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">IERR</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RSEED</td><td>Seed for random value generator </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">NWdir</td><td>Number of wave directions </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">SprExp</td><td>Wave spreading exponent (for <em>Ndir</em> &gt; 1)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This subroutine generates the wave function parameters from a wave spectrum. If <em>Gamma</em> &le; 1, a Pierson-Moskowitz spectrum is used, otherwise a JONSWAP spectrum depending on <em>Gamma</em> is used.</p>
+<p>References:</p><ol type="1">
+<li>DNV Recommended practice 205, October 2010.</li>
+<li>S. K. Chakrabarti, "Hydrodynamics of Offshore Structures", pp. 113-116.</li>
+</ol>
+<dl class="section author"><dt>Author</dt><dd>Paul Anton Letnes</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3 Jan 2013</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20 Jul 2015 </dd></dl>
+
 </div>
 </div>
 <a id="a4aa0d97f46e1bf2953224407b5c3e571"></a>
@@ -329,6 +384,36 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initializes a wave function based on statistical parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">IOP</td><td>Wave spectrum model:<ol type="1">
+<li>Pierson-Moskowitz with constant frequency intervals</li>
+<li>Pierson-Moskowitz with random frequency intervals</li>
+<li>JONSWAP spectrum with constant frequency intervals</li>
+<li>JONSWAP spectrum with random frequency intervals </li>
+</ol>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">H3</td><td>Significant wave height (mean of the one third highest waves) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">T1</td><td>Mean wave period </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Gamma</td><td>Spectral peakedness </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Omega0</td><td>Lowest frequency in wave spectrum </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dOmega</td><td>Frequency increment between successive wave components </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">g</td><td>Gravity constant </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">D</td><td>Sea depth for finite depth waves </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">RFUNC</td><td>Real function parameters </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">IERR</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RSEED</td><td>Seed for random value generator</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This subroutine generates the wave function parameters from a wave spectrum depending on the input argument <em>IOP</em> (see above).</p>
+<p>References:</p><ol type="1">
+<li>O. Faltinsen, Sea Loads on Ships and Offshore Structures, pp. 23-26.</li>
+</ol>
+<dl class="section author"><dt>Author</dt><dd>Knut Morten Okstad</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>29 Jan 2007 </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
@@ -337,7 +422,7 @@ Private Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

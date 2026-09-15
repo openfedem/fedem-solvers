@@ -1,8 +1,8 @@
 <map id="fedem&#45;foundation/src/FFpLib/FFpExport/FFpBatchExport.C" name="fedem&#45;foundation/src/FFpLib/FFpExport/FFpBatchExport.C">
-<area shape="rect" id="node1" title=" " alt="" coords="1197,5,1455,47"/>
+<area shape="rect" id="node1" title="Auto&#45;export of curve data for batch executions." alt="" coords="1197,5,1455,47"/>
 <area shape="rect" id="node2" title=" " alt="" coords="184,102,257,129"/>
 <area shape="rect" id="node3" title=" " alt="" coords="381,184,455,211"/>
-<area shape="rect" id="node4" href="$FFpBatchExport_8H.html" title=" " alt="" coords="951,348,1151,389"/>
+<area shape="rect" id="node4" href="$FFpBatchExport_8H.html" title="Auto&#45;export of curve data for batch executions." alt="" coords="951,348,1151,389"/>
 <area shape="rect" id="node7" href="$FFpCurveDef_8H.html" title=" " alt="" coords="1389,259,1551,300"/>
 <area shape="rect" id="node11" href="$FFpGraph_8H.html" title=" " alt="" coords="282,95,445,136"/>
 <area shape="rect" id="node21" href="$FFrExtractor_8H.html" title="Front&#45;end for the result extraction module." alt="" coords="1746,102,1903,129"/>

@@ -74,23 +74,34 @@ $(function() {
 <div class="title">sparsematrixmodule::sparsematrixtype Type Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data type representing a rectangular sparse matrix.  
+ <a href="structsparsematrixmodule_1_1sparsematrixtype.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a85a8e9954c7d62366e00be56da8f0e8c"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsparsematrixmodule_1_1sparsematrixtype.html#a85a8e9954c7d62366e00be56da8f0e8c">nnonzero</a></td></tr>
+<tr class="memdesc:a85a8e9954c7d62366e00be56da8f0e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of non-zero elements.  <a href="structsparsematrixmodule_1_1sparsematrixtype.html#a85a8e9954c7d62366e00be56da8f0e8c">More...</a><br /></td></tr>
 <tr class="separator:a85a8e9954c7d62366e00be56da8f0e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e38ad268562e8927743bfdeb81c47e1"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsparsematrixmodule_1_1sparsematrixtype.html#a0e38ad268562e8927743bfdeb81c47e1">nrows</a></td></tr>
+<tr class="memdesc:a0e38ad268562e8927743bfdeb81c47e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of matrix rows.  <a href="structsparsematrixmodule_1_1sparsematrixtype.html#a0e38ad268562e8927743bfdeb81c47e1">More...</a><br /></td></tr>
 <tr class="separator:a0e38ad268562e8927743bfdeb81c47e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10f00bb4ee74daac273c219ff6c6b1c1"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsparsematrixmodule_1_1sparsematrixtype.html#a10f00bb4ee74daac273c219ff6c6b1c1">ncols</a></td></tr>
+<tr class="memdesc:a10f00bb4ee74daac273c219ff6c6b1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of matrix columns.  <a href="structsparsematrixmodule_1_1sparsematrixtype.html#a10f00bb4ee74daac273c219ff6c6b1c1">More...</a><br /></td></tr>
 <tr class="separator:a10f00bb4ee74daac273c219ff6c6b1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a107b6b71997d71d024b36c0ab8bc121a"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsparsematrixmodule_1_1sparsematrixtype.html#a107b6b71997d71d024b36c0ab8bc121a">vala</a></td></tr>
+<tr class="memdesc:a107b6b71997d71d024b36c0ab8bc121a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values of non-zero elements.  <a href="structsparsematrixmodule_1_1sparsematrixtype.html#a107b6b71997d71d024b36c0ab8bc121a">More...</a><br /></td></tr>
 <tr class="separator:a107b6b71997d71d024b36c0ab8bc121a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6ec75707b4cc4981f09412248da8bd0"><td class="memItemLeft" align="right" valign="top">integer, dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsparsematrixmodule_1_1sparsematrixtype.html#ac6ec75707b4cc4981f09412248da8bd0">irow</a></td></tr>
+<tr class="memdesc:ac6ec75707b4cc4981f09412248da8bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Row indices of the non-zero entries.  <a href="structsparsematrixmodule_1_1sparsematrixtype.html#ac6ec75707b4cc4981f09412248da8bd0">More...</a><br /></td></tr>
 <tr class="separator:ac6ec75707b4cc4981f09412248da8bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3733745831a5323c4e0d3f4c55ffb63"><td class="memItemLeft" align="right" valign="top">integer, dimension(:), pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsparsematrixmodule_1_1sparsematrixtype.html#aa3733745831a5323c4e0d3f4c55ffb63">jcol</a></td></tr>
+<tr class="memdesc:aa3733745831a5323c4e0d3f4c55ffb63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Column indices of the non-zero entries.  <a href="structsparsematrixmodule_1_1sparsematrixtype.html#aa3733745831a5323c4e0d3f4c55ffb63">More...</a><br /></td></tr>
 <tr class="separator:aa3733745831a5323c4e0d3f4c55ffb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data type representing a rectangular sparse matrix. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ac6ec75707b4cc4981f09412248da8bd0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6ec75707b4cc4981f09412248da8bd0">&#9670;&nbsp;</a></span>irow</h2>
 
@@ -102,6 +113,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Row indices of the non-zero entries. </p>
 
 </div>
 </div>
@@ -117,6 +130,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Column indices of the non-zero entries. </p>
+
 </div>
 </div>
 <a id="a10f00bb4ee74daac273c219ff6c6b1c1"></a>
@@ -130,6 +145,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Number of matrix columns. </p>
 
 </div>
 </div>
@@ -145,6 +162,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Number of non-zero elements. </p>
+
 </div>
 </div>
 <a id="a0e38ad268562e8927743bfdeb81c47e1"></a>
@@ -158,6 +177,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Number of matrix rows. </p>
 
 </div>
 </div>
@@ -173,6 +194,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Values of non-zero elements. </p>
+
 </div>
 </div>
 <hr/>The documentation for this type was generated from the following file:<ul>
@@ -181,7 +204,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

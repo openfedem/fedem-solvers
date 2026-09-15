@@ -1,0 +1,5 @@
+<map id="initnonlinwavefunc" name="initnonlinwavefunc">
+<area shape="rect" id="node1" title="Initializes parameters for a non&#45;linear wave function." alt="" coords="5,46,152,73"/>
+<area shape="rect" id="node2" href="$namespacewavefunctionsmodule.html#a06c8bdd24c903d00c546d9f9534c69a4" title="Computes coefficients for 5th order Stokes waves." alt="" coords="200,5,367,47"/>
+<area shape="rect" id="node3" href="$namespacewavefunctionsmodule.html#a0b66f307c0d375822090491d4417f9e1" title="Solves the streamline wave equation." alt="" coords="200,71,367,112"/>
+</map>

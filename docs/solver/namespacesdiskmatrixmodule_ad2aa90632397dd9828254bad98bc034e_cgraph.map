@@ -1,0 +1,6 @@
+<map id="sdiskmatrixmodule::dmgetcol" name="sdiskmatrixmodule::dmgetcol">
+<area shape="rect" id="node1" title="Gets a column of the given disk matrix." alt="" coords="5,39,161,80"/>
+<area shape="rect" id="node2" href="$namespacesdiskmatrixmodule.html#a843f0cf302bb5ba8e6a3da164ad20cd5" title="Gets swap section number and local array index for matrix element." alt="" coords="209,5,365,47"/>
+<area shape="rect" id="node3" href="$namespacesdiskmatrixmodule.html#a6d0d8801571f3a248b37eb4a34a87483" title="Writes current section to disk and reads a new one into core." alt="" coords="209,71,365,112"/>
+<area shape="rect" id="node4" href="$namespacesdiskmatrixmodule.html#aa48c50df064255b9cdf83f3c45228d6f" title="Casts the in&#45;core matrix elements from double to single precision." alt="" coords="413,71,569,112"/>
+</map>

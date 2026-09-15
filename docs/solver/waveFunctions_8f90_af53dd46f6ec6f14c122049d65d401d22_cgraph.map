@@ -1,0 +1,12 @@
+<map id="evalwave" name="evalwave">
+<area shape="rect" id="node1" title="Evaluates a wave profile." alt="" coords="5,254,91,281"/>
+<area shape="rect" id="node2" href="$namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="139,5,305,47"/>
+<area shape="rect" id="node3" href="$namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="139,71,305,112"/>
+<area shape="rect" id="node4" href="$namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="139,188,305,229"/>
+<area shape="rect" id="node5" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="353,143,520,184"/>
+<area shape="rect" id="node6" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="353,221,520,263"/>
+<area shape="rect" id="node7" href="$namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="139,305,305,347"/>
+<area shape="rect" id="node8" href="$namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="139,371,305,412"/>
+<area shape="rect" id="node9" href="$namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="139,436,305,477"/>
+<area shape="rect" id="node10" href="$namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="139,501,305,543"/>
+</map>

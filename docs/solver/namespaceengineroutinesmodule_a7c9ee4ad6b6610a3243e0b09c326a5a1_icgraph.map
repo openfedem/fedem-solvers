@@ -1,0 +1,4 @@
+<map id="engineroutinesmodule::sensorgradient" name="engineroutinesmodule::sensorgradient">
+<area shape="rect" id="node1" title="Calculates gradient of a control input w.r.t. displacement DOFs." alt="" coords="236,5,404,47"/>
+<area shape="rect" id="node2" href="$namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="5,5,188,47"/>
+</map>

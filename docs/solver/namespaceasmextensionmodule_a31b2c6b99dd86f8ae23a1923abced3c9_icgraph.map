@@ -5,7 +5,7 @@
 <area shape="rect" id="node23" href="$namespacespringroutinesmodule.html#ac05d1d43e81337683d3ae43a7e3c962d" title="Assembles system stiffness contributions from a spring element." alt="" coords="1493,346,1657,387"/>
 <area shape="rect" id="node3" href="$namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="1195,212,1440,239"/>
 <area shape="rect" id="node19" href="$namespaceaddinsysmodule.html#a3c569512bde26f2cc7d7210ead9e67be" title="Builds the system Newton matrix." alt="" coords="1196,313,1439,340"/>
-<area shape="rect" id="node4" href="$namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="947,255,1115,297"/>
+<area shape="rect" id="node4" href="$namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="947,255,1115,297"/>
 <area shape="rect" id="node11" href="$namespacesolvermodule.html#a4949a616df199a9030957af627312729" title="Returns a system matrix as a full matrix." alt="" coords="916,192,1147,219"/>
 <area shape="rect" id="node5" href="$namespacesolvermodule.html#ac875f72daed4703cd8a24dc7b4908dc2" title="Solves the eigenvalue system at current configuration." alt="" coords="655,304,854,331"/>
 <area shape="rect" id="node7" href="$namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="663,372,846,399"/>

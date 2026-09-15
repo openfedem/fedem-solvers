@@ -74,13 +74,31 @@ $(function() {
 <div class="title">ffabodyhandlerinterface::ffa_partial_volume Interface Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Calculates the partial volume of a body under a specified plane.  
+ <a href="interfaceffabodyhandlerinterface_1_1ffa__partial__volume.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a91befc99db609e8561fa1f909427a23b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceffabodyhandlerinterface_1_1ffa__partial__volume.html#a91befc99db609e8561fa1f909427a23b">ffa_partial_volume</a> (bodyIndex, normal, z0, Vb, As, C0b, C0s, ierr)</td></tr>
 <tr class="separator:a91befc99db609e8561fa1f909427a23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Calculates the partial volume of a body under a specified plane. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">bodyIndex</td><td>Handle of the body to calculate for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">normal</td><td>Normal vector of the intersecting plane </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">z0</td><td>Position of the intersection plane along the <em>normal</em> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Vb</td><td>Volume of the portion of the body below the plane </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">As</td><td>Area of the intersection between the body and the plane </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">C0b</td><td>Centroid of the volume portion below the plane </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">C0s</td><td>Centroid of the intersection area </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error indicator </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a91befc99db609e8561fa1f909427a23b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91befc99db609e8561fa1f909427a23b">&#9670;&nbsp;</a></span>ffa_partial_volume()</h2>
 
@@ -151,7 +169,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

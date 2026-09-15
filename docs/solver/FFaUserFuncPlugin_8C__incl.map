@@ -1,6 +1,6 @@
 <map id="fedem&#45;foundation/src/FFaFunctionLib/FFaUserFuncPlugin.C" name="fedem&#45;foundation/src/FFaFunctionLib/FFaUserFuncPlugin.C">
-<area shape="rect" id="node1" title=" " alt="" coords="270,5,478,61"/>
-<area shape="rect" id="node2" href="$FFaUserFuncPlugin_8H.html" title=" " alt="" coords="151,109,309,136"/>
+<area shape="rect" id="node1" title="User&#45;defined functions plugin." alt="" coords="270,5,478,61"/>
+<area shape="rect" id="node2" href="$FFaUserFuncPlugin_8H.html" title="User&#45;defined functions plugin." alt="" coords="151,109,309,136"/>
 <area shape="rect" id="node8" title=" " alt="" coords="334,109,414,136"/>
 <area shape="rect" id="node9" title=" " alt="" coords="438,109,499,136"/>
 <area shape="rect" id="node3" href="$FFaDynamicLibraryBase_8H.html" title="Management of dynamic loading of shared object libraries." alt="" coords="5,184,241,225"/>

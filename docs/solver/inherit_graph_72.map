@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classFFaAppInfo.html" title="Class to store information about the application." alt="" coords="5,5,100,32"/>
+<area shape="rect" id="node1" href="$classFFa__stream.html" title="Interface class for stream&#45;based reading/writing of file tags." alt="" coords="5,5,103,32"/>
+<area shape="rect" id="node2" href="$classF__stream.html" title="Class for file stream based on standard IO." alt="" coords="151,5,233,32"/>
 </map>

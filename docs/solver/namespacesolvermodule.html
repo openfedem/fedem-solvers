@@ -202,6 +202,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a68e8a3a1b958dc31258215efb7ee5bb3"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structsysmatrixtypemodule_1_1sysmatrixtype.html">sysmatrixtype</a>), save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#a68e8a3a1b958dc31258215efb7ee5bb3">amat</a></td></tr>
 <tr class="memdesc:a68e8a3a1b958dc31258215efb7ee5bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">System matrix for external communication.  <a href="namespacesolvermodule.html#a68e8a3a1b958dc31258215efb7ee5bb3">More...</a><br /></td></tr>
 <tr class="separator:a68e8a3a1b958dc31258215efb7ee5bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1f60f74490a4db1645fb15d4f77b29b"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structcontrolstructmodule_1_1controlstructtype.html">controlstructtype</a>), pointer, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#ab1f60f74490a4db1645fb15d4f77b29b">ctrlstructel</a> =&gt; null()</td></tr>
+<tr class="memdesc:ab1f60f74490a4db1645fb15d4f77b29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for coupled control system and structure modal analysis.  <a href="namespacesolvermodule.html#ab1f60f74490a4db1645fb15d4f77b29b">More...</a><br /></td></tr>
+<tr class="separator:ab1f60f74490a4db1645fb15d4f77b29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb98e979e73d1d8cd8ee5104f354bb60"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), allocatable, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesolvermodule.html#afb98e979e73d1d8cd8ee5104f354bb60">extrhs</a></td></tr>
 <tr class="memdesc:afb98e979e73d1d8cd8ee5104f354bb60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Externally set load vector.  <a href="namespacesolvermodule.html#afb98e979e73d1d8cd8ee5104f354bb60">More...</a><br /></td></tr>
 <tr class="separator:afb98e979e73d1d8cd8ee5104f354bb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -269,38 +272,42 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_aef77c02d4ed38569accb6f1fe2e7e636_cgraph.png" border="0" usemap="#anamespacesolvermodule_aef77c02d4ed38569accb6f1fe2e7e636_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_aef77c02d4ed38569accb6f1fe2e7e636_cgraph" id="anamespacesolvermodule_aef77c02d4ed38569accb6f1fe2e7e636_cgraph">
-<area shape="rect" title="Closes the result database files and any external modules used." alt="" coords="5,225,175,251"/>
-<area shape="rect" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="235,5,436,47"/>
-<area shape="rect" href="namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="223,71,448,98"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="250,123,421,164"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="252,188,419,229"/>
-<area shape="rect" href="namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="524,254,732,281"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="253,305,417,347"/>
-<area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="234,681,437,707"/>
-<area shape="rect" href="namespacesolvermodule.html#a9f05e8e4dbe8d59b93d78ff35c4b83d8" title="Outputs file and profiling information on program termination." alt="" coords="236,1111,435,1138"/>
-<area shape="rect" href="namespacediffractionmodule.html#a324768086b529accc06b43be22114575" title=" " alt="" coords="555,5,701,47"/>
-<area shape="rect" href="namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="547,71,709,112"/>
-<area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="823,227,997,254"/>
-<area shape="rect" href="namespacestrainrosettemodule.html#acac235b75ebe19e901d5533caf55f979" title="Deallocates a strainrosettemodule::strainelementtype object." alt="" coords="551,188,705,229"/>
-<area shape="rect" href="namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="527,422,729,449"/>
-<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="808,19,1012,46"/>
-<area shape="rect" href="namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title=" " alt="" coords="832,71,988,112"/>
-<area shape="rect" href="namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="827,136,993,177"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a6fde006223d686f83af46a5bfc95856b" title=" " alt="" coords="555,356,701,397"/>
-<area shape="rect" href="namespacesavevtfmodule.html#a81d77243bbbd06f4e4e51f977513ad9a" title=" " alt="" coords="538,305,718,331"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="544,641,712,683"/>
-<area shape="rect" href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="547,707,709,748"/>
-<area shape="rect" href="namespacefiniteelementmodule.html#abbaced9003d8f6f16bd639a692eb028c" title="Deallocates the linked lists of beam elements." alt="" coords="549,772,707,813"/>
-<area shape="rect" href="namespacecontroltypemodule.html#aabb1918d67d6f1433abc016b097d1cad" title="Deallocates the ControlType object." alt="" coords="551,837,705,879"/>
-<area shape="rect" href="namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="540,903,716,944"/>
-<area shape="rect" href="namespacemodestypemodule.html#a3fa8725132dbe04fc66f03bff91f38ad" title="Deallocates the ModesType object." alt="" coords="496,969,760,995"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title=" " alt="" coords="539,1020,717,1061"/>
-<area shape="rect" href="namespacesystemtypemodule.html#a935fe4ac037cf2666adc7adcee35c6db" title="Deallocates the SystemType object." alt="" coords="505,473,751,499"/>
-<area shape="rect" href="namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="545,524,711,565"/>
-<area shape="rect" href="namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title="Deallocates the internal buffers for automatic time stepping." alt="" coords="497,590,759,617"/>
-<area shape="rect" href="stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="578,1086,678,1113"/>
-<area shape="rect" href="namespaceprofilermodule.html#aba3890845238dfacf1394b47e474de03" title="Prints out solver profiling information in a nicely formatted table." alt="" coords="525,1137,731,1163"/>
-<area shape="rect" href="solverModule_8f90.html#acb9478740ad1afdfe4fef1dfad434481" title="Writes a file name with description to the console file unit." alt="" coords="572,1187,684,1214"/>
+<area shape="rect" title="Closes the result database files and any external modules used." alt="" coords="5,261,175,288"/>
+<area shape="rect" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="235,42,436,83"/>
+<area shape="rect" href="namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="223,108,448,135"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="250,159,421,201"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="252,225,419,266"/>
+<area shape="rect" href="namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="524,291,732,317"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="253,342,417,383"/>
+<area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="234,717,437,744"/>
+<area shape="rect" href="namespacesolvermodule.html#a9f05e8e4dbe8d59b93d78ff35c4b83d8" title="Outputs file and profiling information on program termination." alt="" coords="236,1148,435,1175"/>
+<area shape="rect" href="namespacediffractionmodule.html#a324768086b529accc06b43be22114575" title=" " alt="" coords="555,42,701,83"/>
+<area shape="rect" href="namespacedisplacementmodule.html#a9de621f2fac410696b9780760ca6c581" title="Closes the B&#45; and E&#45;matrix files and deallocates related arrays." alt="" coords="547,107,709,149"/>
+<area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="823,264,997,291"/>
+<area shape="rect" href="namespacestrainrosettemodule.html#acac235b75ebe19e901d5533caf55f979" title="Deallocates a strainrosettemodule::strainelementtype object." alt="" coords="551,225,705,266"/>
+<area shape="rect" href="namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="527,459,729,485"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="808,56,1012,83"/>
+<area shape="rect" href="namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="832,107,988,149"/>
+<area shape="rect" href="namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="827,173,993,214"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title="Initializes a disk matrix object." alt="" coords="1060,5,1271,32"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="1063,56,1267,83"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="1319,56,1599,83"/>
+<area shape="rect" href="namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title="Initializes a disk matrix object." alt="" coords="1087,107,1243,149"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a6fde006223d686f83af46a5bfc95856b" title=" " alt="" coords="555,393,701,434"/>
+<area shape="rect" href="namespacesavevtfmodule.html#a81d77243bbbd06f4e4e51f977513ad9a" title=" " alt="" coords="538,341,718,368"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="544,678,712,719"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="547,743,709,785"/>
+<area shape="rect" href="namespacefiniteelementmodule.html#abbaced9003d8f6f16bd639a692eb028c" title="Deallocates the linked lists of beam elements." alt="" coords="549,809,707,850"/>
+<area shape="rect" href="namespacecontroltypemodule.html#a342d26459ddb487a527fa8175c3bcc26" title="Deallocates a control system object." alt="" coords="551,874,705,915"/>
+<area shape="rect" href="namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="540,939,716,981"/>
+<area shape="rect" href="namespacemodestypemodule.html#a3fa8725132dbe04fc66f03bff91f38ad" title="Deallocates the ModesType object." alt="" coords="496,1005,760,1032"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title="Deallocates all spline function data." alt="" coords="539,1057,717,1098"/>
+<area shape="rect" href="namespacesystemtypemodule.html#a935fe4ac037cf2666adc7adcee35c6db" title="Deallocates the SystemType object." alt="" coords="505,509,751,536"/>
+<area shape="rect" href="namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="545,561,711,602"/>
+<area shape="rect" href="namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title="Deallocates the internal buffers for automatic time stepping." alt="" coords="497,627,759,653"/>
+<area shape="rect" href="stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="578,1123,678,1149"/>
+<area shape="rect" href="namespaceprofilermodule.html#aba3890845238dfacf1394b47e474de03" title="Prints out solver profiling information in a nicely formatted table." alt="" coords="525,1173,731,1200"/>
+<area shape="rect" href="solverModule_8f90.html#acb9478740ad1afdfe4fef1dfad434481" title="Writes a file name with description to the console file unit." alt="" coords="572,1224,684,1251"/>
 </map>
 </div>
 <div class="dynheader">
@@ -582,46 +589,52 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a774ec4ba197d6aa05e99b34cdfa0d442_cgraph.png" border="0" usemap="#anamespacesolvermodule_a774ec4ba197d6aa05e99b34cdfa0d442_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a774ec4ba197d6aa05e99b34cdfa0d442_cgraph" id="anamespacesolvermodule_a774ec4ba197d6aa05e99b34cdfa0d442_cgraph">
-<area shape="rect" title="Computes relative distance between 2 triads for input displacements." alt="" coords="5,612,287,639"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="392,521,547,562"/>
-<area shape="rect" href="namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="377,587,561,613"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a39da629df03d79e4630a9ee029ae954b" title="Updates the position matrices for all triads." alt="" coords="361,637,578,664"/>
-<area shape="rect" href="namespacetriadtypemodule.html#aeda80bbbb7a791706f599c2c0d3ae388" title="Transforms a system vector to global directions." alt="" coords="335,688,604,715"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="652,579,820,621"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="868,458,1036,499"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="1091,393,1245,434"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#adeae596463a829024cd36a41499bd94a" title="Updates a sensor value depending on the sensor type." alt="" coords="1084,458,1252,499"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1382,509,1461,536"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1378,560,1465,587"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1363,175,1479,201"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1384,225,1459,252"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1375,276,1468,303"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1336,327,1507,369"/>
-<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1321,393,1522,434"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1300,459,1543,485"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1337,611,1505,653"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1337,686,1505,727"/>
+<area shape="rect" title="Computes relative distance between 2 triads for input displacements." alt="" coords="5,672,287,699"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="392,581,547,622"/>
+<area shape="rect" href="namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="377,647,561,673"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a39da629df03d79e4630a9ee029ae954b" title="Updates the position matrices for all triads." alt="" coords="361,697,578,724"/>
+<area shape="rect" href="namespacetriadtypemodule.html#aeda80bbbb7a791706f599c2c0d3ae388" title="Transforms a system vector to global directions." alt="" coords="335,748,604,775"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="652,639,820,681"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="868,530,1036,571"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="1091,465,1245,506"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="1084,530,1252,571"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1382,512,1461,539"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1378,563,1465,589"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1363,613,1479,640"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1384,664,1459,691"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1375,176,1468,203"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1336,227,1507,269"/>
+<area shape="rect" href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa" title="Returns the id of a sensor object, including its type." alt="" coords="1308,293,1535,320"/>
+<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1321,345,1522,386"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a920191a55a1956e3a8fdc98bd6718b66" title="Reports an internal error on invalid sensor data." alt="" coords="1373,411,1469,437"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1300,461,1543,488"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1337,715,1505,757"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1337,781,1505,822"/>
 <area shape="rect" href="namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1633,49,1803,90"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1633,327,1803,369"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1633,290,1803,331"/>
 <area shape="rect" href="hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="1945,5,2009,32"/>
 <area shape="rect" href="FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="1938,56,2015,83"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="1893,107,2060,149"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="1893,173,2060,214"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="1893,238,2060,279"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="1893,303,2060,345"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="1893,369,2060,410"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="1893,434,2060,475"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="1893,499,2060,541"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="1893,565,2060,606"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="1893,630,2060,671"/>
-<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1598,551,1838,577"/>
-<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1597,601,1839,628"/>
-<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1690,652,1746,679"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1900,695,2053,737"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="2108,695,2287,737"/>
-<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1591,753,1845,780"/>
-<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1607,703,1829,729"/>
-<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1611,804,1825,831"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="1893,107,2060,149"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="1893,173,2060,214"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="1893,290,2060,331"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="2114,245,2281,286"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="2114,335,2281,377"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="1893,407,2060,449"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="1893,473,2060,514"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="1893,538,2060,579"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="1893,603,2060,645"/>
+<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1598,636,1838,663"/>
+<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1597,687,1839,713"/>
+<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1690,737,1746,764"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1900,730,2053,771"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title="Integrates an explicit function from 0.0 to x." alt="" coords="2108,697,2287,738"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a426a080def8bc084419465ae1bd77b37" title="Returns the id of a function object, including its type." alt="" coords="2121,762,2274,803"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="2335,631,2513,673"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="2335,697,2513,738"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="2335,762,2513,803"/>
+<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1591,839,1845,865"/>
+<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1607,788,1829,815"/>
+<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1611,889,1825,916"/>
 </map>
 </div>
 <div class="dynheader">
@@ -705,45 +718,51 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a78a479ffd569dd6d0f66949a945ee112_cgraph.png" border="0" usemap="#anamespacesolvermodule_a78a479ffd569dd6d0f66949a945ee112_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a78a479ffd569dd6d0f66949a945ee112_cgraph" id="anamespacesolvermodule_a78a479ffd569dd6d0f66949a945ee112_cgraph">
-<area shape="rect" title="Computes response variables for input displacements." alt="" coords="5,645,268,672"/>
-<area shape="rect" href="namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="316,587,500,613"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="326,638,490,679"/>
-<area shape="rect" href="solverModule_8f90.html#a660f7320b8927fe9af55cf1569cf5b41" title="Updates the configuration by applying given displacement vector." alt="" coords="338,704,478,731"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="548,579,716,621"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="764,458,932,499"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="987,393,1141,434"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#adeae596463a829024cd36a41499bd94a" title="Updates a sensor value depending on the sensor type." alt="" coords="980,458,1148,499"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1278,509,1357,536"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1274,560,1361,587"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1259,175,1375,201"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1280,225,1355,252"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1271,276,1364,303"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1232,327,1403,369"/>
-<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1217,393,1418,434"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1196,459,1439,485"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1233,611,1401,653"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1233,686,1401,727"/>
+<area shape="rect" title="Computes response variables for input displacements." alt="" coords="5,705,268,732"/>
+<area shape="rect" href="namespacesolvermodule.html#a0fcbad0fcb909c0422e289c18966cd0f" title="Returns the current value of the specified engine." alt="" coords="316,647,500,673"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#af5ddd72d067b73dcf0a8e8f0cfd327c5" title="Restores all state variables from the last converged time step." alt="" coords="326,698,490,739"/>
+<area shape="rect" href="solverModule_8f90.html#a660f7320b8927fe9af55cf1569cf5b41" title="Updates the configuration by applying given displacement vector." alt="" coords="338,764,478,791"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="548,639,716,681"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="764,530,932,571"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="987,465,1141,506"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="980,530,1148,571"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1278,512,1357,539"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1274,563,1361,589"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1259,613,1375,640"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1280,664,1355,691"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1271,176,1364,203"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1232,227,1403,269"/>
+<area shape="rect" href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa" title="Returns the id of a sensor object, including its type." alt="" coords="1204,293,1431,320"/>
+<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1217,345,1418,386"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a920191a55a1956e3a8fdc98bd6718b66" title="Reports an internal error on invalid sensor data." alt="" coords="1269,411,1365,437"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1196,461,1439,488"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1233,715,1401,757"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1233,781,1401,822"/>
 <area shape="rect" href="namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1529,49,1699,90"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1529,327,1699,369"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1529,290,1699,331"/>
 <area shape="rect" href="hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="1841,5,1905,32"/>
 <area shape="rect" href="FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="1834,56,1911,83"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="1789,107,1956,149"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="1789,173,1956,214"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="1789,238,1956,279"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="1789,303,1956,345"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="1789,369,1956,410"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="1789,434,1956,475"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="1789,499,1956,541"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="1789,565,1956,606"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="1789,630,1956,671"/>
-<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1494,551,1734,577"/>
-<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1493,601,1735,628"/>
-<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1586,652,1642,679"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1796,695,1949,737"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="2004,695,2183,737"/>
-<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1487,753,1741,780"/>
-<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1503,703,1725,729"/>
-<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1507,804,1721,831"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="1789,107,1956,149"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="1789,173,1956,214"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="1789,290,1956,331"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="2010,245,2177,286"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="2010,335,2177,377"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="1789,407,1956,449"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="1789,473,1956,514"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="1789,538,1956,579"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="1789,603,1956,645"/>
+<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1494,636,1734,663"/>
+<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1493,687,1735,713"/>
+<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1586,737,1642,764"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1796,730,1949,771"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title="Integrates an explicit function from 0.0 to x." alt="" coords="2004,697,2183,738"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a426a080def8bc084419465ae1bd77b37" title="Returns the id of a function object, including its type." alt="" coords="2017,762,2170,803"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="2231,631,2409,673"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="2231,697,2409,738"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="2231,762,2409,803"/>
+<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1487,839,1741,865"/>
+<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1503,788,1725,815"/>
+<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1507,889,1721,916"/>
 </map>
 </div>
 <div class="dynheader">
@@ -787,14 +806,14 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="namespacesolvermodule_a63566c45e8e23ae6afd3dfcf28796afd_cgraph.png" border="0" usemap="#anamespacesolvermodule_a63566c45e8e23ae6afd3dfcf28796afd_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a63566c45e8e23ae6afd3dfcf28796afd_cgraph" id="anamespacesolvermodule_a63566c45e8e23ae6afd3dfcf28796afd_cgraph">
 <area shape="rect" title="Deallocates all dynamically allocated data." alt="" coords="5,333,208,359"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="304,5,472,47"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="304,5,472,47"/>
 <area shape="rect" href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="307,71,469,112"/>
 <area shape="rect" href="namespacefiniteelementmodule.html#abbaced9003d8f6f16bd639a692eb028c" title="Deallocates the linked lists of beam elements." alt="" coords="309,136,467,177"/>
-<area shape="rect" href="namespacecontroltypemodule.html#aabb1918d67d6f1433abc016b097d1cad" title="Deallocates the ControlType object." alt="" coords="311,201,465,243"/>
+<area shape="rect" href="namespacecontroltypemodule.html#a342d26459ddb487a527fa8175c3bcc26" title="Deallocates a control system object." alt="" coords="311,201,465,243"/>
 <area shape="rect" href="namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="300,267,476,308"/>
 <area shape="rect" href="namespacemodestypemodule.html#a3fa8725132dbe04fc66f03bff91f38ad" title="Deallocates the ModesType object." alt="" coords="256,333,520,359"/>
 <area shape="rect" href="namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="287,383,489,410"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title=" " alt="" coords="299,435,477,476"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title="Deallocates all spline function data." alt="" coords="299,435,477,476"/>
 <area shape="rect" href="namespacesystemtypemodule.html#a935fe4ac037cf2666adc7adcee35c6db" title="Deallocates the SystemType object." alt="" coords="265,501,511,527"/>
 <area shape="rect" href="namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="305,552,471,593"/>
 <area shape="rect" href="namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title="Deallocates the internal buffers for automatic time stepping." alt="" coords="257,618,519,645"/>
@@ -877,18 +896,22 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="1107,227,1281,254"/>
 <area shape="rect" href="namespacestrainrosettemodule.html#acac235b75ebe19e901d5533caf55f979" title="Deallocates a strainrosettemodule::strainelementtype object." alt="" coords="835,136,989,177"/>
 <area shape="rect" href="namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="811,421,1013,447"/>
-<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title=" " alt="" coords="1092,137,1296,163"/>
-<area shape="rect" href="namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title=" " alt="" coords="1116,5,1272,47"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a9fef84f2f1125228340f49223f3f4c76" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="1092,137,1296,163"/>
+<area shape="rect" href="namespacesdiskmatrixmodule.html#aa825ba121dfad845a9a69eb0473fda3f" title="Closes the disk matrix file and releases the associated swap array." alt="" coords="1116,5,1272,47"/>
 <area shape="rect" href="namespacescratcharraymodule.html#ae41c1f66ad8bcad06a3a7c147b4f2e7e" title="Deallocates the scratch arrays, if allocated." alt="" coords="1111,71,1277,112"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#a3b025a4e58a255027fe15f5f26a9a702" title="Initializes a disk matrix object." alt="" coords="1344,162,1555,189"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#aef496ea1a4943efd1522eab24ff90faf" title="Writes current section to disk and reads a new one into core." alt="" coords="1347,111,1551,138"/>
+<area shape="rect" href="namespacediskmatrixmodule.html#ac1ce7a35cf1655b464712e31ecfca59a" title="Casts the in&#45;core matrix elements to/from single precision." alt="" coords="1603,111,1883,138"/>
+<area shape="rect" href="namespacesdiskmatrixmodule.html#a1e9dc1ab2e03fc8606067ce6a7dada6e" title="Initializes a disk matrix object." alt="" coords="1371,5,1527,47"/>
 <area shape="rect" href="namespacetireroutinesmodule.html#a6fde006223d686f83af46a5bfc95856b" title=" " alt="" coords="839,355,985,396"/>
 <area shape="rect" href="namespacesavevtfmodule.html#a81d77243bbbd06f4e4e51f977513ad9a" title=" " alt="" coords="822,303,1002,330"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="828,589,996,631"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="828,589,996,631"/>
 <area shape="rect" href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="831,655,993,696"/>
 <area shape="rect" href="namespacefiniteelementmodule.html#abbaced9003d8f6f16bd639a692eb028c" title="Deallocates the linked lists of beam elements." alt="" coords="833,720,991,761"/>
-<area shape="rect" href="namespacecontroltypemodule.html#aabb1918d67d6f1433abc016b097d1cad" title="Deallocates the ControlType object." alt="" coords="835,785,989,827"/>
+<area shape="rect" href="namespacecontroltypemodule.html#a342d26459ddb487a527fa8175c3bcc26" title="Deallocates a control system object." alt="" coords="835,785,989,827"/>
 <area shape="rect" href="namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="824,851,1000,892"/>
 <area shape="rect" href="namespacemodestypemodule.html#a3fa8725132dbe04fc66f03bff91f38ad" title="Deallocates the ModesType object." alt="" coords="780,917,1044,943"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title=" " alt="" coords="823,968,1001,1009"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#ae9ef064a67debdf91d73ab7fce2ff9f6" title="Deallocates all spline function data." alt="" coords="823,968,1001,1009"/>
 <area shape="rect" href="namespacesystemtypemodule.html#a935fe4ac037cf2666adc7adcee35c6db" title="Deallocates the SystemType object." alt="" coords="789,1034,1035,1061"/>
 <area shape="rect" href="namespacesysmatrixtypemodule.html#ac8f5733f473b1bea7757200877d3d067" title="Deallocates all dynamic arrays for a system matrix object." alt="" coords="829,472,995,513"/>
 <area shape="rect" href="namespacetimestepmodule.html#a65821e217ba2148b0a64365a80e5f35f" title="Deallocates the internal buffers for automatic time stepping." alt="" coords="781,538,1043,565"/>
@@ -1038,42 +1061,48 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a0fcbad0fcb909c0422e289c18966cd0f_cgraph.png" border="0" usemap="#anamespacesolvermodule_a0fcbad0fcb909c0422e289c18966cd0f_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a0fcbad0fcb909c0422e289c18966cd0f_cgraph" id="anamespacesolvermodule_a0fcbad0fcb909c0422e289c18966cd0f_cgraph">
-<area shape="rect" title="Returns the current value of the specified engine." alt="" coords="5,587,189,613"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="237,579,405,621"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="453,458,621,499"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="677,393,830,434"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#adeae596463a829024cd36a41499bd94a" title="Updates a sensor value depending on the sensor type." alt="" coords="669,458,837,499"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="967,509,1046,536"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="963,560,1050,587"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="949,175,1065,201"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="969,225,1044,252"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="960,276,1053,303"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="921,327,1092,369"/>
-<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="906,393,1107,434"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="885,459,1128,485"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="923,611,1091,653"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="923,686,1091,727"/>
+<area shape="rect" title="Returns the current value of the specified engine." alt="" coords="5,647,189,673"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="237,639,405,681"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="453,530,621,571"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="677,465,830,506"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="669,530,837,571"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="967,512,1046,539"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="963,563,1050,589"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="949,613,1065,640"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="969,664,1044,691"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="960,176,1053,203"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="921,227,1092,269"/>
+<area shape="rect" href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa" title="Returns the id of a sensor object, including its type." alt="" coords="893,293,1120,320"/>
+<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="906,345,1107,386"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a920191a55a1956e3a8fdc98bd6718b66" title="Reports an internal error on invalid sensor data." alt="" coords="959,411,1055,437"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="885,461,1128,488"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="923,715,1091,757"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="923,781,1091,822"/>
 <area shape="rect" href="namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1218,49,1389,90"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1218,327,1389,369"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1218,290,1389,331"/>
 <area shape="rect" href="hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="1530,5,1594,32"/>
 <area shape="rect" href="FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="1523,56,1601,83"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="1479,107,1645,149"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="1479,173,1645,214"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="1479,238,1645,279"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="1479,303,1645,345"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="1479,369,1645,410"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="1479,434,1645,475"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="1479,499,1645,541"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="1479,565,1645,606"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="1479,630,1645,671"/>
-<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1183,551,1423,577"/>
-<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1183,601,1424,628"/>
-<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1275,652,1331,679"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1485,695,1639,737"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="1693,695,1872,737"/>
-<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1176,753,1431,780"/>
-<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1193,703,1414,729"/>
-<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1197,804,1410,831"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="1479,107,1645,149"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="1479,173,1645,214"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="1479,290,1645,331"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="1699,245,1866,286"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="1699,335,1866,377"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="1479,407,1645,449"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="1479,473,1645,514"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="1479,538,1645,579"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="1479,603,1645,645"/>
+<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1183,636,1423,663"/>
+<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1183,687,1424,713"/>
+<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1275,737,1331,764"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1485,730,1639,771"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title="Integrates an explicit function from 0.0 to x." alt="" coords="1693,697,1872,738"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a426a080def8bc084419465ae1bd77b37" title="Returns the id of a function object, including its type." alt="" coords="1706,762,1859,803"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="1920,631,2099,673"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="1920,697,2099,738"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="1920,762,2099,803"/>
+<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1176,839,1431,865"/>
+<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1193,788,1414,815"/>
+<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1197,889,1410,916"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1403,48 +1432,54 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph.png" border="0" usemap="#anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph" id="anamespacesolvermodule_aee11f240a987ec00b0339a031adc38b5_cgraph">
-<area shape="rect" title="Returns the physical time of a specified simulation state." alt="" coords="5,328,176,355"/>
-<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="224,328,467,355"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="538,262,706,303"/>
-<area shape="rect" href="namespacetimestepmodule.html#af787e6f92eeb200e9c4f125a827e8758" title="Calculates the next time step based on local truncation errors." alt="" coords="515,357,729,384"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="777,262,945,303"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="1001,259,1154,301"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#adeae596463a829024cd36a41499bd94a" title="Updates a sensor value depending on the sensor type." alt="" coords="993,325,1161,366"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1291,281,1370,308"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1287,332,1374,359"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1273,383,1389,409"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1293,433,1368,460"/>
-<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1284,484,1377,511"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1245,601,1416,642"/>
-<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1230,535,1431,577"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1209,231,1452,257"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1247,165,1415,206"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1247,99,1415,141"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1542,801,1713,842"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1542,546,1713,587"/>
-<area shape="rect" href="hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="1854,859,1918,885"/>
-<area shape="rect" href="FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="1847,808,1925,835"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="1803,219,1969,261"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="1803,285,1969,326"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="1803,350,1969,391"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="1803,415,1969,457"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="1803,481,1969,522"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="1803,546,1969,587"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="1803,611,1969,653"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="1803,677,1969,718"/>
-<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="1803,742,1969,783"/>
-<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1507,259,1747,285"/>
-<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1507,208,1748,235"/>
-<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1599,157,1655,184"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1809,126,1963,167"/>
-<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title=" " alt="" coords="2017,126,2196,167"/>
-<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1500,5,1755,32"/>
-<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1517,107,1738,133"/>
-<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1521,56,1734,83"/>
-<area shape="rect" href="namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="782,523,941,565"/>
-<area shape="rect" href="namespacenormroutinesmodule.html#ac496980953eb98dc898429cd5741382c" title="Returns a pointer to the expanded solution vector." alt="" coords="998,666,1157,707"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="1253,666,1408,707"/>
-<area shape="rect" href="namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="1252,731,1409,773"/>
+<area shape="rect" title="Returns the physical time of a specified simulation state." alt="" coords="5,498,176,525"/>
+<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="224,498,467,525"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="538,432,706,473"/>
+<area shape="rect" href="namespacetimestepmodule.html#af787e6f92eeb200e9c4f125a827e8758" title="Calculates the next time step based on local truncation errors." alt="" coords="515,527,729,554"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="777,432,945,473"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="1001,429,1154,471"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="993,495,1161,536"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1291,662,1370,689"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1287,713,1374,739"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1273,763,1389,790"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1293,814,1368,841"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1284,327,1377,354"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1245,429,1416,471"/>
+<area shape="rect" href="namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa" title="Returns the id of a sensor object, including its type." alt="" coords="1217,378,1444,405"/>
+<area shape="rect" href="namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1230,495,1431,536"/>
+<area shape="rect" href="engineRoutinesModule_8f90.html#a920191a55a1956e3a8fdc98bd6718b66" title="Reports an internal error on invalid sensor data." alt="" coords="1283,561,1379,587"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1209,611,1452,638"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1247,196,1415,237"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1247,261,1415,303"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1542,721,1713,763"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1542,429,1713,471"/>
+<area shape="rect" href="hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="1854,779,1918,806"/>
+<area shape="rect" href="FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="1847,729,1925,755"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="1803,481,1969,523"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="1803,547,1969,588"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="1803,612,1969,653"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="2023,641,2190,683"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="2023,372,2190,413"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="1803,220,1969,261"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="1803,285,1969,327"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="1803,351,1969,392"/>
+<area shape="rect" href="namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="1803,416,1969,457"/>
+<area shape="rect" href="namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1507,161,1747,187"/>
+<area shape="rect" href="namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1507,110,1748,137"/>
+<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1599,211,1655,238"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a85cca1a1e3200aa2ef5dabcbe26c6ec5" title="Integrates a function shape over specified domain." alt="" coords="1809,103,1963,144"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#aa35a6db770b90a9242369305ad21cfa0" title="Integrates an explicit function from 0.0 to x." alt="" coords="2017,71,2196,112"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#a426a080def8bc084419465ae1bd77b37" title="Returns the id of a function object, including its type." alt="" coords="2030,136,2183,177"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af041d58f2b71991baf9f386b3731d64a" title="Integrates a piece&#45;wise linear function from 0.0 to X." alt="" coords="2244,5,2423,47"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#a7e0bdf82d148880fc4f5591efe2f97a8" title="Calls a C&#45;function to read and integrate a function from a file." alt="" coords="2244,71,2423,112"/>
+<area shape="rect" href="namespaceexplicitfunctionsmodule.html#af35461b04153c8ff90c55a95d96deecf" title="Integrate a ramp function from 0.0 to X." alt="" coords="2244,136,2423,177"/>
+<area shape="rect" href="namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1500,363,1755,390"/>
+<area shape="rect" href="namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1517,313,1738,339"/>
+<area shape="rect" href="namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1521,262,1734,289"/>
+<area shape="rect" href="namespacenormroutinesmodule.html#a51c8312190f783a6271fdc481e797a22" title="Calculates the scaled norm of the given vector." alt="" coords="782,708,941,749"/>
+<area shape="rect" href="namespacenormroutinesmodule.html#ac496980953eb98dc898429cd5741382c" title="Returns a pointer to the expanded solution vector." alt="" coords="998,865,1157,907"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="1253,865,1408,907"/>
+<area shape="rect" href="namespacescratcharraymodule.html#ae10f22e9df252a0c329b145347d2fc1f" title="Returns a pointer to a real(dp) scratch array." alt="" coords="1252,931,1409,972"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1556,38 +1591,38 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a98becc18e10e1c5bd8ac605048e0aebe_cgraph.png" border="0" usemap="#anamespacesolvermodule_a98becc18e10e1c5bd8ac605048e0aebe_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a98becc18e10e1c5bd8ac605048e0aebe_cgraph" id="anamespacesolvermodule_a98becc18e10e1c5bd8ac605048e0aebe_cgraph">
-<area shape="rect" title="Initializes the simulation model." alt="" coords="5,1270,180,1297"/>
+<area shape="rect" title="Initializes the simulation model." alt="" coords="5,1245,180,1271"/>
 <area shape="rect" href="namespacesolverroutinesmodule.html#a73a769e7f7927fb702153d69b02a162d" title="Calculates all iteration tolerances defined in the system." alt="" coords="255,52,467,93"/>
 <area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="276,319,445,346"/>
 <area shape="rect" href="stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="922,563,1022,590"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#af7c7d06b112a3a1b72f1123859f20629" title="Performs diffraction analysis using Nemoh." alt="" coords="275,943,446,984"/>
-<area shape="rect" href="namespaceenergyintegrationmodule.html#ab0df93c47539f0ca4c44728c4cbb87c7" title="Initializes the energy integration variables." alt="" coords="267,1008,454,1049"/>
-<area shape="rect" href="namespaceffacmdlinearginterface.html#ae81c7187ffb7ffde8bbebdf1a23998fa" title="Returns the value of a double precision command&#45;line option id." alt="" coords="253,1073,468,1115"/>
-<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="595,691,766,732"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="277,1139,444,1180"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#a4dedbdb8ba7983d8fc40b7e44a566fe5" title="Builds the system force vectors." alt="" coords="241,891,480,918"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#af7c7d06b112a3a1b72f1123859f20629" title="Performs diffraction analysis using Nemoh." alt="" coords="275,976,446,1017"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#ab0df93c47539f0ca4c44728c4cbb87c7" title="Initializes the energy integration variables." alt="" coords="267,1041,454,1083"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#ae81c7187ffb7ffde8bbebdf1a23998fa" title="Returns the value of a double precision command&#45;line option id." alt="" coords="253,1107,468,1148"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="595,691,766,732"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="277,1172,444,1213"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a4dedbdb8ba7983d8fc40b7e44a566fe5" title="Builds the system force vectors." alt="" coords="241,925,480,951"/>
 <area shape="rect" href="namespacetimestepmodule.html#a686f6e26076d07ee000d5b6abb5543ae" title="Returns the length of the initial time step." alt="" coords="541,1397,820,1423"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a8a92d21d270bc47338c919f868d6ee40" title="Saves/restores the initial gage strains to/from an in&#45;core array." alt="" coords="277,1321,444,1363"/>
-<area shape="rect" href="namespacesavemodule.html#aa50e29317831724dd64995825e895ade" title="Initializes the solver result database file." alt="" coords="243,1387,479,1414"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a8a92d21d270bc47338c919f868d6ee40" title="Saves/restores the initial gage strains to/from an in&#45;core array." alt="" coords="277,1355,444,1396"/>
+<area shape="rect" href="namespacesavemodule.html#aa50e29317831724dd64995825e895ade" title="Initializes the solver result database file." alt="" coords="243,1421,479,1447"/>
 <area shape="rect" href="namespacestressrecoverymodule.html#adb408bc46746f7665cc44fa60c200000" title="Initializes for superelement stress recovery." alt="" coords="277,163,444,204"/>
-<area shape="rect" href="namespaceinitiatesystemtypemodule.html#a2b65789ec9056c08fe5d305ee2954092" title="Initializes the time stepping before starting integration loop." alt="" coords="263,1204,458,1245"/>
-<area shape="rect" href="namespacefunctiontypemodule.html#ae604f41927066d68ff843fd45bc1970e" title="Checks if any functions have a control system variable as argument." alt="" coords="284,1439,437,1480"/>
-<area shape="rect" href="namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="241,1505,480,1531"/>
-<area shape="rect" href="namespacesysmatrixtypemodule.html#aa279b99d9db021dfedba04c9922ffe11" title="Initializes a system matrix object." alt="" coords="278,1556,443,1597"/>
-<area shape="rect" href="namespacesensortypemodule.html#a08d41faef384a7de0902837f3b79a3fb" title="Returns the number of control output sensors in the model." alt="" coords="249,1622,472,1649"/>
-<area shape="rect" href="solverModule_8f90.html#a4addf05fb809939e080fa6947fd0fd8e" title="Counts the number of superelements with recovery enabled." alt="" coords="290,1673,431,1699"/>
-<area shape="rect" href="namespaceversionmodule.html#a27b0515f99082f419d4ebf8b00acf0a0" title="Opens the solver res&#45;file and print header information to it." alt="" coords="261,1723,460,1750"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="228,1774,493,1801"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a3eb8050e2ed46f4bdcbf7e87035244bf" title="Prints a summary of the mass distribution to the res&#45;file." alt="" coords="276,1825,445,1867"/>
+<area shape="rect" href="namespaceinitiatesystemtypemodule.html#a2b65789ec9056c08fe5d305ee2954092" title="Initializes the time stepping before starting integration loop." alt="" coords="263,1237,458,1279"/>
+<area shape="rect" href="namespacefunctiontypemodule.html#ae604f41927066d68ff843fd45bc1970e" title="Checks if any functions have a control system variable as argument." alt="" coords="284,1472,437,1513"/>
+<area shape="rect" href="namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="241,1538,480,1565"/>
+<area shape="rect" href="namespacesysmatrixtypemodule.html#aa279b99d9db021dfedba04c9922ffe11" title="Initializes a system matrix object." alt="" coords="278,1589,443,1631"/>
+<area shape="rect" href="namespacesensortypemodule.html#a08d41faef384a7de0902837f3b79a3fb" title="Returns the number of control output sensors in the model." alt="" coords="249,1655,472,1682"/>
+<area shape="rect" href="solverModule_8f90.html#a4addf05fb809939e080fa6947fd0fd8e" title="Counts the number of superelements with recovery enabled." alt="" coords="290,1706,431,1733"/>
+<area shape="rect" href="namespaceversionmodule.html#a27b0515f99082f419d4ebf8b00acf0a0" title="Opens the solver res&#45;file and print header information to it." alt="" coords="261,1757,460,1783"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="228,706,493,733"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a3eb8050e2ed46f4bdcbf7e87035244bf" title="Prints a summary of the mass distribution to the res&#45;file." alt="" coords="276,1808,445,1849"/>
 <area shape="rect" href="namespaceinitiatemodule.html#afffa92f3c80736848396a95c9a5527b0" title="Administers reading of model data from the FEDEM solver input file." alt="" coords="569,589,792,615"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065" title="Save strain gage results to the results database file." alt="" coords="277,1891,444,1932"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065" title="Save strain gage results to the results database file." alt="" coords="277,1873,444,1915"/>
 <area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="599,756,763,797"/>
-<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="270,821,451,863"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a3680756ba4e87795f19474addfe247e6" title="Updates the previous state variables in the mechanism objects." alt="" coords="279,1956,443,1997"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="275,653,447,695"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#acb1cc0e9638da48bbda7f2cf2347b2f3" title="Writes a Fortran90 subroutine with the strain recovery matrices." alt="" coords="277,2021,444,2063"/>
-<area shape="rect" href="namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="243,2087,478,2114"/>
-<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a2642a4223894a9a32bc86d6a860db278" title="Writes a Fortran90 subroutine with hard&#45;coded superelement matrices." alt="" coords="270,2139,451,2180"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#a0f1bc8d14ea2d090018de7485bf8a2ae" title="Performs static equilibrium iterations to find start configuration." alt="" coords="270,859,451,900"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a3680756ba4e87795f19474addfe247e6" title="Updates the previous state variables in the mechanism objects." alt="" coords="279,1939,443,1980"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="275,640,447,681"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#acb1cc0e9638da48bbda7f2cf2347b2f3" title="Writes a Fortran90 subroutine with the strain recovery matrices." alt="" coords="277,2004,444,2045"/>
+<area shape="rect" href="namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="243,2070,478,2097"/>
+<area shape="rect" href="namespaceinitiatesupeltypemodule.html#a2642a4223894a9a32bc86d6a860db278" title="Writes a Fortran90 subroutine with hard&#45;coded superelement matrices." alt="" coords="270,2121,451,2163"/>
 <area shape="rect" href="namespacenormroutinesmodule.html#a6155a1f7ea95c1fcbbfad47f1e294a8e" title="Defines the convergence tolerance to use for a given test item." alt="" coords="601,5,760,47"/>
 <area shape="rect" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="580,188,781,229"/>
 <area shape="rect" href="namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="568,319,793,346"/>
@@ -2228,13 +2263,13 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="namespacesammodule.html#a935769881340e8482ed732796625afea" title="Deallocates all dynamic arrays within the SAM structure." alt="" coords="856,356,1059,383"/>
 <area shape="rect" href="namespacetireroutinesmodule.html#a6fde006223d686f83af46a5bfc95856b" title=" " alt="" coords="884,290,1031,331"/>
 <area shape="rect" href="namespacesavevtfmodule.html#a81d77243bbbd06f4e4e51f977513ad9a" title=" " alt="" coords="867,239,1047,265"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="873,603,1041,645"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="873,603,1041,645"/>
 <area shape="rect" href="namespaceasmextensionmodule.html#ab2313422d646443a1792e1a1c476c769" title="Creates a 64&#45;bit integer version of the SAM&#45;arrays needed by SPR." alt="" coords="876,669,1039,710"/>
 <area shape="rect" href="namespacefiniteelementmodule.html#abbaced9003d8f6f16bd639a692eb028c" title="Deallocates the linked lists of beam elements." alt="" coords="878,407,1037,449"/>
-<area shape="rect" href="namespacecontroltypemodule.html#aabb1918d67d6f1433abc016b097d1cad" title="Deallocates the ControlType object." alt="" coords="881,473,1034,514"/>
+<area shape="rect" href="namespacecontroltypemodule.html#a342d26459ddb487a527fa8175c3bcc26" title="Deallocates a control system object." alt="" coords="881,473,1034,514"/>
 <area shape="rect" href="namespacemechanismtypemodule.html#a532bb18d3988497a73d5115dcbcbf836" title="Deallocates the MechanismType object." alt="" coords="869,538,1045,579"/>
 <area shape="rect" href="stressRecoveryModule_8f90.html#ab3e0acabd7ac4876fb080dd903a67b3d" title="Extracts one file name from a comma&#45;separated list." alt="" coords="907,800,1007,827"/>
-<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="872,902,1043,943"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="872,902,1043,943"/>
 <area shape="rect" href="namespacecontroltypemodule.html#a0ab21abe0427f8f9194d24479dde1770" title="Checks if control elements are present in the model." alt="" coords="587,1998,741,2039"/>
 <area shape="rect" href="saveModule_8f90.html#a3d0818a0623cb64a406630a725eb6c55" title="Initializes all response header variables." alt="" coords="620,2064,708,2091"/>
 <area shape="rect" href="namespacerdbmodule.html#adee7ae38b2de39389b6cdea77b9b5562" title="Opens the temporary header files and write the meta data section." alt="" coords="562,2115,766,2141"/>
@@ -2435,56 +2470,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_ac875f72daed4703cd8a24dc7b4908dc2_cgraph.png" border="0" usemap="#anamespacesolvermodule_ac875f72daed4703cd8a24dc7b4908dc2_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_ac875f72daed4703cd8a24dc7b4908dc2_cgraph" id="anamespacesolvermodule_ac875f72daed4703cd8a24dc7b4908dc2_cgraph">
-<area shape="rect" title="Solves the eigenvalue system at current configuration." alt="" coords="5,1390,204,1417"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="263,356,431,397"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="263,1263,431,1304"/>
-<area shape="rect" href="namespaceinitiatemodestypemodule.html#a584da4b82a57902b6584aacc8e02fba3" title="Initializes the eigenvalue solver." alt="" coords="252,1500,443,1541"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337" title="Prints the eigenvalues and eigenvectors to unit IO." alt="" coords="263,1565,431,1607"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="839,201,1007,243"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="496,759,741,786"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="503,998,734,1025"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="509,567,729,594"/>
-<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="538,811,699,852"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="845,71,1000,112"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="537,876,701,917"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="535,239,703,280"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="535,5,703,47"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="535,71,703,112"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="491,137,747,163"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="535,356,703,397"/>
-<area shape="rect" href="namespacebushingelementroutinesmodule.html#a92ee5a2bfa21215d2fe1c92b22849814" title=" " alt="" coords="808,659,1037,700"/>
-<area shape="rect" href="namespacecontactelementroutinesmodule.html#a80824cb38e21c91f12e078f0bc627b46" title="Calculates the damping matrix for each contact damper." alt="" coords="801,724,1045,765"/>
-<area shape="rect" href="namespacedamperroutinesmodule.html#aaf447a948e2456c63a102f35b8bd6f8f" title="Assembles system damping matrix contributions from a damper element." alt="" coords="835,985,1010,1027"/>
-<area shape="rect" href="namespacesupelroutinesmodule.html#ac2c60bfff413e3167651225234767668" title="Adds a superelement matrix into the equivalent system matrix." alt="" coords="843,855,1002,896"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a6d53338014facb0e81f48f0663b983bc" title=" " alt="" coords="841,920,1005,961"/>
-<area shape="rect" href="namespaceuserdefelroutinesmodule.html#a803075181ede4bb81e95c07ec3413f8b" title="Adds an element matrix into the equivalent system matrix." alt="" coords="830,789,1015,831"/>
-<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="895,1182,951,1209"/>
-<area shape="rect" href="namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="1131,724,1293,765"/>
-<area shape="rect" href="namespacecontactelementroutinesmodule.html#acfbc2afd2bc6545e5b8ac6649f6594ed" title=" " alt="" coords="1099,627,1325,668"/>
-<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="1129,789,1295,831"/>
-<area shape="rect" href="namespacemassroutinesmodule.html#ae8d96389b518f957ec01a38549d68c0c" title="Calculates the mass matrix for a mass element." alt="" coords="843,1116,1002,1157"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a7edd4427d38361936be7128f46bf5afe" title=" " alt="" coords="848,1051,997,1092"/>
-<area shape="rect" href="namespacecontactelementroutinesmodule.html#a8926a15efeafd32a7cb03d30d764ff51" title="Calculates the stiffness matrix for each contact spring." alt="" coords="809,593,1036,635"/>
-<area shape="rect" href="namespacespringroutinesmodule.html#ac05d1d43e81337683d3ae43a7e3c962d" title="Assembles system stiffness contributions from a spring element." alt="" coords="841,528,1005,569"/>
-<area shape="rect" href="namespacetireroutinesmodule.html#a96a580dd209b33ef28ea2d513f2bda97" title=" " alt="" coords="849,397,996,439"/>
-<area shape="rect" href="namespacesupelroutinesmodule.html#a7de00964a81d8cf58aecae33fffd4267" title="Computes the tangential superelement stiffness matrix." alt="" coords="843,463,1002,504"/>
-<area shape="rect" href="namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="840,136,1005,177"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a" title="Sorts a real array in ascending order." alt="" coords="839,5,1007,47"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aa8e9fddcfe2ea567d8e3433ce3ad90df" title="Adds an element unit displacement vector into the system vector." alt="" coords="839,332,1007,373"/>
-<area shape="rect" href="namespacemassmatrixcorrectionmodule.html#ac87a6535b0ec6104d2fd45b994bd5f86" title="Generates the 6 rigid body acceleration vectors for a superelement." alt="" coords="815,267,1030,308"/>
-<area shape="rect" href="modesRoutinesModule_8f90.html#aa881f9e4066baf97b96b5791c0ea7a5c" title="Calculates scaling factor for an eigenvector." alt="" coords="580,1077,657,1103"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a39da629df03d79e4630a9ee029ae954b" title="Updates the position matrices for all triads." alt="" coords="510,1127,727,1154"/>
-<area shape="rect" href="namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="827,1365,1018,1391"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a441306c043857e9d3bd4fc8707099c84" title="Writes the mode shape eigenvector to a YAML frequency response file." alt="" coords="535,1295,703,1336"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a3f9a5dea9c3ed46751fff16abe6676ec" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="535,1412,703,1453"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a9433463f64e5f22b47eccb8a211dc99d" title="Writes the header of a YAML frequency response file." alt="" coords="535,1229,703,1271"/>
-<area shape="rect" href="namespacesupeltypemodule.html#a9c3feeb631203d9d136491520d1d9363" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="1112,1443,1312,1470"/>
-<area shape="rect" href="namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="795,1469,1051,1495"/>
-<area shape="rect" href="namespaceversionmodule.html#af1314db1e48ea02ac31a0d407028c9cd" title="Returns current date and time in the format &quot;dd Mmm yyyy hh:mm:ss&quot;." alt="" coords="811,1237,1034,1263"/>
-<area shape="rect" href="namespacesysmatrixtypemodule.html#ada8e37503fcd8d03c4ea25fd8a1d448d" title="Allocates storage for a system matrix." alt="" coords="536,1595,701,1636"/>
-<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="533,1660,704,1701"/>
-<area shape="rect" href="namespacemodestypemodule.html#a43424880f2f896b318e263531738f866" title="Initializes the ModesType object." alt="" coords="501,1478,737,1505"/>
-<area shape="rect" href="namespacesysmatrixtypemodule.html#a69d39748d3fceedc24046aa1fcc27044" title="Lets one system matrix object share the data structure of another." alt="" coords="535,1529,702,1571"/>
+<area shape="rect" title="Solves the eigenvalue system at current configuration." alt="" coords="5,1485,204,1512"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="263,1263,431,1305"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="263,210,431,251"/>
+<area shape="rect" href="namespaceinitiatemodestypemodule.html#a584da4b82a57902b6584aacc8e02fba3" title="Initializes the eigenvalue solver." alt="" coords="252,1722,443,1763"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337" title="Prints the eigenvalues and eigenvectors to unit IO." alt="" coords="263,1787,431,1829"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="839,1435,1007,1477"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="496,716,741,743"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="1131,837,1293,878"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="503,876,734,903"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="509,1096,729,1123"/>
+<area shape="rect" href="namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="527,1627,710,1669"/>
+<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="538,1030,699,1071"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="845,1294,1000,1335"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="537,1329,701,1370"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="535,1497,703,1538"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="535,1263,703,1305"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="535,1198,703,1239"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="491,1395,747,1421"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="535,1562,703,1603"/>
+<area shape="rect" href="namespacebushingelementroutinesmodule.html#a92ee5a2bfa21215d2fe1c92b22849814" title=" " alt="" coords="808,771,1037,813"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#a80824cb38e21c91f12e078f0bc627b46" title="Calculates the damping matrix for each contact damper." alt="" coords="801,589,1045,630"/>
+<area shape="rect" href="namespacedamperroutinesmodule.html#aaf447a948e2456c63a102f35b8bd6f8f" title="Assembles system damping matrix contributions from a damper element." alt="" coords="835,523,1010,565"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#ac2c60bfff413e3167651225234767668" title="Adds a superelement matrix into the equivalent system matrix." alt="" coords="843,837,1002,878"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a6d53338014facb0e81f48f0663b983bc" title=" " alt="" coords="841,458,1005,499"/>
+<area shape="rect" href="namespaceuserdefelroutinesmodule.html#a803075181ede4bb81e95c07ec3413f8b" title="Adds an element matrix into the equivalent system matrix." alt="" coords="830,967,1015,1009"/>
+<area shape="rect" href="windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="895,655,951,681"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#acfbc2afd2bc6545e5b8ac6649f6594ed" title=" " alt="" coords="1099,1001,1325,1042"/>
+<area shape="rect" href="namespacescratcharraymodule.html#a8f0a03b1ed43803ba4b8c2058b4cc314" title="Returns a pointer to a nrow×ncol real(dp) scratch array." alt="" coords="1129,935,1295,977"/>
+<area shape="rect" href="namespacemassroutinesmodule.html#ae8d96389b518f957ec01a38549d68c0c" title="Calculates the mass matrix for a mass element." alt="" coords="843,902,1002,943"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a7edd4427d38361936be7128f46bf5afe" title=" " alt="" coords="848,706,997,747"/>
+<area shape="rect" href="namespacecontactelementroutinesmodule.html#a8926a15efeafd32a7cb03d30d764ff51" title="Calculates the stiffness matrix for each contact spring." alt="" coords="809,1033,1036,1074"/>
+<area shape="rect" href="namespacespringroutinesmodule.html#ac05d1d43e81337683d3ae43a7e3c962d" title="Assembles system stiffness contributions from a spring element." alt="" coords="841,1229,1005,1270"/>
+<area shape="rect" href="namespacetireroutinesmodule.html#a96a580dd209b33ef28ea2d513f2bda97" title=" " alt="" coords="849,1098,996,1139"/>
+<area shape="rect" href="namespacesupelroutinesmodule.html#a7de00964a81d8cf58aecae33fffd4267" title="Computes the tangential superelement stiffness matrix." alt="" coords="843,1163,1002,1205"/>
+<area shape="rect" href="namespacesysmatrixtypemodule.html#acf0619e20507a0508453a96f801fd6fd" title="Converts the given system matrix into a full rectangular matrix." alt="" coords="840,1501,1005,1542"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a06f7e4f86ff3d0003b5eea9b6e9fa26a" title="Sorts a real array in ascending order." alt="" coords="839,1359,1007,1401"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af69bc4349ef2b92680d92fead084cba6" title="Adds a superelement unit displacement vector into the system vector." alt="" coords="839,1566,1007,1607"/>
+<area shape="rect" href="modesRoutinesModule_8f90.html#aa881f9e4066baf97b96b5791c0ea7a5c" title="Calculates scaling factor for an eigenvector." alt="" coords="580,305,657,332"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a39da629df03d79e4630a9ee029ae954b" title="Updates the position matrices for all triads." alt="" coords="510,5,727,32"/>
+<area shape="rect" href="namespacesupeltypemodule.html#af7de24f3cdc9f76344a249ad443dc355" title="Returns whether a superelement is a beam element or not." alt="" coords="827,176,1018,203"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a441306c043857e9d3bd4fc8707099c84" title="Writes the mode shape eigenvector to a YAML frequency response file." alt="" coords="535,122,703,163"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a8f3b23185bc8e904549bdacf9224dce4" title="Writes beam sectional forces to a YAML frequency response file." alt="" coords="535,57,703,98"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a9433463f64e5f22b47eccb8a211dc99d" title="Writes the header of a YAML frequency response file." alt="" coords="535,239,703,281"/>
+<area shape="rect" href="namespacesupeltypemodule.html#a9c3feeb631203d9d136491520d1d9363" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="1112,39,1312,65"/>
+<area shape="rect" href="namespacesupeltypemodule.html#aa4153a12fc9dac40e11e40f3b68142a1" title="Returns the full ID of a superelement." alt="" coords="817,115,1028,141"/>
+<area shape="rect" href="namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="795,64,1051,91"/>
+<area shape="rect" href="namespacesysmatrixtypemodule.html#ada8e37503fcd8d03c4ea25fd8a1d448d" title="Allocates storage for a system matrix." alt="" coords="536,1875,701,1917"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="533,1693,704,1734"/>
+<area shape="rect" href="namespacemodestypemodule.html#a43424880f2f896b318e263531738f866" title="Initializes the ModesType object." alt="" coords="501,1759,737,1785"/>
+<area shape="rect" href="namespacesysmatrixtypemodule.html#a69d39748d3fceedc24046aa1fcc27044" title="Lets one system matrix object share the data structure of another." alt="" coords="535,1810,702,1851"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2547,56 +2582,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a1b92706b06bc176f7c61a0e3d4a427f1_cgraph.png" border="0" usemap="#anamespacesolvermodule_a1b92706b06bc176f7c61a0e3d4a427f1_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a1b92706b06bc176f7c61a0e3d4a427f1_cgraph" id="anamespacesolvermodule_a1b92706b06bc176f7c61a0e3d4a427f1_cgraph">
-<area shape="rect" title="Solves the ramp&#45;up stage, if any." alt="" coords="5,1095,209,1122"/>
-<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="257,1095,440,1122"/>
+<area shape="rect" title="Solves the ramp&#45;up stage, if any." alt="" coords="5,887,209,914"/>
+<area shape="rect" href="namespacesolvermodule.html#a048f4879c526c74e1ae704bc1cf2dd48" title="Solves for the next time step or iteration." alt="" coords="257,887,440,914"/>
 <area shape="rect" href="namespacesolverroutinesmodule.html#a73a769e7f7927fb702153d69b02a162d" title="Calculates all iteration tolerances defined in the system." alt="" coords="505,5,717,47"/>
-<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="526,414,695,441"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="526,326,695,353"/>
 <area shape="rect" href="namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="1099,275,1307,302"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="527,1055,695,1096"/>
-<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="517,1120,704,1161"/>
-<area shape="rect" href="namespacefiniteelementmodule.html#a14905ed31c92aafc8f043a2175446568" title="Calculates the max/min beam sectional forces and positions." alt="" coords="531,639,690,680"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="527,704,695,745"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="527,769,694,811"/>
-<area shape="rect" href="namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="508,835,713,862"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="527,887,694,928"/>
-<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="489,953,732,979"/>
-<area shape="rect" href="namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="491,1003,730,1030"/>
-<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="518,1812,703,1853"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="827,1645,991,1687"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all engines and store the values for saving." alt="" coords="1115,1795,1290,1836"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="527,1251,695,1292"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337" title="Prints the eigenvalues and eigenvectors to unit IO." alt="" coords="527,1316,695,1357"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#af08eaa1ab32fc8aeae97e755e4355894" title="Prints basic simulation variables to the res&#45;file." alt="" coords="529,1381,693,1423"/>
-<area shape="rect" href="namespacefiniteelementmodule.html#a5f87acc6c3efb8603af19a28baca11cd" title="Reports all beam sectional forces at current configuration." alt="" coords="525,1447,696,1488"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065" title="Save strain gage results to the results database file." alt="" coords="527,1512,694,1553"/>
-<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="520,1185,701,1227"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="527,1629,694,1671"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a2e7d7fdcf7ac2ad0fb0d0ec9072ecb1f" title="Terminates a time step by doing some final calculations." alt="" coords="529,1695,693,1736"/>
-<area shape="rect" href="namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="488,1761,733,1787"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="527,909,695,951"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="517,377,704,419"/>
+<area shape="rect" href="namespacefiniteelementmodule.html#a14905ed31c92aafc8f043a2175446568" title="Calculates the max/min beam sectional forces and positions." alt="" coords="531,443,690,484"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="527,508,695,549"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="527,573,694,615"/>
+<area shape="rect" href="namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="508,639,713,666"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="527,691,694,732"/>
+<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="489,757,732,783"/>
+<area shape="rect" href="namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="491,807,730,834"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="518,1601,703,1643"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="827,1496,991,1537"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all general function objects and store the values for saving." alt="" coords="1115,1605,1290,1647"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="527,1040,695,1081"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337" title="Prints the eigenvalues and eigenvectors to unit IO." alt="" coords="527,1105,695,1147"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#af08eaa1ab32fc8aeae97e755e4355894" title="Prints basic simulation variables to the res&#45;file." alt="" coords="529,1171,693,1212"/>
+<area shape="rect" href="namespacefiniteelementmodule.html#a5f87acc6c3efb8603af19a28baca11cd" title="Reports all beam sectional forces at current configuration." alt="" coords="525,1236,696,1277"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065" title="Save strain gage results to the results database file." alt="" coords="527,1301,694,1343"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="520,975,701,1016"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="527,1419,694,1460"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a2e7d7fdcf7ac2ad0fb0d0ec9072ecb1f" title="Terminates a time step by doing some final calculations." alt="" coords="529,1484,693,1525"/>
+<area shape="rect" href="namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="488,1550,733,1577"/>
 <area shape="rect" href="namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="1117,123,1289,164"/>
-<area shape="rect" href="namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="1085,545,1320,571"/>
+<area shape="rect" href="namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="1085,538,1320,565"/>
 <area shape="rect" href="namespacenormroutinesmodule.html#a6155a1f7ea95c1fcbbfad47f1e294a8e" title="Defines the convergence tolerance to use for a given test item." alt="" coords="830,5,989,47"/>
 <area shape="rect" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="809,407,1010,448"/>
 <area shape="rect" href="namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="797,473,1022,499"/>
 <area shape="rect" href="namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="824,173,995,215"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="1119,377,1286,419"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="1119,375,1286,416"/>
 <area shape="rect" href="namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="827,239,991,280"/>
 <area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="808,574,1011,601"/>
 <area shape="rect" href="namespacesolvermodule.html#a9f05e8e4dbe8d59b93d78ff35c4b83d8" title="Outputs file and profiling information on program termination." alt="" coords="810,355,1009,382"/>
-<area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="1368,330,1543,357"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="1119,843,1287,884"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="787,675,1032,702"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="794,726,1025,753"/>
+<area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="1368,329,1543,355"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="1119,668,1287,709"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="787,1091,1032,1118"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="794,1142,1025,1169"/>
 <area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="799,1390,1019,1417"/>
-<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="829,777,990,819"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="1125,1084,1280,1125"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="827,908,991,949"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="825,843,993,884"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="825,1259,993,1300"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="825,1025,993,1067"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="781,1142,1037,1169"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="825,1193,993,1235"/>
-<area shape="rect" href="namespaceenergyintegrationmodule.html#a639b9c87dd968bd59be56890637903c6" title="Calculates the incremental work done by the aerodynamic force on a wind turbine blade node." alt="" coords="816,1324,1003,1365"/>
+<area shape="rect" href="namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="818,1193,1001,1235"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="828,1259,991,1300"/>
+<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="829,1324,990,1365"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="1125,909,1280,951"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="827,727,991,768"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="825,792,993,833"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="825,909,993,951"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="825,975,993,1016"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="781,1041,1037,1067"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2745,56 +2780,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacesolvermodule_a048f4879c526c74e1ae704bc1cf2dd48_cgraph.png" border="0" usemap="#anamespacesolvermodule_a048f4879c526c74e1ae704bc1cf2dd48_cgraph" alt=""/></div>
 <map name="anamespacesolvermodule_a048f4879c526c74e1ae704bc1cf2dd48_cgraph" id="anamespacesolvermodule_a048f4879c526c74e1ae704bc1cf2dd48_cgraph">
-<area shape="rect" title="Solves for the next time step or iteration." alt="" coords="5,1667,188,1694"/>
+<area shape="rect" title="Solves for the next time step or iteration." alt="" coords="5,1059,188,1086"/>
 <area shape="rect" href="namespacesolverroutinesmodule.html#a73a769e7f7927fb702153d69b02a162d" title="Calculates all iteration tolerances defined in the system." alt="" coords="253,5,465,47"/>
-<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="274,458,443,485"/>
-<area shape="rect" href="namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="847,278,1055,305"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a427a3c801ab9d700747fc7d40c7a4e0c" title="Calculate damped or undamped eigenvalues and eigenvectors." alt="" coords="275,1020,443,1061"/>
-<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="265,1496,452,1537"/>
-<area shape="rect" href="namespacefiniteelementmodule.html#a14905ed31c92aafc8f043a2175446568" title="Calculates the max/min beam sectional forces and positions." alt="" coords="279,1561,438,1603"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a1b0f5d4c167460dc2168e8615583c977" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="275,1627,443,1668"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="275,1692,442,1733"/>
-<area shape="rect" href="namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="256,1758,461,1785"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="275,1809,442,1851"/>
-<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="237,1875,480,1902"/>
-<area shape="rect" href="namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="239,1926,478,1953"/>
-<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="266,1379,451,1420"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="575,1379,739,1420"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all engines and store the values for saving." alt="" coords="863,1408,1038,1449"/>
-<area shape="rect" href="namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="275,1977,443,2019"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337" title="Prints the eigenvalues and eigenvectors to unit IO." alt="" coords="275,2043,443,2084"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#af08eaa1ab32fc8aeae97e755e4355894" title="Prints basic simulation variables to the res&#45;file." alt="" coords="277,2108,441,2149"/>
-<area shape="rect" href="namespacefiniteelementmodule.html#a5f87acc6c3efb8603af19a28baca11cd" title="Reports all beam sectional forces at current configuration." alt="" coords="273,2173,444,2215"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065" title="Save strain gage results to the results database file." alt="" coords="275,2239,442,2280"/>
-<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="268,1261,449,1303"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="275,2304,442,2345"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#a2e7d7fdcf7ac2ad0fb0d0ec9072ecb1f" title="Terminates a time step by doing some final calculations." alt="" coords="277,2369,441,2411"/>
-<area shape="rect" href="namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="236,2435,481,2462"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="865,161,1037,203"/>
-<area shape="rect" href="namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="833,85,1068,111"/>
+<area shape="rect" href="namespacesolvermodule.html#aef77c02d4ed38569accb6f1fe2e7e636" title="Closes the result database files and any external modules used." alt="" coords="274,355,443,382"/>
+<area shape="rect" href="namespacesavemodule.html#a530c7fc644ef5374dd298d76f6631e82" title="Closes the results database file(s)." alt="" coords="847,226,1055,253"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a0b1277c287c0d89e025e0352c57099aa" title="Calculates damped or undamped eigenvalues and eigenvectors." alt="" coords="275,1019,443,1060"/>
+<area shape="rect" href="namespaceenergyintegrationmodule.html#a696bebdf72658de5c375d33eb54c84ba" title="Integrates the system energies for current time step." alt="" coords="265,537,452,579"/>
+<area shape="rect" href="namespacefiniteelementmodule.html#a14905ed31c92aafc8f043a2175446568" title="Calculates the max/min beam sectional forces and positions." alt="" coords="279,603,438,644"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#af35c7106432786600bb8d9209358dc11" title="Exports mode shapes with associated beam section forces to YAML." alt="" coords="275,668,443,709"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a71b9de5aee478b60338b5c56e9506fb8" title="Flushes the strain gage results database file to disk." alt="" coords="275,733,442,775"/>
+<area shape="rect" href="namespacesavemodule.html#ad262948a9ddf6020abb8a473ae805c06" title="Flushes the results database file(s) to disk." alt="" coords="256,799,461,826"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a7bc247bcec48daf39891f8c9810e1de2" title="Calculates strain gage results for the superelements." alt="" coords="275,851,442,892"/>
+<area shape="rect" href="namespacetimestepmodule.html#a0b51ef5b9aedaa5d2aa8f61c6110de67" title="Returns the length of the next time step." alt="" coords="237,917,480,943"/>
+<area shape="rect" href="namespacesystemtypemodule.html#a151383711413878f9a9d9b98a3bf6eb3" title="Checks whether current step is quasi&#45;static or dynamic." alt="" coords="239,967,478,994"/>
+<area shape="rect" href="namespacenewmarkroutinesmodule.html#a4998597a0918626e80be5fcf91c40819" title="Advances the dynamics solution one step forward." alt="" coords="266,1528,451,1569"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a7716799bcfc2860355c412a4ee3da400" title="Saves response variables of current time step to file." alt="" coords="575,1492,739,1533"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a42e2b292c12fca80c6843a4a51f34310" title="Update all general function objects and store the values for saving." alt="" coords="863,1640,1038,1681"/>
+<area shape="rect" href="namespaceengineroutinesmodule.html#a60aadb7a8151697f0d718fa66fa1bc1b" title="Updates and prints out the current value of all general functions." alt="" coords="275,1201,443,1243"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aab9d5cd7588c6ccdaf017659ff18c337" title="Prints the eigenvalues and eigenvectors to unit IO." alt="" coords="275,1267,443,1308"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#af08eaa1ab32fc8aeae97e755e4355894" title="Prints basic simulation variables to the res&#45;file." alt="" coords="277,1332,441,1373"/>
+<area shape="rect" href="namespacefiniteelementmodule.html#a5f87acc6c3efb8603af19a28baca11cd" title="Reports all beam sectional forces at current configuration." alt="" coords="273,1397,444,1439"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a5b35e2c5a3e912f3b02ecdc70fd8b065" title="Save strain gage results to the results database file." alt="" coords="275,1463,442,1504"/>
+<area shape="rect" href="namespacestaticequilibriummodule.html#aac6e8c83f3a0d690bf57832bf35012bf" title="Advances the quasi&#45;static solution one time step." alt="" coords="268,1084,449,1125"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a36722df4bb4eaa3f4c00e302c819fdb1" title="Calculates internal displacements and stresses in superelements." alt="" coords="275,1593,442,1635"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#a2e7d7fdcf7ac2ad0fb0d0ec9072ecb1f" title="Terminates a time step by doing some final calculations." alt="" coords="277,1659,441,1700"/>
+<area shape="rect" href="namespacemodestypemodule.html#ab17f5cd072437f3284ca218a74c6948a" title="Writes modal results to database file." alt="" coords="236,1725,481,1751"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#ad785c5f5d2293276e7362f509b51e875" title="Initializes the stress&#45; and strain gage recovery frs&#45;files." alt="" coords="865,1761,1037,1803"/>
+<area shape="rect" href="namespacesavemodule.html#adca0b67d2247d06df16e1578e5879653" title="Administers writing of results database headers." alt="" coords="833,489,1068,515"/>
 <area shape="rect" href="namespacenormroutinesmodule.html#a6155a1f7ea95c1fcbbfad47f1e294a8e" title="Defines the convergence tolerance to use for a given test item." alt="" coords="578,5,737,47"/>
-<area shape="rect" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="557,509,758,551"/>
-<area shape="rect" href="namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="545,575,770,602"/>
-<area shape="rect" href="namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="572,224,743,265"/>
-<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="867,371,1034,412"/>
-<area shape="rect" href="namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="575,341,739,383"/>
-<area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="556,626,759,653"/>
-<area shape="rect" href="namespacesolvermodule.html#a9f05e8e4dbe8d59b93d78ff35c4b83d8" title="Outputs file and profiling information on program termination." alt="" coords="558,458,757,485"/>
-<area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="1116,223,1291,250"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#aea5fc2c7ab3bc7e0d9bc2583c0d3ffcb" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="867,728,1035,769"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="535,859,780,886"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="542,910,773,937"/>
-<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="547,1327,767,1354"/>
-<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="577,961,738,1003"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="873,1144,1028,1185"/>
-<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="575,1261,739,1303"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a39533fa8e5762a7534046da54e71344c" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="573,728,741,769"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="573,1079,741,1120"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="573,1144,741,1185"/>
-<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="529,677,785,703"/>
-<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="573,793,741,835"/>
-<area shape="rect" href="namespaceenergyintegrationmodule.html#a639b9c87dd968bd59be56890637903c6" title="Calculates the incremental work done by the aerodynamic force on a wind turbine blade node." alt="" coords="564,1496,751,1537"/>
-<area shape="rect" href="namespaceenergyintegrationmodule.html#a231dcd3261fb3a841e88996bef516f27" title="Calculates the incremental work done by a discrete damper." alt="" coords="564,1561,751,1603"/>
+<area shape="rect" href="namespacewindturbineroutinesmodule.html#a20fb074a31e5839e450779025c44bb7e" title="Terminates the aerodynamics module." alt="" coords="557,407,758,448"/>
+<area shape="rect" href="namespacedbgunitsmodule.html#ada2eb76158c4f0f5b43e940657b1efef" title="Closes all debug print files." alt="" coords="545,473,770,499"/>
+<area shape="rect" href="namespacehydrodynamicsmodule.html#a84a52d6cc9cb01b84c4612512e79da8b" title="Closes the hydrodynamics module and report some timings." alt="" coords="572,123,743,164"/>
+<area shape="rect" href="namespacestressrecoverymodule.html#a94e4eb51128f7c0dfda012f838023413" title="Closes files and deallocates memory associated with stress recovery." alt="" coords="867,325,1034,367"/>
+<area shape="rect" href="namespacesolverroutinesmodule.html#aed06fccf80606c95ebe42d4c7c737eb1" title="Closes all solver data base files before program termination." alt="" coords="575,188,739,229"/>
+<area shape="rect" href="namespacesolvermodule.html#a63566c45e8e23ae6afd3dfcf28796afd" title="Deallocates all dynamically allocated data." alt="" coords="556,523,759,550"/>
+<area shape="rect" href="namespacesolvermodule.html#a9f05e8e4dbe8d59b93d78ff35c4b83d8" title="Outputs file and profiling information on program termination." alt="" coords="558,355,757,382"/>
+<area shape="rect" href="namespacerdbmodule.html#a99b9c7ba1d0f94026ee0cc36c322ac6f" title="Closes the specified results database file." alt="" coords="1116,459,1291,486"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a5780859dc33847c322f3350781023f18" title="Allocates internal work arrays used by the eigenvalue solver." alt="" coords="867,617,1035,659"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#a089f322e19a593724938e9575a2c2a69" title="Builds the system damping matrix." alt="" coords="535,975,780,1002"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#af16ebd7a36416357247c1b7e5d80c5f0" title="Builds the system mass matrix." alt="" coords="542,1026,773,1053"/>
+<area shape="rect" href="namespaceaddinsysmodule.html#adb6c2705d671dea365812272b79827dd" title="Builds the system stiffness matrix." alt="" coords="547,1405,767,1431"/>
+<area shape="rect" href="namespacecontrolstructmodule.html#a663764d1257c1ff33ea5b03e1cf6e266" title="Computes the gradient matrices of forces w.r.t. controller inputs." alt="" coords="566,1077,749,1119"/>
+<area shape="rect" href="namespaceasmextensionmodule.html#a1ea67edba0d607cc3e37e35acc4da3d7" title="Adds an element matrix into the system matrix." alt="" coords="576,1143,739,1184"/>
+<area shape="rect" href="namespacematextensionmodule.html#a38c6dcb7e657f9b72eddaeab81d0ce00" title="Performs the matrix operation A = B." alt="" coords="577,1208,738,1249"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a3b1e9bd2748417226594ceaab32ca03d" title="Expands and rearranges a solution vector." alt="" coords="873,909,1028,951"/>
+<area shape="rect" href="namespacesolextensionmodule.html#a7acd8d2de76f49214c65649b864c473f" title="Solves the eigenvalue problem (A + λB) * u = 0." alt="" coords="575,1339,739,1380"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#aecdca9cb6f13b5637b8481696b14cf8a" title="Builds the full matrices of the generalized eigenvalue problem." alt="" coords="573,676,741,717"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a36c8183875f17b56a6838657cc57c657" title="Extracts the complex eigenvalues and associated eigenvectors." alt="" coords="573,1273,741,1315"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a08f0f6aec7fe6e9843261e63f8405725" title="Extracts the real eigenvalues and associated eigenvectors." alt="" coords="573,909,741,951"/>
+<area shape="rect" href="namespacetriadtypemodule.html#a735ba5f1d0bbeafafa295b6fc32ba5f0" title="Checks if a triad has a local coordinate system attached." alt="" coords="529,793,785,819"/>
+<area shape="rect" href="namespacemodesroutinesmodule.html#a9103940cba6421dfdbf089e1040771f9" title="Calculates effective modal masses for the eigenmodes." alt="" coords="573,844,741,885"/>
 </map>
 </div>
 <div class="dynheader">
@@ -3136,6 +3171,30 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="ab1f60f74490a4db1645fb15d4f77b29b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1f60f74490a4db1645fb15d4f77b29b">&#9670;&nbsp;</a></span>ctrlstructel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">type(<a class="el" href="structcontrolstructmodule_1_1controlstructtype.html">controlstructtype</a>), pointer, save solvermodule::ctrlstructel =&gt; null()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Data for coupled control system and structure modal analysis. </p>
+
+</div>
+</div>
 <a id="afb98e979e73d1d8cd8ee5104f354bb60"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb98e979e73d1d8cd8ee5104f354bb60">&#9670;&nbsp;</a></span>extrhs</h2>
 
@@ -3284,7 +3343,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

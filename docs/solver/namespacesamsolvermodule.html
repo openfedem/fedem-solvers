@@ -82,9 +82,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a6ec35e68dbe65686577cb117913a2032"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesamsolvermodule.html#a6ec35e68dbe65686577cb117913a2032">initsam_dofstatus</a> (triads, sups, joints, mpar, madof, msc, dofType, ierr)</td></tr>
 <tr class="memdesc:a6ec35e68dbe65686577cb117913a2032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes some nodal/dof arrays in SAM.  <a href="namespacesamsolvermodule.html#a6ec35e68dbe65686577cb117913a2032">More...</a><br /></td></tr>
 <tr class="separator:a6ec35e68dbe65686577cb117913a2032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bfb536ee75aef50e1240d060a5c34a6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesamsolvermodule.html#a6bfb536ee75aef50e1240d060a5c34a6">initsam_topology</a> (sups, springs, dampers, joints, bElems, cElems, uElems, masses, tires, mpar, mmnpc, mpmnpc, ierr)</td></tr>
-<tr class="memdesc:a6bfb536ee75aef50e1240d060a5c34a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes element topology arrays in SAM.  <a href="namespacesamsolvermodule.html#a6bfb536ee75aef50e1240d060a5c34a6">More...</a><br /></td></tr>
-<tr class="separator:a6bfb536ee75aef50e1240d060a5c34a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a7e032ec0aa9532d4f172c715eb3ad7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesamsolvermodule.html#a0a7e032ec0aa9532d4f172c715eb3ad7">initsam_topology</a> (sups, springs, dampers, joints, bElems, cElems, uElems, masses, tires, ctrlStructEl, mpar, mmnpc, mpmnpc, ierr)</td></tr>
+<tr class="memdesc:a0a7e032ec0aa9532d4f172c715eb3ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes element topology arrays in SAM.  <a href="namespacesamsolvermodule.html#a0a7e032ec0aa9532d4f172c715eb3ad7">More...</a><br /></td></tr>
+<tr class="separator:a0a7e032ec0aa9532d4f172c715eb3ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb082d415c7334c2799395fd64e7f1b3"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesamsolvermodule.html#afb082d415c7334c2799395fd64e7f1b3">initsam_constraints</a> (motions, joints, higherPairs, mpar, madof, msc, mpmceq, mmceq, ttcc, mpreac, ierr)</td></tr>
 <tr class="memdesc:afb082d415c7334c2799395fd64e7f1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes linear coupling arrays in SAM.  <a href="namespacesamsolvermodule.html#afb082d415c7334c2799395fd64e7f1b3">More...</a><br /></td></tr>
 <tr class="separator:afb082d415c7334c2799395fd64e7f1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,7 +149,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesamsolvermodule_a4421108415c5aacaf9304ff650020d14_icgraph.png" border="0" usemap="#anamespacesamsolvermodule_a4421108415c5aacaf9304ff650020d14_icgraph" alt=""/></div>
 <map name="anamespacesamsolvermodule_a4421108415c5aacaf9304ff650020d14_icgraph" id="anamespacesamsolvermodule_a4421108415c5aacaf9304ff650020d14_icgraph">
 <area shape="rect" title="Initializes the SAM data structure for fedem_solver." alt="" coords="667,107,863,133"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
 <area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
@@ -269,7 +269,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesamsolvermodule_afb082d415c7334c2799395fd64e7f1b3_icgraph.png" border="0" usemap="#anamespacesamsolvermodule_afb082d415c7334c2799395fd64e7f1b3_icgraph" alt=""/></div>
 <map name="anamespacesamsolvermodule_afb082d415c7334c2799395fd64e7f1b3_icgraph" id="anamespacesamsolvermodule_afb082d415c7334c2799395fd64e7f1b3_icgraph">
 <area shape="rect" title="Initializes linear coupling arrays in SAM." alt="" coords="667,99,863,141"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
 <area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
@@ -366,7 +366,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesamsolvermodule_a6ec35e68dbe65686577cb117913a2032_icgraph.png" border="0" usemap="#anamespacesamsolvermodule_a6ec35e68dbe65686577cb117913a2032_icgraph" alt=""/></div>
 <map name="anamespacesamsolvermodule_a6ec35e68dbe65686577cb117913a2032_icgraph" id="anamespacesamsolvermodule_a6ec35e68dbe65686577cb117913a2032_icgraph">
 <area shape="rect" title="Initializes some nodal/dof arrays in SAM." alt="" coords="667,99,863,141"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
 <area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
@@ -432,7 +432,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="namespaceasmextensionmodule.html#a122643b3527b45a229c0696a604a0196" title="Initializes pointer arrays for the equation solvers." alt="" coords="253,123,416,164"/>
 <area shape="rect" href="namespaceasmextensionmodule.html#a759fe332aeceacfc7c339b6f0808e411" title="Performs pre&#45;assembly for the given system matrix." alt="" coords="253,188,416,229"/>
 <area shape="rect" href="namespaceasmextensionmodule.html#a3c11905099dd1e2c12f2fe747bf46c74" title="Performs nodal renumbering for the equation solver." alt="" coords="253,253,416,295"/>
-<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns .true. if the command&#45;line option id is specified." alt="" coords="249,319,420,360"/>
+<area shape="rect" href="namespaceffacmdlinearginterface.html#a08fac5ccc462d883eb136c10891967b0" title="Returns the value of an boolean command&#45;line option id." alt="" coords="249,319,420,360"/>
 </map>
 </div>
 <div class="dynheader">
@@ -441,7 +441,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacesamsolvermodule_a0cf83f9fe742b5383b2d1dbe1f142d9a_icgraph.png" border="0" usemap="#anamespacesamsolvermodule_a0cf83f9fe742b5383b2d1dbe1f142d9a_icgraph" alt=""/></div>
 <map name="anamespacesamsolvermodule_a0cf83f9fe742b5383b2d1dbe1f142d9a_icgraph" id="anamespacesamsolvermodule_a0cf83f9fe742b5383b2d1dbe1f142d9a_icgraph">
 <area shape="rect" title="Does final initialization of SAM (nodal reordering and preassembly)." alt="" coords="667,99,863,141"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
 <area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
@@ -453,8 +453,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a6bfb536ee75aef50e1240d060a5c34a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bfb536ee75aef50e1240d060a5c34a6">&#9670;&nbsp;</a></span>initsam_topology()</h2>
+<a id="a0a7e032ec0aa9532d4f172c715eb3ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a7e032ec0aa9532d4f172c715eb3ad7">&#9670;&nbsp;</a></span>initsam_topology()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -516,6 +516,12 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">type(<a class="el" href="structcontrolstructmodule_1_1controlstructtype.html">controlstructtype</a>), pointer&#160;</td>
+          <td class="paramname"><em>ctrlStructEl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">integer, dimension(:), intent(inout)&#160;</td>
           <td class="paramname"><em>mpar</em>, </td>
         </tr>
@@ -557,6 +563,7 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramdir"></td><td class="paramname">uElems</td><td>All user-defined elements in the model </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">masses</td><td>All masses in the model </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">tires</td><td>All tires in the model </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ctrlStructEl</td><td>Data for coupled control system modal analysis </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">mpar</td><td>Matrix of parameters </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">mmnpc</td><td>Matrix of nodal point correspondances </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">mpmnpc</td><td>Matrix of pointers to MNPCs </td></tr>
@@ -570,10 +577,10 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacesamsolvermodule_a6bfb536ee75aef50e1240d060a5c34a6_icgraph.png" border="0" usemap="#anamespacesamsolvermodule_a6bfb536ee75aef50e1240d060a5c34a6_icgraph" alt=""/></div>
-<map name="anamespacesamsolvermodule_a6bfb536ee75aef50e1240d060a5c34a6_icgraph" id="anamespacesamsolvermodule_a6bfb536ee75aef50e1240d060a5c34a6_icgraph">
+<div class="center"><img src="namespacesamsolvermodule_a0a7e032ec0aa9532d4f172c715eb3ad7_icgraph.png" border="0" usemap="#anamespacesamsolvermodule_a0a7e032ec0aa9532d4f172c715eb3ad7_icgraph" alt=""/></div>
+<map name="anamespacesamsolvermodule_a0a7e032ec0aa9532d4f172c715eb3ad7_icgraph" id="anamespacesamsolvermodule_a0a7e032ec0aa9532d4f172c715eb3ad7_icgraph">
 <area shape="rect" title="Initializes element topology arrays in SAM." alt="" coords="667,99,863,141"/>
-<area shape="rect" href="namespaceinitiatemodule.html#afb73962d4ec4715c77b340b56066af70" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
+<area shape="rect" href="namespaceinitiatemodule.html#a36133c466fb34126418d79ef7cb63203" title="Administers preprocessing of model data for the dynamics solver." alt="" coords="353,107,619,133"/>
 <area shape="rect" href="namespacesolvermodule.html#a98becc18e10e1c5bd8ac605048e0aebe" title="Initializes the simulation model." alt="" coords="131,107,305,133"/>
 <area shape="rect" href="solverDriver_8f90.html#aa07e0fdca0c16c6bded8d8219dd3d3dc" title="Initializes a new simulation process." alt="" coords="5,5,83,32"/>
 <area shape="rect" href="solverDriver_8f90.html#a28abf5f95b1e2d8dd4ae6c17f1f2d31a" title="Initializes a new simulation process." alt="" coords="5,56,83,83"/>
@@ -661,7 +668,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

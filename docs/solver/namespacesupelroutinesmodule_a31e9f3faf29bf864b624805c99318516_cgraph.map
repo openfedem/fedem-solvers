@@ -1,52 +1,52 @@
 <map id="supelroutinesmodule::updatesupelsstatic" name="supelroutinesmodule::updatesupelsstatic">
-<area shape="rect" id="node1" title="Updates all superelements in the model based on the computed state." alt="" coords="5,524,164,565"/>
-<area shape="rect" id="node2" href="$namespacesupeltypemodule.html#a9c3feeb631203d9d136491520d1d9363" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="516,371,716,398"/>
-<area shape="rect" id="node3" href="$namespacesupelroutinesmodule.html#ad6fc0213b4c19b628cfec3bfaa624127" title="Calculates buoyancy forces and associated load correction stiffness." alt="" coords="769,408,927,449"/>
-<area shape="rect" id="node20" href="$namespacesupeltypemodule.html#adbdf5f04df719a0ba37ff40d70898c0a" title="Returns the transformation matrix to system directions for a triad." alt="" coords="227,473,453,499"/>
-<area shape="rect" id="node21" href="$namespacesupelroutinesmodule.html#a585f5697d287857d37cdc6ecdef0ec67" title="Calculates the scaled matrix&#45;vector product Y = α*A*X." alt="" coords="261,524,419,565"/>
-<area shape="rect" id="node22" href="$namespacetriadtypemodule.html#a2bf3201c49a85698dc70252d35f205bc" title="Updates the total nodal force vector associated with a triad." alt="" coords="216,590,464,617"/>
-<area shape="rect" id="node23" href="$namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="212,641,468,667"/>
-<area shape="rect" id="node27" href="$namespacesupelroutinesmodule.html#a61947935475782946c6c892ed8dc7b4b" title="Adds the superelement loads to the system external load vector." alt="" coords="261,767,419,808"/>
-<area shape="rect" id="node4" href="$namespacehydrodynamicsmodule.html#aba4271cbefa81017b5f49a83f98d3641" title="Calculates buoyancy force resultant for a superelement or beam." alt="" coords="1196,389,1367,431"/>
-<area shape="rect" id="node5" href="$namespacehydrodynamicsmodule.html#a6970d8c6fe6e6dcb973f3d6e30508472" title="Returns the wave height at the given point and time." alt="" coords="1451,324,1621,365"/>
-<area shape="rect" id="node17" href="$namespacehydrodynamicsmodule.html#ae3488b0b99cc90f1011f7d14c3160f44" title="Updates the hydrodynamic body quantities." alt="" coords="1451,389,1621,431"/>
-<area shape="rect" id="node6" href="$namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1747,299,1918,340"/>
-<area shape="rect" id="node12" href="$FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="2053,594,2130,621"/>
-<area shape="rect" id="node7" href="$namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title=" " alt="" coords="2008,5,2175,47"/>
-<area shape="rect" id="node8" href="$namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title=" " alt="" coords="2008,71,2175,112"/>
-<area shape="rect" id="node9" href="$namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title=" " alt="" coords="2008,136,2175,177"/>
-<area shape="rect" id="node10" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title=" " alt="" coords="2008,201,2175,243"/>
-<area shape="rect" id="node11" href="$namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title=" " alt="" coords="2008,267,2175,308"/>
-<area shape="rect" id="node13" href="$namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title=" " alt="" coords="2008,332,2175,373"/>
-<area shape="rect" id="node14" href="$namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title=" " alt="" coords="2008,397,2175,439"/>
-<area shape="rect" id="node15" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title=" " alt="" coords="2008,463,2175,504"/>
-<area shape="rect" id="node16" href="$namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title=" " alt="" coords="2008,528,2175,569"/>
-<area shape="rect" id="node18" href="$namespacehydrodynamicsmodule.html#a89c6ae8da9405064482ab133361c06c0" title="Computes the buoyancy length and center for a two&#45;noded beam." alt="" coords="1747,416,1918,457"/>
-<area shape="rect" id="node19" href="$namespacehydrodynamicsmodule.html#a2ea2177d016f5ca3e78cc96d8f103f1d" title="Returns the water surface normal vector in local coordinate system." alt="" coords="1747,481,1918,523"/>
-<area shape="rect" id="node24" href="$namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="535,568,697,609"/>
-<area shape="rect" id="node25" href="$namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="535,633,697,675"/>
-<area shape="rect" id="node26" href="$namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="539,699,693,740"/>
-<area shape="rect" id="node28" href="$namespaceengineroutinesmodule.html#a828b78f0573ddb417f2a719b5f4eb786" title="Evaluates a general function with optional scaling and offset." alt="" coords="532,767,700,808"/>
-<area shape="rect" id="node32" href="$namespaceengineroutinesmodule.html#adeae596463a829024cd36a41499bd94a" title="Updates a sensor value depending on the sensor type." alt="" coords="1197,709,1365,751"/>
-<area shape="rect" id="node29" href="$namespaceengineroutinesmodule.html#abde8ca534224a78120fd57630c2aad8a" title="Evaluates a general function." alt="" coords="764,767,932,808"/>
-<area shape="rect" id="node30" href="$namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="980,659,1148,700"/>
-<area shape="rect" id="node31" href="$namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="1205,644,1358,685"/>
-<area shape="rect" id="node33" href="$engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1497,455,1575,482"/>
-<area shape="rect" id="node34" href="$engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1493,506,1579,533"/>
-<area shape="rect" id="node35" href="$engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1478,557,1594,583"/>
-<area shape="rect" id="node36" href="$engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1499,607,1573,634"/>
-<area shape="rect" id="node37" href="$engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1489,658,1583,685"/>
-<area shape="rect" id="node38" href="$namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1451,709,1621,751"/>
-<area shape="rect" id="node41" href="$namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1435,775,1637,816"/>
-<area shape="rect" id="node42" href="$namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1415,841,1657,867"/>
-<area shape="rect" id="node43" href="$namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1452,892,1620,933"/>
-<area shape="rect" id="node47" href="$namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1452,957,1620,999"/>
-<area shape="rect" id="node39" href="$namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1747,673,1918,715"/>
-<area shape="rect" id="node40" href="$hydroDynamicsModule_8f90.html#a25008eba1d21a1f3d49fabe077374659" title="Returns the function arguments depending on its dimensionality." alt="" coords="2059,681,2123,707"/>
-<area shape="rect" id="node44" href="$namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1713,813,1953,839"/>
-<area shape="rect" id="node45" href="$namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1712,863,1953,890"/>
-<area shape="rect" id="node46" href="$windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1805,914,1861,941"/>
-<area shape="rect" id="node48" href="$namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1705,965,1960,991"/>
-<area shape="rect" id="node49" href="$namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1722,1015,1943,1042"/>
-<area shape="rect" id="node50" href="$namespacespringtypemodule.html#a36aa0726914f7bbdd270d55f0359f4ce" title="Evaluates the current stiffness in a spring." alt="" coords="1726,1066,1939,1093"/>
+<area shape="rect" id="node1" title="Updates all superelements in the model based on the computed state." alt="" coords="5,639,164,680"/>
+<area shape="rect" id="node2" href="$namespacesupeltypemodule.html#a9c3feeb631203d9d136491520d1d9363" title="Establishes the deformation vector (finit) for a superelement." alt="" coords="516,339,716,366"/>
+<area shape="rect" id="node3" href="$namespacesupelroutinesmodule.html#ad6fc0213b4c19b628cfec3bfaa624127" title="Calculates buoyancy forces and associated load correction stiffness." alt="" coords="769,525,927,567"/>
+<area shape="rect" id="node20" href="$namespacesupeltypemodule.html#adbdf5f04df719a0ba37ff40d70898c0a" title="Returns the transformation matrix to system directions for a triad." alt="" coords="227,705,453,731"/>
+<area shape="rect" id="node21" href="$namespacesupelroutinesmodule.html#a585f5697d287857d37cdc6ecdef0ec67" title="Calculates the scaled matrix&#45;vector product Y = α*A*X." alt="" coords="261,756,419,797"/>
+<area shape="rect" id="node22" href="$namespacetriadtypemodule.html#a2bf3201c49a85698dc70252d35f205bc" title="Updates the total nodal force vector associated with a triad." alt="" coords="216,822,464,849"/>
+<area shape="rect" id="node23" href="$namespacesupeltypemodule.html#a54eb4f1b3666d58489d85b692609d69c" title="Updates the co&#45;rotated system for a superelement." alt="" coords="212,463,468,490"/>
+<area shape="rect" id="node27" href="$namespacesupelroutinesmodule.html#a61947935475782946c6c892ed8dc7b4b" title="Adds the superelement loads to the system external load vector." alt="" coords="261,639,419,680"/>
+<area shape="rect" id="node4" href="$namespacehydrodynamicsmodule.html#aba4271cbefa81017b5f49a83f98d3641" title="Calculates buoyancy force resultant for a superelement or beam." alt="" coords="1196,360,1367,401"/>
+<area shape="rect" id="node5" href="$namespacehydrodynamicsmodule.html#a6970d8c6fe6e6dcb973f3d6e30508472" title="Returns the wave height at the given point and time." alt="" coords="1451,360,1621,401"/>
+<area shape="rect" id="node17" href="$namespacehydrodynamicsmodule.html#ae3488b0b99cc90f1011f7d14c3160f44" title="Updates the hydrodynamic body quantities." alt="" coords="1451,272,1621,313"/>
+<area shape="rect" id="node6" href="$namespacehydrodynamicsmodule.html#a9b42c0a097e0b2a5af861b10daa0a2a0" title="Evaluates the wave profile, velocity and acceleration at a point." alt="" coords="1747,337,1918,379"/>
+<area shape="rect" id="node13" href="$FNVwaveForceModule_8f90.html#a423ad348d400b7384ac2c56360de988d" title=" " alt="" coords="2053,567,2130,594"/>
+<area shape="rect" id="node7" href="$namespacewavefunctionsmodule.html#acebfbf95e3a88840ff3fe41dda629647" title="Evaluates the deep water wave profile." alt="" coords="2008,5,2175,47"/>
+<area shape="rect" id="node8" href="$namespacewavefunctionsmodule.html#a3c430e214eb5b3ec493b6497e09f8998" title="Evaluates the deep water wave profile." alt="" coords="2008,71,2175,112"/>
+<area shape="rect" id="node9" href="$namespacewavefunctionsmodule.html#ae6675f30431fbeb5ee575addef577573" title="Evaluates a wave function with embedded nonlinear components." alt="" coords="2008,188,2175,229"/>
+<area shape="rect" id="node10" href="$namespacewavefunctionsmodule.html#a409b2f382d9232e850cd7e45ff20e112" title="Evaluates the finite depth wave profile." alt="" coords="2223,143,2389,184"/>
+<area shape="rect" id="node11" href="$namespacewavefunctionsmodule.html#a5a9eb4c44dbc482bccb8c3d96924cbfb" title="Evaluates the nonlinear wave profile according to streamline theory." alt="" coords="2223,221,2389,263"/>
+<area shape="rect" id="node12" href="$namespacewavefunctionsmodule.html#af083ce99d4b5b74b498641ac7a8831d7" title="Evaluates the finite depth wave profile." alt="" coords="2008,305,2175,347"/>
+<area shape="rect" id="node14" href="$namespacewavefunctionsmodule.html#a2dc8d3557051ab7af9072d329bcceb12" title="Evaluates the wave profile according to 2nd order Stokes theory." alt="" coords="2008,371,2175,412"/>
+<area shape="rect" id="node15" href="$namespacewavefunctionsmodule.html#afabeafcb29815fdeac56558792aa3cc0" title="Evaluates the wave profile according to 5th order Stokes theory." alt="" coords="2008,436,2175,477"/>
+<area shape="rect" id="node16" href="$namespacewavefunctionsmodule.html#a9536ea972bfe0f38fca26cf9d3776fa0" title="Evaluates the user&#45;defined wave profile." alt="" coords="2008,501,2175,543"/>
+<area shape="rect" id="node18" href="$namespacehydrodynamicsmodule.html#a89c6ae8da9405064482ab133361c06c0" title="Computes the buoyancy length and center for a two&#45;noded beam." alt="" coords="1747,207,1918,248"/>
+<area shape="rect" id="node19" href="$namespacehydrodynamicsmodule.html#a2ea2177d016f5ca3e78cc96d8f103f1d" title="Returns the water surface normal vector in local coordinate system." alt="" coords="1747,272,1918,313"/>
+<area shape="rect" id="node24" href="$namespacemanipmatrixmodule.html#af21638285c73919de3cd66d37c1dad48" title="Returns the inverse of the 3×4 transformation matrix a." alt="" coords="535,391,697,432"/>
+<area shape="rect" id="node25" href="$namespacemanipmatrixmodule.html#adc1c258576e5e55d86a46df6d94ccc66" title="Returns a 3×4 transformation matrix calculated from 3 points." alt="" coords="535,456,697,497"/>
+<area shape="rect" id="node26" href="$namespacerotationmodule.html#acb475da74e6c0330e956454b7fd95ea2" title="Computes the rotation tensor from a rotation vector." alt="" coords="539,521,693,563"/>
+<area shape="rect" id="node28" href="$namespaceengineroutinesmodule.html#ace3473ab4ee1d8ad31ad68fdb493db31" title="Evaluates a general function with optional scaling and offset." alt="" coords="532,692,700,733"/>
+<area shape="rect" id="node29" href="$namespaceengineroutinesmodule.html#a7c460509291d3a2a659f71f248aa4ccd" title="Evaluates a general function." alt="" coords="764,695,932,736"/>
+<area shape="rect" id="node30" href="$namespaceengineroutinesmodule.html#ae629adacbb32ecad9d122738343c5f83" title="Evaluates the argument(s) of a general function." alt="" coords="980,753,1148,795"/>
+<area shape="rect" id="node31" href="$namespacefunctiontypemodule.html#a9e17d342b51a0fd0e8a0b1a110c75059" title="Evaluates the smooth trajectory ramp function." alt="" coords="1205,789,1358,831"/>
+<area shape="rect" id="node32" href="$namespaceengineroutinesmodule.html#a2fb450cca36772406ef8a8de18e70311" title="Updates a sensor value depending on the sensor type." alt="" coords="1197,724,1365,765"/>
+<area shape="rect" id="node33" href="$engineRoutinesModule_8f90.html#ab3fdff948eb505621ca2f6eaab5853cb" title="Evaluates a global rotation angle for given triad." alt="" coords="1497,681,1575,707"/>
+<area shape="rect" id="node34" href="$engineRoutinesModule_8f90.html#a55d70144866378795ead8b81659ea2d2" title="Evaluates the angle between two lines." alt="" coords="1493,731,1579,758"/>
+<area shape="rect" id="node35" href="$engineRoutinesModule_8f90.html#a6e17874c5c197a1f4f24bec41453fee0" title="Evaluates a global force for given triad." alt="" coords="1478,782,1594,809"/>
+<area shape="rect" id="node36" href="$engineRoutinesModule_8f90.html#af2e79733501f74c7bbf6ebce52f73e20" title="Evaluates a local velocity, acceleration or force for given triad." alt="" coords="1499,833,1573,859"/>
+<area shape="rect" id="node37" href="$engineRoutinesModule_8f90.html#a1eb3c4dd66eeec5c9fb54c0facc49b23" title="Evaluates a relative quantity between given two triads." alt="" coords="1489,883,1583,910"/>
+<area shape="rect" id="node38" href="$namespacehydrodynamicsmodule.html#ab23f3f782251450bff539a671b03298f" title="Evaluates the sea state at the given point and time." alt="" coords="1451,448,1621,489"/>
+<area shape="rect" id="node40" href="$namespacesensortypemodule.html#a830a47fa4b46fba5a68ce928d31d90aa" title="Returns the id of a sensor object, including its type." alt="" coords="1423,934,1649,961"/>
+<area shape="rect" id="node41" href="$namespacewindturbineroutinesmodule.html#a738953d247d8f8b668a38100c94b743a" title="Evaluates the wind speed at a given location center." alt="" coords="1435,985,1637,1027"/>
+<area shape="rect" id="node42" href="$engineRoutinesModule_8f90.html#a920191a55a1956e3a8fdc98bd6718b66" title="Reports an internal error on invalid sensor data." alt="" coords="1488,579,1584,606"/>
+<area shape="rect" id="node43" href="$namespacetriadtypemodule.html#a69c00879f55aa87483ea1ecc0dbbb9e3" title="Transforms a triad vector from system to global directions." alt="" coords="1415,630,1657,657"/>
+<area shape="rect" id="node44" href="$namespaceengineroutinesmodule.html#ae0205bdca764304fc089ed235b1e16bc" title="Updates the damper variables." alt="" coords="1452,1051,1620,1092"/>
+<area shape="rect" id="node48" href="$namespaceengineroutinesmodule.html#aec312be90b47bc22894598dbf7fcd244" title="Updates the spring variables." alt="" coords="1452,513,1620,555"/>
+<area shape="rect" id="node39" href="$namespacehydrodynamicsmodule.html#a44da9d3a4c902f379fe9075481880114" title="Evaluates the sea current velocity at the given point and time." alt="" coords="1747,455,1918,496"/>
+<area shape="rect" id="node45" href="$namespacedampertypemodule.html#a96a4a05cd6756c30dfc9885e46863fae" title="Evaluates the current damping coefficient for a damper." alt="" coords="1713,1083,1953,1110"/>
+<area shape="rect" id="node46" href="$namespacedampertypemodule.html#a0c661b3d54ca99aaceed4a1accb18aad" title="Evaluates the current force for a damper." alt="" coords="1712,1033,1953,1059"/>
+<area shape="rect" id="node47" href="$windTurbineRoutinesModule_8f90.html#a9054197eeb3116310ba964898ccae39b" title="Scales a real vector by given scalar." alt="" coords="1805,802,1861,829"/>
+<area shape="rect" id="node49" href="$namespacespringtypemodule.html#a51cf5243df27b1821816d0a4f0527700" title="Enforces the yield limits on current stiffness and force values." alt="" coords="1705,521,1960,547"/>
+<area shape="rect" id="node50" href="$namespacespringtypemodule.html#a1aee6a5522fa8de073f083882d027b65" title="Evaluates the current force in a spring." alt="" coords="1722,571,1943,598"/>
 </map>

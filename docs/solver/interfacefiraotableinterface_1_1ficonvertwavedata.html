@@ -74,13 +74,30 @@ $(function() {
 <div class="title">firaotableinterface::ficonvertwavedata Interface Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Applies a Response Amplitude Operator (RAO) to a wave function.  
+ <a href="interfacefiraotableinterface_1_1ficonvertwavedata.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af647e3a16f626b92da3868839f5291d4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacefiraotableinterface_1_1ficonvertwavedata.html#af647e3a16f626b92da3868839f5291d4">ficonvertwavedata</a> (fileName, dir, nRows, nComp, waveData, err)</td></tr>
 <tr class="separator:af647e3a16f626b92da3868839f5291d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Applies a Response Amplitude Operator (RAO) to a wave function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of file contaning the ROA data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dir</td><td>Wave direction (angle in degrees) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>Number of data values per wave component (3 or more) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nComp</td><td>Number of wave component </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">waveData</td><td>Wave component data (amplitude, frequency, phase) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">err</td><td>Error indicator</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The resulting vessel motion data is stored in an internal container which is released by <a class="el" href="interfacefiraotableinterface_1_1fireleasemotion.html" title="Releases the internal vessel motion container.">firaotableinterface::fireleasemotion</a>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af647e3a16f626b92da3868839f5291d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af647e3a16f626b92da3868839f5291d4">&#9670;&nbsp;</a></span>ficonvertwavedata()</h2>
 
@@ -139,7 +156,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

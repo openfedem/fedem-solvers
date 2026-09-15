@@ -1,0 +1,7 @@
+<map id="sparsematrixmodule::smgrow" name="sparsematrixmodule::smgrow">
+<area shape="rect" id="node1" title="Expands the allocated space for a sparse matrix by a fixed amount." alt="" coords="691,39,848,80"/>
+<area shape="rect" id="node2" href="$namespacesparsematrixmodule.html#aa744ac5ab1cc8a4ae68b07c83174123f" title="Assigns a matrix element." alt="" coords="485,39,643,80"/>
+<area shape="rect" id="node3" href="$namespacesprextensionmodule.html#addeebc448d47e0b2fde7fbdf7a7501af" title="Extracts an off&#45;diagonal sub&#45;matrix from a skyline system matrix." alt="" coords="283,5,437,47"/>
+<area shape="rect" id="node5" href="$namespacesprextensionmodule.html#a0a8d759490a4bd01035d36faf7bc63f7" title="Extracts an off&#45;diagonal sub&#45;matrix from a sparse system matrix." alt="" coords="283,71,437,112"/>
+<area shape="rect" id="node4" href="$interfacematextensionmodule_1_1csgetsub12.html#aaf32cb8f166e28be8149eaf7019edd9c" title="Extracts the 12 sub&#45;matrix from a system matrix." alt="" coords="5,5,235,47"/>
+</map>

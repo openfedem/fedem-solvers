@@ -87,16 +87,17 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Returns the name of a result quantity of a user-defined element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">eId</td><td>Unique id identifying this element instance </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">eId</td><td>Unique id (baseId) identifying this element instance </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">eType</td><td>Unique id identifying the element type </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">idx</td><td>Result quantity index </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">iwork</td><td>Integer work area for this element </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rwork</td><td>Real work area for this element </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>Name of result quantity </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">nvar</td><td>Total number of result quantities for this element </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">nvar</td><td>Total number of result quantities for this element</td></tr>
   </table>
   </dd>
 </dl>
+<p>This subroutine is only invoked once as a pre-processing task. </p><dl class="section note"><dt>Note</dt><dd>The plugin library does not need to contain this routine. If absent, no output variables are defined. </dd></dl>
 </div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a id="a02e4c6410d1c72c1590849283c547ded"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a02e4c6410d1c72c1590849283c547ded">&#9670;&nbsp;</a></span>fi_ude4()</h2>
@@ -162,7 +163,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -1,26 +1,26 @@
 <map id="masterslavejointtypemodule::higherpairtype" name="masterslavejointtypemodule::higherpairtype">
-<area shape="rect" id="node1" title="Data type representing a higher pairs object." alt="" coords="4117,223,4328,265"/>
-<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,425,167,452"/>
-<area shape="rect" id="node3" href="$structmasterslavejointtypemodule_1_1masterslavejointtype.html" title="Data type representing a master&#45;slave&#45;based joint." alt="" coords="3779,458,3989,499"/>
-<area shape="rect" id="node5" href="$structcontactsurfacemodule_1_1glidercurvetype.html" title="Data type representing the glider curve in point&#45;to&#45;path joints." alt="" coords="3107,774,3273,815"/>
-<area shape="rect" id="node7" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="2249,891,2447,917"/>
-<area shape="rect" id="node9" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="2224,473,2472,500"/>
-<area shape="rect" id="node10" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="1224,317,1377,358"/>
-<area shape="rect" id="node11" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="720,418,873,459"/>
-<area shape="rect" id="node13" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="232,296,455,323"/>
-<area shape="rect" id="node14" href="$structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="941,605,1200,632"/>
-<area shape="rect" id="node15" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1889,512,2139,539"/>
-<area shape="rect" id="node17" href="$structdampertypemodule_1_1damperbasetype.html" title="Data type representing a base damper object." alt="" coords="2555,396,2823,423"/>
-<area shape="rect" id="node19" href="$structfrictiontypemodule_1_1frictionparametertype.html" title="Data type representing a set of friction parameters." alt="" coords="479,106,652,147"/>
-<area shape="rect" id="node22" href="$structspringtypemodule_1_1springtype.html" title="Data type representing multi&#45;DOF spring element." alt="" coords="3081,680,3299,707"/>
-<area shape="rect" id="node4" href="$structmasterslavejointtypemodule_1_1slidertype.html" title="Data type representing slide DOF in a multi&#45;master joint." alt="" coords="3452,605,3663,646"/>
-<area shape="rect" id="node6" href="$structcurvepointtypemodule_1_1curvepointtype.html" title="Data type representing a point on a contact curve/surface." alt="" coords="2604,883,2773,925"/>
-<area shape="rect" id="node20" href="$structmasterslavejointtypemodule_1_1jmtriadtype.html" title="Data type representing a master triad in a joint." alt="" coords="2847,921,3057,962"/>
-<area shape="rect" id="node23" href="$structtriadtypemodule_1_1triadptrtype.html" title="Data type representing a triad pointer." alt="" coords="2581,832,2796,859"/>
-<area shape="rect" id="node8" href="$structmasterslavejointtypemodule_1_1jointdoftype.html" title="Data type representing a joint DOF." alt="" coords="3085,458,3295,499"/>
-<area shape="rect" id="node18" href="$structfrictiontypemodule_1_1frictiontype.html" title="Data type representing a joint DOF friction." alt="" coords="2615,330,2762,371"/>
-<area shape="rect" id="node24" href="$structspringtypemodule_1_1springptrtype.html" title="Data type representing a base spring pointer." alt="" coords="2571,655,2806,681"/>
-<area shape="rect" id="node16" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1475,375,1713,401"/>
-<area shape="rect" id="node12" href="$structsensortypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="676,296,917,323"/>
-<area shape="rect" id="node21" href="$structmasterslavejointtypemodule_1_1slavedoftype.html" title="Data type representing a slave DOF in a joint." alt="" coords="3452,398,3663,439"/>
+<area shape="rect" id="node1" title="Data type representing a higher pairs object." alt="" coords="3804,125,4015,166"/>
+<area shape="rect" id="node2" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,423,167,449"/>
+<area shape="rect" id="node3" href="$structmasterslavejointtypemodule_1_1masterslavejointtype.html" title="Data type representing a master&#45;slave&#45;based joint." alt="" coords="3465,250,3676,291"/>
+<area shape="rect" id="node5" href="$structcontactsurfacemodule_1_1glidercurvetype.html" title="Data type representing the glider curve in point&#45;to&#45;path joints." alt="" coords="2793,237,2960,278"/>
+<area shape="rect" id="node7" href="$structtriadtypemodule_1_1triadtype.html" title="Data type representing a triad object." alt="" coords="1936,208,2133,235"/>
+<area shape="rect" id="node9" href="$structspringtypemodule_1_1springbasetype.html" title="Data type representing a single&#45;DOF base spring object." alt="" coords="1911,555,2159,581"/>
+<area shape="rect" id="node10" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="656,574,809,615"/>
+<area shape="rect" id="node11" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="232,787,385,829"/>
+<area shape="rect" id="node13" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="409,480,632,507"/>
+<area shape="rect" id="node14" href="$structspringtypemodule_1_1springfailuretype.html" title="Data type representing a spring failure object." alt="" coords="1293,429,1552,456"/>
+<area shape="rect" id="node15" href="$structspringtypemodule_1_1springyieldtype.html" title="Data type representing a spring yield object." alt="" coords="1576,520,1825,547"/>
+<area shape="rect" id="node17" href="$structdampertypemodule_1_1damperbasetype.html" title="Data type representing a base damper object." alt="" coords="2241,799,2509,825"/>
+<area shape="rect" id="node19" href="$structfrictiontypemodule_1_1frictionparametertype.html" title="Data type representing a set of friction parameters." alt="" coords="833,303,1007,345"/>
+<area shape="rect" id="node22" href="$structspringtypemodule_1_1springtype.html" title="Data type representing multi&#45;DOF spring element." alt="" coords="2768,532,2985,559"/>
+<area shape="rect" id="node4" href="$structmasterslavejointtypemodule_1_1slidertype.html" title="Data type representing slide DOF in a multi&#45;master joint." alt="" coords="3139,250,3349,291"/>
+<area shape="rect" id="node6" href="$structcurvepointtypemodule_1_1curvepointtype.html" title="Data type representing a point on a contact curve/surface." alt="" coords="2291,221,2460,262"/>
+<area shape="rect" id="node20" href="$structmasterslavejointtypemodule_1_1jmtriadtype.html" title="Data type representing a master triad in a joint." alt="" coords="2533,167,2744,209"/>
+<area shape="rect" id="node23" href="$structtriadtypemodule_1_1triadptrtype.html" title="Data type representing a triad pointer." alt="" coords="2268,337,2483,364"/>
+<area shape="rect" id="node8" href="$structmasterslavejointtypemodule_1_1jointdoftype.html" title="Data type representing a joint DOF." alt="" coords="2771,389,2982,430"/>
+<area shape="rect" id="node18" href="$structfrictiontypemodule_1_1frictiontype.html" title="Data type representing a joint DOF friction." alt="" coords="2302,389,2449,430"/>
+<area shape="rect" id="node24" href="$structspringtypemodule_1_1springptrtype.html" title="Data type representing a base spring pointer." alt="" coords="2258,555,2493,581"/>
+<area shape="rect" id="node12" href="$structfunctiontypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="1073,615,1227,657"/>
+<area shape="rect" id="node16" href="$structspringtypemodule_1_1yieldlimittype.html" title="Data type representing a yield force limit." alt="" coords="1031,513,1269,540"/>
+<area shape="rect" id="node21" href="$structmasterslavejointtypemodule_1_1slavedoftype.html" title="Data type representing a slave DOF in a joint." alt="" coords="3139,526,3349,567"/>
 </map>

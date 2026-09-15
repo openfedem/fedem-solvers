@@ -67,12 +67,13 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FFaUserFuncPlugin_F.C File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Fortran wrapper for the <a class="el" href="classFFaUserFuncPlugin.html" title="Singleton class for user-defined functions plugins.">FFaUserFuncPlugin</a> methods.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;cstring&gt;</code><br />
 <code>#include &quot;<a class="el" href="FFaUserFuncPlugin_8H_source.html">FFaFunctionLib/FFaUserFuncPlugin.H</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="FFaTokenizer_8H_source.html">FFaLib/FFaString/FFaTokenizer.H</a>&quot;</code><br />
@@ -82,9 +83,9 @@ Include dependency graph for FFaUserFuncPlugin_F.C:</div>
 <div class="dyncontent">
 <div class="center"><img src="FFaUserFuncPlugin__F_8C__incl.png" border="0" usemap="#afedem-foundation_2src_2FFaFunctionLib_2FFaUserFuncPlugin__F_8C" alt=""/></div>
 <map name="afedem-foundation_2src_2FFaFunctionLib_2FFaUserFuncPlugin__F_8C" id="afedem-foundation_2src_2FFaFunctionLib_2FFaUserFuncPlugin__F_8C">
-<area shape="rect" title=" " alt="" coords="255,5,463,61"/>
+<area shape="rect" title="Fortran wrapper for the FFaUserFuncPlugin methods." alt="" coords="255,5,463,61"/>
 <area shape="rect" title=" " alt="" coords="97,117,163,143"/>
-<area shape="rect" href="FFaUserFuncPlugin_8H.html" title=" " alt="" coords="188,109,392,151"/>
+<area shape="rect" href="FFaUserFuncPlugin_8H.html" title="User&#45;defined functions plugin." alt="" coords="188,109,392,151"/>
 <area shape="rect" href="FFaTokenizer_8H.html" title="One&#45;level token hierarchies." alt="" coords="433,206,659,233"/>
 <area shape="rect" href="FFaFortran_8H.html" title="Macros to aid cross&#45;language linkage between C/C++ and Fortran." alt="" coords="468,117,661,143"/>
 <area shape="rect" href="FFaDynamicLibraryBase_8H.html" title="Management of dynamic loading of shared object libraries." alt="" coords="172,199,408,240"/>
@@ -96,195 +97,22 @@ Include dependency graph for FFaUserFuncPlugin_F.C:</div>
 <area shape="rect" title=" " alt="" coords="506,288,586,315"/>
 </map>
 </div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a8b85f9a9b1949c93850be7e36a1cdb8f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin__F_8C.html#a8b85f9a9b1949c93850be7e36a1cdb8f">INTEGER_FUNCTION</a> (ffauf_init, FFAUF_INIT) const</td></tr>
-<tr class="separator:a8b85f9a9b1949c93850be7e36a1cdb8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e07b58cb0e94998f8d4b971bdc492ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin__F_8C.html#a5e07b58cb0e94998f8d4b971bdc492ec">INTEGER_FUNCTION</a> (ffauf_getnopar, FFAUF_GETNOPAR) const</td></tr>
-<tr class="separator:a5e07b58cb0e94998f8d4b971bdc492ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37dc5f625e66d369464a43a31b3ebfd1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin__F_8C.html#a37dc5f625e66d369464a43a31b3ebfd1">INTEGER_FUNCTION</a> (ffauf_getflag, FFAUF_GETFLAG) const</td></tr>
-<tr class="separator:a37dc5f625e66d369464a43a31b3ebfd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a113d1a54f820b00f468a71576a18e221"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin__F_8C.html#a113d1a54f820b00f468a71576a18e221">DOUBLE_FUNCTION</a> (ffauf_getvalue, FFAUF_GETVALUE) const</td></tr>
-<tr class="separator:a113d1a54f820b00f468a71576a18e221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c4d53e6f397c81aeacc8008205b40ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin__F_8C.html#a2c4d53e6f397c81aeacc8008205b40ce">DOUBLE_FUNCTION</a> (ffauf_getdiff, FFAUF_GETDIFF) const</td></tr>
-<tr class="separator:a2c4d53e6f397c81aeacc8008205b40ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b50c288030b2419ade5e312543ea397"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FFaUserFuncPlugin__F_8C.html#a7b50c288030b2419ade5e312543ea397">INTEGER_FUNCTION</a> (ffauf_wave, FFAUF_WAVE) const</td></tr>
-<tr class="separator:a7b50c288030b2419ade5e312543ea397"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a2c4d53e6f397c81aeacc8008205b40ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c4d53e6f397c81aeacc8008205b40ce">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffauf_getdiff&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAUF_GETDIFF&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a113d1a54f820b00f468a71576a18e221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a113d1a54f820b00f468a71576a18e221">&#9670;&nbsp;</a></span>DOUBLE_FUNCTION() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DOUBLE_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffauf_getvalue&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAUF_GETVALUE&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a37dc5f625e66d369464a43a31b3ebfd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37dc5f625e66d369464a43a31b3ebfd1">&#9670;&nbsp;</a></span>INTEGER_FUNCTION() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">INTEGER_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffauf_getflag&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAUF_GETFLAG&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5e07b58cb0e94998f8d4b971bdc492ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e07b58cb0e94998f8d4b971bdc492ec">&#9670;&nbsp;</a></span>INTEGER_FUNCTION() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">INTEGER_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffauf_getnopar&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAUF_GETNOPAR&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8b85f9a9b1949c93850be7e36a1cdb8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b85f9a9b1949c93850be7e36a1cdb8f">&#9670;&nbsp;</a></span>INTEGER_FUNCTION() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">INTEGER_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffauf_init&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAUF_INIT&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7b50c288030b2419ade5e312543ea397"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b50c288030b2419ade5e312543ea397">&#9670;&nbsp;</a></span>INTEGER_FUNCTION() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">INTEGER_FUNCTION </td>
-          <td>(</td>
-          <td class="paramtype">ffauf_wave&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FFAUF_WAVE&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-</div><!-- contents -->
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Fortran wrapper for the <a class="el" href="classFFaUserFuncPlugin.html" title="Singleton class for user-defined functions plugins.">FFaUserFuncPlugin</a> methods. </p>
+<p>This file contains the implementation of the following Fortran wrappers of the <a class="el" href="classFFaUserFuncPlugin.html" title="Singleton class for user-defined functions plugins.">FFaUserFuncPlugin</a> module:</p>
+<ul>
+<li><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__init.html" title="Loads the user-defined plugin(s) into core memory.">ffauserfuncinterface::ffauf_init</a></li>
+<li><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__getnopar.html" title="Returns the number of parameters for the function funcId.">ffauserfuncinterface::ffauf_getnopar</a></li>
+<li><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__getflag.html" title="Returns the function flag for the function funcId.">ffauserfuncinterface::ffauf_getflag</a></li>
+<li><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__getvalue.html" title="Evaluates the specified user-defined function.">ffauserfuncinterface::ffauf_getvalue</a></li>
+<li><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__getdiff.html" title="Evaluates the derivative of specified user-defined function.">ffauserfuncinterface::ffauf_getdiff</a></li>
+<li><a class="el" href="interfaceffauserfuncinterface_1_1ffauf__wave.html" title="Evaluates the specified user-defined wave function.">ffauserfuncinterface::ffauf_wave</a></li>
+</ul>
+<p>No further documentation is provided here. The wrappers are documented in the <a class="el" href="FFaUserFuncInterface_8f90.html" title="Fortran interface for FFaUserFuncPlugin methods.">FFaUserFuncInterface.f90</a> file. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:11 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

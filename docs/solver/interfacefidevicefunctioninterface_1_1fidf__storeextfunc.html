@@ -89,8 +89,13 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">data</td><td>Solution state array </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ndat</td><td>Length of the solution state array </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iop</td><td>Option telling what to do (0=return required array size) </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">istat</td><td>Running array offset, negative value indicates an error </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iop</td><td>Option telling what to do:<ul>
+<li>0 : return required array size</li>
+<li>1 : store new values</li>
+<li>2 : restore values </li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">istat</td><td>Running array index, negative value indicates an error </td></tr>
   </table>
   </dd>
 </dl>
@@ -141,7 +146,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

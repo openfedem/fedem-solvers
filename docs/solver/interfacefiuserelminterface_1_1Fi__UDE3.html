@@ -87,18 +87,19 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Calculates the local origin of a user-defined element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">eId</td><td>Unique id identifying this element instance </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">eId</td><td>Unique id (baseID) identifying this element instance </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">eType</td><td>Unique id identifying the element type </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">nenod</td><td>Number of element nodes </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">X</td><td>Global nodal coordinates of the element </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">X</td><td>Global nodal coordinates of the element (current config.) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">T</td><td>Local nodal coordinate systems of the element </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">iwork</td><td>Integer work area for this element </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">rwork</td><td>Real work area for this element </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">rwork</td><td>Real work area for this element </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">Tlg</td><td>Local-to-global transformation matrix for the element </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ierr</td><td>Error flag</td></tr>
   </table>
   </dd>
 </dl>
+<p>This subroutine is invoked only in pre- and post-processing tasks, requiring the position of current element. It does not affect the response simulation. </p><dl class="section note"><dt>Note</dt><dd>The plugin library does not need to contain this routine. If absent, the identity transformation matrix is assumed instead. </dd></dl>
 </div><h2 class="groupheader">Member Function/Subroutine Documentation</h2>
 <a id="a2fc4542b4a07fbc032dd96d1120142db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fc4542b4a07fbc032dd96d1120142db">&#9670;&nbsp;</a></span>fi_ude3()</h2>
@@ -176,7 +177,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:15 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

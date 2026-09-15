@@ -1,0 +1,9 @@
+<map id="controlstructmodule::structsensorgradtype" name="controlstructmodule::structsensorgradtype">
+<area shape="rect" id="node1" title="Data type representing a control input gradient." alt="" coords="1048,151,1216,192"/>
+<area shape="rect" id="node2" href="$structcontroltypemodule_1_1ctrlprm.html" title="Data type representing a control input parameter." alt="" coords="787,5,940,47"/>
+<area shape="rect" id="node3" href="$structfunctiontypemodule_1_1enginetype.html" title="Data type representing a general function object." alt="" coords="501,37,655,79"/>
+<area shape="rect" id="node6" href="$structfunctiontypemodule_1_1sensorptrtype.html" title="Data type representing a sensor pointer." alt="" coords="787,83,940,124"/>
+<area shape="rect" id="node4" href="$structidtypemodule_1_1idtype.html" title="Data type for unique object identification." alt="" coords="5,86,167,113"/>
+<area shape="rect" id="node5" href="$structfunctiontypemodule_1_1functiontype.html" title="Data type representing a function shape object." alt="" coords="232,79,385,120"/>
+<area shape="rect" id="node7" href="$structsensortypemodule_1_1sensortype.html" title="Data type representing a sensor object." alt="" coords="467,146,689,173"/>
+</map>

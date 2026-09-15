@@ -88,9 +88,22 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>Name of file to open </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fileType</td><td>Type of file to open </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileType</td><td>Type of file to open<ul>
+<li>0 : Temporary file with no name, automatically deleted when closed</li>
+<li>1 : Existing file, opened for read-only</li>
+<li>2 : New file, opened for write</li>
+<li>3 : Existing file, opened for append</li>
+<li>4 : New file, opened for read and write</li>
+<li>5 : Existing file, opened for read and write </li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">fileNum</td><td>Assigned file handle (non-negative number) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">status</td><td>Exit status (negative on error) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">status</td><td>Exit status (negative on error)<ul>
+<li>0 : Everything is OK</li>
+<li>-1 : Could not open the specified file</li>
+<li>-2 : Too many simultaneously opened files </li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
@@ -141,7 +154,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 5 2026 07:07:12 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Sep 15 2026 05:16:14 for FEDEM Solver by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
