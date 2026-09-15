@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>modeler module &mdash; fedempy 4.6.2 documentation</title>
+  <title>modeler module &mdash; fedempy 5.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5f0a4c00"></script>
+      <script src="_static/documentation_options.js?v=6a0c42bb"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -243,9 +243,9 @@ and for modifying existing ones.</p>
 </dd>
 <dt><strong>obj</strong><span class="classifier">int or str or (int, int) or (str, str)</span></dt><dd><p>Base Id or tag of object(s) producing the response quantity to use</p>
 </dd>
-<dt><strong>var</strong><span class="classifier">FmVar, default=None=0</span></dt><dd><p>Response quantity to use as function argument</p>
+<dt><strong>var</strong><span class="classifier">FmVar, default=None</span></dt><dd><p>Response quantity to use as function argument</p>
 </dd>
-<dt><strong>dof</strong><span class="classifier">FmDof, default=None=0</span></dt><dd><p>Which component of <cite>var</cite> to be used if a multi-DOF quantity</p>
+<dt><strong>dof</strong><span class="classifier">FmDof, default=None</span></dt><dd><p>Which component of <cite>var</cite> to be used if a multi-DOF quantity</p>
 </dd>
 </dl>
 </dd>
@@ -807,7 +807,7 @@ are taken as the end points of the glider.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modeler.FedemModeler.make_sensor">
-<span class="sig-name descname"><span class="pre">make_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_sensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_sensor" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">make_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modeler.html#FedemModeler.make_sensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modeler.FedemModeler.make_sensor" title="Link to this definition"></a></dt>
 <dd><p>Creates a sensor object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -816,7 +816,7 @@ are taken as the end points of the glider.</p>
 </dd>
 <dt><strong>obj</strong><span class="classifier">int or str or (int, int) or (str, str)</span></dt><dd><p>Base Id or tag of object(s) to measure</p>
 </dd>
-<dt><strong>var</strong><span class="classifier">FmVar</span></dt><dd><p>The variable to measure</p>
+<dt><strong>var</strong><span class="classifier">FmVar, default=None</span></dt><dd><p>The variable to measure</p>
 </dd>
 <dt><strong>dof</strong><span class="classifier">FmDof, default=None</span></dt><dd><p>Local DOF to measure if <cite>var</cite> is a multi-DOF quantity</p>
 </dd>

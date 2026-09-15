@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>divergence &mdash; fedempy 4.6.2 documentation</title>
+  <title>divergence &mdash; fedempy 5.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5f0a4c00"></script>
+      <script src="../_static/documentation_options.js?v=6a0c42bb"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -77,9 +77,9 @@
 <span class="c1">#</span>
 <span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Convenience module for automatic simulation restart of diverging models.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ctypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">c_double</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">mkdir</span><span class="p">,</span> <span class="n">path</span>
@@ -88,11 +88,11 @@
 <div class="viewcode-block" id="ramp_dataframe">
 <a class="viewcode-back" href="../divergence.html#divergence.ramp_dataframe">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ramp_dataframe</span><span class="p">(</span><span class="n">dfr</span><span class="p">,</span> <span class="n">start_pos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Creating a s-shape ramp, starting with 0 and ending with 1</span>
 <span class="sd">    Second derivative at start/end will be zero</span>
 <span class="sd">    Multiplying each column in dataframe with ramp-array</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">r_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfr</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>  <span class="c1"># ramp steps</span>
 
     <span class="n">smooth</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_steps</span>
@@ -108,36 +108,36 @@
 <div class="viewcode-block" id="jump_state">
 <a class="viewcode-back" href="../divergence.html#divergence.jump_state">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">jump_state</span><span class="p">(</span><span class="n">lib_dir</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Checks whether the current state should be jumped over or not.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jump_exist</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">json_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/stream.json&quot;</span>
+    <span class="n">json_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">"/stream.json"</span>
     <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
             <span class="n">frame_data</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
-            <span class="n">jump_exist</span> <span class="o">=</span> <span class="n">frame_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;conv_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;JUMP_OVER&quot;</span>
+            <span class="n">jump_exist</span> <span class="o">=</span> <span class="n">frame_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"conv_type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"JUMP_OVER"</span>
 
     <span class="k">if</span> <span class="n">jump_exist</span><span class="p">:</span>
         <span class="c1"># Reset conv_type to None</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
-            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;conv_type&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">"conv_type"</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">jump_exist</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_opts_list</span><span class="p">(</span><span class="n">opts_dict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Helper converting option dictionary into a list of solver options.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__format_arg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">+&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">+"</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">-"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">__format_arg</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">opts_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
@@ -145,7 +145,7 @@
 <div class="viewcode-block" id="restart">
 <a class="viewcode-back" href="../divergence.html#divergence.restart">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">restart</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">lib_dir</span><span class="p">,</span> <span class="n">out_id</span><span class="p">,</span> <span class="n">c_opts</span><span class="p">,</span> <span class="n">x_times</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># NOSONAR</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Restarts the simulation over a time window in case of divergence issues.</span>
 <span class="sd">    When a divergent solution is detected, one (or more) of the following</span>
 <span class="sd">    approaches may be attempted:</span>
@@ -195,18 +195,18 @@
 <span class="sd">        Output sensor values for each time step</span>
 <span class="sd">    str</span>
 <span class="sd">        How the simulation was actually restarted (or not)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** The solver has diverged at t =&quot;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"  ** The solver has diverged at t ="</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
 
     <span class="c1"># If file stream.json not existing, create it</span>
-    <span class="n">json_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/stream.json&quot;</span>
+    <span class="n">json_file</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">"/stream.json"</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">json_file</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
-            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;conv_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOL&quot;</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">"conv_type"</span><span class="p">:</span> <span class="s2">"TOL"</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 
     <span class="c1"># Define state path for state file storage</span>
-    <span class="n">step_state_path</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">&quot;/step_state&quot;</span>
+    <span class="n">step_state_path</span> <span class="o">=</span> <span class="n">lib_dir</span> <span class="o">+</span> <span class="s2">"/step_state"</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">step_state_path</span><span class="p">):</span>
         <span class="n">mkdir</span><span class="p">(</span><span class="n">step_state_path</span><span class="p">)</span>
 
@@ -216,41 +216,41 @@
 
     <span class="c1"># Default dictionary settings (solver)</span>
     <span class="c1"># Check that the option files exist before adding them</span>
-    <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cwd&quot;</span><span class="p">:</span> <span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;terminal&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
-    <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;fco&quot;</span><span class="p">,</span> <span class="s2">&quot;fop&quot;</span><span class="p">,</span> <span class="s2">&quot;fao&quot;</span><span class="p">):</span>
-        <span class="n">option_file</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver.&quot;</span> <span class="o">+</span> <span class="n">ext</span>
-        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">option_file</span><span class="p">):</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"cwd"</span><span class="p">:</span> <span class="n">getcwd</span><span class="p">(),</span> <span class="s2">"terminal"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"fco"</span><span class="p">,</span> <span class="s2">"fop"</span><span class="p">,</span> <span class="s2">"fao"</span><span class="p">):</span>
+        <span class="n">option_file</span> <span class="o">=</span> <span class="s2">"fedem_solver."</span> <span class="o">+</span> <span class="n">ext</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="n">option_file</span><span class="p">):</span>
             <span class="n">opts</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span> <span class="o">=</span> <span class="n">option_file</span>
 
     <span class="c1"># Do not overwrite the original res-file</span>
     <span class="n">ires</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">ires</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">ires</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;resfile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver_r&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">ires</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.res&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;resfile&quot;</span><span class="p">]):</span>
+        <span class="n">opts</span><span class="p">[</span><span class="s2">"resfile"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"fedem_solver_r"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">ires</span><span class="p">)</span> <span class="o">+</span> <span class="s2">".res"</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="n">opts</span><span class="p">[</span><span class="s2">"resfile"</span><span class="p">]):</span>
             <span class="n">ires</span> <span class="o">=</span> <span class="o">-</span><span class="n">ires</span>
 
     <span class="k">if</span> <span class="n">c_opts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">opts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">c_opts</span><span class="p">)</span>
 
     <span class="c1"># Convergence handling settings (solver)</span>
-    <span class="n">activate_ramp</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;use_ramping&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">state_pos</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;use_state_n_steps_behind&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="n">nr_steps</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;nr_steps&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">activate_ramp</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"use_ramping"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">state_pos</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"use_state_n_steps_behind"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">nr_steps</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"nr_steps"</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">conv_types</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
-        <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
+        <span class="s2">"sequence"</span><span class="p">,</span>
         <span class="p">[</span>
-            <span class="s2">&quot;TOL&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;STATE_DYNAMIC&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;STATE_STATIC&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;NO_STATE_WITH_RAMP&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;JUMP_OVER&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;NO_CONV&quot;</span><span class="p">,</span>
+            <span class="s2">"TOL"</span><span class="p">,</span>
+            <span class="s2">"STATE_DYNAMIC"</span><span class="p">,</span>
+            <span class="s2">"STATE_STATIC"</span><span class="p">,</span>
+            <span class="s2">"NO_STATE_WITH_RAMP"</span><span class="p">,</span>
+            <span class="s2">"JUMP_OVER"</span><span class="p">,</span>
+            <span class="s2">"NO_CONV"</span><span class="p">,</span>
         <span class="p">],</span>
     <span class="p">)</span>
     <span class="c1"># Ensure the trial loop exits with NO_CONV if nothing else succeeds</span>
-    <span class="k">if</span> <span class="n">conv_types</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;NO_CONV&quot;</span><span class="p">:</span>
-        <span class="n">conv_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NO_CONV&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">conv_types</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"NO_CONV"</span><span class="p">:</span>
+        <span class="n">conv_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"NO_CONV"</span><span class="p">)</span>
 
     <span class="n">use_ramp</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -274,12 +274,12 @@
         <span class="n">ierr</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solver_init</span><span class="p">(</span><span class="n">_opts_list</span><span class="p">(</span><span class="n">opts</span><span class="p">),</span> <span class="n">state_data</span><span class="o">=</span><span class="n">step_state</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ierr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot; *** Solver initialization failure in divergence handling (</span><span class="si">{</span><span class="n">ierr</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">" *** Solver initialization failure in divergence handling (</span><span class="si">{</span><span class="n">ierr</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
                 <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;FAILURE&quot;</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"FAILURE"</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Trying restart </span><span class="si">{</span><span class="n">conv_type</span><span class="si">}</span><span class="s2"> at t = </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"     Trying restart </span><span class="si">{</span><span class="n">conv_type</span><span class="si">}</span><span class="s2"> at t = </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1"># Scaling down the input for the remaining period</span>
         <span class="k">if</span> <span class="n">use_ramp</span><span class="p">:</span>
@@ -293,14 +293,14 @@
                 <span class="c1"># Save state during stepping</span>
                 <span class="n">solver</span><span class="o">.</span><span class="n">save_state</span><span class="p">()</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">solver</span><span class="o">.</span><span class="n">state_data</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** No state at step&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"  ** No state at step"</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">step_state_file</span> <span class="o">=</span> <span class="n">step_state_path</span> <span class="o">+</span> <span class="s2">&quot;/step_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">state_pos</span><span class="p">)</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">step_state_file</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_file</span><span class="p">:</span>
+                    <span class="n">step_state_file</span> <span class="o">=</span> <span class="n">step_state_path</span> <span class="o">+</span> <span class="s2">"/step_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">state_pos</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">step_state_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_file</span><span class="p">:</span>
                         <span class="k">try</span><span class="p">:</span>
                             <span class="n">step_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">state_data</span><span class="p">)</span>
                         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Failed to write state to&quot;</span><span class="p">,</span> <span class="n">step_state_file</span><span class="p">)</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">"  ** Failed to write state to"</span><span class="p">,</span> <span class="n">step_state_file</span><span class="p">)</span>
 
                 <span class="c1"># Extract the results</span>
                 <span class="n">output</span><span class="p">[</span><span class="n">j</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)</span> <span class="p">:</span> <span class="n">j</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_id</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
@@ -309,37 +309,37 @@
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">solver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** The solver diverged at t =&quot;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"  ** The solver diverged at t ="</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">())</span>
                 <span class="k">break</span>
 
         <span class="c1"># Leave loop in case of convergence/non-convergence and jump over</span>
         <span class="n">conv_type</span> <span class="o">=</span> <span class="n">conv_types</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;JUMP_OVER&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">"JUMP_OVER"</span><span class="p">:</span>
             <span class="n">j</span> <span class="o">=</span> <span class="n">n_step</span>
         <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n_step</span><span class="p">:</span>
             <span class="c1"># Update data on json file</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
-                <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;conv_type&quot;</span><span class="p">:</span> <span class="n">conv_type</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">({</span><span class="s2">"conv_type"</span><span class="p">:</span> <span class="n">conv_type</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
             <span class="k">break</span>
 
         <span class="c1"># Convergence issue still exists</span>
-        <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;NO_STATE_WITH_RAMP&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">"NO_STATE_WITH_RAMP"</span><span class="p">:</span>
             <span class="n">step_state</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">use_ramp</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;NO_CONV&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">"NO_CONV"</span><span class="p">:</span>
             <span class="k">break</span>  <span class="c1"># No convergence reached, giving up</span>
-        <span class="k">elif</span> <span class="n">conv_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;STATE_DYNAMIC&quot;</span><span class="p">,</span> <span class="s2">&quot;STATE_STATIC&quot;</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="n">conv_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"STATE_DYNAMIC"</span><span class="p">,</span> <span class="s2">"STATE_STATIC"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">state_pos</span><span class="p">:</span>
                 <span class="n">step_state</span> <span class="o">=</span> <span class="n">state</span>  <span class="c1"># use state at the beginning</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">step_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">state_size</span><span class="p">)()</span>
-                <span class="n">step_state_file</span> <span class="o">=</span> <span class="n">step_state_path</span> <span class="o">+</span> <span class="s2">&quot;/step_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">state_pos</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   * Read state from </span><span class="si">{</span><span class="n">step_state_file</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">state_size</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">step_state_file</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_file</span><span class="p">:</span>
+                <span class="n">step_state_file</span> <span class="o">=</span> <span class="n">step_state_path</span> <span class="o">+</span> <span class="s2">"/step_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span> <span class="o">%</span> <span class="n">state_pos</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   * Read state from </span><span class="si">{</span><span class="n">step_state_file</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">state_size</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">step_state_file</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_file</span><span class="p">:</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">step_file</span><span class="o">.</span><span class="n">readinto</span><span class="p">(</span><span class="n">step_state</span><span class="p">)</span>
                     <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ** Failed to read state from&quot;</span><span class="p">,</span> <span class="n">step_state_file</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">"  ** Failed to read state from"</span><span class="p">,</span> <span class="n">step_state_file</span><span class="p">)</span>
 
             <span class="c1"># Number of backwards steps</span>
             <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">state_pos</span> <span class="k">else</span> <span class="n">j</span> <span class="o">-</span> <span class="n">state_pos</span> <span class="o">+</span> <span class="mi">1</span>
@@ -350,14 +350,14 @@
                 <span class="n">setoff</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># means ramping starts with zero</span>
 
             <span class="c1"># Equilibrium fails at time, set solver parameter quasiStatic</span>
-            <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">&quot;STATE_STATIC&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conv_type</span> <span class="o">==</span> <span class="s2">"STATE_STATIC"</span><span class="p">:</span>
                 <span class="n">time</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_next_time</span><span class="p">()</span>
                 <span class="n">dt</span> <span class="o">=</span> <span class="n">time</span> <span class="o">-</span> <span class="n">solver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">()</span>
-                <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;quasiStatic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="n">nr_steps</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+                <span class="n">opts</span><span class="p">[</span><span class="s2">"quasiStatic"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="n">nr_steps</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
 
         <span class="c1"># Increment the restart res-file, to not overwrite previous ones</span>
         <span class="n">ires</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">opts</span><span class="p">[</span><span class="s2">&quot;resfile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fedem_solver_r&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ires</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.res&quot;</span>
+        <span class="n">opts</span><span class="p">[</span><span class="s2">"resfile"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"fedem_solver_r"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ires</span><span class="p">)</span> <span class="o">+</span> <span class="s2">".res"</span>
 
     <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">conv_type</span></div>
 

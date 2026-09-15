@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solving Fedem models &mdash; fedempy 4.6.2 documentation</title>
+  <title>Solving Fedem models &mdash; fedempy 5.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5f0a4c00"></script>
+      <script src="_static/documentation_options.js?v=6a0c42bb"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -111,7 +111,7 @@ To access this class, start your python script by:</p>
 <section id="starting-a-new-simulation">
 <h2>Starting a new simulation<a class="headerlink" href="#starting-a-new-simulation" title="Link to this heading"></a></h2>
 <p>To start the solver on an existing Fedem model “mymodel.fmm”, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">(</span><span class="s2">"mymodel.fmm"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will parse the model file, write out some key model size parameters, and
@@ -122,9 +122,9 @@ occurs during this stage, an exception is raised and the script will abort.</p>
 <p>You may also perform this in two separate operations, like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span> <span class="o">=</span> <span class="n">FmmSolver</span><span class="p">()</span>
 
-<span class="n">status</span> <span class="o">=</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">"mymodel.fmm"</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Something bad happened, check fedem_solver.res&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Something bad happened, check fedem_solver.res"</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This way, the script will not abort if the solver fails, and you can take the
@@ -149,11 +149,11 @@ documentation for a full overview of the available methods.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function_id</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># User Id of a function measuring the response variable</span>
 <span class="k">while</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">solve_next</span><span class="p">():</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">get_function</span><span class="p">(</span><span class="n">function_id</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time = &quot;</span><span class="p">,</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">(),</span> <span class="s2">&quot; response =&quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Time = "</span><span class="p">,</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">get_current_time</span><span class="p">(),</span> <span class="s2">" response ="</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">solver_done</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Time step loop finished, solver is closed&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"   * Time step loop finished, solver is closed"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Solver failed, see fedem_solver.res&quot;</span><span class="p">,</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Solver failed, see fedem_solver.res"</span><span class="p">,</span> <span class="n">mySolver</span><span class="o">.</span><span class="n">ierr</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The while loop will continue as long there are more time steps defined,
@@ -162,7 +162,7 @@ and a response variable extracted using <code class="docutils literal notranslat
 the simulation. Here you can insert any other processing instead.</p>
 <p>If you only need to run through the model without accessing any response
 variables, the above code block can be replaced by one line:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span><span class="o">.</span><span class="n">solve_all</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mySolver</span><span class="o">.</span><span class="n">solve_all</span><span class="p">(</span><span class="s2">"mymodel.fmm"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will also reduce the FE parts, if needed, before the solver is started,
@@ -208,8 +208,8 @@ The order of the columns in the file is arbitrary, and it may also contain some
 columns that are not used, since a search will be performed for each function.</p>
 <p>For instance, assume you created a model using <a class="reference internal" href="modeler.html#modeler.FedemModeler" title="modeler.FedemModeler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modeler.FedemModeler</span></code></a>
 and included the following external functions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;Input function A&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;FuncA&quot;</span><span class="p">);</span>
-<span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;Input function B&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;FuncB&quot;</span><span class="p">);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"Input function A"</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">"FuncA"</span><span class="p">);</span>
+<span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"Input function B"</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">"FuncB"</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Then a <cite>datafile.asc</cite> containing the following will work:</p>

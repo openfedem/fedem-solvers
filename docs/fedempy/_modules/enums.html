@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>enums &mdash; fedempy 4.6.2 documentation</title>
+  <title>enums &mdash; fedempy 5.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5f0a4c00"></script>
+      <script src="../_static/documentation_options.js?v=6a0c42bb"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -77,14 +77,14 @@
 <span class="c1">#</span>
 <span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">This module contains some enum definitions for the ``fedempy`` package.</span>
 <span class="sd">They are python equivalents to corresponding enum definitions in the C++ code</span>
 <span class="sd">of the `FedemDB` shared object library (see the `fedem_mdb` repository).</span>
 <span class="sd">The numerical value of each enum value in this module should therefore</span>
 <span class="sd">not be changed without a similar change in the C++ equivalent,</span>
 <span class="sd">to preserve consistency.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 
@@ -92,11 +92,11 @@
 <div class="viewcode-block" id="FmType">
 <a class="viewcode-back" href="../enums.html#enums.FmType">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FmType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This enumerator identifies the various object types a Fedem mechanism model</span>
 <span class="sd">    may consist of. They are mapped onto a corresponding type ID value of the</span>
 <span class="sd">    C++ classes in the `FedemDB.C` source file (see the `fedem_mdb` repository).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">ALL</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">TRIAD</span> <span class="o">=</span> <span class="mi">1</span>
@@ -126,11 +126,11 @@
 <div class="viewcode-block" id="FmLoadType">
 <a class="viewcode-back" href="../enums.html#enums.FmLoadType">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FmLoadType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This enumerator identifies the two external load types a Fedem model.</span>
 <span class="sd">    The values corresponds to the enum values in the C++ class ``FmLoad``.</span>
 <span class="sd">    (see the `fedem_mdb` repository).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">FORCE</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">TORQUE</span> <span class="o">=</span> <span class="mi">1</span></div>
@@ -140,11 +140,11 @@
 <div class="viewcode-block" id="FmDofStat">
 <a class="viewcode-back" href="../enums.html#enums.FmDofStat">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FmDofStat</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This enumerator identifies the available DOF constraint types.</span>
 <span class="sd">    The values corresponds to the ``FmHasDOFsBase::DOFStatus`` enum values</span>
 <span class="sd">    (see the `fedem_mdb` repository).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">FREE</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">FIXED</span> <span class="o">=</span> <span class="mi">1</span>
@@ -158,11 +158,11 @@
 <div class="viewcode-block" id="FmDof">
 <a class="viewcode-back" href="../enums.html#enums.FmDof">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FmDof</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This enumerator identifies the local DOF components in an object.</span>
 <span class="sd">    The values corresponds to the ``FmIsMeasuredBase::SensorDof`` enum values</span>
 <span class="sd">    (see the `fedem_mdb` repository).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">TX</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">TY</span> <span class="o">=</span> <span class="mi">1</span>
@@ -184,11 +184,11 @@
 <div class="viewcode-block" id="FmVar">
 <a class="viewcode-back" href="../enums.html#enums.FmVar">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FmVar</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This enumerator identifies the result quantities that may be measured.</span>
 <span class="sd">    The values corresponds to the ``FmIsMeasuredBase::SensorEntity`` enum values</span>
 <span class="sd">    (see the `fedem_mdb` repository).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">POS</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">LOCAL_VEL</span> <span class="o">=</span> <span class="mi">1</span>

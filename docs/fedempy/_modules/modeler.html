@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>modeler &mdash; fedempy 4.6.2 documentation</title>
+  <title>modeler &mdash; fedempy 5.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5f0a4c00"></script>
+      <script src="../_static/documentation_options.js?v=6a0c42bb"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -77,12 +77,12 @@
 <span class="c1">#</span>
 <span class="c1"># This file is part of FEDEM - https://openfedem.org</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Python wrapper for the native fedem modeler.</span>
 
 <span class="sd">This module provides functionality for creating new Fedem models,</span>
 <span class="sd">and for modifying existing ones.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">ctypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">POINTER</span><span class="p">,</span> <span class="n">byref</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_double</span><span class="p">,</span> <span class="n">c_int</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
@@ -92,9 +92,9 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_convert_bool</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Converts a boolean from Python to C type.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
@@ -104,13 +104,13 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">c_bool</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">arg</span>
 
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">bool</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_bool</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="nb">bool</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_bool</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_convert_int_array</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Converts an array of integers from Python to C type.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">None</span>
 
@@ -123,16 +123,16 @@
             <span class="n">argv</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="n">argv</span>
 
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_length_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_type_&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">"_length_"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">"_type_"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_int</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)),</span> <span class="n">arg</span>
 
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_int</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_int</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_convert_float_array</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Converts an array of floats from Python to C type.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">None</span>
 
@@ -145,21 +145,21 @@
             <span class="n">argv</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="n">argv</span>
 
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_length_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;_type_&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_double</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">"_length_"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">"_type_"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">c_double</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)),</span> <span class="n">arg</span>
 
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_double</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="nb">list</span><span class="si">}</span><span class="s2"> or </span><span class="si">{</span><span class="n">c_double</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_extract_dofs</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extracts 6 DOF values into a c_double array from a dictionary.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="n">has_dofs</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">dof_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ty&quot;</span><span class="p">,</span> <span class="s2">&quot;Tz&quot;</span><span class="p">,</span> <span class="s2">&quot;Rx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span><span class="p">,</span> <span class="s2">&quot;Rz&quot;</span><span class="p">]</span>
+    <span class="n">dof_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Tx"</span><span class="p">,</span> <span class="s2">"Ty"</span><span class="p">,</span> <span class="s2">"Tz"</span><span class="p">,</span> <span class="s2">"Rx"</span><span class="p">,</span> <span class="s2">"Ry"</span><span class="p">,</span> <span class="s2">"Rz"</span><span class="p">]</span>
     <span class="n">dof_vals</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)(</span><span class="o">*</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">arg</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dof_tags</span><span class="p">:</span>
@@ -173,17 +173,17 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_extract_polyline</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extracts data for a polyline function from a dictionary.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">coord</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="s2">&quot;xy&quot;</span><span class="p">]</span>
+<span class="sd">    """</span>
+    <span class="n">coord</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="s2">"xy"</span><span class="p">]</span>
     <span class="n">n_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">))</span>
     <span class="n">x_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">))()</span>
     <span class="n">y_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">))()</span>
     <span class="n">x_</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_double</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coord</span><span class="p">]</span>
     <span class="n">y_</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_double</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coord</span><span class="p">]</span>
-    <span class="n">extrap</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="s2">&quot;FLAT&quot;</span><span class="p">,</span> <span class="s2">&quot;LINEAR&quot;</span><span class="p">]</span>
-    <span class="n">e_type</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extrapol_type&quot;</span><span class="p">,</span> <span class="n">extrap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">extrap</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"NONE"</span><span class="p">,</span> <span class="s2">"FLAT"</span><span class="p">,</span> <span class="s2">"LINEAR"</span><span class="p">]</span>
+    <span class="n">e_type</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"extrapol_type"</span><span class="p">,</span> <span class="n">extrap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">e_type</span> <span class="ow">in</span> <span class="n">extrap</span><span class="p">:</span>
         <span class="n">e_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">extrap</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">e_type</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
@@ -195,7 +195,7 @@
 <div class="viewcode-block" id="FedemModeler">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FedemModeler</span><span class="p">(</span><span class="n">FedemModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This subclass of :class:`fmm.FedemModel` adds some basic modeling methods.</span>
 
 <span class="sd">    Parameters</span>
@@ -255,16 +255,16 @@
 <span class="sd">        Modifies an existing function</span>
 <span class="sd">    solver_setup:</span>
 <span class="sd">        Setting dynamics solver parameters</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force_new</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plugins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        Optionally opens a Fedem model, if a model file name is specified.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fedem_lib</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FEDEM_MDB&quot;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">fedem_lib</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"FEDEM_MDB"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">fedem_lib</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> *** Environment variable FEDEM_MDB is not set!&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> *** Environment variable FEDEM_MDB is not set!"</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">return</span>  <span class="c1"># This will probably cause crash later, but not here</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plugins</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -480,12 +480,12 @@
         <span class="k">if</span> <span class="n">model_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">force_new</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fm_new</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_open</span><span class="p">(</span><span class="n">model_file</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to open model file&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to open model file"</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_convert_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_ids</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convenience method, to reduce cognitive complexity.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj_ids</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">obj_ids</span>
 
@@ -494,7 +494,7 @@
 <div class="viewcode-block" id="FedemModeler.open">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.open">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Opens the specified model file and prints out some key model parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -506,16 +506,16 @@
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True on success, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_open</span><span class="p">(</span><span class="n">model_file</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to open model file&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to open model file"</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   * Model file&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">,</span> <span class="s2">&quot;successfully opened&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Number of Triads:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Number of Beams:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">BEAM</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Number of Parts:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Total number of mechanism objects:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"   * Model file"</span><span class="p">,</span> <span class="n">model_file</span><span class="p">,</span> <span class="s2">"successfully opened"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"     Number of Triads:"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"     Number of Beams:"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">BEAM</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"     Number of Parts:"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">(</span><span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"     Total number of mechanism objects:"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_count</span><span class="p">())</span>
 
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -523,7 +523,7 @@
 <div class="viewcode-block" id="FedemModeler.save">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Saves current model into the specified model file.</span>
 
 <span class="sd">        If no model_file is given, that last opened model file is overwritten.</span>
@@ -537,17 +537,17 @@
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True on success, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_save</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">status</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to save model file&quot;</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to save model file"</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">status</span></div>
 
 
 <div class="viewcode-block" id="FedemModeler.close">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_singletons</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Closes the currently open model.</span>
 
 <span class="sd">        Parameters</span>
@@ -561,10 +561,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True on success, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_save</span><span class="p">()</span> <span class="k">if</span> <span class="n">save</span> <span class="k">else</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">status</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to save current fedem model&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to save current fedem model"</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fm_close</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fm_close</span><span class="p">(</span><span class="n">remove_singletons</span><span class="p">)</span>
@@ -574,7 +574,7 @@
 <div class="viewcode-block" id="FedemModeler.make_triad">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_triad">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">on_part</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new triad at specified location or nodal point.</span>
 
 <span class="sd">        Parameters</span>
@@ -599,7 +599,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of new triad, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">part_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">on_part</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">node</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">part_</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">triad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmTriadOnNode</span><span class="p">(</span>
@@ -607,7 +607,7 @@
             <span class="p">)</span>
 
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Invalid Triad position&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Invalid Triad position"</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
             <span class="n">triad</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
         <span class="k">elif</span> <span class="n">rot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -635,7 +635,7 @@
                 <span class="p">)</span>
 
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">rot</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Invalid Triad rotation&quot;</span><span class="p">,</span> <span class="n">rot</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Invalid Triad rotation"</span><span class="p">,</span> <span class="n">rot</span><span class="p">)</span>
             <span class="n">triad</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
         <span class="k">else</span><span class="p">:</span>
@@ -659,7 +659,7 @@
 <div class="viewcode-block" id="FedemModeler.make_beam">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_beam">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_beam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="n">bprop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a string of beam elements.</span>
 
 <span class="sd">        Parameters</span>
@@ -677,9 +677,9 @@
 <span class="sd">        -------</span>
 <span class="sd">        list of int</span>
 <span class="sd">            Base Ids of the created beams, None if error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** make_beam: At least two triads must be specified&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** make_beam: At least two triads must be specified"</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
 
         <span class="n">base_ids</span> <span class="o">=</span> <span class="p">[]</span>
@@ -703,7 +703,7 @@
 <div class="viewcode-block" id="FedemModeler.make_beam_section">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_beam_section">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_beam_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">bprops</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a beam cross section property object.</span>
 
 <span class="sd">        Parameters</span>
@@ -724,7 +724,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of beam property object, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">nprop_</span><span class="p">,</span> <span class="n">prop_</span> <span class="o">=</span> <span class="n">_convert_float_array</span><span class="p">(</span><span class="n">bprops</span><span class="p">)</span>
         <span class="n">bprop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateBeamProperty</span><span class="p">(</span>
             <span class="n">_convert_char</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
@@ -742,7 +742,7 @@
 <div class="viewcode-block" id="FedemModeler.make_beam_material">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_beam_material">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_beam_material</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mprops</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a material property object.</span>
 
 <span class="sd">        Parameters</span>
@@ -758,7 +758,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of material property object, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">nprop_</span><span class="p">,</span> <span class="n">prop_</span> <span class="o">=</span> <span class="n">_convert_float_array</span><span class="p">(</span><span class="n">mprops</span><span class="p">)</span>
         <span class="n">mprop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateMaterialProperty</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">nprop_</span><span class="p">,</span> <span class="n">prop_</span><span class="p">)</span>
 
@@ -771,7 +771,7 @@
 <div class="viewcode-block" id="FedemModeler.make_spring">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_spring">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_spring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates axial spring elements.</span>
 
 <span class="sd">        Parameters</span>
@@ -795,43 +795,43 @@
 <span class="sd">            * `init_Stiff_Coeff`: Constant spring stiffness coefficient</span>
 <span class="sd">            * `fn`: Base Id of spring stiffness function</span>
 <span class="sd">            * `xy`: List of XY-pairs giving a piece-wise linear spring stiffness</span>
-<span class="sd">            * `extrapol_type`: String, either &quot;NONE&quot; (default), &quot;FLAT&quot; or &quot;LINEAR&quot;</span>
-<span class="sd">            * `spring_characteristics`: String, either &quot;SPR_TRA_STIFF&quot; (default)</span>
-<span class="sd">              or &quot;SPR_TRA_FORCE&quot;</span>
+<span class="sd">            * `extrapol_type`: String, either "NONE" (default), "FLAT" or "LINEAR"</span>
+<span class="sd">            * `spring_characteristics`: String, either "SPR_TRA_STIFF" (default)</span>
+<span class="sd">              or "SPR_TRA_FORCE"</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int or list of int</span>
 <span class="sd">            Base Id(s) of the created spring(s), None if an error occurs</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">x_</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">y_</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">e_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="n">use_constant_defl_</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># default is constant deflection</span>
-        <span class="k">if</span> <span class="s2">&quot;constDefl&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">const_length_defl_</span> <span class="o">=</span> <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;constDefl&quot;</span><span class="p">])</span>
-        <span class="k">elif</span> <span class="s2">&quot;constLength&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">const_length_defl_</span> <span class="o">=</span> <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;constLength&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s2">"constDefl"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">const_length_defl_</span> <span class="o">=</span> <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"constDefl"</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="s2">"constLength"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">const_length_defl_</span> <span class="o">=</span> <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"constLength"</span><span class="p">])</span>
             <span class="n">use_constant_defl_</span> <span class="o">=</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">const_length_defl_</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;fn&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Base Id of existing spring function</span>
-            <span class="n">sp_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;fn&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s2">"fn"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Base Id of existing spring function</span>
+            <span class="n">sp_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"fn"</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sp_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;xy&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"xy"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c1"># We have data of a new spring stiffness function</span>
             <span class="n">n_</span><span class="p">,</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">e_</span> <span class="o">=</span> <span class="n">_extract_polyline</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
             <span class="n">charac</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="s2">&quot;SPR_TRA_STIFF&quot;</span><span class="p">,</span>  <span class="c1"># stiffness - translational deflection</span>
-                <span class="s2">&quot;SPR_TRA_FORCE&quot;</span><span class="p">,</span>  <span class="c1"># force - translational deflection</span>
+                <span class="s2">"SPR_TRA_STIFF"</span><span class="p">,</span>  <span class="c1"># stiffness - translational deflection</span>
+                <span class="s2">"SPR_TRA_FORCE"</span><span class="p">,</span>  <span class="c1"># force - translational deflection</span>
             <span class="p">]</span>
-            <span class="n">sp_charac</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spring_characteristics&quot;</span><span class="p">,</span> <span class="n">charac</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">sp_charac</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"spring_characteristics"</span><span class="p">,</span> <span class="n">charac</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">sp_charac</span> <span class="ow">in</span> <span class="n">charac</span><span class="p">:</span>
                 <span class="c1"># Notice negative value to indicate spring function type</span>
                 <span class="n">sp_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="o">-</span><span class="n">charac</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sp_charac</span><span class="p">))</span>
@@ -848,13 +848,13 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">triad</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">),</span>
                 <span class="n">const_length_defl_</span><span class="p">,</span>
                 <span class="n">use_constant_defl_</span><span class="p">,</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;init_Stiff_Coeff&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"init_Stiff_Coeff"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
                 <span class="n">byref</span><span class="p">(</span><span class="n">sp_</span><span class="p">),</span>
                 <span class="n">n_</span><span class="p">,</span>
                 <span class="n">x_</span><span class="p">,</span>
                 <span class="n">y_</span><span class="p">,</span>
                 <span class="n">e_</span><span class="p">,</span>
-                <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+                <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"length"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">s_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">base_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s_id</span><span class="p">)</span>
@@ -862,8 +862,8 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_ids</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Failure creating at least one spring</span>
 
-        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_ids</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s2">"tag"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_ids</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="n">one_spring</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">base_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -874,7 +874,7 @@
 <div class="viewcode-block" id="FedemModeler.make_damper">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_damper">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_damper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates axial damper elements.</span>
 
 <span class="sd">        Parameters</span>
@@ -894,34 +894,34 @@
 <span class="sd">            * `init_Damp_Coeff`: Constant damping coefficient</span>
 <span class="sd">            * `fn`: Base Id of damping coefficient function</span>
 <span class="sd">            * `xy`: List of XY-pairs giving a piece-wise linear damping coefficient</span>
-<span class="sd">            * `extrapol_type`: String, either &quot;NONE&quot; (default), &quot;FLAT&quot; or &quot;LINEAR&quot;</span>
-<span class="sd">            * `damp_characteristics`: String, either &quot;DA_TRA_COEFF&quot; (default)</span>
-<span class="sd">              or &quot;DA_TRA_FORCE&quot;</span>
+<span class="sd">            * `extrapol_type`: String, either "NONE" (default), "FLAT" or "LINEAR"</span>
+<span class="sd">            * `damp_characteristics`: String, either "DA_TRA_COEFF" (default)</span>
+<span class="sd">              or "DA_TRA_FORCE"</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int or list of int</span>
 <span class="sd">            Base Id(s) of the created damper(s), None if an error occurs</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">x_</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">y_</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">e_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;fn&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Base Id of existing damper function</span>
-            <span class="n">da_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;fn&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s2">"fn"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Base Id of existing damper function</span>
+            <span class="n">da_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"fn"</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">da_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;xy&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"xy"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c1"># We have data of a new damping coefficient function</span>
             <span class="n">n_</span><span class="p">,</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">e_</span> <span class="o">=</span> <span class="n">_extract_polyline</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
             <span class="n">charac</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="s2">&quot;DA_TRA_COEFF&quot;</span><span class="p">,</span>  <span class="c1"># damping coefficient - translational velocity</span>
-                <span class="s2">&quot;DA_TRA_FORCE&quot;</span><span class="p">,</span>  <span class="c1"># force - translational velocity</span>
+                <span class="s2">"DA_TRA_COEFF"</span><span class="p">,</span>  <span class="c1"># damping coefficient - translational velocity</span>
+                <span class="s2">"DA_TRA_FORCE"</span><span class="p">,</span>  <span class="c1"># force - translational velocity</span>
             <span class="p">]</span>
-            <span class="n">da_charac</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;damp_characteristics&quot;</span><span class="p">,</span> <span class="n">charac</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">da_charac</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"damp_characteristics"</span><span class="p">,</span> <span class="n">charac</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">da_charac</span> <span class="ow">in</span> <span class="n">charac</span><span class="p">:</span>
                 <span class="c1"># Notice negative value to indicate damper function type</span>
                 <span class="n">da_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="o">-</span><span class="n">charac</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">da_charac</span><span class="p">))</span>
@@ -936,8 +936,8 @@
                 <span class="n">_convert_char</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">triad</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">triad</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">),</span>
-                <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;def_vel_damper&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;init_Damp_Coeff&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"def_vel_damper"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"init_Damp_Coeff"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
                 <span class="n">byref</span><span class="p">(</span><span class="n">da_</span><span class="p">),</span>
                 <span class="n">n_</span><span class="p">,</span>
                 <span class="n">x_</span><span class="p">,</span>
@@ -950,8 +950,8 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_ids</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Failure creating at least one damper</span>
 
-        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_ids</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s2">"tag"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_ids</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="n">one_damper</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">base_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -962,7 +962,7 @@
 <div class="viewcode-block" id="FedemModeler.make_joint">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_joint">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">joint_type</span><span class="p">,</span> <span class="n">follower</span><span class="p">,</span> <span class="n">followed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a joint object.</span>
 
 <span class="sd">        Parameters</span>
@@ -986,7 +986,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of joint object, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">follower</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">followed</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1010,7 +1010,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">make_load</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">load_type</span><span class="p">,</span> <span class="n">triad</span><span class="p">,</span> <span class="n">load_dir</span><span class="p">,</span> <span class="n">magnitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates an external load object.</span>
 
 <span class="sd">        Parameters</span>
@@ -1034,9 +1034,9 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of load object, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">load_dir</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Invalid load direction vector&quot;</span><span class="p">,</span> <span class="n">load_dir</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Invalid load direction vector"</span><span class="p">,</span> <span class="n">load_dir</span><span class="p">)</span>
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
         <span class="n">load</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateLoad</span><span class="p">(</span>
@@ -1059,7 +1059,7 @@
 <div class="viewcode-block" id="FedemModeler.make_function">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_function">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a general function of time.</span>
 
 <span class="sd">        The type of function to be created is determined</span>
@@ -1081,8 +1081,8 @@
 
 <span class="sd">              | `xy`:sup:`*`: List of `XY`-pairs giving a</span>
 <span class="sd">                              piece-wise linear curve</span>
-<span class="sd">              | `extrapol_type`: String, either &quot;NONE&quot; (default),</span>
-<span class="sd">                                 &quot;FLAT&quot; or &quot;LINEAR&quot;</span>
+<span class="sd">              | `extrapol_type`: String, either "NONE" (default),</span>
+<span class="sd">                                 "FLAT" or "LINEAR"</span>
 
 <span class="sd">            2. **Polyline-from-file**</span>
 
@@ -1165,62 +1165,62 @@
 <span class="sd">        int</span>
 <span class="sd">            User Id or base Id of created function object.</span>
 <span class="sd">            Will be 0 or negative if an error occurs.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">name_</span> <span class="o">=</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">tag_</span> <span class="o">=</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-        <span class="n">bid_</span> <span class="o">=</span> <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_id&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+        <span class="n">tag_</span> <span class="o">=</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tag"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">bid_</span> <span class="o">=</span> <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"base_id"</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="s2">&quot;xy&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"xy"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c1"># Polyline function, get abscissa and ordinate values</span>
             <span class="n">n_</span><span class="p">,</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">e_</span> <span class="o">=</span> <span class="n">_extract_polyline</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreatePolyFunc</span><span class="p">(</span><span class="n">name_</span><span class="p">,</span> <span class="n">tag_</span><span class="p">,</span> <span class="n">n_</span><span class="p">,</span> <span class="n">x_</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">e_</span><span class="p">,</span> <span class="n">bid_</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;frequency&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"frequency"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c1"># Sine function, get function parameters</span>
             <span class="n">sine_par</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)()</span>
-            <span class="n">sine_par</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-            <span class="n">sine_par</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;delay&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-            <span class="n">sine_par</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;amplitude&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-            <span class="n">sine_par</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mean_value&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-            <span class="n">sine_par</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+            <span class="n">sine_par</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"frequency"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+            <span class="n">sine_par</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"delay"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+            <span class="n">sine_par</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"amplitude"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+            <span class="n">sine_par</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mean_value"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+            <span class="n">sine_par</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"end"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateSineFunc</span><span class="p">(</span><span class="n">name_</span><span class="p">,</span> <span class="n">tag_</span><span class="p">,</span> <span class="n">sine_par</span><span class="p">,</span> <span class="n">bid_</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;filename&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"filename"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c1"># Polyline-from-file function</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateDeviceFunc</span><span class="p">(</span>
                 <span class="n">name_</span><span class="p">,</span>
                 <span class="n">tag_</span><span class="p">,</span>
-                <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-                <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ch_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sc_factor&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)),</span>
-                <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;z_adjust&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;v_shift&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+                <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ch_name"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sc_factor"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)),</span>
+                <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"z_adjust"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"v_shift"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
                 <span class="n">bid_</span><span class="p">,</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;expression&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"expression"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="c1"># Math expression function</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateMathExprFunc</span><span class="p">(</span>
-                <span class="n">name_</span><span class="p">,</span> <span class="n">tag_</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;expression&quot;</span><span class="p">]),</span> <span class="n">bid_</span>
+                <span class="n">name_</span><span class="p">,</span> <span class="n">tag_</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"expression"</span><span class="p">]),</span> <span class="n">bid_</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;slope&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">&quot;value&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"slope"</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">"value"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)(</span><span class="o">*</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
-            <span class="k">if</span> <span class="s2">&quot;end_ramp&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Limited ramp function</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slope&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_val&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_ramp&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;end_ramp&quot;</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="s2">&quot;start_ramp&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Ramp function</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slope&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_val&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_ramp&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+            <span class="k">if</span> <span class="s2">"end_ramp"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Limited ramp function</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"slope"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"start_val"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"start_ramp"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"end_ramp"</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="s2">"start_ramp"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Ramp function</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"slope"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"start_val"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"start_ramp"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
                 <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="s2">&quot;slope&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Linear function</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slope&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="s2">"slope"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>  <span class="c1"># Linear function</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"slope"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>  <span class="c1"># Constant function</span>
-                <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+                <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmCreateLinearFunc</span><span class="p">(</span><span class="n">name_</span><span class="p">,</span> <span class="n">tag_</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">bid_</span><span class="p">)</span>
 
         <span class="c1"># By default (if kwargs is empty), create an external function</span>
@@ -1229,8 +1229,8 @@
 
 <div class="viewcode-block" id="FedemModeler.make_sensor">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_sensor">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">make_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a sensor object.</span>
 
 <span class="sd">        Parameters</span>
@@ -1239,7 +1239,7 @@
 <span class="sd">            Description of the new sensor</span>
 <span class="sd">        obj : int or str or (int, int) or (str, str)</span>
 <span class="sd">            Base Id or tag of object(s) to measure</span>
-<span class="sd">        var : FmVar</span>
+<span class="sd">        var : FmVar, default=None</span>
 <span class="sd">            The variable to measure</span>
 <span class="sd">        dof : FmDof, default=None</span>
 <span class="sd">            Local DOF to measure if `var` is a multi-DOF quantity</span>
@@ -1250,7 +1250,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            User Id of sensor object, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">obj1_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">obj2_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -1281,7 +1281,7 @@
 <div class="viewcode-block" id="FedemModeler.make_fe_part">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_fe_part">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_fe_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates an FE part.</span>
 
 <span class="sd">        Parameters</span>
@@ -1297,7 +1297,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of the FE part object, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">part</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmLoadPart</span><span class="p">(</span><span class="n">_convert_char</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">tag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">part</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -1309,7 +1309,7 @@
 <div class="viewcode-block" id="FedemModeler.make_generic_part">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_generic_part">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_generic_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a generic part.</span>
 
 <span class="sd">        Parameters</span>
@@ -1330,10 +1330,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of the created generic part, zero of negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n_triads</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_triads</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** make_generic_part: No triads specified&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** make_generic_part: No triads specified"</span><span class="p">)</span>
             <span class="k">return</span> <span class="mi">0</span>
 
         <span class="n">n_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">n_triads</span><span class="p">)</span>
@@ -1343,15 +1343,15 @@
         <span class="k">if</span> <span class="n">base_id</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">base_id</span>
 
-        <span class="k">if</span> <span class="s2">&quot;alpha1&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">&quot;alpha2&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"alpha1"</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">"alpha2"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmStructDamp</span><span class="p">(</span>
                 <span class="n">base_id</span><span class="p">,</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alpha1&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alpha2&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alpha1"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alpha2"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s2">"tag"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">base_id</span></div>
 
@@ -1359,7 +1359,7 @@
 <div class="viewcode-block" id="FedemModeler.make_strain_rosette">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_strain_rosette">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_strain_rosette</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a strain rosette on an FE part.</span>
 
 <span class="sd">        Parameters</span>
@@ -1386,28 +1386,28 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of the strain rosette, zero or negative on error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">name_</span> <span class="o">=</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">part_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">part_id</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">)</span>
 
         <span class="n">nodes_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)()</span>
-        <span class="n">node_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">node_pos</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">node_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">node_pos</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"pos"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node_pos</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="c1"># Nodal positions are provided, find the closest FE nodes</span>
             <span class="n">nnod_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_pos</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node_pos</span><span class="p">):</span>
                 <span class="n">nodes_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fm_get_node</span><span class="p">(</span><span class="n">part_</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="c1"># The node Id&#39;s are provided directly</span>
+            <span class="c1"># The node Id's are provided directly</span>
             <span class="n">nnod_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span>
             <span class="n">nodes_</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">node_id</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Neither nodes nor pos is specified&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Neither nodes nor pos is specified"</span><span class="p">)</span>
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
         <span class="n">dirvec_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)()</span>
-        <span class="n">direction</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;direction&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"direction"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">dirvec_</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">direction</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1419,15 +1419,15 @@
             <span class="n">nnod_</span><span class="p">,</span>
             <span class="n">nodes_</span><span class="p">,</span>
             <span class="n">dirvec_</span><span class="p">,</span>
-            <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;angle&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
-            <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_at_zero&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span>
+            <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"angle"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+            <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"start_at_zero"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">ros</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Activate strain gage recovery during solve for this part</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmRecoverOpts</span><span class="p">(</span><span class="n">part_</span><span class="p">,</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">ros</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">ros</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s2">"tag"</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">ros</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">ros</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">ros</span></div>
 
@@ -1435,7 +1435,7 @@
 <div class="viewcode-block" id="FedemModeler.make_udelm">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_udelm">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_udelm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">triads</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a string of 2-noded user-defined elements.</span>
 
 <span class="sd">        Parameters</span>
@@ -1456,9 +1456,9 @@
 <span class="sd">        -------</span>
 <span class="sd">        list of int</span>
 <span class="sd">            Base Ids of the created elements, None if error</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">triads</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** make_udelm: At least two triads must be specified&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** make_udelm: At least two triads must be specified"</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
 
         <span class="n">base_ids</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1472,15 +1472,15 @@
                 <span class="k">return</span> <span class="kc">None</span>
             <span class="n">base_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_id</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="s2">&quot;alpha1&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">&quot;alpha2&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"alpha1"</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">"alpha2"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmStructDamp</span><span class="p">(</span>
                     <span class="n">base_id</span><span class="p">,</span>
-                    <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alpha1&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
-                    <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alpha2&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                    <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alpha1"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                    <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alpha2"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
                 <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_ids</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s2">"tag"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fm_tag_object</span><span class="p">(</span><span class="n">base_ids</span><span class="p">,</span> <span class="n">_convert_char</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">base_ids</span></div>
 
@@ -1488,7 +1488,7 @@
 <div class="viewcode-block" id="FedemModeler.make_assembly">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.make_assembly">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">make_assembly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">objs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a sub-assembly and moves the specified objects into it.</span>
 
 <span class="sd">        Parameters</span>
@@ -1502,7 +1502,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            Base Id of the created sub-assembly</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">obj_ids</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -1522,9 +1522,9 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_move_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Moves an existing object identified by its base Id.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">dofs_</span> <span class="o">=</span> <span class="n">_extract_dofs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dofs_</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># No movement specified, silently ignore</span>
@@ -1532,37 +1532,37 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmMoveObject</span><span class="p">(</span>
             <span class="n">_convert_int</span><span class="p">(</span><span class="n">base_id</span><span class="p">),</span>
             <span class="n">dofs_</span><span class="p">,</span>
-            <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tra_ref&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
-            <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rot_ref&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+            <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tra_ref"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+            <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"rot_ref"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_constrain_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Constrains DOFs in an existing object identified by its base Id.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># No constraints specified, silently ignore</span>
 
-        <span class="n">dof_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ty&quot;</span><span class="p">,</span> <span class="s2">&quot;Tz&quot;</span><span class="p">,</span> <span class="s2">&quot;Rx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span><span class="p">,</span> <span class="s2">&quot;Rz&quot;</span><span class="p">,</span> <span class="s2">&quot;All&quot;</span><span class="p">]</span>
+        <span class="n">dof_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Tx"</span><span class="p">,</span> <span class="s2">"Ty"</span><span class="p">,</span> <span class="s2">"Tz"</span><span class="p">,</span> <span class="s2">"Rx"</span><span class="p">,</span> <span class="s2">"Ry"</span><span class="p">,</span> <span class="s2">"Rz"</span><span class="p">,</span> <span class="s2">"All"</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dof_tags</span><span class="p">:</span>
                 <span class="n">dof_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">dof_tags</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
                 <span class="n">con_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">FmDofStat</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Constraining </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> in object [</span><span class="si">{</span><span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Constraining </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> in object [</span><span class="si">{</span><span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">]"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmConstrainObject</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">dof_</span><span class="p">,</span> <span class="n">con_</span><span class="p">):</span>
                     <span class="k">return</span> <span class="kc">False</span>
 
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dof_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_id</span><span class="p">,</span> <span class="n">prt</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Assigns a DOF property in an existing object identified by its base Id.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># No properties specified, silently ignore</span>
 
         <span class="n">pr_type_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">prt</span><span class="p">)</span>
-        <span class="n">dof_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ty&quot;</span><span class="p">,</span> <span class="s2">&quot;Tz&quot;</span><span class="p">,</span> <span class="s2">&quot;Rx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span><span class="p">,</span> <span class="s2">&quot;Rz&quot;</span><span class="p">]</span>
+        <span class="n">dof_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Tx"</span><span class="p">,</span> <span class="s2">"Ty"</span><span class="p">,</span> <span class="s2">"Tz"</span><span class="p">,</span> <span class="s2">"Rx"</span><span class="p">,</span> <span class="s2">"Ry"</span><span class="p">,</span> <span class="s2">"Rz"</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dof_tags</span><span class="p">:</span>
                 <span class="n">dof_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="n">dof_tags</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
@@ -1575,7 +1575,7 @@
                     <span class="n">fcn_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>  <span class="c1"># The user Id of a general function is specified</span>
                     <span class="n">val_</span> <span class="o">=</span> <span class="n">c_double</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> property </span><span class="si">{</span><span class="n">prt</span><span class="si">}</span><span class="s2"> in object [</span><span class="si">{</span><span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">fcn_</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> property </span><span class="si">{</span><span class="n">prt</span><span class="si">}</span><span class="s2"> in object [</span><span class="si">{</span><span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">]"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">fcn_</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmDofProperty</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">dof_</span><span class="p">,</span> <span class="n">pr_type_</span><span class="p">,</span> <span class="n">val_</span><span class="p">,</span> <span class="n">fcn_</span><span class="p">):</span>
                     <span class="k">return</span> <span class="kc">False</span>
 
@@ -1584,7 +1584,7 @@
 <div class="viewcode-block" id="FedemModeler.edit_triad">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.edit_triad">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">edit_triad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Modifies an existing triad.</span>
 
 <span class="sd">        Parameters</span>
@@ -1604,23 +1604,23 @@
 <span class="sd">            * mass_func : User Id or base Id (if negative) of mass scaling function</span>
 
 <span class="sd">            * constraints : Dictionary with keywords for constraing DOFs, i.e.,</span>
-<span class="sd">              ``constraints={&quot;Tx&quot; : &lt;value&gt;, ..., &quot;Rz&quot; : &lt;value&gt;}``, where</span>
+<span class="sd">              ``constraints={"Tx" : &lt;value&gt;, ..., "Rz" : &lt;value&gt;}``, where</span>
 <span class="sd">              ``&lt;value&gt;`` can be any of the enum values :class:`enums.FmDofStat`.</span>
 <span class="sd">              Only the DOFs that should be changed need to be specified.</span>
-<span class="sd">              You can also use &quot;All&quot; as key which implies all DOFs in the triad.</span>
+<span class="sd">              You can also use "All" as key which implies all DOFs in the triad.</span>
 
 <span class="sd">            * init_vel : Dictionary with keywords specifying initial velocities,</span>
-<span class="sd">              i.e., ``init_vel={&quot;Tx&quot; : &lt;u01&gt;, ..., &quot;Rz&quot; : &lt;u06&gt;}``, where</span>
+<span class="sd">              i.e., ``init_vel={"Tx" : &lt;u01&gt;, ..., "Rz" : &lt;u06&gt;}``, where</span>
 <span class="sd">              ``&lt;u0i&gt;`` is the initial velocity to be assigned local dof `i`.</span>
 
 <span class="sd">            * load : Dictionary with keywords specifying constant DOF loads,</span>
-<span class="sd">              i.e., ``load={&quot;Tx&quot; : &lt;f1&gt;, ..., &quot;Rz&quot; : &lt;f6&gt;}``, where</span>
+<span class="sd">              i.e., ``load={"Tx" : &lt;f1&gt;, ..., "Rz" : &lt;f6&gt;}``, where</span>
 <span class="sd">              ``&lt;fi&gt;`` is the user Id of a general function defining the load</span>
 <span class="sd">              in local dof `i` if the type is int, otherwise it is taken as the</span>
 <span class="sd">              constant load to be assigned local dof `i`.</span>
 
 <span class="sd">            * motion : Dictionary with keywords specifying prescribed motions,</span>
-<span class="sd">              i.e., ``motion={&quot;Tx&quot; : &lt;u1&gt;, ..., &quot;Rz&quot; : &lt;u6&gt;}``, where</span>
+<span class="sd">              i.e., ``motion={"Tx" : &lt;u1&gt;, ..., "Rz" : &lt;u6&gt;}``, where</span>
 <span class="sd">              ``&lt;ui&gt;`` is the user Id of a general function defining the motion</span>
 <span class="sd">              in local dof `i` if the type is int, otherwise it is taken as the</span>
 <span class="sd">              constant motion to be prescribed in local dof `i`.</span>
@@ -1629,7 +1629,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True if the input is valid, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="c1"># Convert tag to base Id or list of base Id</span>
         <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_ids</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">TRIAD</span><span class="p">)</span>
@@ -1642,33 +1642,33 @@
 
         <span class="n">retval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">retval</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to move triad&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to move triad"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="n">mass</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">mass</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mass"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
                 <span class="n">n_</span><span class="p">,</span> <span class="n">m_</span> <span class="o">=</span> <span class="n">_convert_float_array</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">n_</span> <span class="o">=</span> <span class="n">c_int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">m_</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)(</span><span class="n">_convert_real</span><span class="p">(</span><span class="n">mass</span><span class="p">))</span>
-            <span class="n">mfunc_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mass_function&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="n">mfunc_</span> <span class="o">=</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mass_function"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmAddMass</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">n_</span><span class="p">,</span> <span class="n">m_</span><span class="p">,</span> <span class="n">mfunc_</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to add mass on triad&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to add mass on triad"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
                 <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constrain_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;constraints&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to constrain triad&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constrain_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"constraints"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to constrain triad"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;init_vel&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign initial velocity to triad&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"init_vel"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign initial velocity to triad"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"load"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">load</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;motion&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"motion"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">load</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign load/motion to triad&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign load/motion to triad"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">return</span> <span class="n">retval</span></div>
@@ -1677,7 +1677,7 @@
 <div class="viewcode-block" id="FedemModeler.edit_part">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.edit_part">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">edit_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Modifies an existing FE part.</span>
 
 <span class="sd">        Parameters</span>
@@ -1704,7 +1704,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True if the input is valid, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="c1"># Convert tag to base Id or list of base Id</span>
         <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_ids</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">FEPART</span><span class="p">)</span>
@@ -1717,27 +1717,27 @@
 
         <span class="n">retval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;alpha1&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">&quot;alpha2&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"alpha1"</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">"alpha2"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="n">retval</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmStructDamp</span><span class="p">(</span>
                 <span class="n">base_id</span><span class="p">,</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alpha1&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
-                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alpha2&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alpha1"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+                <span class="n">_convert_real</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alpha2"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;component_modes&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">&quot;consistent_mass&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"component_modes"</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="s2">"consistent_mass"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="n">retval</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmReduceOpts</span><span class="p">(</span>
                 <span class="n">base_id</span><span class="p">,</span>
-                <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;component_modes&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
-                <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;consistent_mass&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
+                <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"component_modes"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+                <span class="n">_convert_bool</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"consistent_mass"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;recovery&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"recovery"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="n">retval</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fmlib</span><span class="o">.</span><span class="n">FmRecoverOpts</span><span class="p">(</span>
-                <span class="n">base_id</span><span class="p">,</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;recovery&quot;</span><span class="p">]),</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">base_id</span><span class="p">,</span> <span class="n">_convert_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">"recovery"</span><span class="p">]),</span> <span class="n">c_bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">retval</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to edit properties on part&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to edit properties on part"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">retval</span></div>
 
@@ -1745,7 +1745,7 @@
 <div class="viewcode-block" id="FedemModeler.edit_joint">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.edit_joint">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">edit_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Modifies an existing joint.</span>
 
 <span class="sd">        Parameters</span>
@@ -1763,37 +1763,37 @@
 <span class="sd">            * rot_ref : Base Id of object used as rotation reference</span>
 
 <span class="sd">            * constraints : Dictionary with keywords for constraing DOFs, i.e.,</span>
-<span class="sd">              ``constraints={&quot;Tx&quot; : &lt;value&gt;, ..., &quot;Rz&quot; : &lt;value&gt;}``, where</span>
+<span class="sd">              ``constraints={"Tx" : &lt;value&gt;, ..., "Rz" : &lt;value&gt;}``, where</span>
 <span class="sd">              ``&lt;value&gt;`` can be any of the enum values :class:`enums.FmDofStat`.</span>
 <span class="sd">              Only the DOFs that should be changed need to be specified.</span>
-<span class="sd">              You can also use &quot;All&quot; as key which implies all DOFs in the joint.</span>
+<span class="sd">              You can also use "All" as key which implies all DOFs in the joint.</span>
 
 <span class="sd">            * init_vel : Dictionary with keywords specifying initial velocities,</span>
-<span class="sd">              i.e., ``init_vel={&quot;Tx&quot; : &lt;u01&gt;, ..., &quot;Rz&quot; : &lt;u06&gt;}``, where</span>
+<span class="sd">              i.e., ``init_vel={"Tx" : &lt;u01&gt;, ..., "Rz" : &lt;u06&gt;}``, where</span>
 <span class="sd">              ``&lt;u0i&gt;`` is the initial velocity to be assigned local dof `i`.</span>
 
 <span class="sd">            * load : Dictionary with keywords specifying constant DOF loads,</span>
-<span class="sd">              i.e., ``load={&quot;Tx&quot; : &lt;f1&gt;, ..., &quot;Rz&quot; : &lt;f6&gt;}``, where</span>
+<span class="sd">              i.e., ``load={"Tx" : &lt;f1&gt;, ..., "Rz" : &lt;f6&gt;}``, where</span>
 <span class="sd">              ``&lt;fi&gt;`` is the user Id of a general function defining the load</span>
 <span class="sd">              in local dof `i` if the type is int, otherwise it is taken as the</span>
 <span class="sd">              constant load to be assigned local dof `i`.</span>
 
 <span class="sd">            * motion : Dictionary with keywords specifying prescribed motions,</span>
-<span class="sd">              i.e., ``motion={&quot;Tx&quot; : &lt;u1&gt;, ..., &quot;Rz&quot; : &lt;u6&gt;}``, where</span>
+<span class="sd">              i.e., ``motion={"Tx" : &lt;u1&gt;, ..., "Rz" : &lt;u6&gt;}``, where</span>
 <span class="sd">              ``&lt;ui&gt;`` is the user Id of a general function defining the motion</span>
 <span class="sd">              in local dof `i` if the type is int, otherwise it is taken as the</span>
 <span class="sd">              constant motion to be prescribed in local dof `i`.</span>
 
 <span class="sd">            * spring : Dictionary with keywords specifying spring stiffnesses,</span>
-<span class="sd">              i.e., ``spring={&quot;Tx&quot; : &lt;k1&gt;, ..., &quot;Rz&quot; : &lt;k6&gt;}``, where</span>
+<span class="sd">              i.e., ``spring={"Tx" : &lt;k1&gt;, ..., "Rz" : &lt;k6&gt;}``, where</span>
 <span class="sd">              ``&lt;ki&gt;`` is the constant stiffness to be assigned local dof `i`.</span>
 
 <span class="sd">            * damper : Dictionary with keywords specifying damping coefficients,</span>
-<span class="sd">              i.e., ``load={&quot;Tx&quot; : &lt;c1&gt;, ..., &quot;Rz&quot; : &lt;c6&gt;}``, where</span>
+<span class="sd">              i.e., ``load={"Tx" : &lt;c1&gt;, ..., "Rz" : &lt;c6&gt;}``, where</span>
 <span class="sd">              ``&lt;ci&gt;`` is the constant damping to be assigned local dof `i`.</span>
 
 <span class="sd">            * length : Dictionary with keywords specifying stress-free lengths,</span>
-<span class="sd">              i.e., ``length={&quot;Tx&quot; : &lt;l1&gt;, ..., &quot;Rz&quot; : &lt;l6&gt;}``, where</span>
+<span class="sd">              i.e., ``length={"Tx" : &lt;l1&gt;, ..., "Rz" : &lt;l6&gt;}``, where</span>
 <span class="sd">              ``&lt;li&gt;`` is the user Id of a general function defining the</span>
 <span class="sd">              stress-free length in local dof `i`.</span>
 
@@ -1801,7 +1801,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True if the input is valid, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="c1"># Convert tag to base Id or list of base Id</span>
         <span class="n">base_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_ids</span><span class="p">(</span><span class="n">obj_id</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">JOINT</span><span class="p">)</span>
@@ -1814,33 +1814,33 @@
 
         <span class="n">retval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">retval</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to move joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to move joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constrain_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;constraints&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to constrain joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constrain_object</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"constraints"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to constrain joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;init_vel&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign initial velocity to joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"init_vel"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign initial velocity to joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"load"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">load</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;motion&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">load</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"motion"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">load</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign load/motion to joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign load/motion to joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spring&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign spring stiffness to joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"spring"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign spring stiffness to joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;damper&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign damping coefficient to joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"damper"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign damping coefficient to joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign stress-free lengths to joint&quot;</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_property</span><span class="p">(</span><span class="n">base_id</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"length"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign stress-free lengths to joint"</span><span class="p">,</span> <span class="n">base_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">return</span> <span class="n">retval</span></div>
@@ -1849,7 +1849,7 @@
 <div class="viewcode-block" id="FedemModeler.edit_function">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.edit_function">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">edit_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_id</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Modifies an existing function by changing its argument.</span>
 
 <span class="sd">        Parameters</span>
@@ -1858,16 +1858,16 @@
 <span class="sd">            User Id (or base Id, if negative) of the function to modify</span>
 <span class="sd">        obj : int or str or (int, int) or (str, str)</span>
 <span class="sd">            Base Id or tag of object(s) producing the response quantity to use</span>
-<span class="sd">        var : FmVar, default=None=0</span>
+<span class="sd">        var : FmVar, default=None</span>
 <span class="sd">            Response quantity to use as function argument</span>
-<span class="sd">        dof : FmDof, default=None=0</span>
+<span class="sd">        dof : FmDof, default=None</span>
 <span class="sd">            Which component of `var` to be used if a multi-DOF quantity</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
 <span class="sd">            True if the input is valid, otherwise False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">obj1_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_id</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1895,15 +1895,15 @@
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">retval</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to change argument of Function&quot;</span><span class="p">,</span> <span class="n">func_id</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     to&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to change argument of Function"</span><span class="p">,</span> <span class="n">func_id</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"     to"</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">dof</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">retval</span></div>
 
 
 <div class="viewcode-block" id="FedemModeler.solver_setup">
 <a class="viewcode-back" href="../modeler.html#modeler.FedemModeler.solver_setup">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">solver_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Setting up solver parameters, t_quasi, t_inc and t_end.</span>
 <span class="sd">        Switching off initial equilibrium by setting t_quasi negative.</span>
 
@@ -1927,24 +1927,24 @@
 <span class="sd">            * tol_dis: Convergence tolerance in displacement norm</span>
 <span class="sd">            * tol_vel: Convergence tolerance in velocity norm</span>
 <span class="sd">            * tol_res: Convergence tolerance in force residual norm</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fm_solver_setup</span><span class="p">(</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t_start&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t_end&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t_inc&quot;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t_quasi&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;n_modes&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;e_inc&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;add_opt&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"t_start"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"t_end"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"t_inc"</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"t_quasi"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"n_modes"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"e_inc"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"add_opt"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">{</span><span class="s2">&quot;tol_ene&quot;</span><span class="p">,</span> <span class="s2">&quot;tol_dis&quot;</span><span class="p">,</span> <span class="s2">&quot;tol_vel&quot;</span><span class="p">,</span> <span class="s2">&quot;tol_res&quot;</span><span class="p">})</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">{</span><span class="s2">"tol_ene"</span><span class="p">,</span> <span class="s2">"tol_dis"</span><span class="p">,</span> <span class="s2">"tol_vel"</span><span class="p">,</span> <span class="s2">"tol_res"</span><span class="p">})</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fm_solver_tol</span><span class="p">(</span>
-                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tol_ene&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
-                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tol_dis&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
-                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tol_vel&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
-                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tol_res&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tol_ene"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tol_dis"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tol_vel"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tol_res"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
             <span class="p">)</span></div>
 </div>
 

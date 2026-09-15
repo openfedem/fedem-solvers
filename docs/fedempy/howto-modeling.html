@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Creating/editing Fedem models &mdash; fedempy 4.6.2 documentation</title>
+  <title>Creating/editing Fedem models &mdash; fedempy 5.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5f0a4c00"></script>
+      <script src="_static/documentation_options.js?v=6a0c42bb"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -129,14 +129,14 @@ This library is named <cite>libFedemDB.so</cite> on Linux (<cite>FedemDB.dll</ci
 <section id="opening-a-new-existing-model">
 <h2>Opening a new/existing model<a class="headerlink" href="#opening-a-new-existing-model" title="Link to this heading"></a></h2>
 <p>To establish a Fedem model object, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="s2">"mymodel.fmm"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If the file “mymodel.fmm” exists, this will open that model, and any subsequent
 modeling operations will alter or append objects to that model.
 If you want to force opening a new empty model, specify <cite>True</cite> as the second
 parameter, viz.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="s2">"mymodel.fmm"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The specified model file will then be overwritten if it already exists when
@@ -146,12 +146,12 @@ saving the model.</p>
 <h2>Saving and closing current model<a class="headerlink" href="#saving-and-closing-current-model" title="Link to this heading"></a></h2>
 <p>To save the current model, use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">save</span><span class="p">():</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">({</span><span class="s2">&quot;Error&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to save current model&quot;</span><span class="p">})</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">({</span><span class="s2">"Error"</span><span class="p">:</span> <span class="s2">"Failed to save current model"</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>To give it a new name (Save As):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;newname.fmm&quot;</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">({</span><span class="s2">&quot;Error&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to save to newname.fmm&quot;</span><span class="p">})</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"newname.fmm"</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">({</span><span class="s2">"Error"</span><span class="p">:</span> <span class="s2">"Failed to save to newname.fmm"</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>When finished, the model should be closed to release all internal memory:</p>
@@ -178,7 +178,7 @@ In the following, some example statements for creating objects are presented.</p
 <p>A FE model stored in one of the supported FE data file formats can be imported
 as an FE part into the current Fedem model, by using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_fe_part</span><span class="p">(</span><span class="n">fe_data_file</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created a FE Part with base Id&quot;</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created a FE Part with base Id"</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where <cite>fe_data_file</cite> is the full path of the FE data file to be imported.
@@ -188,28 +188,28 @@ See <a class="reference internal" href="#editing-parts"><span class="std std-ref
 <section id="triads">
 <h3>Triads<a class="headerlink" href="#triads" title="Link to this heading"></a></h3>
 <p>To create a triad object at the global location (1.0, 2.0, 3.5), use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My first triad&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created a Triad with base Id&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My first triad"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created a Triad with base Id"</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If the triad should be attached to a part, the base Id of that part may be
 specified using the optional <cite>on_part</cite> argument, as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My second triad&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">on_part</span><span class="o">=</span><span class="n">part_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created a Triad with base Id&quot;</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="s2">&quot;on Part&quot;</span><span class="p">,</span> <span class="n">part_id</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My second triad"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">on_part</span><span class="o">=</span><span class="n">part_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created a Triad with base Id"</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="s2">"on Part"</span><span class="p">,</span> <span class="n">part_id</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This assumes that the coordinates provided match a nodal point in the FE model
 of the part specified.
 If the triad should be attached to ground, the base Id of the Reference plane
 is specified instead, which usually equals 2, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t3</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My third triad&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">on_part</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created a grounded Triad with base Id&quot;</span><span class="p">,</span> <span class="n">t3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t3</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My third triad"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">on_part</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created a grounded Triad with base Id"</span><span class="p">,</span> <span class="n">t3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Finally, if the nodal point of the triad to be created is known,
 you may specify that instead of the coordinates, viz.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t4</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My fourth triad&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="n">node_id</span><span class="p">,</span> <span class="n">on_part</span><span class="o">=</span><span class="n">part_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created a Triad with base Id&quot;</span><span class="p">,</span> <span class="n">t4</span><span class="p">,</span> <span class="s2">&quot;on Part&quot;</span><span class="p">,</span> <span class="n">part_id</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t4</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My fourth triad"</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="n">node_id</span><span class="p">,</span> <span class="n">on_part</span><span class="o">=</span><span class="n">part_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created a Triad with base Id"</span><span class="p">,</span> <span class="n">t4</span><span class="p">,</span> <span class="s2">"on Part"</span><span class="p">,</span> <span class="n">part_id</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where <cite>node_id</cite> is the Id of a nodal point in the FE model of the part <cite>part_id</cite>.</p>
@@ -220,19 +220,19 @@ created triads.</p>
 <h3>Beam elements<a class="headerlink" href="#beam-elements" title="Link to this heading"></a></h3>
 <p>To create a string of three beam elements connected to the four triads,
 <cite>t1</cite>, <cite>t2</cite>, <cite>t3</cite> and <cite>t4</cite>, you can use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beams</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam</span><span class="p">(</span><span class="s2">&quot;My beams&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">],</span> <span class="n">prop_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created beam elements with base Ids&quot;</span><span class="p">,</span> <span class="n">beams</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beams</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam</span><span class="p">(</span><span class="s2">"My beams"</span><span class="p">,</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">],</span> <span class="n">prop_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created beam elements with base Ids"</span><span class="p">,</span> <span class="n">beams</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This method returns a list of base Id values for the created beam elements
 (or <cite>None</cite> if an error occured). The last parameter in the above call is
 the base Id of a cross section property, which is created by:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mat_id</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam_material</span><span class="p">(</span><span class="s2">&quot;Steel&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">7850</span><span class="p">,</span> <span class="mf">2.1e11</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="n">prop_id</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam_section</span><span class="p">(</span><span class="s2">&quot;Pipe&quot;</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mat_id</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam_material</span><span class="p">(</span><span class="s2">"Steel"</span><span class="p">,</span> <span class="p">(</span><span class="mi">7850</span><span class="p">,</span> <span class="mf">2.1e11</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">))</span>
+<span class="n">prop_id</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam_section</span><span class="p">(</span><span class="s2">"Pipe"</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prop_id</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam_section</span><span class="p">(</span><span class="s2">&quot;General&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">section_data</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prop_id</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_beam_section</span><span class="p">(</span><span class="s2">"General"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">section_data</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The first variant above creates a pipe cross section with outer diameter 0.5
@@ -249,18 +249,18 @@ equal to zero.</p>
 <section id="joints">
 <h3>Joints<a class="headerlink" href="#joints" title="Link to this heading"></a></h3>
 <p>To attach a triad to ground using a rigid joint, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_joint</span><span class="p">(</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">RIGID_JOINT</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_joint</span><span class="p">(</span><span class="s2">"Fixed"</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">RIGID_JOINT</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To connect two triads via a revolute joint:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_joint</span><span class="p">(</span><span class="s2">&quot;Hinge&quot;</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">REVOLUTE_JOINT</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_joint</span><span class="p">(</span><span class="s2">"Hinge"</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">REVOLUTE_JOINT</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The first triad specified (t2) will then be the dependent joint triad
 and the second triad (t3) will be the independent triad. You can also specify
 <code class="docutils literal notranslate"><span class="pre">FmType.BALL_JOINT</span></code> and <code class="docutils literal notranslate"><span class="pre">FmType.FREE_JOINT</span></code> as joint type.</p>
 <p>To connect triads via a cylindric joint, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint3</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_joint</span> <span class="p">(</span><span class="s2">&quot;Cylindric&quot;</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">CYLINDRIC_JOINT</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">tn</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint3</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_joint</span> <span class="p">(</span><span class="s2">"Cylindric"</span><span class="p">,</span> <span class="n">FmType</span><span class="o">.</span><span class="n">CYLINDRIC_JOINT</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">tn</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>After the dependent triad (t0), a list of independent triads (t1, t2, …, tn) is specified.
@@ -275,11 +275,11 @@ created joints.</p>
 <h3>Springs and Dampers<a class="headerlink" href="#springs-and-dampers" title="Link to this heading"></a></h3>
 <p>To create an axial spring with a piece-wise linear stiffness function,
 the following will work:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spr1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="s2">&quot;My first spring&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spr1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="s2">"My first spring"</span><span class="p">,</span> <span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">),</span>
                            <span class="n">xy</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]],</span>
-                           <span class="n">extrapol_type</span><span class="o">=</span><span class="s2">&quot;FLAT&quot;</span><span class="p">)</span>
+                           <span class="n">extrapol_type</span><span class="o">=</span><span class="s2">"FLAT"</span><span class="p">)</span>
 
-<span class="n">spr2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="s2">&quot;My second spring&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">),</span> <span class="n">init_Stiff_Coeff</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
+<span class="n">spr2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="s2">"My second spring"</span><span class="p">,</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">),</span> <span class="n">init_Stiff_Coeff</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The first example above creates an axial spring connected to triad (base Id)
@@ -290,14 +290,14 @@ The second example creates a spring with a constant stiffness.</p>
 <p>It is also possible to create several axial springs in one go by specifying
 a list of <cite>(int, int)</cite> tuples, and referring an already existing spring
 stiffness function using the <cite>fn</cite> keyword argument, as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spr</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="s2">&quot;My springs&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">),</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">),</span> <span class="p">(</span><span class="n">t5</span><span class="p">,</span> <span class="n">t6</span><span class="p">)],</span> <span class="n">fn</span><span class="o">=</span><span class="n">spr_func</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spr</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_spring</span><span class="p">(</span><span class="s2">"My springs"</span><span class="p">,</span> <span class="p">[(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">),</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">),</span> <span class="p">(</span><span class="n">t5</span><span class="p">,</span> <span class="n">t6</span><span class="p">)],</span> <span class="n">fn</span><span class="o">=</span><span class="n">spr_func</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where <cite>spr_func</cite> is the base Id of an existing spring stiffness function.</p>
 <p>To create axial dampers, there exists a method <cite>make_damper</cite> with a similar
 set of arguments as the <cite>make_spring</cite> method. That is, you can create one
 or several dampers with a piece-wise linear, or constant, damping coefficient, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmp</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_damper</span><span class="p">(</span><span class="s2">&quot;My damper&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">),</span> <span class="n">init_Damp_Coeff</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmp</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_damper</span><span class="p">(</span><span class="s2">"My damper"</span><span class="p">,</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">),</span> <span class="n">init_Damp_Coeff</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>which creates an axial damper between the triads <cite>t3</cite> and <cite>t4</cite>
@@ -311,8 +311,8 @@ arguments that may be used for these two methods.</p>
 <p>To create an external load on a triad, acting in the positive global
 Z-direction, with a time-dependent magnitude, you can use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ldir</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Positive Z-direction</span>
-<span class="n">load</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_load</span><span class="p">(</span><span class="s2">&quot;Sine&quot;</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="o">.</span><span class="n">FORCE</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">ldir</span><span class="p">,</span> <span class="s2">&quot;1E6*sin(5*x)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created an external load with base Id&quot;</span><span class="p">,</span> <span class="n">load</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_load</span><span class="p">(</span><span class="s2">"Sine"</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="o">.</span><span class="n">FORCE</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">ldir</span><span class="p">,</span> <span class="s2">"1E6*sin(5*x)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created an external load with base Id"</span><span class="p">,</span> <span class="n">load</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where you also can use <code class="docutils literal notranslate"><span class="pre">FmLoadType.TORQUE</span></code> as second parameter if a torque
@@ -321,7 +321,7 @@ The last argument is a string with a math expression giving the load magnitude
 as function of time (here represented by the variable “x”), in this case
 a sinusoidal function with amplitude 1000000.0 and angular frequencey 5.0.</p>
 <p>Alternatively, you may specify a general function as the load magnitude:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_load</span><span class="p">(</span><span class="s2">&quot;My load&quot;</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="o">.</span><span class="n">FORCE</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">ldir</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="n">funcId</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_load</span><span class="p">(</span><span class="s2">"My load"</span><span class="p">,</span> <span class="n">FmLoadType</span><span class="o">.</span><span class="n">FORCE</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">ldir</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="n">funcId</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where <cite>funcId</cite> is the user Id of an existing general function,
@@ -330,8 +330,8 @@ see <a class="reference internal" href="#general-functions"><span class="std std
 <section id="sensors">
 <h3>Sensors<a class="headerlink" href="#sensors" title="Link to this heading"></a></h3>
 <p>To create a sensor measuring the Z-displacement at a triad, use the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_sensor</span><span class="p">(</span><span class="s2">&quot;Displacement&quot;</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">FmVar</span><span class="o">.</span><span class="n">POS</span><span class="p">,</span> <span class="n">FmDof</span><span class="o">.</span><span class="n">TX</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created sensor&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_sensor</span><span class="p">(</span><span class="s2">"Displacement"</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">FmVar</span><span class="o">.</span><span class="n">POS</span><span class="p">,</span> <span class="n">FmDof</span><span class="o">.</span><span class="n">TX</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created sensor"</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where the third parameter can be any of <code class="docutils literal notranslate"><span class="pre">FmVar.POS</span></code>, <code class="docutils literal notranslate"><span class="pre">FmVar.LOCAL_VEL</span></code>,
@@ -340,8 +340,8 @@ see <a class="reference internal" href="#general-functions"><span class="std std
 can be <code class="docutils literal notranslate"><span class="pre">FmDof.TX</span></code>, <code class="docutils literal notranslate"><span class="pre">FmDof.TY</span></code>, <code class="docutils literal notranslate"><span class="pre">FmDof.TZ</span></code>, <code class="docutils literal notranslate"><span class="pre">FmDof.RX</span></code>, <code class="docutils literal notranslate"><span class="pre">FmDof.RY</span></code>
 or <code class="docutils literal notranslate"><span class="pre">FmDof.RZ</span></code>.</p>
 <p>To create a relative sensor between two triads, you can use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_sensor</span><span class="p">(</span><span class="s2">&quot;Relative displacement&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t2</span><span class="p">),</span> <span class="n">FmVar</span><span class="o">.</span><span class="n">POS</span><span class="p">,</span> <span class="n">FmDof</span><span class="o">.</span><span class="n">TX</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created relative sensor&quot;</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_sensor</span><span class="p">(</span><span class="s2">"Relative displacement"</span><span class="p">,</span> <span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">t2</span><span class="p">),</span> <span class="n">FmVar</span><span class="o">.</span><span class="n">POS</span><span class="p">,</span> <span class="n">FmDof</span><span class="o">.</span><span class="n">TX</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created relative sensor"</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where the third parameter can be either <code class="docutils literal notranslate"><span class="pre">FmVar.POS</span></code>, <code class="docutils literal notranslate"><span class="pre">FmVar.VEL</span></code>, or
@@ -352,23 +352,23 @@ or <code class="docutils literal notranslate"><span class="pre">FmDof.RZ</span><
 <h3>General functions<a class="headerlink" href="#general-functions" title="Link to this heading"></a></h3>
 <p>To create a general function of time, any of the following can be used:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Polyline</span>
-<span class="n">f1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 1&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]],</span> <span class="n">extrapol_type</span><span class="o">=</span><span class="s2">&quot;FLAT&quot;</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 1"</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]],</span> <span class="n">extrapol_type</span><span class="o">=</span><span class="s2">"FLAT"</span><span class="p">)</span>
 <span class="c1"># Polyline from file</span>
-<span class="n">f2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 2&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;data.asc&quot;</span><span class="p">,</span> <span class="n">ch_name</span><span class="o">=</span><span class="s2">&quot;Force&quot;</span><span class="p">)</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 2"</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">"data.asc"</span><span class="p">,</span> <span class="n">ch_name</span><span class="o">=</span><span class="s2">"Force"</span><span class="p">)</span>
 <span class="c1"># Sine</span>
-<span class="n">f3</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 3&quot;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">1.23</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 3"</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">1.23</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
 <span class="c1"># Math expression</span>
-<span class="n">f4</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 4&quot;</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="s2">&quot;1.2+3.0*x^2&quot;</span><span class="p">)</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 4"</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="s2">"1.2+3.0*x^2"</span><span class="p">)</span>
 <span class="c1"># Constant function</span>
-<span class="n">f5</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 5&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="n">f5</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 5"</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
 <span class="c1"># Linear function</span>
-<span class="n">f6</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 6&quot;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">8.13</span><span class="p">)</span>
+<span class="n">f6</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 6"</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">8.13</span><span class="p">)</span>
 <span class="c1"># Ramp function</span>
-<span class="n">f7</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 7&quot;</span><span class="p">,</span> <span class="n">start_val</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">start_ramp</span><span class="o">=</span><span class="mf">1.46</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">8.13</span><span class="p">)</span>
+<span class="n">f7</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 7"</span><span class="p">,</span> <span class="n">start_val</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">start_ramp</span><span class="o">=</span><span class="mf">1.46</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">8.13</span><span class="p">)</span>
 <span class="c1"># Limited Ramp function</span>
-<span class="n">f8</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 8&quot;</span><span class="p">,</span> <span class="n">start_val</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">start_ramp</span><span class="o">=</span><span class="mf">1.46</span><span class="p">,</span> <span class="n">end_ramp</span><span class="o">=</span><span class="mf">3.48</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">8.13</span><span class="p">)</span>
+<span class="n">f8</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 8"</span><span class="p">,</span> <span class="n">start_val</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">start_ramp</span><span class="o">=</span><span class="mf">1.46</span><span class="p">,</span> <span class="n">end_ramp</span><span class="o">=</span><span class="mf">3.48</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">8.13</span><span class="p">)</span>
 <span class="c1"># External function (no arguments)</span>
-<span class="n">f9</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My func 9&quot;</span><span class="p">)</span>
+<span class="n">f9</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My func 9"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>What type of function to create is determined by the presence of keywords
@@ -399,16 +399,16 @@ created functions.</p>
 strain rosette element to, or the coordinates of 3 or 4 spatial points if the node numbers are not
 known. It will then search for and use the closest node for each point:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using FE node numbers</span>
-<span class="n">r1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_strain_rosette</span><span class="p">(</span><span class="s2">&quot;Gage A&quot;</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_strain_rosette</span><span class="p">(</span><span class="s2">"Gage A"</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span>
                                  <span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">123</span><span class="p">],</span>
                                  <span class="n">direction</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 <span class="c1"># Using spatial point coordinates</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_strain_rosette</span><span class="p">(</span><span class="s2">&quot;Gage B&quot;</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_strain_rosette</span><span class="p">(</span><span class="s2">"Gage B"</span><span class="p">,</span> <span class="n">part_id</span><span class="p">,</span>
                                  <span class="n">pos</span><span class="o">=</span><span class="p">[(</span><span class="o">-</span><span class="mf">1.702537</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5171</span><span class="p">,</span> <span class="mf">1.702752</span><span class="p">),</span>
                                       <span class="p">(</span><span class="o">-</span><span class="mf">1.649538</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5171</span><span class="p">,</span> <span class="mf">1.658139</span><span class="p">),</span>
                                       <span class="p">(</span><span class="o">-</span><span class="mf">1.630592</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5171</span><span class="p">,</span> <span class="mf">1.73142</span><span class="p">)],</span>
                                  <span class="n">direction</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created strain rosettes&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">],</span> <span class="s2">&quot;on FE part&quot;</span><span class="p">,</span> <span class="n">part_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created strain rosettes"</span><span class="p">,</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">],</span> <span class="s2">"on FE part"</span><span class="p">,</span> <span class="n">part_id</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You may also specify other keywords, see <a class="reference internal" href="modeler.html#modeler.FedemModeler.make_strain_rosette" title="modeler.FedemModeler.make_strain_rosette"><code class="xref py py-meth docutils literal notranslate"><span class="pre">modeler.FedemModeler.make_strain_rosette()</span></code></a>
@@ -419,15 +419,15 @@ for the full documentation of this method.</p>
 <p>User-defined elements can be included in a Fedem model, if you specify the path to
 the plugin shared object library containing your element implementation
 when creating the <code class="docutils literal notranslate"><span class="pre">FedemModeler</span></code> object, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="s2">&quot;mymodel.fmm&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;/usr/local/lib/libMyElmPlugin.so&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span> <span class="o">=</span> <span class="n">FedemModeler</span><span class="p">(</span><span class="s2">"mymodel.fmm"</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"/usr/local/lib/libMyElmPlugin.so"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Please refer to the Fedem User’s Guide for details on how the create a plugin library
 for user-defined elements.
 With this, you can create a string of three 2-noded elements connected to the four triads,
 <cite>t1</cite>, <cite>t2</cite>, <cite>t3</cite> and <cite>t4</cite>, using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">elms</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_udelm</span><span class="p">(</span><span class="s2">&quot;My elements&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">],</span> <span class="n">alpha1</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">alpha2</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created user-defined elements with base Ids&quot;</span><span class="p">,</span> <span class="n">elms</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">elms</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_udelm</span><span class="p">(</span><span class="s2">"My elements"</span><span class="p">,</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">],</span> <span class="n">alpha1</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">alpha2</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Created user-defined elements with base Ids"</span><span class="p">,</span> <span class="n">elms</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Currently, only two-noded elements are supported in <code class="docutils literal notranslate"><span class="pre">fedempy</span></code>.
@@ -447,7 +447,7 @@ success, otherwise False. The <cite>**kwarg</cite> argument represents a varying
 <h3>Editing triads<a class="headerlink" href="#editing-triads" title="Link to this heading"></a></h3>
 <p>To change the position of a triad with base Id <cite>tid</cite>, use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">Tx</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Ty</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Tz</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span> <span class="n">Rx</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">Ry</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">Rz</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to move Triad&quot;</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to move Triad"</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The values specified are considered as offsets to the current position.
@@ -458,12 +458,12 @@ If you need to rotate in a different order, that can be achieved by multiple
 <cite>edit_triad</cite> calls.</p>
 <p>To adjust the DOF status of a triad, use something like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="p">{</span>
-                          <span class="s2">&quot;Tx&quot;</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span>
-                          <span class="s2">&quot;Ty&quot;</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">PRESCRIBED</span><span class="p">,</span>
-                          <span class="s2">&quot;Tz&quot;</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FREE_DYN</span><span class="p">,</span>
-                          <span class="s2">&quot;Rx&quot;</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span>
+                          <span class="s2">"Tx"</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span>
+                          <span class="s2">"Ty"</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">PRESCRIBED</span><span class="p">,</span>
+                          <span class="s2">"Tz"</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FREE_DYN</span><span class="p">,</span>
+                          <span class="s2">"Rx"</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span>
                           <span class="p">}):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to constrain Triad&quot;</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to constrain Triad"</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this example, the triad is fixed in X-translation and X-axis rotation,
@@ -471,15 +471,15 @@ prescribed in Y-translation, and fixed during initial equilibrium only
 in Z-translation. The last two DOFs (Ry and Rz) remain free.</p>
 <p>If you need to constrain all DOFs in a triad, you can alternatively
 use the keyword “All” to shorten the statement, viz.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;All&quot;</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">}):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to constrain Triad&quot;</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="p">{</span><span class="s2">"All"</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">}):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to constrain Triad"</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will then be equivalent to attaching the triad to ground.</p>
 <p>To assign a constant load and/or prescribed motion to a triad, you can do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Tz&quot;</span> <span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span> <span class="p">:</span> <span class="mf">123.4</span><span class="p">},</span>
-                          <span class="n">motion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ty&quot;</span> <span class="p">:</span> <span class="mf">0.01</span><span class="p">}):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign load/motion to Triad&quot;</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="p">{</span><span class="s2">"Tz"</span> <span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="s2">"Ry"</span> <span class="p">:</span> <span class="mf">123.4</span><span class="p">},</span>
+                          <span class="n">motion</span><span class="o">=</span><span class="p">{</span><span class="s2">"Ty"</span> <span class="p">:</span> <span class="mf">0.01</span><span class="p">}):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign load/motion to Triad"</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will assign constant loads in the 3rd and 5th local DOF,
@@ -487,9 +487,9 @@ and a prescribed motion in the 2nd local DOF of the triad.</p>
 <p>To assign a non-constant load or motion, just specify the user Id of the
 general function defining the load magnitude instead of the constant value.
 For instance, the following will assign a sinusoidal load in the <cite>Tx</cite>-DOF:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lid</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">&quot;My load&quot;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">12.5</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Tx&quot;</span> <span class="p">:</span> <span class="n">lid</span><span class="p">}):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign load to Triad&quot;</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lid</span> <span class="o">=</span> <span class="n">myModel</span><span class="o">.</span><span class="n">make_function</span><span class="p">(</span><span class="s2">"My load"</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mf">12.5</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="p">{</span><span class="s2">"Tx"</span> <span class="p">:</span> <span class="n">lid</span><span class="p">}):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign load to Triad"</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The convention is that an integer value in the <cite>load</cite> and <cite>motion</cite> dictionary
@@ -505,10 +505,10 @@ the DOF is kept fixed during initial equilibrium and (optionally) during
 eigenvalue analysis. For joint DOFs with either of these status codes,
 you can then assign constant <cite>spring</cite> and <cite>damper</cite> properties as well as
 stress-free length change function, as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_joint</span><span class="p">(</span><span class="n">jid</span><span class="p">,</span> <span class="n">spring</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Tx&quot;</span> <span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span> <span class="p">:</span> <span class="mf">1234.5</span><span class="p">},</span>
-                          <span class="n">damper</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Tx&quot;</span> <span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span> <span class="s2">&quot;Ry&quot;</span> <span class="p">:</span> <span class="mf">222.2</span><span class="p">},</span>
-                          <span class="n">length</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Tx&quot;</span> <span class="p">:</span> <span class="n">len_id</span><span class="p">}):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to assign spring/damper properties to joint&quot;</span><span class="p">,</span> <span class="n">jid</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_joint</span><span class="p">(</span><span class="n">jid</span><span class="p">,</span> <span class="n">spring</span><span class="o">=</span><span class="p">{</span><span class="s2">"Tx"</span> <span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="s2">"Ry"</span> <span class="p">:</span> <span class="mf">1234.5</span><span class="p">},</span>
+                          <span class="n">damper</span><span class="o">=</span><span class="p">{</span><span class="s2">"Tx"</span> <span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span> <span class="s2">"Ry"</span> <span class="p">:</span> <span class="mf">222.2</span><span class="p">},</span>
+                          <span class="n">length</span><span class="o">=</span><span class="p">{</span><span class="s2">"Tx"</span> <span class="p">:</span> <span class="n">len_id</span><span class="p">}):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to assign spring/damper properties to joint"</span><span class="p">,</span> <span class="n">jid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where <cite>jid</cite> is the base Id of the joint to modify and <cite>len_id</cite> is the user Id
@@ -519,7 +519,7 @@ of an existing general function defining the stress-free length change of the
 <h3>Editing parts<a class="headerlink" href="#editing-parts" title="Link to this heading"></a></h3>
 <p>To change the position of a part with base Id <cite>pid</cite>, use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_part</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">Tx</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Ty</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Tz</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span> <span class="n">Rx</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">Ry</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">Rz</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to move Part&quot;</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to move Part"</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The interpretation of the keywords Tx,Ty,…,Rz is here similar as for triads,
@@ -528,7 +528,7 @@ as explained above in <a class="reference internal" href="#editing-triads"><span
 using the edit_part method, viz.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_part</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">alpha1</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">alpha2</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
                          <span class="n">component_modes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">consistent_mass</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to change properties for Part&quot;</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to change properties for Part"</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -538,7 +538,7 @@ using the edit_part method, viz.:</p>
 will make a general function of time, by default.
 To change the argument to other response variables, you can use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_function</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">FmVar</span><span class="o">.</span><span class="n">POS</span><span class="p">,</span> <span class="n">FmDof</span><span class="o">.</span><span class="n">TX</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to change argument of Function&quot;</span><span class="p">,</span> <span class="n">fid</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to change argument of Function"</span><span class="p">,</span> <span class="n">fid</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Except for the first argument, which here is the user Id of the general function
@@ -555,14 +555,14 @@ or modifying objects. However, it is often more convenient to use a
 user-defined <cite>tag</cite> to refer to an object, or a group of objects.</p>
 <p>For this purpose, all <cite>make</cite>-methods accept the keyword <cite>tag</cite> for assigning a tag,
 e.g., for triads:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My first Triad&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">)</span>
-<span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My second triad&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;T2&quot;</span><span class="p">)</span>
-<span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">&quot;My third triad&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;T3&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My first Triad"</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="s2">"T1"</span><span class="p">)</span>
+<span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My second triad"</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="s2">"T2"</span><span class="p">)</span>
+<span class="n">myModel</span><span class="o">.</span><span class="n">make_triad</span><span class="p">(</span><span class="s2">"My third triad"</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">tag</span><span class="o">=</span><span class="s2">"T3"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then, to change their properties, specify a string instead of the base Id:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="s2">&quot;T.&quot;</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Tz&quot;</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">}):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** Failed to constrain Triads&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">myModel</span><span class="o">.</span><span class="n">edit_triad</span><span class="p">(</span><span class="s2">"T."</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="p">{</span><span class="s2">"Tz"</span> <span class="p">:</span> <span class="n">FmDofStat</span><span class="o">.</span><span class="n">FIXED</span><span class="p">}):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" *** Failed to constrain Triads"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The string may contain a regular expression and will expand into all objects
