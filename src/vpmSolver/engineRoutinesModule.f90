@@ -690,7 +690,7 @@ contains
           case (POS_p)
              if (dof >= 4 .and. dof <= 9) then
                 !! Evaluate global angular orientation variables
-                sensor%p%value = GetAngle(triads(idx),dof-3)
+                sensor%p%value = GetAngle(triads(idx),dof)
              end if
           case (FORCE_p)
              !! Evaluate global force component of the triad
