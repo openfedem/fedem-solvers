@@ -29,49 +29,47 @@
 
 subroutine solver (n,nodes,displ,ierr)
 
-  use sprKindModule             , only : dp, ik
-  use KindModule                , only : lfnam_p, pi_p
-  use SamModule                 , only : SamType
-  use SamModule                 , only : NodeNumFromEqNum, deAllocateSAM
-  use SamReducerModule          , only : saveSAM
-  use SaveReducerModule         , only : writeModes, writeDeformation
-  use SysMatrixTypeModule       , only : SysMatrixType, outOfCore_p
-  use SysMatrixTypeModule       , only : deAllocateSysMatrix
-  use AsmExtensionModule        , only : csBeginAssembly, csEndAssembly
-  use AsmExtensionModule        , only : castToInt8
-  use SolExtensionModule        , only : csSolve
-  use InputReducerModule        , only : readReducerData
-  use InaddModule               , only : INADD
-  use CmstrsModule              , only : EIGVAL
-  use FileUtilitiesModule       , only : getFileName
-  use TimerModule               , only : initTime, showTime
-  use VersionModule             , only : openResFile
-  use ProgressModule            , only : lterm, writeProgress
-  use ManipMatrixModule         , only : writeObject
-  use ScratchArrayModule        , only : releaseScratchArrays
-  use IdTypeModule              , only : StrId
-  use ReportErrorModule         , only : openTerminalOutputFile
-  use ReportErrorModule         , only : allocationError, reportError, note_p
-  use ReportErrorModule         , only : error_p, warning_p, debugFileOnly_p
-  use BinaryDBInterface         , only : closeBinaryDB
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getint
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getbool
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getdouble
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_getdoubles
-  use FFaCmdLineArgInterface    , only : ffa_cmdlinearg_isSet
-  use FFlLinkHandlerInterface   , only : ffl_done
+  use sprKindModule          , only : dp, ik
+  use KindModule             , only : lfnam_p, pi_p
+  use SamModule              , only : SamType, NodeNumFromEqNum, deAllocateSAM
+  use SamReducerModule       , only : saveSAM
+  use SaveReducerModule      , only : writeModes, writeDeformation
+  use SysMatrixTypeModule    , only : SysMatrixType, outOfCore_p
+  use SysMatrixTypeModule    , only : deAllocateSysMatrix
+  use AsmExtensionModule     , only : csBeginAssembly, csEndAssembly, castToInt8
+  use SolExtensionModule     , only : csSolve
+  use InputReducerModule     , only : readReducerData
+  use InaddModule            , only : INADD
+  use CmstrsModule           , only : EIGVAL
+  use FileUtilitiesModule    , only : getFileName
+  use TimerModule            , only : initTime, showTime
+  use VersionModule          , only : openResFile
+  use ProgressModule         , only : lterm, writeProgress
+  use ManipMatrixModule      , only : writeObject
+  use ScratchArrayModule     , only : releaseScratchArrays
+  use IdTypeModule           , only : StrId
+  use ReportErrorModule      , only : openTerminalOutputFile
+  use ReportErrorModule      , only : allocationError, reportError, note_p
+  use ReportErrorModule      , only : error_p, warning_p, debugFileOnly_p
+  use BinaryDBInterface      , only : closeBinaryDB
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getint
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getbool
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getdouble
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_getdoubles
+  use FFaCmdLineArgInterface , only : ffa_cmdlinearg_isSet
+  use FFlLinkHandlerInterface, only : ffl_done
 
   implicit none
 
-  integer, intent(in)    :: n
-  integer, intent(inout) :: nodes(n)
+  integer , intent(in)   :: n
+  integer , intent(in)   :: nodes(n)
   real(dp), intent(out)  :: displ(3,n)
   integer , intent(out)  :: ierr
   logical                :: lumpedMass, factorMass
-  integer                :: i, iopAdd, iopSing, lpu, iprint
+  integer                :: i, iopAdd, iopSing, lpu, iprint, printNodes(10)
   integer                :: j, k, ieq, neval, nMax, nrhs, mlc(100)
   integer(ik)            :: eqnInErr
-  real(dp)               :: dMax, sMass, rMass, grav(3)
+  real(dp)               :: dMax, sMass, rMass, grav(3), printDisp(6,10)
   real(dp)               :: tolEigval, tolFactorize, eigenShift
   real(dp), allocatable  :: rhs(:,:), Qg(:,:)
   real(dp), pointer      :: tenc(:,:), eval(:), evec(:,:)
@@ -86,6 +84,7 @@ subroutine solver (n,nodes,displ,ierr)
   call openTerminalOutputFile (lterm)
   write(lterm,6000) 'START OF PROGRAM SOLVER'
 
+  printNodes = 0
   grav = 0.0_dp
   nullify(tenc)
   nullify(eval)
@@ -99,6 +98,7 @@ subroutine solver (n,nodes,displ,ierr)
 
   call ffa_cmdlinearg_getint ('debug',iprint)
   call ffa_cmdlinearg_getint ('singularityHandler',iopSing)
+  call ffa_cmdlinearg_getints ('printNodes',printNodes,10)
   call ffa_cmdlinearg_getbool ('lumpedmass',lumpedMass)
   call ffa_cmdlinearg_getdouble ('tolFactorize',tolFactorize)
   call ffa_cmdlinearg_getdoubles ('gvec',grav,3)
@@ -300,7 +300,9 @@ subroutine solver (n,nodes,displ,ierr)
         ! and print out the max value in each direction
         write(lpu,"()")
         displ = 0.0_dp
-        do k = 1, 3
+        printDisp = 0.0_dp
+        printNodes = -printNodes
+        do k = 1, 6
            nMax = 0
            dMax = 0.0_dp
            do i = 1, sam%nnod
@@ -311,15 +313,38 @@ subroutine solver (n,nodes,displ,ierr)
                        nMax = sam%minex(i)
                        dMax = rhs(ieq,1)
                     end if
-                    do j = 1, n
-                       if (nodes(j) == sam%minex(i)) displ(k,j) = rhs(ieq,1)
+                    if (k <= 3) then
+                       do j = 1, n
+                          if (nodes(j) == sam%minex(i)) then
+                             displ(k,j) = rhs(ieq,1)
+                             exit
+                          end if
+                       end do
+                    end if
+                    do j = 1, 10
+                       if (abs(printNodes(j)) == sam%minex(i)) then
+                          printDisp(k,j) = rhs(ieq,1)
+                          if (k == 1) printNodes(j) = -printNodes(j)
+                          exit
+                       end if
                     end do
                  end if
               end if
            end do
-           write(lpu,600) char(ichar('W')+k),dMax,nMax
-600        format('    Max ',A1,'-displacement:',1PE12.5,'  in node',I8)
+           if (k <= 3) then
+              write(lpu,603) char(ichar('W')+k),dMax,nMax
+           else
+              write(lpu,606) char(ichar('T')+k),dMax,nMax
+           end if
+603        format('    Max ',A1,'-displacement:',1PE12.5,'  in node',I8)
+606        format('    Max ',A1,'-rotation:    ',1PE12.5,'  in node',I8)
         end do
+        do j = 1, 10
+           if (printNodes(j) > 0) then
+              write(lpu,609) printNodes(j), printDisp(:,j)
+           end if
+        end do
+609     format('    Displacements in node',I8,' :',1P6E13.5)
         write(lpu,"()")
 
         if (chname /= '') then

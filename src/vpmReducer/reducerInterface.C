@@ -142,6 +142,7 @@ DLLexport(int) solvePart ()
 {
   // Additional command-line options for the FE part solver
   ADDOPTION ("gvec",DoubleVec(),"Gravity vector in global coordinates");
+  ADDOPTION ("printNodes",IntVec(),"Nodes to report the displacements in");
 
   int ierr = solvePartDis(0,NULL,NULL);
 
